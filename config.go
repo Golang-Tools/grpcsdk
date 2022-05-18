@@ -40,8 +40,8 @@ type SDKConfig struct {
 	// 请求超时设置
 	Query_Timeout int `json:"query_timeout,omitempty" jsonschema:"description=请求服务的最大超时时间单位ms"`
 
-	UnaryInterceptors  []grpc.UnaryClientInterceptor  `json"-"`
-	StreamInterceptors []grpc.StreamClientInterceptor `json"-"`
+	UnaryInterceptors  []grpc.UnaryClientInterceptor  `json:"-" jsonschema:"nullable"`
+	StreamInterceptors []grpc.StreamClientInterceptor `json:"-" jsonschema:"nullable"`
 }
 
 //UntilEnd NewCtx方法的参数,用于设置ctx为不会超时
