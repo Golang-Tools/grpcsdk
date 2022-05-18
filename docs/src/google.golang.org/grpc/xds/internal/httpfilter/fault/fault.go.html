@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: fault.go in package google.golang.org/grpc/xds/internal/httpfilter/fault</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	fault.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html">google.golang.org/grpc/xds/internal/httpfilter/fault</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11,
+input[id=i12]:checked ~pre .i12,
+input[id=i13]:checked ~pre .i13,
+input[id=i14]:checked ~pre .i14,
+input[id=i15]:checked ~pre .i15,
+input[id=i16]:checked ~pre .i16,
+input[id=i17]:checked ~pre .i17,
+input[id=i18]:checked ~pre .i18
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+<input id="i12" type="radio" name="i"/>
+<input id="i13" type="radio" name="i"/>
+<input id="i14" type="radio" name="i"/>
+<input id="i15" type="radio" name="i"/>
+<input id="i16" type="radio" name="i"/>
+<input id="i17" type="radio" name="i"/>
+<input id="i18" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package fault implements the Envoy Fault Injection HTTP filter.</span></code></span></div><span class="codeline" id="line-20"><code><span class="keyword">package</span> fault</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-23"><code>	<label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i1"><span class="lit-string i1">"errors"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i2"><span class="lit-string i2">"fmt"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i3"><span class="lit-string i3">"io"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i4"><span class="lit-string i4">"strconv"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i5"><span class="lit-string i5">"sync/atomic"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<label for="i6"><span class="lit-string i6">"time"</span></label></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i7"><span class="lit-string i7">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<label for="i8"><span class="lit-string i8">"github.com/golang/protobuf/ptypes"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<label for="i9"><span class="lit-string i9">"google.golang.org/grpc/codes"</span></label></code></span>
+<span class="codeline" id="line-34"><code>	<label for="i10"><span class="lit-string i10">"google.golang.org/grpc/internal/grpcrand"</span></label></code></span>
+<span class="codeline" id="line-35"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i11">iresolver</a> <label for="i11"><span class="lit-string i11">"google.golang.org/grpc/internal/resolver"</span></label></code></span>
+<span class="codeline" id="line-36"><code>	<label for="i12"><span class="lit-string i12">"google.golang.org/grpc/metadata"</span></label></code></span>
+<span class="codeline" id="line-37"><code>	<label for="i13"><span class="lit-string i13">"google.golang.org/grpc/status"</span></label></code></span>
+<span class="codeline" id="line-38"><code>	<label for="i14"><span class="lit-string i14">"google.golang.org/grpc/xds/internal/httpfilter"</span></label></code></span>
+<span class="codeline" id="line-39"><code>	<label for="i15"><span class="lit-string i15">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3.html" class="ident i16">cpb</a> <label for="i16"><span class="lit-string i16">"github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"</span></label></code></span>
+<span class="codeline" id="line-42"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a> <label for="i17"><span class="lit-string i17">"github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"</span></label></code></span>
+<span class="codeline" id="line-43"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/v3.html" class="ident i18">tpb</a> <label for="i18"><span class="lit-string i18">"github.com/envoyproxy/go-control-plane/envoy/type/v3"</span></label></code></span>
+<span class="codeline" id="line-44"><code>)</code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-headerAbortHTTPStatus" class="ident">headerAbortHTTPStatus</a> = <span class="lit-string">"x-envoy-fault-abort-request"</span></code></span>
+<span class="codeline" id="line-47"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-headerAbortGRPCStatus" class="ident">headerAbortGRPCStatus</a> = <span class="lit-string">"x-envoy-fault-abort-grpc-request"</span></code></span>
+<span class="codeline" id="line-48"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-headerAbortPercentage" class="ident">headerAbortPercentage</a> = <span class="lit-string">"x-envoy-fault-abort-request-percentage"</span></code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-headerDelayPercentage" class="ident">headerDelayPercentage</a> = <span class="lit-string">"x-envoy-fault-delay-request-percentage"</span></code></span>
+<span class="codeline" id="line-51"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-headerDelayDuration" class="ident">headerDelayDuration</a> = <span class="lit-string">"x-envoy-fault-delay-request"</span></code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-statusMap" class="ident">statusMap</a> = <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>{</code></span>
+<span class="codeline" id="line-54"><code>	<span class="lit-number">400</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-168" class="ident">Internal</a>,</code></span>
+<span class="codeline" id="line-55"><code>	<span class="lit-number">401</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-193" class="ident">Unauthenticated</a>,</code></span>
+<span class="codeline" id="line-56"><code>	<span class="lit-number">403</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-90" class="ident">PermissionDenied</a>,</code></span>
+<span class="codeline" id="line-57"><code>	<span class="lit-number">404</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-160" class="ident">Unimplemented</a>,</code></span>
+<span class="codeline" id="line-58"><code>	<span class="lit-number">429</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>,</code></span>
+<span class="codeline" id="line-59"><code>	<span class="lit-number">502</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>,</code></span>
+<span class="codeline" id="line-60"><code>	<span class="lit-number">503</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>,</code></span>
+<span class="codeline" id="line-61"><code>	<span class="lit-number">504</span>: <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>,</code></span>
+<span class="codeline" id="line-62"><code>}</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-init" class="ident">init</a></label>() {</code></span>
+<span class="codeline" id="line-65"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-92" class="ident">Register</a>(<a href="#line-68" class="ident">builder</a>{})</code></span>
+<span class="codeline" id="line-66"><code>}</code></span>
+<span class="codeline" id="line-67"><code></code></span>
+<span class="codeline" id="line-68"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-builder" class="ident">builder</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-69"><code>}</code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-config" class="ident">config</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-72"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-30" class="ident">FilterConfig</a></code></span>
+<span class="codeline" id="line-73"><code>	config *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-138" class="ident">HTTPFault</a></code></span>
+<span class="codeline" id="line-74"><code>}</code></span>
+<span class="codeline" id="line-75"><code></code></span>
+<span class="codeline" id="line-76"><code><span class="keyword">func</span> (<a href="#line-68" class="ident">builder</a>) <label for="r1" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.builder^df6b0.html#name-.TypeURLs" class="ident">TypeURLs</a></label>() []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-77"><code>	<span class="keyword">return</span> []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>{<span class="lit-string">"type.googleapis.com/envoy.extensions.filters.http.fault.v3.HTTPFault"</span>}</code></span>
+<span class="codeline" id="line-78"><code>}</code></span>
+<span class="codeline" id="line-79"><code></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">// Parsing is the same for the base config and the override config.</span></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-parseConfig" class="ident">parseConfig</a></label>(<label for="r3" class="ident">cfg</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-30" class="ident">FilterConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">if</span> <label for="r3" class="ident">cfg</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-83"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: nil configuration message provided"</span>)</code></span>
+<span class="codeline" id="line-84"><code>	}</code></span>
+<span class="codeline" id="line-85"><code>	<label for="r4" class="ident">any</label>, <label for="r5" class="ident">ok</label> := <label for="r3" class="ident">cfg</label>.(*<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i15">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>)</code></span>
+<span class="codeline" id="line-86"><code>	<span class="keyword">if</span> !<label for="r5" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-87"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: error parsing config %v: unknown type %T"</span>, <label for="r3" class="ident">cfg</label>, <label for="r3" class="ident">cfg</label>)</code></span>
+<span class="codeline" id="line-88"><code>	}</code></span>
+<span class="codeline" id="line-89"><code>	<label for="r6" class="ident">msg</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-138" class="ident">HTTPFault</a>)</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r7" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/ptypes.html" class="ident i8">ptypes</a>.<a href="../../../../../../github.com/golang/protobuf/ptypes/any.go.html#line-88" class="ident">UnmarshalAny</a>(<label for="r4" class="ident">any</label>, <label for="r6" class="ident">msg</label>); <label for="r7" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: error parsing config %v: %v"</span>, <label for="r3" class="ident">cfg</label>, <label for="r7" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-92"><code>	}</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">return</span> <a href="#line-71" class="ident">config</a>{<a href="#line-73" class="ident">config</a>: <label for="r6" class="ident">msg</label>}, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-94"><code>}</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code><span class="keyword">func</span> (<a href="#line-68" class="ident">builder</a>) <label for="r8" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.builder^df6b0.html#name-.ParseFilterConfig" class="ident">ParseFilterConfig</a></label>(<label for="r9" class="ident">cfg</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-30" class="ident">FilterConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-97"><code>	<span class="keyword">return</span> <a href="#line-81" class="ident">parseConfig</a>(<label for="r9" class="ident">cfg</label>)</code></span>
+<span class="codeline" id="line-98"><code>}</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code><span class="keyword">func</span> (<a href="#line-68" class="ident">builder</a>) <label for="r10" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.builder^df6b0.html#name-.ParseFilterConfigOverride" class="ident">ParseFilterConfigOverride</a></label>(<label for="r11" class="ident">override</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-30" class="ident">FilterConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-101"><code>	<span class="keyword">return</span> <a href="#line-81" class="ident">parseConfig</a>(<label for="r11" class="ident">override</label>)</code></span>
+<span class="codeline" id="line-102"><code>}</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code><span class="keyword">func</span> (<a href="#line-68" class="ident">builder</a>) <label for="r12" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.builder^df6b0.html#name-.IsTerminal" class="ident">IsTerminal</a></label>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-105"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-106"><code>}</code></span>
+<span class="codeline" id="line-107"><code></code></span>
+<span class="codeline" id="line-108"><code><span class="keyword">var</span> _ <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-61" class="ident">ClientInterceptorBuilder</a> = <a href="#line-68" class="ident">builder</a>{}</code></span>
+<span class="codeline" id="line-109"><code></code></span>
+<span class="codeline" id="line-110"><code><span class="keyword">func</span> (<a href="#line-68" class="ident">builder</a>) <label for="r13" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.builder^df6b0.html#name-.BuildClientInterceptor" class="ident">BuildClientInterceptor</a></label>(<label for="r14" class="ident">cfg</label>, <label for="r15" class="ident">override</label> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i14">httpfilter</a>.<a href="../httpfilter.go.html#line-30" class="ident">FilterConfig</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i11">iresolver</a>.<a href="../../../../internal/resolver/config_selector.go.html#line-108" class="ident">ClientInterceptor</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-111"><code>	<span class="keyword">if</span> <label for="r14" class="ident">cfg</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-112"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: nil config provided"</span>)</code></span>
+<span class="codeline" id="line-113"><code>	}</code></span>
+<span class="codeline" id="line-114"><code></code></span>
+<span class="codeline" id="line-115"><code>	<label for="r16" class="ident">c</label>, <label for="r17" class="ident">ok</label> := <label for="r14" class="ident">cfg</label>.(<a href="#line-71" class="ident">config</a>)</code></span>
+<span class="codeline" id="line-116"><code>	<span class="keyword">if</span> !<label for="r17" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-117"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: incorrect config type provided (%T): %v"</span>, <label for="r14" class="ident">cfg</label>, <label for="r14" class="ident">cfg</label>)</code></span>
+<span class="codeline" id="line-118"><code>	}</code></span>
+<span class="codeline" id="line-119"><code></code></span>
+<span class="codeline" id="line-120"><code>	<span class="keyword">if</span> <label for="r15" class="ident">override</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-121"><code>		<span class="comment">// override completely replaces the listener configuration; but we</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">		// still validate the listener config type.</span></code></span>
+<span class="codeline" id="line-123"><code>		<label for="r16" class="ident">c</label>, <label for="r17" class="ident">ok</label> = <label for="r15" class="ident">override</label>.(<a href="#line-71" class="ident">config</a>)</code></span>
+<span class="codeline" id="line-124"><code>		<span class="keyword">if</span> !<label for="r17" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-125"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"fault: incorrect override config type provided (%T): %v"</span>, <label for="r15" class="ident">override</label>, <label for="r15" class="ident">override</label>)</code></span>
+<span class="codeline" id="line-126"><code>		}</code></span>
+<span class="codeline" id="line-127"><code>	}</code></span>
+<span class="codeline" id="line-128"><code></code></span>
+<span class="codeline" id="line-129"><code>	<label for="r18" class="ident">icfg</label> := <label for="r16" class="ident">c</label>.<a href="#line-73" class="ident">config</a></code></span>
+<span class="codeline" id="line-130"><code>	<span class="keyword">if</span> (<label for="r18" class="ident">icfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-286" class="ident">GetMaxActiveFaults</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r18" class="ident">icfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-286" class="ident">GetMaxActiveFaults</a>().<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>() == <span class="lit-number">0</span>) ||</code></span>
+<span class="codeline" id="line-131"><code>		(<label for="r18" class="ident">icfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-251" class="ident">GetDelay</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r18" class="ident">icfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-258" class="ident">GetAbort</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>) {</code></span>
+<span class="codeline" id="line-132"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-133"><code>	}</code></span>
+<span class="codeline" id="line-134"><code>	<span class="keyword">return</span> &amp;<a href="#line-137" class="ident">interceptor</a>{<a href="#line-138" class="ident">config</a>: <label for="r18" class="ident">icfg</label>}, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-135"><code>}</code></span>
+<span class="codeline" id="line-136"><code></code></span>
+<span class="codeline" id="line-137"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-interceptor" class="ident">interceptor</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-138"><code>	config *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-138" class="ident">HTTPFault</a></code></span>
+<span class="codeline" id="line-139"><code>}</code></span>
+<span class="codeline" id="line-140"><code></code></span>
+<span class="codeline" id="line-141"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-activeFaults" class="ident">activeFaults</a> <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a> <span class="comment">// global active faults; accessed atomically</span></code></span>
+<span class="codeline" id="line-142"><code></code></span>
+<span class="codeline" id="line-143"><code><span class="keyword">func</span> (<label for="r19" class="ident">i</label> *<a href="#line-137" class="ident">interceptor</a>) <label for="r20" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.interceptor^66ecd.html#name-.NewStream" class="ident">NewStream</a></label>(<label for="r21" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r22" class="ident">ri</label> <a href="../../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i11">iresolver</a>.<a href="../../../../internal/resolver/config_selector.go.html#line-40" class="ident">RPCInfo</a>, <label for="r23" class="ident">done</label> <span class="keyword">func</span>(), <label for="r24" class="ident">newStream</label> <span class="keyword">func</span>(<label for="r25" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r26" class="ident">done</label> <span class="keyword">func</span>()) (<a href="../../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i11">iresolver</a>.<a href="../../../../internal/resolver/config_selector.go.html#line-60" class="ident">ClientStream</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) (<a href="../../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i11">iresolver</a>.<a href="../../../../internal/resolver/config_selector.go.html#line-60" class="ident">ClientStream</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">if</span> <label for="r27" class="ident">maxAF</label> := <label for="r19" class="ident">i</label>.<a href="#line-138" class="ident">config</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-286" class="ident">GetMaxActiveFaults</a>(); <label for="r27" class="ident">maxAF</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-145"><code>		<span class="keyword">defer</span> <a href="../../../../../../../pkg/sync/atomic.html" class="ident i5">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-97" class="ident">AddUint32</a>(&amp;<a href="#line-141" class="ident">activeFaults</a>, ^<a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<span class="lit-number">0</span>)) <span class="comment">// decrement counter</span></code></span>
+<span class="codeline" id="line-146"><code>		<span class="keyword">if</span> <label for="r28" class="ident">af</label> := <a href="../../../../../../../pkg/sync/atomic.html" class="ident i5">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-97" class="ident">AddUint32</a>(&amp;<a href="#line-141" class="ident">activeFaults</a>, <span class="lit-number">1</span>); <label for="r28" class="ident">af</label> &gt; <label for="r27" class="ident">maxAF</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>() {</code></span>
+<span class="codeline" id="line-147"><code>			<span class="comment">// Would exceed maximum active fault limit.</span></code></span>
+<span class="codeline" id="line-148"><code>			<span class="keyword">return</span> <label for="r24" class="ident">newStream</label>(<label for="r21" class="ident">ctx</label>, <label for="r23" class="ident">done</label>)</code></span>
+<span class="codeline" id="line-149"><code>		}</code></span>
+<span class="codeline" id="line-150"><code>	}</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">if</span> <label for="r29" class="ident">err</label> := <a href="#line-169" class="ident">injectDelay</a>(<label for="r21" class="ident">ctx</label>, <label for="r19" class="ident">i</label>.<a href="#line-138" class="ident">config</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-251" class="ident">GetDelay</a>()); <label for="r29" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-153"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r29" class="ident">err</label></code></span>
+<span class="codeline" id="line-154"><code>	}</code></span>
+<span class="codeline" id="line-155"><code></code></span>
+<span class="codeline" id="line-156"><code>	<span class="keyword">if</span> <label for="r30" class="ident">err</label> := <a href="#line-207" class="ident">injectAbort</a>(<label for="r21" class="ident">ctx</label>, <label for="r19" class="ident">i</label>.<a href="#line-138" class="ident">config</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-258" class="ident">GetAbort</a>()); <label for="r30" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-157"><code>		<span class="keyword">if</span> <label for="r30" class="ident">err</label> == <a href="#line-243" class="ident">errOKStream</a> {</code></span>
+<span class="codeline" id="line-158"><code>			<span class="keyword">return</span> &amp;<a href="#line-292" class="ident">okStream</a>{<a href="#line-293" class="ident">ctx</a>: <label for="r21" class="ident">ctx</label>}, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-159"><code>		}</code></span>
+<span class="codeline" id="line-160"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r30" class="ident">err</label></code></span>
+<span class="codeline" id="line-161"><code>	}</code></span>
+<span class="codeline" id="line-162"><code>	<span class="keyword">return</span> <label for="r24" class="ident">newStream</label>(<label for="r21" class="ident">ctx</label>, <label for="r23" class="ident">done</label>)</code></span>
+<span class="codeline" id="line-163"><code>}</code></span>
+<span class="codeline" id="line-164"><code></code></span>
+<span class="codeline" id="line-165"><code><span class="comment">// For overriding in tests</span></code></span>
+<span class="codeline" id="line-166"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-randIntn" class="ident">randIntn</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpcrand.html" class="ident i10">grpcrand</a>.<a href="../../../../internal/grpcrand/grpcrand.go.html#line-49" class="ident">Intn</a></code></span>
+<span class="codeline" id="line-167"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-newTimer" class="ident">newTimer</a> = <a href="../../../../../../../pkg/time.html" class="ident i6">time</a>.<a href="../../../../../../time/sleep.go.html#line-86" class="ident">NewTimer</a></code></span>
+<span class="codeline" id="line-168"><code></code></span>
+<span class="codeline" id="line-169"><code><span class="keyword">func</span> <label for="r31" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-injectDelay" class="ident">injectDelay</a></label>(<label for="r32" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r33" class="ident">delayCfg</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3.html" class="ident i16">cpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-74" class="ident">FaultDelay</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-170"><code>	<label for="r34" class="ident">numerator</label>, <label for="r35" class="ident">denominator</label> := <a href="#line-255" class="ident">splitPct</a>(<label for="r33" class="ident">delayCfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-140" class="ident">GetPercentage</a>())</code></span>
+<span class="codeline" id="line-171"><code>	<span class="keyword">var</span> <label for="r36" class="ident">delay</label> <a href="../../../../../../../pkg/time.html" class="ident i6">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-172"><code>	<span class="keyword">switch</span> delayType := <label for="r33" class="ident">delayCfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-119" class="ident">GetFaultDelaySecifier</a>().(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-173"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3.html" class="ident i16">cpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-151" class="ident">FaultDelay_FixedDelay</a>:</code></span>
+<span class="codeline" id="line-174"><code>		<label for="r36" class="ident">delay</label> = <label for="r37" class="ident">delayType</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-157" class="ident">FixedDelay</a>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-176" class="ident">AsDuration</a>()</code></span>
+<span class="codeline" id="line-175"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3.html" class="ident i16">cpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3/fault.pb.go.html#line-160" class="ident">FaultDelay_HeaderDelay_</a>:</code></span>
+<span class="codeline" id="line-176"><code>		<label for="r38" class="ident">md</label>, <label for="r39" class="ident">_</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/metadata.html" class="ident i12">metadata</a>.<a href="../../../../metadata/metadata.go.html#line-219" class="ident">FromOutgoingContext</a>(<label for="r32" class="ident">ctx</label>)</code></span>
+<span class="codeline" id="line-177"><code>		<label for="r40" class="ident">v</label> := <label for="r38" class="ident">md</label>[<a href="#line-51" class="ident">headerDelayDuration</a>]</code></span>
+<span class="codeline" id="line-178"><code>		<span class="keyword">if</span> <label for="r40" class="ident">v</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-179"><code>			<span class="comment">// No delay configured for this RPC.</span></code></span>
+<span class="codeline" id="line-180"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-181"><code>		}</code></span>
+<span class="codeline" id="line-182"><code>		<label for="r41" class="ident">ms</label>, <label for="r42" class="ident">ok</label> := <a href="#line-247" class="ident">parseIntFromMD</a>(<label for="r40" class="ident">v</label>)</code></span>
+<span class="codeline" id="line-183"><code>		<span class="keyword">if</span> !<label for="r42" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-184"><code>			<span class="comment">// Malformed header; no delay.</span></code></span>
+<span class="codeline" id="line-185"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-186"><code>		}</code></span>
+<span class="codeline" id="line-187"><code>		<label for="r36" class="ident">delay</label> = <a href="../../../../../../../pkg/time.html" class="ident i6">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a>(<label for="r41" class="ident">ms</label>) * <a href="../../../../../../../pkg/time.html" class="ident i6">time</a>.<a href="../../../../../../time/time.go.html#line-610" class="ident">Millisecond</a></code></span>
+<span class="codeline" id="line-188"><code>		<span class="keyword">if</span> <label for="r43" class="ident">v</label> := <label for="r38" class="ident">md</label>[<a href="#line-50" class="ident">headerDelayPercentage</a>]; <label for="r43" class="ident">v</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-189"><code>			<span class="keyword">if</span> <label for="r44" class="ident">num</label>, <label for="r45" class="ident">ok</label> := <a href="#line-247" class="ident">parseIntFromMD</a>(<label for="r43" class="ident">v</label>); <label for="r45" class="ident">ok</label> &amp;&amp; <label for="r44" class="ident">num</label> &lt; <label for="r34" class="ident">numerator</label> {</code></span>
+<span class="codeline" id="line-190"><code>				<label for="r34" class="ident">numerator</label> = <label for="r44" class="ident">num</label></code></span>
+<span class="codeline" id="line-191"><code>			}</code></span>
+<span class="codeline" id="line-192"><code>		}</code></span>
+<span class="codeline" id="line-193"><code>	}</code></span>
+<span class="codeline" id="line-194"><code>	<span class="keyword">if</span> <label for="r36" class="ident">delay</label> == <span class="lit-number">0</span> || <a href="#line-166" class="ident">randIntn</a>(<label for="r35" class="ident">denominator</label>) &gt;= <label for="r34" class="ident">numerator</label> {</code></span>
+<span class="codeline" id="line-195"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-196"><code>	}</code></span>
+<span class="codeline" id="line-197"><code>	<label for="r46" class="ident">t</label> := <a href="#line-167" class="ident">newTimer</a>(<label for="r36" class="ident">delay</label>)</code></span>
+<span class="codeline" id="line-198"><code>	<a href="../../../../../../runtime/select.go.html#line-122"><span class="keyword">select</span></a> {</code></span>
+<span class="codeline" id="line-199"><code>	<span class="keyword">case</span> <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r46" class="ident">t</label>.<a href="../../../../../../time/sleep.go.html#line-51" class="ident">C</a>:</code></span>
+<span class="codeline" id="line-200"><code>	<span class="keyword">case</span> <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r32" class="ident">ctx</label>.<a href="../../../../../../context/context.go.html#line-99" class="ident">Done</a>():</code></span>
+<span class="codeline" id="line-201"><code>		<label for="r46" class="ident">t</label>.<a href="../../../../../../time/sleep.go.html#line-77" class="ident">Stop</a>()</code></span>
+<span class="codeline" id="line-202"><code>		<span class="keyword">return</span> <label for="r32" class="ident">ctx</label>.<a href="../../../../../../context/context.go.html#line-106" class="ident">Err</a>()</code></span>
+<span class="codeline" id="line-203"><code>	}</code></span>
+<span class="codeline" id="line-204"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-205"><code>}</code></span>
+<span class="codeline" id="line-206"><code></code></span>
+<span class="codeline" id="line-207"><code><span class="keyword">func</span> <label for="r47" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-injectAbort" class="ident">injectAbort</a></label>(<label for="r48" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r49" class="ident">abortCfg</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-30" class="ident">FaultAbort</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-208"><code>	<label for="r50" class="ident">numerator</label>, <label for="r51" class="ident">denominator</label> := <a href="#line-255" class="ident">splitPct</a>(<label for="r49" class="ident">abortCfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-105" class="ident">GetPercentage</a>())</code></span>
+<span class="codeline" id="line-209"><code>	<label for="r52" class="ident">code</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-33" class="ident">OK</a></code></span>
+<span class="codeline" id="line-210"><code>	<label for="r53" class="ident">okCode</label> := <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-211"><code>	<span class="keyword">switch</span> errType := <label for="r49" class="ident">abortCfg</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-77" class="ident">GetErrorType</a>().(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-212"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-116" class="ident">FaultAbort_HttpStatus</a>:</code></span>
+<span class="codeline" id="line-213"><code>		<label for="r52" class="ident">code</label>, <label for="r53" class="ident">okCode</label> = <a href="#line-271" class="ident">grpcFromHTTP</a>(<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r54" class="ident">errType</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-118" class="ident">HttpStatus</a>))</code></span>
+<span class="codeline" id="line-214"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-121" class="ident">FaultAbort_GrpcStatus</a>:</code></span>
+<span class="codeline" id="line-215"><code>		<label for="r52" class="ident">code</label>, <label for="r53" class="ident">okCode</label> = <a href="#line-285" class="ident">sanitizeGRPCCode</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>(<label for="r55" class="ident">errType</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-123" class="ident">GrpcStatus</a>)), <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-216"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html" class="ident i17">fpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-126" class="ident">FaultAbort_HeaderAbort_</a>:</code></span>
+<span class="codeline" id="line-217"><code>		<label for="r56" class="ident">md</label>, <label for="r57" class="ident">_</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/metadata.html" class="ident i12">metadata</a>.<a href="../../../../metadata/metadata.go.html#line-219" class="ident">FromOutgoingContext</a>(<label for="r48" class="ident">ctx</label>)</code></span>
+<span class="codeline" id="line-218"><code>		<span class="keyword">if</span> <label for="r58" class="ident">v</label> := <label for="r56" class="ident">md</label>[<a href="#line-46" class="ident">headerAbortHTTPStatus</a>]; <label for="r58" class="ident">v</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-219"><code>			<span class="comment">// HTTP status has priority over gRPC status.</span></code></span>
+<span class="codeline" id="line-220"><code>			<span class="keyword">if</span> <label for="r59" class="ident">httpStatus</label>, <label for="r60" class="ident">ok</label> := <a href="#line-247" class="ident">parseIntFromMD</a>(<label for="r58" class="ident">v</label>); <label for="r60" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-221"><code>				<label for="r52" class="ident">code</label>, <label for="r53" class="ident">okCode</label> = <a href="#line-271" class="ident">grpcFromHTTP</a>(<label for="r59" class="ident">httpStatus</label>)</code></span>
+<span class="codeline" id="line-222"><code>			}</code></span>
+<span class="codeline" id="line-223"><code>		} <span class="keyword">else</span> <span class="keyword">if</span> <label for="r61" class="ident">v</label> := <label for="r56" class="ident">md</label>[<a href="#line-47" class="ident">headerAbortGRPCStatus</a>]; <label for="r61" class="ident">v</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-224"><code>			<span class="keyword">if</span> <label for="r62" class="ident">grpcStatus</label>, <label for="r63" class="ident">ok</label> := <a href="#line-247" class="ident">parseIntFromMD</a>(<label for="r61" class="ident">v</label>); <label for="r63" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-225"><code>				<label for="r52" class="ident">code</label>, <label for="r53" class="ident">okCode</label> = <a href="#line-285" class="ident">sanitizeGRPCCode</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>(<label for="r62" class="ident">grpcStatus</label>)), <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-226"><code>			}</code></span>
+<span class="codeline" id="line-227"><code>		}</code></span>
+<span class="codeline" id="line-228"><code>		<span class="keyword">if</span> <label for="r64" class="ident">v</label> := <label for="r56" class="ident">md</label>[<a href="#line-48" class="ident">headerAbortPercentage</a>]; <label for="r64" class="ident">v</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-229"><code>			<span class="keyword">if</span> <label for="r65" class="ident">num</label>, <label for="r66" class="ident">ok</label> := <a href="#line-247" class="ident">parseIntFromMD</a>(<label for="r64" class="ident">v</label>); <label for="r66" class="ident">ok</label> &amp;&amp; <label for="r65" class="ident">num</label> &lt; <label for="r50" class="ident">numerator</label> {</code></span>
+<span class="codeline" id="line-230"><code>				<label for="r50" class="ident">numerator</label> = <label for="r65" class="ident">num</label></code></span>
+<span class="codeline" id="line-231"><code>			}</code></span>
+<span class="codeline" id="line-232"><code>		}</code></span>
+<span class="codeline" id="line-233"><code>	}</code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">if</span> !<label for="r53" class="ident">okCode</label> || <a href="#line-166" class="ident">randIntn</a>(<label for="r51" class="ident">denominator</label>) &gt;= <label for="r50" class="ident">numerator</label> {</code></span>
+<span class="codeline" id="line-235"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-236"><code>	}</code></span>
+<span class="codeline" id="line-237"><code>	<span class="keyword">if</span> <label for="r52" class="ident">code</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-33" class="ident">OK</a> {</code></span>
+<span class="codeline" id="line-238"><code>		<span class="keyword">return</span> <a href="#line-243" class="ident">errOKStream</a></code></span>
+<span class="codeline" id="line-239"><code>	}</code></span>
+<span class="codeline" id="line-240"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i13">status</a>.<a href="../../../../status/status.go.html#line-63" class="ident">Errorf</a>(<label for="r52" class="ident">code</label>, <span class="lit-string">"RPC terminated due to fault injection"</span>)</code></span>
+<span class="codeline" id="line-241"><code>}</code></span>
+<span class="codeline" id="line-242"><code></code></span>
+<span class="codeline" id="line-243"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-errOKStream" class="ident">errOKStream</a> = <a href="../../../../../../../pkg/errors.html" class="ident i1">errors</a>.<a href="../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"stream terminated early with OK status"</span>)</code></span>
+<span class="codeline" id="line-244"><code></code></span>
+<span class="codeline" id="line-245"><code><span class="comment">// parseIntFromMD returns the integer in the last header or nil if parsing</span></code></span>
+<span class="codeline" id="line-246"><code><span class="comment">// failed.</span></code></span>
+<span class="codeline" id="line-247"><code><span class="keyword">func</span> <label for="r67" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-parseIntFromMD" class="ident">parseIntFromMD</a></label>(<label for="r68" class="ident">header</label> []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) (<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-248"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r68" class="ident">header</label>) == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-249"><code>		<span class="keyword">return</span> <span class="lit-number">0</span>, <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-250"><code>	}</code></span>
+<span class="codeline" id="line-251"><code>	<label for="r69" class="ident">v</label>, <label for="r70" class="ident">err</label> := <a href="../../../../../../../pkg/strconv.html" class="ident i4">strconv</a>.<a href="../../../../../../strconv/atoi.go.html#line-229" class="ident">Atoi</a>(<label for="r68" class="ident">header</label>[<a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r68" class="ident">header</label>)-<span class="lit-number">1</span>])</code></span>
+<span class="codeline" id="line-252"><code>	<span class="keyword">return</span> <label for="r69" class="ident">v</label>, <label for="r70" class="ident">err</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-253"><code>}</code></span>
+<span class="codeline" id="line-254"><code></code></span>
+<span class="codeline" id="line-255"><code><span class="keyword">func</span> <label for="r71" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-splitPct" class="ident">splitPct</a></label>(<label for="r72" class="ident">fp</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/v3.html" class="ident i18">tpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-138" class="ident">FractionalPercent</a>) (<label for="r73" class="ident">num</label> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r74" class="ident">den</label> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-256"><code>	<span class="keyword">if</span> <label for="r72" class="ident">fp</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-257"><code>		<span class="keyword">return</span> <span class="lit-number">0</span>, <span class="lit-number">100</span></code></span>
+<span class="codeline" id="line-258"><code>	}</code></span>
+<span class="codeline" id="line-259"><code>	<label for="r73" class="ident">num</label> = <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r72" class="ident">fp</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-182" class="ident">GetNumerator</a>())</code></span>
+<span class="codeline" id="line-260"><code>	<span class="keyword">switch</span> <label for="r72" class="ident">fp</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-189" class="ident">GetDenominator</a>() {</code></span>
+<span class="codeline" id="line-261"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/v3.html" class="ident i18">tpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-32" class="ident">FractionalPercent_HUNDRED</a>:</code></span>
+<span class="codeline" id="line-262"><code>		<span class="keyword">return</span> <label for="r73" class="ident">num</label>, <span class="lit-number">100</span></code></span>
+<span class="codeline" id="line-263"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/v3.html" class="ident i18">tpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-36" class="ident">FractionalPercent_TEN_THOUSAND</a>:</code></span>
+<span class="codeline" id="line-264"><code>		<span class="keyword">return</span> <label for="r73" class="ident">num</label>, <span class="lit-number">10</span> * <span class="lit-number">1000</span></code></span>
+<span class="codeline" id="line-265"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/v3.html" class="ident i18">tpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/type/v3/percent.pb.go.html#line-40" class="ident">FractionalPercent_MILLION</a>:</code></span>
+<span class="codeline" id="line-266"><code>		<span class="keyword">return</span> <label for="r73" class="ident">num</label>, <span class="lit-number">1000</span> * <span class="lit-number">1000</span></code></span>
+<span class="codeline" id="line-267"><code>	}</code></span>
+<span class="codeline" id="line-268"><code>	<span class="keyword">return</span> <label for="r73" class="ident">num</label>, <span class="lit-number">100</span></code></span>
+<span class="codeline" id="line-269"><code>}</code></span>
+<span class="codeline" id="line-270"><code></code></span>
+<span class="codeline" id="line-271"><code><span class="keyword">func</span> <label for="r75" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-grpcFromHTTP" class="ident">grpcFromHTTP</a></label>(<label for="r76" class="ident">httpStatus</label> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>, <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-272"><code>	<span class="keyword">if</span> <label for="r76" class="ident">httpStatus</label> &lt; <span class="lit-number">200</span> || <label for="r76" class="ident">httpStatus</label> &gt;= <span class="lit-number">600</span> {</code></span>
+<span class="codeline" id="line-273"><code>		<span class="comment">// Malformed; ignore this fault type.</span></code></span>
+<span class="codeline" id="line-274"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-33" class="ident">OK</a>, <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-275"><code>	}</code></span>
+<span class="codeline" id="line-276"><code>	<span class="keyword">if</span> <label for="r77" class="ident">c</label> := <a href="#line-53" class="ident">statusMap</a>[<label for="r76" class="ident">httpStatus</label>]; <label for="r77" class="ident">c</label> != <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-33" class="ident">OK</a> {</code></span>
+<span class="codeline" id="line-277"><code>		<span class="comment">// OK = 0/the default for the map.</span></code></span>
+<span class="codeline" id="line-278"><code>		<span class="keyword">return</span> <label for="r77" class="ident">c</label>, <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-279"><code>	}</code></span>
+<span class="codeline" id="line-280"><code>	<span class="comment">// All undefined HTTP status codes convert to Unknown. HTTP status of 200</span></code></span>
+<span class="codeline" id="line-281"><code><span class="comment">	// is "success", but gRPC converts to Unknown due to missing grpc status.</span></code></span>
+<span class="codeline" id="line-282"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-49" class="ident">Unknown</a>, <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-283"><code>}</code></span>
+<span class="codeline" id="line-284"><code></code></span>
+<span class="codeline" id="line-285"><code><span class="keyword">func</span> <label for="r78" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-sanitizeGRPCCode" class="ident">sanitizeGRPCCode</a></label>(<label for="r79" class="ident">c</label> <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>) <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a> {</code></span>
+<span class="codeline" id="line-286"><code>	<span class="keyword">if</span> <label for="r79" class="ident">c</label> &gt; <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>(<span class="lit-number">16</span>) {</code></span>
+<span class="codeline" id="line-287"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i9">codes</a>.<a href="../../../../codes/codes.go.html#line-49" class="ident">Unknown</a></code></span>
+<span class="codeline" id="line-288"><code>	}</code></span>
+<span class="codeline" id="line-289"><code>	<span class="keyword">return</span> <label for="r79" class="ident">c</label></code></span>
+<span class="codeline" id="line-290"><code>}</code></span>
+<span class="codeline" id="line-291"><code></code></span>
+<span class="codeline" id="line-292"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-okStream" class="ident">okStream</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-293"><code>	ctx <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a></code></span>
+<span class="codeline" id="line-294"><code>}</code></span>
+<span class="codeline" id="line-295"><code></code></span>
+<span class="codeline" id="line-296"><code><span class="keyword">func</span> (*<a href="#line-292" class="ident">okStream</a>) <label for="r80" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.Header" class="ident">Header</a></label>() (<a href="../../../../../../../pkg/google.golang.org/grpc/metadata.html" class="ident i12">metadata</a>.<a href="../../../../metadata/metadata.go.html#line-39" class="ident">MD</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) { <span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> }</code></span>
+<span class="codeline" id="line-297"><code><span class="keyword">func</span> (*<a href="#line-292" class="ident">okStream</a>) <label for="r81" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.Trailer" class="ident">Trailer</a></label>() <a href="../../../../../../../pkg/google.golang.org/grpc/metadata.html" class="ident i12">metadata</a>.<a href="../../../../metadata/metadata.go.html#line-39" class="ident">MD</a>         { <span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> }</code></span>
+<span class="codeline" id="line-298"><code><span class="keyword">func</span> (*<a href="#line-292" class="ident">okStream</a>) <label for="r82" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.CloseSend" class="ident">CloseSend</a></label>() <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>             { <span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> }</code></span>
+<span class="codeline" id="line-299"><code><span class="keyword">func</span> (<label for="r83" class="ident">o</label> *<a href="#line-292" class="ident">okStream</a>) <label for="r84" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.Context" class="ident">Context</a></label>() <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>   { <span class="keyword">return</span> <label for="r83" class="ident">o</label>.<a href="#line-293" class="ident">ctx</a> }</code></span>
+<span class="codeline" id="line-300"><code><span class="keyword">func</span> (*<a href="#line-292" class="ident">okStream</a>) <label for="r85" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.SendMsg" class="ident">SendMsg</a></label>(<label for="r86" class="ident">m</label> <span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>  { <span class="keyword">return</span> <a href="../../../../../../../pkg/io.html" class="ident i3">io</a>.<a href="../../../../../../io/io.go.html#line-44" class="ident">EOF</a> }</code></span>
+<span class="codeline" id="line-301"><code><span class="keyword">func</span> (*<a href="#line-292" class="ident">okStream</a>) <label for="r87" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter/fault.okStream^5e2bd.html#name-.RecvMsg" class="ident">RecvMsg</a></label>(<label for="r88" class="ident">m</label> <span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>  { <span class="keyword">return</span> <a href="../../../../../../../pkg/io.html" class="ident i3">io</a>.<a href="../../../../../../io/io.go.html#line-44" class="ident">EOF</a> }</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

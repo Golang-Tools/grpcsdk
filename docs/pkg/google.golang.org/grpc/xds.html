@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds</title>
+<link href="../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>xds</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../index.html#pkg-google.golang.org/grpc/xds">google.golang.org/grpc/xds</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../dep/google.golang.org/grpc/xds.html">36 packages</a>, and imported by <a href="../../../dep/google.golang.org/grpc/xds.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../src/google.golang.org/grpc/xds/server.go.html">server.go</a></span>
+	<span class="nodocs">      <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html">server_options.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-2-fold-content"><label for="file-2-fold-content">   <a href="../../../src/google.golang.org/grpc/xds/xds.go.html#doc">#d</a> <a href="../../../src/google.golang.org/grpc/xds/xds.go.html">xds.go</a></label><span id='file-2-fold-content-items' class="fold-items">
+		Package xds contains an implementation of the xDS suite of protocols, to be
+		used by gRPC client and server applications.
+
+		On the client-side, users simply need to import this package to get all xDS
+		functionality. On the server-side, users need to use the GRPCServer type
+		exported by this package instead of the regular grpc.Server.
+
+		See https://github.com/grpc/grpc-go/tree/master/examples/features/xds for
+		example.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 7, in which 3 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-GRPCServer" data-popularity="710">	<input type='checkbox' class="fold" id="GRPCServer-fold-content"><label for="GRPCServer-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-82">GRPCServer</a> <i>(struct)</i></label><span id='GRPCServer-fold-content-docs' class="fold-docs">
+		GRPCServer wraps a gRPC server and provides server-side xDS functionality, by
+		communication with a management server using xDS APIs. It implements the
+		grpc.ServiceRegistrar interface and can be passed to service registration
+		functions in IDL generated code.
+
+		<input type='checkbox' class="fold" id="GRPCServer-fold-fields"><label for="GRPCServer-fold-fields">Fields (<i>total 7, none are exported</i>)</label><span id='GRPCServer-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="GRPCServer-showhide-fields"><i><label for="GRPCServer-showhide-fields" class="show-inline">/* 7 unexporteds ... */</label><label for="GRPCServer-showhide-fields" class="hide-inline">/* 7 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-field-clientMu"><label for="GRPCServer-fold-field-clientMu"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-92">clientMu</a> <i><a href="../../sync.html">sync</a>.<a href="../../sync.html#name-Mutex">Mutex</a></i></label><span id='GRPCServer-fold-field-clientMu-docs' class="fold-docs">
+				clientMu is used only in initXDSClient(), which is called at the
+				beginning of Serve(), where we have to decide if we have to create a
+				client or use an existing one.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-83">gs</a> <i><a href="#name-grpcServer">grpcServer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-85">logger</a> <i>*<a href="internal/grpclog.html">internalgrpclog</a>.<a href="internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-87">opts</a> <i>*<a href="#name-serverOptions">serverOptions</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-84">quit</a> <i>*<a href="internal/grpcsync.html">grpcsync</a>.<a href="internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-93">xdsC</a> <i><a href="xds/internal/xdsclient.html">xdsclient</a>.<a href="xds/internal/xdsclient.html#name-XDSClient">XDSClient</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-86">xdsCredsInUse</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="GRPCServer-fold-methods"><label for="GRPCServer-fold-methods">Methods (<i>total 10, in which 5 are exported</i>)</label><span id='GRPCServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-GetServiceInfo"><label for="GRPCServer-fold-method-GetServiceInfo">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-171">GetServiceInfo</a>() map[<a href="../../builtin.html#name-string">string</a>]<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServiceInfo">ServiceInfo</a></label><span id='GRPCServer-fold-method-GetServiceInfo-docs' class="fold-docs">
+				GetServiceInfo returns a map from service names to ServiceInfo.
+				Service names include the package names, in the form of &lt;package&gt;.&lt;service&gt;.
+</span></span><span>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-GracefulStop"><label for="GRPCServer-fold-method-GracefulStop">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-344">GracefulStop</a>()</label><span id='GRPCServer-fold-method-GracefulStop-docs' class="fold-docs">
+				GracefulStop stops the underlying gRPC server gracefully. It stops the server
+				from accepting new connections and RPCs and blocks until all the pending RPCs
+				are finished.
+</span></span><span>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-RegisterService"><label for="GRPCServer-fold-method-RegisterService">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-165">RegisterService</a>(sd *<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServiceDesc">ServiceDesc</a>, ss interface{})</label><span id='GRPCServer-fold-method-RegisterService-docs' class="fold-docs">
+				RegisterService registers a service and its implementation to the underlying
+				gRPC server. It is called from the IDL generated code. This must be called
+				before invoking Serve.
+</span></span><span>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-Serve"><label for="GRPCServer-fold-method-Serve">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-208">Serve</a>(lis <a href="../../net.html">net</a>.<a href="../../net.html#name-Listener">Listener</a>) <a href="../../builtin.html#name-error">error</a></label><span id='GRPCServer-fold-method-Serve-docs' class="fold-docs">
+				Serve gets the underlying gRPC server to accept incoming connections on the
+				listener lis, which is expected to be listening on a TCP port.
+
+				A connection to the management server, to receive xDS configuration, is
+				initiated here.
+
+				Serve will return a non-nil error unless Stop or GracefulStop is called.
+</span></span><span>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-Stop"><label for="GRPCServer-fold-method-Stop">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-333">Stop</a>()</label><span id='GRPCServer-fold-method-Stop-docs' class="fold-docs">
+				Stop stops the underlying gRPC server. It immediately closes all open
+				connections. It cancels all active RPCs on the server side and the
+				corresponding pending RPCs on the client side will get notified by connection
+				errors.
+</span></span>
+			<input type='checkbox' class="showhide" id="GRPCServer-showhide-methods"><i><label for="GRPCServer-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="GRPCServer-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-141">defaultServerOptions</a>() *<a href="#name-serverOptions">serverOptions</a></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-handleServerOptions"><label for="GRPCServer-fold-method-handleServerOptions">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-131">handleServerOptions</a>(opts []<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a>)</label><span id='GRPCServer-fold-method-handleServerOptions-docs' class="fold-docs">
+				handleServerOptions iterates through the list of server options passed in by
+				the user, and handles the xDS server specific options.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-handleServingModeChanges"><label for="GRPCServer-fold-method-handleServingModeChanges">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-296">handleServingModeChanges</a>(updateCh *<a href="internal/buffer.html">buffer</a>.<a href="internal/buffer.html#name-Unbounded">Unbounded</a>)</label><span id='GRPCServer-fold-method-handleServingModeChanges-docs' class="fold-docs">
+				handleServingModeChanges runs as a separate goroutine, spawned from Serve().
+				It reads a channel on to which mode change arguments are pushed, and in turn
+				invokes the user registered callback. It also calls an internal method on the
+				underlying grpc.Server to gracefully close existing connections, if the
+				listener moved to a "not-serving" mode.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GRPCServer-fold-method-initXDSClient"><label for="GRPCServer-fold-method-initXDSClient">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-176">initXDSClient</a>() <a href="../../builtin.html#name-error">error</a></label><span id='GRPCServer-fold-method-initXDSClient-docs' class="fold-docs">
+				initXDSClient creates a new xdsClient if there is no existing one available.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*GRPCServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-153">loggingServerModeChangeCallback</a>(addr <a href="../../net.html">net</a>.<a href="../../net.html#name-Addr">Addr</a>, args <a href="#name-ServingModeChangeArgs">ServingModeChangeArgs</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="GRPCServer-fold-impls"><label for="GRPCServer-fold-impls">Implements (<i>at least 2, in which 1 are exported</i>)</label><span id='GRPCServer-fold-impls-items' class="fold-items"><span>
+			*GRPCServer : google.golang.org/grpc.<a href="../grpc.html#name-ServiceRegistrar">ServiceRegistrar</a></span>
+			<input type='checkbox' class="showhide" id="GRPCServer-showhide-impls"><i><label for="GRPCServer-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="GRPCServer-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*GRPCServer : <a href="#name-grpcServer">grpcServer</a></i></span></span>
+		<input type='checkbox' class="fold" id="GRPCServer-fold-results"><label for="GRPCServer-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GRPCServer-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewGRPCServer">NewGRPCServer</a>(opts ...<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a>) *<b>GRPCServer</b></span></span>
+		<input type='checkbox' class="fold" id="GRPCServer-fold-params"><label for="GRPCServer-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='GRPCServer-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="GRPCServer-showhide-outputofs"><i><label for="GRPCServer-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="GRPCServer-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>GRPCServer</b>) *<a href="internal/grpclog.html">internalgrpclog</a>.<a href="internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-ServingModeCallbackFunc" data-popularity="35">	<input type='checkbox' class="fold" id="ServingModeCallbackFunc-fold-content"><label for="ServingModeCallbackFunc-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-49">ServingModeCallbackFunc</a> <i>(func)</i></label><span id='ServingModeCallbackFunc-fold-content-docs' class="fold-docs">
+		ServingModeCallbackFunc is the callback that users can register to get
+		notified about the server's serving mode changes. The callback is invoked
+		with the address of the listener and its new mode.
+
+		Users must not perform any blocking operations in this callback.
+
+		<input type='checkbox' class="fold" id="ServingModeCallbackFunc-fold-params"><label for="ServingModeCallbackFunc-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='ServingModeCallbackFunc-fold-params-items' class="fold-items"><span>
+			func <a href="#name-ServingModeCallback">ServingModeCallback</a>(cb <b>ServingModeCallbackFunc</b>) <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-ServingModeChangeArgs" data-popularity="35">	<input type='checkbox' class="fold" id="ServingModeChangeArgs-fold-content"><label for="ServingModeChangeArgs-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-53">ServingModeChangeArgs</a> <i>(struct)</i></label><span id='ServingModeChangeArgs-fold-content-docs' class="fold-docs">
+		ServingModeChangeArgs wraps the arguments passed to the serving mode callback
+		function.
+
+		<input type='checkbox' class="fold" id="ServingModeChangeArgs-fold-fields"><label for="ServingModeChangeArgs-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='ServingModeChangeArgs-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ServingModeChangeArgs-fold-field-Err"><label for="ServingModeChangeArgs-fold-field-Err"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-58">Err</a> <i><a href="../../builtin.html#name-error">error</a></i></label><span id='ServingModeChangeArgs-fold-field-Err-docs' class="fold-docs">
+				Err is set to a non-nil error if the server has transitioned into
+				not-serving mode.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServingModeChangeArgs-fold-field-Mode"><label for="ServingModeChangeArgs-fold-field-Mode"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-55">Mode</a> <i><a href="connectivity.html">connectivity</a>.<a href="connectivity.html#name-ServingMode">ServingMode</a></i></label><span id='ServingModeChangeArgs-fold-field-Mode-docs' class="fold-docs">
+				Mode is the new serving mode of the server listener.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ServingModeChangeArgs-fold-params"><label for="ServingModeChangeArgs-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='ServingModeChangeArgs-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ServingModeChangeArgs-showhide-outputofs"><i><label for="ServingModeChangeArgs-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="ServingModeChangeArgs-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-GRPCServer">GRPCServer</a>).<a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-153">loggingServerModeChangeCallback</a>(addr <a href="../../net.html">net</a>.<a href="../../net.html#name-Addr">Addr</a>, args <b>ServingModeChangeArgs</b>)</i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-grpcServer" data-popularity="600">	<input type='checkbox' class="fold" id="grpcServer-fold-content"><label for="grpcServer-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-70">grpcServer</a> <b><i>(interface)</i></b></label><span id='grpcServer-fold-content-docs' class="fold-docs">
+		grpcServer contains methods from grpc.Server which are used by the
+		GRPCServer type here. This is useful for overriding in unit tests.
+
+		<input type='checkbox' class="fold" id="grpcServer-fold-methods"><label for="grpcServer-fold-methods">Methods (<i>total 5, all are exported</i>)</label><span id='grpcServer-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( grpcServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-75">GetServiceInfo</a>() map[<a href="../../builtin.html#name-string">string</a>]<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServiceInfo">ServiceInfo</a></span></span><span>
+			<span class="nodocs">( grpcServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-74">GracefulStop</a>()</span></span><span>
+			<span class="nodocs">( grpcServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-71">RegisterService</a>(*<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServiceDesc">ServiceDesc</a>, interface{})</span></span><span>
+			<span class="nodocs">( grpcServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-72">Serve</a>(<a href="../../net.html">net</a>.<a href="../../net.html#name-Listener">Listener</a>) <a href="../../builtin.html#name-error">error</a></span></span><span>
+			<span class="nodocs">( grpcServer) <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-73">Stop</a>()</span></span></span>
+		<input type='checkbox' class="fold" id="grpcServer-fold-impledby"><label for="grpcServer-fold-impledby">Implemented By (<i>at least 2, both are exported</i>)</label><span id='grpcServer-fold-impledby-items' class="fold-items"><span>
+			*<a href="#name-GRPCServer">GRPCServer</a></span><span>
+			*google.golang.org/grpc.<a href="../grpc.html#name-Server">Server</a></span></span>
+		<input type='checkbox' class="fold" id="grpcServer-fold-impls"><label for="grpcServer-fold-impls">Implements (<i>at least one exported</i>)</label><span id='grpcServer-fold-impls-items' class="fold-items"><span>
+			 grpcServer : google.golang.org/grpc.<a href="../grpc.html#name-ServiceRegistrar">ServiceRegistrar</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-modeChangeArgs" data-popularity="0">	<input type='checkbox' class="fold" id="modeChangeArgs-fold-content"><label for="modeChangeArgs-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-285">modeChangeArgs</a> <i>(struct)</i></label><span id='modeChangeArgs-fold-content-docs' class="fold-docs">
+		modeChangeArgs wraps argument required for invoking mode change callback.
+
+		<input type='checkbox' class="fold" id="modeChangeArgs-fold-fields"><label for="modeChangeArgs-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='modeChangeArgs-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="modeChangeArgs-showhide-fields"><i><label for="modeChangeArgs-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="modeChangeArgs-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-286">addr</a> <i><a href="../../net.html">net</a>.<a href="../../net.html#name-Addr">Addr</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-288">err</a> <i><a href="../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-287">mode</a> <i><a href="connectivity.html">connectivity</a>.<a href="connectivity.html#name-ServingMode">ServingMode</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-serverOption" data-popularity="100">	<input type='checkbox' class="fold" id="serverOption-fold-content"><label for="serverOption-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-33">serverOption</a> <i>(struct)</i></label><span id='serverOption-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="serverOption-fold-fields"><label for="serverOption-fold-fields">Fields (<i>total 2, in which 1 are exported</i>)</label><span id='serverOption-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-34">EmptyServerOption</a> <i><a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-EmptyServerOption">EmptyServerOption</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="serverOption-showhide-fields"><i><label for="serverOption-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="serverOption-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-35">apply</a> <i>func(*<a href="#name-serverOptions">serverOptions</a>)</i></span></i></span></span>
+		<input type='checkbox' class="fold" id="serverOption-fold-methods"><label for="serverOption-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='serverOption-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serverOption-showhide-methods"><i><label for="serverOption-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="serverOption-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( serverOption) <a href="../../../src/google.golang.org/grpc/server.go.html#line-192">apply</a>(*<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-serverOptions">serverOptions</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="serverOption-fold-impls"><label for="serverOption-fold-impls">Implements (<i>at least one exported</i>)</label><span id='serverOption-fold-impls-items' class="fold-items"><span>
+			 serverOption : google.golang.org/grpc.<a href="../grpc.html#name-ServerOption">ServerOption</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-serverOptions" data-popularity="75">	<input type='checkbox' class="fold" id="serverOptions-fold-content"><label for="serverOptions-fold-content"> type <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-28">serverOptions</a> <i>(struct)</i></label><span id='serverOptions-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="serverOptions-fold-fields"><label for="serverOptions-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='serverOptions-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serverOptions-showhide-fields"><i><label for="serverOptions-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="serverOptions-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-30">bootstrapContentsForTesting</a> <i>[]<a href="../../builtin.html#name-byte">byte</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-29">modeCallback</a> <i><a href="#name-ServingModeCallbackFunc">ServingModeCallbackFunc</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="serverOptions-fold-results"><label for="serverOptions-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='serverOptions-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serverOptions-showhide-inputofs"><i><label for="serverOptions-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="serverOptions-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-GRPCServer">GRPCServer</a>).<a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-141">defaultServerOptions</a>() *<b>serverOptions</b></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 9, in which 4 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-BootstrapContentsForTesting">	<input type='checkbox' class="fold" id="BootstrapContentsForTesting-fold-content"><label for="BootstrapContentsForTesting-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-74">BootstrapContentsForTesting</a>(contents []<a href="../../builtin.html#name-byte">byte</a>) <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a></label><span id='BootstrapContentsForTesting-fold-content-docs' class="fold-docs">
+		BootstrapContentsForTesting returns a grpc.ServerOption which allows users
+		to inject a bootstrap configuration used by only this server, instead of the
+		global configuration from the environment variables.
+
+		Testing Only
+
+		This function should ONLY be used for testing and may not work with some
+		other features, including the CSDS service.
+
+		Experimental
+
+		Notice: This API is EXPERIMENTAL and may be changed or removed in a
+		later release.
+
+</span></div><div class="anchor value-res" id="name-NewGRPCServer">	<input type='checkbox' class="fold" id="NewGRPCServer-fold-content"><label for="NewGRPCServer-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-99">NewGRPCServer</a>(opts ...<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a>) *<a href="#name-GRPCServer">GRPCServer</a></label><span id='NewGRPCServer-fold-content-docs' class="fold-docs">
+		NewGRPCServer creates an xDS-enabled gRPC server using the passed in opts.
+		The underlying gRPC server has no service registered and has not started to
+		accept requests yet.
+
+</span></div><div class="anchor value-res" id="name-NewXDSResolverWithConfigForTesting">	<input type='checkbox' class="fold" id="NewXDSResolverWithConfigForTesting-fold-content"><label for="NewXDSResolverWithConfigForTesting-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/xds.go.html#line-93">NewXDSResolverWithConfigForTesting</a>(bootstrapConfig []<a href="../../builtin.html#name-byte">byte</a>) (<a href="resolver.html">resolver</a>.<a href="resolver.html#name-Builder">Builder</a>, <a href="../../builtin.html#name-error">error</a>)</label><span id='NewXDSResolverWithConfigForTesting-fold-content-docs' class="fold-docs">
+		NewXDSResolverWithConfigForTesting creates a new xds resolver builder using
+		the provided xds bootstrap config instead of the global configuration from
+		the supported environment variables.  The resolver.Builder is meant to be
+		used in conjunction with the grpc.WithResolvers DialOption.
+
+		Testing Only
+
+		This function should ONLY be used for testing and may not work with some
+		other features, including the CSDS service.
+
+		Experimental
+
+		Notice: This API is EXPERIMENTAL and may be changed or removed in a
+		later release.
+
+</span></div><div class="anchor value-res" id="name-ServingModeCallback">	<input type='checkbox' class="fold" id="ServingModeCallback-fold-content"><label for="ServingModeCallback-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server_options.go.html#line-40">ServingModeCallback</a>(cb <a href="#name-ServingModeCallbackFunc">ServingModeCallbackFunc</a>) <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a></label><span id='ServingModeCallback-fold-content-docs' class="fold-docs">
+		ServingModeCallback returns a grpc.ServerOption which allows users to
+		register a callback to get notified about serving mode changes.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../src/google.golang.org/grpc/xds/xds.go.html#line-50">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-64">prefixLogger</a>(p *<a href="#name-GRPCServer">GRPCServer</a>) *<a href="internal/grpclog.html">internalgrpclog</a>.<a href="internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div><div class="anchor value-res hidden" id="name-routeAndProcess"><i>	<input type='checkbox' class="fold" id="routeAndProcess-fold-content"><label for="routeAndProcess-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-355">routeAndProcess</a>(ctx <a href="../../context.html">context</a>.<a href="../../context.html#name-Context">Context</a>) <a href="../../builtin.html#name-error">error</a></label><span id='routeAndProcess-fold-content-docs' class="fold-docs">
+		routeAndProcess routes the incoming RPC to a configured route in the route
+		table and also processes the RPC by running the incoming RPC through any HTTP
+		Filters configured.
+
+</span></i></div><div class="anchor value-res hidden" id="name-xdsStreamInterceptor"><i>	<input type='checkbox' class="fold" id="xdsStreamInterceptor-fold-content"><label for="xdsStreamInterceptor-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-420">xdsStreamInterceptor</a>(srv interface{}, ss <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerStream">ServerStream</a>, _ *<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-StreamServerInfo">StreamServerInfo</a>, handler <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-StreamHandler">StreamHandler</a>) <a href="../../builtin.html#name-error">error</a></label><span id='xdsStreamInterceptor-fold-content-docs' class="fold-docs">
+		xdsStreamInterceptor is the stream interceptor added to the gRPC server to
+		perform any xDS specific functionality on streaming RPCs.
+
+</span></i></div><div class="anchor value-res hidden" id="name-xdsUnaryInterceptor"><i>	<input type='checkbox' class="fold" id="xdsUnaryInterceptor-fold-content"><label for="xdsUnaryInterceptor-fold-content"> func <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-409">xdsUnaryInterceptor</a>(ctx <a href="../../context.html">context</a>.<a href="../../context.html#name-Context">Context</a>, req interface{}, _ *<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-UnaryServerInfo">UnaryServerInfo</a>, handler <a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-UnaryHandler">UnaryHandler</a>) (resp interface{}, err <a href="../../builtin.html#name-error">error</a>)</label><span id='xdsUnaryInterceptor-fold-content-docs' class="fold-docs">
+		xdsUnaryInterceptor is the unary interceptor added to the gRPC server to
+		perform any xDS specific functionality on unary RPCs.
+
+</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 5, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-drainServerTransports"><i>	<span class="nodocs">  var <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-60">drainServerTransports</a> func(*<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-Server">Server</a>, <a href="../../builtin.html#name-string">string</a>)</span></i></div><div class="anchor value-res hidden" id="name-grpcGetServerCreds"><i>	<span class="nodocs">  var <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-59">grpcGetServerCreds</a> func(*<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-Server">Server</a>) <a href="credentials.html">credentials</a>.<a href="credentials.html#name-TransportCredentials">TransportCredentials</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-61">logger</a> <a href="grpclog.html">grpclog</a>.<a href="grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div><div class="anchor value-res hidden" id="name-newGRPCServer"><i>	<span class="nodocs">  var <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-55">newGRPCServer</a> func(opts ...<a href="../grpc.html">grpc</a>.<a href="../grpc.html#name-ServerOption">ServerOption</a>) <a href="#name-grpcServer">grpcServer</a></span></i></div><div class="anchor value-res hidden" id="name-newXDSClient"><i>	<input type='checkbox' class="fold" id="newXDSClient-fold-content"><label for="newXDSClient-fold-content">  var <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-52">newXDSClient</a> func() (<a href="xds/internal/xdsclient.html">xdsclient</a>.<a href="xds/internal/xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../builtin.html#name-error">error</a>)</label><span id='newXDSClient-fold-content-docs' class="fold-docs">
+		These new functions will be overridden in unit tests.
+
+</span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-serverPrefix"><i>	<span class="nodocs">const <a href="../../../src/google.golang.org/grpc/xds/server.go.html#line-48">serverPrefix</a> = "[xds-server %p] "</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method Implmentations: golang.org/x/net/http2.WriteScheduler</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+<pre><code><span style="font-size:x-large;">type <a href="../../../../pkg/golang.org/x/net/http2.html">golang.org/x/net/http2</a>.<b><a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-11">WriteScheduler</a></b></span><span style="font-size:large;"> <b><i>(interface)</i></b></span>
+
+<code><span class="title">Method Implmentations<span class="title-stat"><i></i></span></span>
+
+<div class="anchor" id="name-AdjustStream">	<a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-26">AdjustStream</a>(streamID <a href="../../../../pkg/builtin.html#name-uint32">uint32</a>, priority <a href="../../../../pkg/golang.org/x/net/http2.html#name-PriorityParam">PriorityParam</a>)
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-priorityWriteScheduler">priorityWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_priority.go.html#line-313">AdjustStream</a></b>
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-randomWriteScheduler">randomWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_random.go.html#line-43">AdjustStream</a></b></div>
+<div class="anchor" id="name-CloseStream">	<a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-20">CloseStream</a>(streamID <a href="../../../../pkg/builtin.html#name-uint32">uint32</a>)
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-priorityWriteScheduler">priorityWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_priority.go.html#line-288">CloseStream</a></b>
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-randomWriteScheduler">randomWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_random.go.html#line-34">CloseStream</a></b></div>
+<div class="anchor" id="name-OpenStream">	<a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-15">OpenStream</a>(streamID <a href="../../../../pkg/builtin.html#name-uint32">uint32</a>, options <a href="../../../../pkg/golang.org/x/net/http2.html#name-OpenStreamOptions">OpenStreamOptions</a>)
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-priorityWriteScheduler">priorityWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_priority.go.html#line-257">OpenStream</a></b>
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-randomWriteScheduler">randomWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_random.go.html#line-30">OpenStream</a></b></div>
+<div class="anchor" id="name-Pop">	<a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-36">Pop</a>() (wr <a href="../../../../pkg/golang.org/x/net/http2.html#name-FrameWriteRequest">FrameWriteRequest</a>, ok <a href="../../../../pkg/builtin.html#name-bool">bool</a>)
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-priorityWriteScheduler">priorityWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_priority.go.html#line-405">Pop</a></b>
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-randomWriteScheduler">randomWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_random.go.html#line-61">Pop</a></b></div>
+<div class="anchor" id="name-Push">	<a href="../../../../src/golang.org/x/net/http2/writesched.go.html#line-31">Push</a>(wr <a href="../../../../pkg/golang.org/x/net/http2.html#name-FrameWriteRequest">FrameWriteRequest</a>)
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-priorityWriteScheduler">priorityWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_priority.go.html#line-384">Push</a></b>
+		(*<a href="../../../../pkg/golang.org/x/net/http2.html#name-randomWriteScheduler">randomWriteScheduler</a>).<b><a href="../../../../src/golang.org/x/net/http2/writesched_random.go.html#line-47">Push</a></b></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

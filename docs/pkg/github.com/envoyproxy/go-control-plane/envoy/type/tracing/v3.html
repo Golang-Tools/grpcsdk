@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>tracingv3</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../../index.html#pkg-github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3">github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3</a><i> (on <a href="https://pkg.go.dev/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3.html">19 packages</a>, and imported by <a href="../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html">custom_tag.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html">custom_tag.pb.validate.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 20, in which 19 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-CustomTag" data-popularity="1150">	<input type='checkbox' class="fold" id="CustomTag-fold-content"><label for="CustomTag-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-28">CustomTag</a> <i>(struct)</i></label><span id='CustomTag-fold-content-docs' class="fold-docs">
+		Describes custom tags for the active span.
+		[#next-free-field: 6]
+
+		<input type='checkbox' class="fold" id="CustomTag-fold-fields"><label for="CustomTag-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='CustomTag-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag-fold-field-Tag"><label for="CustomTag-fold-field-Tag"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-34">Tag</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag-fold-field-Tag-docs' class="fold-docs">
+				Used to populate the tag name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag-fold-field-Type"><label for="CustomTag-fold-field-Type"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-42">Type</a> <i><a href="#name-isCustomTag_Type">isCustomTag_Type</a></i></label><span id='CustomTag-fold-field-Type-docs' class="fold-docs">
+				Used to specify what kind of custom tag.
+
+				Types that are assignable to Type:
+					*CustomTag_Literal_
+					*CustomTag_Environment_
+					*CustomTag_RequestHeader
+					*CustomTag_Metadata_
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag-showhide-fields"><i><label for="CustomTag-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="CustomTag-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-30">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-29">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-31">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag-fold-methods"><label for="CustomTag-fold-methods">Methods (<i>total 14, in which 13 are exported</i>)</label><span id='CustomTag-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag-fold-method-Descriptor"><label for="CustomTag-fold-method-Descriptor">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-73">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='CustomTag-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use CustomTag.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-98">GetEnvironment</a>() *<a href="#name-CustomTag_Environment">CustomTag_Environment</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-91">GetLiteral</a>() *<a href="#name-CustomTag_Literal">CustomTag_Literal</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-112">GetMetadata</a>() *<a href="#name-CustomTag_Metadata">CustomTag_Metadata</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-105">GetRequestHeader</a>() *<a href="#name-CustomTag_Header">CustomTag_Header</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-77">GetTag</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-84">GetType</a>() <a href="#name-isCustomTag_Type">isCustomTag_Type</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-58">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-60">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-45">Reset</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-54">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag-fold-method-Validate"><label for="CustomTag-fold-method-Validate">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-41">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on CustomTag with the rules defined in the
+				proto definition for this message. If any rules are violated, the first
+				error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag-fold-method-ValidateAll"><label for="CustomTag-fold-method-ValidateAll">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-49">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on CustomTag with the rules defined in
+				the proto definition for this message. If any rules are violated, the
+				result is a list of violation errors wrapped in CustomTagMultiError, or nil
+				if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag-showhide-methods"><i><label for="CustomTag-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-53">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag-fold-impls"><label for="CustomTag-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='CustomTag-fold-impls-items' class="fold-items"><span>
+			*CustomTag : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*CustomTag : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*CustomTag : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="CustomTag-showhide-impls"><i><label for="CustomTag-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="CustomTag-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*CustomTag : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*CustomTag : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*CustomTag : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag-fold-results"><label for="CustomTag-fold-results">As Outputs Of (<i>at least 2, both are exported</i>)</label><span id='CustomTag-fold-results-items' class="fold-items"><span>
+			func github.com/envoyproxy/go-control-plane/envoy/config/route/v3.(*<a href="../../config/route/v3.html#name-Tracing">Tracing</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/config/route/v3/route_components.pb.go.html#line-2868">GetCustomTags</a>() []*<b>CustomTag</b></span><span>
+			func github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3.(*<a href="../../extensions/filters/network/http_connection_manager/v3.html#name-HttpConnectionManager_Tracing">HttpConnectionManager_Tracing</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3/http_connection_manager.pb.go.html#line-1907">GetCustomTags</a>() []*<b>CustomTag</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Environment" data-popularity="875">	<input type='checkbox' class="fold" id="CustomTag_Environment-fold-content"><label for="CustomTag_Environment-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-201">CustomTag_Environment</a> <i>(struct)</i></label><span id='CustomTag_Environment-fold-content-docs' class="fold-docs">
+		Environment type custom tag with environment name and default value.
+
+		<input type='checkbox' class="fold" id="CustomTag_Environment-fold-fields"><label for="CustomTag_Environment-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='CustomTag_Environment-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment-fold-field-DefaultValue"><label for="CustomTag_Environment-fold-field-DefaultValue"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-211">DefaultValue</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Environment-fold-field-DefaultValue-docs' class="fold-docs">
+				When the environment variable is not found,
+				the tag value will be populated with this default value if specified,
+				otherwise no tag will be populated.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment-fold-field-Name"><label for="CustomTag_Environment-fold-field-Name"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-207">Name</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Environment-fold-field-Name-docs' class="fold-docs">
+				Environment variable name to obtain the value to populate the tag value.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Environment-showhide-fields"><i><label for="CustomTag_Environment-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="CustomTag_Environment-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-203">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-202">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-204">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Environment-fold-methods"><label for="CustomTag_Environment-fold-methods">Methods (<i>total 10, in which 9 are exported</i>)</label><span id='CustomTag_Environment-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment-fold-method-Descriptor"><label for="CustomTag_Environment-fold-method-Descriptor">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-242">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='CustomTag_Environment-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use CustomTag_Environment.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-253">GetDefaultValue</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-246">GetName</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-227">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-229">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-214">Reset</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-223">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment-fold-method-Validate"><label for="CustomTag_Environment-fold-method-Validate">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-402">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Environment-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on CustomTag_Environment with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment-fold-method-ValidateAll"><label for="CustomTag_Environment-fold-method-ValidateAll">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-410">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Environment-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on CustomTag_Environment with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				CustomTag_EnvironmentMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Environment-showhide-methods"><i><label for="CustomTag_Environment-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Environment-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Environment) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-414">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Environment-fold-impls"><label for="CustomTag_Environment-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='CustomTag_Environment-fold-impls-items' class="fold-items"><span>
+			*CustomTag_Environment : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*CustomTag_Environment : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*CustomTag_Environment : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Environment-showhide-impls"><i><label for="CustomTag_Environment-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="CustomTag_Environment-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*CustomTag_Environment : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*CustomTag_Environment : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*CustomTag_Environment : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Environment-fold-results"><label for="CustomTag_Environment-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='CustomTag_Environment-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-CustomTag">CustomTag</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-98">GetEnvironment</a>() *<b>CustomTag_Environment</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Environment_" data-popularity="100">	<input type='checkbox' class="fold" id="CustomTag_Environment_-fold-content"><label for="CustomTag_Environment_-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-128">CustomTag_Environment_</a> <i>(struct)</i></label><span id='CustomTag_Environment_-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="CustomTag_Environment_-fold-fields"><label for="CustomTag_Environment_-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='CustomTag_Environment_-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Environment_-fold-field-Environment"><label for="CustomTag_Environment_-fold-field-Environment"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-130">Environment</a> <i>*<a href="#name-CustomTag_Environment">CustomTag_Environment</a></i></label><span id='CustomTag_Environment_-fold-field-Environment-docs' class="fold-docs">
+				An environment custom tag.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Environment_-fold-methods"><label for="CustomTag_Environment_-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='CustomTag_Environment_-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Environment_-showhide-methods"><i><label for="CustomTag_Environment_-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Environment_-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Environment_) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-145">isCustomTag_Type</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Environment_-fold-impls"><label for="CustomTag_Environment_-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='CustomTag_Environment_-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Environment_-showhide-impls"><i><label for="CustomTag_Environment_-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="CustomTag_Environment_-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*CustomTag_Environment_ : <a href="#name-isCustomTag_Type">isCustomTag_Type</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_EnvironmentMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="CustomTag_EnvironmentMultiError-fold-content"><label for="CustomTag_EnvironmentMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-444">CustomTag_EnvironmentMultiError</a> <i>([])</i></label><span id='CustomTag_EnvironmentMultiError-fold-content-docs' class="fold-docs">
+		CustomTag_EnvironmentMultiError is an error wrapping multiple validation
+		errors returned by CustomTag_Environment.ValidateAll() if the designated
+		constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_EnvironmentMultiError-fold-methods"><label for="CustomTag_EnvironmentMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='CustomTag_EnvironmentMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentMultiError-fold-method-AllErrors"><label for="CustomTag_EnvironmentMultiError-fold-method-AllErrors">( CustomTag_EnvironmentMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-456">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_EnvironmentMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentMultiError-fold-method-Error"><label for="CustomTag_EnvironmentMultiError-fold-method-Error">( CustomTag_EnvironmentMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-447">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_EnvironmentMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_EnvironmentMultiError-fold-impls"><label for="CustomTag_EnvironmentMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_EnvironmentMultiError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_EnvironmentMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_EnvironmentValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-content"><label for="CustomTag_EnvironmentValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-460">CustomTag_EnvironmentValidationError</a> <i>(struct)</i></label><span id='CustomTag_EnvironmentValidationError-fold-content-docs' class="fold-docs">
+		CustomTag_EnvironmentValidationError is the validation error returned by
+		CustomTag_Environment.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-fields"><label for="CustomTag_EnvironmentValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='CustomTag_EnvironmentValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_EnvironmentValidationError-showhide-fields"><i><label for="CustomTag_EnvironmentValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="CustomTag_EnvironmentValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-237">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-235">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-238">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-236">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-methods"><label for="CustomTag_EnvironmentValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='CustomTag_EnvironmentValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-Cause"><label for="CustomTag_EnvironmentValidationError-fold-method-Cause">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-474">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-Error"><label for="CustomTag_EnvironmentValidationError-fold-method-Error">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-485">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-ErrorName"><label for="CustomTag_EnvironmentValidationError-fold-method-ErrorName">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-480">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-Field"><label for="CustomTag_EnvironmentValidationError-fold-method-Field">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-468">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-Key"><label for="CustomTag_EnvironmentValidationError-fold-method-Key">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-477">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-method-Reason"><label for="CustomTag_EnvironmentValidationError-fold-method-Reason">( CustomTag_EnvironmentValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-471">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_EnvironmentValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_EnvironmentValidationError-fold-impls"><label for="CustomTag_EnvironmentValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_EnvironmentValidationError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_EnvironmentValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Header" data-popularity="875">	<input type='checkbox' class="fold" id="CustomTag_Header-fold-content"><label for="CustomTag_Header-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-261">CustomTag_Header</a> <i>(struct)</i></label><span id='CustomTag_Header-fold-content-docs' class="fold-docs">
+		Header type custom tag with header name and default value.
+
+		<input type='checkbox' class="fold" id="CustomTag_Header-fold-fields"><label for="CustomTag_Header-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='CustomTag_Header-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Header-fold-field-DefaultValue"><label for="CustomTag_Header-fold-field-DefaultValue"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-211">DefaultValue</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Header-fold-field-DefaultValue-docs' class="fold-docs">
+				When the environment variable is not found,
+				the tag value will be populated with this default value if specified,
+				otherwise no tag will be populated.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Header-fold-field-Name"><label for="CustomTag_Header-fold-field-Name"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-207">Name</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Header-fold-field-Name-docs' class="fold-docs">
+				Environment variable name to obtain the value to populate the tag value.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Header-showhide-fields"><i><label for="CustomTag_Header-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="CustomTag_Header-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-203">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-202">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-204">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Header-fold-methods"><label for="CustomTag_Header-fold-methods">Methods (<i>total 10, in which 9 are exported</i>)</label><span id='CustomTag_Header-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Header-fold-method-Descriptor"><label for="CustomTag_Header-fold-method-Descriptor">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-302">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='CustomTag_Header-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use CustomTag_Header.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-313">GetDefaultValue</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-306">GetName</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-287">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-289">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-274">Reset</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-283">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Header-fold-method-Validate"><label for="CustomTag_Header-fold-method-Validate">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-517">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Header-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on CustomTag_Header with the rules defined
+				in the proto definition for this message. If any rules are violated, the
+				first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Header-fold-method-ValidateAll"><label for="CustomTag_Header-fold-method-ValidateAll">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-525">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Header-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on CustomTag_Header with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				CustomTag_HeaderMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Header-showhide-methods"><i><label for="CustomTag_Header-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Header-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Header) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-529">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Header-fold-impls"><label for="CustomTag_Header-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='CustomTag_Header-fold-impls-items' class="fold-items"><span>
+			*CustomTag_Header : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*CustomTag_Header : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*CustomTag_Header : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Header-showhide-impls"><i><label for="CustomTag_Header-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="CustomTag_Header-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*CustomTag_Header : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*CustomTag_Header : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*CustomTag_Header : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Header-fold-results"><label for="CustomTag_Header-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='CustomTag_Header-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-CustomTag">CustomTag</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-105">GetRequestHeader</a>() *<b>CustomTag_Header</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_HeaderMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="CustomTag_HeaderMultiError-fold-content"><label for="CustomTag_HeaderMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-570">CustomTag_HeaderMultiError</a> <i>([])</i></label><span id='CustomTag_HeaderMultiError-fold-content-docs' class="fold-docs">
+		CustomTag_HeaderMultiError is an error wrapping multiple validation errors
+		returned by CustomTag_Header.ValidateAll() if the designated constraints
+		aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_HeaderMultiError-fold-methods"><label for="CustomTag_HeaderMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='CustomTag_HeaderMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderMultiError-fold-method-AllErrors"><label for="CustomTag_HeaderMultiError-fold-method-AllErrors">( CustomTag_HeaderMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-582">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_HeaderMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderMultiError-fold-method-Error"><label for="CustomTag_HeaderMultiError-fold-method-Error">( CustomTag_HeaderMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-573">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_HeaderMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_HeaderMultiError-fold-impls"><label for="CustomTag_HeaderMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_HeaderMultiError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_HeaderMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_HeaderValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-content"><label for="CustomTag_HeaderValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-586">CustomTag_HeaderValidationError</a> <i>(struct)</i></label><span id='CustomTag_HeaderValidationError-fold-content-docs' class="fold-docs">
+		CustomTag_HeaderValidationError is the validation error returned by
+		CustomTag_Header.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-fields"><label for="CustomTag_HeaderValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='CustomTag_HeaderValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_HeaderValidationError-showhide-fields"><i><label for="CustomTag_HeaderValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="CustomTag_HeaderValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-237">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-235">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-238">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-236">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-methods"><label for="CustomTag_HeaderValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='CustomTag_HeaderValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-Cause"><label for="CustomTag_HeaderValidationError-fold-method-Cause">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-600">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_HeaderValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-Error"><label for="CustomTag_HeaderValidationError-fold-method-Error">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-609">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_HeaderValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-ErrorName"><label for="CustomTag_HeaderValidationError-fold-method-ErrorName">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-606">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_HeaderValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-Field"><label for="CustomTag_HeaderValidationError-fold-method-Field">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-594">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_HeaderValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-Key"><label for="CustomTag_HeaderValidationError-fold-method-Key">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-603">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='CustomTag_HeaderValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-method-Reason"><label for="CustomTag_HeaderValidationError-fold-method-Reason">( CustomTag_HeaderValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-597">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_HeaderValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_HeaderValidationError-fold-impls"><label for="CustomTag_HeaderValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_HeaderValidationError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_HeaderValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Literal" data-popularity="825">	<input type='checkbox' class="fold" id="CustomTag_Literal-fold-content"><label for="CustomTag_Literal-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-152">CustomTag_Literal</a> <i>(struct)</i></label><span id='CustomTag_Literal-fold-content-docs' class="fold-docs">
+		Literal type custom tag with static value for the tag value.
+
+		<input type='checkbox' class="fold" id="CustomTag_Literal-fold-fields"><label for="CustomTag_Literal-fold-fields">Fields (<i>total 4, in which 1 are exported</i>)</label><span id='CustomTag_Literal-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Literal-fold-field-Value"><label for="CustomTag_Literal-fold-field-Value"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-158">Value</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Literal-fold-field-Value-docs' class="fold-docs">
+				Static literal value to populate the tag value.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Literal-showhide-fields"><i><label for="CustomTag_Literal-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="CustomTag_Literal-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-154">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-153">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-155">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Literal-fold-methods"><label for="CustomTag_Literal-fold-methods">Methods (<i>total 9, in which 8 are exported</i>)</label><span id='CustomTag_Literal-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Literal-fold-method-Descriptor"><label for="CustomTag_Literal-fold-method-Descriptor">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-189">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='CustomTag_Literal-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use CustomTag_Literal.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-193">GetValue</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-174">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-176">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-161">Reset</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-170">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Literal-fold-method-Validate"><label for="CustomTag_Literal-fold-method-Validate">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-289">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Literal-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on CustomTag_Literal with the rules defined
+				in the proto definition for this message. If any rules are violated, the
+				first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Literal-fold-method-ValidateAll"><label for="CustomTag_Literal-fold-method-ValidateAll">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-297">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Literal-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on CustomTag_Literal with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				CustomTag_LiteralMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Literal-showhide-methods"><i><label for="CustomTag_Literal-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Literal-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Literal) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-301">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Literal-fold-impls"><label for="CustomTag_Literal-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='CustomTag_Literal-fold-impls-items' class="fold-items"><span>
+			*CustomTag_Literal : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*CustomTag_Literal : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*CustomTag_Literal : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Literal-showhide-impls"><i><label for="CustomTag_Literal-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="CustomTag_Literal-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*CustomTag_Literal : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*CustomTag_Literal : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*CustomTag_Literal : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Literal-fold-results"><label for="CustomTag_Literal-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='CustomTag_Literal-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-CustomTag">CustomTag</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-91">GetLiteral</a>() *<b>CustomTag_Literal</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Literal_" data-popularity="100">	<input type='checkbox' class="fold" id="CustomTag_Literal_-fold-content"><label for="CustomTag_Literal_-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-123">CustomTag_Literal_</a> <i>(struct)</i></label><span id='CustomTag_Literal_-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="CustomTag_Literal_-fold-fields"><label for="CustomTag_Literal_-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='CustomTag_Literal_-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Literal_-fold-field-Literal"><label for="CustomTag_Literal_-fold-field-Literal"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-125">Literal</a> <i>*<a href="#name-CustomTag_Literal">CustomTag_Literal</a></i></label><span id='CustomTag_Literal_-fold-field-Literal-docs' class="fold-docs">
+				A literal custom tag.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Literal_-fold-methods"><label for="CustomTag_Literal_-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='CustomTag_Literal_-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Literal_-showhide-methods"><i><label for="CustomTag_Literal_-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Literal_-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Literal_) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-143">isCustomTag_Type</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Literal_-fold-impls"><label for="CustomTag_Literal_-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='CustomTag_Literal_-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Literal_-showhide-impls"><i><label for="CustomTag_Literal_-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="CustomTag_Literal_-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*CustomTag_Literal_ : <a href="#name-isCustomTag_Type">isCustomTag_Type</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_LiteralMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="CustomTag_LiteralMultiError-fold-content"><label for="CustomTag_LiteralMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-329">CustomTag_LiteralMultiError</a> <i>([])</i></label><span id='CustomTag_LiteralMultiError-fold-content-docs' class="fold-docs">
+		CustomTag_LiteralMultiError is an error wrapping multiple validation errors
+		returned by CustomTag_Literal.ValidateAll() if the designated constraints
+		aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_LiteralMultiError-fold-methods"><label for="CustomTag_LiteralMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='CustomTag_LiteralMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralMultiError-fold-method-AllErrors"><label for="CustomTag_LiteralMultiError-fold-method-AllErrors">( CustomTag_LiteralMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-341">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_LiteralMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralMultiError-fold-method-Error"><label for="CustomTag_LiteralMultiError-fold-method-Error">( CustomTag_LiteralMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-332">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_LiteralMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_LiteralMultiError-fold-impls"><label for="CustomTag_LiteralMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_LiteralMultiError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_LiteralMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_LiteralValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-content"><label for="CustomTag_LiteralValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-345">CustomTag_LiteralValidationError</a> <i>(struct)</i></label><span id='CustomTag_LiteralValidationError-fold-content-docs' class="fold-docs">
+		CustomTag_LiteralValidationError is the validation error returned by
+		CustomTag_Literal.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-fields"><label for="CustomTag_LiteralValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='CustomTag_LiteralValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_LiteralValidationError-showhide-fields"><i><label for="CustomTag_LiteralValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="CustomTag_LiteralValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-237">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-235">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-238">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-236">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-methods"><label for="CustomTag_LiteralValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='CustomTag_LiteralValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-Cause"><label for="CustomTag_LiteralValidationError-fold-method-Cause">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-359">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_LiteralValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-Error"><label for="CustomTag_LiteralValidationError-fold-method-Error">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-370">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_LiteralValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-ErrorName"><label for="CustomTag_LiteralValidationError-fold-method-ErrorName">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-365">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_LiteralValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-Field"><label for="CustomTag_LiteralValidationError-fold-method-Field">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-353">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_LiteralValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-Key"><label for="CustomTag_LiteralValidationError-fold-method-Key">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-362">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='CustomTag_LiteralValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-method-Reason"><label for="CustomTag_LiteralValidationError-fold-method-Reason">( CustomTag_LiteralValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-356">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_LiteralValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_LiteralValidationError-fold-impls"><label for="CustomTag_LiteralValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_LiteralValidationError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_LiteralValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Metadata" data-popularity="925">	<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-content"><label for="CustomTag_Metadata-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-325">CustomTag_Metadata</a> <i>(struct)</i></label><span id='CustomTag_Metadata-fold-content-docs' class="fold-docs">
+		Metadata type custom tag using
+		:ref:`MetadataKey &lt;envoy_v3_api_msg_type.metadata.v3.MetadataKey&gt;` to retrieve the protobuf value
+		from :ref:`Metadata &lt;envoy_v3_api_msg_config.core.v3.Metadata&gt;`, and populate the tag value with
+		`the canonical JSON &lt;https://developers.google.com/protocol-buffers/docs/proto3#json&gt;`_
+		representation of it.
+
+		<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-fields"><label for="CustomTag_Metadata-fold-fields">Fields (<i>total 6, in which 3 are exported</i>)</label><span id='CustomTag_Metadata-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-field-DefaultValue"><label for="CustomTag_Metadata-fold-field-DefaultValue"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-337">DefaultValue</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='CustomTag_Metadata-fold-field-DefaultValue-docs' class="fold-docs">
+				When no valid metadata is found,
+				the tag value would be populated with this default value if specified,
+				otherwise no tag would be populated.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-field-Kind"><label for="CustomTag_Metadata-fold-field-Kind"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-331">Kind</a> <i>*<a href="../metadata/v3.html">v3</a>.<a href="../metadata/v3.html#name-MetadataKind">MetadataKind</a></i></label><span id='CustomTag_Metadata-fold-field-Kind-docs' class="fold-docs">
+				Specify what kind of metadata to obtain tag value from.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-field-MetadataKey"><label for="CustomTag_Metadata-fold-field-MetadataKey"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-333">MetadataKey</a> <i>*<a href="../metadata/v3.html">v3</a>.<a href="../metadata/v3.html#name-MetadataKey">MetadataKey</a></i></label><span id='CustomTag_Metadata-fold-field-MetadataKey-docs' class="fold-docs">
+				Metadata key to define the path to retrieve the tag value.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Metadata-showhide-fields"><i><label for="CustomTag_Metadata-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="CustomTag_Metadata-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-327">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-326">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-328">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-methods"><label for="CustomTag_Metadata-fold-methods">Methods (<i>total 11, in which 10 are exported</i>)</label><span id='CustomTag_Metadata-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-method-Descriptor"><label for="CustomTag_Metadata-fold-method-Descriptor">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-368">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='CustomTag_Metadata-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use CustomTag_Metadata.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-386">GetDefaultValue</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-372">GetKind</a>() *<a href="../metadata/v3.html">v3</a>.<a href="../metadata/v3.html#name-MetadataKind">MetadataKind</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-379">GetMetadataKey</a>() *<a href="../metadata/v3.html">v3</a>.<a href="../metadata/v3.html#name-MetadataKey">MetadataKey</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-353">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-355">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-340">Reset</a>()</span></span><span>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-349">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-method-Validate"><label for="CustomTag_Metadata-fold-method-Validate">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-643">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Metadata-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on CustomTag_Metadata with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-method-ValidateAll"><label for="CustomTag_Metadata-fold-method-ValidateAll">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-651">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_Metadata-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on CustomTag_Metadata with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				CustomTag_MetadataMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Metadata-showhide-methods"><i><label for="CustomTag_Metadata-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Metadata-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Metadata) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-655">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-impls"><label for="CustomTag_Metadata-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='CustomTag_Metadata-fold-impls-items' class="fold-items"><span>
+			*CustomTag_Metadata : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*CustomTag_Metadata : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*CustomTag_Metadata : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="CustomTag_Metadata-showhide-impls"><i><label for="CustomTag_Metadata-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="CustomTag_Metadata-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*CustomTag_Metadata : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*CustomTag_Metadata : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*CustomTag_Metadata : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Metadata-fold-results"><label for="CustomTag_Metadata-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='CustomTag_Metadata-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-CustomTag">CustomTag</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-112">GetMetadata</a>() *<b>CustomTag_Metadata</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_Metadata_" data-popularity="100">	<input type='checkbox' class="fold" id="CustomTag_Metadata_-fold-content"><label for="CustomTag_Metadata_-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-138">CustomTag_Metadata_</a> <i>(struct)</i></label><span id='CustomTag_Metadata_-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="CustomTag_Metadata_-fold-fields"><label for="CustomTag_Metadata_-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='CustomTag_Metadata_-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_Metadata_-fold-field-Metadata"><label for="CustomTag_Metadata_-fold-field-Metadata"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-140">Metadata</a> <i>*<a href="#name-CustomTag_Metadata">CustomTag_Metadata</a></i></label><span id='CustomTag_Metadata_-fold-field-Metadata-docs' class="fold-docs">
+				A custom tag to obtain tag value from the metadata.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Metadata_-fold-methods"><label for="CustomTag_Metadata_-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='CustomTag_Metadata_-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Metadata_-showhide-methods"><i><label for="CustomTag_Metadata_-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_Metadata_-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_Metadata_) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-149">isCustomTag_Type</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_Metadata_-fold-impls"><label for="CustomTag_Metadata_-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='CustomTag_Metadata_-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_Metadata_-showhide-impls"><i><label for="CustomTag_Metadata_-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="CustomTag_Metadata_-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*CustomTag_Metadata_ : <a href="#name-isCustomTag_Type">isCustomTag_Type</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_MetadataMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="CustomTag_MetadataMultiError-fold-content"><label for="CustomTag_MetadataMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-732">CustomTag_MetadataMultiError</a> <i>([])</i></label><span id='CustomTag_MetadataMultiError-fold-content-docs' class="fold-docs">
+		CustomTag_MetadataMultiError is an error wrapping multiple validation errors
+		returned by CustomTag_Metadata.ValidateAll() if the designated constraints
+		aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_MetadataMultiError-fold-methods"><label for="CustomTag_MetadataMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='CustomTag_MetadataMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataMultiError-fold-method-AllErrors"><label for="CustomTag_MetadataMultiError-fold-method-AllErrors">( CustomTag_MetadataMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-744">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_MetadataMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataMultiError-fold-method-Error"><label for="CustomTag_MetadataMultiError-fold-method-Error">( CustomTag_MetadataMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-735">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_MetadataMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_MetadataMultiError-fold-impls"><label for="CustomTag_MetadataMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_MetadataMultiError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_MetadataMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_MetadataValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-content"><label for="CustomTag_MetadataValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-748">CustomTag_MetadataValidationError</a> <i>(struct)</i></label><span id='CustomTag_MetadataValidationError-fold-content-docs' class="fold-docs">
+		CustomTag_MetadataValidationError is the validation error returned by
+		CustomTag_Metadata.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-fields"><label for="CustomTag_MetadataValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='CustomTag_MetadataValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_MetadataValidationError-showhide-fields"><i><label for="CustomTag_MetadataValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="CustomTag_MetadataValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-237">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-235">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-238">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-236">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-methods"><label for="CustomTag_MetadataValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='CustomTag_MetadataValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-Cause"><label for="CustomTag_MetadataValidationError-fold-method-Cause">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-762">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTag_MetadataValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-Error"><label for="CustomTag_MetadataValidationError-fold-method-Error">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-773">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_MetadataValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-ErrorName"><label for="CustomTag_MetadataValidationError-fold-method-ErrorName">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-768">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_MetadataValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-Field"><label for="CustomTag_MetadataValidationError-fold-method-Field">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-756">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_MetadataValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-Key"><label for="CustomTag_MetadataValidationError-fold-method-Key">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-765">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='CustomTag_MetadataValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-method-Reason"><label for="CustomTag_MetadataValidationError-fold-method-Reason">( CustomTag_MetadataValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-759">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTag_MetadataValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_MetadataValidationError-fold-impls"><label for="CustomTag_MetadataValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTag_MetadataValidationError-fold-impls-items' class="fold-items"><span>
+			 CustomTag_MetadataValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTag_RequestHeader" data-popularity="100">	<input type='checkbox' class="fold" id="CustomTag_RequestHeader-fold-content"><label for="CustomTag_RequestHeader-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-133">CustomTag_RequestHeader</a> <i>(struct)</i></label><span id='CustomTag_RequestHeader-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="CustomTag_RequestHeader-fold-fields"><label for="CustomTag_RequestHeader-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='CustomTag_RequestHeader-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTag_RequestHeader-fold-field-RequestHeader"><label for="CustomTag_RequestHeader-fold-field-RequestHeader"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-135">RequestHeader</a> <i>*<a href="#name-CustomTag_Header">CustomTag_Header</a></i></label><span id='CustomTag_RequestHeader-fold-field-RequestHeader-docs' class="fold-docs">
+				A request header custom tag.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_RequestHeader-fold-methods"><label for="CustomTag_RequestHeader-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='CustomTag_RequestHeader-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_RequestHeader-showhide-methods"><i><label for="CustomTag_RequestHeader-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="CustomTag_RequestHeader-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*CustomTag_RequestHeader) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-147">isCustomTag_Type</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTag_RequestHeader-fold-impls"><label for="CustomTag_RequestHeader-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='CustomTag_RequestHeader-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTag_RequestHeader-showhide-impls"><i><label for="CustomTag_RequestHeader-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="CustomTag_RequestHeader-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*CustomTag_RequestHeader : <a href="#name-isCustomTag_Type">isCustomTag_Type</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTagMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="CustomTagMultiError-fold-content"><label for="CustomTagMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-218">CustomTagMultiError</a> <i>([])</i></label><span id='CustomTagMultiError-fold-content-docs' class="fold-docs">
+		CustomTagMultiError is an error wrapping multiple validation errors returned
+		by CustomTag.ValidateAll() if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTagMultiError-fold-methods"><label for="CustomTagMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='CustomTagMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTagMultiError-fold-method-AllErrors"><label for="CustomTagMultiError-fold-method-AllErrors">( CustomTagMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-230">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTagMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagMultiError-fold-method-Error"><label for="CustomTagMultiError-fold-method-Error">( CustomTagMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-221">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTagMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTagMultiError-fold-impls"><label for="CustomTagMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTagMultiError-fold-impls-items' class="fold-items"><span>
+			 CustomTagMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-CustomTagValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="CustomTagValidationError-fold-content"><label for="CustomTagValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-234">CustomTagValidationError</a> <i>(struct)</i></label><span id='CustomTagValidationError-fold-content-docs' class="fold-docs">
+		CustomTagValidationError is the validation error returned by
+		CustomTag.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="CustomTagValidationError-fold-fields"><label for="CustomTagValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='CustomTagValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="CustomTagValidationError-showhide-fields"><i><label for="CustomTagValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="CustomTagValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-237">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-235">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-238">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-236">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="CustomTagValidationError-fold-methods"><label for="CustomTagValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='CustomTagValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-Cause"><label for="CustomTagValidationError-fold-method-Cause">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-248">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='CustomTagValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-Error"><label for="CustomTagValidationError-fold-method-Error">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-257">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTagValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-ErrorName"><label for="CustomTagValidationError-fold-method-ErrorName">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-254">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTagValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-Field"><label for="CustomTagValidationError-fold-method-Field">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-242">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTagValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-Key"><label for="CustomTagValidationError-fold-method-Key">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-251">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='CustomTagValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="CustomTagValidationError-fold-method-Reason"><label for="CustomTagValidationError-fold-method-Reason">( CustomTagValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-245">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='CustomTagValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="CustomTagValidationError-fold-impls"><label for="CustomTagValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='CustomTagValidationError-fold-impls-items' class="fold-items"><span>
+			 CustomTagValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor type-res hidden" id="name-isCustomTag_Type" data-popularity="725">	<input type='checkbox' class="fold" id="isCustomTag_Type-fold-content"><label for="isCustomTag_Type-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-119">isCustomTag_Type</a> <b><i>(interface)</i></b></label><span id='isCustomTag_Type-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="isCustomTag_Type-fold-methods"><label for="isCustomTag_Type-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='isCustomTag_Type-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="isCustomTag_Type-showhide-methods"><i><label for="isCustomTag_Type-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="isCustomTag_Type-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( isCustomTag_Type) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-120">isCustomTag_Type</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="isCustomTag_Type-fold-impledby"><label for="isCustomTag_Type-fold-impledby">Implemented By (<i>at least 4, all are exported</i>)</label><span id='isCustomTag_Type-fold-impledby-items' class="fold-items"><span>
+			*<a href="#name-CustomTag_Environment_">CustomTag_Environment_</a></span><span>
+			*<a href="#name-CustomTag_Literal_">CustomTag_Literal_</a></span><span>
+			*<a href="#name-CustomTag_Metadata_">CustomTag_Metadata_</a></span><span>
+			*<a href="#name-CustomTag_RequestHeader">CustomTag_RequestHeader</a></span></span>
+		<input type='checkbox' class="fold" id="isCustomTag_Type-fold-results"><label for="isCustomTag_Type-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='isCustomTag_Type-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-CustomTag">CustomTag</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-84">GetType</a>() <b>isCustomTag_Type</b></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-518">file_envoy_type_tracing_v3_custom_tag_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-486">file_envoy_type_tracing_v3_custom_tag_proto_rawDescGZIP</a>() []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-517">init</a>()</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 8, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-File_envoy_type_tracing_v3_custom_tag_proto">	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-393">File_envoy_type_tracing_v3_custom_tag_proto</a> <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 7 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 7 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-_CustomTag_Header_Name_Pattern"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.validate.go.html#line-638">_CustomTag_Header_Name_Pattern</a> *<a href="../../../../../../regexp.html">regexp</a>.<a href="../../../../../../regexp.html#name-Regexp">Regexp</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-503">file_envoy_type_tracing_v3_custom_tag_proto_depIdxs</a> []<a href="../../../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-494">file_envoy_type_tracing_v3_custom_tag_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-493">file_envoy_type_tracing_v3_custom_tag_proto_msgTypes</a> []<a href="../../../../../../google.golang.org/protobuf/internal/impl.html">impl</a>.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-395">file_envoy_type_tracing_v3_custom_tag_proto_rawDesc</a> []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-483">file_envoy_type_tracing_v3_custom_tag_proto_rawDescData</a> []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_type_tracing_v3_custom_tag_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/type/tracing/v3/custom_tag.pb.go.html#line-482">file_envoy_type_tracing_v3_custom_tag_proto_rawDescOnce</a> <a href="../../../../../../sync.html">sync</a>.<a href="../../../../../../sync.html#name-Once">Once</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

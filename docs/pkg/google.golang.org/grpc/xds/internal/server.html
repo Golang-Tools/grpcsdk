@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/server</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>server</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/server">google.golang.org/grpc/xds/internal/server</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/server" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/xds/internal/server.html">18 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/xds/internal/server.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html">conn_wrapper.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-1-fold-content"><label for="file-1-fold-content">   <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html">listener_wrapper.go</a></label><span id='file-1-fold-content-items' class="fold-items">
+		Package server contains internal server-side functionality used by the public
+		facing xds package.
+</span>
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html">rds_handler.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 9, in which 4 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-DrainCallback" data-popularity="0">	<input type='checkbox' class="fold" id="DrainCallback-fold-content"><label for="DrainCallback-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-67">DrainCallback</a> <i>(func)</i></label><span id='DrainCallback-fold-content-docs' class="fold-docs">
+		DrainCallback is the callback that an xDS-enabled server registers to get
+		notified about updates to the Listener configuration. The server is expected
+		to gracefully shutdown existing connections, thereby forcing clients to
+		reconnect and have the new configuration applied to the newly created
+		connections.
+
+</span></div><div class="anchor type-res" id="name-ListenerWrapperParams" data-popularity="35">	<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-content"><label for="ListenerWrapperParams-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-82">ListenerWrapperParams</a> <i>(struct)</i></label><span id='ListenerWrapperParams-fold-content-docs' class="fold-docs">
+		ListenerWrapperParams wraps parameters required to create a listenerWrapper.
+
+		<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-fields"><label for="ListenerWrapperParams-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='ListenerWrapperParams-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-DrainCallback"><label for="ListenerWrapperParams-fold-field-DrainCallback"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-96">DrainCallback</a> <i><a href="#name-DrainCallback">DrainCallback</a></i></label><span id='ListenerWrapperParams-fold-field-DrainCallback-docs' class="fold-docs">
+				DrainCallback is the callback to invoke when the Listener gets a LDS
+				update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-Listener"><label for="ListenerWrapperParams-fold-field-Listener"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-84">Listener</a> <i><a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Listener">Listener</a></i></label><span id='ListenerWrapperParams-fold-field-Listener-docs' class="fold-docs">
+				Listener is the net.Listener passed by the user that is to be wrapped.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-ListenerResourceName"><label for="ListenerWrapperParams-fold-field-ListenerResourceName"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-86">ListenerResourceName</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='ListenerWrapperParams-fold-field-ListenerResourceName-docs' class="fold-docs">
+				ListenerResourceName is the xDS Listener resource to request.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-ModeCallback"><label for="ListenerWrapperParams-fold-field-ModeCallback"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-93">ModeCallback</a> <i><a href="#name-ServingModeCallback">ServingModeCallback</a></i></label><span id='ListenerWrapperParams-fold-field-ModeCallback-docs' class="fold-docs">
+				ModeCallback is the callback to invoke when the serving mode changes.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-XDSClient"><label for="ListenerWrapperParams-fold-field-XDSClient"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-91">XDSClient</a> <i><a href="#name-XDSClient">XDSClient</a></i></label><span id='ListenerWrapperParams-fold-field-XDSClient-docs' class="fold-docs">
+				XDSClient provides the functionality from the XDSClient required here.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-field-XDSCredsInUse"><label for="ListenerWrapperParams-fold-field-XDSCredsInUse"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-89">XDSCredsInUse</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></label><span id='ListenerWrapperParams-fold-field-XDSCredsInUse-docs' class="fold-docs">
+				XDSCredsInUse specifies whether or not the user expressed interest to
+				receive security configuration from the control plane.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ListenerWrapperParams-fold-params"><label for="ListenerWrapperParams-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='ListenerWrapperParams-fold-params-items' class="fold-items"><span>
+			func <a href="#name-NewListenerWrapper">NewListenerWrapper</a>(params <b>ListenerWrapperParams</b>) (<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Listener">Listener</a>, &lt;-chan struct{})</span></span>
+
+</span></div><div class="anchor type-res" id="name-ServingModeCallback" data-popularity="0">	<input type='checkbox' class="fold" id="ServingModeCallback-fold-content"><label for="ServingModeCallback-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-60">ServingModeCallback</a> <i>(func)</i></label><span id='ServingModeCallback-fold-content-docs' class="fold-docs">
+		ServingModeCallback is the callback that users can register to get notified
+		about the server's serving mode changes. The callback is invoked with the
+		address of the listener and its new mode. The err parameter is set to a
+		non-nil error if the server has transitioned into not-serving mode.
+
+</span></div><div class="anchor type-res" id="name-XDSClient" data-popularity="635">	<input type='checkbox' class="fold" id="XDSClient-fold-content"><label for="XDSClient-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-75">XDSClient</a> <b><i>(interface)</i></b></label><span id='XDSClient-fold-content-docs' class="fold-docs">
+		XDSClient wraps the methods on the XDSClient which are required by
+		the listenerWrapper.
+
+		<input type='checkbox' class="fold" id="XDSClient-fold-methods"><label for="XDSClient-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='XDSClient-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( XDSClient) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-78">BootstrapConfig</a>() *<a href="xdsclient/bootstrap.html">bootstrap</a>.<a href="xdsclient/bootstrap.html#name-Config">Config</a></span></span><span>
+			<span class="nodocs">( XDSClient) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-76">WatchListener</a>(<a href="../../../../builtin.html#name-string">string</a>, func(<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-ListenerUpdate">ListenerUpdate</a>, <a href="../../../../builtin.html#name-error">error</a>)) func()</span></span><span>
+			<span class="nodocs">( XDSClient) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-77">WatchRouteConfig</a>(<a href="../../../../builtin.html#name-string">string</a>, func(<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>, <a href="../../../../builtin.html#name-error">error</a>)) func()</span></span></span>
+		<input type='checkbox' class="fold" id="XDSClient-fold-impledby"><label for="XDSClient-fold-impledby">Implemented By (<i>at least 3, in which 1 are exported</i>)</label><span id='XDSClient-fold-impledby-items' class="fold-items"><span>
+			 google.golang.org/grpc/xds/internal/xdsclient.<a href="xdsclient.html#name-XDSClient">XDSClient</a> <i>(interface)</i></span>
+			<input type='checkbox' class="showhide" id="XDSClient-showhide-impedBys"><i><label for="XDSClient-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="XDSClient-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*google.golang.org/grpc/xds/internal/xdsclient.<a href="xdsclient.html#name-clientRefCounted">clientRefCounted</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/xdsclient.<a href="xdsclient.html#name-onceClosingClient">onceClosingClient</a></i></span></span>
+		<input type='checkbox' class="fold" id="XDSClient-fold-params"><label for="XDSClient-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='XDSClient-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="XDSClient-showhide-outputofs"><i><label for="XDSClient-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="XDSClient-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRDSHandler">newRDSHandler</a>(xdsC <b>XDSClient</b>, ch chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>) *<a href="#name-rdsHandler">rdsHandler</a></i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-connWrapper" data-popularity="950">	<input type='checkbox' class="fold" id="connWrapper-fold-content"><label for="connWrapper-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-42">connWrapper</a> <i>(struct)</i></label><span id='connWrapper-fold-content-docs' class="fold-docs">
+		connWrapper is a thin wrapper around a net.Conn returned by Accept(). It
+		provides the following additional functionality:
+		1. A way to retrieve the configured deadline. This is required by the
+		   ServerHandshake() method of the xdsCredentials when it attempts to read
+		   key material from the certificate providers.
+		2. Implements the XDSHandshakeInfo() method used by the xdsCredentials to
+		   retrieve the configured certificate providers.
+		3. xDS filter_chain matching logic to select appropriate security
+		   configuration for the incoming connection.
+
+		<input type='checkbox' class="fold" id="connWrapper-fold-fields"><label for="connWrapper-fold-fields">Fields (<i>total 8, in which 1 are exported</i>)</label><span id='connWrapper-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-43">Conn</a> <i><a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Conn">Conn</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="connWrapper-showhide-fields"><i><label for="connWrapper-showhide-fields" class="show-inline">/* 7 unexporteds ... */</label><label for="connWrapper-showhide-fields" class="hide-inline">/* 7 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-60">deadline</a> <i><a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Time">Time</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-deadlineMu"><label for="connWrapper-fold-field-deadlineMu"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-59">deadlineMu</a> <i><a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='connWrapper-fold-field-deadlineMu-docs' class="fold-docs">
+				The connection deadline as configured by the grpc.Server on the rawConn
+				that is returned by a call to Accept(). This is set to the connection
+				timeout value configured by the user (or to a default value) before
+				initiating the transport credential handshake, and set to zero after
+				completing the HTTP2 handshake.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-filterChain"><label for="connWrapper-fold-field-filterChain"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-46">filterChain</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-FilterChain">FilterChain</a></i></label><span id='connWrapper-fold-field-filterChain-docs' class="fold-docs">
+				The specific filter chain picked for handling this connection.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-identityProvider"><label for="connWrapper-fold-field-identityProvider"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-52">identityProvider</a> <i><a href="../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../credentials/tls/certprovider.html#name-Provider">Provider</a></i></label><span id='connWrapper-fold-field-identityProvider-docs' class="fold-docs">
+				The certificate providers created for this connection.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-parent"><label for="connWrapper-fold-field-parent"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-49">parent</a> <i>*<a href="#name-listenerWrapper">listenerWrapper</a></i></label><span id='connWrapper-fold-field-parent-docs' class="fold-docs">
+				A reference fo the listenerWrapper on which this connection was accepted.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-rootProvider"><label for="connWrapper-fold-field-rootProvider"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-52">rootProvider</a> <i><a href="../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../credentials/tls/certprovider.html#name-Provider">Provider</a></i></label><span id='connWrapper-fold-field-rootProvider-docs' class="fold-docs">
+				The certificate providers created for this connection.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="connWrapper-fold-field-virtualHosts"><label for="connWrapper-fold-field-virtualHosts"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-64">virtualHosts</a> <i>[]<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-VirtualHostWithInterceptors">VirtualHostWithInterceptors</a></i></label><span id='connWrapper-fold-field-virtualHosts-docs' class="fold-docs">
+				The virtual hosts with matchable routes and instantiated HTTP Filters per
+				route.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="connWrapper-fold-methods"><label for="connWrapper-fold-methods">Methods (<i>total 11, all are exported</i>)</label><span id='connWrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-Close"><label for="connWrapper-fold-method-Close">(*connWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-137">Close</a>() <a href="../../../../builtin.html#name-error">error</a></label><span id='connWrapper-fold-method-Close-docs' class="fold-docs">
+				Close closes the providers and the underlying connection.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-GetDeadline"><label for="connWrapper-fold-method-GetDeadline">(*connWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-84">GetDeadline</a>() <a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Time">Time</a></label><span id='connWrapper-fold-method-GetDeadline-docs' class="fold-docs">
+				GetDeadline returns the configured deadline. This will be invoked by the
+				ServerHandshake() method of the XdsCredentials, which needs a deadline to
+				pass to the certificate provider.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-LocalAddr"><label for="connWrapper-fold-method-LocalAddr">( connWrapper) <a href="../../../../../src/net/net.go.html#line-129">LocalAddr</a>() <a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Addr">Addr</a></label><span id='connWrapper-fold-method-LocalAddr-docs' class="fold-docs">
+				LocalAddr returns the local network address, if known.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-Read"><label for="connWrapper-fold-method-Read">( connWrapper) <a href="../../../../../src/net/net.go.html#line-117">Read</a>(b []<a href="../../../../builtin.html#name-byte">byte</a>) (n <a href="../../../../builtin.html#name-int">int</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='connWrapper-fold-method-Read-docs' class="fold-docs">
+				Read reads data from the connection.
+				Read can be made to time out and return an error after a fixed
+				time limit; see SetDeadline and SetReadDeadline.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-RemoteAddr"><label for="connWrapper-fold-method-RemoteAddr">( connWrapper) <a href="../../../../../src/net/net.go.html#line-132">RemoteAddr</a>() <a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Addr">Addr</a></label><span id='connWrapper-fold-method-RemoteAddr-docs' class="fold-docs">
+				RemoteAddr returns the remote network address, if known.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-SetDeadline"><label for="connWrapper-fold-method-SetDeadline">(*connWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-74">SetDeadline</a>(t <a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Time">Time</a>) <a href="../../../../builtin.html#name-error">error</a></label><span id='connWrapper-fold-method-SetDeadline-docs' class="fold-docs">
+				SetDeadline makes a copy of the passed in deadline and forwards the call to
+				the underlying rawConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-SetReadDeadline"><label for="connWrapper-fold-method-SetReadDeadline">( connWrapper) <a href="../../../../../src/net/net.go.html#line-160">SetReadDeadline</a>(t <a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Time">Time</a>) <a href="../../../../builtin.html#name-error">error</a></label><span id='connWrapper-fold-method-SetReadDeadline-docs' class="fold-docs">
+				SetReadDeadline sets the deadline for future Read calls
+				and any currently-blocked Read call.
+				A zero value for t means Read will not time out.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-SetWriteDeadline"><label for="connWrapper-fold-method-SetWriteDeadline">( connWrapper) <a href="../../../../../src/net/net.go.html#line-167">SetWriteDeadline</a>(t <a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Time">Time</a>) <a href="../../../../builtin.html#name-error">error</a></label><span id='connWrapper-fold-method-SetWriteDeadline-docs' class="fold-docs">
+				SetWriteDeadline sets the deadline for future Write calls
+				and any currently-blocked Write call.
+				Even if write times out, it may return n &gt; 0, indicating that
+				some of the data was successfully written.
+				A zero value for t means Write will not time out.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-VirtualHosts"><label for="connWrapper-fold-method-VirtualHosts">(*connWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-68">VirtualHosts</a>() []<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-VirtualHostWithInterceptors">VirtualHostWithInterceptors</a></label><span id='connWrapper-fold-method-VirtualHosts-docs' class="fold-docs">
+				VirtualHosts returns the virtual hosts to be used for server side routing.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-Write"><label for="connWrapper-fold-method-Write">( connWrapper) <a href="../../../../../src/net/net.go.html#line-122">Write</a>(b []<a href="../../../../builtin.html#name-byte">byte</a>) (n <a href="../../../../builtin.html#name-int">int</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='connWrapper-fold-method-Write-docs' class="fold-docs">
+				Write writes data to the connection.
+				Write can be made to time out and return an error after a fixed
+				time limit; see SetDeadline and SetWriteDeadline.
+</span></span><span>
+			<input type='checkbox' class="fold" id="connWrapper-fold-method-XDSHandshakeInfo"><label for="connWrapper-fold-method-XDSHandshakeInfo">(*connWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-94">XDSHandshakeInfo</a>() (*<a href="../../internal/credentials/xds.html">xdsinternal</a>.<a href="../../internal/credentials/xds.html#name-HandshakeInfo">HandshakeInfo</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='connWrapper-fold-method-XDSHandshakeInfo-docs' class="fold-docs">
+				XDSHandshakeInfo returns a HandshakeInfo with appropriate security
+				configuration for this connection. This method is invoked by the
+				ServerHandshake() method of the XdsCredentials.
+</span></span></span>
+		<input type='checkbox' class="fold" id="connWrapper-fold-impls"><label for="connWrapper-fold-impls">Implements (<i>at least 8, all are exported</i>)</label><span id='connWrapper-fold-impls-items' class="fold-items"><span>
+			*connWrapper : io.<a href="../../../../io.html#name-Closer">Closer</a></span><span>
+			*connWrapper : io.<a href="../../../../io.html#name-ReadCloser">ReadCloser</a></span><span>
+			 connWrapper : io.<a href="../../../../io.html#name-Reader">Reader</a></span><span>
+			*connWrapper : io.<a href="../../../../io.html#name-ReadWriteCloser">ReadWriteCloser</a></span><span>
+			 connWrapper : io.<a href="../../../../io.html#name-ReadWriter">ReadWriter</a></span><span>
+			*connWrapper : io.<a href="../../../../io.html#name-WriteCloser">WriteCloser</a></span><span>
+			 connWrapper : io.<a href="../../../../io.html#name-Writer">Writer</a></span><span>
+			*connWrapper : net.<a href="../../../../net.html#name-Conn">Conn</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ldsUpdateWithError" data-popularity="0">	<input type='checkbox' class="fold" id="ldsUpdateWithError-fold-content"><label for="ldsUpdateWithError-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-139">ldsUpdateWithError</a> <i>(struct)</i></label><span id='ldsUpdateWithError-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="ldsUpdateWithError-fold-fields"><label for="ldsUpdateWithError-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='ldsUpdateWithError-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ldsUpdateWithError-showhide-fields"><i><label for="ldsUpdateWithError-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="ldsUpdateWithError-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-141">err</a> <i><a href="../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-140">update</a> <i><a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-ListenerUpdate">ListenerUpdate</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-listenerWrapper" data-popularity="535">	<input type='checkbox' class="fold" id="listenerWrapper-fold-content"><label for="listenerWrapper-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-147">listenerWrapper</a> <i>(struct)</i></label><span id='listenerWrapper-fold-content-docs' class="fold-docs">
+		listenerWrapper wraps the net.Listener associated with the listening address
+		passed to Serve(). It also contains all other state associated with this
+		particular invocation of Serve().
+
+		<input type='checkbox' class="fold" id="listenerWrapper-fold-fields"><label for="listenerWrapper-fold-fields">Fields (<i>total 20, in which 1 are exported</i>)</label><span id='listenerWrapper-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-148">Listener</a> <i><a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Listener">Listener</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="listenerWrapper-showhide-fields"><i><label for="listenerWrapper-showhide-fields" class="show-inline">/* 19 unexporteds ... */</label><label for="listenerWrapper-showhide-fields" class="hide-inline">/* 19 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-addr"><label for="listenerWrapper-fold-field-addr"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-163">addr</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='listenerWrapper-fold-field-addr-docs' class="fold-docs">
+				Listening address and port. Used to validate the socket address in the
+				Listener resource received from the control plane.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-154">cancelWatch</a> <i>func()</i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-closed"><label for="listenerWrapper-fold-field-closed"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-176">closed</a> <i>*<a href="../../internal/grpcsync.html">grpcsync</a>.<a href="../../internal/grpcsync.html#name-Event">Event</a></i></label><span id='listenerWrapper-fold-field-closed-docs' class="fold-docs">
+				A small race exists in the XDSClient code between the receipt of an xDS
+				response and the user cancelling the associated watch. In this window,
+				the registered callback may be invoked after the watch is canceled, and
+				the user is expected to work around this. This event signifies that the
+				listener is closed (and hence the watch is cancelled), and we drop any
+				updates received in the callback if this event has fired.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-156">drainCallback</a> <i><a href="#name-DrainCallback">DrainCallback</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-filterChains"><label for="listenerWrapper-fold-field-filterChains"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-186">filterChains</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-FilterChainManager">FilterChainManager</a></i></label><span id='listenerWrapper-fold-field-filterChains-docs' class="fold-docs">
+				Filter chains received as part of the last good update.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-goodUpdate"><label for="listenerWrapper-fold-field-goodUpdate"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-169">goodUpdate</a> <i>*<a href="../../internal/grpcsync.html">grpcsync</a>.<a href="../../internal/grpcsync.html#name-Event">Event</a></i></label><span id='listenerWrapper-fold-field-goodUpdate-docs' class="fold-docs">
+				This is used to notify that a good update has been received and that
+				Serve() can be invoked on the underlying gRPC server. Using an event
+				instead of a vanilla channel simplifies the update handler as it need not
+				keep track of whether the received update is the first one or not.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-isUnspecifiedAddr"><label for="listenerWrapper-fold-field-isUnspecifiedAddr"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-160">isUnspecifiedAddr</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></label><span id='listenerWrapper-fold-field-isUnspecifiedAddr-docs' class="fold-docs">
+				Set to true if the listener is bound to the IP_ANY address (which is
+				"0.0.0.0" for IPv4 and "::" for IPv6).
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-ldsUpdateCh"><label for="listenerWrapper-fold-field-ldsUpdateCh"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-195">ldsUpdateCh</a> <i>chan <a href="#name-ldsUpdateWithError">ldsUpdateWithError</a></i></label><span id='listenerWrapper-fold-field-ldsUpdateCh-docs' class="fold-docs">
+				ldsUpdateCh is a channel for XDSClient LDS updates.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-149">logger</a> <i>*<a href="../../internal/grpclog.html">internalgrpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-mode"><label for="listenerWrapper-fold-field-mode"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-184">mode</a> <i><a href="../../connectivity.html">connectivity</a>.<a href="../../connectivity.html#name-ServingMode">ServingMode</a></i></label><span id='listenerWrapper-fold-field-mode-docs' class="fold-docs">
+				Current serving mode.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-155">modeCallback</a> <i><a href="#name-ServingModeCallback">ServingModeCallback</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-mu"><label for="listenerWrapper-fold-field-mu"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-182">mu</a> <i><a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-RWMutex">RWMutex</a></i></label><span id='listenerWrapper-fold-field-mu-docs' class="fold-docs">
+				mu guards access to the current serving mode and the filter chains. The
+				reason for using an rw lock here is that these fields are read in
+				Accept() for all incoming connections, but writes happen rarely (when we
+				get a Listener resource update).
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-151">name</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-port"><label for="listenerWrapper-fold-field-port"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-163">port</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='listenerWrapper-fold-field-port-docs' class="fold-docs">
+				Listening address and port. Used to validate the socket address in the
+				Listener resource received from the control plane.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-rdsHandler"><label for="listenerWrapper-fold-field-rdsHandler"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-190">rdsHandler</a> <i>*<a href="#name-rdsHandler">rdsHandler</a></i></label><span id='listenerWrapper-fold-field-rdsHandler-docs' class="fold-docs">
+				rdsHandler is used for any dynamic RDS resources specified in a LDS
+				update.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-rdsUpdateCh"><label for="listenerWrapper-fold-field-rdsUpdateCh"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-197">rdsUpdateCh</a> <i>chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a></i></label><span id='listenerWrapper-fold-field-rdsUpdateCh-docs' class="fold-docs">
+				rdsUpdateCh is a channel for XDSClient RDS updates.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-field-rdsUpdates"><label for="listenerWrapper-fold-field-rdsUpdates"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-193">rdsUpdates</a> <i><a href="../../../../unsafe.html">unsafe</a>.<a href="../../../../unsafe.html#name-Pointer">Pointer</a></i></label><span id='listenerWrapper-fold-field-rdsUpdates-docs' class="fold-docs">
+				rdsUpdates are the RDS resources received from the management
+				server, keyed on the RouteName of the RDS resource.
+				// map[string]xdsclient.RouteConfigUpdate
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-153">xdsC</a> <i><a href="#name-XDSClient">XDSClient</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-152">xdsCredsInUse</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="listenerWrapper-fold-methods"><label for="listenerWrapper-fold-methods">Methods (<i>total 8, in which 3 are exported</i>)</label><span id='listenerWrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-Accept"><label for="listenerWrapper-fold-method-Accept">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-202">Accept</a>() (<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Conn">Conn</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='listenerWrapper-fold-method-Accept-docs' class="fold-docs">
+				Accept blocks on an Accept() on the underlying listener, and wraps the
+				returned net.connWrapper with the configured certificate providers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-Addr"><label for="listenerWrapper-fold-method-Addr">( listenerWrapper) <a href="../../../../../src/net/net.go.html#line-393">Addr</a>() <a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Addr">Addr</a></label><span id='listenerWrapper-fold-method-Addr-docs' class="fold-docs">
+				Addr returns the listener's network address.
+</span></span><span>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-Close"><label for="listenerWrapper-fold-method-Close">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-316">Close</a>() <a href="../../../../builtin.html#name-error">error</a></label><span id='listenerWrapper-fold-method-Close-docs' class="fold-docs">
+				Close closes the underlying listener. It also cancels the xDS watch
+				registered in Serve() and closes any certificate provider instances created
+				based on security configuration received in the LDS response.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="listenerWrapper-showhide-methods"><i><label for="listenerWrapper-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="listenerWrapper-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-381">handleLDSUpdate</a>(update <a href="#name-ldsUpdateWithError">ldsUpdateWithError</a>)</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-handleListenerUpdate"><label for="listenerWrapper-fold-method-handleListenerUpdate">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-344">handleListenerUpdate</a>(update <a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-ListenerUpdate">ListenerUpdate</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='listenerWrapper-fold-method-handleListenerUpdate-docs' class="fold-docs">
+				handleLDSUpdate is the callback which handles LDS Updates. It writes the
+				received update to the update channel, which is picked up by the run
+				goroutine.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-handleRDSUpdate"><label for="listenerWrapper-fold-method-handleRDSUpdate">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-361">handleRDSUpdate</a>(update <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>)</label><span id='listenerWrapper-fold-method-handleRDSUpdate-docs' class="fold-docs">
+				handleRDSUpdate handles a full rds update from rds handler. On a successful
+				update, the server will switch to ServingModeServing as the full
+				configuration (both LDS and RDS) has been received.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-run"><label for="listenerWrapper-fold-method-run">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-328">run</a>()</label><span id='listenerWrapper-fold-method-run-docs' class="fold-docs">
+				run is a long running goroutine which handles all xds updates. LDS and RDS
+				push updates onto a channel which is read and acted upon from this goroutine.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="listenerWrapper-fold-method-switchMode"><label for="listenerWrapper-fold-method-switchMode">(*listenerWrapper) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-436">switchMode</a>(fcs *<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-FilterChainManager">FilterChainManager</a>, newMode <a href="../../connectivity.html">connectivity</a>.<a href="../../connectivity.html#name-ServingMode">ServingMode</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='listenerWrapper-fold-method-switchMode-docs' class="fold-docs">
+				switchMode updates the value of serving mode and filter chains stored in the
+				listenerWrapper. And if the serving mode has changed, it invokes the
+				registered mode change callback.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="listenerWrapper-fold-impls"><label for="listenerWrapper-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='listenerWrapper-fold-impls-items' class="fold-items"><span>
+			*listenerWrapper : io.<a href="../../../../io.html#name-Closer">Closer</a></span><span>
+			*listenerWrapper : net.<a href="../../../../net.html#name-Listener">Listener</a></span></span>
+		<input type='checkbox' class="fold" id="listenerWrapper-fold-params"><label for="listenerWrapper-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='listenerWrapper-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="listenerWrapper-showhide-outputofs"><i><label for="listenerWrapper-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="listenerWrapper-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>listenerWrapper</b>) *<a href="../../internal/grpclog.html">internalgrpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-rdsHandler" data-popularity="225">	<input type='checkbox' class="fold" id="rdsHandler-fold-content"><label for="rdsHandler-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-36">rdsHandler</a> <i>(struct)</i></label><span id='rdsHandler-fold-content-docs' class="fold-docs">
+		rdsHandler handles any RDS queries that need to be started for a given server
+		side listeners Filter Chains (i.e. not inline).
+
+		<input type='checkbox' class="fold" id="rdsHandler-fold-fields"><label for="rdsHandler-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='rdsHandler-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rdsHandler-showhide-fields"><i><label for="rdsHandler-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="rdsHandler-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-41">cancels</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]func()</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-39">mu</a> <i><a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rdsHandler-fold-field-updateChannel"><label for="rdsHandler-fold-field-updateChannel"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-46">updateChannel</a> <i>chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a></i></label><span id='rdsHandler-fold-field-updateChannel-docs' class="fold-docs">
+				For a rdsHandler update, the only update wrapped listener cares about is
+				most recent one, so this channel will be opportunistically drained before
+				sending any new updates.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-40">updates</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-37">xdsC</a> <i><a href="#name-XDSClient">XDSClient</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="rdsHandler-fold-methods"><label for="rdsHandler-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='rdsHandler-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rdsHandler-showhide-methods"><i><label for="rdsHandler-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="rdsHandler-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rdsHandler-fold-method-close"><label for="rdsHandler-fold-method-close">(*rdsHandler) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-127">close</a>()</label><span id='rdsHandler-fold-method-close-docs' class="fold-docs">
+				close() is meant to be called by wrapped listener when the wrapped listener
+				is closed, and it cleans up resources by canceling all the active RDS
+				watches.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rdsHandler-fold-method-handleRouteUpdate"><label for="rdsHandler-fold-method-handleRouteUpdate">(*rdsHandler) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-100">handleRouteUpdate</a>(routeName <a href="../../../../builtin.html#name-string">string</a>, update <a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='rdsHandler-fold-method-handleRouteUpdate-docs' class="fold-docs">
+				handleRouteUpdate persists the route config for a given route name, and also
+				sends an update to the Listener Wrapper on an error received or if the rds
+				handler has a full collection of updates.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rdsHandler-fold-method-updateRouteNamesToWatch"><label for="rdsHandler-fold-method-updateRouteNamesToWatch">(*rdsHandler) <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-65">updateRouteNamesToWatch</a>(routeNamesToWatch map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-bool">bool</a>)</label><span id='rdsHandler-fold-method-updateRouteNamesToWatch-docs' class="fold-docs">
+				updateRouteNamesToWatch handles a list of route names to watch for a given
+				server side listener (if a filter chain specifies dynamic RDS configuration).
+				This function handles all the logic with respect to any routes that may have
+				been added or deleted as compared to what was previously present.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="rdsHandler-fold-results"><label for="rdsHandler-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='rdsHandler-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rdsHandler-showhide-inputofs"><i><label for="rdsHandler-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="rdsHandler-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRDSHandler">newRDSHandler</a>(xdsC <a href="#name-XDSClient">XDSClient</a>, ch chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>) *<b>rdsHandler</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-rdsHandlerUpdate" data-popularity="105">	<input type='checkbox' class="fold" id="rdsHandlerUpdate-fold-content"><label for="rdsHandlerUpdate-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-29">rdsHandlerUpdate</a> <i>(struct)</i></label><span id='rdsHandlerUpdate-fold-content-docs' class="fold-docs">
+		rdsHandlerUpdate wraps the full RouteConfigUpdate that are dynamically
+		queried for a given server side listener.
+
+		<input type='checkbox' class="fold" id="rdsHandlerUpdate-fold-fields"><label for="rdsHandlerUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='rdsHandlerUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rdsHandlerUpdate-showhide-fields"><i><label for="rdsHandlerUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="rdsHandlerUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-31">err</a> <i><a href="../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-30">updates</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="rdsHandlerUpdate-fold-params"><label for="rdsHandlerUpdate-fold-params">As Inputs Of (<i>at least 3, none are exported</i>)</label><span id='rdsHandlerUpdate-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rdsHandlerUpdate-showhide-outputofs"><i><label for="rdsHandlerUpdate-showhide-outputofs" class="show-inline">/* 3+ unexporteds ... */</label><label for="rdsHandlerUpdate-showhide-outputofs" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-drainAndPush">drainAndPush</a>(ch chan <b>rdsHandlerUpdate</b>, update <b>rdsHandlerUpdate</b>)</i></span><span class="hidden"><i>
+			func <a href="#name-drainAndPush">drainAndPush</a>(ch chan <b>rdsHandlerUpdate</b>, update <b>rdsHandlerUpdate</b>)</i></span><span class="hidden"><i>
+			func <a href="#name-newRDSHandler">newRDSHandler</a>(xdsC <a href="#name-XDSClient">XDSClient</a>, ch chan <b>rdsHandlerUpdate</b>) *<a href="#name-rdsHandler">rdsHandler</a></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 5, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewListenerWrapper">	<input type='checkbox' class="fold" id="NewListenerWrapper-fold-content"><label for="NewListenerWrapper-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-104">NewListenerWrapper</a>(params <a href="#name-ListenerWrapperParams">ListenerWrapperParams</a>) (<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Listener">Listener</a>, &lt;-chan struct{})</label><span id='NewListenerWrapper-fold-content-docs' class="fold-docs">
+		NewListenerWrapper creates a new listenerWrapper with params. It returns a
+		net.Listener and a channel which is written to, indicating that the former is
+		ready to be passed to grpc.Serve().
+
+		Only TCP listeners are supported.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-buildProviderFunc"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/conn_wrapper.go.html#line-147">buildProviderFunc</a>(configs map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../credentials/tls/certprovider.html#name-BuildableConfig">BuildableConfig</a>, instanceName, certName <a href="../../../../builtin.html#name-string">string</a>, wantIdentity, wantRoot <a href="../../../../builtin.html#name-bool">bool</a>) (<a href="../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../credentials/tls/certprovider.html#name-Provider">Provider</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-drainAndPush"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-116">drainAndPush</a>(ch chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>, update <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>)</span></i></div><div class="anchor value-res hidden" id="name-newRDSHandler"><i>	<input type='checkbox' class="fold" id="newRDSHandler-fold-content"><label for="newRDSHandler-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/rds_handler.go.html#line-52">newRDSHandler</a>(xdsC <a href="#name-XDSClient">XDSClient</a>, ch chan <a href="#name-rdsHandlerUpdate">rdsHandlerUpdate</a>) *<a href="#name-rdsHandler">rdsHandler</a></label><span id='newRDSHandler-fold-content-docs' class="fold-docs">
+		newRDSHandler creates a new rdsHandler to watch for RDS resources.
+		listenerWrapper updates the list of route names to watch by calling
+		updateRouteNamesToWatch() upon receipt of new Listener configuration.
+
+</span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-69">prefixLogger</a>(p *<a href="#name-listenerWrapper">listenerWrapper</a>) *<a href="../../internal/grpclog.html">internalgrpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-backoffFunc"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-53">backoffFunc</a> func(retries <a href="../../../../builtin.html#name-int">int</a>) <a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Duration">Duration</a></span></i></div><div class="anchor value-res hidden" id="name-bs"><i>	<input type='checkbox' class="fold" id="bs-fold-content"><label for="bs-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-48">bs</a> <a href="../../internal/backoff.html">backoff</a>.<a href="../../internal/backoff.html#name-Exponential">Exponential</a></label><span id='bs-fold-content-docs' class="fold-docs">
+		Backoff strategy for temporary errors received from Accept(). If this
+		needs to be configurable, we can inject it through ListenerWrapperParams.
+
+</span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-44">logger</a> <a href="../../grpclog.html">grpclog</a>.<a href="../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

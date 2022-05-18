@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/balancer/clustermanager</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>clustermanager</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/balancer/clustermanager">google.golang.org/grpc/xds/internal/balancer/clustermanager</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/balancer/clustermanager" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/clustermanager.html">17 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html">balancerstateaggregator.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-1-fold-content"><label for="file-1-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html">clustermanager.go</a></label><span id='file-1-fold-content-items' class="fold-items">
+		Package clustermanager implements the cluster manager LB policy for xds.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html">config.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html">picker.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 8, none are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 8 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 8 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-bal" data-popularity="435">	<input type='checkbox' class="fold" id="bal-fold-content"><label for="bal-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-63">bal</a> <i>(struct)</i></label><span id='bal-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="bal-fold-fields"><label for="bal-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='bal-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="bal-showhide-fields"><i><label for="bal-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="bal-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="bal-fold-field-bg"><label for="bal-fold-field-bg"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-68">bg</a> <i>*<a href="../../../internal/balancergroup.html">balancergroup</a>.<a href="../../../internal/balancergroup.html#name-BalancerGroup">BalancerGroup</a></i></label><span id='bal-fold-field-bg-docs' class="fold-docs">
+				TODO: make this package not dependent on xds specific code. Same as for
+				weighted target balancer.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-71">children</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="#name-childConfig">childConfig</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-64">logger</a> <i>*<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-69">stateAggregator</a> <i>*<a href="#name-balancerStateAggregator">balancerStateAggregator</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="bal-fold-methods"><label for="bal-fold-methods">Methods (<i>total 6, in which 5 are exported</i>)</label><span id='bal-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-138">Close</a>()</span></span><span>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-144">ExitIdle</a>()</span></span><span>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-130">ResolverError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-119">UpdateClientConnState</a>(s <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../../../builtin.html#name-error">error</a></span></span><span>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-134">UpdateSubConnState</a>(sc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a>)</span></span>
+			<input type='checkbox' checked class="showhide" id="bal-showhide-methods"><i><label for="bal-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="bal-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*bal) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-74">updateChildren</a>(s <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a>, newConfig *<a href="#name-lbConfig">lbConfig</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="bal-fold-impls"><label for="bal-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='bal-fold-impls-items' class="fold-items"><span>
+			*bal : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Balancer">Balancer</a></span><span>
+			*bal : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ExitIdler">ExitIdler</a></span></span>
+		<input type='checkbox' class="fold" id="bal-fold-params"><label for="bal-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='bal-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="bal-showhide-outputofs"><i><label for="bal-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="bal-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>bal</b>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-balancerStateAggregator" data-popularity="525">	<input type='checkbox' class="fold" id="balancerStateAggregator-fold-content"><label for="balancerStateAggregator-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-45">balancerStateAggregator</a> <i>(struct)</i></label><span id='balancerStateAggregator-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="balancerStateAggregator-fold-fields"><label for="balancerStateAggregator-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='balancerStateAggregator-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="balancerStateAggregator-showhide-fields"><i><label for="balancerStateAggregator-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="balancerStateAggregator-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-46">cc</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-field-idToPickerState"><label for="balancerStateAggregator-fold-field-idToPickerState"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-59">idToPickerState</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-subBalancerState">subBalancerState</a></i></label><span id='balancerStateAggregator-fold-field-idToPickerState-docs' class="fold-docs">
+				All balancer IDs exist as keys in this map, even if balancer group is not
+				started.
+
+				If an ID is not in map, it's either removed or never added.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-47">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-49">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-field-started"><label for="balancerStateAggregator-fold-field-started"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-54">started</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></label><span id='balancerStateAggregator-fold-field-started-docs' class="fold-docs">
+				If started is false, no updates should be sent to the parent cc. A closed
+				sub-balancer could still send pickers to this aggregator. This makes sure
+				that no updates will be forwarded to parent when the whole balancer group
+				and states aggregator is closed.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="balancerStateAggregator-fold-methods"><label for="balancerStateAggregator-fold-methods">Methods (<i>total 8, in which 1 are exported</i>)</label><span id='balancerStateAggregator-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-UpdateState"><label for="balancerStateAggregator-fold-method-UpdateState">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-125">UpdateState</a>(id <a href="../../../../../builtin.html#name-string">string</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='balancerStateAggregator-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState is called to report a balancer state change from sub-balancer.
+				It's usually called by the balancer group.
+
+				It calls parent ClientConn's UpdateState with the new aggregated state.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="balancerStateAggregator-showhide-methods"><i><label for="balancerStateAggregator-showhide-methods" class="show-inline">/* 7 unexporteds ... */</label><label for="balancerStateAggregator-showhide-methods" class="hide-inline">/* 7 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-add"><label for="balancerStateAggregator-fold-method-add">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-91">add</a>(id <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='balancerStateAggregator-fold-method-add-docs' class="fold-docs">
+				add adds a sub-balancer state with weight. It adds a place holder, and waits
+				for the real sub-balancer to update state.
+
+				This is called when there's a new child.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-build"><label for="balancerStateAggregator-fold-method-build">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-177">build</a>() <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a></label><span id='balancerStateAggregator-fold-method-build-docs' class="fold-docs">
+				build combines sub-states into one. The picker will do a child pick.
+
+				Caller must hold bsa.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-buildAndUpdate"><label for="balancerStateAggregator-fold-method-buildAndUpdate">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-165">buildAndUpdate</a>()</label><span id='balancerStateAggregator-fold-method-buildAndUpdate-docs' class="fold-docs">
+				buildAndUpdate combines the sub-state from each sub-balancer into one state,
+				and update it to parent ClientConn.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-clearStates"><label for="balancerStateAggregator-fold-method-clearStates">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-153">clearStates</a>()</label><span id='balancerStateAggregator-fold-method-clearStates-docs' class="fold-docs">
+				clearState Reset everything to init state (Connecting) but keep the entry in
+				map (to keep the weight).
+
+				Caller must hold bsa.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-close"><label for="balancerStateAggregator-fold-method-close">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-80">close</a>()</label><span id='balancerStateAggregator-fold-method-close-docs' class="fold-docs">
+				Close closes the aggregator. When the aggregator is closed, it won't call
+				parent ClientConn to update balancer state.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-remove"><label for="balancerStateAggregator-fold-method-remove">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-110">remove</a>(id <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='balancerStateAggregator-fold-method-remove-docs' class="fold-docs">
+				remove removes the sub-balancer state. Future updates from this sub-balancer,
+				if any, will be ignored.
+
+				This is called when a child is removed.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="balancerStateAggregator-fold-method-start"><label for="balancerStateAggregator-fold-method-start">(*balancerStateAggregator) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-72">start</a>()</label><span id='balancerStateAggregator-fold-method-start-docs' class="fold-docs">
+				Start starts the aggregator. It can be called after Close to restart the
+				aggretator.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="balancerStateAggregator-fold-impls"><label for="balancerStateAggregator-fold-impls">Implements (<i>at least one exported</i>)</label><span id='balancerStateAggregator-fold-impls-items' class="fold-items"><span>
+			*balancerStateAggregator : google.golang.org/grpc/internal/balancergroup.<a href="../../../internal/balancergroup.html#name-BalancerStateAggregator">BalancerStateAggregator</a></span></span>
+		<input type='checkbox' class="fold" id="balancerStateAggregator-fold-results"><label for="balancerStateAggregator-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='balancerStateAggregator-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="balancerStateAggregator-showhide-inputofs"><i><label for="balancerStateAggregator-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="balancerStateAggregator-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newBalancerStateAggregator">newBalancerStateAggregator</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<b>balancerStateAggregator</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-bb" data-popularity="250">	<input type='checkbox' class="fold" id="bb-fold-content"><label for="bb-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-42">bb</a> <i>(struct)</i></label><span id='bb-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="bb-fold-methods"><label for="bb-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='bb-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-44">Build</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-55">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-59">ParseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="bb-fold-impls"><label for="bb-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='bb-fold-impls-items' class="fold-items"><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Builder">Builder</a></span><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ConfigParser">ConfigParser</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-childConfig" data-popularity="0">	<input type='checkbox' class="fold" id="childConfig-fold-content"><label for="childConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-28">childConfig</a> <i>(struct)</i></label><span id='childConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="childConfig-fold-fields"><label for="childConfig-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='childConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="childConfig-fold-field-ChildPolicy"><label for="childConfig-fold-field-ChildPolicy"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-30">ChildPolicy</a> <i>*<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a></i></label><span id='childConfig-fold-field-ChildPolicy-docs' class="fold-docs">
+				ChildPolicy is the child policy and it's config.
+</span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterKey" data-popularity="0">	<span class="nodocs"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-53">clusterKey</a> <i>(struct)</i></span></div><div class="anchor type-res hidden" id="name-lbConfig" data-popularity="175">	<input type='checkbox' class="fold" id="lbConfig-fold-content"><label for="lbConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-34">lbConfig</a> <i>(struct)</i></label><span id='lbConfig-fold-content-docs' class="fold-docs">
+		lbConfig is the balancer config for xds routing policy.
+
+		<input type='checkbox' class="fold" id="lbConfig-fold-fields"><label for="lbConfig-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='lbConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-36">Children</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="#name-childConfig">childConfig</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-35">LoadBalancingConfig</a> <i><a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="lbConfig-fold-methods"><label for="lbConfig-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='lbConfig-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lbConfig-showhide-methods"><i><label for="lbConfig-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="lbConfig-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( lbConfig) <a href="../../../../../../src/google.golang.org/grpc/serviceconfig/serviceconfig.go.html#line-36">isLoadBalancingConfig</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="lbConfig-fold-impls"><label for="lbConfig-fold-impls">Implements (<i>at least one exported</i>)</label><span id='lbConfig-fold-impls-items' class="fold-items"><span>
+			 lbConfig : google.golang.org/grpc/serviceconfig.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></span></span>
+		<input type='checkbox' class="fold" id="lbConfig-fold-results"><label for="lbConfig-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='lbConfig-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lbConfig-showhide-inputofs"><i><label for="lbConfig-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="lbConfig-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-parseConfig">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<b>lbConfig</b>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-pickerGroup" data-popularity="175">	<input type='checkbox' class="fold" id="pickerGroup-fold-content"><label for="pickerGroup-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-31">pickerGroup</a> <i>(struct)</i></label><span id='pickerGroup-fold-content-docs' class="fold-docs">
+		pickerGroup contains a list of pickers. If the picker isn't ready, the pick
+		will be queued.
+
+		<input type='checkbox' class="fold" id="pickerGroup-fold-fields"><label for="pickerGroup-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='pickerGroup-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="pickerGroup-showhide-fields"><i><label for="pickerGroup-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="pickerGroup-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-32">pickers</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Picker">Picker</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="pickerGroup-fold-methods"><label for="pickerGroup-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='pickerGroup-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*pickerGroup) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-45">Pick</a>(info <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-PickInfo">PickInfo</a>) (<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-PickResult">PickResult</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="pickerGroup-fold-impls"><label for="pickerGroup-fold-impls">Implements (<i>at least one exported</i>)</label><span id='pickerGroup-fold-impls-items' class="fold-items"><span>
+			*pickerGroup : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Picker">Picker</a></span></span>
+		<input type='checkbox' class="fold" id="pickerGroup-fold-results"><label for="pickerGroup-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='pickerGroup-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="pickerGroup-showhide-inputofs"><i><label for="pickerGroup-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="pickerGroup-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newPickerGroup">newPickerGroup</a>(idToPickerState map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-subBalancerState">subBalancerState</a>) *<b>pickerGroup</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-subBalancerState" data-popularity="235">	<input type='checkbox' class="fold" id="subBalancerState-fold-content"><label for="subBalancerState-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-31">subBalancerState</a> <i>(struct)</i></label><span id='subBalancerState-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="subBalancerState-fold-fields"><label for="subBalancerState-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='subBalancerState-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="subBalancerState-showhide-fields"><i><label for="subBalancerState-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="subBalancerState-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-32">state</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerState-fold-field-stateToAggregate"><label for="subBalancerState-fold-field-stateToAggregate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-38">stateToAggregate</a> <i><a href="../../../connectivity.html">connectivity</a>.<a href="../../../connectivity.html#name-State">State</a></i></label><span id='subBalancerState-fold-field-stateToAggregate-docs' class="fold-docs">
+				stateToAggregate is the connectivity state used only for state
+				aggregation. It could be different from state.ConnectivityState. For
+				example when a sub-balancer transitions from TransientFailure to
+				connecting, state.ConnectivityState is Connecting, but stateToAggregate
+				is still TransientFailure.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="subBalancerState-fold-methods"><label for="subBalancerState-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='subBalancerState-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*subBalancerState) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-41">String</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="subBalancerState-fold-impls"><label for="subBalancerState-fold-impls">Implements (<i>at least 3, in which 1 are exported</i>)</label><span id='subBalancerState-fold-impls-items' class="fold-items"><span>
+			*subBalancerState : fmt.<a href="../../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' checked class="showhide" id="subBalancerState-showhide-impls"><i><label for="subBalancerState-showhide-impls" class="show-inline">/* 2+ unexporteds ... */</label><label for="subBalancerState-showhide-impls" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*subBalancerState : context.<a href="../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*subBalancerState : runtime.<a href="../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="subBalancerState-fold-params"><label for="subBalancerState-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='subBalancerState-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="subBalancerState-showhide-outputofs"><i><label for="subBalancerState-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="subBalancerState-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newPickerGroup">newPickerGroup</a>(idToPickerState map[<a href="../../../../../builtin.html#name-string">string</a>]*<b>subBalancerState</b>) *<a href="#name-pickerGroup">pickerGroup</a></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 8, in which 2 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-GetPickedClusterForTesting">	<input type='checkbox' class="fold" id="GetPickedClusterForTesting-fold-content"><label for="GetPickedClusterForTesting-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-62">GetPickedClusterForTesting</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>) <a href="../../../../../builtin.html#name-string">string</a></label><span id='GetPickedClusterForTesting-fold-content-docs' class="fold-docs">
+		GetPickedClusterForTesting returns the cluster in the context; to be used
+		for testing only.
+
+</span></div><div class="anchor value-res" id="name-SetPickedCluster">	<input type='checkbox' class="fold" id="SetPickedCluster-fold-content"><label for="SetPickedCluster-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-68">SetPickedCluster</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>, cluster <a href="../../../../../builtin.html#name-string">string</a>) <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a></label><span id='SetPickedCluster-fold-content-docs' class="fold-docs">
+		SetPickedCluster adds the selected cluster to the context for the
+		xds_cluster_manager LB policy to pick.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 6 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 6 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-getPickedCluster"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-55">getPickedCluster</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>) <a href="../../../../../builtin.html#name-string">string</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-38">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-newBalancerStateAggregator"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/balancerstateaggregator.go.html#line-62">newBalancerStateAggregator</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<a href="#name-balancerStateAggregator">balancerStateAggregator</a></span></i></div><div class="anchor value-res hidden" id="name-newPickerGroup"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/picker.go.html#line-35">newPickerGroup</a>(idToPickerState map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-subBalancerState">subBalancerState</a>) *<a href="#name-pickerGroup">pickerGroup</a></span></i></div><div class="anchor value-res hidden" id="name-parseConfig"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/config.go.html#line-39">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<a href="#name-lbConfig">lbConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-152">prefixLogger</a>(p *<a href="#name-bal">bal</a>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-150">logger</a> <a href="../../../grpclog.html">grpclog</a>.<a href="../../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 2, neither is exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-balancerName"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-36">balancerName</a> = "xds_cluster_manager_experimental"</span></i></div><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clustermanager/clustermanager.go.html#line-148">prefix</a> = "[xds-cluster-manager-lb %p] "</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

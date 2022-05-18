@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/internal/balancergroup</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>balancergroup</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../index.html#pkg-google.golang.org/grpc/internal/balancergroup">google.golang.org/grpc/internal/balancergroup</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/internal/balancergroup" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../dep/google.golang.org/grpc/internal/balancergroup.html">9 packages</a>, and imported by <a href="../../../../dep/google.golang.org/grpc/internal/balancergroup.html#imported-by">3 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#doc">#d</a> <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html">balancergroup.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package balancergroup implements a utility struct to bind multiple balancers
+		into one balancer.
+</span>
+	<span class="nodocs">      <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancerstateaggregator.go.html">balancerstateaggregator.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 3, in which 2 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-BalancerGroup" data-popularity="825">	<input type='checkbox' class="fold" id="BalancerGroup-fold-content"><label for="BalancerGroup-fold-content"> type <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-206">BalancerGroup</a> <i>(struct)</i></label><span id='BalancerGroup-fold-content-docs' class="fold-docs">
+		BalancerGroup takes a list of balancers, and make them into one balancer.
+
+		Note that this struct doesn't implement balancer.Balancer, because it's not
+		intended to be used directly as a balancer. It's expected to be used as a
+		sub-balancer manager by a high level balancer.
+
+		Updates from ClientConn are forwarded to sub-balancers
+		 - service config update
+		 - address update
+		 - subConn state change
+		    - find the corresponding balancer and forward
+
+		Actions from sub-balances are forwarded to parent ClientConn
+		 - new/remove SubConn
+		 - picker update and health states change
+		    - sub-pickers are sent to an aggregator provided by the parent, which
+		    will group them into a group-picker. The aggregated connectivity state is
+		    also handled by the aggregator.
+		 - resolveNow
+
+		Sub-balancers are only built when the balancer group is started. If the
+		balancer group is closed, the sub-balancers are also closed. And it's
+		guaranteed that no updates will be sent to parent ClientConn from a closed
+		balancer group.
+
+		<input type='checkbox' class="fold" id="BalancerGroup-fold-fields"><label for="BalancerGroup-fold-fields">Fields (<i>total 11, none are exported</i>)</label><span id='BalancerGroup-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="BalancerGroup-showhide-fields"><i><label for="BalancerGroup-showhide-fields" class="show-inline">/* 11 unexporteds ... */</label><label for="BalancerGroup-showhide-fields" class="hide-inline">/* 11 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-field-balancerCache"><label for="BalancerGroup-fold-field-balancerCache"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-226">balancerCache</a> <i>*<a href="cache.html">cache</a>.<a href="cache.html#name-TimeoutCache">TimeoutCache</a></i></label><span id='BalancerGroup-fold-field-balancerCache-docs' class="fold-docs">
+				Cache for sub-balancers when they are removed.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-208">buildOpts</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-BuildOptions">BuildOptions</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-207">cc</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-224">idToBalancerConfig</a> <i>map[<a href="../../../builtin.html#name-string">string</a>]*<a href="#name-subBalancerWrapper">subBalancerWrapper</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-field-incomingMu"><label for="BalancerGroup-fold-field-incomingMu"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-251">incomingMu</a> <i><a href="../../../sync.html">sync</a>.<a href="../../../sync.html#name-Mutex">Mutex</a></i></label><span id='BalancerGroup-fold-field-incomingMu-docs' class="fold-docs">
+				incomingMu guards all operations in the direction:
+				Sub-balancer--&gt;ClientConn. Including NewSubConn, RemoveSubConn. It also
+				guards the map from SubConn to balancer ID, so updateSubConnState needs
+				to hold it shortly to find the sub-balancer to forward the update.
+
+				UpdateState is called by the balancer state aggretator, and it will
+				decide when and whether to call.
+
+				The corresponding boolean incomingStarted is used to stop further updates
+				from sub-balancers after they are closed.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-field-incomingStarted"><label for="BalancerGroup-fold-field-incomingStarted"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-252">incomingStarted</a> <i><a href="../../../builtin.html#name-bool">bool</a></i></label><span id='BalancerGroup-fold-field-incomingStarted-docs' class="fold-docs">
+				// This boolean only guards calls back to ClientConn.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-209">logger</a> <i>*<a href="grpclog.html">grpclog</a>.<a href="grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-field-outgoingMu"><label for="BalancerGroup-fold-field-outgoingMu"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-222">outgoingMu</a> <i><a href="../../../sync.html">sync</a>.<a href="../../../sync.html#name-Mutex">Mutex</a></i></label><span id='BalancerGroup-fold-field-outgoingMu-docs' class="fold-docs">
+				outgoingMu guards all operations in the direction:
+				ClientConn--&gt;Sub-balancer. Including start, stop, resolver updates and
+				SubConn state changes.
+
+				The corresponding boolean outgoingStarted is used to stop further updates
+				to sub-balancers after they are closed.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-223">outgoingStarted</a> <i><a href="../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-253">scToSubBalancer</a> <i>map[<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>]*<a href="#name-subBalancerWrapper">subBalancerWrapper</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-field-stateAggregator"><label for="BalancerGroup-fold-field-stateAggregator"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-214">stateAggregator</a> <i><a href="#name-BalancerStateAggregator">BalancerStateAggregator</a></i></label><span id='BalancerGroup-fold-field-stateAggregator-docs' class="fold-docs">
+				stateAggregator is where the state/picker updates will be sent to. It's
+				provided by the parent balancer, to build a picker with all the
+				sub-pickers.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="BalancerGroup-fold-methods"><label for="BalancerGroup-fold-methods">Methods (<i>total 14, in which 10 are exported</i>)</label><span id='BalancerGroup-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-Add"><label for="BalancerGroup-fold-method-Add">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-302">Add</a>(id <a href="../../../builtin.html#name-string">string</a>, builder <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-Builder">Builder</a>)</label><span id='BalancerGroup-fold-method-Add-docs' class="fold-docs">
+				Add adds a balancer built by builder to the group, with given id.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-Close"><label for="BalancerGroup-fold-method-Close">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-512">Close</a>()</label><span id='BalancerGroup-fold-method-Close-docs' class="fold-docs">
+				Close closes the balancer. It stops sub-balancers, and removes the subconns.
+				The BalancerGroup can be restarted later.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-ExitIdle"><label for="BalancerGroup-fold-method-ExitIdle">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-541">ExitIdle</a>()</label><span id='BalancerGroup-fold-method-ExitIdle-docs' class="fold-docs">
+				ExitIdle should be invoked when the parent LB policy's ExitIdle is invoked.
+				It will trigger this on all sub-balancers, or reconnect their subconns if
+				not supported.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-ExitIdleOne"><label for="BalancerGroup-fold-method-ExitIdleOne">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-553">ExitIdleOne</a>(id <a href="../../../builtin.html#name-string">string</a>)</label><span id='BalancerGroup-fold-method-ExitIdleOne-docs' class="fold-docs">
+				ExitIdleOne instructs the sub-balancer `id` to exit IDLE state, if
+				appropriate and possible.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-Remove"><label for="BalancerGroup-fold-method-Remove">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-371">Remove</a>(id <a href="../../../builtin.html#name-string">string</a>)</label><span id='BalancerGroup-fold-method-Remove-docs' class="fold-docs">
+				Remove removes the balancer with id from the group.
+
+				But doesn't close the balancer. The balancer is kept in a cache, and will be
+				closed after timeout. Cleanup work (closing sub-balancer and removing
+				subconns) will be done after timeout.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-ResolverError"><label for="BalancerGroup-fold-method-ResolverError">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-459">ResolverError</a>(err <a href="../../../builtin.html#name-error">error</a>)</label><span id='BalancerGroup-fold-method-ResolverError-docs' class="fold-docs">
+				ResolverError forwards resolver errors to all sub-balancers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-Start"><label for="BalancerGroup-fold-method-Start">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-283">Start</a>()</label><span id='BalancerGroup-fold-method-Start-docs' class="fold-docs">
+				Start starts the balancer group, including building all the sub-balancers,
+				and send the existing addresses to them.
+
+				A BalancerGroup can be closed and started later. When a BalancerGroup is
+				closed, it can still receive address updates, which will be applied when
+				restarted.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-UpdateBuilder"><label for="BalancerGroup-fold-method-UpdateBuilder">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-351">UpdateBuilder</a>(id <a href="../../../builtin.html#name-string">string</a>, builder <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-Builder">Builder</a>)</label><span id='BalancerGroup-fold-method-UpdateBuilder-docs' class="fold-docs">
+				UpdateBuilder updates the builder for a current child, starting the Graceful
+				Switch process for that child.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-UpdateClientConnState"><label for="BalancerGroup-fold-method-UpdateClientConnState">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-449">UpdateClientConnState</a>(id <a href="../../../builtin.html#name-string">string</a>, s <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../builtin.html#name-error">error</a></label><span id='BalancerGroup-fold-method-UpdateClientConnState-docs' class="fold-docs">
+				UpdateClientConnState handles ClientState (including balancer config and
+				addresses) from resolver. It finds the balancer and forwards the update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-UpdateSubConnState"><label for="BalancerGroup-fold-method-UpdateSubConnState">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-429">UpdateSubConnState</a>(sc <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, state <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConnState">SubConnState</a>)</label><span id='BalancerGroup-fold-method-UpdateSubConnState-docs' class="fold-docs">
+				UpdateSubConnState handles the state for the subconn. It finds the
+				corresponding balancer and forwards the update.
+</span></span>
+			<input type='checkbox' class="showhide" id="BalancerGroup-showhide-methods"><i><label for="BalancerGroup-showhide-methods" class="show-inline">/* 4 unexporteds ... */</label><label for="BalancerGroup-showhide-methods" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-cleanupSubConns"><label for="BalancerGroup-fold-method-cleanupSubConns">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-396">cleanupSubConns</a>(config *<a href="#name-subBalancerWrapper">subBalancerWrapper</a>)</label><span id='BalancerGroup-fold-method-cleanupSubConns-docs' class="fold-docs">
+				bg.remove(id) doesn't do cleanup for the sub-balancer. This function does
+				cleanup after the timeout.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-connect"><label for="BalancerGroup-fold-method-connect">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-415">connect</a>(sb *<a href="#name-subBalancerWrapper">subBalancerWrapper</a>)</label><span id='BalancerGroup-fold-method-connect-docs' class="fold-docs">
+				connect attempts to connect to all subConns belonging to sb.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-newSubConn"><label for="BalancerGroup-fold-method-newSubConn">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-476">newSubConn</a>(config *<a href="#name-subBalancerWrapper">subBalancerWrapper</a>, addrs []<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Address">Address</a>, opts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='BalancerGroup-fold-method-newSubConn-docs' class="fold-docs">
+				newSubConn: forward to ClientConn, and also create a map from sc to balancer,
+				so state update will find the right balancer.
+
+				One note about removing SubConn: only forward to ClientConn, but not delete
+				from map. Delete sc from the map only when state changes to Shutdown. Since
+				it's just forwarding the action, there's no need for a removeSubConn()
+				wrapper function.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="BalancerGroup-fold-method-updateBalancerState"><label for="BalancerGroup-fold-method-updateBalancerState">(*BalancerGroup) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-498">updateBalancerState</a>(id <a href="../../../builtin.html#name-string">string</a>, state <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-State">State</a>)</label><span id='BalancerGroup-fold-method-updateBalancerState-docs' class="fold-docs">
+				updateBalancerState: forward the new state to balancer state aggregator. The
+				aggregator will create an aggregated picker and an aggregated connectivity
+				state, then forward to ClientConn.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="BalancerGroup-fold-impls"><label for="BalancerGroup-fold-impls">Implements (<i>at least one exported</i>)</label><span id='BalancerGroup-fold-impls-items' class="fold-items"><span>
+			*BalancerGroup : google.golang.org/grpc/balancer.<a href="../balancer.html#name-ExitIdler">ExitIdler</a></span></span>
+		<input type='checkbox' class="fold" id="BalancerGroup-fold-results"><label for="BalancerGroup-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='BalancerGroup-fold-results-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>(cc <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConn">ClientConn</a>, bOpts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-BuildOptions">BuildOptions</a>, stateAggregator <a href="#name-BalancerStateAggregator">BalancerStateAggregator</a>, logger *<a href="grpclog.html">grpclog</a>.<a href="grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<b>BalancerGroup</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-BalancerStateAggregator" data-popularity="535">	<input type='checkbox' class="fold" id="BalancerStateAggregator-fold-content"><label for="BalancerStateAggregator-fold-content"> type <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancerstateaggregator.go.html#line-31">BalancerStateAggregator</a> <b><i>(interface)</i></b></label><span id='BalancerStateAggregator-fold-content-docs' class="fold-docs">
+		BalancerStateAggregator aggregates sub-picker and connectivity states into a
+		state.
+
+		It takes care of merging sub-picker into one picker. The picking config is
+		passed directly from the the parent to the aggregator implementation (instead
+		via balancer group).
+
+		<input type='checkbox' class="fold" id="BalancerStateAggregator-fold-methods"><label for="BalancerStateAggregator-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='BalancerStateAggregator-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="BalancerStateAggregator-fold-method-UpdateState"><label for="BalancerStateAggregator-fold-method-UpdateState">( BalancerStateAggregator) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancerstateaggregator.go.html#line-36">UpdateState</a>(id <a href="../../../builtin.html#name-string">string</a>, state <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-State">State</a>)</label><span id='BalancerStateAggregator-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState updates the state of the id.
+
+				It's up to the implementation whether this will trigger an update to the
+				parent ClientConn.
+</span></span></span>
+		<input type='checkbox' class="fold" id="BalancerStateAggregator-fold-impledby"><label for="BalancerStateAggregator-fold-impledby">Implemented By (<i>at least 3, in which 1 are exported</i>)</label><span id='BalancerStateAggregator-fold-impledby-items' class="fold-items"><span>
+			*google.golang.org/grpc/balancer/weightedtarget/weightedaggregator.<a href="../balancer/weightedtarget/weightedaggregator.html#name-Aggregator">Aggregator</a></span>
+			<input type='checkbox' class="showhide" id="BalancerStateAggregator-showhide-impedBys"><i><label for="BalancerStateAggregator-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="BalancerStateAggregator-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*google.golang.org/grpc/xds/internal/balancer/clustermanager.<a href="../xds/internal/balancer/clustermanager.html#name-balancerStateAggregator">balancerStateAggregator</a></i></span><span class="hidden"><i>
+			*google.golang.org/grpc/xds/internal/balancer/priority.<a href="../xds/internal/balancer/priority.html#name-priorityBalancer">priorityBalancer</a></i></span></span>
+		<input type='checkbox' class="fold" id="BalancerStateAggregator-fold-params"><label for="BalancerStateAggregator-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='BalancerStateAggregator-fold-params-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>(cc <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConn">ClientConn</a>, bOpts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-BuildOptions">BuildOptions</a>, stateAggregator <b>BalancerStateAggregator</b>, logger *<a href="grpclog.html">grpclog</a>.<a href="grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<a href="#name-BalancerGroup">BalancerGroup</a></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor type-res hidden" id="name-subBalancerWrapper" data-popularity="855">	<input type='checkbox' class="fold" id="subBalancerWrapper-fold-content"><label for="subBalancerWrapper-fold-content"> type <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-42">subBalancerWrapper</a> <i>(struct)</i></label><span id='subBalancerWrapper-fold-content-docs' class="fold-docs">
+		subBalancerWrapper is used to keep the configurations that will be used to start
+		the underlying balancer. It can be called to start/stop the underlying
+		balancer.
+
+		When the config changes, it will pass the update to the underlying balancer
+		if it exists.
+
+		TODO: move to a separate file?
+
+		<input type='checkbox' class="fold" id="subBalancerWrapper-fold-fields"><label for="subBalancerWrapper-fold-fields">Fields (<i>total 9, in which 1 are exported</i>)</label><span id='subBalancerWrapper-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-field-ClientConn"><label for="subBalancerWrapper-fold-field-ClientConn"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-51">ClientConn</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConn">ClientConn</a></i></label><span id='subBalancerWrapper-fold-field-ClientConn-docs' class="fold-docs">
+				subBalancerWrapper is passed to the sub-balancer as a ClientConn
+				wrapper, only to keep the state and picker.  When sub-balancer is
+				restarted while in cache, the picker needs to be resent.
+
+				It also contains the sub-balancer ID, so the parent balancer group can
+				keep track of SubConn/pickers and the sub-balancers they belong to. Some
+				of the actions are forwarded to the parent ClientConn with no change.
+				Some are forward to balancer group with the sub-balancer ID.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="subBalancerWrapper-showhide-fields"><i><label for="subBalancerWrapper-showhide-fields" class="show-inline">/* 8 unexporteds ... */</label><label for="subBalancerWrapper-showhide-fields" class="hide-inline">/* 8 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-field-balancer"><label for="subBalancerWrapper-fold-field-balancer"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-71">balancer</a> <i>*<a href="balancer/gracefulswitch.html">gracefulswitch</a>.<a href="balancer/gracefulswitch.html#name-Balancer">Balancer</a></i></label><span id='subBalancerWrapper-fold-field-balancer-docs' class="fold-docs">
+				The dynamic part of sub-balancer. Only used when balancer group is
+				started. Gets cleared when sub-balancer is closed.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-field-buildOpts"><label for="subBalancerWrapper-fold-field-buildOpts"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-62">buildOpts</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-BuildOptions">BuildOptions</a></i></label><span id='subBalancerWrapper-fold-field-buildOpts-docs' class="fold-docs">
+				Options to be passed to sub-balancer at the time of creation.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-field-builder"><label for="subBalancerWrapper-fold-field-builder"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-60">builder</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-Builder">Builder</a></i></label><span id='subBalancerWrapper-fold-field-builder-docs' class="fold-docs">
+				The static part of sub-balancer. Keeps balancerBuilders and addresses.
+				To be used when restarting sub-balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-field-ccState"><label for="subBalancerWrapper-fold-field-ccState"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-68">ccState</a> <i>*<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConnState">ClientConnState</a></i></label><span id='subBalancerWrapper-fold-field-ccState-docs' class="fold-docs">
+				ccState is a cache of the addresses/balancer config, so when the balancer
+				is restarted after close, it will get the previous update. It's a pointer
+				and is set to nil at init, so when the balancer is built for the first
+				time (not a restart), it won't receive an empty update. Note that this
+				isn't reset to nil when the underlying balancer is closed.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-53">group</a> <i>*<a href="#name-BalancerGroup">BalancerGroup</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-52">id</a> <i><a href="../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-55">mu</a> <i><a href="../../../sync.html">sync</a>.<a href="../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-56">state</a> <i><a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-State">State</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="subBalancerWrapper-fold-methods"><label for="subBalancerWrapper-fold-methods">Methods (<i>total 14, in which 6 are exported</i>)</label><span id='subBalancerWrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-NewSubConn"><label for="subBalancerWrapper-fold-method-NewSubConn">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-84">NewSubConn</a>(addrs []<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Address">Address</a>, opts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='subBalancerWrapper-fold-method-NewSubConn-docs' class="fold-docs">
+				NewSubConn overrides balancer.ClientConn, so balancer group can keep track of
+				the relation between subconns and sub-balancers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-RemoveSubConn"><label for="subBalancerWrapper-fold-method-RemoveSubConn">( subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-151">RemoveSubConn</a>(<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>)</label><span id='subBalancerWrapper-fold-method-RemoveSubConn-docs' class="fold-docs">
+				RemoveSubConn removes the SubConn from ClientConn.
+				The SubConn will be shutdown.
+</span></span><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-ResolveNow"><label for="subBalancerWrapper-fold-method-ResolveNow">( subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-168">ResolveNow</a>(<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</label><span id='subBalancerWrapper-fold-method-ResolveNow-docs' class="fold-docs">
+				ResolveNow is called by balancer to notify gRPC to do a name resolving.
+</span></span><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-Target"><label for="subBalancerWrapper-fold-method-Target">( subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-173">Target</a>() <a href="../../../builtin.html#name-string">string</a></label><span id='subBalancerWrapper-fold-method-Target-docs' class="fold-docs">
+				Target returns the dial target for this ClientConn.
+
+				Deprecated: Use the Target field in the BuildOptions instead.
+</span></span><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-UpdateAddresses"><label for="subBalancerWrapper-fold-method-UpdateAddresses">( subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-158">UpdateAddresses</a>(<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, []<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Address">Address</a>)</label><span id='subBalancerWrapper-fold-method-UpdateAddresses-docs' class="fold-docs">
+				UpdateAddresses updates the addresses used in the passed in SubConn.
+				gRPC checks if the currently connected address is still in the new list.
+				If so, the connection will be kept. Else, the connection will be
+				gracefully closed, and a new connection will be created.
+
+				This will trigger a state transition for the SubConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-UpdateState"><label for="subBalancerWrapper-fold-method-UpdateState">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-75">UpdateState</a>(state <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-State">State</a>)</label><span id='subBalancerWrapper-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState overrides balancer.ClientConn, to keep state and picker.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="subBalancerWrapper-showhide-methods"><i><label for="subBalancerWrapper-showhide-methods" class="show-inline">/* 8 unexporteds ... */</label><label for="subBalancerWrapper-showhide-methods" class="hide-inline">/* 8 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="subBalancerWrapper-fold-method-exitIdle"><label for="subBalancerWrapper-fold-method-exitIdle">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-109">exitIdle</a>() (complete <a href="../../../builtin.html#name-bool">bool</a>)</label><span id='subBalancerWrapper-fold-method-exitIdle-docs' class="fold-docs">
+				exitIdle invokes the sub-balancer's ExitIdle method. Returns a boolean
+				indicating whether or not the operation was completed.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-163">gracefulSwitch</a>(builder <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-Builder">Builder</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-147">resolverError</a>(err <a href="../../../builtin.html#name-error">error</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-96">startBalancer</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-177">stopBalancer</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-88">updateBalancerStateWithCachedPicker</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-130">updateClientConnState</a>(s <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../builtin.html#name-error">error</a></span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*subBalancerWrapper) <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-118">updateSubConnState</a>(sc <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, state <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConnState">SubConnState</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="subBalancerWrapper-fold-impls"><label for="subBalancerWrapper-fold-impls">Implements (<i>at least one exported</i>)</label><span id='subBalancerWrapper-fold-impls-items' class="fold-items"><span>
+			*subBalancerWrapper : google.golang.org/grpc/balancer.<a href="../balancer.html#name-ClientConn">ClientConn</a></span></span>
+		<input type='checkbox' class="fold" id="subBalancerWrapper-fold-params"><label for="subBalancerWrapper-fold-params">As Inputs Of (<i>at least 3, none are exported</i>)</label><span id='subBalancerWrapper-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="subBalancerWrapper-showhide-outputofs"><i><label for="subBalancerWrapper-showhide-outputofs" class="show-inline">/* 3+ unexporteds ... */</label><label for="subBalancerWrapper-showhide-outputofs" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-BalancerGroup">BalancerGroup</a>).<a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-396">cleanupSubConns</a>(config *<b>subBalancerWrapper</b>)</i></span><span class="hidden"><i>
+			func (*<a href="#name-BalancerGroup">BalancerGroup</a>).<a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-415">connect</a>(sb *<b>subBalancerWrapper</b>)</i></span><span class="hidden"><i>
+			func (*<a href="#name-BalancerGroup">BalancerGroup</a>).<a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-476">newSubConn</a>(config *<b>subBalancerWrapper</b>, addrs []<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Address">Address</a>, opts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-SubConn">SubConn</a>, <a href="../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div class="anchor value-res" id="name-New">	<input type='checkbox' class="fold" id="New-fold-content"><label for="New-fold-content"> func <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-264">New</a>(cc <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-ClientConn">ClientConn</a>, bOpts <a href="../balancer.html">balancer</a>.<a href="../balancer.html#name-BuildOptions">BuildOptions</a>, stateAggregator <a href="#name-BalancerStateAggregator">BalancerStateAggregator</a>, logger *<a href="grpclog.html">grpclog</a>.<a href="grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<a href="#name-BalancerGroup">BalancerGroup</a></label><span id='New-fold-content-docs' class="fold-docs">
+		New creates a new BalancerGroup. Note that the BalancerGroup
+		needs to be started to work.
+
+</span></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div class="anchor value-res" id="name-DefaultSubBalancerCloseTimeout">	<input type='checkbox' class="fold" id="DefaultSubBalancerCloseTimeout-fold-content"><label for="DefaultSubBalancerCloseTimeout-fold-content">  var <a href="../../../../src/google.golang.org/grpc/internal/balancergroup/balancergroup.go.html#line-260">DefaultSubBalancerCloseTimeout</a> <a href="../../../time.html">time</a>.<a href="../../../time.html#name-Duration">Duration</a></label><span id='DefaultSubBalancerCloseTimeout-fold-content-docs' class="fold-docs">
+		DefaultSubBalancerCloseTimeout is defined as a variable instead of const for
+		testing.
+
+		TODO: make it a parameter for New().
+
+</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: sdk.go in package github.com/Golang-Tools/grpcsdk</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	sdk.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html">github.com/Golang-Tools/grpcsdk</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91],
+input[id=r92]:checked ~pre label[for=r92],
+input[id=r93]:checked ~pre label[for=r93],
+input[id=r94]:checked ~pre label[for=r94],
+input[id=r95]:checked ~pre label[for=r95],
+input[id=r96]:checked ~pre label[for=r96],
+input[id=r97]:checked ~pre label[for=r97]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11,
+input[id=i12]:checked ~pre .i12,
+input[id=i13]:checked ~pre .i13,
+input[id=i14]:checked ~pre .i14,
+input[id=i15]:checked ~pre .i15,
+input[id=i16]:checked ~pre .i16,
+input[id=i17]:checked ~pre .i17,
+input[id=i18]:checked ~pre .i18,
+input[id=i19]:checked ~pre .i19,
+input[id=i20]:checked ~pre .i20,
+input[id=i21]:checked ~pre .i21
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="r92" type="radio" name="g"/>
+<input id="r93" type="radio" name="g"/>
+<input id="r94" type="radio" name="g"/>
+<input id="r95" type="radio" name="g"/>
+<input id="r96" type="radio" name="g"/>
+<input id="r97" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+<input id="i12" type="radio" name="i"/>
+<input id="i13" type="radio" name="i"/>
+<input id="i14" type="radio" name="i"/>
+<input id="i15" type="radio" name="i"/>
+<input id="i16" type="radio" name="i"/>
+<input id="i17" type="radio" name="i"/>
+<input id="i18" type="radio" name="i"/>
+<input id="i19" type="radio" name="i"/>
+<input id="i20" type="radio" name="i"/>
+<input id="i21" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="keyword">package</span> grpcsdk</code></span>
+<span class="codeline" id="line-2"><code></code></span>
+<span class="codeline" id="line-3"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-4"><code>	<label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-5"><code>	<label for="i1"><span class="lit-string i1">"crypto/tls"</span></label></code></span>
+<span class="codeline" id="line-6"><code>	<label for="i2"><span class="lit-string i2">"crypto/x509"</span></label></code></span>
+<span class="codeline" id="line-7"><code>	<label for="i3"><span class="lit-string i3">"errors"</span></label></code></span>
+<span class="codeline" id="line-8"><code>	<label for="i4"><span class="lit-string i4">"fmt"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<label for="i5"><span class="lit-string i5">"io/ioutil"</span></label></code></span>
+<span class="codeline" id="line-10"><code>	<label for="i6"><span class="lit-string i6">"strings"</span></label></code></span>
+<span class="codeline" id="line-11"><code>	<label for="i7"><span class="lit-string i7">"sync"</span></label></code></span>
+<span class="codeline" id="line-12"><code>	<label for="i8"><span class="lit-string i8">"time"</span></label></code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a> <label for="i9"><span class="lit-string i9">"github.com/Golang-Tools/loggerhelper/v2"</span></label></code></span>
+<span class="codeline" id="line-15"><code>	<label for="i10"><span class="lit-string i10">"github.com/Golang-Tools/optparams"</span></label></code></span>
+<span class="codeline" id="line-16"><code>	<a href="../../../../pkg/github.com/json-iterator/go.html" class="ident i11">jsoniter</a> <label for="i11"><span class="lit-string i11">"github.com/json-iterator/go"</span></label></code></span>
+<span class="codeline" id="line-17"><code>	<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a> <label for="i12"><span class="lit-string i12">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-18"><code>	<label for="i13"><span class="lit-string i13">"google.golang.org/grpc/credentials"</span></label></code></span>
+<span class="codeline" id="line-19"><code>	<label for="i14"><span class="lit-string i14">"google.golang.org/grpc/credentials/insecure"</span></label></code></span>
+<span class="codeline" id="line-20"><code>	<a href="../../../../pkg/google.golang.org/grpc/credentials/xds.html" class="ident i15">xdscreds</a> <label for="i15"><span class="lit-string i15">"google.golang.org/grpc/credentials/xds"</span></label></code></span>
+<span class="codeline" id="line-21"><code>	<label for="i16"><span class="lit-string i16">"google.golang.org/grpc/encoding/gzip"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i17"><span class="lit-string i17">"google.golang.org/grpc/keepalive"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i18"><span class="lit-string i18">"google.golang.org/grpc/metadata"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<a href="../../../../pkg/google.golang.org/grpc/resolver.html" class="ident i19">resolver</a> <label for="i19"><span class="lit-string i19">"google.golang.org/grpc/resolver"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i20"><span class="lit-string i20">"google.golang.org/grpc/resolver/manual"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<a href="../../../../pkg/google.golang.org/grpc/xds.html" class="ident i21">_</a> <label for="i21"><span class="lit-string i21">"google.golang.org/grpc/xds"</span></label></code></span>
+<span class="codeline" id="line-27"><code>)</code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">var</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-json" class="ident">json</a> = <a href="../../../../pkg/github.com/json-iterator/go.html" class="ident i11">jsoniter</a>.<a href="../../json-iterator/go/config.go.html#line-55" class="ident">ConfigCompatibleWithStandardLibrary</a></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//SDK 的客户端类型</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">type</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-SDK" class="ident">SDK</a>[<label for="r0" class="ident">T</label> <a href="../../../../pkg/builtin.html#name-any" class="ident">any</a>] <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-34"><code>	*<a href="config.go.html#line-9" class="ident">SDKConfig</a></code></span>
+<span class="codeline" id="line-35"><code>	opts                []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-69" class="ident">DialOption</a></code></span>
+<span class="codeline" id="line-36"><code>	callopts            []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/rpc_util.go.html#line-174" class="ident">CallOption</a></code></span>
+<span class="codeline" id="line-37"><code>	serviceconfig       <span class="keyword">map</span>[<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">interface</span>{}</code></span>
+<span class="codeline" id="line-38"><code>	addr                <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-39"><code>	factory             <a href="grpcsdk.go.html#line-36" class="ident">NewGrpcClientFunc</a>[<label for="r0" class="ident">T</label>]</code></span>
+<span class="codeline" id="line-40"><code>	clientgetter        <a href="grpcsdk.go.html#line-28" class="ident">GrpcClientGetter</a>[<label for="r0" class="ident">T</label>]</code></span>
+<span class="codeline" id="line-41"><code>	getClientGetterLock *<a href="../../../../pkg/sync.html" class="ident i7">sync</a>.<a href="../../../sync/rwmutex.go.html#line-28" class="ident">RWMutex</a></code></span>
+<span class="codeline" id="line-42"><code>	Logger              *<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/log.go.html#line-7" class="ident">Log</a></code></span>
+<span class="codeline" id="line-43"><code>}</code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">//New 创建客户端对象</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">//@params factory NewGrpcClientFunc[T] 将grpc连接转化为grpc客户端的程序,可以在pb生成的模块中找到,通常以`NewXXXXXXClient`命名</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">//@params desc *grpc.ServiceDesc grpc服务的描述对象,可以在pb生成的模块中找到,通常以`XXXXX_ServiceDesc`命名</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">//@returns *SDK[T] SDK对象</span></code></span>
+<span class="codeline" id="line-50"><code><span class="keyword">func</span> <label for="r1" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-New" class="ident">New</a></label>[<label for="r2" class="ident">T</label> <a href="../../../../pkg/builtin.html#name-any" class="ident">any</a>](<label for="r3" class="ident">factory</label> <a href="grpcsdk.go.html#line-36" class="ident">NewGrpcClientFunc</a>[<label for="r2" class="ident">T</label>], <label for="r4" class="ident">desc</label> *<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/server.go.html#line-90" class="ident">ServiceDesc</a>) *<a href="#line-33" class="ident">SDK</a>[<label for="r2" class="ident">T</label>] {</code></span>
+<span class="codeline" id="line-51"><code>	<label for="r5" class="ident">c</label> := <a href="../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="#line-33" class="ident">SDK</a>[<label for="r2" class="ident">T</label>])</code></span>
+<span class="codeline" id="line-52"><code>	<label for="r5" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-69" class="ident">DialOption</a>{}</code></span>
+<span class="codeline" id="line-53"><code>	<label for="r5" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a> = []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>{}</code></span>
+<span class="codeline" id="line-54"><code>	<label for="r5" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a> = <span class="keyword">map</span>[<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">interface</span>{}{}</code></span>
+<span class="codeline" id="line-55"><code>	<label for="r5" class="ident">c</label>.<a href="#line-41" class="ident">getClientGetterLock</a> = &amp;<a href="../../../../pkg/sync.html" class="ident i7">sync</a>.<a href="../../../sync/rwmutex.go.html#line-28" class="ident">RWMutex</a>{}</code></span>
+<span class="codeline" id="line-56"><code>	<label for="r5" class="ident">c</label>.<a href="#line-39" class="ident">factory</a> = <label for="r3" class="ident">factory</label></code></span>
+<span class="codeline" id="line-57"><code>	<label for="r5" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a> = &amp;<a href="config.go.html#line-9" class="ident">SDKConfig</a>{}</code></span>
+<span class="codeline" id="line-58"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-65" class="ident">Set</a>(<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/options.go.html#line-117" class="ident">WithExtFields</a>(<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"module"</span>: <span class="lit-string">"grpcsdk"</span>, <span class="lit-string">"target_service"</span>: <label for="r4" class="ident">desc</label>.<a href="../../../google.golang.org/grpc/server.go.html#line-91" class="ident">ServiceName</a>}))</code></span>
+<span class="codeline" id="line-59"><code>	<label for="r5" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a> = <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-54" class="ident">Export</a>()</code></span>
+<span class="codeline" id="line-60"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-65" class="ident">Set</a>(<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/options.go.html#line-117" class="ident">WithExtFields</a>(<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{}))</code></span>
+<span class="codeline" id="line-61"><code>	<span class="keyword">return</span> <label for="r5" class="ident">c</label></code></span>
+<span class="codeline" id="line-62"><code>}</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">//initMsgSize 初始化消息大小设置</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-66"><code><span class="keyword">func</span> (<label for="r6" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r7" class="ident">T</label>]) <label for="r8" class="ident">initMsgSize</label>() {</code></span>
+<span class="codeline" id="line-67"><code>	<span class="keyword">if</span> <label for="r6" class="ident">c</label>.<a href="config.go.html#line-21" class="ident">Max_Recv_Msg_Size</a> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-68"><code>		<label for="r6" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r6" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/rpc_util.go.html#line-301" class="ident">MaxCallRecvMsgSize</a>(<label for="r6" class="ident">c</label>.<a href="config.go.html#line-21" class="ident">Max_Recv_Msg_Size</a>))</code></span>
+<span class="codeline" id="line-69"><code>	}</code></span>
+<span class="codeline" id="line-70"><code>	<span class="keyword">if</span> <label for="r6" class="ident">c</label>.<a href="config.go.html#line-22" class="ident">Max_Send_Msg_Size</a> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-71"><code>		<label for="r6" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r6" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/rpc_util.go.html#line-324" class="ident">MaxCallSendMsgSize</a>(<label for="r6" class="ident">c</label>.<a href="config.go.html#line-22" class="ident">Max_Send_Msg_Size</a>))</code></span>
+<span class="codeline" id="line-72"><code>	}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code>}</code></span>
+<span class="codeline" id="line-75"><code></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">//initCompression 初始化压缩设置</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-78"><code><span class="keyword">func</span> (<label for="r9" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r10" class="ident">T</label>]) <label for="r11" class="ident">initCompression</label>() {</code></span>
+<span class="codeline" id="line-79"><code>	<span class="keyword">switch</span> <label for="r9" class="ident">c</label>.<a href="config.go.html#line-25" class="ident">Compression</a> {</code></span>
+<span class="codeline" id="line-80"><code>	<span class="keyword">case</span> <span class="lit-string">"gzip"</span>:</code></span>
+<span class="codeline" id="line-81"><code>		{</code></span>
+<span class="codeline" id="line-82"><code>			<label for="r9" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r9" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/rpc_util.go.html#line-376" class="ident">UseCompressor</a>(<a href="../../../../pkg/google.golang.org/grpc/encoding/gzip.html" class="ident i16">gzip</a>.<a href="../../../google.golang.org/grpc/encoding/gzip/gzip.go.html#line-40" class="ident">Name</a>))</code></span>
+<span class="codeline" id="line-83"><code>		}</code></span>
+<span class="codeline" id="line-84"><code>	}</code></span>
+<span class="codeline" id="line-85"><code>}</code></span>
+<span class="codeline" id="line-86"><code></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">//initKeepalive 初始化keepalive的相关设置</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-89"><code><span class="keyword">func</span> (<label for="r12" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r13" class="ident">T</label>]) <label for="r14" class="ident">initKeepalive</label>() {</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r12" class="ident">c</label>.<a href="config.go.html#line-17" class="ident">Keepalive_Time</a> != <span class="lit-number">0</span> || <label for="r12" class="ident">c</label>.<a href="config.go.html#line-18" class="ident">Keepalive_Timeout</a> != <span class="lit-number">0</span> || <label for="r12" class="ident">c</label>.<a href="config.go.html#line-19" class="ident">Keepalive_Enforcement_Permit_Without_Stream</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<label for="r15" class="ident">kacp</label> := <a href="../../../../pkg/google.golang.org/grpc/keepalive.html" class="ident i17">keepalive</a>.<a href="../../../google.golang.org/grpc/keepalive/keepalive.go.html#line-33" class="ident">ClientParameters</a>{</code></span>
+<span class="codeline" id="line-92"><code>			<a href="../../../google.golang.org/grpc/keepalive/keepalive.go.html#line-37" class="ident">Time</a>:                <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-589" class="ident">Duration</a>(<label for="r12" class="ident">c</label>.<a href="config.go.html#line-17" class="ident">Keepalive_Time</a>) * <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-611" class="ident">Second</a>,</code></span>
+<span class="codeline" id="line-93"><code>			<a href="../../../google.golang.org/grpc/keepalive/keepalive.go.html#line-41" class="ident">Timeout</a>:             <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-589" class="ident">Duration</a>(<label for="r12" class="ident">c</label>.<a href="config.go.html#line-18" class="ident">Keepalive_Timeout</a>) * <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-611" class="ident">Second</a>,</code></span>
+<span class="codeline" id="line-94"><code>			<a href="../../../google.golang.org/grpc/keepalive/keepalive.go.html#line-45" class="ident">PermitWithoutStream</a>: <label for="r12" class="ident">c</label>.<a href="config.go.html#line-19" class="ident">Keepalive_Enforcement_Permit_Without_Stream</a>, <span class="comment">// send pings even without active streams</span></code></span>
+<span class="codeline" id="line-95"><code>		}</code></span>
+<span class="codeline" id="line-96"><code>		<label for="r12" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r12" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-415" class="ident">WithKeepaliveParams</a>(<label for="r15" class="ident">kacp</label>))</code></span>
+<span class="codeline" id="line-97"><code>	}</code></span>
+<span class="codeline" id="line-98"><code>}</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">//initPerformanceOpts 初始化连接的性能选项</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-102"><code><span class="keyword">func</span> (<label for="r16" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r17" class="ident">T</label>]) <label for="r18" class="ident">initPerformanceOpts</label>() {</code></span>
+<span class="codeline" id="line-103"><code>	<span class="keyword">if</span> <label for="r16" class="ident">c</label>.<a href="config.go.html#line-20" class="ident">Conn_With_Block</a> {</code></span>
+<span class="codeline" id="line-104"><code>		<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-256" class="ident">WithBlock</a>())</code></span>
+<span class="codeline" id="line-105"><code>	}</code></span>
+<span class="codeline" id="line-106"><code>	<span class="keyword">if</span> <label for="r16" class="ident">c</label>.<a href="config.go.html#line-15" class="ident">Initial_Window_Size</a> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-107"><code>		<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-127" class="ident">WithInitialWindowSize</a>(<a href="../../../../pkg/builtin.html#name-int32" class="ident">int32</a>(<label for="r16" class="ident">c</label>.<a href="config.go.html#line-15" class="ident">Initial_Window_Size</a>)))</code></span>
+<span class="codeline" id="line-108"><code>	}</code></span>
+<span class="codeline" id="line-109"><code>	<span class="keyword">if</span> <label for="r16" class="ident">c</label>.<a href="config.go.html#line-16" class="ident">Initial_Conn_Window_Size</a> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-110"><code>		<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r16" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-136" class="ident">WithInitialConnWindowSize</a>(<a href="../../../../pkg/builtin.html#name-int32" class="ident">int32</a>(<label for="r16" class="ident">c</label>.<a href="config.go.html#line-16" class="ident">Initial_Conn_Window_Size</a>)))</code></span>
+<span class="codeline" id="line-111"><code>	}</code></span>
+<span class="codeline" id="line-112"><code>}</code></span>
+<span class="codeline" id="line-113"><code></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">//initTLS 初始化TLS设置</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-116"><code><span class="keyword">func</span> (<label for="r19" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r20" class="ident">T</label>]) <label for="r21" class="ident">initTLS</label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-117"><code>	<span class="keyword">if</span> <label for="r19" class="ident">c</label>.<a href="config.go.html#line-28" class="ident">Ca_Cert_Path</a> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-118"><code>		<span class="keyword">if</span> <label for="r19" class="ident">c</label>.<a href="config.go.html#line-29" class="ident">Client_Cert_Path</a> != <span class="lit-string">""</span> &amp;&amp; <label for="r19" class="ident">c</label>.<a href="config.go.html#line-30" class="ident">Client_Key_Path</a> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-119"><code>			<label for="r22" class="ident">cert</label>, <label for="r23" class="ident">err</label> := <a href="../../../../pkg/crypto/tls.html" class="ident i1">tls</a>.<a href="../../../crypto/tls/tls.go.html#line-230" class="ident">LoadX509KeyPair</a>(<label for="r19" class="ident">c</label>.<a href="config.go.html#line-29" class="ident">Client_Cert_Path</a>, <label for="r19" class="ident">c</label>.<a href="config.go.html#line-30" class="ident">Client_Key_Path</a>)</code></span>
+<span class="codeline" id="line-120"><code>			<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-121"><code>				<label for="r19" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-102" class="ident">Error</a>(<span class="lit-string">"read client pem file error:"</span>, <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"err"</span>: <label for="r23" class="ident">err</label>.Error(), <span class="lit-string">"Cert_path"</span>: <label for="r19" class="ident">c</label>.<a href="config.go.html#line-29" class="ident">Client_Cert_Path</a>, <span class="lit-string">"Key_Path"</span>: <label for="r19" class="ident">c</label>.<a href="config.go.html#line-30" class="ident">Client_Key_Path</a>})</code></span>
+<span class="codeline" id="line-122"><code>				<span class="keyword">return</span> <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-123"><code>			}</code></span>
+<span class="codeline" id="line-124"><code>			<label for="r24" class="ident">capool</label> := <a href="../../../../pkg/crypto/x509.html" class="ident i2">x509</a>.<a href="../../../crypto/x509/cert_pool.go.html#line-59" class="ident">NewCertPool</a>()</code></span>
+<span class="codeline" id="line-125"><code>			<label for="r25" class="ident">caCrt</label>, <label for="r23" class="ident">err</label> := <a href="../../../../pkg/io/ioutil.html" class="ident i5">ioutil</a>.<a href="../../../io/ioutil/ioutil.go.html#line-36" class="ident">ReadFile</a>(<label for="r19" class="ident">c</label>.<a href="config.go.html#line-28" class="ident">Ca_Cert_Path</a>)</code></span>
+<span class="codeline" id="line-126"><code>			<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-127"><code>				<label for="r19" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-102" class="ident">Error</a>(<span class="lit-string">"read ca pem file error:"</span>, <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"err"</span>: <label for="r23" class="ident">err</label>.Error(), <span class="lit-string">"path"</span>: <label for="r19" class="ident">c</label>.<a href="config.go.html#line-28" class="ident">Ca_Cert_Path</a>})</code></span>
+<span class="codeline" id="line-128"><code>				<span class="keyword">return</span> <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-129"><code>			}</code></span>
+<span class="codeline" id="line-130"><code>			<label for="r24" class="ident">capool</label>.<a href="../../../crypto/x509/cert_pool.go.html#line-206" class="ident">AppendCertsFromPEM</a>(<label for="r25" class="ident">caCrt</label>)</code></span>
+<span class="codeline" id="line-131"><code>			<label for="r26" class="ident">tlsconf</label> := &amp;<a href="../../../../pkg/crypto/tls.html" class="ident i1">tls</a>.<a href="../../../crypto/tls/common.go.html#line-518" class="ident">Config</a>{</code></span>
+<span class="codeline" id="line-132"><code>				<a href="../../../crypto/tls/common.go.html#line-616" class="ident">RootCAs</a>:      <label for="r24" class="ident">capool</label>,</code></span>
+<span class="codeline" id="line-133"><code>				<a href="../../../crypto/tls/common.go.html#line-540" class="ident">Certificates</a>: []<a href="../../../../pkg/crypto/tls.html" class="ident i1">tls</a>.<a href="../../../crypto/tls/common.go.html#line-1350" class="ident">Certificate</a>{<label for="r22" class="ident">cert</label>},</code></span>
+<span class="codeline" id="line-134"><code>			}</code></span>
+<span class="codeline" id="line-135"><code>			<label for="r27" class="ident">creds</label> := <a href="../../../../pkg/google.golang.org/grpc/credentials.html" class="ident i13">credentials</a>.<a href="../../../google.golang.org/grpc/credentials/tls.go.html#line-142" class="ident">NewTLS</a>(<label for="r26" class="ident">tlsconf</label>)</code></span>
+<span class="codeline" id="line-136"><code>			<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-309" class="ident">WithTransportCredentials</a>(<label for="r27" class="ident">creds</label>))</code></span>
+<span class="codeline" id="line-137"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-138"><code>			<label for="r28" class="ident">creds</label>, <label for="r29" class="ident">err</label> := <a href="../../../../pkg/google.golang.org/grpc/credentials.html" class="ident i13">credentials</a>.<a href="../../../google.golang.org/grpc/credentials/tls.go.html#line-168" class="ident">NewClientTLSFromFile</a>(<label for="r19" class="ident">c</label>.<a href="config.go.html#line-28" class="ident">Ca_Cert_Path</a>, <span class="lit-string">""</span>)</code></span>
+<span class="codeline" id="line-139"><code>			<span class="keyword">if</span> <label for="r29" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-140"><code>				<label for="r19" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-102" class="ident">Error</a>(<span class="lit-string">"failed to load credentials"</span>, <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"err"</span>: <label for="r29" class="ident">err</label>.Error()})</code></span>
+<span class="codeline" id="line-141"><code>				<span class="keyword">return</span> <label for="r29" class="ident">err</label></code></span>
+<span class="codeline" id="line-142"><code>			}</code></span>
+<span class="codeline" id="line-143"><code>			<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-309" class="ident">WithTransportCredentials</a>(<label for="r28" class="ident">creds</label>))</code></span>
+<span class="codeline" id="line-144"><code>		}</code></span>
+<span class="codeline" id="line-145"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-146"><code>		<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r19" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-309" class="ident">WithTransportCredentials</a>(<a href="../../../../pkg/google.golang.org/grpc/credentials/insecure.html" class="ident i14">insecure</a>.<a href="../../../google.golang.org/grpc/credentials/insecure/insecure.go.html#line-34" class="ident">NewCredentials</a>()))</code></span>
+<span class="codeline" id="line-147"><code>	}</code></span>
+<span class="codeline" id="line-148"><code>	<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-149"><code>}</code></span>
+<span class="codeline" id="line-150"><code></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">//initWithoutBL 初始化没有堵在均衡设置的服务</span></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-153"><code><span class="keyword">func</span> (<label for="r30" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r31" class="ident">T</label>]) <label for="r32" class="ident">initWithoutBL</label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-154"><code>	<span class="keyword">return</span> <label for="r30" class="ident">c</label>.<a href="#line-116" class="ident">initTLS</a>()</code></span>
+<span class="codeline" id="line-155"><code>}</code></span>
+<span class="codeline" id="line-156"><code></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">//initWithDNSLB 初始化使用外部dns做负载均衡的设置</span></code></span>
+<span class="codeline" id="line-158"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-159"><code><span class="keyword">func</span> (<label for="r33" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r34" class="ident">T</label>]) <label for="r35" class="ident">initWithDNSLB</label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-160"><code>	<label for="r33" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a>[<span class="lit-string">"loadBalancingPolicy"</span>] = <span class="lit-string">"round_robin"</span></code></span>
+<span class="codeline" id="line-161"><code>	<span class="keyword">return</span> <label for="r33" class="ident">c</label>.<a href="#line-116" class="ident">initTLS</a>()</code></span>
+<span class="codeline" id="line-162"><code>}</code></span>
+<span class="codeline" id="line-163"><code></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">//InitWithStandalone 初始化使用XDS协议做负载均衡的设置</span></code></span>
+<span class="codeline" id="line-165"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-166"><code><span class="keyword">func</span> (<label for="r36" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r37" class="ident">T</label>]) <label for="r38" class="ident">initWithXDSLB</label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-167"><code>	<label for="r39" class="ident">creds</label> := <a href="../../../../pkg/google.golang.org/grpc/credentials/insecure.html" class="ident i14">insecure</a>.<a href="../../../google.golang.org/grpc/credentials/insecure/insecure.go.html#line-34" class="ident">NewCredentials</a>()</code></span>
+<span class="codeline" id="line-168"><code>	<span class="keyword">var</span> <label for="r40" class="ident">err</label> <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-169"><code>	<span class="keyword">if</span> <label for="r36" class="ident">c</label>.<a href="config.go.html#line-33" class="ident">XDS_CREDS</a> {</code></span>
+<span class="codeline" id="line-170"><code>		<label for="r39" class="ident">creds</label>, <label for="r40" class="ident">err</label> = <a href="../../../../pkg/google.golang.org/grpc/credentials/xds.html" class="ident i15">xdscreds</a>.<a href="../../../google.golang.org/grpc/credentials/xds/xds.go.html#line-49" class="ident">NewClientCredentials</a>(<a href="../../../../pkg/google.golang.org/grpc/credentials/xds.html" class="ident i15">xdscreds</a>.<a href="../../../google.golang.org/grpc/credentials/xds/xds.go.html#line-39" class="ident">ClientOptions</a>{<a href="../../../google.golang.org/grpc/credentials/xds/xds.go.html#line-44" class="ident">FallbackCreds</a>: <a href="../../../../pkg/google.golang.org/grpc/credentials/insecure.html" class="ident i14">insecure</a>.<a href="../../../google.golang.org/grpc/credentials/insecure/insecure.go.html#line-34" class="ident">NewCredentials</a>()})</code></span>
+<span class="codeline" id="line-171"><code>	}</code></span>
+<span class="codeline" id="line-172"><code>	<span class="keyword">if</span> <label for="r40" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-173"><code>		<span class="keyword">return</span> <label for="r40" class="ident">err</label></code></span>
+<span class="codeline" id="line-174"><code>	}</code></span>
+<span class="codeline" id="line-175"><code>	<label for="r36" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r36" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-309" class="ident">WithTransportCredentials</a>(<label for="r39" class="ident">creds</label>))</code></span>
+<span class="codeline" id="line-176"><code>	<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-177"><code>}</code></span>
+<span class="codeline" id="line-178"><code></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">//InitWithLocalBalance 初始化本地负载均衡的连接配置</span></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-181"><code><span class="keyword">func</span> (<label for="r41" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r42" class="ident">T</label>]) <label for="r43" class="ident">initWithLocalBalance</label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-182"><code>	<label for="r44" class="ident">serverName</label> := <span class="lit-string">""</span></code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">if</span> <label for="r41" class="ident">c</label>.<a href="config.go.html#line-11" class="ident">Requester_App_Name</a> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">if</span> <label for="r41" class="ident">c</label>.<a href="config.go.html#line-12" class="ident">Requester_App_Version</a> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-185"><code>			<label for="r44" class="ident">serverName</label> = <a href="../../../../pkg/fmt.html" class="ident i4">fmt</a>.<a href="../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"%s-%s"</span>, <label for="r41" class="ident">c</label>.<a href="config.go.html#line-11" class="ident">Requester_App_Name</a>, <a href="../../../../pkg/strings.html" class="ident i6">strings</a>.<a href="../../../strings/strings.go.html#line-1036" class="ident">ReplaceAll</a>(<label for="r41" class="ident">c</label>.<a href="config.go.html#line-12" class="ident">Requester_App_Version</a>, <span class="lit-string">"."</span>, <span class="lit-string">"_"</span>))</code></span>
+<span class="codeline" id="line-186"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-187"><code>			<label for="r44" class="ident">serverName</label> = <label for="r41" class="ident">c</label>.<a href="config.go.html#line-11" class="ident">Requester_App_Name</a></code></span>
+<span class="codeline" id="line-188"><code>		}</code></span>
+<span class="codeline" id="line-189"><code>	}</code></span>
+<span class="codeline" id="line-190"><code>	<label for="r41" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a>[<span class="lit-string">"loadBalancingPolicy"</span>] = <span class="lit-string">"round_robin"</span></code></span>
+<span class="codeline" id="line-191"><code>	<label for="r41" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a>[<span class="lit-string">"healthCheckConfig"</span>] = <span class="keyword">map</span>[<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>{<span class="lit-string">"serviceName"</span>: <label for="r44" class="ident">serverName</label>}</code></span>
+<span class="codeline" id="line-192"><code></code></span>
+<span class="codeline" id="line-193"><code>	<label for="r45" class="ident">r</label> := <a href="../../../../pkg/google.golang.org/grpc/resolver/manual.html" class="ident i20">manual</a>.<a href="../../../google.golang.org/grpc/resolver/manual/manual.go.html#line-28" class="ident">NewBuilderWithScheme</a>(<span class="lit-string">"localbalancer"</span>)</code></span>
+<span class="codeline" id="line-194"><code>	<label for="r46" class="ident">addresses</label> := []<a href="../../../../pkg/google.golang.org/grpc/resolver.html" class="ident i19">resolver</a>.<a href="../../../google.golang.org/grpc/resolver/resolver.go.html#line-103" class="ident">Address</a>{}</code></span>
+<span class="codeline" id="line-195"><code>	<span class="keyword">for</span> <label for="r47" class="ident">_</label>, <label for="r48" class="ident">addr</label> := <span class="keyword">range</span> <label for="r41" class="ident">c</label>.<a href="config.go.html#line-10" class="ident">Query_Addresses</a> {</code></span>
+<span class="codeline" id="line-196"><code>		<label for="r46" class="ident">addresses</label> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r46" class="ident">addresses</label>, <a href="../../../../pkg/google.golang.org/grpc/resolver.html" class="ident i19">resolver</a>.<a href="../../../google.golang.org/grpc/resolver/resolver.go.html#line-103" class="ident">Address</a>{<a href="../../../google.golang.org/grpc/resolver/resolver.go.html#line-105" class="ident">Addr</a>: <label for="r48" class="ident">addr</label>})</code></span>
+<span class="codeline" id="line-197"><code>	}</code></span>
+<span class="codeline" id="line-198"><code>	<label for="r45" class="ident">r</label>.<a href="../../../google.golang.org/grpc/resolver/manual/manual.go.html#line-59" class="ident">InitialState</a>(<a href="../../../../pkg/google.golang.org/grpc/resolver.html" class="ident i19">resolver</a>.<a href="../../../google.golang.org/grpc/resolver/resolver.go.html#line-182" class="ident">State</a>{</code></span>
+<span class="codeline" id="line-199"><code>		<a href="../../../google.golang.org/grpc/resolver/resolver.go.html#line-184" class="ident">Addresses</a>: <label for="r46" class="ident">addresses</label>,</code></span>
+<span class="codeline" id="line-200"><code>	})</code></span>
+<span class="codeline" id="line-201"><code>	<label for="r41" class="ident">c</label>.<a href="#line-38" class="ident">addr</a> = <a href="../../../../pkg/fmt.html" class="ident i4">fmt</a>.<a href="../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"%s:///%s"</span>, <label for="r45" class="ident">r</label>.<a href="../../../google.golang.org/grpc/resolver/manual/manual.go.html#line-74" class="ident">Scheme</a>(), <label for="r44" class="ident">serverName</label>)</code></span>
+<span class="codeline" id="line-202"><code>	<label for="r41" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r41" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-591" class="ident">WithResolvers</a>(<label for="r45" class="ident">r</label>))</code></span>
+<span class="codeline" id="line-203"><code>	<span class="keyword">return</span> <label for="r41" class="ident">c</label>.<a href="#line-116" class="ident">initTLS</a>()</code></span>
+<span class="codeline" id="line-204"><code>}</code></span>
+<span class="codeline" id="line-205"><code></code></span>
+<span class="codeline" id="line-206"><code><span class="comment">//RegistInterceptor 注册拦截器</span></code></span>
+<span class="codeline" id="line-207"><code><span class="keyword">func</span> (<label for="r49" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r50" class="ident">T</label>]) <label for="r51" class="ident">RegistInterceptor</label>() {</code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">if</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r49" class="ident">c</label>.<a href="config.go.html#line-43" class="ident">UnaryInterceptors</a>) &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-209"><code>		<span class="keyword">for</span> <label for="r52" class="ident">_</label>, <label for="r53" class="ident">i</label> := <span class="keyword">range</span> <label for="r49" class="ident">c</label>.<a href="config.go.html#line-43" class="ident">UnaryInterceptors</a> {</code></span>
+<span class="codeline" id="line-210"><code>			<label for="r49" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r49" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-427" class="ident">WithUnaryInterceptor</a>(<label for="r53" class="ident">i</label>))</code></span>
+<span class="codeline" id="line-211"><code>		}</code></span>
+<span class="codeline" id="line-212"><code>	}</code></span>
+<span class="codeline" id="line-213"><code>	<span class="keyword">if</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r49" class="ident">c</label>.<a href="config.go.html#line-44" class="ident">StreamInterceptors</a>) &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-214"><code>		<span class="keyword">for</span> <label for="r54" class="ident">_</label>, <label for="r55" class="ident">i</label> := <span class="keyword">range</span> <label for="r49" class="ident">c</label>.<a href="config.go.html#line-44" class="ident">StreamInterceptors</a> {</code></span>
+<span class="codeline" id="line-215"><code>			<label for="r49" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r49" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-446" class="ident">WithStreamInterceptor</a>(<label for="r55" class="ident">i</label>))</code></span>
+<span class="codeline" id="line-216"><code>		}</code></span>
+<span class="codeline" id="line-217"><code>	}</code></span>
+<span class="codeline" id="line-218"><code>}</code></span>
+<span class="codeline" id="line-219"><code></code></span>
+<span class="codeline" id="line-220"><code><span class="comment">//Init 初始化sdk客户端的连接信息</span></code></span>
+<span class="codeline" id="line-221"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-222"><code><span class="keyword">func</span> (<label for="r56" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r57" class="ident">T</label>]) <label for="r58" class="ident">Init</label>(<label for="r59" class="ident">opts</label> ...<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="config.go.html#line-9" class="ident">SDKConfig</a>]) <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-223"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-36" class="ident">GetOption</a>(<label for="r56" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a>, <label for="r59" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-224"><code>	<span class="keyword">if</span> <label for="r56" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a>.<a href="config.go.html#line-10" class="ident">Query_Addresses</a> == <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-225"><code>		<span class="keyword">return</span> <a href="../../../../pkg/errors.html" class="ident i3">errors</a>.<a href="../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"必须至少有一个地址"</span>)</code></span>
+<span class="codeline" id="line-226"><code>	}</code></span>
+<span class="codeline" id="line-227"><code>	<span class="keyword">switch</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r56" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a>.<a href="config.go.html#line-10" class="ident">Query_Addresses</a>) {</code></span>
+<span class="codeline" id="line-228"><code>	<span class="keyword">case</span> <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-229"><code>		{</code></span>
+<span class="codeline" id="line-230"><code>			<span class="keyword">return</span> <a href="../../../../pkg/errors.html" class="ident i3">errors</a>.<a href="../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"必须至少有一个地址"</span>)</code></span>
+<span class="codeline" id="line-231"><code>		}</code></span>
+<span class="codeline" id="line-232"><code>	<span class="keyword">case</span> <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-233"><code>		{</code></span>
+<span class="codeline" id="line-234"><code>			<label for="r56" class="ident">c</label>.<a href="#line-38" class="ident">addr</a> = <label for="r56" class="ident">c</label>.<a href="config.go.html#line-10" class="ident">Query_Addresses</a>[<span class="lit-number">0</span>]</code></span>
+<span class="codeline" id="line-235"><code>			<span class="keyword">if</span> <a href="../../../../pkg/strings.html" class="ident i6">strings</a>.<a href="../../../strings/strings.go.html#line-448" class="ident">HasPrefix</a>(<label for="r56" class="ident">c</label>.<a href="#line-38" class="ident">addr</a>, <span class="lit-string">"dns:///"</span>) {</code></span>
+<span class="codeline" id="line-236"><code>				<label for="r60" class="ident">err</label> := <label for="r56" class="ident">c</label>.<a href="#line-159" class="ident">initWithDNSLB</a>()</code></span>
+<span class="codeline" id="line-237"><code>				<span class="keyword">if</span> <label for="r60" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-238"><code>					<span class="keyword">return</span> <label for="r60" class="ident">err</label></code></span>
+<span class="codeline" id="line-239"><code>				}</code></span>
+<span class="codeline" id="line-240"><code>			} <span class="keyword">else</span> <span class="keyword">if</span> <a href="../../../../pkg/strings.html" class="ident i6">strings</a>.<a href="../../../strings/strings.go.html#line-448" class="ident">HasPrefix</a>(<label for="r56" class="ident">c</label>.<a href="#line-38" class="ident">addr</a>, <span class="lit-string">"xds:///"</span>) {</code></span>
+<span class="codeline" id="line-241"><code>				<label for="r61" class="ident">err</label> := <label for="r56" class="ident">c</label>.<a href="#line-166" class="ident">initWithXDSLB</a>()</code></span>
+<span class="codeline" id="line-242"><code>				<span class="keyword">if</span> <label for="r61" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-243"><code>					<span class="keyword">return</span> <label for="r61" class="ident">err</label></code></span>
+<span class="codeline" id="line-244"><code>				}</code></span>
+<span class="codeline" id="line-245"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-246"><code>				<label for="r62" class="ident">err</label> := <label for="r56" class="ident">c</label>.<a href="#line-153" class="ident">initWithoutBL</a>()</code></span>
+<span class="codeline" id="line-247"><code>				<span class="keyword">if</span> <label for="r62" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-248"><code>					<span class="keyword">return</span> <label for="r62" class="ident">err</label></code></span>
+<span class="codeline" id="line-249"><code>				}</code></span>
+<span class="codeline" id="line-250"><code>			}</code></span>
+<span class="codeline" id="line-251"><code>		}</code></span>
+<span class="codeline" id="line-252"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-253"><code>		{</code></span>
+<span class="codeline" id="line-254"><code>			<label for="r63" class="ident">err</label> := <label for="r56" class="ident">c</label>.<a href="#line-181" class="ident">initWithLocalBalance</a>()</code></span>
+<span class="codeline" id="line-255"><code>			<span class="keyword">if</span> <label for="r63" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-256"><code>				<span class="keyword">return</span> <label for="r63" class="ident">err</label></code></span>
+<span class="codeline" id="line-257"><code>			}</code></span>
+<span class="codeline" id="line-258"><code>		}</code></span>
+<span class="codeline" id="line-259"><code>	}</code></span>
+<span class="codeline" id="line-260"><code>	<label for="r56" class="ident">c</label>.<a href="#line-66" class="ident">initMsgSize</a>()</code></span>
+<span class="codeline" id="line-261"><code>	<label for="r56" class="ident">c</label>.<a href="#line-78" class="ident">initCompression</a>()</code></span>
+<span class="codeline" id="line-262"><code>	<label for="r56" class="ident">c</label>.<a href="#line-89" class="ident">initKeepalive</a>()</code></span>
+<span class="codeline" id="line-263"><code>	<label for="r56" class="ident">c</label>.<a href="#line-102" class="ident">initPerformanceOpts</a>()</code></span>
+<span class="codeline" id="line-264"><code>	<label for="r56" class="ident">c</label>.<a href="#line-207" class="ident">RegistInterceptor</a>()</code></span>
+<span class="codeline" id="line-265"><code>	<span class="keyword">if</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r56" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-266"><code>		<label for="r64" class="ident">serviceconfig</label>, <label for="r65" class="ident">err</label> := <a href="#line-29" class="ident">json</a>.<a href="../../json-iterator/go/config.go.html#line-35" class="ident">MarshalToString</a>(<label for="r56" class="ident">c</label>.<a href="#line-37" class="ident">serviceconfig</a>)</code></span>
+<span class="codeline" id="line-267"><code>		<span class="keyword">if</span> <label for="r65" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-268"><code>			<span class="keyword">return</span> <label for="r65" class="ident">err</label></code></span>
+<span class="codeline" id="line-269"><code>		}</code></span>
+<span class="codeline" id="line-270"><code>		<label for="r56" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r56" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-510" class="ident">WithDefaultServiceConfig</a>(<label for="r64" class="ident">serviceconfig</label>))</code></span>
+<span class="codeline" id="line-271"><code>	}</code></span>
+<span class="codeline" id="line-272"><code>	<span class="keyword">if</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r56" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-273"><code>		<label for="r56" class="ident">c</label>.<a href="#line-35" class="ident">opts</a> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r56" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>, <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i12">grpc</a>.<a href="../../../google.golang.org/grpc/dialoptions.go.html#line-153" class="ident">WithDefaultCallOptions</a>(<label for="r56" class="ident">c</label>.<a href="#line-36" class="ident">callopts</a>...))</code></span>
+<span class="codeline" id="line-274"><code>	}</code></span>
+<span class="codeline" id="line-275"><code>	<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-276"><code>}</code></span>
+<span class="codeline" id="line-277"><code></code></span>
+<span class="codeline" id="line-278"><code><span class="comment">//NewCtx 创建请求的上下文,这个上下问可以带元数据信息</span></code></span>
+<span class="codeline" id="line-279"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-280"><code><span class="comment">//@params opts ...optparams.Option[CtxOptions] 构造上下文的参数</span></code></span>
+<span class="codeline" id="line-281"><code><span class="comment">//@returns ctx context.Context 上下文对象</span></code></span>
+<span class="codeline" id="line-282"><code><span class="comment">//@returns cancel context.CancelFunc 上下文取消函数</span></code></span>
+<span class="codeline" id="line-283"><code><span class="keyword">func</span> (<label for="r66" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r67" class="ident">T</label>]) <label for="r68" class="ident">NewCtx</label>(<label for="r69" class="ident">opts</label> ...<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="ctxopts.go.html#line-11" class="ident">CtxOptions</a>]) (<label for="r70" class="ident">ctx</label> <a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r71" class="ident">cancel</label> <a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-224" class="ident">CancelFunc</a>) {</code></span>
+<span class="codeline" id="line-284"><code>	<label for="r72" class="ident">dopt</label> := <a href="ctxopts.go.html#line-11" class="ident">CtxOptions</a>{}</code></span>
+<span class="codeline" id="line-285"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-36" class="ident">GetOption</a>(&amp;<label for="r72" class="ident">dopt</label>, <label for="r69" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-286"><code>	<span class="keyword">if</span> <label for="r72" class="ident">dopt</label>.<a href="ctxopts.go.html#line-12" class="ident">UntilEnd</a> || <label for="r66" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a>.<a href="config.go.html#line-41" class="ident">Query_Timeout</a> &lt;= <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-287"><code>		<label for="r70" class="ident">ctx</label>, <label for="r71" class="ident">cancel</label> = <a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-232" class="ident">WithCancel</a>(<a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-208" class="ident">Background</a>())</code></span>
+<span class="codeline" id="line-288"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-289"><code>		<span class="keyword">var</span> <label for="r73" class="ident">timeout</label> <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-290"><code>		<span class="keyword">if</span> <label for="r72" class="ident">dopt</label>.<a href="ctxopts.go.html#line-13" class="ident">Timeout</a> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-291"><code>			<label for="r73" class="ident">timeout</label> = <label for="r72" class="ident">dopt</label>.<a href="ctxopts.go.html#line-13" class="ident">Timeout</a></code></span>
+<span class="codeline" id="line-292"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-293"><code>			<label for="r73" class="ident">timeout</label> = <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-589" class="ident">Duration</a>(<label for="r66" class="ident">c</label>.<a href="#line-34" class="ident">SDKConfig</a>.<a href="config.go.html#line-41" class="ident">Query_Timeout</a>) * <a href="../../../../pkg/time.html" class="ident i8">time</a>.<a href="../../../time/time.go.html#line-610" class="ident">Millisecond</a></code></span>
+<span class="codeline" id="line-294"><code>		}</code></span>
+<span class="codeline" id="line-295"><code>		<label for="r70" class="ident">ctx</label>, <label for="r71" class="ident">cancel</label> = <a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-506" class="ident">WithTimeout</a>(<a href="../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../context/context.go.html#line-208" class="ident">Background</a>(), <label for="r73" class="ident">timeout</label>)</code></span>
+<span class="codeline" id="line-296"><code>	}</code></span>
+<span class="codeline" id="line-297"><code>	<span class="keyword">if</span> <a href="../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r72" class="ident">dopt</label>.<a href="ctxopts.go.html#line-14" class="ident">MetaData</a>) &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-298"><code>		<label for="r70" class="ident">ctx</label> = <a href="../../../../pkg/google.golang.org/grpc/metadata.html" class="ident i18">metadata</a>.<a href="../../../google.golang.org/grpc/metadata/metadata.go.html#line-158" class="ident">NewOutgoingContext</a>(<label for="r70" class="ident">ctx</label>, <label for="r72" class="ident">dopt</label>.<a href="ctxopts.go.html#line-14" class="ident">MetaData</a>)</code></span>
+<span class="codeline" id="line-299"><code>	}</code></span>
+<span class="codeline" id="line-300"><code>	<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-301"><code>}</code></span>
+<span class="codeline" id="line-302"><code></code></span>
+<span class="codeline" id="line-303"><code><span class="comment">//GetClient 返回接口和回收函数</span></code></span>
+<span class="codeline" id="line-304"><code><span class="comment">//注意如果获取连接时报错会报panic</span></code></span>
+<span class="codeline" id="line-305"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-306"><code><span class="comment">//@params opts ...optparams.Option[AcquireOptions] acquire方法的参数,只有`Force()`可用,表示是否强制获取,如果队列中已经没有可用的客户端了则创建一个客户端对象</span></code></span>
+<span class="codeline" id="line-307"><code><span class="comment">//@returns T grpc客户端对象</span></code></span>
+<span class="codeline" id="line-308"><code><span class="comment">//@returns ReleaseFunc grpc客户端回收函数</span></code></span>
+<span class="codeline" id="line-309"><code><span class="keyword">func</span> (<label for="r74" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r75" class="ident">T</label>]) <label for="r76" class="ident">GetClient</label>(<label for="r77" class="ident">opts</label> ...<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="acquireopts.go.html#line-8" class="ident">AcquireOptions</a>]) (<label for="r75" class="ident">T</label>, <a href="grpcsdk.go.html#line-38" class="ident">ReleaseFunc</a>) {</code></span>
+<span class="codeline" id="line-310"><code>	<label for="r74" class="ident">c</label>.<a href="#line-41" class="ident">getClientGetterLock</a>.<a href="../../../sync/rwmutex.go.html#line-56" class="ident">RLock</a>()</code></span>
+<span class="codeline" id="line-311"><code>	<label for="r78" class="ident">clientgetter</label> := <label for="r74" class="ident">c</label>.<a href="#line-40" class="ident">clientgetter</a></code></span>
+<span class="codeline" id="line-312"><code>	<label for="r74" class="ident">c</label>.<a href="#line-41" class="ident">getClientGetterLock</a>.<a href="../../../sync/rwmutex.go.html#line-103" class="ident">RUnlock</a>()</code></span>
+<span class="codeline" id="line-313"><code>	<span class="keyword">var</span> <label for="r79" class="ident">err</label> <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-314"><code>	<span class="keyword">if</span> <label for="r78" class="ident">clientgetter</label> == <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-315"><code>		<label for="r74" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-36" class="ident">Debug</a>(<span class="lit-string">"new clientgetter"</span>)</code></span>
+<span class="codeline" id="line-316"><code>		<label for="r78" class="ident">clientgetter</label>, <label for="r79" class="ident">err</label> = <label for="r74" class="ident">c</label>.<a href="#line-373" class="ident">NewClientGetter</a>()</code></span>
+<span class="codeline" id="line-317"><code>		<span class="keyword">if</span> <label for="r79" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-318"><code>			<label for="r74" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-102" class="ident">Error</a>(<span class="lit-string">"NewClientGetter get err"</span>, <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"err"</span>: <label for="r79" class="ident">err</label>.Error()})</code></span>
+<span class="codeline" id="line-319"><code>			<a href="../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<label for="r79" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-320"><code>		}</code></span>
+<span class="codeline" id="line-321"><code>	}</code></span>
+<span class="codeline" id="line-322"><code>	<span class="keyword">if</span> <label for="r74" class="ident">c</label>.<a href="config.go.html#line-36" class="ident">Client_Pool</a> {</code></span>
+<span class="codeline" id="line-323"><code>		<label for="r74" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-36" class="ident">Debug</a>(<span class="lit-string">"clientgetter is pool"</span>)</code></span>
+<span class="codeline" id="line-324"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-325"><code>		<label for="r74" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-36" class="ident">Debug</a>(<span class="lit-string">"clientgetter is client"</span>)</code></span>
+<span class="codeline" id="line-326"><code>	}</code></span>
+<span class="codeline" id="line-327"><code>	<label for="r80" class="ident">client</label>, <label for="r79" class="ident">err</label> := <label for="r78" class="ident">clientgetter</label>.<a href="grpcsdk.go.html#line-29" class="ident">Acquire</a>(<label for="r77" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-328"><code>	<span class="keyword">if</span> <label for="r79" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-329"><code>		<label for="r74" class="ident">c</label>.<a href="#line-42" class="ident">Logger</a>.<a href="../loggerhelper/v2/log.go.html#line-102" class="ident">Error</a>(<span class="lit-string">"Acquire get err"</span>, <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/loggerhelper/v2.html" class="ident i9">log</a>.<a href="../loggerhelper/v2/loggerhelper.go.html#line-26" class="ident">Dict</a>{<span class="lit-string">"err"</span>: <label for="r79" class="ident">err</label>.Error()})</code></span>
+<span class="codeline" id="line-330"><code>		<a href="../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<label for="r79" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-331"><code>	}</code></span>
+<span class="codeline" id="line-332"><code>	<label for="r81" class="ident">res</label> := <label for="r80" class="ident">client</label>.<a href="grpcsdk.go.html#line-22" class="ident">AsGrpcClient</a>()</code></span>
+<span class="codeline" id="line-333"><code>	<span class="keyword">if</span> <label for="r74" class="ident">c</label>.<a href="config.go.html#line-36" class="ident">Client_Pool</a> {</code></span>
+<span class="codeline" id="line-334"><code>		<span class="keyword">return</span> <label for="r81" class="ident">res</label>, <span class="keyword">func</span>() { <label for="r78" class="ident">clientgetter</label>.<a href="grpcsdk.go.html#line-30" class="ident">Release</a>(<label for="r80" class="ident">client</label>) }</code></span>
+<span class="codeline" id="line-335"><code>	}</code></span>
+<span class="codeline" id="line-336"><code>	<span class="keyword">return</span> <label for="r81" class="ident">res</label>, <span class="keyword">func</span>() {}</code></span>
+<span class="codeline" id="line-337"><code>}</code></span>
+<span class="codeline" id="line-338"><code></code></span>
+<span class="codeline" id="line-339"><code><span class="comment">//newClientGetter 建立一个新的客户端获取器</span></code></span>
+<span class="codeline" id="line-340"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-341"><code><span class="comment">//@returns GrpcClientGetter[T] 客户端获取器</span></code></span>
+<span class="codeline" id="line-342"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-343"><code><span class="keyword">func</span> (<label for="r82" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r83" class="ident">T</label>]) <label for="r84" class="ident">newClientGetter</label>() (<a href="grpcsdk.go.html#line-28" class="ident">GrpcClientGetter</a>[<label for="r83" class="ident">T</label>], <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-344"><code>	<span class="keyword">if</span> <label for="r82" class="ident">c</label>.<a href="config.go.html#line-36" class="ident">Client_Pool</a> {</code></span>
+<span class="codeline" id="line-345"><code>		<label for="r85" class="ident">opts</label> := []<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i10">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="clientpoolnewopts.go.html#line-11" class="ident">NewClientPoolOptions</a>]{<a href="clientpoolnewopts.go.html#line-28" class="ident">HasClientConfig</a>(<a href="clientnewopts.go.html#line-21" class="ident">WithAddr</a>(<label for="r82" class="ident">c</label>.<a href="#line-38" class="ident">addr</a>), <a href="clientnewopts.go.html#line-30" class="ident">WithDialOpts</a>(<label for="r82" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>...))}</code></span>
+<span class="codeline" id="line-346"><code>		<span class="keyword">if</span> <label for="r82" class="ident">c</label>.<a href="config.go.html#line-39" class="ident">Client_Pool_Acquire_Wait_Time_MS</a> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-347"><code>			<label for="r85" class="ident">opts</label> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r85" class="ident">opts</label>, <a href="clientpoolnewopts.go.html#line-57" class="ident">WithAcquireWaitTimeMS</a>(<label for="r82" class="ident">c</label>.<a href="config.go.html#line-39" class="ident">Client_Pool_Acquire_Wait_Time_MS</a>))</code></span>
+<span class="codeline" id="line-348"><code>		}</code></span>
+<span class="codeline" id="line-349"><code>		<span class="keyword">if</span> <label for="r82" class="ident">c</label>.<a href="config.go.html#line-38" class="ident">Client_Pool_Limits</a> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-350"><code>			<label for="r85" class="ident">opts</label> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r85" class="ident">opts</label>, <a href="clientpoolnewopts.go.html#line-47" class="ident">WithLimits</a>(<label for="r82" class="ident">c</label>.<a href="config.go.html#line-38" class="ident">Client_Pool_Limits</a>))</code></span>
+<span class="codeline" id="line-351"><code>		}</code></span>
+<span class="codeline" id="line-352"><code>		<span class="keyword">if</span> <label for="r82" class="ident">c</label>.<a href="config.go.html#line-37" class="ident">Client_Pool_Reservations</a> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-353"><code>			<label for="r85" class="ident">opts</label> = <a href="../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r85" class="ident">opts</label>, <a href="clientpoolnewopts.go.html#line-37" class="ident">WithReservations</a>(<label for="r82" class="ident">c</label>.<a href="config.go.html#line-37" class="ident">Client_Pool_Reservations</a>))</code></span>
+<span class="codeline" id="line-354"><code>		}</code></span>
+<span class="codeline" id="line-355"><code>		<label for="r86" class="ident">pool</label>, <label for="r87" class="ident">err</label> := <a href="clientpool.go.html#line-178" class="ident">NewPool</a>(<label for="r82" class="ident">c</label>.<a href="#line-39" class="ident">factory</a>, <label for="r85" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-356"><code>		<span class="keyword">if</span> <label for="r87" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-357"><code>			<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r87" class="ident">err</label></code></span>
+<span class="codeline" id="line-358"><code>		}</code></span>
+<span class="codeline" id="line-359"><code>		<span class="keyword">return</span> <label for="r86" class="ident">pool</label>, <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-360"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-361"><code>		<label for="r88" class="ident">cli</label>, <label for="r89" class="ident">err</label> := <a href="client.go.html#line-52" class="ident">NewClient</a>(<label for="r82" class="ident">c</label>.<a href="#line-39" class="ident">factory</a>, <a href="clientnewopts.go.html#line-39" class="ident">WithClientConfig</a>(&amp;<a href="clientnewopts.go.html#line-9" class="ident">NewClientOptions</a>{<a href="clientnewopts.go.html#line-10" class="ident">Addr</a>: <label for="r82" class="ident">c</label>.<a href="#line-38" class="ident">addr</a>, <a href="clientnewopts.go.html#line-11" class="ident">DialOpts</a>: <label for="r82" class="ident">c</label>.<a href="#line-35" class="ident">opts</a>}))</code></span>
+<span class="codeline" id="line-362"><code>		<span class="keyword">if</span> <label for="r89" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-363"><code>			<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r89" class="ident">err</label></code></span>
+<span class="codeline" id="line-364"><code>		}</code></span>
+<span class="codeline" id="line-365"><code>		<span class="keyword">return</span> <label for="r88" class="ident">cli</label>, <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-366"><code>	}</code></span>
+<span class="codeline" id="line-367"><code>}</code></span>
+<span class="codeline" id="line-368"><code></code></span>
+<span class="codeline" id="line-369"><code><span class="comment">//NewClientGetter 建立一个新的客户端获取器,并绑定至sdk中</span></code></span>
+<span class="codeline" id="line-370"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-371"><code><span class="comment">//@returns GrpcClientGetter[T] 客户端获取器</span></code></span>
+<span class="codeline" id="line-372"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-373"><code><span class="keyword">func</span> (<label for="r90" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r91" class="ident">T</label>]) <label for="r92" class="ident">NewClientGetter</label>() (<a href="grpcsdk.go.html#line-28" class="ident">GrpcClientGetter</a>[<label for="r91" class="ident">T</label>], <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-374"><code>	<label for="r93" class="ident">clientgetter</label>, <label for="r94" class="ident">err</label> := <label for="r90" class="ident">c</label>.<a href="#line-343" class="ident">newClientGetter</a>()</code></span>
+<span class="codeline" id="line-375"><code>	<span class="keyword">if</span> <label for="r94" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-376"><code>		<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r94" class="ident">err</label></code></span>
+<span class="codeline" id="line-377"><code>	}</code></span>
+<span class="codeline" id="line-378"><code>	<label for="r90" class="ident">c</label>.<a href="#line-41" class="ident">getClientGetterLock</a>.<a href="../../../sync/rwmutex.go.html#line-133" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-379"><code>	<span class="keyword">defer</span> <label for="r90" class="ident">c</label>.<a href="#line-41" class="ident">getClientGetterLock</a>.<a href="../../../sync/rwmutex.go.html#line-190" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-380"><code>	<label for="r90" class="ident">c</label>.<a href="#line-40" class="ident">clientgetter</a> = <label for="r93" class="ident">clientgetter</label></code></span>
+<span class="codeline" id="line-381"><code>	<span class="keyword">return</span> <label for="r93" class="ident">clientgetter</label>, <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-382"><code>}</code></span>
+<span class="codeline" id="line-383"><code></code></span>
+<span class="codeline" id="line-384"><code><span class="comment">//NewClientGetter 建立一个新的客户端获取器,并绑定至sdk中</span></code></span>
+<span class="codeline" id="line-385"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-386"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-387"><code><span class="keyword">func</span> (<label for="r95" class="ident">c</label> *<a href="#line-33" class="ident">SDK</a>[<label for="r96" class="ident">T</label>]) <label for="r97" class="ident"><a href="../../../../imp/github.com/Golang-Tools^b0a0c/grpcsdk.SDK.html#name-.Close" class="ident">Close</a></label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-388"><code>	<span class="keyword">if</span> <label for="r95" class="ident">c</label>.<a href="#line-40" class="ident">clientgetter</a> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-389"><code>		<span class="keyword">return</span> <label for="r95" class="ident">c</label>.<a href="#line-40" class="ident">clientgetter</a>.<a href="grpcsdk.go.html#line-31" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-390"><code>	}</code></span>
+<span class="codeline" id="line-391"><code>	<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-392"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

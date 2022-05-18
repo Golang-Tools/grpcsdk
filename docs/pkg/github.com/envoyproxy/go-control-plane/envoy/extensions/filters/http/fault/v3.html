@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3</title>
+<link href="../../../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>faultv3</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../../../../index.html#pkg-github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3">github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3</a><i> (on <a href="https://pkg.go.dev/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html">22 packages</a>, and imported by <a href="../../../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html">fault.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html">fault.pb.validate.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 13, in which 12 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-FaultAbort" data-popularity="1060">	<input type='checkbox' class="fold" id="FaultAbort-fold-content"><label for="FaultAbort-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-30">FaultAbort</a> <i>(struct)</i></label><span id='FaultAbort-fold-content-docs' class="fold-docs">
+		[#next-free-field: 6]
+
+		<input type='checkbox' class="fold" id="FaultAbort-fold-fields"><label for="FaultAbort-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='FaultAbort-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort-fold-field-ErrorType"><label for="FaultAbort-fold-field-ErrorType"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-39">ErrorType</a> <i><a href="#name-isFaultAbort_ErrorType">isFaultAbort_ErrorType</a></i></label><span id='FaultAbort-fold-field-ErrorType-docs' class="fold-docs">
+				Types that are assignable to ErrorType:
+					*FaultAbort_HttpStatus
+					*FaultAbort_GrpcStatus
+					*FaultAbort_HeaderAbort_
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort-fold-field-Percentage"><label for="FaultAbort-fold-field-Percentage"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-42">Percentage</a> <i>*<a href="../../../../type/v3.html">v3</a>.<a href="../../../../type/v3.html#name-FractionalPercent">FractionalPercent</a></i></label><span id='FaultAbort-fold-field-Percentage-docs' class="fold-docs">
+				The percentage of requests/operations/connections that will be aborted with the error code
+				provided.
+</span></span>
+			<input type='checkbox' class="showhide" id="FaultAbort-showhide-fields"><i><label for="FaultAbort-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="FaultAbort-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-32">sizeCache</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-31">state</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-33">unknownFields</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort-fold-methods"><label for="FaultAbort-fold-methods">Methods (<i>total 13, in which 12 are exported</i>)</label><span id='FaultAbort-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort-fold-method-Descriptor"><label for="FaultAbort-fold-method-Descriptor">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-73">Descriptor</a>() ([]<a href="../../../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../../../builtin.html#name-int">int</a>)</label><span id='FaultAbort-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use FaultAbort.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-77">GetErrorType</a>() <a href="#name-isFaultAbort_ErrorType">isFaultAbort_ErrorType</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-91">GetGrpcStatus</a>() <a href="../../../../../../../../builtin.html#name-uint32">uint32</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-98">GetHeaderAbort</a>() *<a href="#name-FaultAbort_HeaderAbort">FaultAbort_HeaderAbort</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-84">GetHttpStatus</a>() <a href="../../../../../../../../builtin.html#name-uint32">uint32</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-105">GetPercentage</a>() *<a href="../../../../type/v3.html">v3</a>.<a href="../../../../type/v3.html#name-FractionalPercent">FractionalPercent</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-58">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-60">ProtoReflect</a>() <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-45">Reset</a>()</span></span><span>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-54">String</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort-fold-method-Validate"><label for="FaultAbort-fold-method-Validate">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-41">Validate</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on FaultAbort with the rules defined in the
+				proto definition for this message. If any rules are violated, the first
+				error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort-fold-method-ValidateAll"><label for="FaultAbort-fold-method-ValidateAll">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-49">ValidateAll</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on FaultAbort with the rules defined in
+				the proto definition for this message. If any rules are violated, the
+				result is a list of violation errors wrapped in FaultAbortMultiError, or
+				nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="FaultAbort-showhide-methods"><i><label for="FaultAbort-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FaultAbort-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*FaultAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-53">validate</a>(all <a href="../../../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort-fold-impls"><label for="FaultAbort-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='FaultAbort-fold-impls-items' class="fold-items"><span>
+			*FaultAbort : fmt.<a href="../../../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*FaultAbort : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*FaultAbort : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="FaultAbort-showhide-impls"><i><label for="FaultAbort-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="FaultAbort-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*FaultAbort : context.<a href="../../../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*FaultAbort : google.golang.org/protobuf/internal/impl.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*FaultAbort : runtime.<a href="../../../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort-fold-results"><label for="FaultAbort-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='FaultAbort-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-HTTPFault">HTTPFault</a>).<a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-258">GetAbort</a>() *<b>FaultAbort</b></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort-fold-params"><label for="FaultAbort-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='FaultAbort-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort-showhide-outputofs"><i><label for="FaultAbort-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="FaultAbort-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/httpfilter/fault.<a href="../../../../../../../../google.golang.org/grpc/xds/internal/httpfilter/fault.html#name-injectAbort">injectAbort</a>(ctx <a href="../../../../../../../../context.html">context</a>.<a href="../../../../../../../../context.html#name-Context">Context</a>, abortCfg *<b>FaultAbort</b>) <a href="../../../../../../../../builtin.html#name-error">error</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_GrpcStatus" data-popularity="100">	<input type='checkbox' class="fold" id="FaultAbort_GrpcStatus-fold-content"><label for="FaultAbort_GrpcStatus-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-121">FaultAbort_GrpcStatus</a> <i>(struct)</i></label><span id='FaultAbort_GrpcStatus-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="FaultAbort_GrpcStatus-fold-fields"><label for="FaultAbort_GrpcStatus-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='FaultAbort_GrpcStatus-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_GrpcStatus-fold-field-GrpcStatus"><label for="FaultAbort_GrpcStatus-fold-field-GrpcStatus"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-123">GrpcStatus</a> <i><a href="../../../../../../../../builtin.html#name-uint32">uint32</a></i></label><span id='FaultAbort_GrpcStatus-fold-field-GrpcStatus-docs' class="fold-docs">
+				gRPC status code to use to abort the gRPC request.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_GrpcStatus-fold-methods"><label for="FaultAbort_GrpcStatus-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='FaultAbort_GrpcStatus-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_GrpcStatus-showhide-methods"><i><label for="FaultAbort_GrpcStatus-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FaultAbort_GrpcStatus-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*FaultAbort_GrpcStatus) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-133">isFaultAbort_ErrorType</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_GrpcStatus-fold-impls"><label for="FaultAbort_GrpcStatus-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='FaultAbort_GrpcStatus-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_GrpcStatus-showhide-impls"><i><label for="FaultAbort_GrpcStatus-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="FaultAbort_GrpcStatus-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*FaultAbort_GrpcStatus : <a href="#name-isFaultAbort_ErrorType">isFaultAbort_ErrorType</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_HeaderAbort" data-popularity="775">	<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-content"><label for="FaultAbort_HeaderAbort-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-359">FaultAbort_HeaderAbort</a> <i>(struct)</i></label><span id='FaultAbort_HeaderAbort-fold-content-docs' class="fold-docs">
+		Fault aborts are controlled via an HTTP header (if applicable). See the
+		:ref:`HTTP fault filter &lt;config_http_filters_fault_injection_http_header&gt;` documentation for
+		more information.
+
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-fields"><label for="FaultAbort_HeaderAbort-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='FaultAbort_HeaderAbort-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbort-showhide-fields"><i><label for="FaultAbort_HeaderAbort-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="FaultAbort_HeaderAbort-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-361">sizeCache</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-360">state</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-362">unknownFields</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-methods"><label for="FaultAbort_HeaderAbort-fold-methods">Methods (<i>total 8, in which 7 are exported</i>)</label><span id='FaultAbort_HeaderAbort-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-method-Descriptor"><label for="FaultAbort_HeaderAbort-fold-method-Descriptor">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-393">Descriptor</a>() ([]<a href="../../../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../../../builtin.html#name-int">int</a>)</label><span id='FaultAbort_HeaderAbort-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use FaultAbort_HeaderAbort.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-378">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-380">ProtoReflect</a>() <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-365">Reset</a>()</span></span><span>
+			<span class="nodocs">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-374">String</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-method-Validate"><label for="FaultAbort_HeaderAbort-fold-method-Validate">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-497">Validate</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort_HeaderAbort-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on FaultAbort_HeaderAbort with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-method-ValidateAll"><label for="FaultAbort_HeaderAbort-fold-method-ValidateAll">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-505">ValidateAll</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort_HeaderAbort-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on FaultAbort_HeaderAbort with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				FaultAbort_HeaderAbortMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbort-showhide-methods"><i><label for="FaultAbort_HeaderAbort-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FaultAbort_HeaderAbort-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*FaultAbort_HeaderAbort) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-509">validate</a>(all <a href="../../../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-impls"><label for="FaultAbort_HeaderAbort-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='FaultAbort_HeaderAbort-fold-impls-items' class="fold-items"><span>
+			*FaultAbort_HeaderAbort : fmt.<a href="../../../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*FaultAbort_HeaderAbort : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*FaultAbort_HeaderAbort : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbort-showhide-impls"><i><label for="FaultAbort_HeaderAbort-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="FaultAbort_HeaderAbort-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*FaultAbort_HeaderAbort : context.<a href="../../../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*FaultAbort_HeaderAbort : google.golang.org/protobuf/internal/impl.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*FaultAbort_HeaderAbort : runtime.<a href="../../../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort-fold-results"><label for="FaultAbort_HeaderAbort-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='FaultAbort_HeaderAbort-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-FaultAbort">FaultAbort</a>).<a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-98">GetHeaderAbort</a>() *<b>FaultAbort_HeaderAbort</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_HeaderAbort_" data-popularity="100">	<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort_-fold-content"><label for="FaultAbort_HeaderAbort_-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-126">FaultAbort_HeaderAbort_</a> <i>(struct)</i></label><span id='FaultAbort_HeaderAbort_-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort_-fold-fields"><label for="FaultAbort_HeaderAbort_-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='FaultAbort_HeaderAbort_-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort_-fold-field-HeaderAbort"><label for="FaultAbort_HeaderAbort_-fold-field-HeaderAbort"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-128">HeaderAbort</a> <i>*<a href="#name-FaultAbort_HeaderAbort">FaultAbort_HeaderAbort</a></i></label><span id='FaultAbort_HeaderAbort_-fold-field-HeaderAbort-docs' class="fold-docs">
+				Fault aborts are controlled via an HTTP header (if applicable).
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort_-fold-methods"><label for="FaultAbort_HeaderAbort_-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='FaultAbort_HeaderAbort_-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbort_-showhide-methods"><i><label for="FaultAbort_HeaderAbort_-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FaultAbort_HeaderAbort_-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*FaultAbort_HeaderAbort_) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-135">isFaultAbort_ErrorType</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbort_-fold-impls"><label for="FaultAbort_HeaderAbort_-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='FaultAbort_HeaderAbort_-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbort_-showhide-impls"><i><label for="FaultAbort_HeaderAbort_-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="FaultAbort_HeaderAbort_-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*FaultAbort_HeaderAbort_ : <a href="#name-isFaultAbort_ErrorType">isFaultAbort_ErrorType</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_HeaderAbortMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortMultiError-fold-content"><label for="FaultAbort_HeaderAbortMultiError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-526">FaultAbort_HeaderAbortMultiError</a> <i>([])</i></label><span id='FaultAbort_HeaderAbortMultiError-fold-content-docs' class="fold-docs">
+		FaultAbort_HeaderAbortMultiError is an error wrapping multiple validation
+		errors returned by FaultAbort_HeaderAbort.ValidateAll() if the designated
+		constraints aren't met.
+
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortMultiError-fold-methods"><label for="FaultAbort_HeaderAbortMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='FaultAbort_HeaderAbortMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortMultiError-fold-method-AllErrors"><label for="FaultAbort_HeaderAbortMultiError-fold-method-AllErrors">( FaultAbort_HeaderAbortMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-538">AllErrors</a>() []<a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort_HeaderAbortMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortMultiError-fold-method-Error"><label for="FaultAbort_HeaderAbortMultiError-fold-method-Error">( FaultAbort_HeaderAbortMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-529">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbort_HeaderAbortMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortMultiError-fold-impls"><label for="FaultAbort_HeaderAbortMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='FaultAbort_HeaderAbortMultiError-fold-impls-items' class="fold-items"><span>
+			 FaultAbort_HeaderAbortMultiError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_HeaderAbortValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-content"><label for="FaultAbort_HeaderAbortValidationError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-542">FaultAbort_HeaderAbortValidationError</a> <i>(struct)</i></label><span id='FaultAbort_HeaderAbortValidationError-fold-content-docs' class="fold-docs">
+		FaultAbort_HeaderAbortValidationError is the validation error returned by
+		FaultAbort_HeaderAbort.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-fields"><label for="FaultAbort_HeaderAbortValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='FaultAbort_HeaderAbortValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HeaderAbortValidationError-showhide-fields"><i><label for="FaultAbort_HeaderAbortValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="FaultAbort_HeaderAbortValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-178">cause</a> <i><a href="../../../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-176">field</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-179">key</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-177">reason</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-methods"><label for="FaultAbort_HeaderAbortValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='FaultAbort_HeaderAbortValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-Cause"><label for="FaultAbort_HeaderAbortValidationError-fold-method-Cause">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-556">Cause</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-Error"><label for="FaultAbort_HeaderAbortValidationError-fold-method-Error">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-567">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-ErrorName"><label for="FaultAbort_HeaderAbortValidationError-fold-method-ErrorName">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-562">ErrorName</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-Field"><label for="FaultAbort_HeaderAbortValidationError-fold-method-Field">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-550">Field</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-Key"><label for="FaultAbort_HeaderAbortValidationError-fold-method-Key">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-559">Key</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-method-Reason"><label for="FaultAbort_HeaderAbortValidationError-fold-method-Reason">( FaultAbort_HeaderAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-553">Reason</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbort_HeaderAbortValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HeaderAbortValidationError-fold-impls"><label for="FaultAbort_HeaderAbortValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='FaultAbort_HeaderAbortValidationError-fold-impls-items' class="fold-items"><span>
+			 FaultAbort_HeaderAbortValidationError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbort_HttpStatus" data-popularity="100">	<input type='checkbox' class="fold" id="FaultAbort_HttpStatus-fold-content"><label for="FaultAbort_HttpStatus-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-116">FaultAbort_HttpStatus</a> <i>(struct)</i></label><span id='FaultAbort_HttpStatus-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="FaultAbort_HttpStatus-fold-fields"><label for="FaultAbort_HttpStatus-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='FaultAbort_HttpStatus-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbort_HttpStatus-fold-field-HttpStatus"><label for="FaultAbort_HttpStatus-fold-field-HttpStatus"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-118">HttpStatus</a> <i><a href="../../../../../../../../builtin.html#name-uint32">uint32</a></i></label><span id='FaultAbort_HttpStatus-fold-field-HttpStatus-docs' class="fold-docs">
+				HTTP status code to use to abort the HTTP request.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HttpStatus-fold-methods"><label for="FaultAbort_HttpStatus-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='FaultAbort_HttpStatus-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HttpStatus-showhide-methods"><i><label for="FaultAbort_HttpStatus-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FaultAbort_HttpStatus-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*FaultAbort_HttpStatus) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-131">isFaultAbort_ErrorType</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbort_HttpStatus-fold-impls"><label for="FaultAbort_HttpStatus-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='FaultAbort_HttpStatus-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbort_HttpStatus-showhide-impls"><i><label for="FaultAbort_HttpStatus-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="FaultAbort_HttpStatus-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*FaultAbort_HttpStatus : <a href="#name-isFaultAbort_ErrorType">isFaultAbort_ErrorType</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbortMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="FaultAbortMultiError-fold-content"><label for="FaultAbortMultiError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-159">FaultAbortMultiError</a> <i>([])</i></label><span id='FaultAbortMultiError-fold-content-docs' class="fold-docs">
+		FaultAbortMultiError is an error wrapping multiple validation errors
+		returned by FaultAbort.ValidateAll() if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="FaultAbortMultiError-fold-methods"><label for="FaultAbortMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='FaultAbortMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbortMultiError-fold-method-AllErrors"><label for="FaultAbortMultiError-fold-method-AllErrors">( FaultAbortMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-171">AllErrors</a>() []<a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbortMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortMultiError-fold-method-Error"><label for="FaultAbortMultiError-fold-method-Error">( FaultAbortMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-162">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbortMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbortMultiError-fold-impls"><label for="FaultAbortMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='FaultAbortMultiError-fold-impls-items' class="fold-items"><span>
+			 FaultAbortMultiError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-FaultAbortValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-content"><label for="FaultAbortValidationError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-175">FaultAbortValidationError</a> <i>(struct)</i></label><span id='FaultAbortValidationError-fold-content-docs' class="fold-docs">
+		FaultAbortValidationError is the validation error returned by
+		FaultAbort.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-fields"><label for="FaultAbortValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='FaultAbortValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FaultAbortValidationError-showhide-fields"><i><label for="FaultAbortValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="FaultAbortValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-178">cause</a> <i><a href="../../../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-176">field</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-179">key</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-177">reason</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-methods"><label for="FaultAbortValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='FaultAbortValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-Cause"><label for="FaultAbortValidationError-fold-method-Cause">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-189">Cause</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='FaultAbortValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-Error"><label for="FaultAbortValidationError-fold-method-Error">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-198">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbortValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-ErrorName"><label for="FaultAbortValidationError-fold-method-ErrorName">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-195">ErrorName</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbortValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-Field"><label for="FaultAbortValidationError-fold-method-Field">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-183">Field</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbortValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-Key"><label for="FaultAbortValidationError-fold-method-Key">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-192">Key</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></label><span id='FaultAbortValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-method-Reason"><label for="FaultAbortValidationError-fold-method-Reason">( FaultAbortValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-186">Reason</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='FaultAbortValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="FaultAbortValidationError-fold-impls"><label for="FaultAbortValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='FaultAbortValidationError-fold-impls-items' class="fold-items"><span>
+			 FaultAbortValidationError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-HTTPFault" data-popularity="1450">	<input type='checkbox' class="fold" id="HTTPFault-fold-content"><label for="HTTPFault-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-138">HTTPFault</a> <i>(struct)</i></label><span id='HTTPFault-fold-content-docs' class="fold-docs">
+		[#next-free-field: 16]
+
+		<input type='checkbox' class="fold" id="HTTPFault-fold-fields"><label for="HTTPFault-fold-fields">Fields (<i>total 18, in which 15 are exported</i>)</label><span id='HTTPFault-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-Abort"><label for="HTTPFault-fold-field-Abort"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-148">Abort</a> <i>*<a href="#name-FaultAbort">FaultAbort</a></i></label><span id='HTTPFault-fold-field-Abort-docs' class="fold-docs">
+				If specified, the filter will abort requests based on the values in
+				the object. At least *abort* or *delay* must be specified.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-AbortGrpcStatusRuntime"><label for="HTTPFault-fold-field-AbortGrpcStatusRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-211">AbortGrpcStatusRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-AbortGrpcStatusRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.abort.grpc_status
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-AbortHttpStatusRuntime"><label for="HTTPFault-fold-field-AbortHttpStatusRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-202">AbortHttpStatusRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-AbortHttpStatusRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.abort.http_status
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-AbortPercentRuntime"><label for="HTTPFault-fold-field-AbortPercentRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-196">AbortPercentRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-AbortPercentRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.abort.abort_percent
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-Delay"><label for="HTTPFault-fold-field-Delay"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-145">Delay</a> <i>*<a href="../../common/fault/v3.html">v31</a>.<a href="../../common/fault/v3.html#name-FaultDelay">FaultDelay</a></i></label><span id='HTTPFault-fold-field-Delay-docs' class="fold-docs">
+				If specified, the filter will inject delays based on the values in the
+				object.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-DelayDurationRuntime"><label for="HTTPFault-fold-field-DelayDurationRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-199">DelayDurationRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-DelayDurationRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.delay.fixed_duration_ms
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-DelayPercentRuntime"><label for="HTTPFault-fold-field-DelayPercentRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-193">DelayPercentRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-DelayPercentRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.delay.fixed_delay_percent
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-DisableDownstreamClusterStats"><label for="HTTPFault-fold-field-DisableDownstreamClusterStats"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-216">DisableDownstreamClusterStats</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></label><span id='HTTPFault-fold-field-DisableDownstreamClusterStats-docs' class="fold-docs">
+				To control whether stats storage is allocated dynamically for each downstream server.
+				If set to true, "x-envoy-downstream-service-cluster" field of header will be ignored by this filter.
+				If set to false, dynamic stats storage will be allocated for the downstream cluster name.
+				Default value is false.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-DownstreamNodes"><label for="HTTPFault-fold-field-DownstreamNodes"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-169">DownstreamNodes</a> <i>[]<a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-DownstreamNodes-docs' class="fold-docs">
+				Faults are injected for the specified list of downstream hosts. If this
+				setting is not set, faults are injected for all downstream nodes.
+				Downstream node name is taken from :ref:`the HTTP
+				x-envoy-downstream-service-node
+				&lt;config_http_conn_man_headers_downstream-service-node&gt;` header and compared
+				against downstream_nodes list.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-Headers"><label for="HTTPFault-fold-field-Headers"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-162">Headers</a> <i>[]*<a href="../../../../config/route/v3.html">v32</a>.<a href="../../../../config/route/v3.html#name-HeaderMatcher">HeaderMatcher</a></i></label><span id='HTTPFault-fold-field-Headers-docs' class="fold-docs">
+				Specifies a set of headers that the filter should match on. The fault
+				injection filter can be applied selectively to requests that match a set of
+				headers specified in the fault filter config. The chances of actual fault
+				injection further depend on the value of the :ref:`percentage
+				&lt;envoy_v3_api_field_extensions.filters.http.fault.v3.FaultAbort.percentage&gt;` field.
+				The filter will check the request's headers against all the specified
+				headers in the filter config. A match will happen if all the headers in the
+				config are present in the request with the same values (or based on
+				presence if the *value* field is not in the config).
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-MaxActiveFaults"><label for="HTTPFault-fold-field-MaxActiveFaults"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-182">MaxActiveFaults</a> <i>*<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html">wrappers</a>.<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html#name-UInt32Value">UInt32Value</a></i></label><span id='HTTPFault-fold-field-MaxActiveFaults-docs' class="fold-docs">
+				The maximum number of faults that can be active at a single time via the configured fault
+				filter. Note that because this setting can be overridden at the route level, it's possible
+				for the number of active faults to be greater than this value (if injected via a different
+				route). If not specified, defaults to unlimited. This setting can be overridden via
+				`runtime &lt;config_http_filters_fault_injection_runtime&gt;` and any faults that are not injected
+				due to overflow will be indicated via the `faults_overflow
+				&lt;config_http_filters_fault_injection_stats&gt;` stat.
+
+				.. attention::
+				  Like other :ref:`circuit breakers &lt;arch_overview_circuit_break&gt;` in Envoy, this is a fuzzy
+				  limit. It's possible for the number of active faults to rise slightly above the configured
+				  amount due to the implementation details.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-MaxActiveFaultsRuntime"><label for="HTTPFault-fold-field-MaxActiveFaultsRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-205">MaxActiveFaultsRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-MaxActiveFaultsRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.max_active_faults
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-ResponseRateLimit"><label for="HTTPFault-fold-field-ResponseRateLimit"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-190">ResponseRateLimit</a> <i>*<a href="../../common/fault/v3.html">v31</a>.<a href="../../common/fault/v3.html#name-FaultRateLimit">FaultRateLimit</a></i></label><span id='HTTPFault-fold-field-ResponseRateLimit-docs' class="fold-docs">
+				The response rate limit to be applied to the response body of the stream. When configured,
+				the percentage can be overridden by the :ref:`fault.http.rate_limit.response_percent
+				&lt;config_http_filters_fault_injection_runtime&gt;` runtime key.
+
+				.. attention::
+				 This is a per-stream limit versus a connection level limit. This means that concurrent streams
+				 will each get an independent limit.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-ResponseRateLimitPercentRuntime"><label for="HTTPFault-fold-field-ResponseRateLimitPercentRuntime"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-208">ResponseRateLimitPercentRuntime</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-ResponseRateLimitPercentRuntime-docs' class="fold-docs">
+				The runtime key to override the :ref:`default &lt;config_http_filters_fault_injection_runtime&gt;`
+				runtime. The default is: fault.http.rate_limit.response_percent
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-field-UpstreamCluster"><label for="HTTPFault-fold-field-UpstreamCluster"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-152">UpstreamCluster</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='HTTPFault-fold-field-UpstreamCluster-docs' class="fold-docs">
+				Specifies the name of the (destination) upstream cluster that the
+				filter should match on. Fault injection will be restricted to requests
+				bound to the specific upstream cluster.
+</span></span>
+			<input type='checkbox' class="showhide" id="HTTPFault-showhide-fields"><i><label for="HTTPFault-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="HTTPFault-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-140">sizeCache</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-139">state</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-141">unknownFields</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="HTTPFault-fold-methods"><label for="HTTPFault-fold-methods">Methods (<i>total 23, in which 22 are exported</i>)</label><span id='HTTPFault-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-method-Descriptor"><label for="HTTPFault-fold-method-Descriptor">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-247">Descriptor</a>() ([]<a href="../../../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../../../builtin.html#name-int">int</a>)</label><span id='HTTPFault-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use HTTPFault.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-258">GetAbort</a>() *<a href="#name-FaultAbort">FaultAbort</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-342">GetAbortGrpcStatusRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-321">GetAbortHttpStatusRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-307">GetAbortPercentRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-251">GetDelay</a>() *<a href="../../common/fault/v3.html">v31</a>.<a href="../../common/fault/v3.html#name-FaultDelay">FaultDelay</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-314">GetDelayDurationRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-300">GetDelayPercentRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-349">GetDisableDownstreamClusterStats</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-279">GetDownstreamNodes</a>() []<a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-272">GetHeaders</a>() []*<a href="../../../../config/route/v3.html">v32</a>.<a href="../../../../config/route/v3.html#name-HeaderMatcher">HeaderMatcher</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-286">GetMaxActiveFaults</a>() *<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html">wrappers</a>.<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html#name-UInt32Value">UInt32Value</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-328">GetMaxActiveFaultsRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-293">GetResponseRateLimit</a>() *<a href="../../common/fault/v3.html">v31</a>.<a href="../../common/fault/v3.html#name-FaultRateLimit">FaultRateLimit</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-335">GetResponseRateLimitPercentRuntime</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-265">GetUpstreamCluster</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-232">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-234">ProtoReflect</a>() <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-219">Reset</a>()</span></span><span>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-228">String</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-method-Validate"><label for="HTTPFault-fold-method-Validate">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-230">Validate</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='HTTPFault-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on HTTPFault with the rules defined in the
+				proto definition for this message. If any rules are violated, the first
+				error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFault-fold-method-ValidateAll"><label for="HTTPFault-fold-method-ValidateAll">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-238">ValidateAll</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='HTTPFault-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on HTTPFault with the rules defined in
+				the proto definition for this message. If any rules are violated, the
+				result is a list of violation errors wrapped in HTTPFaultMultiError, or nil
+				if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="HTTPFault-showhide-methods"><i><label for="HTTPFault-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="HTTPFault-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*HTTPFault) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-242">validate</a>(all <a href="../../../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="HTTPFault-fold-impls"><label for="HTTPFault-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='HTTPFault-fold-impls-items' class="fold-items"><span>
+			*HTTPFault : fmt.<a href="../../../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*HTTPFault : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*HTTPFault : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="HTTPFault-showhide-impls"><i><label for="HTTPFault-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="HTTPFault-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*HTTPFault : context.<a href="../../../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*HTTPFault : google.golang.org/protobuf/internal/impl.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*HTTPFault : runtime.<a href="../../../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-HTTPFaultMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="HTTPFaultMultiError-fold-content"><label for="HTTPFaultMultiError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-426">HTTPFaultMultiError</a> <i>([])</i></label><span id='HTTPFaultMultiError-fold-content-docs' class="fold-docs">
+		HTTPFaultMultiError is an error wrapping multiple validation errors returned
+		by HTTPFault.ValidateAll() if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="HTTPFaultMultiError-fold-methods"><label for="HTTPFaultMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='HTTPFaultMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HTTPFaultMultiError-fold-method-AllErrors"><label for="HTTPFaultMultiError-fold-method-AllErrors">( HTTPFaultMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-438">AllErrors</a>() []<a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='HTTPFaultMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultMultiError-fold-method-Error"><label for="HTTPFaultMultiError-fold-method-Error">( HTTPFaultMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-429">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='HTTPFaultMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="HTTPFaultMultiError-fold-impls"><label for="HTTPFaultMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='HTTPFaultMultiError-fold-impls-items' class="fold-items"><span>
+			 HTTPFaultMultiError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-HTTPFaultValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-content"><label for="HTTPFaultValidationError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-442">HTTPFaultValidationError</a> <i>(struct)</i></label><span id='HTTPFaultValidationError-fold-content-docs' class="fold-docs">
+		HTTPFaultValidationError is the validation error returned by
+		HTTPFault.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-fields"><label for="HTTPFaultValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='HTTPFaultValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="HTTPFaultValidationError-showhide-fields"><i><label for="HTTPFaultValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="HTTPFaultValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-178">cause</a> <i><a href="../../../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-176">field</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-179">key</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-177">reason</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-methods"><label for="HTTPFaultValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='HTTPFaultValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-Cause"><label for="HTTPFaultValidationError-fold-method-Cause">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-456">Cause</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='HTTPFaultValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-Error"><label for="HTTPFaultValidationError-fold-method-Error">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-465">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='HTTPFaultValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-ErrorName"><label for="HTTPFaultValidationError-fold-method-ErrorName">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-462">ErrorName</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='HTTPFaultValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-Field"><label for="HTTPFaultValidationError-fold-method-Field">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-450">Field</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='HTTPFaultValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-Key"><label for="HTTPFaultValidationError-fold-method-Key">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-459">Key</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></label><span id='HTTPFaultValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-method-Reason"><label for="HTTPFaultValidationError-fold-method-Reason">( HTTPFaultValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.validate.go.html#line-453">Reason</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='HTTPFaultValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="HTTPFaultValidationError-fold-impls"><label for="HTTPFaultValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='HTTPFaultValidationError-fold-impls-items' class="fold-items"><span>
+			 HTTPFaultValidationError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor type-res hidden" id="name-isFaultAbort_ErrorType" data-popularity="575">	<input type='checkbox' class="fold" id="isFaultAbort_ErrorType-fold-content"><label for="isFaultAbort_ErrorType-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-112">isFaultAbort_ErrorType</a> <b><i>(interface)</i></b></label><span id='isFaultAbort_ErrorType-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="isFaultAbort_ErrorType-fold-methods"><label for="isFaultAbort_ErrorType-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='isFaultAbort_ErrorType-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="isFaultAbort_ErrorType-showhide-methods"><i><label for="isFaultAbort_ErrorType-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="isFaultAbort_ErrorType-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( isFaultAbort_ErrorType) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-113">isFaultAbort_ErrorType</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="isFaultAbort_ErrorType-fold-impledby"><label for="isFaultAbort_ErrorType-fold-impledby">Implemented By (<i>at least 3, all are exported</i>)</label><span id='isFaultAbort_ErrorType-fold-impledby-items' class="fold-items"><span>
+			*<a href="#name-FaultAbort_GrpcStatus">FaultAbort_GrpcStatus</a></span><span>
+			*<a href="#name-FaultAbort_HeaderAbort_">FaultAbort_HeaderAbort_</a></span><span>
+			*<a href="#name-FaultAbort_HttpStatus">FaultAbort_HttpStatus</a></span></span>
+		<input type='checkbox' class="fold" id="isFaultAbort_ErrorType-fold-results"><label for="isFaultAbort_ErrorType-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='isFaultAbort_ErrorType-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-FaultAbort">FaultAbort</a>).<a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-77">GetErrorType</a>() <b>isFaultAbort_ErrorType</b></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-565">file_envoy_extensions_filters_http_fault_v3_fault_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-531">file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescGZIP</a>() []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-564">init</a>()</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 7, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-File_envoy_extensions_filters_http_fault_v3_fault_proto">	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-397">File_envoy_extensions_filters_http_fault_v3_fault_proto</a> <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 6 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 6 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-549">file_envoy_extensions_filters_http_fault_v3_fault_proto_depIdxs</a> []<a href="../../../../../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-539">file_envoy_extensions_filters_http_fault_v3_fault_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-538">file_envoy_extensions_filters_http_fault_v3_fault_proto_msgTypes</a> []<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html">impl</a>.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-399">file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDesc</a> []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-528">file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescData</a> []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3/fault.pb.go.html#line-527">file_envoy_extensions_filters_http_fault_v3_fault_proto_rawDescOnce</a> <a href="../../../../../../../../sync.html">sync</a>.<a href="../../../../../../../../sync.html#name-Once">Once</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

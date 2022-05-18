@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: balancerstateaggregator.go in package google.golang.org/grpc/xds/internal/balancer/clustermanager</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	balancerstateaggregator.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html">google.golang.org/grpc/xds/internal/balancer/clustermanager</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">package</span> clustermanager</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-22"><code>	<label for="i0"><span class="lit-string i0">"fmt"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"sync"</span></label></code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/balancer"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/balancer/base"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/connectivity"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/internal/grpclog"</span></label></code></span>
+<span class="codeline" id="line-29"><code>)</code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-subBalancerState" class="ident">subBalancerState</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-32"><code>	state <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a></code></span>
+<span class="codeline" id="line-33"><code>	<span class="comment">// stateToAggregate is the connectivity state used only for state</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">	// aggregation. It could be different from state.ConnectivityState. For</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">	// example when a sub-balancer transitions from TransientFailure to</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">	// connecting, state.ConnectivityState is Connecting, but stateToAggregate</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">	// is still TransientFailure.</span></code></span>
+<span class="codeline" id="line-38"><code>	stateToAggregate <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-31" class="ident">State</a></code></span>
+<span class="codeline" id="line-39"><code>}</code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code><span class="keyword">func</span> (<label for="r0" class="ident">s</label> *<a href="#line-31" class="ident">subBalancerState</a>) <label for="r1" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.subBalancerState^25ad8.html#name-.String" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-42"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i0">fmt</a>.<a href="../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"picker:%p,state:%v,stateToAggregate:%v"</span>, <label for="r0" class="ident">s</label>.<a href="#line-32" class="ident">state</a>.<a href="../../../../balancer/balancer.go.html#line-135" class="ident">Picker</a>, <label for="r0" class="ident">s</label>.<a href="#line-32" class="ident">state</a>.<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a>, <label for="r0" class="ident">s</label>.<a href="#line-38" class="ident">stateToAggregate</a>)</code></span>
+<span class="codeline" id="line-43"><code>}</code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-balancerStateAggregator" class="ident">balancerStateAggregator</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-46"><code>	cc     <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-144" class="ident">ClientConn</a></code></span>
+<span class="codeline" id="line-47"><code>	logger *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">grpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a></code></span>
+<span class="codeline" id="line-48"><code></code></span>
+<span class="codeline" id="line-49"><code>	mu <a href="../../../../../../../pkg/sync.html" class="ident i1">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-50"><code>	<span class="comment">// If started is false, no updates should be sent to the parent cc. A closed</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">	// sub-balancer could still send pickers to this aggregator. This makes sure</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">	// that no updates will be forwarded to parent when the whole balancer group</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">	// and states aggregator is closed.</span></code></span>
+<span class="codeline" id="line-54"><code>	started <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-55"><code>	<span class="comment">// All balancer IDs exist as keys in this map, even if balancer group is not</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">	// started.</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-58"><code><span class="comment">	// If an ID is not in map, it's either removed or never added.</span></code></span>
+<span class="codeline" id="line-59"><code>	idToPickerState <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-31" class="ident">subBalancerState</a></code></span>
+<span class="codeline" id="line-60"><code>}</code></span>
+<span class="codeline" id="line-61"><code></code></span>
+<span class="codeline" id="line-62"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-newBalancerStateAggregator" class="ident">newBalancerStateAggregator</a></label>(<label for="r3" class="ident">cc</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-144" class="ident">ClientConn</a>, <label for="r4" class="ident">logger</label> *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">grpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a>) *<a href="#line-45" class="ident">balancerStateAggregator</a> {</code></span>
+<span class="codeline" id="line-63"><code>	<span class="keyword">return</span> &amp;<a href="#line-45" class="ident">balancerStateAggregator</a>{</code></span>
+<span class="codeline" id="line-64"><code>		<a href="#line-46" class="ident">cc</a>:              <label for="r3" class="ident">cc</label>,</code></span>
+<span class="codeline" id="line-65"><code>		<a href="#line-47" class="ident">logger</a>:          <label for="r4" class="ident">logger</label>,</code></span>
+<span class="codeline" id="line-66"><code>		<a href="#line-59" class="ident">idToPickerState</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-31" class="ident">subBalancerState</a>),</code></span>
+<span class="codeline" id="line-67"><code>	}</code></span>
+<span class="codeline" id="line-68"><code>}</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// Start starts the aggregator. It can be called after Close to restart the</span></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">// aggretator.</span></code></span>
+<span class="codeline" id="line-72"><code><span class="keyword">func</span> (<label for="r5" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r6" class="ident">start</label>() {</code></span>
+<span class="codeline" id="line-73"><code>	<label for="r5" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-74"><code>	<span class="keyword">defer</span> <label for="r5" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-75"><code>	<label for="r5" class="ident">bsa</label>.<a href="#line-54" class="ident">started</a> = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-76"><code>}</code></span>
+<span class="codeline" id="line-77"><code></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">// Close closes the aggregator. When the aggregator is closed, it won't call</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">// parent ClientConn to update balancer state.</span></code></span>
+<span class="codeline" id="line-80"><code><span class="keyword">func</span> (<label for="r7" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r8" class="ident">close</label>() {</code></span>
+<span class="codeline" id="line-81"><code>	<label for="r7" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">defer</span> <label for="r7" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-83"><code>	<label for="r7" class="ident">bsa</label>.<a href="#line-54" class="ident">started</a> = <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-84"><code>	<label for="r7" class="ident">bsa</label>.<a href="#line-153" class="ident">clearStates</a>()</code></span>
+<span class="codeline" id="line-85"><code>}</code></span>
+<span class="codeline" id="line-86"><code></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">// add adds a sub-balancer state with weight. It adds a place holder, and waits</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">// for the real sub-balancer to update state.</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">// This is called when there's a new child.</span></code></span>
+<span class="codeline" id="line-91"><code><span class="keyword">func</span> (<label for="r9" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r10" class="ident">add</label>(<label for="r11" class="ident">id</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-92"><code>	<label for="r9" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">defer</span> <label for="r9" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-94"><code>	<label for="r9" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>[<label for="r11" class="ident">id</label>] = &amp;<a href="#line-31" class="ident">subBalancerState</a>{</code></span>
+<span class="codeline" id="line-95"><code>		<span class="comment">// Start everything in CONNECTING, so if one of the sub-balancers</span></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">		// reports TransientFailure, the RPCs will still wait for the other</span></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">		// sub-balancers.</span></code></span>
+<span class="codeline" id="line-98"><code>		<a href="#line-32" class="ident">state</a>: <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a>{</code></span>
+<span class="codeline" id="line-99"><code>			<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a>: <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a>,</code></span>
+<span class="codeline" id="line-100"><code>			<a href="../../../../balancer/balancer.go.html#line-135" class="ident">Picker</a>:            <a href="../../../../../../../pkg/google.golang.org/grpc/balancer/base.html" class="ident i3">base</a>.<a href="../../../../balancer/base/balancer.go.html#line-235" class="ident">NewErrPicker</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-254" class="ident">ErrNoSubConnAvailable</a>),</code></span>
+<span class="codeline" id="line-101"><code>		},</code></span>
+<span class="codeline" id="line-102"><code>		<a href="#line-38" class="ident">stateToAggregate</a>: <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a>,</code></span>
+<span class="codeline" id="line-103"><code>	}</code></span>
+<span class="codeline" id="line-104"><code>}</code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">// remove removes the sub-balancer state. Future updates from this sub-balancer,</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">// if any, will be ignored.</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">// This is called when a child is removed.</span></code></span>
+<span class="codeline" id="line-110"><code><span class="keyword">func</span> (<label for="r12" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r13" class="ident">remove</label>(<label for="r14" class="ident">id</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-111"><code>	<label for="r12" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-112"><code>	<span class="keyword">defer</span> <label for="r12" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-113"><code>	<span class="keyword">if</span> <label for="r15" class="ident">_</label>, <label for="r16" class="ident">ok</label> := <label for="r12" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>[<label for="r14" class="ident">id</label>]; !<label for="r16" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-114"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-115"><code>	}</code></span>
+<span class="codeline" id="line-116"><code>	<span class="comment">// Remove id and picker from picker map. This also results in future updates</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">	// for this ID to be ignored.</span></code></span>
+<span class="codeline" id="line-118"><code>	<a href="../../../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<label for="r12" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>, <label for="r14" class="ident">id</label>)</code></span>
+<span class="codeline" id="line-119"><code>}</code></span>
+<span class="codeline" id="line-120"><code></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">// UpdateState is called to report a balancer state change from sub-balancer.</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">// It's usually called by the balancer group.</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">// It calls parent ClientConn's UpdateState with the new aggregated state.</span></code></span>
+<span class="codeline" id="line-125"><code><span class="keyword">func</span> (<label for="r17" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r18" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.balancerStateAggregator^fa4be.html#name-.UpdateState" class="ident">UpdateState</a></label>(<label for="r19" class="ident">id</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r20" class="ident">state</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a>) {</code></span>
+<span class="codeline" id="line-126"><code>	<label for="r17" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">defer</span> <label for="r17" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-128"><code>	<label for="r21" class="ident">pickerSt</label>, <label for="r22" class="ident">ok</label> := <label for="r17" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>[<label for="r19" class="ident">id</label>]</code></span>
+<span class="codeline" id="line-129"><code>	<span class="keyword">if</span> !<label for="r22" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-130"><code>		<span class="comment">// All state starts with an entry in pickStateMap. If ID is not in map,</span></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">		// it's either removed, or never existed.</span></code></span>
+<span class="codeline" id="line-132"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-133"><code>	}</code></span>
+<span class="codeline" id="line-134"><code>	<span class="keyword">if</span> !(<label for="r21" class="ident">pickerSt</label>.<a href="#line-32" class="ident">state</a>.<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a> == <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-59" class="ident">TransientFailure</a> &amp;&amp; <label for="r20" class="ident">state</label>.<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a> == <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a>) {</code></span>
+<span class="codeline" id="line-135"><code>		<span class="comment">// If old state is TransientFailure, and new state is Connecting, don't</span></code></span>
+<span class="codeline" id="line-136"><code><span class="comment">		// update the state, to prevent the aggregated state from being always</span></code></span>
+<span class="codeline" id="line-137"><code><span class="comment">		// CONNECTING. Otherwise, stateToAggregate is the same as</span></code></span>
+<span class="codeline" id="line-138"><code><span class="comment">		// state.ConnectivityState.</span></code></span>
+<span class="codeline" id="line-139"><code>		<label for="r21" class="ident">pickerSt</label>.<a href="#line-38" class="ident">stateToAggregate</a> = <label for="r20" class="ident">state</label>.<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a></code></span>
+<span class="codeline" id="line-140"><code>	}</code></span>
+<span class="codeline" id="line-141"><code>	<label for="r21" class="ident">pickerSt</label>.<a href="#line-32" class="ident">state</a> = <label for="r20" class="ident">state</label></code></span>
+<span class="codeline" id="line-142"><code></code></span>
+<span class="codeline" id="line-143"><code>	<span class="keyword">if</span> !<label for="r17" class="ident">bsa</label>.<a href="#line-54" class="ident">started</a> {</code></span>
+<span class="codeline" id="line-144"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-145"><code>	}</code></span>
+<span class="codeline" id="line-146"><code>	<label for="r17" class="ident">bsa</label>.<a href="#line-46" class="ident">cc</a>.<a href="../../../../balancer/balancer.go.html#line-165" class="ident">UpdateState</a>(<label for="r17" class="ident">bsa</label>.<a href="#line-177" class="ident">build</a>())</code></span>
+<span class="codeline" id="line-147"><code>}</code></span>
+<span class="codeline" id="line-148"><code></code></span>
+<span class="codeline" id="line-149"><code><span class="comment">// clearState Reset everything to init state (Connecting) but keep the entry in</span></code></span>
+<span class="codeline" id="line-150"><code><span class="comment">// map (to keep the weight).</span></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">// Caller must hold bsa.mu.</span></code></span>
+<span class="codeline" id="line-153"><code><span class="keyword">func</span> (<label for="r23" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r24" class="ident">clearStates</label>() {</code></span>
+<span class="codeline" id="line-154"><code>	<span class="keyword">for</span> <label for="r25" class="ident">_</label>, <label for="r26" class="ident">pState</label> := <span class="keyword">range</span> <label for="r23" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a> {</code></span>
+<span class="codeline" id="line-155"><code>		<label for="r26" class="ident">pState</label>.<a href="#line-32" class="ident">state</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a>{</code></span>
+<span class="codeline" id="line-156"><code>			<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a>: <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a>,</code></span>
+<span class="codeline" id="line-157"><code>			<a href="../../../../balancer/balancer.go.html#line-135" class="ident">Picker</a>:            <a href="../../../../../../../pkg/google.golang.org/grpc/balancer/base.html" class="ident i3">base</a>.<a href="../../../../balancer/base/balancer.go.html#line-235" class="ident">NewErrPicker</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-254" class="ident">ErrNoSubConnAvailable</a>),</code></span>
+<span class="codeline" id="line-158"><code>		}</code></span>
+<span class="codeline" id="line-159"><code>		<label for="r26" class="ident">pState</label>.<a href="#line-38" class="ident">stateToAggregate</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a></code></span>
+<span class="codeline" id="line-160"><code>	}</code></span>
+<span class="codeline" id="line-161"><code>}</code></span>
+<span class="codeline" id="line-162"><code></code></span>
+<span class="codeline" id="line-163"><code><span class="comment">// buildAndUpdate combines the sub-state from each sub-balancer into one state,</span></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">// and update it to parent ClientConn.</span></code></span>
+<span class="codeline" id="line-165"><code><span class="keyword">func</span> (<label for="r27" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r28" class="ident">buildAndUpdate</label>() {</code></span>
+<span class="codeline" id="line-166"><code>	<label for="r27" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-167"><code>	<span class="keyword">defer</span> <label for="r27" class="ident">bsa</label>.<a href="#line-49" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-168"><code>	<span class="keyword">if</span> !<label for="r27" class="ident">bsa</label>.<a href="#line-54" class="ident">started</a> {</code></span>
+<span class="codeline" id="line-169"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-170"><code>	}</code></span>
+<span class="codeline" id="line-171"><code>	<label for="r27" class="ident">bsa</label>.<a href="#line-46" class="ident">cc</a>.<a href="../../../../balancer/balancer.go.html#line-165" class="ident">UpdateState</a>(<label for="r27" class="ident">bsa</label>.<a href="#line-177" class="ident">build</a>())</code></span>
+<span class="codeline" id="line-172"><code>}</code></span>
+<span class="codeline" id="line-173"><code></code></span>
+<span class="codeline" id="line-174"><code><span class="comment">// build combines sub-states into one. The picker will do a child pick.</span></code></span>
+<span class="codeline" id="line-175"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-176"><code><span class="comment">// Caller must hold bsa.mu.</span></code></span>
+<span class="codeline" id="line-177"><code><span class="keyword">func</span> (<label for="r29" class="ident">bsa</label> *<a href="#line-45" class="ident">balancerStateAggregator</a>) <label for="r30" class="ident">build</label>() <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a> {</code></span>
+<span class="codeline" id="line-178"><code>	<span class="comment">// TODO: the majority of this function (and UpdateState) is exactly the same</span></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">	// as weighted_target's state aggregator. Try to make a general utility</span></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">	// function/struct to handle the logic.</span></code></span>
+<span class="codeline" id="line-181"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-182"><code><span class="comment">	// One option: make a SubBalancerState that handles Update(State), including</span></code></span>
+<span class="codeline" id="line-183"><code><span class="comment">	// handling the special connecting after ready, as in UpdateState(). Then a</span></code></span>
+<span class="codeline" id="line-184"><code><span class="comment">	// function to calculate the aggregated connectivity state as in this</span></code></span>
+<span class="codeline" id="line-185"><code><span class="comment">	// function.</span></code></span>
+<span class="codeline" id="line-186"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-187"><code><span class="comment">	// TODO: use balancer.ConnectivityStateEvaluator to calculate the aggregated</span></code></span>
+<span class="codeline" id="line-188"><code><span class="comment">	// state.</span></code></span>
+<span class="codeline" id="line-189"><code>	<span class="keyword">var</span> <label for="r31" class="ident">readyN</label>, <label for="r32" class="ident">connectingN</label>, <label for="r33" class="ident">idleN</label> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-190"><code>	<span class="keyword">for</span> <label for="r34" class="ident">_</label>, <label for="r35" class="ident">ps</label> := <span class="keyword">range</span> <label for="r29" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a> {</code></span>
+<span class="codeline" id="line-191"><code>		<span class="keyword">switch</span> <label for="r35" class="ident">ps</label>.<a href="#line-38" class="ident">stateToAggregate</a> {</code></span>
+<span class="codeline" id="line-192"><code>		<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-57" class="ident">Ready</a>:</code></span>
+<span class="codeline" id="line-193"><code>			<label for="r31" class="ident">readyN</label>++</code></span>
+<span class="codeline" id="line-194"><code>		<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a>:</code></span>
+<span class="codeline" id="line-195"><code>			<label for="r32" class="ident">connectingN</label>++</code></span>
+<span class="codeline" id="line-196"><code>		<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-53" class="ident">Idle</a>:</code></span>
+<span class="codeline" id="line-197"><code>			<label for="r33" class="ident">idleN</label>++</code></span>
+<span class="codeline" id="line-198"><code>		}</code></span>
+<span class="codeline" id="line-199"><code>	}</code></span>
+<span class="codeline" id="line-200"><code>	<span class="keyword">var</span> <label for="r36" class="ident">aggregatedState</label> <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-31" class="ident">State</a></code></span>
+<span class="codeline" id="line-201"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-202"><code>	<span class="keyword">case</span> <label for="r31" class="ident">readyN</label> &gt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-203"><code>		<label for="r36" class="ident">aggregatedState</label> = <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-57" class="ident">Ready</a></code></span>
+<span class="codeline" id="line-204"><code>	<span class="keyword">case</span> <label for="r32" class="ident">connectingN</label> &gt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-205"><code>		<label for="r36" class="ident">aggregatedState</label> = <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-55" class="ident">Connecting</a></code></span>
+<span class="codeline" id="line-206"><code>	<span class="keyword">case</span> <label for="r33" class="ident">idleN</label> &gt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-207"><code>		<label for="r36" class="ident">aggregatedState</label> = <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-53" class="ident">Idle</a></code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-209"><code>		<label for="r36" class="ident">aggregatedState</label> = <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i4">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-59" class="ident">TransientFailure</a></code></span>
+<span class="codeline" id="line-210"><code>	}</code></span>
+<span class="codeline" id="line-211"><code></code></span>
+<span class="codeline" id="line-212"><code>	<span class="comment">// The picker's return error might not be consistent with the</span></code></span>
+<span class="codeline" id="line-213"><code><span class="comment">	// aggregatedState. Because for this LB policy, we want to always build</span></code></span>
+<span class="codeline" id="line-214"><code><span class="comment">	// picker with all sub-pickers (not only ready sub-pickers), so even if the</span></code></span>
+<span class="codeline" id="line-215"><code><span class="comment">	// overall state is Ready, pick for certain RPCs can behave like Connecting</span></code></span>
+<span class="codeline" id="line-216"><code><span class="comment">	// or TransientFailure.</span></code></span>
+<span class="codeline" id="line-217"><code>	<label for="r29" class="ident">bsa</label>.<a href="#line-47" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Child pickers: %+v"</span>, <label for="r29" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>)</code></span>
+<span class="codeline" id="line-218"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a>{</code></span>
+<span class="codeline" id="line-219"><code>		<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a>: <label for="r36" class="ident">aggregatedState</label>,</code></span>
+<span class="codeline" id="line-220"><code>		<a href="../../../../balancer/balancer.go.html#line-135" class="ident">Picker</a>:            <a href="picker.go.html#line-35" class="ident">newPickerGroup</a>(<label for="r29" class="ident">bsa</label>.<a href="#line-59" class="ident">idToPickerState</a>),</code></span>
+<span class="codeline" id="line-221"><code>	}</code></span>
+<span class="codeline" id="line-222"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

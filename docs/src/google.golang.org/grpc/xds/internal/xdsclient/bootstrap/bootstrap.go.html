@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: bootstrap.go in package google.golang.org/grpc/xds/internal/xdsclient/bootstrap</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	bootstrap.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html">google.golang.org/grpc/xds/internal/xdsclient/bootstrap</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11,
+input[id=i12]:checked ~pre .i12,
+input[id=i13]:checked ~pre .i13,
+input[id=i14]:checked ~pre .i14,
+input[id=i15]:checked ~pre .i15,
+input[id=i16]:checked ~pre .i16,
+input[id=i17]:checked ~pre .i17,
+input[id=i18]:checked ~pre .i18,
+input[id=i19]:checked ~pre .i19
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+<input id="i12" type="radio" name="i"/>
+<input id="i13" type="radio" name="i"/>
+<input id="i14" type="radio" name="i"/>
+<input id="i15" type="radio" name="i"/>
+<input id="i16" type="radio" name="i"/>
+<input id="i17" type="radio" name="i"/>
+<input id="i18" type="radio" name="i"/>
+<input id="i19" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2019 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package bootstrap provides the functionality to initialize certain aspects</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// of an xDS client by reading a bootstrap file.</span></code></span></div><span class="codeline" id="line-21"><code><span class="keyword">package</span> bootstrap</code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-24"><code>	<label for="i0"><span class="lit-string i0">"bytes"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i1"><span class="lit-string i1">"encoding/json"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i2"><span class="lit-string i2">"fmt"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i3"><span class="lit-string i3">"io/ioutil"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i4"><span class="lit-string i4">"net/url"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<label for="i5"><span class="lit-string i5">"strings"</span></label></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i6"><span class="lit-string i6">"github.com/golang/protobuf/jsonpb"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<label for="i7"><span class="lit-string i7">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<label for="i8"><span class="lit-string i8">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-34"><code>	<label for="i9"><span class="lit-string i9">"google.golang.org/grpc/credentials"</span></label></code></span>
+<span class="codeline" id="line-35"><code>	<label for="i10"><span class="lit-string i10">"google.golang.org/grpc/credentials/google"</span></label></code></span>
+<span class="codeline" id="line-36"><code>	<label for="i11"><span class="lit-string i11">"google.golang.org/grpc/credentials/insecure"</span></label></code></span>
+<span class="codeline" id="line-37"><code>	<label for="i12"><span class="lit-string i12">"google.golang.org/grpc/credentials/tls/certprovider"</span></label></code></span>
+<span class="codeline" id="line-38"><code>	<label for="i13"><span class="lit-string i13">"google.golang.org/grpc/internal"</span></label></code></span>
+<span class="codeline" id="line-39"><code>	<label for="i14"><span class="lit-string i14">"google.golang.org/grpc/internal/envconfig"</span></label></code></span>
+<span class="codeline" id="line-40"><code>	<label for="i15"><span class="lit-string i15">"google.golang.org/grpc/internal/pretty"</span></label></code></span>
+<span class="codeline" id="line-41"><code>	<label for="i16"><span class="lit-string i16">"google.golang.org/grpc/xds/bootstrap"</span></label></code></span>
+<span class="codeline" id="line-42"><code>	<label for="i17"><span class="lit-string i17">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"</span></label></code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/api/v2/core.html" class="ident i18">v2corepb</a> <label for="i18"><span class="lit-string i18">"github.com/envoyproxy/go-control-plane/envoy/api/v2/core"</span></label></code></span>
+<span class="codeline" id="line-45"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a> <label for="i19"><span class="lit-string i19">"github.com/envoyproxy/go-control-plane/envoy/config/core/v3"</span></label></code></span>
+<span class="codeline" id="line-46"><code>)</code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-49"><code>	<span class="comment">// The "server_features" field in the bootstrap file contains a list of</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">	// features supported by the server. A value of "xds_v3" indicates that the</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">	// server supports the v3 version of the xDS transport protocol.</span></code></span>
+<span class="codeline" id="line-52"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-serverFeaturesV3" class="ident">serverFeaturesV3</a> = <span class="lit-string">"xds_v3"</span></code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-gRPCUserAgentName" class="ident">gRPCUserAgentName</a>               = <span class="lit-string">"gRPC Go"</span></code></span>
+<span class="codeline" id="line-55"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-clientFeatureNoOverprovisioning" class="ident">clientFeatureNoOverprovisioning</a> = <span class="lit-string">"envoy.lb.does_not_support_overprovisioning"</span></code></span>
+<span class="codeline" id="line-56"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-clientFeatureResourceWrapper" class="ident">clientFeatureResourceWrapper</a>    = <span class="lit-string">"xds.config.resource-in-sotw"</span></code></span>
+<span class="codeline" id="line-57"><code>)</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-init" class="ident">init</a></label>() {</code></span>
+<span class="codeline" id="line-60"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/bootstrap.html" class="ident i16">bootstrap</a>.<a href="../../../bootstrap/bootstrap.go.html#line-52" class="ident">RegisterCredentials</a>(&amp;<a href="#line-71" class="ident">insecureCredsBuilder</a>{})</code></span>
+<span class="codeline" id="line-61"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/bootstrap.html" class="ident i16">bootstrap</a>.<a href="../../../bootstrap/bootstrap.go.html#line-52" class="ident">RegisterCredentials</a>(&amp;<a href="#line-83" class="ident">googleDefaultCredsBuilder</a>{})</code></span>
+<span class="codeline" id="line-62"><code>}</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-gRPCVersion" class="ident">gRPCVersion</a> = <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"%s %s"</span>, <a href="#line-54" class="ident">gRPCUserAgentName</a>, <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i8">grpc</a>.<a href="../../../../version.go.html#line-22" class="ident">Version</a>)</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">// For overriding in unit tests.</span></code></span>
+<span class="codeline" id="line-67"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-bootstrapFileReadFunc" class="ident">bootstrapFileReadFunc</a> = <a href="../../../../../../../pkg/io/ioutil.html" class="ident i3">ioutil</a>.<a href="../../../../../../io/ioutil/ioutil.go.html#line-36" class="ident">ReadFile</a></code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// insecureCredsBuilder implements the `Credentials` interface defined in</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// package `xds/bootstrap` and encapsulates an insecure credential.</span></code></span>
+<span class="codeline" id="line-71"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-insecureCredsBuilder" class="ident">insecureCredsBuilder</a> <span class="keyword">struct</span>{}</code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code><span class="keyword">func</span> (<label for="r1" class="ident">i</label> *<a href="#line-71" class="ident">insecureCredsBuilder</a>) <label for="r2" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.insecureCredsBuilder^fd236.html#name-.Build" class="ident">Build</a></label>(<a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/credentials.html" class="ident i9">credentials</a>.<a href="../../../../credentials/credentials.go.html#line-180" class="ident">Bundle</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-74"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/credentials/insecure.html" class="ident i11">insecure</a>.<a href="../../../../credentials/insecure/insecure.go.html#line-80" class="ident">NewBundle</a>(), <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-75"><code>}</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code><span class="keyword">func</span> (<label for="r3" class="ident">i</label> *<a href="#line-71" class="ident">insecureCredsBuilder</a>) <label for="r4" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.insecureCredsBuilder^fd236.html#name-.Name" class="ident">Name</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-78"><code>	<span class="keyword">return</span> <span class="lit-string">"insecure"</span></code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">// googleDefaultCredsBuilder implements the `Credentials` interface defined in</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">// package `xds/boostrap` and encapsulates a Google Default credential.</span></code></span>
+<span class="codeline" id="line-83"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-googleDefaultCredsBuilder" class="ident">googleDefaultCredsBuilder</a> <span class="keyword">struct</span>{}</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="keyword">func</span> (<label for="r5" class="ident">d</label> *<a href="#line-83" class="ident">googleDefaultCredsBuilder</a>) <label for="r6" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.googleDefaultCredsBuilder^dad38.html#name-.Build" class="ident">Build</a></label>(<a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/credentials.html" class="ident i9">credentials</a>.<a href="../../../../credentials/credentials.go.html#line-180" class="ident">Bundle</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-86"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/credentials/google.html" class="ident i10">google</a>.<a href="../../../../credentials/google/google.go.html#line-70" class="ident">NewDefaultCredentials</a>(), <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-87"><code>}</code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code><span class="keyword">func</span> (<label for="r7" class="ident">d</label> *<a href="#line-83" class="ident">googleDefaultCredsBuilder</a>) <label for="r8" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.googleDefaultCredsBuilder^dad38.html#name-.Name" class="ident">Name</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">return</span> <span class="lit-string">"google_default"</span></code></span>
+<span class="codeline" id="line-91"><code>}</code></span>
+<span class="codeline" id="line-92"><code></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">// ServerConfig contains the configuration to connect to a server, including</span></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">// URI, creds, and transport API version (e.g. v2 or v3).</span></code></span>
+<span class="codeline" id="line-95"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-ServerConfig" class="ident">ServerConfig</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-96"><code>	<span class="comment">// ServerURI is the management server to connect to.</span></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">	// The bootstrap file contains an ordered list of xDS servers to contact for</span></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">	// this authority. The first one is picked.</span></code></span>
+<span class="codeline" id="line-100"><code>	ServerURI <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-101"><code>	<span class="comment">// Creds contains the credentials to be used while talking to the xDS</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">	// server, as a grpc.DialOption.</span></code></span>
+<span class="codeline" id="line-103"><code>	Creds <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i8">grpc</a>.<a href="../../../../dialoptions.go.html#line-69" class="ident">DialOption</a></code></span>
+<span class="codeline" id="line-104"><code>	<span class="comment">// CredsType is the type of the creds. It will be used to dedup servers.</span></code></span>
+<span class="codeline" id="line-105"><code>	CredsType <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-106"><code>	<span class="comment">// TransportAPI indicates the API version of xDS transport protocol to use.</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">	// This describes the xDS gRPC endpoint and version of</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">	// DiscoveryRequest/Response used on the wire.</span></code></span>
+<span class="codeline" id="line-109"><code>	TransportAPI <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-26" class="ident">TransportAPI</a></code></span>
+<span class="codeline" id="line-110"><code>	<span class="comment">// NodeProto contains the Node proto to be used in xDS requests. The actual</span></code></span>
+<span class="codeline" id="line-111"><code><span class="comment">	// type depends on the transport protocol version used.</span></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">	// Note that it's specified in the bootstrap globally for all the servers,</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">	// but we keep it in each server config so that its type (e.g. *v2pb.Node or</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">	// *v3pb.Node) is consistent with the transport API version.</span></code></span>
+<span class="codeline" id="line-116"><code>	NodeProto <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a></code></span>
+<span class="codeline" id="line-117"><code>}</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">// String returns the string representation of the ServerConfig.</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">// This string representation will be used as map keys in federation</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">// (`map[ServerConfig]authority`), so that the xDS ClientConn and stream will be</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">// shared by authorities with different names but the same server config.</span></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">// It covers (almost) all the fields so the string can represent the config</span></code></span>
+<span class="codeline" id="line-126"><code><span class="comment">// content. It doesn't cover NodeProto because NodeProto isn't used by</span></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">// federation.</span></code></span>
+<span class="codeline" id="line-128"><code><span class="keyword">func</span> (<label for="r9" class="ident">sc</label> *<a href="#line-95" class="ident">ServerConfig</a>) <label for="r10" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.ServerConfig.html#name-.String" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-129"><code>	<span class="keyword">var</span> <label for="r11" class="ident">ver</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-130"><code>	<span class="keyword">switch</span> <label for="r9" class="ident">sc</label>.<a href="#line-109" class="ident">TransportAPI</a> {</code></span>
+<span class="codeline" id="line-131"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-32" class="ident">TransportV3</a>:</code></span>
+<span class="codeline" id="line-132"><code>		<label for="r11" class="ident">ver</label> = <span class="lit-string">"xDSv3"</span></code></span>
+<span class="codeline" id="line-133"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-30" class="ident">TransportV2</a>:</code></span>
+<span class="codeline" id="line-134"><code>		<label for="r11" class="ident">ver</label> = <span class="lit-string">"xDSv2"</span></code></span>
+<span class="codeline" id="line-135"><code>	}</code></span>
+<span class="codeline" id="line-136"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/strings.html" class="ident i5">strings</a>.<a href="../../../../../../strings/strings.go.html#line-425" class="ident">Join</a>([]<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>{<label for="r9" class="ident">sc</label>.<a href="#line-100" class="ident">ServerURI</a>, <label for="r9" class="ident">sc</label>.<a href="#line-105" class="ident">CredsType</a>, <label for="r11" class="ident">ver</label>}, <span class="lit-string">"-"</span>)</code></span>
+<span class="codeline" id="line-137"><code>}</code></span>
+<span class="codeline" id="line-138"><code></code></span>
+<span class="codeline" id="line-139"><code><span class="comment">// MarshalJSON marshals the ServerConfig to json.</span></code></span>
+<span class="codeline" id="line-140"><code><span class="keyword">func</span> (<label for="r12" class="ident">sc</label> <a href="#line-95" class="ident">ServerConfig</a>) <label for="r13" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.ServerConfig.html#name-.MarshalJSON" class="ident">MarshalJSON</a></label>() ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-141"><code>	<label for="r14" class="ident">server</label> := <a href="#line-302" class="ident">xdsServer</a>{</code></span>
+<span class="codeline" id="line-142"><code>		<a href="#line-303" class="ident">ServerURI</a>:    <label for="r12" class="ident">sc</label>.<a href="#line-100" class="ident">ServerURI</a>,</code></span>
+<span class="codeline" id="line-143"><code>		<a href="#line-304" class="ident">ChannelCreds</a>: []<a href="#line-297" class="ident">channelCreds</a>{{<a href="#line-298" class="ident">Type</a>: <label for="r12" class="ident">sc</label>.<a href="#line-105" class="ident">CredsType</a>, <a href="#line-299" class="ident">Config</a>: <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>}},</code></span>
+<span class="codeline" id="line-144"><code>	}</code></span>
+<span class="codeline" id="line-145"><code>	<span class="keyword">if</span> <label for="r12" class="ident">sc</label>.<a href="#line-109" class="ident">TransportAPI</a> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-32" class="ident">TransportV3</a> {</code></span>
+<span class="codeline" id="line-146"><code>		<label for="r14" class="ident">server</label>.<a href="#line-305" class="ident">ServerFeatures</a> = []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>{<a href="#line-52" class="ident">serverFeaturesV3</a>}</code></span>
+<span class="codeline" id="line-147"><code>	}</code></span>
+<span class="codeline" id="line-148"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/encode.go.html#line-158" class="ident">Marshal</a>(<label for="r14" class="ident">server</label>)</code></span>
+<span class="codeline" id="line-149"><code>}</code></span>
+<span class="codeline" id="line-150"><code></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">// UnmarshalJSON takes the json data (a server) and unmarshals it to the struct.</span></code></span>
+<span class="codeline" id="line-152"><code><span class="keyword">func</span> (<label for="r15" class="ident">sc</label> *<a href="#line-95" class="ident">ServerConfig</a>) <label for="r16" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.ServerConfig.html#name-.UnmarshalJSON" class="ident">UnmarshalJSON</a></label>(<label for="r17" class="ident">data</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-153"><code>	<span class="keyword">var</span> <label for="r18" class="ident">server</label> <a href="#line-302" class="ident">xdsServer</a></code></span>
+<span class="codeline" id="line-154"><code>	<span class="keyword">if</span> <label for="r19" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r17" class="ident">data</label>, &amp;<label for="r18" class="ident">server</label>); <label for="r19" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-155"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(data) for field ServerConfig failed during bootstrap: %v"</span>, <label for="r19" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-156"><code>	}</code></span>
+<span class="codeline" id="line-157"><code>	<label for="r15" class="ident">sc</label>.<a href="#line-100" class="ident">ServerURI</a> = <label for="r18" class="ident">server</label>.<a href="#line-303" class="ident">ServerURI</a></code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">for</span> <label for="r20" class="ident">_</label>, <label for="r21" class="ident">cc</label> := <span class="keyword">range</span> <label for="r18" class="ident">server</label>.<a href="#line-304" class="ident">ChannelCreds</a> {</code></span>
+<span class="codeline" id="line-159"><code>		<span class="comment">// We stop at the first credential type that we support.</span></code></span>
+<span class="codeline" id="line-160"><code>		<label for="r15" class="ident">sc</label>.<a href="#line-105" class="ident">CredsType</a> = <label for="r21" class="ident">cc</label>.<a href="#line-298" class="ident">Type</a></code></span>
+<span class="codeline" id="line-161"><code>		<label for="r22" class="ident">c</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/xds/bootstrap.html" class="ident i16">bootstrap</a>.<a href="../../../bootstrap/bootstrap.go.html#line-58" class="ident">GetCredentials</a>(<label for="r21" class="ident">cc</label>.<a href="#line-298" class="ident">Type</a>)</code></span>
+<span class="codeline" id="line-162"><code>		<span class="keyword">if</span> <label for="r22" class="ident">c</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-163"><code>			<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-164"><code>		}</code></span>
+<span class="codeline" id="line-165"><code>		<label for="r23" class="ident">bundle</label>, <label for="r24" class="ident">err</label> := <label for="r22" class="ident">c</label>.<a href="../../../bootstrap/bootstrap.go.html#line-41" class="ident">Build</a>(<label for="r21" class="ident">cc</label>.<a href="#line-299" class="ident">Config</a>)</code></span>
+<span class="codeline" id="line-166"><code>		<span class="keyword">if</span> <label for="r24" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-167"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to build credentials bundle from bootstrap for %q: %v"</span>, <label for="r21" class="ident">cc</label>.<a href="#line-298" class="ident">Type</a>, <label for="r24" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-168"><code>		}</code></span>
+<span class="codeline" id="line-169"><code>		<label for="r15" class="ident">sc</label>.<a href="#line-103" class="ident">Creds</a> = <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i8">grpc</a>.<a href="../../../../dialoptions.go.html#line-331" class="ident">WithCredentialsBundle</a>(<label for="r23" class="ident">bundle</label>)</code></span>
+<span class="codeline" id="line-170"><code>		<span class="keyword">break</span></code></span>
+<span class="codeline" id="line-171"><code>	}</code></span>
+<span class="codeline" id="line-172"><code>	<span class="keyword">for</span> <label for="r25" class="ident">_</label>, <label for="r26" class="ident">f</label> := <span class="keyword">range</span> <label for="r18" class="ident">server</label>.<a href="#line-305" class="ident">ServerFeatures</a> {</code></span>
+<span class="codeline" id="line-173"><code>		<span class="keyword">if</span> <label for="r26" class="ident">f</label> == <a href="#line-52" class="ident">serverFeaturesV3</a> {</code></span>
+<span class="codeline" id="line-174"><code>			<label for="r15" class="ident">sc</label>.<a href="#line-109" class="ident">TransportAPI</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-32" class="ident">TransportV3</a></code></span>
+<span class="codeline" id="line-175"><code>		}</code></span>
+<span class="codeline" id="line-176"><code>	}</code></span>
+<span class="codeline" id="line-177"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-178"><code>}</code></span>
+<span class="codeline" id="line-179"><code></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">// unmarshalJSONServerConfigSlice unmarshals JSON to a slice.</span></code></span>
+<span class="codeline" id="line-181"><code><span class="keyword">func</span> <label for="r27" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-unmarshalJSONServerConfigSlice" class="ident">unmarshalJSONServerConfigSlice</a></label>(<label for="r28" class="ident">data</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) ([]*<a href="#line-95" class="ident">ServerConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-182"><code>	<span class="keyword">var</span> <label for="r29" class="ident">servers</label> []*<a href="#line-95" class="ident">ServerConfig</a></code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">if</span> <label for="r30" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r28" class="ident">data</label>, &amp;<label for="r29" class="ident">servers</label>); <label for="r30" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to unmarshal JSON to []*ServerConfig: %v"</span>, <label for="r30" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-185"><code>	}</code></span>
+<span class="codeline" id="line-186"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r29" class="ident">servers</label>) &lt; <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-187"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"no management server found in JSON"</span>)</code></span>
+<span class="codeline" id="line-188"><code>	}</code></span>
+<span class="codeline" id="line-189"><code>	<span class="keyword">return</span> <label for="r29" class="ident">servers</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-190"><code>}</code></span>
+<span class="codeline" id="line-191"><code></code></span>
+<span class="codeline" id="line-192"><code><span class="comment">// Authority contains configuration for an Authority for an xDS control plane</span></code></span>
+<span class="codeline" id="line-193"><code><span class="comment">// server. See the Authorities field in the Config struct for how it's used.</span></code></span>
+<span class="codeline" id="line-194"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-Authority" class="ident">Authority</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-195"><code>	<span class="comment">// ClientListenerResourceNameTemplate is template for the name of the</span></code></span>
+<span class="codeline" id="line-196"><code><span class="comment">	// Listener resource to subscribe to for a gRPC client channel.  Used only</span></code></span>
+<span class="codeline" id="line-197"><code><span class="comment">	// when the channel is created using an "xds:" URI with this authority name.</span></code></span>
+<span class="codeline" id="line-198"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-199"><code><span class="comment">	// The token "%s", if present in this string, will be replaced</span></code></span>
+<span class="codeline" id="line-200"><code><span class="comment">	// with %-encoded service authority (i.e., the path part of the target</span></code></span>
+<span class="codeline" id="line-201"><code><span class="comment">	// URI used to create the gRPC channel).</span></code></span>
+<span class="codeline" id="line-202"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-203"><code><span class="comment">	// Must start with "xdstp://&lt;authority_name&gt;/".  If it does not,</span></code></span>
+<span class="codeline" id="line-204"><code><span class="comment">	// that is considered a bootstrap file parsing error.</span></code></span>
+<span class="codeline" id="line-205"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-206"><code><span class="comment">	// If not present in the bootstrap file, defaults to</span></code></span>
+<span class="codeline" id="line-207"><code><span class="comment">	// "xdstp://&lt;authority_name&gt;/envoy.config.listener.v3.Listener/%s".</span></code></span>
+<span class="codeline" id="line-208"><code>	ClientListenerResourceNameTemplate <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-209"><code>	<span class="comment">// XDSServer contains the management server and config to connect to for</span></code></span>
+<span class="codeline" id="line-210"><code><span class="comment">	// this authority.</span></code></span>
+<span class="codeline" id="line-211"><code>	XDSServer *<a href="#line-95" class="ident">ServerConfig</a></code></span>
+<span class="codeline" id="line-212"><code>}</code></span>
+<span class="codeline" id="line-213"><code></code></span>
+<span class="codeline" id="line-214"><code><span class="comment">// UnmarshalJSON implement json unmarshaller.</span></code></span>
+<span class="codeline" id="line-215"><code><span class="keyword">func</span> (<label for="r31" class="ident">a</label> *<a href="#line-194" class="ident">Authority</a>) <label for="r32" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.Authority.html#name-.UnmarshalJSON" class="ident">UnmarshalJSON</a></label>(<label for="r33" class="ident">data</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-216"><code>	<span class="keyword">var</span> <label for="r34" class="ident">jsonData</label> <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a></code></span>
+<span class="codeline" id="line-217"><code>	<span class="keyword">if</span> <label for="r35" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r33" class="ident">data</label>, &amp;<label for="r34" class="ident">jsonData</label>); <label for="r35" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-218"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: failed to parse authority: %v"</span>, <label for="r35" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-219"><code>	}</code></span>
+<span class="codeline" id="line-220"><code></code></span>
+<span class="codeline" id="line-221"><code>	<span class="keyword">for</span> <label for="r36" class="ident">k</label>, <label for="r37" class="ident">v</label> := <span class="keyword">range</span> <label for="r34" class="ident">jsonData</label> {</code></span>
+<span class="codeline" id="line-222"><code>		<span class="keyword">switch</span> <label for="r36" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-223"><code>		<span class="keyword">case</span> <span class="lit-string">"xds_servers"</span>:</code></span>
+<span class="codeline" id="line-224"><code>			<label for="r38" class="ident">servers</label>, <label for="r39" class="ident">err</label> := <a href="#line-181" class="ident">unmarshalJSONServerConfigSlice</a>(<label for="r37" class="ident">v</label>)</code></span>
+<span class="codeline" id="line-225"><code>			<span class="keyword">if</span> <label for="r39" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-226"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(data) for field %q failed during bootstrap: %v"</span>, <label for="r36" class="ident">k</label>, <label for="r39" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-227"><code>			}</code></span>
+<span class="codeline" id="line-228"><code>			<label for="r31" class="ident">a</label>.<a href="#line-211" class="ident">XDSServer</a> = <label for="r38" class="ident">servers</label>[<span class="lit-number">0</span>]</code></span>
+<span class="codeline" id="line-229"><code>		<span class="keyword">case</span> <span class="lit-string">"client_listener_resource_name_template"</span>:</code></span>
+<span class="codeline" id="line-230"><code>			<span class="keyword">if</span> <label for="r40" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r37" class="ident">v</label>, &amp;<label for="r31" class="ident">a</label>.<a href="#line-208" class="ident">ClientListenerResourceNameTemplate</a>); <label for="r40" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-231"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r37" class="ident">v</label>), <label for="r36" class="ident">k</label>, <label for="r40" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-232"><code>			}</code></span>
+<span class="codeline" id="line-233"><code>		}</code></span>
+<span class="codeline" id="line-234"><code>	}</code></span>
+<span class="codeline" id="line-235"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-236"><code>}</code></span>
+<span class="codeline" id="line-237"><code></code></span>
+<span class="codeline" id="line-238"><code><span class="comment">// Config provides the xDS client with several key bits of information that it</span></code></span>
+<span class="codeline" id="line-239"><code><span class="comment">// requires in its interaction with the management server. The Config is</span></code></span>
+<span class="codeline" id="line-240"><code><span class="comment">// initialized from the bootstrap file.</span></code></span>
+<span class="codeline" id="line-241"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-Config" class="ident">Config</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-242"><code>	<span class="comment">// XDSServer is the management server to connect to.</span></code></span>
+<span class="codeline" id="line-243"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-244"><code><span class="comment">	// The bootstrap file contains a list of servers (with name+creds), but we</span></code></span>
+<span class="codeline" id="line-245"><code><span class="comment">	// pick the first one.</span></code></span>
+<span class="codeline" id="line-246"><code>	XDSServer *<a href="#line-95" class="ident">ServerConfig</a></code></span>
+<span class="codeline" id="line-247"><code>	<span class="comment">// CertProviderConfigs contains a mapping from certificate provider plugin</span></code></span>
+<span class="codeline" id="line-248"><code><span class="comment">	// instance names to parsed buildable configs.</span></code></span>
+<span class="codeline" id="line-249"><code>	CertProviderConfigs <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="../../../../../../../pkg/google.golang.org/grpc/credentials/tls/certprovider.html" class="ident i12">certprovider</a>.<a href="../../../../credentials/tls/certprovider/store.go.html#line-80" class="ident">BuildableConfig</a></code></span>
+<span class="codeline" id="line-250"><code>	<span class="comment">// ServerListenerResourceNameTemplate is a template for the name of the</span></code></span>
+<span class="codeline" id="line-251"><code><span class="comment">	// Listener resource to subscribe to for a gRPC server.</span></code></span>
+<span class="codeline" id="line-252"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-253"><code><span class="comment">	// If starts with "xdstp:", will be interpreted as a new-style name,</span></code></span>
+<span class="codeline" id="line-254"><code><span class="comment">	// in which case the authority of the URI will be used to select the</span></code></span>
+<span class="codeline" id="line-255"><code><span class="comment">	// relevant configuration in the "authorities" map.</span></code></span>
+<span class="codeline" id="line-256"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-257"><code><span class="comment">	// The token "%s", if present in this string, will be replaced with the IP</span></code></span>
+<span class="codeline" id="line-258"><code><span class="comment">	// and port on which the server is listening.  (e.g., "0.0.0.0:8080",</span></code></span>
+<span class="codeline" id="line-259"><code><span class="comment">	// "[::]:8080"). For example, a value of "example/resource/%s" could become</span></code></span>
+<span class="codeline" id="line-260"><code><span class="comment">	// "example/resource/0.0.0.0:8080". If the template starts with "xdstp:",</span></code></span>
+<span class="codeline" id="line-261"><code><span class="comment">	// the replaced string will be %-encoded.</span></code></span>
+<span class="codeline" id="line-262"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-263"><code><span class="comment">	// There is no default; if unset, xDS-based server creation fails.</span></code></span>
+<span class="codeline" id="line-264"><code>	ServerListenerResourceNameTemplate <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-265"><code>	<span class="comment">// A template for the name of the Listener resource to subscribe to</span></code></span>
+<span class="codeline" id="line-266"><code><span class="comment">	// for a gRPC client channel.  Used only when the channel is created</span></code></span>
+<span class="codeline" id="line-267"><code><span class="comment">	// with an "xds:" URI with no authority.</span></code></span>
+<span class="codeline" id="line-268"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-269"><code><span class="comment">	// If starts with "xdstp:", will be interpreted as a new-style name,</span></code></span>
+<span class="codeline" id="line-270"><code><span class="comment">	// in which case the authority of the URI will be used to select the</span></code></span>
+<span class="codeline" id="line-271"><code><span class="comment">	// relevant configuration in the "authorities" map.</span></code></span>
+<span class="codeline" id="line-272"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-273"><code><span class="comment">	// The token "%s", if present in this string, will be replaced with</span></code></span>
+<span class="codeline" id="line-274"><code><span class="comment">	// the service authority (i.e., the path part of the target URI</span></code></span>
+<span class="codeline" id="line-275"><code><span class="comment">	// used to create the gRPC channel).  If the template starts with</span></code></span>
+<span class="codeline" id="line-276"><code><span class="comment">	// "xdstp:", the replaced string will be %-encoded.</span></code></span>
+<span class="codeline" id="line-277"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-278"><code><span class="comment">	// Defaults to "%s".</span></code></span>
+<span class="codeline" id="line-279"><code>	ClientDefaultListenerResourceNameTemplate <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-280"><code></code></span>
+<span class="codeline" id="line-281"><code>	<span class="comment">// Authorities is a map of authority name to corresponding configuration.</span></code></span>
+<span class="codeline" id="line-282"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-283"><code><span class="comment">	// This is used in the following cases:</span></code></span>
+<span class="codeline" id="line-284"><code><span class="comment">	// - A gRPC client channel is created using an "xds:" URI that includes</span></code></span>
+<span class="codeline" id="line-285"><code><span class="comment">	//   an authority.</span></code></span>
+<span class="codeline" id="line-286"><code><span class="comment">	// - A gRPC client channel is created using an "xds:" URI with no</span></code></span>
+<span class="codeline" id="line-287"><code><span class="comment">	//   authority, but the "client_default_listener_resource_name_template"</span></code></span>
+<span class="codeline" id="line-288"><code><span class="comment">	//   field above turns it into an "xdstp:" URI.</span></code></span>
+<span class="codeline" id="line-289"><code><span class="comment">	// - A gRPC server is created and the</span></code></span>
+<span class="codeline" id="line-290"><code><span class="comment">	//   "server_listener_resource_name_template" field is an "xdstp:" URI.</span></code></span>
+<span class="codeline" id="line-291"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-292"><code><span class="comment">	// In any of those cases, it is an error if the specified authority is</span></code></span>
+<span class="codeline" id="line-293"><code><span class="comment">	// not present in this map.</span></code></span>
+<span class="codeline" id="line-294"><code>	Authorities <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-194" class="ident">Authority</a></code></span>
+<span class="codeline" id="line-295"><code>}</code></span>
+<span class="codeline" id="line-296"><code></code></span>
+<span class="codeline" id="line-297"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-channelCreds" class="ident">channelCreds</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-298"><code>	Type   <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>          <span class="lit-string">`json:"type"`</span></code></span>
+<span class="codeline" id="line-299"><code>	Config <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a> <span class="lit-string">`json:"config,omitempty"`</span></code></span>
+<span class="codeline" id="line-300"><code>}</code></span>
+<span class="codeline" id="line-301"><code></code></span>
+<span class="codeline" id="line-302"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-xdsServer" class="ident">xdsServer</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-303"><code>	ServerURI      <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>         <span class="lit-string">`json:"server_uri"`</span></code></span>
+<span class="codeline" id="line-304"><code>	ChannelCreds   []<a href="#line-297" class="ident">channelCreds</a> <span class="lit-string">`json:"channel_creds"`</span></code></span>
+<span class="codeline" id="line-305"><code>	ServerFeatures []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>       <span class="lit-string">`json:"server_features"`</span></code></span>
+<span class="codeline" id="line-306"><code>}</code></span>
+<span class="codeline" id="line-307"><code></code></span>
+<span class="codeline" id="line-308"><code><span class="keyword">func</span> <label for="r41" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-bootstrapConfigFromEnvVariable" class="ident">bootstrapConfigFromEnvVariable</a></label>() ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-309"><code>	<label for="r42" class="ident">fName</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-57" class="ident">XDSBootstrapFileName</a></code></span>
+<span class="codeline" id="line-310"><code>	<label for="r43" class="ident">fContent</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-63" class="ident">XDSBootstrapFileContent</a></code></span>
+<span class="codeline" id="line-311"><code></code></span>
+<span class="codeline" id="line-312"><code>	<span class="comment">// Bootstrap file name has higher priority than bootstrap content.</span></code></span>
+<span class="codeline" id="line-313"><code>	<span class="keyword">if</span> <label for="r42" class="ident">fName</label> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-314"><code>		<span class="comment">// If file name is set</span></code></span>
+<span class="codeline" id="line-315"><code><span class="comment">		// - If file not found (or other errors), fail</span></code></span>
+<span class="codeline" id="line-316"><code><span class="comment">		// - Otherwise, use the content.</span></code></span>
+<span class="codeline" id="line-317"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-318"><code><span class="comment">		// Note that even if the content is invalid, we don't failover to the</span></code></span>
+<span class="codeline" id="line-319"><code><span class="comment">		// file content env variable.</span></code></span>
+<span class="codeline" id="line-320"><code>		<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-65" class="ident">Debugf</a>(<span class="lit-string">"xds: using bootstrap file with name %q"</span>, <label for="r42" class="ident">fName</label>)</code></span>
+<span class="codeline" id="line-321"><code>		<span class="keyword">return</span> <a href="#line-67" class="ident">bootstrapFileReadFunc</a>(<label for="r42" class="ident">fName</label>)</code></span>
+<span class="codeline" id="line-322"><code>	}</code></span>
+<span class="codeline" id="line-323"><code></code></span>
+<span class="codeline" id="line-324"><code>	<span class="keyword">if</span> <label for="r43" class="ident">fContent</label> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-325"><code>		<span class="keyword">return</span> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>(<label for="r43" class="ident">fContent</label>), <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-326"><code>	}</code></span>
+<span class="codeline" id="line-327"><code></code></span>
+<span class="codeline" id="line-328"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"none of the bootstrap environment variables (%q or %q) defined"</span>,</code></span>
+<span class="codeline" id="line-329"><code>		<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-32" class="ident">XDSBootstrapFileNameEnv</a>, <a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-38" class="ident">XDSBootstrapFileContentEnv</a>)</code></span>
+<span class="codeline" id="line-330"><code>}</code></span>
+<span class="codeline" id="line-331"><code></code></span>
+<span class="codeline" id="line-332"><code><span class="comment">// NewConfig returns a new instance of Config initialized by reading the</span></code></span>
+<span class="codeline" id="line-333"><code><span class="comment">// bootstrap file found at ${GRPC_XDS_BOOTSTRAP} or bootstrap contents specified</span></code></span>
+<span class="codeline" id="line-334"><code><span class="comment">// at ${GRPC_XDS_BOOTSTRAP_CONFIG}. If both env vars are set, the former is</span></code></span>
+<span class="codeline" id="line-335"><code><span class="comment">// preferred.</span></code></span>
+<span class="codeline" id="line-336"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-337"><code><span class="comment">// We support a credential registration mechanism and only credentials</span></code></span>
+<span class="codeline" id="line-338"><code><span class="comment">// registered through that mechanism will be accepted here. See package</span></code></span>
+<span class="codeline" id="line-339"><code><span class="comment">// `xds/bootstrap` for details.</span></code></span>
+<span class="codeline" id="line-340"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-341"><code><span class="comment">// This function tries to process as much of the bootstrap file as possible (in</span></code></span>
+<span class="codeline" id="line-342"><code><span class="comment">// the presence of the errors) and may return a Config object with certain</span></code></span>
+<span class="codeline" id="line-343"><code><span class="comment">// fields left unspecified, in which case the caller should use some sane</span></code></span>
+<span class="codeline" id="line-344"><code><span class="comment">// defaults.</span></code></span>
+<span class="codeline" id="line-345"><code><span class="keyword">func</span> <label for="r44" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-NewConfig" class="ident">NewConfig</a></label>() (*<a href="#line-241" class="ident">Config</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-346"><code>	<span class="comment">// Examples of the bootstrap json can be found in the generator tests</span></code></span>
+<span class="codeline" id="line-347"><code><span class="comment">	// https://github.com/GoogleCloudPlatform/traffic-director-grpc-bootstrap/blob/master/main_test.go.</span></code></span>
+<span class="codeline" id="line-348"><code>	<label for="r45" class="ident">data</label>, <label for="r46" class="ident">err</label> := <a href="#line-308" class="ident">bootstrapConfigFromEnvVariable</a>()</code></span>
+<span class="codeline" id="line-349"><code>	<span class="keyword">if</span> <label for="r46" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-350"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Failed to read bootstrap config: %v"</span>, <label for="r46" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-351"><code>	}</code></span>
+<span class="codeline" id="line-352"><code>	<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-65" class="ident">Debugf</a>(<span class="lit-string">"Bootstrap content: %s"</span>, <label for="r45" class="ident">data</label>)</code></span>
+<span class="codeline" id="line-353"><code>	<span class="keyword">return</span> <a href="#line-364" class="ident">newConfigFromContents</a>(<label for="r45" class="ident">data</label>)</code></span>
+<span class="codeline" id="line-354"><code>}</code></span>
+<span class="codeline" id="line-355"><code></code></span>
+<span class="codeline" id="line-356"><code><span class="comment">// NewConfigFromContentsForTesting returns a new Config using the specified</span></code></span>
+<span class="codeline" id="line-357"><code><span class="comment">// bootstrap file contents instead of reading the environment variable.</span></code></span>
+<span class="codeline" id="line-358"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-359"><code><span class="comment">// This is only suitable for testing purposes.</span></code></span>
+<span class="codeline" id="line-360"><code><span class="keyword">func</span> <label for="r47" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-NewConfigFromContentsForTesting" class="ident">NewConfigFromContentsForTesting</a></label>(<label for="r48" class="ident">data</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) (*<a href="#line-241" class="ident">Config</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-361"><code>	<span class="keyword">return</span> <a href="#line-364" class="ident">newConfigFromContents</a>(<label for="r48" class="ident">data</label>)</code></span>
+<span class="codeline" id="line-362"><code>}</code></span>
+<span class="codeline" id="line-363"><code></code></span>
+<span class="codeline" id="line-364"><code><span class="keyword">func</span> <label for="r49" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#name-newConfigFromContents" class="ident">newConfigFromContents</a></label>(<label for="r50" class="ident">data</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) (*<a href="#line-241" class="ident">Config</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-365"><code>	<label for="r51" class="ident">config</label> := &amp;<a href="#line-241" class="ident">Config</a>{}</code></span>
+<span class="codeline" id="line-366"><code></code></span>
+<span class="codeline" id="line-367"><code>	<span class="keyword">var</span> <label for="r52" class="ident">jsonData</label> <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a></code></span>
+<span class="codeline" id="line-368"><code>	<span class="keyword">if</span> <label for="r53" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r50" class="ident">data</label>, &amp;<label for="r52" class="ident">jsonData</label>); <label for="r53" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-369"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Failed to parse bootstrap config: %v"</span>, <label for="r53" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-370"><code>	}</code></span>
+<span class="codeline" id="line-371"><code></code></span>
+<span class="codeline" id="line-372"><code>	<span class="keyword">var</span> <label for="r54" class="ident">node</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a></code></span>
+<span class="codeline" id="line-373"><code>	<label for="r55" class="ident">m</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/jsonpb.html" class="ident i6">jsonpb</a>.<a href="../../../../../../github.com/golang/protobuf/jsonpb/decode.go.html#line-44" class="ident">Unmarshaler</a>{<a href="../../../../../../github.com/golang/protobuf/jsonpb/decode.go.html#line-47" class="ident">AllowUnknownFields</a>: <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a>}</code></span>
+<span class="codeline" id="line-374"><code>	<span class="keyword">for</span> <label for="r56" class="ident">k</label>, <label for="r57" class="ident">v</label> := <span class="keyword">range</span> <label for="r52" class="ident">jsonData</label> {</code></span>
+<span class="codeline" id="line-375"><code>		<span class="keyword">switch</span> <label for="r56" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-376"><code>		<span class="keyword">case</span> <span class="lit-string">"node"</span>:</code></span>
+<span class="codeline" id="line-377"><code>			<span class="comment">// We unconditionally convert the JSON into a v3.Node proto. The v3</span></code></span>
+<span class="codeline" id="line-378"><code><span class="comment">			// proto does not contain the deprecated field "build_version" from</span></code></span>
+<span class="codeline" id="line-379"><code><span class="comment">			// the v2 proto. We do not expect the bootstrap file to contain the</span></code></span>
+<span class="codeline" id="line-380"><code><span class="comment">			// "build_version" field. In any case, the unmarshal will succeed</span></code></span>
+<span class="codeline" id="line-381"><code><span class="comment">			// because we have set the `AllowUnknownFields` option on the</span></code></span>
+<span class="codeline" id="line-382"><code><span class="comment">			// unmarshaler.</span></code></span>
+<span class="codeline" id="line-383"><code>			<label for="r54" class="ident">node</label> = &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a>{}</code></span>
+<span class="codeline" id="line-384"><code>			<span class="keyword">if</span> <label for="r58" class="ident">err</label> := <label for="r55" class="ident">m</label>.<a href="../../../../../../github.com/golang/protobuf/jsonpb/decode.go.html#line-67" class="ident">Unmarshal</a>(<a href="../../../../../../../pkg/bytes.html" class="ident i0">bytes</a>.<a href="../../../../../../bytes/reader.go.html#line-160" class="ident">NewReader</a>(<label for="r57" class="ident">v</label>), <label for="r54" class="ident">node</label>); <label for="r58" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-385"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: jsonpb.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r56" class="ident">k</label>, <label for="r58" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-386"><code>			}</code></span>
+<span class="codeline" id="line-387"><code>		<span class="keyword">case</span> <span class="lit-string">"xds_servers"</span>:</code></span>
+<span class="codeline" id="line-388"><code>			<label for="r59" class="ident">servers</label>, <label for="r60" class="ident">err</label> := <a href="#line-181" class="ident">unmarshalJSONServerConfigSlice</a>(<label for="r57" class="ident">v</label>)</code></span>
+<span class="codeline" id="line-389"><code>			<span class="keyword">if</span> <label for="r60" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-390"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(data) for field %q failed during bootstrap: %v"</span>, <label for="r56" class="ident">k</label>, <label for="r60" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-391"><code>			}</code></span>
+<span class="codeline" id="line-392"><code>			<label for="r51" class="ident">config</label>.<a href="#line-246" class="ident">XDSServer</a> = <label for="r59" class="ident">servers</label>[<span class="lit-number">0</span>]</code></span>
+<span class="codeline" id="line-393"><code>		<span class="keyword">case</span> <span class="lit-string">"certificate_providers"</span>:</code></span>
+<span class="codeline" id="line-394"><code>			<span class="keyword">var</span> <label for="r61" class="ident">providerInstances</label> <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a></code></span>
+<span class="codeline" id="line-395"><code>			<span class="keyword">if</span> <label for="r62" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r57" class="ident">v</label>, &amp;<label for="r61" class="ident">providerInstances</label>); <label for="r62" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-396"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r56" class="ident">k</label>, <label for="r62" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-397"><code>			}</code></span>
+<span class="codeline" id="line-398"><code>			<label for="r63" class="ident">configs</label> := <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="../../../../../../../pkg/google.golang.org/grpc/credentials/tls/certprovider.html" class="ident i12">certprovider</a>.<a href="../../../../credentials/tls/certprovider/store.go.html#line-80" class="ident">BuildableConfig</a>)</code></span>
+<span class="codeline" id="line-399"><code>			<label for="r64" class="ident">getBuilder</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal.html" class="ident i13">internal</a>.<a href="../../../../internal/internal.go.html#line-52" class="ident">GetCertificateProviderBuilder</a>.(<span class="keyword">func</span>(<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/google.golang.org/grpc/credentials/tls/certprovider.html" class="ident i12">certprovider</a>.<a href="../../../../credentials/tls/certprovider/provider.go.html#line-66" class="ident">Builder</a>)</code></span>
+<span class="codeline" id="line-400"><code>			<span class="keyword">for</span> <label for="r65" class="ident">instance</label>, <label for="r66" class="ident">data</label> := <span class="keyword">range</span> <label for="r61" class="ident">providerInstances</label> {</code></span>
+<span class="codeline" id="line-401"><code>				<span class="keyword">var</span> <label for="r67" class="ident">nameAndConfig</label> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-402"><code>					<label for="r68" class="ident">PluginName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>          <span class="lit-string">`json:"plugin_name"`</span></code></span>
+<span class="codeline" id="line-403"><code>					<label for="r69" class="ident">Config</label>     <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a> <span class="lit-string">`json:"config"`</span></code></span>
+<span class="codeline" id="line-404"><code>				}</code></span>
+<span class="codeline" id="line-405"><code>				<span class="keyword">if</span> <label for="r70" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r66" class="ident">data</label>, &amp;<label for="r67" class="ident">nameAndConfig</label>); <label for="r70" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-406"><code>					<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r65" class="ident">instance</label>, <label for="r70" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-407"><code>				}</code></span>
+<span class="codeline" id="line-408"><code></code></span>
+<span class="codeline" id="line-409"><code>				<label for="r71" class="ident">name</label> := <label for="r67" class="ident">nameAndConfig</label>.<label for="r68" class="ident">PluginName</label></code></span>
+<span class="codeline" id="line-410"><code>				<label for="r72" class="ident">parser</label> := <label for="r64" class="ident">getBuilder</label>(<label for="r67" class="ident">nameAndConfig</label>.<label for="r68" class="ident">PluginName</label>)</code></span>
+<span class="codeline" id="line-411"><code>				<span class="keyword">if</span> <label for="r72" class="ident">parser</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-412"><code>					<span class="comment">// We ignore plugins that we do not know about.</span></code></span>
+<span class="codeline" id="line-413"><code>					<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-414"><code>				}</code></span>
+<span class="codeline" id="line-415"><code>				<label for="r73" class="ident">bc</label>, <label for="r74" class="ident">err</label> := <label for="r72" class="ident">parser</label>.<a href="../../../../credentials/tls/certprovider/provider.go.html#line-69" class="ident">ParseConfig</a>(<label for="r67" class="ident">nameAndConfig</label>.<label for="r69" class="ident">Config</label>)</code></span>
+<span class="codeline" id="line-416"><code>				<span class="keyword">if</span> <label for="r74" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-417"><code>					<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Config parsing for plugin %q failed: %v"</span>, <label for="r71" class="ident">name</label>, <label for="r74" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-418"><code>				}</code></span>
+<span class="codeline" id="line-419"><code>				<label for="r63" class="ident">configs</label>[<label for="r65" class="ident">instance</label>] = <label for="r73" class="ident">bc</label></code></span>
+<span class="codeline" id="line-420"><code>			}</code></span>
+<span class="codeline" id="line-421"><code>			<label for="r51" class="ident">config</label>.<a href="#line-249" class="ident">CertProviderConfigs</a> = <label for="r63" class="ident">configs</label></code></span>
+<span class="codeline" id="line-422"><code>		<span class="keyword">case</span> <span class="lit-string">"server_listener_resource_name_template"</span>:</code></span>
+<span class="codeline" id="line-423"><code>			<span class="keyword">if</span> <label for="r75" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r57" class="ident">v</label>, &amp;<label for="r51" class="ident">config</label>.<a href="#line-264" class="ident">ServerListenerResourceNameTemplate</a>); <label for="r75" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-424"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r56" class="ident">k</label>, <label for="r75" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-425"><code>			}</code></span>
+<span class="codeline" id="line-426"><code>		<span class="keyword">case</span> <span class="lit-string">"client_default_listener_resource_name_template"</span>:</code></span>
+<span class="codeline" id="line-427"><code>			<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-91" class="ident">XDSFederation</a> {</code></span>
+<span class="codeline" id="line-428"><code>				<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-45" class="ident">Warningf</a>(<span class="lit-string">"xds: bootstrap field %v is not support when Federation is disabled"</span>, <label for="r56" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-429"><code>				<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-430"><code>			}</code></span>
+<span class="codeline" id="line-431"><code>			<span class="keyword">if</span> <label for="r76" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r57" class="ident">v</label>, &amp;<label for="r51" class="ident">config</label>.<a href="#line-279" class="ident">ClientDefaultListenerResourceNameTemplate</a>); <label for="r76" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-432"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r56" class="ident">k</label>, <label for="r76" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-433"><code>			}</code></span>
+<span class="codeline" id="line-434"><code>		<span class="keyword">case</span> <span class="lit-string">"authorities"</span>:</code></span>
+<span class="codeline" id="line-435"><code>			<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i14">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-91" class="ident">XDSFederation</a> {</code></span>
+<span class="codeline" id="line-436"><code>				<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-45" class="ident">Warningf</a>(<span class="lit-string">"xds: bootstrap field %v is not support when Federation is disabled"</span>, <label for="r56" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-437"><code>				<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-438"><code>			}</code></span>
+<span class="codeline" id="line-439"><code>			<span class="keyword">if</span> <label for="r77" class="ident">err</label> := <a href="../../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../../encoding/json/decode.go.html#line-96" class="ident">Unmarshal</a>(<label for="r57" class="ident">v</label>, &amp;<label for="r51" class="ident">config</label>.<a href="#line-294" class="ident">Authorities</a>); <label for="r77" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-440"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v"</span>, <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r57" class="ident">v</label>), <label for="r56" class="ident">k</label>, <label for="r77" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-441"><code>			}</code></span>
+<span class="codeline" id="line-442"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-443"><code>			<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-45" class="ident">Warningf</a>(<span class="lit-string">"Bootstrap content has unknown field: %s"</span>, <label for="r56" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-444"><code>		}</code></span>
+<span class="codeline" id="line-445"><code>		<span class="comment">// Do not fail the xDS bootstrap when an unknown field is seen. This can</span></code></span>
+<span class="codeline" id="line-446"><code><span class="comment">		// happen when an older version client reads a newer version bootstrap</span></code></span>
+<span class="codeline" id="line-447"><code><span class="comment">		// file with new fields.</span></code></span>
+<span class="codeline" id="line-448"><code>	}</code></span>
+<span class="codeline" id="line-449"><code></code></span>
+<span class="codeline" id="line-450"><code>	<span class="keyword">if</span> <label for="r51" class="ident">config</label>.<a href="#line-279" class="ident">ClientDefaultListenerResourceNameTemplate</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-451"><code>		<span class="comment">// Default value of the default client listener name template is "%s".</span></code></span>
+<span class="codeline" id="line-452"><code>		<label for="r51" class="ident">config</label>.<a href="#line-279" class="ident">ClientDefaultListenerResourceNameTemplate</a> = <span class="lit-string">"%s"</span></code></span>
+<span class="codeline" id="line-453"><code>	}</code></span>
+<span class="codeline" id="line-454"><code>	<span class="keyword">if</span> <label for="r51" class="ident">config</label>.<a href="#line-246" class="ident">XDSServer</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-455"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Required field %q not found in bootstrap %s"</span>, <span class="lit-string">"xds_servers"</span>, <label for="r52" class="ident">jsonData</label>[<span class="lit-string">"xds_servers"</span>])</code></span>
+<span class="codeline" id="line-456"><code>	}</code></span>
+<span class="codeline" id="line-457"><code>	<span class="keyword">if</span> <label for="r51" class="ident">config</label>.<a href="#line-246" class="ident">XDSServer</a>.<a href="#line-100" class="ident">ServerURI</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-458"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Required field %q not found in bootstrap %s"</span>, <span class="lit-string">"xds_servers.server_uri"</span>, <label for="r52" class="ident">jsonData</label>[<span class="lit-string">"xds_servers"</span>])</code></span>
+<span class="codeline" id="line-459"><code>	}</code></span>
+<span class="codeline" id="line-460"><code>	<span class="keyword">if</span> <label for="r51" class="ident">config</label>.<a href="#line-246" class="ident">XDSServer</a>.<a href="#line-103" class="ident">Creds</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-461"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: Required field %q doesn't contain valid value in bootstrap %s"</span>, <span class="lit-string">"xds_servers.channel_creds"</span>, <label for="r52" class="ident">jsonData</label>[<span class="lit-string">"xds_servers"</span>])</code></span>
+<span class="codeline" id="line-462"><code>	}</code></span>
+<span class="codeline" id="line-463"><code>	<span class="comment">// Post-process the authorities' client listener resource template field:</span></code></span>
+<span class="codeline" id="line-464"><code><span class="comment">	// - if set, it must start with "xdstp://&lt;authority_name&gt;/"</span></code></span>
+<span class="codeline" id="line-465"><code><span class="comment">	// - if not set, it defaults to "xdstp://&lt;authority_name&gt;/envoy.config.listener.v3.Listener/%s"</span></code></span>
+<span class="codeline" id="line-466"><code>	<span class="keyword">for</span> <label for="r78" class="ident">name</label>, <label for="r79" class="ident">authority</label> := <span class="keyword">range</span> <label for="r51" class="ident">config</label>.<a href="#line-294" class="ident">Authorities</a> {</code></span>
+<span class="codeline" id="line-467"><code>		<label for="r80" class="ident">prefix</label> := <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"xdstp://%s"</span>, <a href="../../../../../../../pkg/net/url.html" class="ident i4">url</a>.<a href="../../../../../../net/url/url.go.html#line-280" class="ident">PathEscape</a>(<label for="r78" class="ident">name</label>))</code></span>
+<span class="codeline" id="line-468"><code>		<span class="keyword">if</span> <label for="r79" class="ident">authority</label>.<a href="#line-208" class="ident">ClientListenerResourceNameTemplate</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-469"><code>			<label for="r79" class="ident">authority</label>.<a href="#line-208" class="ident">ClientListenerResourceNameTemplate</a> = <label for="r80" class="ident">prefix</label> + <span class="lit-string">"/envoy.config.listener.v3.Listener/%s"</span></code></span>
+<span class="codeline" id="line-470"><code>			<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-471"><code>		}</code></span>
+<span class="codeline" id="line-472"><code>		<span class="keyword">if</span> !<a href="../../../../../../../pkg/strings.html" class="ident i5">strings</a>.<a href="../../../../../../strings/strings.go.html#line-448" class="ident">HasPrefix</a>(<label for="r79" class="ident">authority</label>.<a href="#line-208" class="ident">ClientListenerResourceNameTemplate</a>, <label for="r80" class="ident">prefix</label>) {</code></span>
+<span class="codeline" id="line-473"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: field ClientListenerResourceNameTemplate %q of authority %q doesn't start with prefix %q"</span>, <label for="r79" class="ident">authority</label>.<a href="#line-208" class="ident">ClientListenerResourceNameTemplate</a>, <label for="r78" class="ident">name</label>, <label for="r80" class="ident">prefix</label>)</code></span>
+<span class="codeline" id="line-474"><code>		}</code></span>
+<span class="codeline" id="line-475"><code>	}</code></span>
+<span class="codeline" id="line-476"><code></code></span>
+<span class="codeline" id="line-477"><code>	<span class="keyword">if</span> <label for="r81" class="ident">err</label> := <label for="r51" class="ident">config</label>.<a href="#line-496" class="ident">updateNodeProto</a>(<label for="r54" class="ident">node</label>); <label for="r81" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-478"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r81" class="ident">err</label></code></span>
+<span class="codeline" id="line-479"><code>	}</code></span>
+<span class="codeline" id="line-480"><code>	<a href="logging.go.html#line-28" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Bootstrap config for creating xds-client: %v"</span>, <a href="../../../../../../../pkg/google.golang.org/grpc/internal/pretty.html" class="ident i15">pretty</a>.<a href="../../../../internal/pretty/pretty.go.html#line-38" class="ident">ToJSON</a>(<label for="r51" class="ident">config</label>))</code></span>
+<span class="codeline" id="line-481"><code>	<span class="keyword">return</span> <label for="r51" class="ident">config</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-482"><code>}</code></span>
+<span class="codeline" id="line-483"><code></code></span>
+<span class="codeline" id="line-484"><code><span class="comment">// updateNodeProto updates the node proto read from the bootstrap file.</span></code></span>
+<span class="codeline" id="line-485"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-486"><code><span class="comment">// The input node is a v3.Node protobuf message corresponding to the JSON</span></code></span>
+<span class="codeline" id="line-487"><code><span class="comment">// contents found in the bootstrap file. This method performs some post</span></code></span>
+<span class="codeline" id="line-488"><code><span class="comment">// processing on it:</span></code></span>
+<span class="codeline" id="line-489"><code><span class="comment">// 1. If the node is nil, we create an empty one here. That way, callers of this</span></code></span>
+<span class="codeline" id="line-490"><code><span class="comment">// function can always expect that the NodeProto field is non-nil.</span></code></span>
+<span class="codeline" id="line-491"><code><span class="comment">// 2. Some additional fields which are not expected to be set in the bootstrap</span></code></span>
+<span class="codeline" id="line-492"><code><span class="comment">// file are populated here.</span></code></span>
+<span class="codeline" id="line-493"><code><span class="comment">// 3. For each server config (both top level and in each authority), we set its</span></code></span>
+<span class="codeline" id="line-494"><code><span class="comment">// node field to the v3.Node, or a v2.Node with the same content, depending on</span></code></span>
+<span class="codeline" id="line-495"><code><span class="comment">// the server's transport API version.</span></code></span>
+<span class="codeline" id="line-496"><code><span class="keyword">func</span> (<label for="r82" class="ident">c</label> *<a href="#line-241" class="ident">Config</a>) <label for="r83" class="ident">updateNodeProto</label>(<label for="r84" class="ident">node</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-497"><code>	<label for="r85" class="ident">v3</label> := <label for="r84" class="ident">node</label></code></span>
+<span class="codeline" id="line-498"><code>	<span class="keyword">if</span> <label for="r85" class="ident">v3</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-499"><code>		<label for="r85" class="ident">v3</label> = &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a>{}</code></span>
+<span class="codeline" id="line-500"><code>	}</code></span>
+<span class="codeline" id="line-501"><code>	<label for="r85" class="ident">v3</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-539" class="ident">UserAgentName</a> = <a href="#line-54" class="ident">gRPCUserAgentName</a></code></span>
+<span class="codeline" id="line-502"><code>	<label for="r85" class="ident">v3</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-543" class="ident">UserAgentVersionType</a> = &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i19">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-682" class="ident">Node_UserAgentVersion</a>{<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-685" class="ident">UserAgentVersion</a>: <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i8">grpc</a>.<a href="../../../../version.go.html#line-22" class="ident">Version</a>}</code></span>
+<span class="codeline" id="line-503"><code>	<label for="r85" class="ident">v3</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-551" class="ident">ClientFeatures</a> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r85" class="ident">v3</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-551" class="ident">ClientFeatures</a>, <a href="#line-55" class="ident">clientFeatureNoOverprovisioning</a>, <a href="#line-56" class="ident">clientFeatureResourceWrapper</a>)</code></span>
+<span class="codeline" id="line-504"><code></code></span>
+<span class="codeline" id="line-505"><code>	<label for="r86" class="ident">v3bytes</label>, <label for="r87" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-22" class="ident">Marshal</a>(<label for="r85" class="ident">v3</label>)</code></span>
+<span class="codeline" id="line-506"><code>	<span class="keyword">if</span> <label for="r87" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-507"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: proto.Marshal(%v): %v"</span>, <label for="r85" class="ident">v3</label>, <label for="r87" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-508"><code>	}</code></span>
+<span class="codeline" id="line-509"><code>	<label for="r88" class="ident">v2</label> := &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/api/v2/core.html" class="ident i18">v2corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-441" class="ident">Node</a>{}</code></span>
+<span class="codeline" id="line-510"><code>	<span class="keyword">if</span> <label for="r89" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r86" class="ident">v3bytes</label>, <label for="r88" class="ident">v2</label>); <label for="r89" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-511"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: proto.Unmarshal(%v): %v"</span>, <label for="r86" class="ident">v3bytes</label>, <label for="r89" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-512"><code>	}</code></span>
+<span class="codeline" id="line-513"><code>	<span class="comment">// BuildVersion is deprecated, and is replaced by user_agent_name and</span></code></span>
+<span class="codeline" id="line-514"><code><span class="comment">	// user_agent_version. But the management servers are still using the old</span></code></span>
+<span class="codeline" id="line-515"><code><span class="comment">	// field, so we will keep both set.</span></code></span>
+<span class="codeline" id="line-516"><code>	<label for="r88" class="ident">v2</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-477" class="ident">BuildVersion</a> = <a href="#line-64" class="ident">gRPCVersion</a></code></span>
+<span class="codeline" id="line-517"><code>	<label for="r88" class="ident">v2</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-484" class="ident">UserAgentVersionType</a> = &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/api/v2/core.html" class="ident i18">v2corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-621" class="ident">Node_UserAgentVersion</a>{<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-624" class="ident">UserAgentVersion</a>: <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i8">grpc</a>.<a href="../../../../version.go.html#line-22" class="ident">Version</a>}</code></span>
+<span class="codeline" id="line-518"><code></code></span>
+<span class="codeline" id="line-519"><code>	<span class="keyword">switch</span> <label for="r82" class="ident">c</label>.<a href="#line-246" class="ident">XDSServer</a>.<a href="#line-109" class="ident">TransportAPI</a> {</code></span>
+<span class="codeline" id="line-520"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-30" class="ident">TransportV2</a>:</code></span>
+<span class="codeline" id="line-521"><code>		<label for="r82" class="ident">c</label>.<a href="#line-246" class="ident">XDSServer</a>.<a href="#line-116" class="ident">NodeProto</a> = <label for="r88" class="ident">v2</label></code></span>
+<span class="codeline" id="line-522"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-32" class="ident">TransportV3</a>:</code></span>
+<span class="codeline" id="line-523"><code>		<label for="r82" class="ident">c</label>.<a href="#line-246" class="ident">XDSServer</a>.<a href="#line-116" class="ident">NodeProto</a> = <label for="r85" class="ident">v3</label></code></span>
+<span class="codeline" id="line-524"><code>	}</code></span>
+<span class="codeline" id="line-525"><code></code></span>
+<span class="codeline" id="line-526"><code>	<span class="keyword">for</span> <label for="r90" class="ident">_</label>, <label for="r91" class="ident">a</label> := <span class="keyword">range</span> <label for="r82" class="ident">c</label>.<a href="#line-294" class="ident">Authorities</a> {</code></span>
+<span class="codeline" id="line-527"><code>		<span class="keyword">if</span> <label for="r91" class="ident">a</label>.<a href="#line-211" class="ident">XDSServer</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-528"><code>			<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-529"><code>		}</code></span>
+<span class="codeline" id="line-530"><code>		<span class="keyword">switch</span> <label for="r91" class="ident">a</label>.<a href="#line-211" class="ident">XDSServer</a>.<a href="#line-109" class="ident">TransportAPI</a> {</code></span>
+<span class="codeline" id="line-531"><code>		<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-30" class="ident">TransportV2</a>:</code></span>
+<span class="codeline" id="line-532"><code>			<label for="r91" class="ident">a</label>.<a href="#line-211" class="ident">XDSServer</a>.<a href="#line-116" class="ident">NodeProto</a> = <label for="r88" class="ident">v2</label></code></span>
+<span class="codeline" id="line-533"><code>		<span class="keyword">case</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i17">version</a>.<a href="../xdsresource/version/version.go.html#line-32" class="ident">TransportV3</a>:</code></span>
+<span class="codeline" id="line-534"><code>			<label for="r91" class="ident">a</label>.<a href="#line-211" class="ident">XDSServer</a>.<a href="#line-116" class="ident">NodeProto</a> = <label for="r85" class="ident">v3</label></code></span>
+<span class="codeline" id="line-535"><code>		}</code></span>
+<span class="codeline" id="line-536"><code>	}</code></span>
+<span class="codeline" id="line-537"><code></code></span>
+<span class="codeline" id="line-538"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-539"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

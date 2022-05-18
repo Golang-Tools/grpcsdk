@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: type.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	type.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"time"</span></label></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3.html" class="ident i1">v3discoverypb</a> <label for="i1"><span class="lit-string i1">"github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-27"><code>)</code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// UpdateValidatorFunc performs validations on update structs using</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">// context/logic available at the xdsClient layer. Since these validation are</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// performed on internal update structs, they can be shared between different</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// API clients.</span></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UpdateValidatorFunc" class="ident">UpdateValidatorFunc</a> <span class="keyword">func</span>(<span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-34"><code></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// UpdateMetadata contains the metadata for each update, including timestamp,</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// raw message, and so on.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UpdateMetadata" class="ident">UpdateMetadata</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-38"><code>	<span class="comment">// Status is the status of this resource, e.g. ACKed, NACKed, or</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">	// Not_exist(removed).</span></code></span>
+<span class="codeline" id="line-40"><code>	Status <a href="#line-97" class="ident">ServiceStatus</a></code></span>
+<span class="codeline" id="line-41"><code>	<span class="comment">// Version is the version of the xds response. Note that this is the version</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	// of the resource in use (previous ACKed). If a response is NACKed, the</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">	// NACKed version is in ErrState.</span></code></span>
+<span class="codeline" id="line-44"><code>	Version <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-45"><code>	<span class="comment">// Timestamp is when the response is received.</span></code></span>
+<span class="codeline" id="line-46"><code>	Timestamp <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-127" class="ident">Time</a></code></span>
+<span class="codeline" id="line-47"><code>	<span class="comment">// ErrState is set when the update is NACKed.</span></code></span>
+<span class="codeline" id="line-48"><code>	ErrState *<a href="#line-118" class="ident">UpdateErrorMetadata</a></code></span>
+<span class="codeline" id="line-49"><code>}</code></span>
+<span class="codeline" id="line-50"><code></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">// IsListenerResource returns true if the provider URL corresponds to an xDS</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">// Listener resource.</span></code></span>
+<span class="codeline" id="line-53"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-IsListenerResource" class="ident">IsListenerResource</a></label>(<label for="r1" class="ident">url</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-54"><code>	<span class="keyword">return</span> <label for="r1" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-46" class="ident">V2ListenerURL</a> || <label for="r1" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-58" class="ident">V3ListenerURL</a></code></span>
+<span class="codeline" id="line-55"><code>}</code></span>
+<span class="codeline" id="line-56"><code></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">// IsHTTPConnManagerResource returns true if the provider URL corresponds to an xDS</span></code></span>
+<span class="codeline" id="line-58"><code><span class="comment">// HTTPConnManager resource.</span></code></span>
+<span class="codeline" id="line-59"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-IsHTTPConnManagerResource" class="ident">IsHTTPConnManagerResource</a></label>(<label for="r3" class="ident">url</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-60"><code>	<span class="keyword">return</span> <label for="r3" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-50" class="ident">V2HTTPConnManagerURL</a> || <label for="r3" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-62" class="ident">V3HTTPConnManagerURL</a></code></span>
+<span class="codeline" id="line-61"><code>}</code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">// IsRouteConfigResource returns true if the provider URL corresponds to an xDS</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">// RouteConfig resource.</span></code></span>
+<span class="codeline" id="line-65"><code><span class="keyword">func</span> <label for="r4" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-IsRouteConfigResource" class="ident">IsRouteConfigResource</a></label>(<label for="r5" class="ident">url</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-66"><code>	<span class="keyword">return</span> <label for="r5" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-47" class="ident">V2RouteConfigURL</a> || <label for="r5" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-59" class="ident">V3RouteConfigURL</a></code></span>
+<span class="codeline" id="line-67"><code>}</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// IsClusterResource returns true if the provider URL corresponds to an xDS</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// Cluster resource.</span></code></span>
+<span class="codeline" id="line-71"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-IsClusterResource" class="ident">IsClusterResource</a></label>(<label for="r7" class="ident">url</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-72"><code>	<span class="keyword">return</span> <label for="r7" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-48" class="ident">V2ClusterURL</a> || <label for="r7" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-60" class="ident">V3ClusterURL</a></code></span>
+<span class="codeline" id="line-73"><code>}</code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">// IsEndpointsResource returns true if the provider URL corresponds to an xDS</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">// Endpoints resource.</span></code></span>
+<span class="codeline" id="line-77"><code><span class="keyword">func</span> <label for="r8" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-IsEndpointsResource" class="ident">IsEndpointsResource</a></label>(<label for="r9" class="ident">url</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-78"><code>	<span class="keyword">return</span> <label for="r9" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-49" class="ident">V2EndpointsURL</a> || <label for="r9" class="ident">url</label> == <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-61" class="ident">V3EndpointsURL</a></code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">// unwrapResource unwraps and returns the inner resource if it's in a resource</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">// wrapper. The original resource is returned if it's not wrapped.</span></code></span>
+<span class="codeline" id="line-83"><code><span class="keyword">func</span> <label for="r10" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-unwrapResource" class="ident">unwrapResource</a></label>(<label for="r11" class="ident">r</label> *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i4">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>) (*<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i4">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-84"><code>	<label for="r12" class="ident">url</label> := <label for="r11" class="ident">r</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-403" class="ident">GetTypeUrl</a>()</code></span>
+<span class="codeline" id="line-85"><code>	<span class="keyword">if</span> <label for="r12" class="ident">url</label> != <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-45" class="ident">V2ResourceWrapperURL</a> &amp;&amp; <label for="r12" class="ident">url</label> != <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i3">version</a>.<a href="version/version.go.html#line-57" class="ident">V3ResourceWrapperURL</a> {</code></span>
+<span class="codeline" id="line-86"><code>		<span class="comment">// Not wrapped.</span></code></span>
+<span class="codeline" id="line-87"><code>		<span class="keyword">return</span> <label for="r11" class="ident">r</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-88"><code>	}</code></span>
+<span class="codeline" id="line-89"><code>	<label for="r13" class="ident">inner</label> := &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3.html" class="ident i1">v3discoverypb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3/discovery.pb.go.html#line-530" class="ident">Resource</a>{}</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r14" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i2">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r11" class="ident">r</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-410" class="ident">GetValue</a>(), <label for="r13" class="ident">inner</label>); <label for="r14" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r14" class="ident">err</label></code></span>
+<span class="codeline" id="line-92"><code>	}</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">return</span> <label for="r13" class="ident">inner</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3/discovery.pb.go.html#line-543" class="ident">Resource</a>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-94"><code>}</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">// ServiceStatus is the status of the update.</span></code></span>
+<span class="codeline" id="line-97"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatus" class="ident">ServiceStatus</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-98"><code></code></span>
+<span class="codeline" id="line-99"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-100"><code>	<span class="comment">// ServiceStatusUnknown is the default state, before a watch is started for</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">	// the resource.</span></code></span>
+<span class="codeline" id="line-102"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatusUnknown" class="ident">ServiceStatusUnknown</a> <a href="#line-97" class="ident">ServiceStatus</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-103"><code>	<span class="comment">// ServiceStatusRequested is when the watch is started, but before and</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">	// response is received.</span></code></span>
+<span class="codeline" id="line-105"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatusRequested" class="ident">ServiceStatusRequested</a></code></span>
+<span class="codeline" id="line-106"><code>	<span class="comment">// ServiceStatusNotExist is when the resource doesn't exist in</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">	// state-of-the-world responses (e.g. LDS and CDS), which means the resource</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">	// is removed by the management server.</span></code></span>
+<span class="codeline" id="line-109"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatusNotExist" class="ident">ServiceStatusNotExist</a> <span class="comment">// Resource is removed in the server, in LDS/CDS.</span></code></span>
+<span class="codeline" id="line-110"><code>	<span class="comment">// ServiceStatusACKed is when the resource is ACKed.</span></code></span>
+<span class="codeline" id="line-111"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatusACKed" class="ident">ServiceStatusACKed</a></code></span>
+<span class="codeline" id="line-112"><code>	<span class="comment">// ServiceStatusNACKed is when the resource is NACKed.</span></code></span>
+<span class="codeline" id="line-113"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ServiceStatusNACKed" class="ident">ServiceStatusNACKed</a></code></span>
+<span class="codeline" id="line-114"><code>)</code></span>
+<span class="codeline" id="line-115"><code></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">// UpdateErrorMetadata is part of UpdateMetadata. It contains the error state</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">// when a response is NACKed.</span></code></span>
+<span class="codeline" id="line-118"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UpdateErrorMetadata" class="ident">UpdateErrorMetadata</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-119"><code>	<span class="comment">// Version is the version of the NACKed response.</span></code></span>
+<span class="codeline" id="line-120"><code>	Version <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-121"><code>	<span class="comment">// Err contains why the response was NACKed.</span></code></span>
+<span class="codeline" id="line-122"><code>	Err <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-123"><code>	<span class="comment">// Timestamp is when the NACKed response was received.</span></code></span>
+<span class="codeline" id="line-124"><code>	Timestamp <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-127" class="ident">Time</a></code></span>
+<span class="codeline" id="line-125"><code>}</code></span>
+<span class="codeline" id="line-126"><code></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">// UpdateWithMD contains the raw message of the update and the metadata,</span></code></span>
+<span class="codeline" id="line-128"><code><span class="comment">// including version, raw message, timestamp.</span></code></span>
+<span class="codeline" id="line-129"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-130"><code><span class="comment">// This is to be used for config dump and CSDS, not directly by users (like</span></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">// resolvers/balancers).</span></code></span>
+<span class="codeline" id="line-132"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UpdateWithMD" class="ident">UpdateWithMD</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-133"><code>	MD  <a href="#line-37" class="ident">UpdateMetadata</a></code></span>
+<span class="codeline" id="line-134"><code>	Raw *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i4">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a></code></span>
+<span class="codeline" id="line-135"><code>}</code></span>
+<span class="codeline" id="line-136"><code></code></span>
+<span class="codeline" id="line-137"><code><span class="comment">// ResourceType identifies resources in a transport protocol agnostic way. These</span></code></span>
+<span class="codeline" id="line-138"><code><span class="comment">// will be used in transport version agnostic code, while the versioned API</span></code></span>
+<span class="codeline" id="line-139"><code><span class="comment">// clients will map these to appropriate version URLs.</span></code></span>
+<span class="codeline" id="line-140"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ResourceType" class="ident">ResourceType</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-141"><code></code></span>
+<span class="codeline" id="line-142"><code><span class="comment">// Version agnostic resource type constants.</span></code></span>
+<span class="codeline" id="line-143"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-144"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UnknownResource" class="ident">UnknownResource</a> <a href="#line-140" class="ident">ResourceType</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-145"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ListenerResource" class="ident">ListenerResource</a></code></span>
+<span class="codeline" id="line-146"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HTTPConnManagerResource" class="ident">HTTPConnManagerResource</a></code></span>
+<span class="codeline" id="line-147"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteConfigResource" class="ident">RouteConfigResource</a></code></span>
+<span class="codeline" id="line-148"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterResource" class="ident">ClusterResource</a></code></span>
+<span class="codeline" id="line-149"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-EndpointsResource" class="ident">EndpointsResource</a></code></span>
+<span class="codeline" id="line-150"><code>)</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code><span class="keyword">func</span> (<label for="r15" class="ident">r</label> <a href="#line-140" class="ident">ResourceType</a>) <label for="r16" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.ResourceType.html#name-.String" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-153"><code>	<span class="keyword">switch</span> <label for="r15" class="ident">r</label> {</code></span>
+<span class="codeline" id="line-154"><code>	<span class="keyword">case</span> <a href="#line-145" class="ident">ListenerResource</a>:</code></span>
+<span class="codeline" id="line-155"><code>		<span class="keyword">return</span> <span class="lit-string">"ListenerResource"</span></code></span>
+<span class="codeline" id="line-156"><code>	<span class="keyword">case</span> <a href="#line-146" class="ident">HTTPConnManagerResource</a>:</code></span>
+<span class="codeline" id="line-157"><code>		<span class="keyword">return</span> <span class="lit-string">"HTTPConnManagerResource"</span></code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">case</span> <a href="#line-147" class="ident">RouteConfigResource</a>:</code></span>
+<span class="codeline" id="line-159"><code>		<span class="keyword">return</span> <span class="lit-string">"RouteConfigResource"</span></code></span>
+<span class="codeline" id="line-160"><code>	<span class="keyword">case</span> <a href="#line-148" class="ident">ClusterResource</a>:</code></span>
+<span class="codeline" id="line-161"><code>		<span class="keyword">return</span> <span class="lit-string">"ClusterResource"</span></code></span>
+<span class="codeline" id="line-162"><code>	<span class="keyword">case</span> <a href="#line-149" class="ident">EndpointsResource</a>:</code></span>
+<span class="codeline" id="line-163"><code>		<span class="keyword">return</span> <span class="lit-string">"EndpointsResource"</span></code></span>
+<span class="codeline" id="line-164"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-165"><code>		<span class="keyword">return</span> <span class="lit-string">"UnknownResource"</span></code></span>
+<span class="codeline" id="line-166"><code>	}</code></span>
+<span class="codeline" id="line-167"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: csds.go in package google.golang.org/grpc/xds/csds</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	csds.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html">google.golang.org/grpc/xds/csds</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11,
+input[id=i12]:checked ~pre .i12,
+input[id=i13]:checked ~pre .i13,
+input[id=i14]:checked ~pre .i14,
+input[id=i15]:checked ~pre .i15
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+<input id="i12" type="radio" name="i"/>
+<input id="i13" type="radio" name="i"/>
+<input id="i14" type="radio" name="i"/>
+<input id="i15" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package csds implements features to dump the status (xDS responses) the</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// xds_client is using.</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// Notice: This package is EXPERIMENTAL and may be changed or removed in a later</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// release.</span></code></span></div><span class="codeline" id="line-24"><code><span class="keyword">package</span> csds</code></span>
+<span class="codeline" id="line-25"><code></code></span>
+<span class="codeline" id="line-26"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-27"><code>	<label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i1"><span class="lit-string i1">"io"</span></label></code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>	<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a> <label for="i2"><span class="lit-string i2">"github.com/envoyproxy/go-control-plane/envoy/admin/v3"</span></label></code></span>
+<span class="codeline" id="line-31"><code>	<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/api/v2/core.html" class="ident i3">v2corepb</a> <label for="i3"><span class="lit-string i3">"github.com/envoyproxy/go-control-plane/envoy/api/v2/core"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i4">v3corepb</a> <label for="i4"><span class="lit-string i4">"github.com/envoyproxy/go-control-plane/envoy/config/core/v3"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i5">v3statusgrpc</a> <label for="i5"><span class="lit-string i5">"github.com/envoyproxy/go-control-plane/envoy/service/status/v3"</span></label></code></span>
+<span class="codeline" id="line-34"><code>	<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a> <label for="i6"><span class="lit-string i6">"github.com/envoyproxy/go-control-plane/envoy/service/status/v3"</span></label></code></span>
+<span class="codeline" id="line-35"><code>	<label for="i7"><span class="lit-string i7">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-36"><code>	<label for="i8"><span class="lit-string i8">"google.golang.org/grpc/codes"</span></label></code></span>
+<span class="codeline" id="line-37"><code>	<label for="i9"><span class="lit-string i9">"google.golang.org/grpc/grpclog"</span></label></code></span>
+<span class="codeline" id="line-38"><code>	<label for="i10"><span class="lit-string i10">"google.golang.org/grpc/status"</span></label></code></span>
+<span class="codeline" id="line-39"><code>	<label for="i11"><span class="lit-string i11">"google.golang.org/grpc/xds/internal/xdsclient"</span></label></code></span>
+<span class="codeline" id="line-40"><code>	<label for="i12"><span class="lit-string i12">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"</span></label></code></span>
+<span class="codeline" id="line-41"><code>	<label for="i13"><span class="lit-string i13">"google.golang.org/protobuf/types/known/timestamppb"</span></label></code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version/v2.html" class="ident i14">_</a> <label for="i14"><span class="lit-string i14">"google.golang.org/grpc/xds/internal/xdsclient/controller/version/v2"</span></label> <span class="comment">// Register v2 xds_client.</span></code></span>
+<span class="codeline" id="line-44"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.html" class="ident i15">_</a> <label for="i15"><span class="lit-string i15">"google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3"</span></label> <span class="comment">// Register v3 xds_client.</span></code></span>
+<span class="codeline" id="line-45"><code>)</code></span>
+<span class="codeline" id="line-46"><code></code></span>
+<span class="codeline" id="line-47"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-48"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-logger" class="ident">logger</a>       = <a href="../../../../../pkg/google.golang.org/grpc/grpclog.html" class="ident i9">grpclog</a>.<a href="../../grpclog/component.go.html#line-110" class="ident">Component</a>(<span class="lit-string">"xds"</span>)</code></span>
+<span class="codeline" id="line-49"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-newXDSClient" class="ident">newXDSClient</a> = <span class="keyword">func</span>() <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html" class="ident i11">xdsclient</a>.<a href="../internal/xdsclient/attributes.go.html#line-34" class="ident">XDSClient</a> {</code></span>
+<span class="codeline" id="line-50"><code>		<label for="r0" class="ident">c</label>, <label for="r1" class="ident">err</label> := <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html" class="ident i11">xdsclient</a>.<a href="../internal/xdsclient/singleton.go.html#line-85" class="ident">New</a>()</code></span>
+<span class="codeline" id="line-51"><code>		<span class="keyword">if</span> <label for="r1" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-52"><code>			<a href="#line-48" class="ident">logger</a>.<a href="../../grpclog/loggerv2.go.html#line-47" class="ident">Warningf</a>(<span class="lit-string">"failed to create xds client: %v"</span>, <label for="r1" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-53"><code>			<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-54"><code>		}</code></span>
+<span class="codeline" id="line-55"><code>		<span class="keyword">return</span> <label for="r0" class="ident">c</label></code></span>
+<span class="codeline" id="line-56"><code>	}</code></span>
+<span class="codeline" id="line-57"><code>)</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-60"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-listenerTypeURL" class="ident">listenerTypeURL</a>    = <span class="lit-string">"envoy.config.listener.v3.Listener"</span></code></span>
+<span class="codeline" id="line-61"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-routeConfigTypeURL" class="ident">routeConfigTypeURL</a> = <span class="lit-string">"envoy.config.route.v3.RouteConfiguration"</span></code></span>
+<span class="codeline" id="line-62"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-clusterTypeURL" class="ident">clusterTypeURL</a>     = <span class="lit-string">"envoy.config.cluster.v3.Cluster"</span></code></span>
+<span class="codeline" id="line-63"><code>	<a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-endpointsTypeURL" class="ident">endpointsTypeURL</a>   = <span class="lit-string">"envoy.config.endpoint.v3.ClusterLoadAssignment"</span></code></span>
+<span class="codeline" id="line-64"><code>)</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">// ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.</span></code></span>
+<span class="codeline" id="line-67"><code><span class="keyword">type</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-ClientStatusDiscoveryServer" class="ident">ClientStatusDiscoveryServer</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-68"><code>	<span class="comment">// xdsClient will always be the same in practice. But we keep a copy in each</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">	// server instance for testing.</span></code></span>
+<span class="codeline" id="line-70"><code>	xdsClient <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html" class="ident i11">xdsclient</a>.<a href="../internal/xdsclient/attributes.go.html#line-34" class="ident">XDSClient</a></code></span>
+<span class="codeline" id="line-71"><code>}</code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">// NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be</span></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">// registered on a gRPC server.</span></code></span>
+<span class="codeline" id="line-75"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-NewClientStatusDiscoveryServer" class="ident">NewClientStatusDiscoveryServer</a></label>() (*<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-76"><code>	<span class="keyword">return</span> &amp;<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>{<a href="#line-70" class="ident">xdsClient</a>: <a href="#line-49" class="ident">newXDSClient</a>()}, <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-77"><code>}</code></span>
+<span class="codeline" id="line-78"><code></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">// StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.</span></code></span>
+<span class="codeline" id="line-80"><code><span class="keyword">func</span> (<label for="r3" class="ident">s</label> *<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>) <label for="r4" class="ident"><a href="../../../../../imp/google.golang.org/grpc/xds/csds.ClientStatusDiscoveryServer.html#name-.StreamClientStatus" class="ident">StreamClientStatus</a></label>(<label for="r5" class="ident">stream</label> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statusgrpc</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-1050" class="ident">ClientStatusDiscoveryService_StreamClientStatusServer</a>) <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-81"><code>	<span class="keyword">for</span> {</code></span>
+<span class="codeline" id="line-82"><code>		<label for="r6" class="ident">req</label>, <label for="r7" class="ident">err</label> := <label for="r5" class="ident">stream</label>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-1052" class="ident">Recv</a>()</code></span>
+<span class="codeline" id="line-83"><code>		<span class="keyword">if</span> <label for="r7" class="ident">err</label> == <a href="../../../../../pkg/io.html" class="ident i1">io</a>.<a href="../../../../io/io.go.html#line-44" class="ident">EOF</a> {</code></span>
+<span class="codeline" id="line-84"><code>			<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-85"><code>		}</code></span>
+<span class="codeline" id="line-86"><code>		<span class="keyword">if</span> <label for="r7" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-87"><code>			<span class="keyword">return</span> <label for="r7" class="ident">err</label></code></span>
+<span class="codeline" id="line-88"><code>		}</code></span>
+<span class="codeline" id="line-89"><code>		<label for="r8" class="ident">resp</label>, <label for="r7" class="ident">err</label> := <label for="r3" class="ident">s</label>.<a href="#line-108" class="ident">buildClientStatusRespForReq</a>(<label for="r6" class="ident">req</label>)</code></span>
+<span class="codeline" id="line-90"><code>		<span class="keyword">if</span> <label for="r7" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>			<span class="keyword">return</span> <label for="r7" class="ident">err</label></code></span>
+<span class="codeline" id="line-92"><code>		}</code></span>
+<span class="codeline" id="line-93"><code>		<span class="keyword">if</span> <label for="r9" class="ident">err</label> := <label for="r5" class="ident">stream</label>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-1051" class="ident">Send</a>(<label for="r8" class="ident">resp</label>); <label for="r9" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-94"><code>			<span class="keyword">return</span> <label for="r9" class="ident">err</label></code></span>
+<span class="codeline" id="line-95"><code>		}</code></span>
+<span class="codeline" id="line-96"><code>	}</code></span>
+<span class="codeline" id="line-97"><code>}</code></span>
+<span class="codeline" id="line-98"><code></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">// FetchClientStatus implementations interface ClientStatusDiscoveryServiceServer.</span></code></span>
+<span class="codeline" id="line-100"><code><span class="keyword">func</span> (<label for="r10" class="ident">s</label> *<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>) <label for="r11" class="ident"><a href="../../../../../imp/google.golang.org/grpc/xds/csds.ClientStatusDiscoveryServer.html#name-.FetchClientStatus" class="ident">FetchClientStatus</a></label>(<label for="r12" class="ident">_</label> <a href="../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r13" class="ident">req</label> *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-160" class="ident">ClientStatusRequest</a>) (*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-443" class="ident">ClientStatusResponse</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-101"><code>	<span class="keyword">return</span> <label for="r10" class="ident">s</label>.<a href="#line-108" class="ident">buildClientStatusRespForReq</a>(<label for="r13" class="ident">req</label>)</code></span>
+<span class="codeline" id="line-102"><code>}</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">// buildClientStatusRespForReq fetches the status from the client, and returns</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">// the response to be sent back to xdsclient.</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">// If it returns an error, the error is a status error.</span></code></span>
+<span class="codeline" id="line-108"><code><span class="keyword">func</span> (<label for="r14" class="ident">s</label> *<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>) <label for="r15" class="ident">buildClientStatusRespForReq</label>(<label for="r16" class="ident">req</label> *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-160" class="ident">ClientStatusRequest</a>) (*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-443" class="ident">ClientStatusResponse</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-109"><code>	<span class="keyword">if</span> <label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a> == <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-110"><code>		<span class="keyword">return</span> &amp;<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-443" class="ident">ClientStatusResponse</a>{}, <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-111"><code>	}</code></span>
+<span class="codeline" id="line-112"><code>	<span class="comment">// Field NodeMatchers is unsupported, by design</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">	// https://github.com/grpc/proposal/blob/master/A40-csds-support.md#detail-node-matching.</span></code></span>
+<span class="codeline" id="line-114"><code>	<span class="keyword">if</span> <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r16" class="ident">req</label>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-167" class="ident">NodeMatchers</a>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-115"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../pkg/google.golang.org/grpc/status.html" class="ident i10">status</a>.<a href="../../status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i8">codes</a>.<a href="../../codes/codes.go.html#line-57" class="ident">InvalidArgument</a>, <span class="lit-string">"node_matchers are not supported, request contains node_matchers: %v"</span>, <label for="r16" class="ident">req</label>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-167" class="ident">NodeMatchers</a>)</code></span>
+<span class="codeline" id="line-116"><code>	}</code></span>
+<span class="codeline" id="line-117"><code></code></span>
+<span class="codeline" id="line-118"><code>	<label for="r17" class="ident">lds</label> := <a href="#line-177" class="ident">dumpToGenericXdsConfig</a>(<a href="#line-60" class="ident">listenerTypeURL</a>, <label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-41" class="ident">DumpLDS</a>)</code></span>
+<span class="codeline" id="line-119"><code>	<label for="r18" class="ident">rds</label> := <a href="#line-177" class="ident">dumpToGenericXdsConfig</a>(<a href="#line-61" class="ident">routeConfigTypeURL</a>, <label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-42" class="ident">DumpRDS</a>)</code></span>
+<span class="codeline" id="line-120"><code>	<label for="r19" class="ident">cds</label> := <a href="#line-177" class="ident">dumpToGenericXdsConfig</a>(<a href="#line-62" class="ident">clusterTypeURL</a>, <label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-43" class="ident">DumpCDS</a>)</code></span>
+<span class="codeline" id="line-121"><code>	<label for="r20" class="ident">eds</label> := <a href="#line-177" class="ident">dumpToGenericXdsConfig</a>(<a href="#line-63" class="ident">endpointsTypeURL</a>, <label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-44" class="ident">DumpEDS</a>)</code></span>
+<span class="codeline" id="line-122"><code>	<label for="r21" class="ident">configs</label> := <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-495" class="ident">ClientConfig_GenericXdsConfig</a>, <span class="lit-number">0</span>, <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r17" class="ident">lds</label>)+<a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r18" class="ident">rds</label>)+<a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r19" class="ident">cds</label>)+<a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r20" class="ident">eds</label>))</code></span>
+<span class="codeline" id="line-123"><code>	<label for="r21" class="ident">configs</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r21" class="ident">configs</label>, <label for="r17" class="ident">lds</label>...)</code></span>
+<span class="codeline" id="line-124"><code>	<label for="r21" class="ident">configs</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r21" class="ident">configs</label>, <label for="r18" class="ident">rds</label>...)</code></span>
+<span class="codeline" id="line-125"><code>	<label for="r21" class="ident">configs</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r21" class="ident">configs</label>, <label for="r19" class="ident">cds</label>...)</code></span>
+<span class="codeline" id="line-126"><code>	<label for="r21" class="ident">configs</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r21" class="ident">configs</label>, <label for="r20" class="ident">eds</label>...)</code></span>
+<span class="codeline" id="line-127"><code></code></span>
+<span class="codeline" id="line-128"><code>	<label for="r22" class="ident">ret</label> := &amp;<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-443" class="ident">ClientStatusResponse</a>{</code></span>
+<span class="codeline" id="line-129"><code>		<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-449" class="ident">Config</a>: []*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-372" class="ident">ClientConfig</a>{</code></span>
+<span class="codeline" id="line-130"><code>			{</code></span>
+<span class="codeline" id="line-131"><code>				<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-378" class="ident">Node</a>:              <a href="#line-156" class="ident">nodeProtoToV3</a>(<label for="r14" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-46" class="ident">BootstrapConfig</a>().<a href="../internal/xdsclient/bootstrap/bootstrap.go.html#line-246" class="ident">XDSServer</a>.<a href="../internal/xdsclient/bootstrap/bootstrap.go.html#line-116" class="ident">NodeProto</a>),</code></span>
+<span class="codeline" id="line-132"><code>				<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-386" class="ident">GenericXdsConfigs</a>: <label for="r21" class="ident">configs</label>,</code></span>
+<span class="codeline" id="line-133"><code>			},</code></span>
+<span class="codeline" id="line-134"><code>		},</code></span>
+<span class="codeline" id="line-135"><code>	}</code></span>
+<span class="codeline" id="line-136"><code>	<span class="keyword">return</span> <label for="r22" class="ident">ret</label>, <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-137"><code>}</code></span>
+<span class="codeline" id="line-138"><code></code></span>
+<span class="codeline" id="line-139"><code><span class="comment">// Close cleans up the resources.</span></code></span>
+<span class="codeline" id="line-140"><code><span class="keyword">func</span> (<label for="r23" class="ident">s</label> *<a href="#line-67" class="ident">ClientStatusDiscoveryServer</a>) <label for="r24" class="ident">Close</label>() {</code></span>
+<span class="codeline" id="line-141"><code>	<span class="keyword">if</span> <label for="r23" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-142"><code>		<label for="r23" class="ident">s</label>.<a href="#line-70" class="ident">xdsClient</a>.<a href="../internal/xdsclient/attributes.go.html#line-47" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-143"><code>	}</code></span>
+<span class="codeline" id="line-144"><code>}</code></span>
+<span class="codeline" id="line-145"><code></code></span>
+<span class="codeline" id="line-146"><code><span class="comment">// nodeProtoToV3 converts the given proto into a v3.Node. n is from bootstrap</span></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">// config, it can be either v2.Node or v3.Node.</span></code></span>
+<span class="codeline" id="line-148"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-149"><code><span class="comment">// If n is already a v3.Node, return it.</span></code></span>
+<span class="codeline" id="line-150"><code><span class="comment">// If n is v2.Node, marshal and unmarshal it to v3.</span></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">// Otherwise, return nil.</span></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-153"><code><span class="comment">// The default case (not v2 or v3) is nil, instead of error, because the</span></code></span>
+<span class="codeline" id="line-154"><code><span class="comment">// resources in the response are more important than the node. The worst case is</span></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">// that the user will receive no Node info, but will still get resources.</span></code></span>
+<span class="codeline" id="line-156"><code><span class="keyword">func</span> <label for="r25" class="ident"><a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-nodeProtoToV3" class="ident">nodeProtoToV3</a></label>(<label for="r26" class="ident">n</label> <a href="../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i4">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a> {</code></span>
+<span class="codeline" id="line-157"><code>	<span class="keyword">var</span> <label for="r27" class="ident">node</label> *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i4">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a></code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">switch</span> nn := <label for="r26" class="ident">n</label>.(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-159"><code>	<span class="keyword">case</span> *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i4">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a>:</code></span>
+<span class="codeline" id="line-160"><code>		<label for="r27" class="ident">node</label> = <label for="r28" class="ident">nn</label></code></span>
+<span class="codeline" id="line-161"><code>	<span class="keyword">case</span> *<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/api/v2/core.html" class="ident i3">v2corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/api/v2/core/base.pb.go.html#line-441" class="ident">Node</a>:</code></span>
+<span class="codeline" id="line-162"><code>		<label for="r29" class="ident">v2</label>, <label for="r30" class="ident">err</label> := <a href="../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../github.com/golang/protobuf/proto/wire.go.html#line-22" class="ident">Marshal</a>(<label for="r31" class="ident">nn</label>)</code></span>
+<span class="codeline" id="line-163"><code>		<span class="keyword">if</span> <label for="r30" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-164"><code>			<a href="#line-48" class="ident">logger</a>.<a href="../../grpclog/loggerv2.go.html#line-47" class="ident">Warningf</a>(<span class="lit-string">"Failed to marshal node (%v): %v"</span>, <label for="r26" class="ident">n</label>, <label for="r30" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-165"><code>			<span class="keyword">break</span></code></span>
+<span class="codeline" id="line-166"><code>		}</code></span>
+<span class="codeline" id="line-167"><code>		<label for="r27" class="ident">node</label> = <a href="../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i4">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-501" class="ident">Node</a>)</code></span>
+<span class="codeline" id="line-168"><code>		<span class="keyword">if</span> <label for="r32" class="ident">err</label> := <a href="../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i7">proto</a>.<a href="../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r29" class="ident">v2</label>, <label for="r27" class="ident">node</label>); <label for="r32" class="ident">err</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-169"><code>			<a href="#line-48" class="ident">logger</a>.<a href="../../grpclog/loggerv2.go.html#line-47" class="ident">Warningf</a>(<span class="lit-string">"Failed to unmarshal node (%v): %v"</span>, <label for="r29" class="ident">v2</label>, <label for="r32" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-170"><code>		}</code></span>
+<span class="codeline" id="line-171"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-172"><code>		<a href="#line-48" class="ident">logger</a>.<a href="../../grpclog/loggerv2.go.html#line-47" class="ident">Warningf</a>(<span class="lit-string">"node from bootstrap is %#v, only v2.Node and v3.Node are supported"</span>, <label for="r33" class="ident">nn</label>)</code></span>
+<span class="codeline" id="line-173"><code>	}</code></span>
+<span class="codeline" id="line-174"><code>	<span class="keyword">return</span> <label for="r27" class="ident">node</label></code></span>
+<span class="codeline" id="line-175"><code>}</code></span>
+<span class="codeline" id="line-176"><code></code></span>
+<span class="codeline" id="line-177"><code><span class="keyword">func</span> <label for="r34" class="ident"><a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-dumpToGenericXdsConfig" class="ident">dumpToGenericXdsConfig</a></label>(<label for="r35" class="ident">typeURL</label> <a href="../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r36" class="ident">dumpF</label> <span class="keyword">func</span>() <span class="keyword">map</span>[<a href="../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-132" class="ident">UpdateWithMD</a>) []*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-495" class="ident">ClientConfig_GenericXdsConfig</a> {</code></span>
+<span class="codeline" id="line-178"><code>	<label for="r37" class="ident">dump</label> := <label for="r36" class="ident">dumpF</label>()</code></span>
+<span class="codeline" id="line-179"><code>	<label for="r38" class="ident">ret</label> := <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]*<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-495" class="ident">ClientConfig_GenericXdsConfig</a>, <span class="lit-number">0</span>, <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r37" class="ident">dump</label>))</code></span>
+<span class="codeline" id="line-180"><code>	<span class="keyword">for</span> <label for="r39" class="ident">name</label>, <label for="r40" class="ident">d</label> := <span class="keyword">range</span> <label for="r37" class="ident">dump</label> {</code></span>
+<span class="codeline" id="line-181"><code>		<label for="r41" class="ident">config</label> := &amp;<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html" class="ident i6">v3statuspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-495" class="ident">ClientConfig_GenericXdsConfig</a>{</code></span>
+<span class="codeline" id="line-182"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-502" class="ident">TypeUrl</a>:      <label for="r35" class="ident">typeURL</label>,</code></span>
+<span class="codeline" id="line-183"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-504" class="ident">Name</a>:         <label for="r39" class="ident">name</label>,</code></span>
+<span class="codeline" id="line-184"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-508" class="ident">VersionInfo</a>:  <label for="r40" class="ident">d</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-133" class="ident">MD</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-44" class="ident">Version</a>,</code></span>
+<span class="codeline" id="line-185"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-510" class="ident">XdsConfig</a>:    <label for="r40" class="ident">d</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-134" class="ident">Raw</a>,</code></span>
+<span class="codeline" id="line-186"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-512" class="ident">LastUpdated</a>:  <a href="../../../../../pkg/google.golang.org/protobuf/types/known/timestamppb.html" class="ident i13">timestamppb</a>.<a href="../../../protobuf/types/known/timestamppb/timestamp.pb.go.html#line-201" class="ident">New</a>(<label for="r40" class="ident">d</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-133" class="ident">MD</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-46" class="ident">Timestamp</a>),</code></span>
+<span class="codeline" id="line-187"><code>			<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-517" class="ident">ClientStatus</a>: <a href="#line-201" class="ident">serviceStatusToProto</a>(<label for="r40" class="ident">d</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-133" class="ident">MD</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-40" class="ident">Status</a>),</code></span>
+<span class="codeline" id="line-188"><code>		}</code></span>
+<span class="codeline" id="line-189"><code>		<span class="keyword">if</span> <label for="r42" class="ident">errState</label> := <label for="r40" class="ident">d</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-133" class="ident">MD</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-48" class="ident">ErrState</a>; <label for="r42" class="ident">errState</label> != <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-190"><code>			<label for="r41" class="ident">config</label>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3/csds.pb.go.html#line-524" class="ident">ErrorState</a> = &amp;<a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-165" class="ident">UpdateFailureState</a>{</code></span>
+<span class="codeline" id="line-191"><code>				<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-174" class="ident">LastUpdateAttempt</a>: <a href="../../../../../pkg/google.golang.org/protobuf/types/known/timestamppb.html" class="ident i13">timestamppb</a>.<a href="../../../protobuf/types/known/timestamppb/timestamp.pb.go.html#line-201" class="ident">New</a>(<label for="r42" class="ident">errState</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-124" class="ident">Timestamp</a>),</code></span>
+<span class="codeline" id="line-192"><code>				<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-176" class="ident">Details</a>:           <label for="r42" class="ident">errState</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-122" class="ident">Err</a>.Error(),</code></span>
+<span class="codeline" id="line-193"><code>				<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-179" class="ident">VersionInfo</a>:       <label for="r42" class="ident">errState</label>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-120" class="ident">Version</a>,</code></span>
+<span class="codeline" id="line-194"><code>			}</code></span>
+<span class="codeline" id="line-195"><code>		}</code></span>
+<span class="codeline" id="line-196"><code>		<label for="r38" class="ident">ret</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r38" class="ident">ret</label>, <label for="r41" class="ident">config</label>)</code></span>
+<span class="codeline" id="line-197"><code>	}</code></span>
+<span class="codeline" id="line-198"><code>	<span class="keyword">return</span> <label for="r38" class="ident">ret</label></code></span>
+<span class="codeline" id="line-199"><code>}</code></span>
+<span class="codeline" id="line-200"><code></code></span>
+<span class="codeline" id="line-201"><code><span class="keyword">func</span> <label for="r43" class="ident"><a href="../../../../../pkg/google.golang.org/grpc/xds/csds.html#name-serviceStatusToProto" class="ident">serviceStatusToProto</a></label>(<label for="r44" class="ident">serviceStatus</label> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-97" class="ident">ServiceStatus</a>) <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-29" class="ident">ClientResourceStatus</a> {</code></span>
+<span class="codeline" id="line-202"><code>	<span class="keyword">switch</span> <label for="r44" class="ident">serviceStatus</label> {</code></span>
+<span class="codeline" id="line-203"><code>	<span class="keyword">case</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-102" class="ident">ServiceStatusUnknown</a>:</code></span>
+<span class="codeline" id="line-204"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-33" class="ident">ClientResourceStatus_UNKNOWN</a></code></span>
+<span class="codeline" id="line-205"><code>	<span class="keyword">case</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-105" class="ident">ServiceStatusRequested</a>:</code></span>
+<span class="codeline" id="line-206"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-37" class="ident">ClientResourceStatus_REQUESTED</a></code></span>
+<span class="codeline" id="line-207"><code>	<span class="keyword">case</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-109" class="ident">ServiceStatusNotExist</a>:</code></span>
+<span class="codeline" id="line-208"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-43" class="ident">ClientResourceStatus_DOES_NOT_EXIST</a></code></span>
+<span class="codeline" id="line-209"><code>	<span class="keyword">case</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-111" class="ident">ServiceStatusACKed</a>:</code></span>
+<span class="codeline" id="line-210"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-45" class="ident">ClientResourceStatus_ACKED</a></code></span>
+<span class="codeline" id="line-211"><code>	<span class="keyword">case</span> <a href="../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i12">xdsresource</a>.<a href="../internal/xdsclient/xdsresource/type.go.html#line-113" class="ident">ServiceStatusNACKed</a>:</code></span>
+<span class="codeline" id="line-212"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-47" class="ident">ClientResourceStatus_NACKED</a></code></span>
+<span class="codeline" id="line-213"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-214"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/admin/v3.html" class="ident i2">v3adminpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3/config_dump.pb.go.html#line-33" class="ident">ClientResourceStatus_UNKNOWN</a></code></span>
+<span class="codeline" id="line-215"><code>	}</code></span>
+<span class="codeline" id="line-216"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

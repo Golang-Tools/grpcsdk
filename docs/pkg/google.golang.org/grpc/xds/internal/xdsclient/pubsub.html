@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/xdsclient/pubsub</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>pubsub</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/xdsclient/pubsub">google.golang.org/grpc/xds/internal/xdsclient/pubsub</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/xdsclient/pubsub" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/pubsub.html">11 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/pubsub.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/dump.go.html">dump.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html">interface.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-2-fold-content"><label for="file-2-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html">pubsub.go</a></label><span id='file-2-fold-content-items' class="fold-items">
+		Package pubsub implements a utility type to maintain resource watchers and
+		the updates.
+
+		This package is designed to work with the xds resources. It could be made a
+		general system that works with all types.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html">update.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html">watch.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 5, in which 2 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Pubsub" data-popularity="875">	<input type='checkbox' class="fold" id="Pubsub-fold-content"><label for="Pubsub-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-42">Pubsub</a> <i>(struct)</i></label><span id='Pubsub-fold-content-docs' class="fold-docs">
+		Pubsub maintains resource watchers and resource updates.
+
+		There can be multiple watchers for the same resource. An update to a resource
+		triggers updates to all the existing watchers. Watchers can be canceled at
+		any time.
+
+		<input type='checkbox' class="fold" id="Pubsub-fold-fields"><label for="Pubsub-fold-fields">Fields (<i>total 18, none are exported</i>)</label><span id='Pubsub-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Pubsub-showhide-fields"><i><label for="Pubsub-showhide-fields" class="show-inline">/* 18 unexporteds ... */</label><label for="Pubsub-showhide-fields" class="hide-inline">/* 18 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-58">cdsCache</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ClusterUpdate">ClusterUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-59">cdsMD</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-57">cdsWatchers</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]map[*<a href="#name-watchInfo">watchInfo</a>]<a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-43">done</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-61">edsCache</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-62">edsMD</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-60">edsWatchers</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]map[*<a href="#name-watchInfo">watchInfo</a>]<a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-52">ldsCache</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ListenerUpdate">ListenerUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-53">ldsMD</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-51">ldsWatchers</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]map[*<a href="#name-watchInfo">watchInfo</a>]<a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-44">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Pubsub-fold-field-mu"><label for="Pubsub-fold-field-mu"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-50">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='Pubsub-fold-field-mu-docs' class="fold-docs">
+				All the following maps are to keep the updates/metadata in a cache.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-46">nodeIDJSON</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-55">rdsCache</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-56">rdsMD</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-54">rdsWatchers</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]map[*<a href="#name-watchInfo">watchInfo</a>]<a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Pubsub-fold-field-updateCh"><label for="Pubsub-fold-field-updateCh"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-48">updateCh</a> <i>*<a href="../../../internal/buffer.html">buffer</a>.<a href="../../../internal/buffer.html#name-Unbounded">Unbounded</a></i></label><span id='Pubsub-fold-field-updateCh-docs' class="fold-docs">
+				// chan *watcherInfoWithUpdate
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-45">watchExpiryTimeout</a> <i><a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="Pubsub-fold-methods"><label for="Pubsub-fold-methods">Methods (<i>total 15, in which 11 are exported</i>)</label><span id='Pubsub-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-Close"><label for="Pubsub-fold-method-Close">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-162">Close</a>()</label><span id='Pubsub-fold-method-Close-docs' class="fold-docs">
+				Close closes the pubsub.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-Dump"><label for="Pubsub-fold-method-Dump">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/dump.go.html#line-53">Dump</a>(t <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>) map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateWithMD">UpdateWithMD</a></label><span id='Pubsub-fold-method-Dump-docs' class="fold-docs">
+				Dump dumps the resource for the given type.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-NewClusters"><label for="Pubsub-fold-method-NewClusters">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-184">NewClusters</a>(updates map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ClusterUpdateErrTuple">ClusterUpdateErrTuple</a>, metadata <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='Pubsub-fold-method-NewClusters-docs' class="fold-docs">
+				NewClusters is called when there's a new CDS update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-NewConnectionError"><label for="Pubsub-fold-method-NewConnectionError">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-294">NewConnectionError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='Pubsub-fold-method-NewConnectionError-docs' class="fold-docs">
+				NewConnectionError is called by the underlying xdsAPIClient when it receives
+				a connection error. The error will be forwarded to all the resource watchers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-NewEndpoints"><label for="Pubsub-fold-method-NewEndpoints">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-247">NewEndpoints</a>(updates map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-EndpointsUpdateErrTuple">EndpointsUpdateErrTuple</a>, metadata <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='Pubsub-fold-method-NewEndpoints-docs' class="fold-docs">
+				NewEndpoints is called when there's anew EDS update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-NewListeners"><label for="Pubsub-fold-method-NewListeners">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-78">NewListeners</a>(updates map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ListenerUpdateErrTuple">ListenerUpdateErrTuple</a>, metadata <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='Pubsub-fold-method-NewListeners-docs' class="fold-docs">
+				NewListeners is called when there's a new LDS update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-NewRouteConfigs"><label for="Pubsub-fold-method-NewRouteConfigs">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-139">NewRouteConfigs</a>(updates map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-RouteConfigUpdateErrTuple">RouteConfigUpdateErrTuple</a>, metadata <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='Pubsub-fold-method-NewRouteConfigs-docs' class="fold-docs">
+				NewRouteConfigs is called when there's a new RDS update.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-WatchCluster"><label for="Pubsub-fold-method-WatchCluster">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-130">WatchCluster</a>(clusterName <a href="../../../../../builtin.html#name-string">string</a>, cb func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ClusterUpdate">ClusterUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='Pubsub-fold-method-WatchCluster-docs' class="fold-docs">
+				WatchCluster register a watcher for the CDS resource.
+
+				It also returns whether this is the first watch for this resource.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-WatchEndpoints"><label for="Pubsub-fold-method-WatchEndpoints">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-147">WatchEndpoints</a>(clusterName <a href="../../../../../builtin.html#name-string">string</a>, cb func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='Pubsub-fold-method-WatchEndpoints-docs' class="fold-docs">
+				WatchEndpoints registers a watcher for the EDS resource.
+
+				It also returns whether this is the first watch for this resource.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-WatchListener"><label for="Pubsub-fold-method-WatchListener">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-96">WatchListener</a>(serviceName <a href="../../../../../builtin.html#name-string">string</a>, cb func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ListenerUpdate">ListenerUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='Pubsub-fold-method-WatchListener-docs' class="fold-docs">
+				WatchListener registers a watcher for the LDS resource.
+
+				It also returns whether this is the first watch for this resource.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-WatchRouteConfig"><label for="Pubsub-fold-method-WatchRouteConfig">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-113">WatchRouteConfig</a>(routeName <a href="../../../../../builtin.html#name-string">string</a>, cb func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='Pubsub-fold-method-WatchRouteConfig-docs' class="fold-docs">
+				WatchRouteConfig register a watcher for the RDS resource.
+
+				It also returns whether this is the first watch for this resource.
+</span></span>
+			<input type='checkbox' class="showhide" id="Pubsub-showhide-methods"><i><label for="Pubsub-showhide-methods" class="show-inline">/* 4 unexporteds ... */</label><label for="Pubsub-showhide-methods" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-42">callCallback</a>(wiu *<a href="#name-watcherInfoWithUpdate">watcherInfoWithUpdate</a>)</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-run"><label for="Pubsub-fold-method-run">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-175">run</a>()</label><span id='Pubsub-fold-method-run-docs' class="fold-docs">
+				run is a goroutine for all the callbacks.
+
+				Callback can be called in watch(), if an item is found in cache. Without this
+				goroutine, the callback will be called inline, which might cause a deadlock
+				in user's code. Callbacks also cannot be simple `go callback()` because the
+				order matters.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Pubsub-fold-method-scheduleCallback"><label for="Pubsub-fold-method-scheduleCallback">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-34">scheduleCallback</a>(wi *<a href="#name-watchInfo">watchInfo</a>, update interface{}, err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='Pubsub-fold-method-scheduleCallback-docs' class="fold-docs">
+				scheduleCallback should only be called by methods of watchInfo, which checks
+				for watcher states and maintain consistency.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*Pubsub) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-136">watch</a>(wi *<a href="#name-watchInfo">watchInfo</a>) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="Pubsub-fold-impls"><label for="Pubsub-fold-impls">Implements (<i>at least one exported</i>)</label><span id='Pubsub-fold-impls-items' class="fold-items"><span>
+			*Pubsub : <a href="#name-UpdateHandler">UpdateHandler</a></span></span>
+		<input type='checkbox' class="fold" id="Pubsub-fold-results"><label for="Pubsub-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Pubsub-fold-results-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>(watchExpiryTimeout <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>, nodeID <a href="../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<b>Pubsub</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-UpdateHandler" data-popularity="435">	<input type='checkbox' class="fold" id="UpdateHandler-fold-content"><label for="UpdateHandler-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-26">UpdateHandler</a> <b><i>(interface)</i></b></label><span id='UpdateHandler-fold-content-docs' class="fold-docs">
+		UpdateHandler receives and processes (by taking appropriate actions) xDS
+		resource updates from an APIClient for a specific version.
+
+		It's a subset of the APIs of a *Pubsub.
+
+		<input type='checkbox' class="fold" id="UpdateHandler-fold-methods"><label for="UpdateHandler-fold-methods">Methods (<i>total 5, all are exported</i>)</label><span id='UpdateHandler-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="UpdateHandler-fold-method-NewClusters"><label for="UpdateHandler-fold-method-NewClusters">( UpdateHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-32">NewClusters</a>(map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ClusterUpdateErrTuple">ClusterUpdateErrTuple</a>, <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='UpdateHandler-fold-method-NewClusters-docs' class="fold-docs">
+				NewClusters handles updates to xDS Cluster resources.
+</span></span><span>
+			<input type='checkbox' class="fold" id="UpdateHandler-fold-method-NewConnectionError"><label for="UpdateHandler-fold-method-NewConnectionError">( UpdateHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-38">NewConnectionError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='UpdateHandler-fold-method-NewConnectionError-docs' class="fold-docs">
+				NewConnectionError handles connection errors from the xDS stream. The
+				error will be reported to all the resource watchers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="UpdateHandler-fold-method-NewEndpoints"><label for="UpdateHandler-fold-method-NewEndpoints">( UpdateHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-35">NewEndpoints</a>(map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-EndpointsUpdateErrTuple">EndpointsUpdateErrTuple</a>, <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='UpdateHandler-fold-method-NewEndpoints-docs' class="fold-docs">
+				NewEndpoints handles updates to xDS ClusterLoadAssignment (or tersely
+				referred to as Endpoints) resources.
+</span></span><span>
+			<input type='checkbox' class="fold" id="UpdateHandler-fold-method-NewListeners"><label for="UpdateHandler-fold-method-NewListeners">( UpdateHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-28">NewListeners</a>(map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ListenerUpdateErrTuple">ListenerUpdateErrTuple</a>, <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='UpdateHandler-fold-method-NewListeners-docs' class="fold-docs">
+				NewListeners handles updates to xDS listener resources.
+</span></span><span>
+			<input type='checkbox' class="fold" id="UpdateHandler-fold-method-NewRouteConfigs"><label for="UpdateHandler-fold-method-NewRouteConfigs">( UpdateHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/interface.go.html#line-30">NewRouteConfigs</a>(map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-RouteConfigUpdateErrTuple">RouteConfigUpdateErrTuple</a>, <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateMetadata">UpdateMetadata</a>)</label><span id='UpdateHandler-fold-method-NewRouteConfigs-docs' class="fold-docs">
+				NewRouteConfigs handles updates to xDS RouteConfiguration resources.
+</span></span></span>
+		<input type='checkbox' class="fold" id="UpdateHandler-fold-impledby"><label for="UpdateHandler-fold-impledby">Implemented By (<i>at least one exported</i>)</label><span id='UpdateHandler-fold-impledby-items' class="fold-items"><span>
+			*<a href="#name-Pubsub">Pubsub</a></span></span>
+		<input type='checkbox' class="fold" id="UpdateHandler-fold-params"><label for="UpdateHandler-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='UpdateHandler-fold-params-items' class="fold-items"><span>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller.<a href="controller.html#name-New">New</a>(config *<a href="bootstrap.html">bootstrap</a>.<a href="bootstrap.html#name-ServerConfig">ServerConfig</a>, updateHandler <b>UpdateHandler</b>, validator <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateValidatorFunc">UpdateValidatorFunc</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, boff func(<a href="../../../../../builtin.html#name-int">int</a>) <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (_ *<a href="controller.html">controller</a>.<a href="controller.html#name-Controller">Controller</a>, retErr <a href="../../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-watcherInfoWithUpdate" data-popularity="35">	<input type='checkbox' class="fold" id="watcherInfoWithUpdate-fold-content"><label for="watcherInfoWithUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-26">watcherInfoWithUpdate</a> <i>(struct)</i></label><span id='watcherInfoWithUpdate-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="watcherInfoWithUpdate-fold-fields"><label for="watcherInfoWithUpdate-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='watcherInfoWithUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watcherInfoWithUpdate-showhide-fields"><i><label for="watcherInfoWithUpdate-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="watcherInfoWithUpdate-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-29">err</a> <i><a href="../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-28">update</a> <i>interface{}</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-27">wi</a> <i>*<a href="#name-watchInfo">watchInfo</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="watcherInfoWithUpdate-fold-params"><label for="watcherInfoWithUpdate-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='watcherInfoWithUpdate-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watcherInfoWithUpdate-showhide-outputofs"><i><label for="watcherInfoWithUpdate-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="watcherInfoWithUpdate-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-Pubsub">Pubsub</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-42">callCallback</a>(wiu *<b>watcherInfoWithUpdate</b>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-watchInfo" data-popularity="370">	<input type='checkbox' class="fold" id="watchInfo-fold-content"><label for="watchInfo-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-39">watchInfo</a> <i>(struct)</i></label><span id='watchInfo-fold-content-docs' class="fold-docs">
+		watchInfo holds all the information from a watch() call.
+
+		<input type='checkbox' class="fold" id="watchInfo-fold-fields"><label for="watchInfo-fold-fields">Fields (<i>total 10, none are exported</i>)</label><span id='watchInfo-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchInfo-showhide-fields"><i><label for="watchInfo-showhide-fields" class="show-inline">/* 10 unexporteds ... */</label><label for="watchInfo-showhide-fields" class="hide-inline">/* 10 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-40">c</a> <i>*<a href="#name-Pubsub">Pubsub</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-46">cdsCallback</a> <i>func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ClusterUpdate">ClusterUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-47">edsCallback</a> <i>func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-49">expiryTimer</a> <i>*<a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Timer">Timer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-44">ldsCallback</a> <i>func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ListenerUpdate">ListenerUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="watchInfo-fold-field-mu"><label for="watchInfo-fold-field-mu"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-54">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='watchInfo-fold-field-mu-docs' class="fold-docs">
+				mu protects state, and c.scheduleCallback().
+				- No callback should be scheduled after watchInfo is canceled.
+				- No timeout error should be scheduled after watchInfo is resp received.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-41">rType</a> <i><a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-45">rdsCallback</a> <i>func(<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-55">state</a> <i><a href="#name-watchInfoState">watchInfoState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-42">target</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="watchInfo-fold-methods"><label for="watchInfo-fold-methods">Methods (<i>total 6, none are exported</i>)</label><span id='watchInfo-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchInfo-showhide-methods"><i><label for="watchInfo-showhide-methods" class="show-inline">/* 6 unexporteds ... */</label><label for="watchInfo-showhide-methods" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-126">cancel</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-69">newError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-58">newUpdate</a>(update interface{})</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-80">resourceNotFound</a>()</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="watchInfo-fold-method-sendErrorLocked"><label for="watchInfo-fold-method-sendErrorLocked">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-102">sendErrorLocked</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='watchInfo-fold-method-sendErrorLocked-docs' class="fold-docs">
+				Caller must hold wi.mu.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*watchInfo) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-91">timeout</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="watchInfo-fold-params"><label for="watchInfo-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='watchInfo-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchInfo-showhide-outputofs"><i><label for="watchInfo-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="watchInfo-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-Pubsub">Pubsub</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/update.go.html#line-34">scheduleCallback</a>(wi *<b>watchInfo</b>, update interface{}, err <a href="../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func (*<a href="#name-Pubsub">Pubsub</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-136">watch</a>(wi *<b>watchInfo</b>) (first <a href="../../../../../builtin.html#name-bool">bool</a>, cancel func() <a href="../../../../../builtin.html#name-bool">bool</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-watchInfoState" data-popularity="15">	<input type='checkbox' class="fold" id="watchInfoState-fold-content"><label for="watchInfoState-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-29">watchInfoState</a> <a href="../../../../../builtin.html#name-int">int</a> <i>(basic type)</i></label><span id='watchInfoState-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="watchInfoState-fold-values"><label for="watchInfoState-fold-values">As Types Of (<i>total 4, none are exported</i>)</label><span id='watchInfoState-fold-values-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchInfoState-showhide-values"><i><label for="watchInfoState-showhide-values" class="show-inline">/* 4 unexporteds ... */</label><label for="watchInfoState-showhide-values" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			const <a href="#name-watchInfoStateCanceled">watchInfoStateCanceled</a></i></span><span class="hidden"><i>
+			const <a href="#name-watchInfoStateRespReceived">watchInfoStateRespReceived</a></i></span><span class="hidden"><i>
+			const <a href="#name-watchInfoStateStarted">watchInfoStateStarted</a></i></span><span class="hidden"><i>
+			const <a href="#name-watchInfoStateTimeout">watchInfoStateTimeout</a></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 2, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-New">	<input type='checkbox' class="fold" id="New-fold-content"><label for="New-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/pubsub.go.html#line-68">New</a>(watchExpiryTimeout <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>, nodeID <a href="../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>) *<a href="#name-Pubsub">Pubsub</a></label><span id='New-fold-content-docs' class="fold-docs">
+		New creates a new Pubsub.
+
+		The passed in nodeID will be attached to all errors sent to the watchers.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-rawFromCache"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/dump.go.html#line-25">rawFromCache</a>(s <a href="../../../../../builtin.html#name-string">string</a>, cache interface{}) *<a href="../../../../../github.com/golang/protobuf/ptypes/any.html">anypb</a>.<a href="../../../../../github.com/golang/protobuf/ptypes/any.html#name-Any">Any</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 4, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-watchInfoStateCanceled"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-35">watchInfoStateCanceled</a> <a href="#name-watchInfoState">watchInfoState</a> = 3</span></i></div><div class="anchor value-res hidden" id="name-watchInfoStateRespReceived"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-33">watchInfoStateRespReceived</a> <a href="#name-watchInfoState">watchInfoState</a> = 1</span></i></div><div class="anchor value-res hidden" id="name-watchInfoStateStarted"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-32">watchInfoStateStarted</a> <a href="#name-watchInfoState">watchInfoState</a> = 0</span></i></div><div class="anchor value-res hidden" id="name-watchInfoStateTimeout"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/pubsub/watch.go.html#line-34">watchInfoStateTimeout</a> <a href="#name-watchInfoState">watchInfoState</a> = 2</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

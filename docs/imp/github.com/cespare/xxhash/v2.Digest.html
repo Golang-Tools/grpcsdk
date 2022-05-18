@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method Implmentations: github.com/cespare/xxhash/v2.Digest</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+<pre><code><span style="font-size:x-large;">type <a href="../../../../pkg/github.com/cespare/xxhash/v2.html">github.com/cespare/xxhash/v2</a>.<b><a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-34">Digest</a></b></span><span style="font-size:large;"> <i>(struct)</i></span>
+
+<code><span class="title">Method Implmentations<span class="title-stat"><i></i></span></span>
+
+<div class="anchor" id="name-BlockSize">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-65">BlockSize</a>() <a href="../../../../pkg/builtin.html#name-int">int</a>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash">Hash</a>.<b><a href="../../../../src/hash/hash.go.html#line-45">BlockSize</a></b>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/hash/hash.go.html#line-45">BlockSize</a></b></div>
+<div class="anchor" id="name-MarshalBinary">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-168">MarshalBinary</a>() ([]<a href="../../../../pkg/builtin.html#name-byte">byte</a>, <a href="../../../../pkg/builtin.html#name-error">error</a>)
+		*Digest.M : encoding.<a href="../../../../pkg/encoding.html#name-BinaryMarshaler">BinaryMarshaler</a>.<b><a href="../../../../src/encoding/encoding.go.html#line-19">MarshalBinary</a></b>
+		*Digest.M : crypto/hmac.<a href="../../../../pkg/crypto/hmac.html#name-marshalable">marshalable</a>.<b><a href="../../../../src/crypto/hmac/hmac.go.html#line-41">MarshalBinary</a></b></div>
+<div class="anchor" id="name-Reset">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-52">Reset</a>()
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash">Hash</a>.<b><a href="../../../../src/hash/hash.go.html#line-36">Reset</a></b>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/hash/hash.go.html#line-36">Reset</a></b></div>
+<div class="anchor" id="name-Size">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-62">Size</a>() <a href="../../../../pkg/builtin.html#name-int">int</a>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash">Hash</a>.<b><a href="../../../../src/hash/hash.go.html#line-39">Size</a></b>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/hash/hash.go.html#line-39">Size</a></b></div>
+<div class="anchor" id="name-Sum">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-104">Sum</a>(b []<a href="../../../../pkg/builtin.html#name-byte">byte</a>) []<a href="../../../../pkg/builtin.html#name-byte">byte</a>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash">Hash</a>.<b><a href="../../../../src/hash/hash.go.html#line-33">Sum</a></b>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/hash/hash.go.html#line-33">Sum</a></b></div>
+<div class="anchor" id="name-Sum64">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-120">Sum64</a>() <a href="../../../../pkg/builtin.html#name-uint64">uint64</a>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/hash/hash.go.html#line-57">Sum64</a></b></div>
+<div class="anchor" id="name-UnmarshalBinary">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-182">UnmarshalBinary</a>(b []<a href="../../../../pkg/builtin.html#name-byte">byte</a>) <a href="../../../../pkg/builtin.html#name-error">error</a>
+		*Digest.M : encoding.<a href="../../../../pkg/encoding.html#name-BinaryUnmarshaler">BinaryUnmarshaler</a>.<b><a href="../../../../src/encoding/encoding.go.html#line-29">UnmarshalBinary</a></b>
+		*Digest.M : crypto/hmac.<a href="../../../../pkg/crypto/hmac.html#name-marshalable">marshalable</a>.<b><a href="../../../../src/crypto/hmac/hmac.go.html#line-42">UnmarshalBinary</a></b></div>
+<div class="anchor" id="name-Write">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash.go.html#line-68">Write</a>(b []<a href="../../../../pkg/builtin.html#name-byte">byte</a>) (n <a href="../../../../pkg/builtin.html#name-int">int</a>, err <a href="../../../../pkg/builtin.html#name-error">error</a>)
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash">Hash</a>.<b><a href="../../../../src/io/io.go.html#line-97">Write</a></b>
+		*Digest.M : hash.<a href="../../../../pkg/hash.html#name-Hash64">Hash64</a>.<b><a href="../../../../src/io/io.go.html#line-97">Write</a></b>
+		*Digest.M : io.<a href="../../../../pkg/io.html#name-Writer">Writer</a>.<b><a href="../../../../src/io/io.go.html#line-97">Write</a></b></div>
+<div class="anchor" id="name-WriteString">	<a href="../../../../src/github.com/cespare/xxhash/v2/xxhash_unsafe.go.html#line-39">WriteString</a>(s <a href="../../../../pkg/builtin.html#name-string">string</a>) (n <a href="../../../../pkg/builtin.html#name-int">int</a>, err <a href="../../../../pkg/builtin.html#name-error">error</a>)
+		*Digest.M : io.<a href="../../../../pkg/io.html#name-StringWriter">StringWriter</a>.<b><a href="../../../../src/io/io.go.html#line-304">WriteString</a></b>
+		*Digest.M : golang.org/x/net/http2.<a href="../../../../pkg/golang.org/x/net/http2.html#name-stringWriter">stringWriter</a>.<b><a href="../../../../src/io/io.go.html#line-304">WriteString</a></b>
+		*Digest.M : net/http.<a href="../../../../pkg/net/http.html#name-http2stringWriter">http2stringWriter</a>.<b><a href="../../../../src/io/io.go.html#line-304">WriteString</a></b></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

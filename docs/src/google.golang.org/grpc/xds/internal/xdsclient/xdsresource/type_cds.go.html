@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: type_cds.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	type_cds.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"time"</span></label></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-24"><code>)</code></span>
+<span class="codeline" id="line-25"><code></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// ClusterType is the type of cluster from a received CDS response.</span></code></span>
+<span class="codeline" id="line-27"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterType" class="ident">ClusterType</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-30"><code>	<span class="comment">// ClusterTypeEDS represents the EDS cluster type, which will delegate endpoint</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">	// discovery to the management server.</span></code></span>
+<span class="codeline" id="line-32"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterTypeEDS" class="ident">ClusterTypeEDS</a> <a href="#line-27" class="ident">ClusterType</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-33"><code>	<span class="comment">// ClusterTypeLogicalDNS represents the Logical DNS cluster type, which essentially</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">	// maps to the gRPC behavior of using the DNS resolver with pick_first LB policy.</span></code></span>
+<span class="codeline" id="line-35"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterTypeLogicalDNS" class="ident">ClusterTypeLogicalDNS</a></code></span>
+<span class="codeline" id="line-36"><code>	<span class="comment">// ClusterTypeAggregate represents the Aggregate Cluster type, which provides a</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">	// prioritized list of clusters to use. It is used for failover between clusters</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// with a different configuration.</span></code></span>
+<span class="codeline" id="line-39"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterTypeAggregate" class="ident">ClusterTypeAggregate</a></code></span>
+<span class="codeline" id="line-40"><code>)</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">// ClusterLRSServerConfigType is the type of LRS server config.</span></code></span>
+<span class="codeline" id="line-43"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterLRSServerConfigType" class="ident">ClusterLRSServerConfigType</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-46"><code>	<span class="comment">// ClusterLRSOff indicates LRS is off (loads are not reported for this</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">	// cluster).</span></code></span>
+<span class="codeline" id="line-48"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterLRSOff" class="ident">ClusterLRSOff</a> <a href="#line-43" class="ident">ClusterLRSServerConfigType</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-49"><code>	<span class="comment">// ClusterLRSServerSelf indicates loads should be reported to the same</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">	// server (the authority) where the CDS resp is received from.</span></code></span>
+<span class="codeline" id="line-51"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterLRSServerSelf" class="ident">ClusterLRSServerSelf</a></code></span>
+<span class="codeline" id="line-52"><code>)</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// ClusterLBPolicyRingHash represents ring_hash lb policy, and also contains its</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// config.</span></code></span>
+<span class="codeline" id="line-56"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterLBPolicyRingHash" class="ident">ClusterLBPolicyRingHash</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-57"><code>	MinimumRingSize <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-58"><code>	MaximumRingSize <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-59"><code>}</code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">// OutlierDetection is the outlier detection configuration for a cluster.</span></code></span>
+<span class="codeline" id="line-62"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-OutlierDetection" class="ident">OutlierDetection</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-63"><code>	<span class="comment">// Interval is the time interval between ejection analysis sweeps. This can</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	// result in both new ejections as well as addresses being returned to</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">	// service. Defaults to 10s.</span></code></span>
+<span class="codeline" id="line-66"><code>	Interval <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-67"><code>	<span class="comment">// BaseEjectionTime is the base time that a host is ejected for. The real</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">	// time is equal to the base time multiplied by the number of times the host</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">	// has been ejected and is capped by MaxEjectionTime. Defaults to 30s.</span></code></span>
+<span class="codeline" id="line-70"><code>	BaseEjectionTime <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-71"><code>	<span class="comment">// MaxEjectionTime is the maximum time that an address is ejected for. If</span></code></span>
+<span class="codeline" id="line-72"><code><span class="comment">	// not specified, the default value (300s) or the BaseEjectionTime value is</span></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">	// applied, whichever is larger.</span></code></span>
+<span class="codeline" id="line-74"><code>	MaxEjectionTime <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-75"><code>	<span class="comment">// MaxEjectionPercent is the maximum % of an upstream cluster that can be</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">	// ejected due to outlier detection. Defaults to 10% but will eject at least</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">	// one host regardless of the value.</span></code></span>
+<span class="codeline" id="line-78"><code>	MaxEjectionPercent <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-79"><code>	<span class="comment">// SuccessRateStddevFactor is used to determine the ejection threshold for</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">	// success rate outlier ejection. The ejection threshold is the difference</span></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">	// between the mean success rate, and the product of this factor and the</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">	// standard deviation of the mean success rate: mean - (stdev *</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">	// success_rate_stdev_factor). This factor is divided by a thousand to get a</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">	// double. That is, if the desired factor is 1.9, the runtime value should</span></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">	// be 1900. Defaults to 1900.</span></code></span>
+<span class="codeline" id="line-86"><code>	SuccessRateStdevFactor <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-87"><code>	<span class="comment">// EnforcingSuccessRate is the % chance that a host will be actually ejected</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">	// when an outlier status is detected through success rate statistics. This</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">	// setting can be used to disable ejection or to ramp it up slowly. Defaults</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">	// to 100.</span></code></span>
+<span class="codeline" id="line-91"><code>	EnforcingSuccessRate <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-92"><code>	<span class="comment">// SuccessRateMinimumHosts is the number of hosts in a cluster that must</span></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">	// have enough request volume to detect success rate outliers. If the number</span></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">	// of hosts is less than this setting, outlier detection via success rate</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">	// statistics is not performed for any host in the cluster. Defaults to 5.</span></code></span>
+<span class="codeline" id="line-96"><code>	SuccessRateMinimumHosts <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-97"><code>	<span class="comment">// SuccessRateRequestVolume is the minimum number of total requests that</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">	// must be collected in one interval (as defined by the interval duration</span></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">	// above) to include this host in success rate based outlier detection. If</span></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">	// the volume is lower than this setting, outlier detection via success rate</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">	// statistics is not performed for that host. Defaults to 100.</span></code></span>
+<span class="codeline" id="line-102"><code>	SuccessRateRequestVolume <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-103"><code>	<span class="comment">// FailurePercentageThreshold is the failure percentage to use when</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">	// determining failure percentage-based outlier detection. If the failure</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">	// percentage of a given host is greater than or equal to this value, it</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">	// will be ejected. Defaults to 85.</span></code></span>
+<span class="codeline" id="line-107"><code>	FailurePercentageThreshold <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-108"><code>	<span class="comment">// EnforcingFailurePercentage is the % chance that a host will be actually</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">	// ejected when an outlier status is detected through failure percentage</span></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">	// statistics. This setting can be used to disable ejection or to ramp it up</span></code></span>
+<span class="codeline" id="line-111"><code><span class="comment">	// slowly. Defaults to 0.</span></code></span>
+<span class="codeline" id="line-112"><code>	EnforcingFailurePercentage <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-113"><code>	<span class="comment">// FailurePercentageMinimumHosts is the minimum number of hosts in a cluster</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">	// in order to perform failure percentage-based ejection. If the total</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">	// number of hosts in the cluster is less than this value, failure</span></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">	// percentage-based ejection will not be performed. Defaults to 5.</span></code></span>
+<span class="codeline" id="line-117"><code>	FailurePercentageMinimumHosts <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-118"><code>	<span class="comment">// FailurePercentageRequestVolume is the minimum number of total requests</span></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">	// that must be collected in one interval (as defined by the interval</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">	// duration above) to perform failure percentage-based ejection for this</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">	// host. If the volume is lower than this setting, failure percentage-based</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">	// ejection will not be performed for this host. Defaults to 50.</span></code></span>
+<span class="codeline" id="line-123"><code>	FailurePercentageRequestVolume <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-124"><code>}</code></span>
+<span class="codeline" id="line-125"><code></code></span>
+<span class="codeline" id="line-126"><code><span class="comment">// ClusterUpdate contains information from a received CDS response, which is of</span></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">// interest to the registered CDS watcher.</span></code></span>
+<span class="codeline" id="line-128"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterUpdate" class="ident">ClusterUpdate</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-129"><code>	ClusterType <a href="#line-27" class="ident">ClusterType</a></code></span>
+<span class="codeline" id="line-130"><code>	<span class="comment">// ClusterName is the clusterName being watched for through CDS.</span></code></span>
+<span class="codeline" id="line-131"><code>	ClusterName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-132"><code>	<span class="comment">// EDSServiceName is an optional name for EDS. If it's not set, the balancer</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">	// should watch ClusterName for the EDS resources.</span></code></span>
+<span class="codeline" id="line-134"><code>	EDSServiceName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-135"><code>	<span class="comment">// LRSServerConfig contains the server where the load reports should be sent</span></code></span>
+<span class="codeline" id="line-136"><code><span class="comment">	// to. This can be change to an interface, to support other types, e.g. a</span></code></span>
+<span class="codeline" id="line-137"><code><span class="comment">	// ServerConfig with ServerURI, creds.</span></code></span>
+<span class="codeline" id="line-138"><code>	LRSServerConfig <a href="#line-43" class="ident">ClusterLRSServerConfigType</a></code></span>
+<span class="codeline" id="line-139"><code>	<span class="comment">// SecurityCfg contains security configuration sent by the control plane.</span></code></span>
+<span class="codeline" id="line-140"><code>	SecurityCfg *<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a></code></span>
+<span class="codeline" id="line-141"><code>	<span class="comment">// MaxRequests for circuit breaking, if any (otherwise nil).</span></code></span>
+<span class="codeline" id="line-142"><code>	MaxRequests *<a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-143"><code>	<span class="comment">// DNSHostName is used only for cluster type DNS. It's the DNS name to</span></code></span>
+<span class="codeline" id="line-144"><code><span class="comment">	// resolve in "host:port" form</span></code></span>
+<span class="codeline" id="line-145"><code>	DNSHostName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-146"><code>	<span class="comment">// PrioritizedClusterNames is used only for cluster type aggregate. It represents</span></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">	// a prioritized list of cluster names.</span></code></span>
+<span class="codeline" id="line-148"><code>	PrioritizedClusterNames []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-149"><code></code></span>
+<span class="codeline" id="line-150"><code>	<span class="comment">// LBPolicy is the lb policy for this cluster.</span></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">	// This only support round_robin and ring_hash.</span></code></span>
+<span class="codeline" id="line-153"><code><span class="comment">	// - if it's nil, the lb policy is round_robin</span></code></span>
+<span class="codeline" id="line-154"><code><span class="comment">	// - if it's not nil, the lb policy is ring_hash, the this field has the config.</span></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-156"><code><span class="comment">	// When we add more support policies, this can be made an interface, and</span></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">	// will be set to different types based on the policy type.</span></code></span>
+<span class="codeline" id="line-158"><code>	LBPolicy *<a href="#line-56" class="ident">ClusterLBPolicyRingHash</a></code></span>
+<span class="codeline" id="line-159"><code></code></span>
+<span class="codeline" id="line-160"><code>	<span class="comment">// OutlierDetection is the outlier detection configuration for this cluster.</span></code></span>
+<span class="codeline" id="line-161"><code><span class="comment">	// If nil, it means this cluster does not use the outlier detection feature.</span></code></span>
+<span class="codeline" id="line-162"><code>	OutlierDetection *<a href="#line-62" class="ident">OutlierDetection</a></code></span>
+<span class="codeline" id="line-163"><code></code></span>
+<span class="codeline" id="line-164"><code>	<span class="comment">// Raw is the resource from the xds response.</span></code></span>
+<span class="codeline" id="line-165"><code>	Raw *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i1">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a></code></span>
+<span class="codeline" id="line-166"><code>}</code></span>
+<span class="codeline" id="line-167"><code></code></span>
+<span class="codeline" id="line-168"><code><span class="comment">// ClusterUpdateErrTuple is a tuple with the update and error. It contains the</span></code></span>
+<span class="codeline" id="line-169"><code><span class="comment">// results from unmarshal functions. It's used to pass unmarshal results of</span></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">// multiple resources together, e.g. in maps like `map[string]{Update,error}`.</span></code></span>
+<span class="codeline" id="line-171"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ClusterUpdateErrTuple" class="ident">ClusterUpdateErrTuple</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-172"><code>	Update <a href="#line-128" class="ident">ClusterUpdate</a></code></span>
+<span class="codeline" id="line-173"><code>	Err    <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-174"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

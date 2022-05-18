@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: httpfilter.go in package google.golang.org/grpc/xds/internal/httpfilter</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	httpfilter.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html">google.golang.org/grpc/xds/internal/httpfilter</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package httpfilter contains the HTTPFilter interface and a registry for</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// storing and retrieving their implementations.</span></code></span></div><span class="codeline" id="line-21"><code><span class="keyword">package</span> httpfilter</code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-24"><code>	<label for="i0"><span class="lit-string i0">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i1">iresolver</a> <label for="i1"><span class="lit-string i1">"google.golang.org/grpc/internal/resolver"</span></label></code></span>
+<span class="codeline" id="line-26"><code>)</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// FilterConfig represents an opaque data structure holding configuration for a</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// filter.  Embed this interface to implement it.</span></code></span>
+<span class="codeline" id="line-30"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-FilterConfig" class="ident">FilterConfig</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-31"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.FilterConfig.html#name-google.golang.org/grpc/xds/internal/httpfilter.isFilterConfig" class="ident">isFilterConfig</a>()</code></span>
+<span class="codeline" id="line-32"><code>}</code></span>
+<span class="codeline" id="line-33"><code></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">// Filter defines the parsing functionality of an HTTP filter.  A Filter may</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// optionally implement either ClientInterceptorBuilder or</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// ServerInterceptorBuilder or both, indicating it is capable of working on the</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// client side or server side or both, respectively.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-Filter" class="ident">Filter</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-39"><code>	<span class="comment">// TypeURLs are the proto message types supported by this filter.  A filter</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">	// will be registered by each of its supported message types.</span></code></span>
+<span class="codeline" id="line-41"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.Filter.html#name-TypeURLs" class="ident">TypeURLs</a>() []<a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-42"><code>	<span class="comment">// ParseFilterConfig parses the provided configuration proto.Message from</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">	// the LDS configuration of this filter.  This may be an anypb.Any, a</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">	// udpa.type.v1.TypedStruct, or an xds.type.v3.TypedStruct for filters that</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">	// do not accept a custom type. The resulting FilterConfig will later be</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">	// passed to Build.</span></code></span>
+<span class="codeline" id="line-47"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.Filter.html#name-ParseFilterConfig" class="ident">ParseFilterConfig</a>(<a href="../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i0">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="#line-30" class="ident">FilterConfig</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-48"><code>	<span class="comment">// ParseFilterConfigOverride parses the provided override configuration</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">	// proto.Message from the RDS override configuration of this filter.  This</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">	// may be an anypb.Any, a udpa.type.v1.TypedStruct, or an</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">	// xds.type.v3.TypedStruct for filters that do not accept a custom type.</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">	// The resulting FilterConfig will later be passed to Build.</span></code></span>
+<span class="codeline" id="line-53"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.Filter.html#name-ParseFilterConfigOverride" class="ident">ParseFilterConfigOverride</a>(<a href="../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i0">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="#line-30" class="ident">FilterConfig</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-54"><code>	<span class="comment">// IsTerminal returns whether this Filter is terminal or not (i.e. it must</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">	// be last filter in the filter chain).</span></code></span>
+<span class="codeline" id="line-56"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.Filter.html#name-IsTerminal" class="ident">IsTerminal</a>() <a href="../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-57"><code>}</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// ClientInterceptorBuilder constructs a Client Interceptor.  If this type is</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// implemented by a Filter, it is capable of working on a client.</span></code></span>
+<span class="codeline" id="line-61"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-ClientInterceptorBuilder" class="ident">ClientInterceptorBuilder</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-62"><code>	<span class="comment">// BuildClientInterceptor uses the FilterConfigs produced above to produce</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	// an HTTP filter interceptor for clients.  config will always be non-nil,</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	// but override may be nil if no override config exists for the filter.  It</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">	// is valid for Build to return a nil Interceptor and a nil error.  In this</span></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">	// case, the RPC will not be intercepted by this filter.</span></code></span>
+<span class="codeline" id="line-67"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.ClientInterceptorBuilder.html#name-BuildClientInterceptor" class="ident">BuildClientInterceptor</a>(config, override <a href="#line-30" class="ident">FilterConfig</a>) (<a href="../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i1">iresolver</a>.<a href="../../../internal/resolver/config_selector.go.html#line-108" class="ident">ClientInterceptor</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-68"><code>}</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// ServerInterceptorBuilder constructs a Server Interceptor.  If this type is</span></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">// implemented by a Filter, it is capable of working on a server.</span></code></span>
+<span class="codeline" id="line-72"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-ServerInterceptorBuilder" class="ident">ServerInterceptorBuilder</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-73"><code>	<span class="comment">// BuildServerInterceptor uses the FilterConfigs produced above to produce</span></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">	// an HTTP filter interceptor for servers.  config will always be non-nil,</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">	// but override may be nil if no override config exists for the filter.  It</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">	// is valid for Build to return a nil Interceptor and a nil error.  In this</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">	// case, the RPC will not be intercepted by this filter.</span></code></span>
+<span class="codeline" id="line-78"><code>	<a href="../../../../../../imp/google.golang.org/grpc/xds/internal/httpfilter.ServerInterceptorBuilder.html#name-BuildServerInterceptor" class="ident">BuildServerInterceptor</a>(config, override <a href="#line-30" class="ident">FilterConfig</a>) (<a href="../../../../../../pkg/google.golang.org/grpc/internal/resolver.html" class="ident i1">iresolver</a>.<a href="../../../internal/resolver/config_selector.go.html#line-121" class="ident">ServerInterceptor</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-82"><code>	<span class="comment">// m is a map from scheme to filter.</span></code></span>
+<span class="codeline" id="line-83"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-m" class="ident">m</a> = <a href="../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-38" class="ident">Filter</a>)</code></span>
+<span class="codeline" id="line-84"><code>)</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// Register registers the HTTP filter Builder to the filter map. b.TypeURLs()</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">// will be used as the types for this filter.</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">// NOTE: this function must only be called during initialization time (i.e. in</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">// an init() function), and is not thread-safe. If multiple filters are</span></code></span>
+<span class="codeline" id="line-91"><code><span class="comment">// registered with the same type URL, the one registered last will take effect.</span></code></span>
+<span class="codeline" id="line-92"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-Register" class="ident">Register</a></label>(<label for="r1" class="ident">b</label> <a href="#line-38" class="ident">Filter</a>) {</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">for</span> <label for="r2" class="ident">_</label>, <label for="r3" class="ident">u</label> := <span class="keyword">range</span> <label for="r1" class="ident">b</label>.<a href="#line-41" class="ident">TypeURLs</a>() {</code></span>
+<span class="codeline" id="line-94"><code>		<a href="#line-83" class="ident">m</a>[<label for="r3" class="ident">u</label>] = <label for="r1" class="ident">b</label></code></span>
+<span class="codeline" id="line-95"><code>	}</code></span>
+<span class="codeline" id="line-96"><code>}</code></span>
+<span class="codeline" id="line-97"><code></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">// UnregisterForTesting unregisters the HTTP Filter for testing purposes.</span></code></span>
+<span class="codeline" id="line-99"><code><span class="keyword">func</span> <label for="r4" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-UnregisterForTesting" class="ident">UnregisterForTesting</a></label>(<label for="r5" class="ident">typeURL</label> <a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-100"><code>	<a href="../../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<a href="#line-83" class="ident">m</a>, <label for="r5" class="ident">typeURL</label>)</code></span>
+<span class="codeline" id="line-101"><code>}</code></span>
+<span class="codeline" id="line-102"><code></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">// Get returns the HTTPFilter registered with typeURL.</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">// If no filter is register with typeURL, nil will be returned.</span></code></span>
+<span class="codeline" id="line-106"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html#name-Get" class="ident">Get</a></label>(<label for="r7" class="ident">typeURL</label> <a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="#line-38" class="ident">Filter</a> {</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">return</span> <a href="#line-83" class="ident">m</a>[<label for="r7" class="ident">typeURL</label>]</code></span>
+<span class="codeline" id="line-108"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

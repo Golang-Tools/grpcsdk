@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: loadreport.go in package google.golang.org/grpc/xds/internal/xdsclient/controller</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	loadreport.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller.html">google.golang.org/grpc/xds/internal/xdsclient/controller</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> controller</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/xds/internal/xdsclient/controller/version"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/xds/internal/xdsclient/load"</span></label></code></span>
+<span class="codeline" id="line-26"><code>)</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// ReportLoad starts an load reporting stream to the given server. If the server</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// is not an empty string, and is different from the management server, a new</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">// ClientConn will be created.</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// The same options used for creating the Client will be used (including</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// NodeProto, and dial options if necessary).</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// It returns a Store for the user to report loads, a function to cancel the</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// load reporting stream.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// TODO(xdsfed): LRS refactor, delete the parameter of this function, and</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// cleanup the multiple LRS ClientConn code. Each controller should have one</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// ClientConn to the authority it's created for, all LRS streams (and ADS</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// streams) in this controller should all share that ClientConn.</span></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">func</span> (<label for="r0" class="ident">c</label> *<a href="controller.go.html#line-51" class="ident">Controller</a>) <label for="r1" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller.Controller.html#name-.ReportLoad" class="ident">ReportLoad</a></label>(<label for="r2" class="ident">server</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) (*<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i3">load</a>.<a href="../load/store.go.html#line-33" class="ident">Store</a>, <span class="keyword">func</span>()) {</code></span>
+<span class="codeline" id="line-43"><code>	<label for="r0" class="ident">c</label>.<a href="controller.go.html#line-87" class="ident">lrsMu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-44"><code>	<span class="keyword">defer</span> <label for="r0" class="ident">c</label>.<a href="controller.go.html#line-87" class="ident">lrsMu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code>	<span class="comment">// If there's already a client to this server, use it. Otherwise, create</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">	// one.</span></code></span>
+<span class="codeline" id="line-48"><code>	<label for="r3" class="ident">lrsC</label>, <label for="r4" class="ident">ok</label> := <label for="r0" class="ident">c</label>.<a href="controller.go.html#line-88" class="ident">lrsClients</a>[<label for="r2" class="ident">server</label>]</code></span>
+<span class="codeline" id="line-49"><code>	<span class="keyword">if</span> !<label for="r4" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-50"><code>		<label for="r3" class="ident">lrsC</label> = <a href="#line-81" class="ident">newLRSClient</a>(<label for="r0" class="ident">c</label>, <label for="r2" class="ident">server</label>)</code></span>
+<span class="codeline" id="line-51"><code>		<label for="r0" class="ident">c</label>.<a href="controller.go.html#line-88" class="ident">lrsClients</a>[<label for="r2" class="ident">server</label>] = <label for="r3" class="ident">lrsC</label></code></span>
+<span class="codeline" id="line-52"><code>	}</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code>	<label for="r5" class="ident">store</label> := <label for="r3" class="ident">lrsC</label>.<a href="#line-92" class="ident">ref</a>()</code></span>
+<span class="codeline" id="line-55"><code>	<span class="keyword">return</span> <label for="r5" class="ident">store</label>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-56"><code>		<span class="comment">// This is a callback, need to hold lrsMu.</span></code></span>
+<span class="codeline" id="line-57"><code>		<label for="r0" class="ident">c</label>.<a href="controller.go.html#line-87" class="ident">lrsMu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-58"><code>		<span class="keyword">defer</span> <label for="r0" class="ident">c</label>.<a href="controller.go.html#line-87" class="ident">lrsMu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-59"><code>		<span class="keyword">if</span> <label for="r3" class="ident">lrsC</label>.<a href="#line-105" class="ident">unRef</a>() {</code></span>
+<span class="codeline" id="line-60"><code>			<span class="comment">// Delete the lrsClient from map if this is the last reference.</span></code></span>
+<span class="codeline" id="line-61"><code>			<a href="../../../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<label for="r0" class="ident">c</label>.<a href="controller.go.html#line-88" class="ident">lrsClients</a>, <label for="r2" class="ident">server</label>)</code></span>
+<span class="codeline" id="line-62"><code>		}</code></span>
+<span class="codeline" id="line-63"><code>	}</code></span>
+<span class="codeline" id="line-64"><code>}</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">// lrsClient maps to one lrsServer. It contains:</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">// - a ClientConn to this server (only if it's different from the management</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">// server)</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// - a load.Store that contains loads only for this server</span></code></span>
+<span class="codeline" id="line-70"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller.html#name-lrsClient" class="ident">lrsClient</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-71"><code>	parent *<a href="controller.go.html#line-51" class="ident">Controller</a></code></span>
+<span class="codeline" id="line-72"><code>	server <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code>	cc           *<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../../clientconn.go.html#line-463" class="ident">ClientConn</a> <span class="comment">// nil if the server is same as the management server</span></code></span>
+<span class="codeline" id="line-75"><code>	refCount     <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-76"><code>	cancelStream <span class="keyword">func</span>()</code></span>
+<span class="codeline" id="line-77"><code>	loadStore    *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i3">load</a>.<a href="../load/store.go.html#line-33" class="ident">Store</a></code></span>
+<span class="codeline" id="line-78"><code>}</code></span>
+<span class="codeline" id="line-79"><code></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">// newLRSClient creates a new LRS stream to the server.</span></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller.html#name-newLRSClient" class="ident">newLRSClient</a></label>(<label for="r7" class="ident">parent</label> *<a href="controller.go.html#line-51" class="ident">Controller</a>, <label for="r8" class="ident">server</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) *<a href="#line-70" class="ident">lrsClient</a> {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">return</span> &amp;<a href="#line-70" class="ident">lrsClient</a>{</code></span>
+<span class="codeline" id="line-83"><code>		<a href="#line-71" class="ident">parent</a>:   <label for="r7" class="ident">parent</label>,</code></span>
+<span class="codeline" id="line-84"><code>		<a href="#line-72" class="ident">server</a>:   <label for="r8" class="ident">server</label>,</code></span>
+<span class="codeline" id="line-85"><code>		<a href="#line-75" class="ident">refCount</a>: <span class="lit-number">0</span>,</code></span>
+<span class="codeline" id="line-86"><code>	}</code></span>
+<span class="codeline" id="line-87"><code>}</code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">// ref increments the refCount. If this is the first ref, it starts the LRS stream.</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-91"><code><span class="comment">// Not thread-safe, caller needs to synchronize.</span></code></span>
+<span class="codeline" id="line-92"><code><span class="keyword">func</span> (<label for="r9" class="ident">lrsC</label> *<a href="#line-70" class="ident">lrsClient</a>) <label for="r10" class="ident">ref</label>() *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i3">load</a>.<a href="../load/store.go.html#line-33" class="ident">Store</a> {</code></span>
+<span class="codeline" id="line-93"><code>	<label for="r9" class="ident">lrsC</label>.<a href="#line-75" class="ident">refCount</a>++</code></span>
+<span class="codeline" id="line-94"><code>	<span class="keyword">if</span> <label for="r9" class="ident">lrsC</label>.<a href="#line-75" class="ident">refCount</a> == <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-95"><code>		<label for="r9" class="ident">lrsC</label>.<a href="#line-120" class="ident">startStream</a>()</code></span>
+<span class="codeline" id="line-96"><code>	}</code></span>
+<span class="codeline" id="line-97"><code>	<span class="keyword">return</span> <label for="r9" class="ident">lrsC</label>.<a href="#line-77" class="ident">loadStore</a></code></span>
+<span class="codeline" id="line-98"><code>}</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">// unRef decrements the refCount, and closes the stream if refCount reaches 0</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">// (and close the cc if cc is not xDS cc). It returns whether refCount reached 0</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">// after this call.</span></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">// Not thread-safe, caller needs to synchronize.</span></code></span>
+<span class="codeline" id="line-105"><code><span class="keyword">func</span> (<label for="r11" class="ident">lrsC</label> *<a href="#line-70" class="ident">lrsClient</a>) <label for="r12" class="ident">unRef</label>() (<label for="r13" class="ident">closed</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-106"><code>	<label for="r11" class="ident">lrsC</label>.<a href="#line-75" class="ident">refCount</a>--</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">if</span> <label for="r11" class="ident">lrsC</label>.<a href="#line-75" class="ident">refCount</a> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-108"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-109"><code>	}</code></span>
+<span class="codeline" id="line-110"><code>	<label for="r11" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-55" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Stopping load report to server: %s"</span>, <label for="r11" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a>)</code></span>
+<span class="codeline" id="line-111"><code>	<label for="r11" class="ident">lrsC</label>.<a href="#line-76" class="ident">cancelStream</a>()</code></span>
+<span class="codeline" id="line-112"><code>	<span class="keyword">if</span> <label for="r11" class="ident">lrsC</label>.<a href="#line-74" class="ident">cc</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-113"><code>		<label for="r11" class="ident">lrsC</label>.<a href="#line-74" class="ident">cc</a>.<a href="../../../../clientconn.go.html#line-993" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-114"><code>	}</code></span>
+<span class="codeline" id="line-115"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-116"><code>}</code></span>
+<span class="codeline" id="line-117"><code></code></span>
+<span class="codeline" id="line-118"><code><span class="comment">// startStream starts the LRS stream to the server. If server is not the same</span></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">// management server from the parent, it also creates a ClientConn.</span></code></span>
+<span class="codeline" id="line-120"><code><span class="keyword">func</span> (<label for="r14" class="ident">lrsC</label> *<a href="#line-70" class="ident">lrsClient</a>) <label for="r15" class="ident">startStream</label>() {</code></span>
+<span class="codeline" id="line-121"><code>	<span class="keyword">var</span> <label for="r16" class="ident">cc</label> *<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../../clientconn.go.html#line-463" class="ident">ClientConn</a></code></span>
+<span class="codeline" id="line-122"><code></code></span>
+<span class="codeline" id="line-123"><code>	<label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-55" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Starting load report to server: %s"</span>, <label for="r14" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a>)</code></span>
+<span class="codeline" id="line-124"><code>	<span class="keyword">if</span> <label for="r14" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a> == <span class="lit-string">""</span> || <label for="r14" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a> == <label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-52" class="ident">config</a>.<a href="../bootstrap/bootstrap.go.html#line-100" class="ident">ServerURI</a> {</code></span>
+<span class="codeline" id="line-125"><code>		<span class="comment">// Reuse the xDS client if server is the same.</span></code></span>
+<span class="codeline" id="line-126"><code>		<label for="r16" class="ident">cc</label> = <label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-57" class="ident">cc</a></code></span>
+<span class="codeline" id="line-127"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-128"><code>		<label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-55" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"LRS server is different from management server, starting a new ClientConn"</span>)</code></span>
+<span class="codeline" id="line-129"><code>		<label for="r17" class="ident">ccNew</label>, <label for="r18" class="ident">err</label> := <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../../clientconn.go.html#line-104" class="ident">Dial</a>(<label for="r14" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a>, <label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-52" class="ident">config</a>.<a href="../bootstrap/bootstrap.go.html#line-103" class="ident">Creds</a>)</code></span>
+<span class="codeline" id="line-130"><code>		<span class="keyword">if</span> <label for="r18" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-131"><code>			<span class="comment">// An error from a non-blocking dial indicates something serious.</span></code></span>
+<span class="codeline" id="line-132"><code>			<label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="controller.go.html#line-55" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"xds: failed to dial load report server {%s}: %v"</span>, <label for="r14" class="ident">lrsC</label>.<a href="#line-72" class="ident">server</a>, <label for="r18" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-133"><code>			<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-134"><code>		}</code></span>
+<span class="codeline" id="line-135"><code>		<label for="r16" class="ident">cc</label> = <label for="r17" class="ident">ccNew</label></code></span>
+<span class="codeline" id="line-136"><code>		<label for="r14" class="ident">lrsC</label>.<a href="#line-74" class="ident">cc</a> = <label for="r17" class="ident">ccNew</label></code></span>
+<span class="codeline" id="line-137"><code>	}</code></span>
+<span class="codeline" id="line-138"><code></code></span>
+<span class="codeline" id="line-139"><code>	<span class="keyword">var</span> <label for="r19" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a></code></span>
+<span class="codeline" id="line-140"><code>	<label for="r19" class="ident">ctx</label>, <label for="r14" class="ident">lrsC</label>.<a href="#line-76" class="ident">cancelStream</a> = <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-232" class="ident">WithCancel</a>(<a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-208" class="ident">Background</a>())</code></span>
+<span class="codeline" id="line-141"><code></code></span>
+<span class="codeline" id="line-142"><code>	<span class="comment">// Create the store and stream.</span></code></span>
+<span class="codeline" id="line-143"><code>	<label for="r14" class="ident">lrsC</label>.<a href="#line-77" class="ident">loadStore</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i3">load</a>.<a href="../load/store.go.html#line-49" class="ident">NewStore</a>()</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">go</span> <label for="r14" class="ident">lrsC</label>.<a href="#line-71" class="ident">parent</a>.<a href="transport.go.html#line-366" class="ident">reportLoad</a>(<label for="r19" class="ident">ctx</label>, <label for="r16" class="ident">cc</label>, <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html" class="ident i2">version</a>.<a href="version/version.go.html#line-70" class="ident">LoadReportingOptions</a>{<a href="version/version.go.html#line-71" class="ident">LoadStore</a>: <label for="r14" class="ident">lrsC</label>.<a href="#line-77" class="ident">loadStore</a>})</code></span>
+<span class="codeline" id="line-145"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

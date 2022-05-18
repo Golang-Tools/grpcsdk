@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3</title>
+<link href="../../../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>routerv3</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../../../../index.html#pkg-github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3">github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3</a><i> (on <a href="https://pkg.go.dev/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3.html">20 packages</a>, and imported by <a href="../../../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html">router.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html">router.pb.validate.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 3, all are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Router" data-popularity="1050">	<input type='checkbox' class="fold" id="Router-fold-content"><label for="Router-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-28">Router</a> <i>(struct)</i></label><span id='Router-fold-content-docs' class="fold-docs">
+		[#next-free-field: 8]
+
+		<input type='checkbox' class="fold" id="Router-fold-fields"><label for="Router-fold-fields">Fields (<i>total 10, in which 7 are exported</i>)</label><span id='Router-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-DynamicStats"><label for="Router-fold-field-DynamicStats"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-35">DynamicStats</a> <i>*<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html">wrappers</a>.<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html#name-BoolValue">BoolValue</a></i></label><span id='Router-fold-field-DynamicStats-docs' class="fold-docs">
+				Whether the router generates dynamic cluster statistics. Defaults to
+				true. Can be disabled in high performance scenarios.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-RespectExpectedRqTimeout"><label for="Router-fold-field-RespectExpectedRqTimeout"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-71">RespectExpectedRqTimeout</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></label><span id='Router-fold-field-RespectExpectedRqTimeout-docs' class="fold-docs">
+				If not set, ingress Envoy will ignore
+				:ref:`config_http_filters_router_x-envoy-expected-rq-timeout-ms` header, populated by egress
+				Envoy, when deriving timeout for upstream cluster.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-StartChildSpan"><label for="Router-fold-field-StartChildSpan"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-40">StartChildSpan</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></label><span id='Router-fold-field-StartChildSpan-docs' class="fold-docs">
+				Whether to start a child span for egress routed calls. This can be
+				useful in scenarios where other filters (auth, ratelimit, etc.) make
+				outbound calls and have child spans rooted at the same ingress
+				parent. Defaults to false.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-StrictCheckHeaders"><label for="Router-fold-field-StrictCheckHeaders"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-67">StrictCheckHeaders</a> <i>[]<a href="../../../../../../../../builtin.html#name-string">string</a></i></label><span id='Router-fold-field-StrictCheckHeaders-docs' class="fold-docs">
+				Specifies a list of HTTP headers to strictly validate. Envoy will reject a
+				request and respond with HTTP status 400 if the request contains an invalid
+				value for any of the headers listed in this field. Strict header checking
+				is only supported for the following headers:
+
+				Value must be a ','-delimited list (i.e. no spaces) of supported retry
+				policy values:
+
+				* :ref:`config_http_filters_router_x-envoy-retry-grpc-on`
+				* :ref:`config_http_filters_router_x-envoy-retry-on`
+
+				Value must be an integer:
+
+				* :ref:`config_http_filters_router_x-envoy-max-retries`
+				* :ref:`config_http_filters_router_x-envoy-upstream-rq-timeout-ms`
+				* :ref:`config_http_filters_router_x-envoy-upstream-rq-per-try-timeout-ms`
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-SuppressEnvoyHeaders"><label for="Router-fold-field-SuppressEnvoyHeaders"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-50">SuppressEnvoyHeaders</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></label><span id='Router-fold-field-SuppressEnvoyHeaders-docs' class="fold-docs">
+				Do not add any additional *x-envoy-* headers to requests or responses. This
+				only affects the :ref:`router filter generated *x-envoy-* headers
+				&lt;config_http_filters_router_headers_set&gt;`, other Envoy filters and the HTTP
+				connection manager may continue to set *x-envoy-* headers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-SuppressGrpcRequestFailureCodeStats"><label for="Router-fold-field-SuppressGrpcRequestFailureCodeStats"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-80">SuppressGrpcRequestFailureCodeStats</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></label><span id='Router-fold-field-SuppressGrpcRequestFailureCodeStats-docs' class="fold-docs">
+				If set, Envoy will avoid incrementing HTTP failure code stats
+				on gRPC requests. This includes the individual status code value
+				(e.g. upstream_rq_504) and group stats (e.g. upstream_rq_5xx).
+				This field is useful if interested in relying only on the gRPC
+				stats filter to define success and failure metrics for gRPC requests
+				as not all failed gRPC requests charge HTTP status code metrics. See
+				:ref:`gRPC stats filter&lt;config_http_filters_grpc_stats&gt;` documentation
+				for more details.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-field-UpstreamLog"><label for="Router-fold-field-UpstreamLog"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-45">UpstreamLog</a> <i>[]*<a href="../../../../config/accesslog/v3.html">v3</a>.<a href="../../../../config/accesslog/v3.html#name-AccessLog">AccessLog</a></i></label><span id='Router-fold-field-UpstreamLog-docs' class="fold-docs">
+				Configuration for HTTP upstream logs emitted by the router. Upstream logs
+				are configured in the same way as access logs, but each log entry represents
+				an upstream request. Presuming retries are configured, multiple upstream
+				requests may be made for each downstream (inbound) request.
+</span></span>
+			<input type='checkbox' class="showhide" id="Router-showhide-fields"><i><label for="Router-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="Router-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-30">sizeCache</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-29">state</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-31">unknownFields</a> <i><a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="Router-fold-methods"><label for="Router-fold-methods">Methods (<i>total 15, in which 14 are exported</i>)</label><span id='Router-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Router-fold-method-Descriptor"><label for="Router-fold-method-Descriptor">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-111">Descriptor</a>() ([]<a href="../../../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../../../builtin.html#name-int">int</a>)</label><span id='Router-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use Router.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-115">GetDynamicStats</a>() *<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html">wrappers</a>.<a href="../../../../../../../golang/protobuf/ptypes/wrappers.html#name-BoolValue">BoolValue</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-150">GetRespectExpectedRqTimeout</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-122">GetStartChildSpan</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-143">GetStrictCheckHeaders</a>() []<a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-136">GetSuppressEnvoyHeaders</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-157">GetSuppressGrpcRequestFailureCodeStats</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-129">GetUpstreamLog</a>() []*<a href="../../../../config/accesslog/v3.html">v3</a>.<a href="../../../../config/accesslog/v3.html#name-AccessLog">AccessLog</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-96">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-98">ProtoReflect</a>() <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-83">Reset</a>()</span></span><span>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-92">String</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-method-Validate"><label for="Router-fold-method-Validate">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-41">Validate</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='Router-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on Router with the rules defined in the
+				proto definition for this message. If any rules are violated, the first
+				error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Router-fold-method-ValidateAll"><label for="Router-fold-method-ValidateAll">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-48">ValidateAll</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='Router-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on Router with the rules defined in the
+				proto definition for this message. If any rules are violated, the result is
+				a list of violation errors wrapped in RouterMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="Router-showhide-methods"><i><label for="Router-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="Router-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*Router) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-52">validate</a>(all <a href="../../../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="Router-fold-impls"><label for="Router-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='Router-fold-impls-items' class="fold-items"><span>
+			*Router : fmt.<a href="../../../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*Router : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*Router : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="Router-showhide-impls"><i><label for="Router-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="Router-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*Router : context.<a href="../../../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*Router : google.golang.org/protobuf/internal/impl.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*Router : runtime.<a href="../../../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouterMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="RouterMultiError-fold-content"><label for="RouterMultiError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-155">RouterMultiError</a> <i>([])</i></label><span id='RouterMultiError-fold-content-docs' class="fold-docs">
+		RouterMultiError is an error wrapping multiple validation errors returned by
+		Router.ValidateAll() if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="RouterMultiError-fold-methods"><label for="RouterMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='RouterMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouterMultiError-fold-method-AllErrors"><label for="RouterMultiError-fold-method-AllErrors">( RouterMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-167">AllErrors</a>() []<a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='RouterMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterMultiError-fold-method-Error"><label for="RouterMultiError-fold-method-Error">( RouterMultiError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-158">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='RouterMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="RouterMultiError-fold-impls"><label for="RouterMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='RouterMultiError-fold-impls-items' class="fold-items"><span>
+			 RouterMultiError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouterValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="RouterValidationError-fold-content"><label for="RouterValidationError-fold-content"> type <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-171">RouterValidationError</a> <i>(struct)</i></label><span id='RouterValidationError-fold-content-docs' class="fold-docs">
+		RouterValidationError is the validation error returned by Router.Validate if
+		the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="RouterValidationError-fold-fields"><label for="RouterValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='RouterValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="RouterValidationError-showhide-fields"><i><label for="RouterValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="RouterValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-174">cause</a> <i><a href="../../../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-172">field</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-175">key</a> <i><a href="../../../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-173">reason</a> <i><a href="../../../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="RouterValidationError-fold-methods"><label for="RouterValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='RouterValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-Cause"><label for="RouterValidationError-fold-method-Cause">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-185">Cause</a>() <a href="../../../../../../../../builtin.html#name-error">error</a></label><span id='RouterValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-Error"><label for="RouterValidationError-fold-method-Error">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-194">Error</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='RouterValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-ErrorName"><label for="RouterValidationError-fold-method-ErrorName">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-191">ErrorName</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='RouterValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-Field"><label for="RouterValidationError-fold-method-Field">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-179">Field</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='RouterValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-Key"><label for="RouterValidationError-fold-method-Key">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-188">Key</a>() <a href="../../../../../../../../builtin.html#name-bool">bool</a></label><span id='RouterValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouterValidationError-fold-method-Reason"><label for="RouterValidationError-fold-method-Reason">( RouterValidationError) <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-182">Reason</a>() <a href="../../../../../../../../builtin.html#name-string">string</a></label><span id='RouterValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="RouterValidationError-fold-impls"><label for="RouterValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='RouterValidationError-fold-impls-items' class="fold-items"><span>
+			 RouterValidationError : <a href="../../../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-266">file_envoy_extensions_filters_http_router_v3_router_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-242">file_envoy_extensions_filters_http_router_v3_router_proto_rawDescGZIP</a>() []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-265">init</a>()</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 8, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-File_envoy_extensions_filters_http_router_v3_router_proto">	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-164">File_envoy_extensions_filters_http_router_v3_router_proto</a> <a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 7 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 7 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-_Router_StrictCheckHeaders_InLookup"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.validate.go.html#line-223">_Router_StrictCheckHeaders_InLookup</a> map[<a href="../../../../../../../../builtin.html#name-string">string</a>]struct{}</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-255">file_envoy_extensions_filters_http_router_v3_router_proto_depIdxs</a> []<a href="../../../../../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-250">file_envoy_extensions_filters_http_router_v3_router_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-249">file_envoy_extensions_filters_http_router_v3_router_proto_msgTypes</a> []<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html">impl</a>.<a href="../../../../../../../../google.golang.org/protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-166">file_envoy_extensions_filters_http_router_v3_router_proto_rawDesc</a> []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-239">file_envoy_extensions_filters_http_router_v3_router_proto_rawDescData</a> []<a href="../../../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_extensions_filters_http_router_v3_router_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3/router.pb.go.html#line-238">file_envoy_extensions_filters_http_router_v3_router_proto_rawDescOnce</a> <a href="../../../../../../../../sync.html">sync</a>.<a href="../../../../../../../../sync.html#name-Once">Once</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

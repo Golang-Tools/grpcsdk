@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/xdsclient/controller/version</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>version</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/xdsclient/controller/version">google.golang.org/grpc/xds/internal/xdsclient/controller/version</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/xdsclient/controller/version" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html">9 packages</a>, and imported by <a href="../../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#imported-by">3 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#doc">#d</a> <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html">version.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package version defines APIs to deal with different versions of xDS.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 4, all are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-BuildOptions" data-popularity="70">	<input type='checkbox' class="fold" id="BuildOptions-fold-content"><label for="BuildOptions-fold-content"> type <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-58">BuildOptions</a> <i>(struct)</i></label><span id='BuildOptions-fold-content-docs' class="fold-docs">
+		BuildOptions contains options to be passed to client builders.
+
+		<input type='checkbox' class="fold" id="BuildOptions-fold-fields"><label for="BuildOptions-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='BuildOptions-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="BuildOptions-fold-field-Logger"><label for="BuildOptions-fold-field-Logger"><a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-66">Logger</a> <i>*<a href="../../../../internal/grpclog.html">grpclog</a>.<a href="../../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></label><span id='BuildOptions-fold-field-Logger-docs' class="fold-docs">
+				// Backoff returns the amount of time to backoff before retrying broken
+				// streams.
+				Backoff func(int) time.Duration
+				Logger provides enhanced logging capabilities.
+</span></span><span>
+			<input type='checkbox' class="fold" id="BuildOptions-fold-field-NodeProto"><label for="BuildOptions-fold-field-NodeProto"><a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-61">NodeProto</a> <i><a href="../../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a></i></label><span id='BuildOptions-fold-field-NodeProto-docs' class="fold-docs">
+				NodeProto contains the Node proto to be used in xDS requests. The actual
+				type depends on the transport protocol version used.
+</span></span></span>
+		<input type='checkbox' class="fold" id="BuildOptions-fold-params"><label for="BuildOptions-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='BuildOptions-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="BuildOptions-showhide-outputofs"><i><label for="BuildOptions-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="BuildOptions-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller/version/v2.<a href="version/v2.html#name-newClient">newClient</a>(opts <b>BuildOptions</b>) (<a href="#name-VersionedClient">VersionedClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="version/v3.html#name-newClient">newClient</a>(opts <b>BuildOptions</b>) (<a href="#name-VersionedClient">VersionedClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-ErrResourceTypeUnsupported" data-popularity="100">	<input type='checkbox' class="fold" id="ErrResourceTypeUnsupported-fold-content"><label for="ErrResourceTypeUnsupported-fold-content"> type <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-76">ErrResourceTypeUnsupported</a> <i>(struct)</i></label><span id='ErrResourceTypeUnsupported-fold-content-docs' class="fold-docs">
+		ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
+		resource type. The wrapped ErrStr contains the details.
+
+		<input type='checkbox' class="fold" id="ErrResourceTypeUnsupported-fold-fields"><label for="ErrResourceTypeUnsupported-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='ErrResourceTypeUnsupported-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-77">ErrStr</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="ErrResourceTypeUnsupported-fold-methods"><label for="ErrResourceTypeUnsupported-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='ErrResourceTypeUnsupported-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ErrResourceTypeUnsupported-fold-method-Error"><label for="ErrResourceTypeUnsupported-fold-method-Error">( ErrResourceTypeUnsupported) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-81">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='ErrResourceTypeUnsupported-fold-method-Error-docs' class="fold-docs">
+				Error helps implements the error interface.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ErrResourceTypeUnsupported-fold-impls"><label for="ErrResourceTypeUnsupported-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ErrResourceTypeUnsupported-fold-impls-items' class="fold-items"><span>
+			 ErrResourceTypeUnsupported : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadReportingOptions" data-popularity="35">	<input type='checkbox' class="fold" id="LoadReportingOptions-fold-content"><label for="LoadReportingOptions-fold-content"> type <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-70">LoadReportingOptions</a> <i>(struct)</i></label><span id='LoadReportingOptions-fold-content-docs' class="fold-docs">
+		LoadReportingOptions contains configuration knobs for reporting load data.
+
+		<input type='checkbox' class="fold" id="LoadReportingOptions-fold-fields"><label for="LoadReportingOptions-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='LoadReportingOptions-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-71">LoadStore</a> <i>*<a href="../load.html">load</a>.<a href="../load.html#name-Store">Store</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingOptions-fold-params"><label for="LoadReportingOptions-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='LoadReportingOptions-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadReportingOptions-showhide-outputofs"><i><label for="LoadReportingOptions-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="LoadReportingOptions-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller.(*<a href="../controller.html#name-Controller">Controller</a>).<a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-366">reportLoad</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, cc *<a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientConn">ClientConn</a>, opts <b>LoadReportingOptions</b>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-VersionedClient" data-popularity="850">	<input type='checkbox' class="fold" id="VersionedClient-fold-content"><label for="VersionedClient-fold-content"> type <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-90">VersionedClient</a> <b><i>(interface)</i></b></label><span id='VersionedClient-fold-content-docs' class="fold-docs">
+		VersionedClient is the interface to version specific operations of the
+		client.
+
+		It mainly deals with the type assertion from proto.Message to the real v2/v3
+		types, and grpc.Stream to the versioned stream types.
+
+		<input type='checkbox' class="fold" id="VersionedClient-fold-methods"><label for="VersionedClient-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='VersionedClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-HandleLoadStatsResponse"><label for="VersionedClient-fold-method-HandleLoadStatsResponse">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-118">HandleLoadStatsResponse</a>(s <a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>) (clusters []<a href="../../../../../../builtin.html#name-string">string</a>, _ <a href="../../../../../../time.html">time</a>.<a href="../../../../../../time.html#name-Duration">Duration</a>, _ <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='VersionedClient-fold-method-HandleLoadStatsResponse-docs' class="fold-docs">
+				HandleLoadStatsResponse receives the first response from the server which
+				contains the load reporting interval and the clusters for which the
+				server asks the client to report load for.
+
+				If the response sets SendAllClusters to true, the returned clusters is
+				nil.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-NewLoadStatsStream"><label for="VersionedClient-fold-method-NewLoadStatsStream">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-108">NewLoadStatsStream</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, cc *<a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientConn">ClientConn</a>) (<a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='VersionedClient-fold-method-NewLoadStatsStream-docs' class="fold-docs">
+				NewLoadStatsStream returns a new LRS client stream specific to the
+				underlying transport protocol version.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-NewStream"><label for="VersionedClient-fold-method-NewStream">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-93">NewStream</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, cc *<a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientConn">ClientConn</a>) (<a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='VersionedClient-fold-method-NewStream-docs' class="fold-docs">
+				NewStream returns a new xDS client stream specific to the underlying
+				transport protocol version.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-ParseResponse"><label for="VersionedClient-fold-method-ParseResponse">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-102">ParseResponse</a>(r <a href="../../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<a href="../xdsresource.html">xdsresource</a>.<a href="../xdsresource.html#name-ResourceType">ResourceType</a>, []*<a href="../../../../../protobuf/types/known/anypb.html">anypb</a>.<a href="../../../../../protobuf/types/known/anypb.html#name-Any">Any</a>, <a href="../../../../../../builtin.html#name-string">string</a>, <a href="../../../../../../builtin.html#name-string">string</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='VersionedClient-fold-method-ParseResponse-docs' class="fold-docs">
+				ParseResponse type asserts message to the versioned response, and
+				retrieves the fields.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-RecvResponse"><label for="VersionedClient-fold-method-RecvResponse">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-99">RecvResponse</a>(s <a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>) (<a href="../../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='VersionedClient-fold-method-RecvResponse-docs' class="fold-docs">
+				RecvResponse uses the provided stream to receive a response specific to
+				the underlying transport protocol version.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-SendFirstLoadStatsRequest"><label for="VersionedClient-fold-method-SendFirstLoadStatsRequest">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-111">SendFirstLoadStatsRequest</a>(s <a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='VersionedClient-fold-method-SendFirstLoadStatsRequest-docs' class="fold-docs">
+				SendFirstLoadStatsRequest constructs and sends the first request on the
+				LRS stream.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-SendLoadStatsRequest"><label for="VersionedClient-fold-method-SendLoadStatsRequest">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-122">SendLoadStatsRequest</a>(s <a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>, loads []*<a href="../load.html">load</a>.<a href="../load.html#name-Data">Data</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='VersionedClient-fold-method-SendLoadStatsRequest-docs' class="fold-docs">
+				SendLoadStatsRequest will be invoked at regular intervals to send load
+				report with load data reported since the last time this method was
+				invoked.
+</span></span><span>
+			<input type='checkbox' class="fold" id="VersionedClient-fold-method-SendRequest"><label for="VersionedClient-fold-method-SendRequest">( VersionedClient) <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-96">SendRequest</a>(s <a href="../../../../../grpc.html">grpc</a>.<a href="../../../../../grpc.html#name-ClientStream">ClientStream</a>, resourceNames []<a href="../../../../../../builtin.html#name-string">string</a>, rType <a href="../xdsresource.html">xdsresource</a>.<a href="../xdsresource.html#name-ResourceType">ResourceType</a>, version, nonce, errMsg <a href="../../../../../../builtin.html#name-string">string</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='VersionedClient-fold-method-SendRequest-docs' class="fold-docs">
+				SendRequest constructs and sends out a DiscoveryRequest message specific
+				to the underlying transport protocol version.
+</span></span></span>
+		<input type='checkbox' class="fold" id="VersionedClient-fold-impledby"><label for="VersionedClient-fold-impledby">Implemented By (<i>at least 2, neither is exported</i>)</label><span id='VersionedClient-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="VersionedClient-showhide-impedBys"><i><label for="VersionedClient-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="VersionedClient-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*google.golang.org/grpc/xds/internal/xdsclient/controller/version/v2.<a href="version/v2.html#name-client">client</a></i></span><span class="hidden"><i>
+			*google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="version/v3.html#name-client">client</a></i></span></span>
+		<input type='checkbox' class="fold" id="VersionedClient-fold-results"><label for="VersionedClient-fold-results">As Outputs Of (<i>at least 2, neither is exported</i>)</label><span id='VersionedClient-fold-results-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="VersionedClient-showhide-inputofs"><i><label for="VersionedClient-showhide-inputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="VersionedClient-showhide-inputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller/version/v2.<a href="version/v2.html#name-newClient">newClient</a>(opts <a href="#name-BuildOptions">BuildOptions</a>) (<b>VersionedClient</b>, <a href="../../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="version/v3.html#name-newClient">newClient</a>(opts <a href="#name-BuildOptions">BuildOptions</a>) (<b>VersionedClient</b>, <a href="../../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 2, both are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-GetAPIClientBuilder">	<input type='checkbox' class="fold" id="GetAPIClientBuilder-fold-content"><label for="GetAPIClientBuilder-fold-content"> func <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-50">GetAPIClientBuilder</a>(version <a href="../xdsresource/version.html">version</a>.<a href="../xdsresource/version.html#name-TransportAPI">TransportAPI</a>) func(opts <a href="#name-BuildOptions">BuildOptions</a>) (<a href="#name-VersionedClient">VersionedClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='GetAPIClientBuilder-fold-content-docs' class="fold-docs">
+		GetAPIClientBuilder returns the client builder registered for the provided
+		xDS transport API version.
+
+</span></div><div class="anchor value-res" id="name-RegisterAPIClientBuilder">	<input type='checkbox' class="fold" id="RegisterAPIClientBuilder-fold-content"><label for="RegisterAPIClientBuilder-fold-content"> func <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-44">RegisterAPIClientBuilder</a>(v <a href="../xdsresource/version.html">version</a>.<a href="../xdsresource/version.html#name-TransportAPI">TransportAPI</a>, f func(opts <a href="#name-BuildOptions">BuildOptions</a>) (<a href="#name-VersionedClient">VersionedClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>))</label><span id='RegisterAPIClientBuilder-fold-content-docs' class="fold-docs">
+		RegisterAPIClientBuilder registers a client builder for xDS transport protocol
+		version specified by b.Version().
+
+		NOTE: this function must only be called during initialization time (i.e. in
+		an init() function), and is not thread-safe. If multiple builders are
+		registered for the same version, the one registered last will take effect.
+
+</span></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-m"><i>	<span class="nodocs">  var <a href="../../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-35">m</a> map[<a href="../xdsresource/version.html">version</a>.<a href="../xdsresource/version.html#name-TransportAPI">TransportAPI</a>]func(opts <a href="#name-BuildOptions">BuildOptions</a>) (<a href="#name-VersionedClient">VersionedClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

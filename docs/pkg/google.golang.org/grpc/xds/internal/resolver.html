@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/resolver</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>resolver</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/resolver">google.golang.org/grpc/xds/internal/resolver</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/resolver" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/xds/internal/resolver.html">32 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/xds/internal/resolver.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/logging.go.html">logging.go</a></span>
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html">serviceconfig.go</a></span>
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html">watch_service.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-3-fold-content"><label for="file-3-fold-content">   <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html">xds_resolver.go</a></label><span id='file-3-fold-content-items' class="fold-items">
+		Package resolver implements the xds resolver, that does LDS and RDS to find
+		the cluster to use.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 17, none are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 17 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 17 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-balancerConfig" data-popularity="75">	<input type='checkbox' class="fold" id="balancerConfig-fold-content"><label for="balancerConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-57">balancerConfig</a> <i>([])</i></label><span id='balancerConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="balancerConfig-fold-results"><label for="balancerConfig-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='balancerConfig-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="balancerConfig-showhide-inputofs"><i><label for="balancerConfig-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="balancerConfig-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newBalancerConfig">newBalancerConfig</a>(name <a href="../../../../builtin.html#name-string">string</a>, config interface{}) <b>balancerConfig</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-cdsBalancerConfig" data-popularity="0">	<input type='checkbox' class="fold" id="cdsBalancerConfig-fold-content"><label for="cdsBalancerConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-63">cdsBalancerConfig</a> <i>(struct)</i></label><span id='cdsBalancerConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="cdsBalancerConfig-fold-fields"><label for="cdsBalancerConfig-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='cdsBalancerConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-64">Cluster</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterInfo" data-popularity="35">	<input type='checkbox' class="fold" id="clusterInfo-fold-content"><label for="clusterInfo-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-419">clusterInfo</a> <i>(struct)</i></label><span id='clusterInfo-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="clusterInfo-fold-fields"><label for="clusterInfo-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='clusterInfo-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterInfo-showhide-fields"><i><label for="clusterInfo-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="clusterInfo-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterInfo-fold-field-cfg"><label for="clusterInfo-fold-field-cfg"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-424">cfg</a> <i><a href="#name-xdsChildConfig">xdsChildConfig</a></i></label><span id='clusterInfo-fold-field-cfg-docs' class="fold-docs">
+				cfg is the child configuration for this cluster, containing either the
+				csp config or the cds cluster config.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterInfo-fold-field-refCount"><label for="clusterInfo-fold-field-refCount"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-421">refCount</a> <i><a href="../../../../builtin.html#name-int32">int32</a></i></label><span id='clusterInfo-fold-field-refCount-docs' class="fold-docs">
+				number of references to this cluster; accessed atomically
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterInfo-fold-params"><label for="clusterInfo-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='clusterInfo-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterInfo-showhide-outputofs"><i><label for="clusterInfo-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="clusterInfo-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-serviceConfigJSON">serviceConfigJSON</a>(activeClusters map[<a href="../../../../builtin.html#name-string">string</a>]*<b>clusterInfo</b>) ([]<a href="../../../../builtin.html#name-byte">byte</a>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-configSelector" data-popularity="300">	<input type='checkbox' class="fold" id="configSelector-fold-content"><label for="configSelector-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-136">configSelector</a> <i>(struct)</i></label><span id='configSelector-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="configSelector-fold-fields"><label for="configSelector-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='configSelector-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="configSelector-showhide-fields"><i><label for="configSelector-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="configSelector-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-140">clusters</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="#name-clusterInfo">clusterInfo</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-141">httpFilterConfig</a> <i>[]<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-HTTPFilter">HTTPFilter</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-137">r</a> <i>*<a href="#name-xdsResolver">xdsResolver</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-139">routes</a> <i>[]<a href="#name-route">route</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-138">virtualHost</a> <i><a href="#name-virtualHost">virtualHost</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="configSelector-fold-methods"><label for="configSelector-fold-methods">Methods (<i>total 5, in which 1 are exported</i>)</label><span id='configSelector-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*configSelector) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-146">SelectConfig</a>(rpcInfo <a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-RPCInfo">RPCInfo</a>) (*<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-RPCConfig">RPCConfig</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+			<input type='checkbox' checked class="showhide" id="configSelector-showhide-methods"><i><label for="configSelector-showhide-methods" class="show-inline">/* 4 unexporteds ... */</label><label for="configSelector-showhide-methods" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*configSelector) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-223">generateHash</a>(rpcInfo <a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-RPCInfo">RPCInfo</a>, hashPolicies []*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-HashPolicy">HashPolicy</a>) <a href="../../../../builtin.html#name-uint64">uint64</a></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="configSelector-fold-method-initializeCluster"><label for="configSelector-fold-method-initializeCluster">(*configSelector) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-409">initializeCluster</a>(clusterName <a href="../../../../builtin.html#name-string">string</a>, cfg <a href="#name-xdsChildConfig">xdsChildConfig</a>)</label><span id='configSelector-fold-method-initializeCluster-docs' class="fold-docs">
+				initializeCluster initializes entries in cs.clusters map, creating entries in
+				r.activeClusters as necessary.  Any created entries will have a ref count set
+				to zero as their ref count will be incremented by incRefs.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*configSelector) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-278">newInterceptor</a>(rt *<a href="#name-route">route</a>, cluster *<a href="#name-routeCluster">routeCluster</a>) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientInterceptor">ClientInterceptor</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="configSelector-fold-method-stop"><label for="configSelector-fold-method-stop">(*configSelector) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-313">stop</a>()</label><span id='configSelector-fold-method-stop-docs' class="fold-docs">
+				stop decrements refs of all clusters referenced by this config selector.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="configSelector-fold-impls"><label for="configSelector-fold-impls">Implements (<i>at least one exported</i>)</label><span id='configSelector-fold-impls-items' class="fold-items"><span>
+			*configSelector : google.golang.org/grpc/internal/resolver.<a href="../../internal/resolver.html#name-ConfigSelector">ConfigSelector</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-interceptorList" data-popularity="100">	<input type='checkbox' class="fold" id="interceptorList-fold-content"><label for="interceptorList-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-427">interceptorList</a> <i>(struct)</i></label><span id='interceptorList-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="interceptorList-fold-fields"><label for="interceptorList-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='interceptorList-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="interceptorList-showhide-fields"><i><label for="interceptorList-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="interceptorList-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-428">interceptors</a> <i>[]<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientInterceptor">ClientInterceptor</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="interceptorList-fold-methods"><label for="interceptorList-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='interceptorList-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*interceptorList) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-431">NewStream</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, ri <a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-RPCInfo">RPCInfo</a>, done func(), newStream func(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, done func()) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientStream">ClientStream</a>, <a href="../../../../builtin.html#name-error">error</a>)) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientStream">ClientStream</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="interceptorList-fold-impls"><label for="interceptorList-fold-impls">Implements (<i>at least one exported</i>)</label><span id='interceptorList-fold-impls-items' class="fold-items"><span>
+			*interceptorList : google.golang.org/grpc/internal/resolver.<a href="../../internal/resolver.html#name-ClientInterceptor">ClientInterceptor</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ldsConfig" data-popularity="0">	<input type='checkbox' class="fold" id="ldsConfig-fold-content"><label for="ldsConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-48">ldsConfig</a> <i>(struct)</i></label><span id='ldsConfig-fold-content-docs' class="fold-docs">
+		ldsConfig contains information received from the LDS responses which are of
+		interest to the xds resolver.
+
+		<input type='checkbox' class="fold" id="ldsConfig-fold-fields"><label for="ldsConfig-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='ldsConfig-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ldsConfig-showhide-fields"><i><label for="ldsConfig-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="ldsConfig-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-52">httpFilterConfig</a> <i>[]<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-HTTPFilter">HTTPFilter</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ldsConfig-fold-field-maxStreamDuration"><label for="ldsConfig-fold-field-maxStreamDuration"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-51">maxStreamDuration</a> <i><a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Duration">Duration</a></i></label><span id='ldsConfig-fold-field-maxStreamDuration-docs' class="fold-docs">
+				maxStreamDuration is from the HTTP connection manager's
+				common_http_protocol_options field.
+</span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-route" data-popularity="200">	<input type='checkbox' class="fold" id="route-fold-content"><label for="route-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-122">route</a> <i>(struct)</i></label><span id='route-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="route-fold-fields"><label for="route-fold-fields">Fields (<i>total 6, none are exported</i>)</label><span id='route-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="route-showhide-fields"><i><label for="route-showhide-fields" class="show-inline">/* 6 unexporteds ... */</label><label for="route-showhide-fields" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="route-fold-field-clusters"><label for="route-fold-field-clusters"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-124">clusters</a> <i><a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a></i></label><span id='route-fold-field-clusters-docs' class="fold-docs">
+				// holds *routeCluster entries
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-129">hashPolicies</a> <i>[]*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-HashPolicy">HashPolicy</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="route-fold-field-httpFilterConfigOverride"><label for="route-fold-field-httpFilterConfigOverride"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-127">httpFilterConfigOverride</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="httpfilter.html">httpfilter</a>.<a href="httpfilter.html#name-FilterConfig">FilterConfig</a></i></label><span id='route-fold-field-httpFilterConfigOverride-docs' class="fold-docs">
+				map from filter name to its config
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="route-fold-field-m"><label for="route-fold-field-m"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-123">m</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-CompositeMatcher">CompositeMatcher</a></i></label><span id='route-fold-field-m-docs' class="fold-docs">
+				// converted from route matchers
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-125">maxStreamDuration</a> <i><a href="../../../../time.html">time</a>.<a href="../../../../time.html#name-Duration">Duration</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-128">retryConfig</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RetryConfig">RetryConfig</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="route-fold-methods"><label for="route-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='route-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( route) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-132">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="route-fold-impls"><label for="route-fold-impls">Implements (<i>at least 3, in which 1 are exported</i>)</label><span id='route-fold-impls-items' class="fold-items"><span>
+			 route : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' checked class="showhide" id="route-showhide-impls"><i><label for="route-showhide-impls" class="show-inline">/* 2+ unexporteds ... */</label><label for="route-showhide-impls" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			 route : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			 route : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-routeCluster" data-popularity="0">	<input type='checkbox' class="fold" id="routeCluster-fold-content"><label for="routeCluster-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-116">routeCluster</a> <i>(struct)</i></label><span id='routeCluster-fold-content-docs' class="fold-docs">
+		routeCluster holds information about a cluster as referenced by a route.
+
+		<input type='checkbox' class="fold" id="routeCluster-fold-fields"><label for="routeCluster-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='routeCluster-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="routeCluster-showhide-fields"><i><label for="routeCluster-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="routeCluster-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="routeCluster-fold-field-httpFilterConfigOverride"><label for="routeCluster-fold-field-httpFilterConfigOverride"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-119">httpFilterConfigOverride</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="httpfilter.html">httpfilter</a>.<a href="httpfilter.html#name-FilterConfig">FilterConfig</a></i></label><span id='routeCluster-fold-field-httpFilterConfigOverride-docs' class="fold-docs">
+				map from filter name to its config
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-117">name</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-serviceConfig" data-popularity="0">	<input type='checkbox' class="fold" id="serviceConfig-fold-content"><label for="serviceConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-53">serviceConfig</a> <i>(struct)</i></label><span id='serviceConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="serviceConfig-fold-fields"><label for="serviceConfig-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='serviceConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-54">LoadBalancingConfig</a> <i><a href="#name-balancerConfig">balancerConfig</a></i></span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-serviceUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="serviceUpdate-fold-content"><label for="serviceUpdate-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-36">serviceUpdate</a> <i>(struct)</i></label><span id='serviceUpdate-fold-content-docs' class="fold-docs">
+		serviceUpdate contains information received from the LDS/RDS responses which
+		are of interest to the xds resolver. The RDS request is built by first
+		making a LDS to get the RouteConfig name.
+
+		<input type='checkbox' class="fold" id="serviceUpdate-fold-fields"><label for="serviceUpdate-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='serviceUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serviceUpdate-showhide-fields"><i><label for="serviceUpdate-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="serviceUpdate-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="serviceUpdate-fold-field-clusterSpecifierPlugins"><label for="serviceUpdate-fold-field-clusterSpecifierPlugins"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-41">clusterSpecifierPlugins</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="clusterspecifier.html">clusterspecifier</a>.<a href="clusterspecifier.html#name-BalancerConfig">BalancerConfig</a></i></label><span id='serviceUpdate-fold-field-clusterSpecifierPlugins-docs' class="fold-docs">
+				clusterSpecifierPlugins contains the configurations for any cluster
+				specifier plugins emitted by the xdsclient.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="serviceUpdate-fold-field-ldsConfig"><label for="serviceUpdate-fold-field-ldsConfig"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-43">ldsConfig</a> <i><a href="#name-ldsConfig">ldsConfig</a></i></label><span id='serviceUpdate-fold-field-ldsConfig-docs' class="fold-docs">
+				ldsConfig contains configuration that applies to all routes.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="serviceUpdate-fold-field-virtualHost"><label for="serviceUpdate-fold-field-virtualHost"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-38">virtualHost</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-VirtualHost">VirtualHost</a></i></label><span id='serviceUpdate-fold-field-virtualHost-docs' class="fold-docs">
+				virtualHost contains routes and other configuration to route RPCs.
+</span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-serviceUpdateWatcher" data-popularity="200">	<input type='checkbox' class="fold" id="serviceUpdateWatcher-fold-content"><label for="serviceUpdateWatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-75">serviceUpdateWatcher</a> <i>(struct)</i></label><span id='serviceUpdateWatcher-fold-content-docs' class="fold-docs">
+		serviceUpdateWatcher handles LDS and RDS response, and calls the service
+		callback at the right time.
+
+		<input type='checkbox' class="fold" id="serviceUpdateWatcher-fold-fields"><label for="serviceUpdateWatcher-fold-fields">Fields (<i>total 10, none are exported</i>)</label><span id='serviceUpdateWatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serviceUpdateWatcher-showhide-fields"><i><label for="serviceUpdateWatcher-showhide-fields" class="show-inline">/* 10 unexporteds ... */</label><label for="serviceUpdateWatcher-showhide-fields" class="hide-inline">/* 10 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-77">c</a> <i><a href="xdsclient.html">xdsclient</a>.<a href="xdsclient.html#name-XDSClient">XDSClient</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-84">closed</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-81">lastUpdate</a> <i><a href="#name-serviceUpdate">serviceUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-79">ldsCancel</a> <i>func()</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-76">logger</a> <i>*<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-83">mu</a> <i><a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-86">rdsCancel</a> <i>func()</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-85">rdsName</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-80">serviceCb</a> <i>func(<a href="#name-serviceUpdate">serviceUpdate</a>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-78">serviceName</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="serviceUpdateWatcher-fold-methods"><label for="serviceUpdateWatcher-fold-methods">Methods (<i>total 4, none are exported</i>)</label><span id='serviceUpdateWatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="serviceUpdateWatcher-showhide-methods"><i><label for="serviceUpdateWatcher-showhide-methods" class="show-inline">/* 4 unexporteds ... */</label><label for="serviceUpdateWatcher-showhide-methods" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*serviceUpdateWatcher) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-158">applyRouteConfigUpdate</a>(update <a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*serviceUpdateWatcher) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-190">close</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*serviceUpdateWatcher) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-89">handleLDSResp</a>(update <a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-ListenerUpdate">ListenerUpdate</a>, err <a href="../../../../builtin.html#name-error">error</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*serviceUpdateWatcher) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-171">handleRDSResp</a>(update <a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RouteConfigUpdate">RouteConfigUpdate</a>, err <a href="../../../../builtin.html#name-error">error</a>)</span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-suWithError" data-popularity="0">	<input type='checkbox' class="fold" id="suWithError-fold-content"><label for="suWithError-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-156">suWithError</a> <i>(struct)</i></label><span id='suWithError-fold-content-docs' class="fold-docs">
+		suWithError wraps the ServiceUpdate and error received through a watch API
+		callback, so that it can pushed onto the update channel as a single entity.
+
+		<input type='checkbox' class="fold" id="suWithError-fold-fields"><label for="suWithError-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='suWithError-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="suWithError-showhide-fields"><i><label for="suWithError-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="suWithError-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-158">emptyUpdate</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-159">err</a> <i><a href="../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-157">su</a> <i><a href="#name-serviceUpdate">serviceUpdate</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-virtualHost" data-popularity="0">	<input type='checkbox' class="fold" id="virtualHost-fold-content"><label for="virtualHost-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-108">virtualHost</a> <i>(struct)</i></label><span id='virtualHost-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="virtualHost-fold-fields"><label for="virtualHost-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='virtualHost-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="virtualHost-showhide-fields"><i><label for="virtualHost-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="virtualHost-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="virtualHost-fold-field-httpFilterConfigOverride"><label for="virtualHost-fold-field-httpFilterConfigOverride"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-110">httpFilterConfigOverride</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="httpfilter.html">httpfilter</a>.<a href="httpfilter.html#name-FilterConfig">FilterConfig</a></i></label><span id='virtualHost-fold-field-httpFilterConfigOverride-docs' class="fold-docs">
+				map from filter name to its config
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="virtualHost-fold-field-retryConfig"><label for="virtualHost-fold-field-retryConfig"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-112">retryConfig</a> <i>*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RetryConfig">RetryConfig</a></i></label><span id='virtualHost-fold-field-retryConfig-docs' class="fold-docs">
+				retry policy present in virtual host
+</span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-xdsChildConfig" data-popularity="0">	<input type='checkbox' class="fold" id="xdsChildConfig-fold-content"><label for="xdsChildConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-67">xdsChildConfig</a> <i>(struct)</i></label><span id='xdsChildConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="xdsChildConfig-fold-fields"><label for="xdsChildConfig-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='xdsChildConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-68">ChildPolicy</a> <i><a href="#name-balancerConfig">balancerConfig</a></i></span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-xdsClusterManagerConfig" data-popularity="0">	<input type='checkbox' class="fold" id="xdsClusterManagerConfig-fold-content"><label for="xdsClusterManagerConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-71">xdsClusterManagerConfig</a> <i>(struct)</i></label><span id='xdsClusterManagerConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="xdsClusterManagerConfig-fold-fields"><label for="xdsClusterManagerConfig-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='xdsClusterManagerConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-72">Children</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="#name-xdsChildConfig">xdsChildConfig</a></i></span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-xdsResolver" data-popularity="435">	<input type='checkbox' class="fold" id="xdsResolver-fold-content"><label for="xdsResolver-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-167">xdsResolver</a> <i>(struct)</i></label><span id='xdsResolver-fold-content-docs' class="fold-docs">
+		xdsResolver implements the resolver.Resolver interface.
+
+		It registers a watcher for ServiceConfig updates with the xdsClient object
+		(which performs LDS/RDS queries for the same), and passes the received
+		updates to the ClientConn.
+
+		<input type='checkbox' class="fold" id="xdsResolver-fold-fields"><label for="xdsResolver-fold-fields">Fields (<i>total 9, none are exported</i>)</label><span id='xdsResolver-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="xdsResolver-showhide-fields"><i><label for="xdsResolver-showhide-fields" class="show-inline">/* 9 unexporteds ... */</label><label for="xdsResolver-showhide-fields" class="hide-inline">/* 9 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-field-activeClusters"><label for="xdsResolver-fold-field-activeClusters"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-184">activeClusters</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="#name-clusterInfo">clusterInfo</a></i></label><span id='xdsResolver-fold-field-activeClusters-docs' class="fold-docs">
+				activeClusters is a map from cluster name to a ref count.  Only read or
+				written during a service update (synchronous).
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-field-cancelWatch"><label for="xdsResolver-fold-field-cancelWatch"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-180">cancelWatch</a> <i>func()</i></label><span id='xdsResolver-fold-field-cancelWatch-docs' class="fold-docs">
+				cancelWatch is the function to cancel the watcher.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-169">cc</a> <i><a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-field-client"><label for="xdsResolver-fold-field-client"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-175">client</a> <i><a href="xdsclient.html">xdsclient</a>.<a href="xdsclient.html#name-XDSClient">XDSClient</a></i></label><span id='xdsResolver-fold-field-client-docs' class="fold-docs">
+				The underlying xdsClient which performs all xDS requests and responses.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-170">closed</a> <i>*<a href="../../internal/grpcsync.html">grpcsync</a>.<a href="../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-186">curConfigSelector</a> <i>*<a href="#name-configSelector">configSelector</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-172">logger</a> <i>*<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-168">target</a> <i><a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-Target">Target</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-field-updateCh"><label for="xdsResolver-fold-field-updateCh"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-178">updateCh</a> <i>chan <a href="#name-suWithError">suWithError</a></i></label><span id='xdsResolver-fold-field-updateCh-docs' class="fold-docs">
+				A channel for the watch API callback to write service updates on to. The
+				updates are read by the run goroutine and passed on to the ClientConn.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="xdsResolver-fold-methods"><label for="xdsResolver-fold-methods">Methods (<i>total 7, in which 2 are exported</i>)</label><span id='xdsResolver-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-Close"><label for="xdsResolver-fold-method-Close">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-303">Close</a>()</label><span id='xdsResolver-fold-method-Close-docs' class="fold-docs">
+				Close closes the resolver, and also closes the underlying xdsClient.
+</span></span><span>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-ResolveNow"><label for="xdsResolver-fold-method-ResolveNow">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-300">ResolveNow</a>(o <a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</label><span id='xdsResolver-fold-method-ResolveNow-docs' class="fold-docs">
+				ResolveNow is a no-op at this point.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="xdsResolver-showhide-methods"><i><label for="xdsResolver-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="xdsResolver-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-handleServiceUpdate"><label for="xdsResolver-fold-method-handleServiceUpdate">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-286">handleServiceUpdate</a>(su <a href="#name-serviceUpdate">serviceUpdate</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='xdsResolver-fold-method-handleServiceUpdate-docs' class="fold-docs">
+				handleServiceUpdate is the callback which handles service updates. It writes
+				the received update to the update channel, which is picked by the run
+				goroutine.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-newConfigSelector"><label for="xdsResolver-fold-method-newConfigSelector">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-344">newConfigSelector</a>(su <a href="#name-serviceUpdate">serviceUpdate</a>) (*<a href="#name-configSelector">configSelector</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='xdsResolver-fold-method-newConfigSelector-docs' class="fold-docs">
+				newConfigSelector creates the config selector for su; may add entries to
+				r.activeClusters for previously-unseen clusters.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-pruneActiveClusters"><label for="xdsResolver-fold-method-pruneActiveClusters">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-77">pruneActiveClusters</a>()</label><span id='xdsResolver-fold-method-pruneActiveClusters-docs' class="fold-docs">
+				pruneActiveClusters deletes entries in r.activeClusters with zero
+				references.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-run"><label for="xdsResolver-fold-method-run">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-227">run</a>()</label><span id='xdsResolver-fold-method-run-docs' class="fold-docs">
+				run is a long running goroutine which blocks on receiving service updates
+				and passes it on the ClientConn.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="xdsResolver-fold-method-sendNewServiceConfig"><label for="xdsResolver-fold-method-sendNewServiceConfig">(*xdsResolver) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-194">sendNewServiceConfig</a>(cs *<a href="#name-configSelector">configSelector</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='xdsResolver-fold-method-sendNewServiceConfig-docs' class="fold-docs">
+				sendNewServiceConfig prunes active clusters, generates a new service config
+				based on the current set of active clusters, and sends an update to the
+				channel with that service config and the provided config selector.  Returns
+				false if an error occurs while generating the service config and the update
+				cannot be sent.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="xdsResolver-fold-impls"><label for="xdsResolver-fold-impls">Implements (<i>at least one exported</i>)</label><span id='xdsResolver-fold-impls-items' class="fold-items"><span>
+			*xdsResolver : google.golang.org/grpc/resolver.<a href="../../resolver.html#name-Resolver">Resolver</a></span></span>
+		<input type='checkbox' class="fold" id="xdsResolver-fold-params"><label for="xdsResolver-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='xdsResolver-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="xdsResolver-showhide-outputofs"><i><label for="xdsResolver-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="xdsResolver-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>xdsResolver</b>) *<a href="../../internal/grpclog.html">internalgrpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-xdsResolverBuilder" data-popularity="150">	<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-content"><label for="xdsResolverBuilder-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-58">xdsResolverBuilder</a> <i>(struct)</i></label><span id='xdsResolverBuilder-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-fields"><label for="xdsResolverBuilder-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='xdsResolverBuilder-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="xdsResolverBuilder-showhide-fields"><i><label for="xdsResolverBuilder-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="xdsResolverBuilder-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-59">newXDSClient</a> <i>func() (<a href="xdsclient.html">xdsclient</a>.<a href="xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></i></span></span>
+		<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-methods"><label for="xdsResolverBuilder-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='xdsResolverBuilder-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-method-Build"><label for="xdsResolverBuilder-fold-method-Build">(*xdsResolverBuilder) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-66">Build</a>(t <a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-Target">Target</a>, cc <a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-ClientConn">ClientConn</a>, opts <a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-BuildOptions">BuildOptions</a>) (_ <a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-Resolver">Resolver</a>, retErr <a href="../../../../builtin.html#name-error">error</a>)</label><span id='xdsResolverBuilder-fold-method-Build-docs' class="fold-docs">
+				Build helps implement the resolver.Builder interface.
+
+				The xds bootstrap process is performed (and a new xds client is built) every
+				time an xds resolver is built.
+</span></span><span>
+			<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-method-Scheme"><label for="xdsResolverBuilder-fold-method-Scheme">(*xdsResolverBuilder) <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-150">Scheme</a>() <a href="../../../../builtin.html#name-string">string</a></label><span id='xdsResolverBuilder-fold-method-Scheme-docs' class="fold-docs">
+				Name helps implement the resolver.Builder interface.
+</span></span></span>
+		<input type='checkbox' class="fold" id="xdsResolverBuilder-fold-impls"><label for="xdsResolverBuilder-fold-impls">Implements (<i>at least one exported</i>)</label><span id='xdsResolverBuilder-fold-impls-items' class="fold-items"><span>
+			*xdsResolverBuilder : google.golang.org/grpc/resolver.<a href="../../resolver.html#name-Builder">Builder</a></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 7, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewBuilderForTesting">	<input type='checkbox' class="fold" id="NewBuilderForTesting-fold-content"><label for="NewBuilderForTesting-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-43">NewBuilderForTesting</a>(config []<a href="../../../../builtin.html#name-byte">byte</a>) (<a href="../../resolver.html">resolver</a>.<a href="../../resolver.html#name-Builder">Builder</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='NewBuilderForTesting-fold-content-docs' class="fold-docs">
+		NewBuilderForTesting creates a new xds resolver builder using a specific xds
+		bootstrap config, so tests can use multiple xds clients in different
+		ClientConns at the same time.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 6 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 6 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-54">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-newBalancerConfig"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-59">newBalancerConfig</a>(name <a href="../../../../builtin.html#name-string">string</a>, config interface{}) <a href="#name-balancerConfig">balancerConfig</a></span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/logging.go.html#line-32">prefixLogger</a>(p *<a href="#name-xdsResolver">xdsResolver</a>) *<a href="../../internal/grpclog.html">internalgrpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div><div class="anchor value-res hidden" id="name-retryConfigToPolicy"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-213">retryConfigToPolicy</a>(config *<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-RetryConfig">RetryConfig</a>) *<a href="../../internal/serviceconfig.html">serviceconfig</a>.<a href="../../internal/serviceconfig.html#name-RetryPolicy">RetryPolicy</a></span></i></div><div class="anchor value-res hidden" id="name-serviceConfigJSON"><i>	<input type='checkbox' class="fold" id="serviceConfigJSON-fold-content"><label for="serviceConfigJSON-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-88">serviceConfigJSON</a>(activeClusters map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="#name-clusterInfo">clusterInfo</a>) ([]<a href="../../../../builtin.html#name-byte">byte</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='serviceConfigJSON-fold-content-docs' class="fold-docs">
+		serviceConfigJSON produces a service config in JSON format representing all
+		the clusters referenced in activeClusters.  This includes clusters with zero
+		references, so they must be pruned first.
+
+</span></i></div><div class="anchor value-res hidden" id="name-watchService"><i>	<input type='checkbox' class="fold" id="watchService-fold-content"><label for="watchService-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/watch_service.go.html#line-61">watchService</a>(c <a href="xdsclient.html">xdsclient</a>.<a href="xdsclient.html#name-XDSClient">XDSClient</a>, serviceName <a href="../../../../builtin.html#name-string">string</a>, cb func(<a href="#name-serviceUpdate">serviceUpdate</a>, <a href="../../../../builtin.html#name-error">error</a>), logger *<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>) (cancel func())</label><span id='watchService-fold-content-docs' class="fold-docs">
+		watchService uses LDS and RDS to discover information about the provided
+		serviceName.
+
+		Note that during race (e.g. an xDS response is received while the user is
+		calling cancel()), there's a small window where the callback can be called
+		after the watcher is canceled. The caller needs to handle this case.
+
+</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 4, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-errNoMatchedRouteFound"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-144">errNoMatchedRouteFound</a> <a href="../../../../builtin.html#name-error">error</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/logging.go.html#line-30">logger</a> <a href="../../grpclog.html">grpclog</a>.<a href="../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div><div class="anchor value-res hidden" id="name-newWRR"><i>	<input type='checkbox' class="fold" id="newWRR-fold-content"><label for="newWRR-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-340">newWRR</a> func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a></label><span id='newWRR-fold-content-docs' class="fold-docs">
+		A global for testing.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newXDSClient"><i>	<input type='checkbox' class="fold" id="newXDSClient-fold-content"><label for="newXDSClient-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-52">newXDSClient</a> func() (<a href="xdsclient.html">xdsclient</a>.<a href="xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='newXDSClient-fold-content-docs' class="fold-docs">
+		For overriding in unittests.
+
+</span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 6, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 6 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 6 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-cdsName"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-47">cdsName</a> = "cds_experimental"</span></i></div><div class="anchor value-res hidden" id="name-clusterPrefix"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-49">clusterPrefix</a> = "cluster:"</span></i></div><div class="anchor value-res hidden" id="name-clusterSpecifierPluginPrefix"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-50">clusterSpecifierPluginPrefix</a> = "cluster_specifier_plugin:"</span></i></div><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/logging.go.html#line-28">prefix</a> = "[xds-resolver %p] "</span></i></div><div class="anchor value-res hidden" id="name-xdsClusterManagerName"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/serviceconfig.go.html#line-48">xdsClusterManagerName</a> = "xds_cluster_manager_experimental"</span></i></div><div class="anchor value-res hidden" id="name-xdsScheme"><i>	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/xds/internal/resolver/xds_resolver.go.html#line-38">xdsScheme</a> = "xds"</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

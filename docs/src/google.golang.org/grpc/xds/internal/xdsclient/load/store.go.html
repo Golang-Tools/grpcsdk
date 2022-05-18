@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: store.go in package google.golang.org/grpc/xds/internal/xdsclient/load</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	store.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html">google.golang.org/grpc/xds/internal/xdsclient/load</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91],
+input[id=r92]:checked ~pre label[for=r92],
+input[id=r93]:checked ~pre label[for=r93],
+input[id=r94]:checked ~pre label[for=r94],
+input[id=r95]:checked ~pre label[for=r95],
+input[id=r96]:checked ~pre label[for=r96],
+input[id=r97]:checked ~pre label[for=r97],
+input[id=r98]:checked ~pre label[for=r98],
+input[id=r99]:checked ~pre label[for=r99],
+input[id=r100]:checked ~pre label[for=r100],
+input[id=r101]:checked ~pre label[for=r101]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="r92" type="radio" name="g"/>
+<input id="r93" type="radio" name="g"/>
+<input id="r94" type="radio" name="g"/>
+<input id="r95" type="radio" name="g"/>
+<input id="r96" type="radio" name="g"/>
+<input id="r97" type="radio" name="g"/>
+<input id="r98" type="radio" name="g"/>
+<input id="r99" type="radio" name="g"/>
+<input id="r100" type="radio" name="g"/>
+<input id="r101" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-17"><code><span class="comment">// Package load provides functionality to record and maintain load data.</span></code></span></div><span class="codeline" id="line-18"><code><span class="keyword">package</span> load</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"sync"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i1"><span class="lit-string i1">"sync/atomic"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i2"><span class="lit-string i2">"time"</span></label></code></span>
+<span class="codeline" id="line-24"><code>)</code></span>
+<span class="codeline" id="line-25"><code></code></span>
+<span class="codeline" id="line-26"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-negativeOneUInt64" class="ident">negativeOneUInt64</a> = ^<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>(<span class="lit-number">0</span>)</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// Store keeps the loads for multiple clusters and services to be reported via</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// LRS. It contains loads to reported to one LRS server. Create multiple stores</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">// for multiple servers.</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// It is safe for concurrent use.</span></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-Store" class="ident">Store</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-34"><code>	<span class="comment">// mu only protects the map (2 layers). The read/write to *perClusterStore</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">	// doesn't need to hold the mu.</span></code></span>
+<span class="codeline" id="line-36"><code>	mu <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-37"><code>	<span class="comment">// clusters is a map with cluster name as the key. The second layer is a map</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// with service name as the key. Each value (perClusterStore) contains data</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">	// for a (cluster, service) pair.</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">	// Note that new entries are added to this map, but never removed. This is</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	// potentially a memory leak. But the memory is allocated for each new</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">	// (cluster,service) pair, and the memory allocated is just pointers and</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">	// maps. So this shouldn't get too bad.</span></code></span>
+<span class="codeline" id="line-45"><code>	clusters <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-139" class="ident">perClusterStore</a></code></span>
+<span class="codeline" id="line-46"><code>}</code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// NewStore creates a Store.</span></code></span>
+<span class="codeline" id="line-49"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-NewStore" class="ident">NewStore</a></label>() *<a href="#line-33" class="ident">Store</a> {</code></span>
+<span class="codeline" id="line-50"><code>	<span class="keyword">return</span> &amp;<a href="#line-33" class="ident">Store</a>{</code></span>
+<span class="codeline" id="line-51"><code>		<a href="#line-45" class="ident">clusters</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-139" class="ident">perClusterStore</a>),</code></span>
+<span class="codeline" id="line-52"><code>	}</code></span>
+<span class="codeline" id="line-53"><code>}</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// Stats returns the load data for the given cluster names. Data is returned in</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">// a slice with no specific order.</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-58"><code><span class="comment">// If no clusterName is given (an empty slice), all data for all known clusters</span></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// is returned.</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">// If a cluster's Data is empty (no load to report), it's not appended to the</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">// returned slice.</span></code></span>
+<span class="codeline" id="line-63"><code><span class="keyword">func</span> (<label for="r1" class="ident">s</label> *<a href="#line-33" class="ident">Store</a>) <label for="r2" class="ident">Stats</label>(<label for="r3" class="ident">clusterNames</label> []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) []*<a href="#line-218" class="ident">Data</a> {</code></span>
+<span class="codeline" id="line-64"><code>	<span class="keyword">var</span> <label for="r4" class="ident">ret</label> []*<a href="#line-218" class="ident">Data</a></code></span>
+<span class="codeline" id="line-65"><code>	<label for="r1" class="ident">s</label>.<a href="#line-36" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-66"><code>	<span class="keyword">defer</span> <label for="r1" class="ident">s</label>.<a href="#line-36" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-67"><code></code></span>
+<span class="codeline" id="line-68"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r3" class="ident">clusterNames</label>) == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-69"><code>		<span class="keyword">for</span> <label for="r5" class="ident">_</label>, <label for="r6" class="ident">c</label> := <span class="keyword">range</span> <label for="r1" class="ident">s</label>.<a href="#line-45" class="ident">clusters</a> {</code></span>
+<span class="codeline" id="line-70"><code>			<label for="r4" class="ident">ret</label> = <a href="#line-87" class="ident">appendClusterStats</a>(<label for="r4" class="ident">ret</label>, <label for="r6" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-71"><code>		}</code></span>
+<span class="codeline" id="line-72"><code>		<span class="keyword">return</span> <label for="r4" class="ident">ret</label></code></span>
+<span class="codeline" id="line-73"><code>	}</code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code>	<span class="keyword">for</span> <label for="r7" class="ident">_</label>, <label for="r8" class="ident">n</label> := <span class="keyword">range</span> <label for="r3" class="ident">clusterNames</label> {</code></span>
+<span class="codeline" id="line-76"><code>		<span class="keyword">if</span> <label for="r9" class="ident">c</label>, <label for="r10" class="ident">ok</label> := <label for="r1" class="ident">s</label>.<a href="#line-45" class="ident">clusters</a>[<label for="r8" class="ident">n</label>]; <label for="r10" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-77"><code>			<label for="r4" class="ident">ret</label> = <a href="#line-87" class="ident">appendClusterStats</a>(<label for="r4" class="ident">ret</label>, <label for="r9" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-78"><code>		}</code></span>
+<span class="codeline" id="line-79"><code>	}</code></span>
+<span class="codeline" id="line-80"><code>	<span class="keyword">return</span> <label for="r4" class="ident">ret</label></code></span>
+<span class="codeline" id="line-81"><code>}</code></span>
+<span class="codeline" id="line-82"><code></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">// appendClusterStats gets Data for the given cluster, append to ret, and return</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">// the new slice.</span></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// Data is only appended to ret if it's not empty.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="keyword">func</span> <label for="r11" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-appendClusterStats" class="ident">appendClusterStats</a></label>(<label for="r12" class="ident">ret</label> []*<a href="#line-218" class="ident">Data</a>, <label for="r13" class="ident">cluster</label> <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-139" class="ident">perClusterStore</a>) []*<a href="#line-218" class="ident">Data</a> {</code></span>
+<span class="codeline" id="line-88"><code>	<span class="keyword">for</span> <label for="r14" class="ident">_</label>, <label for="r15" class="ident">d</label> := <span class="keyword">range</span> <label for="r13" class="ident">cluster</label> {</code></span>
+<span class="codeline" id="line-89"><code>		<label for="r16" class="ident">data</label> := <label for="r15" class="ident">d</label>.<a href="#line-274" class="ident">stats</a>()</code></span>
+<span class="codeline" id="line-90"><code>		<span class="keyword">if</span> <label for="r16" class="ident">data</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>			<span class="comment">// Skip this data if it doesn't contain any information.</span></code></span>
+<span class="codeline" id="line-92"><code>			<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-93"><code>		}</code></span>
+<span class="codeline" id="line-94"><code>		<label for="r12" class="ident">ret</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r12" class="ident">ret</label>, <label for="r16" class="ident">data</label>)</code></span>
+<span class="codeline" id="line-95"><code>	}</code></span>
+<span class="codeline" id="line-96"><code>	<span class="keyword">return</span> <label for="r12" class="ident">ret</label></code></span>
+<span class="codeline" id="line-97"><code>}</code></span>
+<span class="codeline" id="line-98"><code></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">// PerCluster returns the perClusterStore for the given clusterName +</span></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">// serviceName.</span></code></span>
+<span class="codeline" id="line-101"><code><span class="keyword">func</span> (<label for="r17" class="ident">s</label> *<a href="#line-33" class="ident">Store</a>) <label for="r18" class="ident">PerCluster</label>(<label for="r19" class="ident">clusterName</label>, <label for="r20" class="ident">serviceName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="reporter.go.html#line-22" class="ident">PerClusterReporter</a> {</code></span>
+<span class="codeline" id="line-102"><code>	<span class="keyword">if</span> <label for="r17" class="ident">s</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-103"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-104"><code>	}</code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code>	<label for="r17" class="ident">s</label>.<a href="#line-36" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">defer</span> <label for="r17" class="ident">s</label>.<a href="#line-36" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-108"><code>	<label for="r21" class="ident">c</label>, <label for="r22" class="ident">ok</label> := <label for="r17" class="ident">s</label>.<a href="#line-45" class="ident">clusters</a>[<label for="r19" class="ident">clusterName</label>]</code></span>
+<span class="codeline" id="line-109"><code>	<span class="keyword">if</span> !<label for="r22" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-110"><code>		<label for="r21" class="ident">c</label> = <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-139" class="ident">perClusterStore</a>)</code></span>
+<span class="codeline" id="line-111"><code>		<label for="r17" class="ident">s</label>.<a href="#line-45" class="ident">clusters</a>[<label for="r19" class="ident">clusterName</label>] = <label for="r21" class="ident">c</label></code></span>
+<span class="codeline" id="line-112"><code>	}</code></span>
+<span class="codeline" id="line-113"><code></code></span>
+<span class="codeline" id="line-114"><code>	<span class="keyword">if</span> <label for="r23" class="ident">p</label>, <label for="r24" class="ident">ok</label> := <label for="r21" class="ident">c</label>[<label for="r20" class="ident">serviceName</label>]; <label for="r24" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-115"><code>		<span class="keyword">return</span> <label for="r23" class="ident">p</label></code></span>
+<span class="codeline" id="line-116"><code>	}</code></span>
+<span class="codeline" id="line-117"><code>	<label for="r25" class="ident">p</label> := &amp;<a href="#line-139" class="ident">perClusterStore</a>{</code></span>
+<span class="codeline" id="line-118"><code>		<a href="#line-140" class="ident">cluster</a>: <label for="r19" class="ident">clusterName</label>,</code></span>
+<span class="codeline" id="line-119"><code>		<a href="#line-140" class="ident">service</a>: <label for="r20" class="ident">serviceName</label>,</code></span>
+<span class="codeline" id="line-120"><code>	}</code></span>
+<span class="codeline" id="line-121"><code>	<label for="r21" class="ident">c</label>[<label for="r20" class="ident">serviceName</label>] = <label for="r25" class="ident">p</label></code></span>
+<span class="codeline" id="line-122"><code>	<span class="keyword">return</span> <label for="r25" class="ident">p</label></code></span>
+<span class="codeline" id="line-123"><code>}</code></span>
+<span class="codeline" id="line-124"><code></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">// perClusterStore is a repository for LB policy implementations to report store</span></code></span>
+<span class="codeline" id="line-126"><code><span class="comment">// load data. It contains load for a (cluster, edsService) pair.</span></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-128"><code><span class="comment">// It is safe for concurrent use.</span></code></span>
+<span class="codeline" id="line-129"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-130"><code><span class="comment">// TODO(easwars): Use regular maps with mutexes instead of sync.Map here. The</span></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">// latter is optimized for two common use cases: (1) when the entry for a given</span></code></span>
+<span class="codeline" id="line-132"><code><span class="comment">// key is only ever written once but read many times, as in caches that only</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">// grow, or (2) when multiple goroutines read, write, and overwrite entries for</span></code></span>
+<span class="codeline" id="line-134"><code><span class="comment">// disjoint sets of keys. In these two cases, use of a Map may significantly</span></code></span>
+<span class="codeline" id="line-135"><code><span class="comment">// reduce lock contention compared to a Go map paired with a separate Mutex or</span></code></span>
+<span class="codeline" id="line-136"><code><span class="comment">// RWMutex.</span></code></span>
+<span class="codeline" id="line-137"><code><span class="comment">// Neither of these conditions are met here, and we should transition to a</span></code></span>
+<span class="codeline" id="line-138"><code><span class="comment">// regular map with a mutex for better type safety.</span></code></span>
+<span class="codeline" id="line-139"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-perClusterStore" class="ident">perClusterStore</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-140"><code>	cluster, service <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-141"><code>	drops            <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/map.go.html#line-27" class="ident">Map</a> <span class="comment">// map[string]*uint64</span></code></span>
+<span class="codeline" id="line-142"><code>	localityRPCCount <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/map.go.html#line-27" class="ident">Map</a> <span class="comment">// map[string]*rpcCountData</span></code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code>	mu               <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-145"><code>	lastLoadReportAt <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-127" class="ident">Time</a></code></span>
+<span class="codeline" id="line-146"><code>}</code></span>
+<span class="codeline" id="line-147"><code></code></span>
+<span class="codeline" id="line-148"><code><span class="comment">// Update functions are called by picker for each RPC. To avoid contention, all</span></code></span>
+<span class="codeline" id="line-149"><code><span class="comment">// updates are done atomically.</span></code></span>
+<span class="codeline" id="line-150"><code></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">// CallDropped adds one drop record with the given category to store.</span></code></span>
+<span class="codeline" id="line-152"><code><span class="keyword">func</span> (<label for="r26" class="ident">ls</label> *<a href="#line-139" class="ident">perClusterStore</a>) <label for="r27" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/load.perClusterStore^7c2d9.html#name-.CallDropped" class="ident">CallDropped</a></label>(<label for="r28" class="ident">category</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-153"><code>	<span class="keyword">if</span> <label for="r26" class="ident">ls</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-154"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-155"><code>	}</code></span>
+<span class="codeline" id="line-156"><code></code></span>
+<span class="codeline" id="line-157"><code>	<label for="r29" class="ident">p</label>, <label for="r30" class="ident">ok</label> := <label for="r26" class="ident">ls</label>.<a href="#line-141" class="ident">drops</a>.<a href="../../../../../../sync/map.go.html#line-103" class="ident">Load</a>(<label for="r28" class="ident">category</label>)</code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">if</span> !<label for="r30" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-159"><code>		<label for="r31" class="ident">tp</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>)</code></span>
+<span class="codeline" id="line-160"><code>		<label for="r29" class="ident">p</label>, _ = <label for="r26" class="ident">ls</label>.<a href="#line-141" class="ident">drops</a>.<a href="../../../../../../sync/map.go.html#line-200" class="ident">LoadOrStore</a>(<label for="r28" class="ident">category</label>, <label for="r31" class="ident">tp</label>)</code></span>
+<span class="codeline" id="line-161"><code>	}</code></span>
+<span class="codeline" id="line-162"><code>	<a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-105" class="ident">AddUint64</a>(<label for="r29" class="ident">p</label>.(*<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>), <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-163"><code>}</code></span>
+<span class="codeline" id="line-164"><code></code></span>
+<span class="codeline" id="line-165"><code><span class="comment">// CallStarted adds one call started record for the given locality.</span></code></span>
+<span class="codeline" id="line-166"><code><span class="keyword">func</span> (<label for="r32" class="ident">ls</label> *<a href="#line-139" class="ident">perClusterStore</a>) <label for="r33" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/load.perClusterStore^7c2d9.html#name-.CallStarted" class="ident">CallStarted</a></label>(<label for="r34" class="ident">locality</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-167"><code>	<span class="keyword">if</span> <label for="r32" class="ident">ls</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-168"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-169"><code>	}</code></span>
+<span class="codeline" id="line-170"><code></code></span>
+<span class="codeline" id="line-171"><code>	<label for="r35" class="ident">p</label>, <label for="r36" class="ident">ok</label> := <label for="r32" class="ident">ls</label>.<a href="#line-142" class="ident">localityRPCCount</a>.<a href="../../../../../../sync/map.go.html#line-103" class="ident">Load</a>(<label for="r34" class="ident">locality</label>)</code></span>
+<span class="codeline" id="line-172"><code>	<span class="keyword">if</span> !<label for="r36" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-173"><code>		<label for="r37" class="ident">tp</label> := <a href="#line-351" class="ident">newRPCCountData</a>()</code></span>
+<span class="codeline" id="line-174"><code>		<label for="r35" class="ident">p</label>, _ = <label for="r32" class="ident">ls</label>.<a href="#line-142" class="ident">localityRPCCount</a>.<a href="../../../../../../sync/map.go.html#line-200" class="ident">LoadOrStore</a>(<label for="r34" class="ident">locality</label>, <label for="r37" class="ident">tp</label>)</code></span>
+<span class="codeline" id="line-175"><code>	}</code></span>
+<span class="codeline" id="line-176"><code>	<label for="r35" class="ident">p</label>.(*<a href="#line-337" class="ident">rpcCountData</a>).<a href="#line-375" class="ident">incrInProgress</a>()</code></span>
+<span class="codeline" id="line-177"><code>}</code></span>
+<span class="codeline" id="line-178"><code></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">// CallFinished adds one call finished record for the given locality.</span></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">// For successful calls, err needs to be nil.</span></code></span>
+<span class="codeline" id="line-181"><code><span class="keyword">func</span> (<label for="r38" class="ident">ls</label> *<a href="#line-139" class="ident">perClusterStore</a>) <label for="r39" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/load.perClusterStore^7c2d9.html#name-.CallFinished" class="ident">CallFinished</a></label>(<label for="r40" class="ident">locality</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r41" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-182"><code>	<span class="keyword">if</span> <label for="r38" class="ident">ls</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-183"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-184"><code>	}</code></span>
+<span class="codeline" id="line-185"><code></code></span>
+<span class="codeline" id="line-186"><code>	<label for="r42" class="ident">p</label>, <label for="r43" class="ident">ok</label> := <label for="r38" class="ident">ls</label>.<a href="#line-142" class="ident">localityRPCCount</a>.<a href="../../../../../../sync/map.go.html#line-103" class="ident">Load</a>(<label for="r40" class="ident">locality</label>)</code></span>
+<span class="codeline" id="line-187"><code>	<span class="keyword">if</span> !<label for="r43" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-188"><code>		<span class="comment">// The map is never cleared, only values in the map are reset. So the</span></code></span>
+<span class="codeline" id="line-189"><code><span class="comment">		// case where entry for call-finish is not found should never happen.</span></code></span>
+<span class="codeline" id="line-190"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-191"><code>	}</code></span>
+<span class="codeline" id="line-192"><code>	<label for="r42" class="ident">p</label>.(*<a href="#line-337" class="ident">rpcCountData</a>).<a href="#line-379" class="ident">decrInProgress</a>()</code></span>
+<span class="codeline" id="line-193"><code>	<span class="keyword">if</span> <label for="r41" class="ident">err</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-194"><code>		<label for="r42" class="ident">p</label>.(*<a href="#line-337" class="ident">rpcCountData</a>).<a href="#line-359" class="ident">incrSucceeded</a>()</code></span>
+<span class="codeline" id="line-195"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-196"><code>		<label for="r42" class="ident">p</label>.(*<a href="#line-337" class="ident">rpcCountData</a>).<a href="#line-367" class="ident">incrErrored</a>()</code></span>
+<span class="codeline" id="line-197"><code>	}</code></span>
+<span class="codeline" id="line-198"><code>}</code></span>
+<span class="codeline" id="line-199"><code></code></span>
+<span class="codeline" id="line-200"><code><span class="comment">// CallServerLoad adds one server load record for the given locality. The</span></code></span>
+<span class="codeline" id="line-201"><code><span class="comment">// load type is specified by desc, and its value by val.</span></code></span>
+<span class="codeline" id="line-202"><code><span class="keyword">func</span> (<label for="r44" class="ident">ls</label> *<a href="#line-139" class="ident">perClusterStore</a>) <label for="r45" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/load.perClusterStore^7c2d9.html#name-.CallServerLoad" class="ident">CallServerLoad</a></label>(<label for="r46" class="ident">locality</label>, <label for="r47" class="ident">name</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r48" class="ident">d</label> <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-203"><code>	<span class="keyword">if</span> <label for="r44" class="ident">ls</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-204"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-205"><code>	}</code></span>
+<span class="codeline" id="line-206"><code></code></span>
+<span class="codeline" id="line-207"><code>	<label for="r49" class="ident">p</label>, <label for="r50" class="ident">ok</label> := <label for="r44" class="ident">ls</label>.<a href="#line-142" class="ident">localityRPCCount</a>.<a href="../../../../../../sync/map.go.html#line-103" class="ident">Load</a>(<label for="r46" class="ident">locality</label>)</code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">if</span> !<label for="r50" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-209"><code>		<span class="comment">// The map is never cleared, only values in the map are reset. So the</span></code></span>
+<span class="codeline" id="line-210"><code><span class="comment">		// case where entry for callServerLoad is not found should never happen.</span></code></span>
+<span class="codeline" id="line-211"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-212"><code>	}</code></span>
+<span class="codeline" id="line-213"><code>	<label for="r49" class="ident">p</label>.(*<a href="#line-337" class="ident">rpcCountData</a>).<a href="#line-387" class="ident">addServerLoad</a>(<label for="r47" class="ident">name</label>, <label for="r48" class="ident">d</label>)</code></span>
+<span class="codeline" id="line-214"><code>}</code></span>
+<span class="codeline" id="line-215"><code></code></span>
+<span class="codeline" id="line-216"><code><span class="comment">// Data contains all load data reported to the Store since the most recent call</span></code></span>
+<span class="codeline" id="line-217"><code><span class="comment">// to stats().</span></code></span>
+<span class="codeline" id="line-218"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-Data" class="ident">Data</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-219"><code>	<span class="comment">// Cluster is the name of the cluster this data is for.</span></code></span>
+<span class="codeline" id="line-220"><code>	Cluster <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-221"><code>	<span class="comment">// Service is the name of the EDS service this data is for.</span></code></span>
+<span class="codeline" id="line-222"><code>	Service <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-223"><code>	<span class="comment">// TotalDrops is the total number of dropped requests.</span></code></span>
+<span class="codeline" id="line-224"><code>	TotalDrops <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-225"><code>	<span class="comment">// Drops is the number of dropped requests per category.</span></code></span>
+<span class="codeline" id="line-226"><code>	Drops <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-227"><code>	<span class="comment">// LocalityStats contains load reports per locality.</span></code></span>
+<span class="codeline" id="line-228"><code>	LocalityStats <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-235" class="ident">LocalityData</a></code></span>
+<span class="codeline" id="line-229"><code>	<span class="comment">// ReportInternal is the duration since last time load was reported (stats()</span></code></span>
+<span class="codeline" id="line-230"><code><span class="comment">	// was called).</span></code></span>
+<span class="codeline" id="line-231"><code>	ReportInterval <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-232"><code>}</code></span>
+<span class="codeline" id="line-233"><code></code></span>
+<span class="codeline" id="line-234"><code><span class="comment">// LocalityData contains load data for a single locality.</span></code></span>
+<span class="codeline" id="line-235"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-LocalityData" class="ident">LocalityData</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-236"><code>	<span class="comment">// RequestStats contains counts of requests made to the locality.</span></code></span>
+<span class="codeline" id="line-237"><code>	RequestStats <a href="#line-244" class="ident">RequestData</a></code></span>
+<span class="codeline" id="line-238"><code>	<span class="comment">// LoadStats contains server load data for requests made to the locality,</span></code></span>
+<span class="codeline" id="line-239"><code><span class="comment">	// indexed by the load type.</span></code></span>
+<span class="codeline" id="line-240"><code>	LoadStats <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-254" class="ident">ServerLoadData</a></code></span>
+<span class="codeline" id="line-241"><code>}</code></span>
+<span class="codeline" id="line-242"><code></code></span>
+<span class="codeline" id="line-243"><code><span class="comment">// RequestData contains request counts.</span></code></span>
+<span class="codeline" id="line-244"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-RequestData" class="ident">RequestData</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-245"><code>	<span class="comment">// Succeeded is the number of succeeded requests.</span></code></span>
+<span class="codeline" id="line-246"><code>	Succeeded <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-247"><code>	<span class="comment">// Errored is the number of requests which ran into errors.</span></code></span>
+<span class="codeline" id="line-248"><code>	Errored <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-249"><code>	<span class="comment">// InProgress is the number of requests in flight.</span></code></span>
+<span class="codeline" id="line-250"><code>	InProgress <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-251"><code>}</code></span>
+<span class="codeline" id="line-252"><code></code></span>
+<span class="codeline" id="line-253"><code><span class="comment">// ServerLoadData contains server load data.</span></code></span>
+<span class="codeline" id="line-254"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-ServerLoadData" class="ident">ServerLoadData</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-255"><code>	<span class="comment">// Count is the number of load reports.</span></code></span>
+<span class="codeline" id="line-256"><code>	Count <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-257"><code>	<span class="comment">// Sum is the total value of all load reports.</span></code></span>
+<span class="codeline" id="line-258"><code>	Sum <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-259"><code>}</code></span>
+<span class="codeline" id="line-260"><code></code></span>
+<span class="codeline" id="line-261"><code><span class="keyword">func</span> <label for="r51" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-newData" class="ident">newData</a></label>(<label for="r52" class="ident">cluster</label>, <label for="r53" class="ident">service</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) *<a href="#line-218" class="ident">Data</a> {</code></span>
+<span class="codeline" id="line-262"><code>	<span class="keyword">return</span> &amp;<a href="#line-218" class="ident">Data</a>{</code></span>
+<span class="codeline" id="line-263"><code>		<a href="#line-220" class="ident">Cluster</a>:       <label for="r52" class="ident">cluster</label>,</code></span>
+<span class="codeline" id="line-264"><code>		<a href="#line-222" class="ident">Service</a>:       <label for="r53" class="ident">service</label>,</code></span>
+<span class="codeline" id="line-265"><code>		<a href="#line-226" class="ident">Drops</a>:         <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>),</code></span>
+<span class="codeline" id="line-266"><code>		<a href="#line-228" class="ident">LocalityStats</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-235" class="ident">LocalityData</a>),</code></span>
+<span class="codeline" id="line-267"><code>	}</code></span>
+<span class="codeline" id="line-268"><code>}</code></span>
+<span class="codeline" id="line-269"><code></code></span>
+<span class="codeline" id="line-270"><code><span class="comment">// stats returns and resets all loads reported to the store, except inProgress</span></code></span>
+<span class="codeline" id="line-271"><code><span class="comment">// rpc counts.</span></code></span>
+<span class="codeline" id="line-272"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-273"><code><span class="comment">// It returns nil if the store doesn't contain any (new) data.</span></code></span>
+<span class="codeline" id="line-274"><code><span class="keyword">func</span> (<label for="r54" class="ident">ls</label> *<a href="#line-139" class="ident">perClusterStore</a>) <label for="r55" class="ident">stats</label>() *<a href="#line-218" class="ident">Data</a> {</code></span>
+<span class="codeline" id="line-275"><code>	<span class="keyword">if</span> <label for="r54" class="ident">ls</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-276"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-277"><code>	}</code></span>
+<span class="codeline" id="line-278"><code></code></span>
+<span class="codeline" id="line-279"><code>	<label for="r56" class="ident">sd</label> := <a href="#line-261" class="ident">newData</a>(<label for="r54" class="ident">ls</label>.<a href="#line-140" class="ident">cluster</a>, <label for="r54" class="ident">ls</label>.<a href="#line-140" class="ident">service</a>)</code></span>
+<span class="codeline" id="line-280"><code>	<label for="r54" class="ident">ls</label>.<a href="#line-141" class="ident">drops</a>.<a href="../../../../../../sync/map.go.html#line-320" class="ident">Range</a>(<span class="keyword">func</span>(<label for="r57" class="ident">key</label>, <label for="r58" class="ident">val</label> <span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-281"><code>		<label for="r59" class="ident">d</label> := <a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-65" class="ident">SwapUint64</a>(<label for="r58" class="ident">val</label>.(*<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>), <span class="lit-number">0</span>)</code></span>
+<span class="codeline" id="line-282"><code>		<span class="keyword">if</span> <label for="r59" class="ident">d</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-283"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-284"><code>		}</code></span>
+<span class="codeline" id="line-285"><code>		<label for="r56" class="ident">sd</label>.<a href="#line-224" class="ident">TotalDrops</a> += <label for="r59" class="ident">d</label></code></span>
+<span class="codeline" id="line-286"><code>		<label for="r60" class="ident">keyStr</label> := <label for="r57" class="ident">key</label>.(<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)</code></span>
+<span class="codeline" id="line-287"><code>		<span class="keyword">if</span> <label for="r60" class="ident">keyStr</label> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-288"><code>			<span class="comment">// Skip drops without category. They are counted in total_drops, but</span></code></span>
+<span class="codeline" id="line-289"><code><span class="comment">			// not in per category. One example is drops by circuit breaking.</span></code></span>
+<span class="codeline" id="line-290"><code>			<label for="r56" class="ident">sd</label>.<a href="#line-226" class="ident">Drops</a>[<label for="r60" class="ident">keyStr</label>] = <label for="r59" class="ident">d</label></code></span>
+<span class="codeline" id="line-291"><code>		}</code></span>
+<span class="codeline" id="line-292"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-293"><code>	})</code></span>
+<span class="codeline" id="line-294"><code>	<label for="r54" class="ident">ls</label>.<a href="#line-142" class="ident">localityRPCCount</a>.<a href="../../../../../../sync/map.go.html#line-320" class="ident">Range</a>(<span class="keyword">func</span>(<label for="r61" class="ident">key</label>, <label for="r62" class="ident">val</label> <span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-295"><code>		<label for="r63" class="ident">countData</label> := <label for="r62" class="ident">val</label>.(*<a href="#line-337" class="ident">rpcCountData</a>)</code></span>
+<span class="codeline" id="line-296"><code>		<label for="r64" class="ident">succeeded</label> := <label for="r63" class="ident">countData</label>.<a href="#line-363" class="ident">loadAndClearSucceeded</a>()</code></span>
+<span class="codeline" id="line-297"><code>		<label for="r65" class="ident">inProgress</label> := <label for="r63" class="ident">countData</label>.<a href="#line-383" class="ident">loadInProgress</a>()</code></span>
+<span class="codeline" id="line-298"><code>		<label for="r66" class="ident">errored</label> := <label for="r63" class="ident">countData</label>.<a href="#line-371" class="ident">loadAndClearErrored</a>()</code></span>
+<span class="codeline" id="line-299"><code>		<span class="keyword">if</span> <label for="r64" class="ident">succeeded</label> == <span class="lit-number">0</span> &amp;&amp; <label for="r65" class="ident">inProgress</label> == <span class="lit-number">0</span> &amp;&amp; <label for="r66" class="ident">errored</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-300"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-301"><code>		}</code></span>
+<span class="codeline" id="line-302"><code></code></span>
+<span class="codeline" id="line-303"><code>		<label for="r67" class="ident">ld</label> := <a href="#line-235" class="ident">LocalityData</a>{</code></span>
+<span class="codeline" id="line-304"><code>			<a href="#line-237" class="ident">RequestStats</a>: <a href="#line-244" class="ident">RequestData</a>{</code></span>
+<span class="codeline" id="line-305"><code>				<a href="#line-246" class="ident">Succeeded</a>:  <label for="r64" class="ident">succeeded</label>,</code></span>
+<span class="codeline" id="line-306"><code>				<a href="#line-248" class="ident">Errored</a>:    <label for="r66" class="ident">errored</label>,</code></span>
+<span class="codeline" id="line-307"><code>				<a href="#line-250" class="ident">InProgress</a>: <label for="r65" class="ident">inProgress</label>,</code></span>
+<span class="codeline" id="line-308"><code>			},</code></span>
+<span class="codeline" id="line-309"><code>			<a href="#line-240" class="ident">LoadStats</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-254" class="ident">ServerLoadData</a>),</code></span>
+<span class="codeline" id="line-310"><code>		}</code></span>
+<span class="codeline" id="line-311"><code>		<label for="r63" class="ident">countData</label>.<a href="#line-348" class="ident">serverLoads</a>.<a href="../../../../../../sync/map.go.html#line-320" class="ident">Range</a>(<span class="keyword">func</span>(<label for="r68" class="ident">key</label>, <label for="r69" class="ident">val</label> <span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-312"><code>			<label for="r70" class="ident">sum</label>, <label for="r71" class="ident">count</label> := <label for="r69" class="ident">val</label>.(*<a href="#line-401" class="ident">rpcLoadData</a>).<a href="#line-418" class="ident">loadAndClear</a>()</code></span>
+<span class="codeline" id="line-313"><code>			<span class="keyword">if</span> <label for="r71" class="ident">count</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-314"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-315"><code>			}</code></span>
+<span class="codeline" id="line-316"><code>			<label for="r67" class="ident">ld</label>.<a href="#line-240" class="ident">LoadStats</a>[<label for="r68" class="ident">key</label>.(<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)] = <a href="#line-254" class="ident">ServerLoadData</a>{</code></span>
+<span class="codeline" id="line-317"><code>				<a href="#line-256" class="ident">Count</a>: <label for="r71" class="ident">count</label>,</code></span>
+<span class="codeline" id="line-318"><code>				<a href="#line-258" class="ident">Sum</a>:   <label for="r70" class="ident">sum</label>,</code></span>
+<span class="codeline" id="line-319"><code>			}</code></span>
+<span class="codeline" id="line-320"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-321"><code>		})</code></span>
+<span class="codeline" id="line-322"><code>		<label for="r56" class="ident">sd</label>.<a href="#line-228" class="ident">LocalityStats</a>[<label for="r61" class="ident">key</label>.(<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)] = <label for="r67" class="ident">ld</label></code></span>
+<span class="codeline" id="line-323"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-324"><code>	})</code></span>
+<span class="codeline" id="line-325"><code></code></span>
+<span class="codeline" id="line-326"><code>	<label for="r54" class="ident">ls</label>.<a href="#line-144" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-327"><code>	<label for="r56" class="ident">sd</label>.<a href="#line-231" class="ident">ReportInterval</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-874" class="ident">Since</a>(<label for="r54" class="ident">ls</label>.<a href="#line-145" class="ident">lastLoadReportAt</a>)</code></span>
+<span class="codeline" id="line-328"><code>	<label for="r54" class="ident">ls</label>.<a href="#line-145" class="ident">lastLoadReportAt</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-1072" class="ident">Now</a>()</code></span>
+<span class="codeline" id="line-329"><code>	<label for="r54" class="ident">ls</label>.<a href="#line-144" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-330"><code></code></span>
+<span class="codeline" id="line-331"><code>	<span class="keyword">if</span> <label for="r56" class="ident">sd</label>.<a href="#line-224" class="ident">TotalDrops</a> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r56" class="ident">sd</label>.<a href="#line-226" class="ident">Drops</a>) == <span class="lit-number">0</span> &amp;&amp; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r56" class="ident">sd</label>.<a href="#line-228" class="ident">LocalityStats</a>) == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-332"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-333"><code>	}</code></span>
+<span class="codeline" id="line-334"><code>	<span class="keyword">return</span> <label for="r56" class="ident">sd</label></code></span>
+<span class="codeline" id="line-335"><code>}</code></span>
+<span class="codeline" id="line-336"><code></code></span>
+<span class="codeline" id="line-337"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-rpcCountData" class="ident">rpcCountData</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-338"><code>	<span class="comment">// Only atomic accesses are allowed for the fields.</span></code></span>
+<span class="codeline" id="line-339"><code>	succeeded  *<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-340"><code>	errored    *<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-341"><code>	inProgress *<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-342"><code></code></span>
+<span class="codeline" id="line-343"><code>	<span class="comment">// Map from load desc to load data (sum+count). Loading data from map is</span></code></span>
+<span class="codeline" id="line-344"><code><span class="comment">	// atomic, but updating data takes a lock, which could cause contention when</span></code></span>
+<span class="codeline" id="line-345"><code><span class="comment">	// multiple RPCs try to report loads for the same desc.</span></code></span>
+<span class="codeline" id="line-346"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-347"><code><span class="comment">	// To fix the contention, shard this map.</span></code></span>
+<span class="codeline" id="line-348"><code>	serverLoads <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/map.go.html#line-27" class="ident">Map</a> <span class="comment">// map[string]*rpcLoadData</span></code></span>
+<span class="codeline" id="line-349"><code>}</code></span>
+<span class="codeline" id="line-350"><code></code></span>
+<span class="codeline" id="line-351"><code><span class="keyword">func</span> <label for="r72" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-newRPCCountData" class="ident">newRPCCountData</a></label>() *<a href="#line-337" class="ident">rpcCountData</a> {</code></span>
+<span class="codeline" id="line-352"><code>	<span class="keyword">return</span> &amp;<a href="#line-337" class="ident">rpcCountData</a>{</code></span>
+<span class="codeline" id="line-353"><code>		<a href="#line-339" class="ident">succeeded</a>:  <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>),</code></span>
+<span class="codeline" id="line-354"><code>		<a href="#line-340" class="ident">errored</a>:    <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>),</code></span>
+<span class="codeline" id="line-355"><code>		<a href="#line-341" class="ident">inProgress</a>: <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>),</code></span>
+<span class="codeline" id="line-356"><code>	}</code></span>
+<span class="codeline" id="line-357"><code>}</code></span>
+<span class="codeline" id="line-358"><code></code></span>
+<span class="codeline" id="line-359"><code><span class="keyword">func</span> (<label for="r73" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r74" class="ident">incrSucceeded</label>() {</code></span>
+<span class="codeline" id="line-360"><code>	<a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-105" class="ident">AddUint64</a>(<label for="r73" class="ident">rcd</label>.<a href="#line-339" class="ident">succeeded</a>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-361"><code>}</code></span>
+<span class="codeline" id="line-362"><code></code></span>
+<span class="codeline" id="line-363"><code><span class="keyword">func</span> (<label for="r75" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r76" class="ident">loadAndClearSucceeded</label>() <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a> {</code></span>
+<span class="codeline" id="line-364"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-65" class="ident">SwapUint64</a>(<label for="r75" class="ident">rcd</label>.<a href="#line-339" class="ident">succeeded</a>, <span class="lit-number">0</span>)</code></span>
+<span class="codeline" id="line-365"><code>}</code></span>
+<span class="codeline" id="line-366"><code></code></span>
+<span class="codeline" id="line-367"><code><span class="keyword">func</span> (<label for="r77" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r78" class="ident">incrErrored</label>() {</code></span>
+<span class="codeline" id="line-368"><code>	<a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-105" class="ident">AddUint64</a>(<label for="r77" class="ident">rcd</label>.<a href="#line-340" class="ident">errored</a>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-369"><code>}</code></span>
+<span class="codeline" id="line-370"><code></code></span>
+<span class="codeline" id="line-371"><code><span class="keyword">func</span> (<label for="r79" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r80" class="ident">loadAndClearErrored</label>() <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a> {</code></span>
+<span class="codeline" id="line-372"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-65" class="ident">SwapUint64</a>(<label for="r79" class="ident">rcd</label>.<a href="#line-340" class="ident">errored</a>, <span class="lit-number">0</span>)</code></span>
+<span class="codeline" id="line-373"><code>}</code></span>
+<span class="codeline" id="line-374"><code></code></span>
+<span class="codeline" id="line-375"><code><span class="keyword">func</span> (<label for="r81" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r82" class="ident">incrInProgress</label>() {</code></span>
+<span class="codeline" id="line-376"><code>	<a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-105" class="ident">AddUint64</a>(<label for="r81" class="ident">rcd</label>.<a href="#line-341" class="ident">inProgress</a>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-377"><code>}</code></span>
+<span class="codeline" id="line-378"><code></code></span>
+<span class="codeline" id="line-379"><code><span class="keyword">func</span> (<label for="r83" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r84" class="ident">decrInProgress</label>() {</code></span>
+<span class="codeline" id="line-380"><code>	<a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-105" class="ident">AddUint64</a>(<label for="r83" class="ident">rcd</label>.<a href="#line-341" class="ident">inProgress</a>, <a href="#line-26" class="ident">negativeOneUInt64</a>) <span class="comment">// atomic.Add(x, -1)</span></code></span>
+<span class="codeline" id="line-381"><code>}</code></span>
+<span class="codeline" id="line-382"><code></code></span>
+<span class="codeline" id="line-383"><code><span class="keyword">func</span> (<label for="r85" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r86" class="ident">loadInProgress</label>() <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a> {</code></span>
+<span class="codeline" id="line-384"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/sync/atomic.html" class="ident i1">atomic</a>.<a href="../../../../../../sync/atomic/doc.go.html#line-120" class="ident">LoadUint64</a>(<label for="r85" class="ident">rcd</label>.<a href="#line-341" class="ident">inProgress</a>) <span class="comment">// InProgress count is not clear when reading.</span></code></span>
+<span class="codeline" id="line-385"><code>}</code></span>
+<span class="codeline" id="line-386"><code></code></span>
+<span class="codeline" id="line-387"><code><span class="keyword">func</span> (<label for="r87" class="ident">rcd</label> *<a href="#line-337" class="ident">rpcCountData</a>) <label for="r88" class="ident">addServerLoad</label>(<label for="r89" class="ident">name</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r90" class="ident">d</label> <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-388"><code>	<label for="r91" class="ident">loads</label>, <label for="r92" class="ident">ok</label> := <label for="r87" class="ident">rcd</label>.<a href="#line-348" class="ident">serverLoads</a>.<a href="../../../../../../sync/map.go.html#line-103" class="ident">Load</a>(<label for="r89" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-389"><code>	<span class="keyword">if</span> !<label for="r92" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-390"><code>		<label for="r93" class="ident">tl</label> := <a href="#line-407" class="ident">newRPCLoadData</a>()</code></span>
+<span class="codeline" id="line-391"><code>		<label for="r91" class="ident">loads</label>, _ = <label for="r87" class="ident">rcd</label>.<a href="#line-348" class="ident">serverLoads</a>.<a href="../../../../../../sync/map.go.html#line-200" class="ident">LoadOrStore</a>(<label for="r89" class="ident">name</label>, <label for="r93" class="ident">tl</label>)</code></span>
+<span class="codeline" id="line-392"><code>	}</code></span>
+<span class="codeline" id="line-393"><code>	<label for="r91" class="ident">loads</label>.(*<a href="#line-401" class="ident">rpcLoadData</a>).<a href="#line-411" class="ident">add</a>(<label for="r90" class="ident">d</label>)</code></span>
+<span class="codeline" id="line-394"><code>}</code></span>
+<span class="codeline" id="line-395"><code></code></span>
+<span class="codeline" id="line-396"><code><span class="comment">// Data for server loads (from trailers or oob). Fields in this struct must be</span></code></span>
+<span class="codeline" id="line-397"><code><span class="comment">// updated consistently.</span></code></span>
+<span class="codeline" id="line-398"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-399"><code><span class="comment">// The current solution is to hold a lock, which could cause contention. To fix,</span></code></span>
+<span class="codeline" id="line-400"><code><span class="comment">// shard serverLoads map in rpcCountData.</span></code></span>
+<span class="codeline" id="line-401"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-rpcLoadData" class="ident">rpcLoadData</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-402"><code>	mu    <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-403"><code>	sum   <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-404"><code>	count <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-405"><code>}</code></span>
+<span class="codeline" id="line-406"><code></code></span>
+<span class="codeline" id="line-407"><code><span class="keyword">func</span> <label for="r94" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html#name-newRPCLoadData" class="ident">newRPCLoadData</a></label>() *<a href="#line-401" class="ident">rpcLoadData</a> {</code></span>
+<span class="codeline" id="line-408"><code>	<span class="keyword">return</span> &amp;<a href="#line-401" class="ident">rpcLoadData</a>{}</code></span>
+<span class="codeline" id="line-409"><code>}</code></span>
+<span class="codeline" id="line-410"><code></code></span>
+<span class="codeline" id="line-411"><code><span class="keyword">func</span> (<label for="r95" class="ident">rld</label> *<a href="#line-401" class="ident">rpcLoadData</a>) <label for="r96" class="ident">add</label>(<label for="r97" class="ident">v</label> <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-412"><code>	<label for="r95" class="ident">rld</label>.<a href="#line-402" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-413"><code>	<label for="r95" class="ident">rld</label>.<a href="#line-403" class="ident">sum</a> += <label for="r97" class="ident">v</label></code></span>
+<span class="codeline" id="line-414"><code>	<label for="r95" class="ident">rld</label>.<a href="#line-404" class="ident">count</a>++</code></span>
+<span class="codeline" id="line-415"><code>	<label for="r95" class="ident">rld</label>.<a href="#line-402" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-416"><code>}</code></span>
+<span class="codeline" id="line-417"><code></code></span>
+<span class="codeline" id="line-418"><code><span class="keyword">func</span> (<label for="r98" class="ident">rld</label> *<a href="#line-401" class="ident">rpcLoadData</a>) <label for="r99" class="ident">loadAndClear</label>() (<label for="r100" class="ident">s</label> <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r101" class="ident">c</label> <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a>) {</code></span>
+<span class="codeline" id="line-419"><code>	<label for="r98" class="ident">rld</label>.<a href="#line-402" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-420"><code>	<label for="r100" class="ident">s</label> = <label for="r98" class="ident">rld</label>.<a href="#line-403" class="ident">sum</a></code></span>
+<span class="codeline" id="line-421"><code>	<label for="r98" class="ident">rld</label>.<a href="#line-403" class="ident">sum</a> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-422"><code>	<label for="r101" class="ident">c</label> = <label for="r98" class="ident">rld</label>.<a href="#line-404" class="ident">count</a></code></span>
+<span class="codeline" id="line-423"><code>	<label for="r98" class="ident">rld</label>.<a href="#line-404" class="ident">count</a> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-424"><code>	<label for="r98" class="ident">rld</label>.<a href="#line-402" class="ident">mu</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-425"><code>	<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-426"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

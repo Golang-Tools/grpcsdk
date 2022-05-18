@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: picker.go in package google.golang.org/grpc/xds/internal/balancer/clusterimpl</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	picker.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html">google.golang.org/grpc/xds/internal/balancer/clusterimpl</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">package</span> clusterimpl</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-22"><code>	<a href="../../../../../../../pkg/github.com/cncf/xds/go/xds/data/orca/v3.html" class="ident i0">orcapb</a> <label for="i0"><span class="lit-string i0">"github.com/cncf/xds/go/xds/data/orca/v3"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"google.golang.org/grpc/balancer"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/codes"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/connectivity"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/internal/wrr"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/status"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i6"><span class="lit-string i6">"google.golang.org/grpc/xds/internal/xdsclient"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<label for="i7"><span class="lit-string i7">"google.golang.org/grpc/xds/internal/xdsclient/load"</span></label></code></span>
+<span class="codeline" id="line-30"><code>)</code></span>
+<span class="codeline" id="line-31"><code></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// NewRandomWRR is used when calculating drops. It's exported so that tests can</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// override it.</span></code></span>
+<span class="codeline" id="line-34"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-NewRandomWRR" class="ident">NewRandomWRR</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/internal/wrr.html" class="ident i4">wrr</a>.<a href="../../../../internal/wrr/random.go.html#line-48" class="ident">NewRandom</a></code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-million" class="ident">million</a> = <span class="lit-number">1000000</span></code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-dropper" class="ident">dropper</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-39"><code>	category <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-40"><code>	w        <a href="../../../../../../../pkg/google.golang.org/grpc/internal/wrr.html" class="ident i4">wrr</a>.<a href="../../../../internal/wrr/wrr.go.html#line-23" class="ident">WRR</a></code></span>
+<span class="codeline" id="line-41"><code>}</code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">// greatest common divisor (GCD) via Euclidean algorithm</span></code></span>
+<span class="codeline" id="line-44"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-gcd" class="ident">gcd</a></label>(<label for="r1" class="ident">a</label>, <label for="r2" class="ident">b</label> <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>) <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a> {</code></span>
+<span class="codeline" id="line-45"><code>	<span class="keyword">for</span> <label for="r2" class="ident">b</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-46"><code>		<label for="r3" class="ident">t</label> := <label for="r2" class="ident">b</label></code></span>
+<span class="codeline" id="line-47"><code>		<label for="r2" class="ident">b</label> = <label for="r1" class="ident">a</label> % <label for="r2" class="ident">b</label></code></span>
+<span class="codeline" id="line-48"><code>		<label for="r1" class="ident">a</label> = <label for="r3" class="ident">t</label></code></span>
+<span class="codeline" id="line-49"><code>	}</code></span>
+<span class="codeline" id="line-50"><code>	<span class="keyword">return</span> <label for="r1" class="ident">a</label></code></span>
+<span class="codeline" id="line-51"><code>}</code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code><span class="keyword">func</span> <label for="r4" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-newDropper" class="ident">newDropper</a></label>(<label for="r5" class="ident">c</label> <a href="config.go.html#line-30" class="ident">DropConfig</a>) *<a href="#line-38" class="ident">dropper</a> {</code></span>
+<span class="codeline" id="line-54"><code>	<label for="r6" class="ident">w</label> := <a href="#line-34" class="ident">NewRandomWRR</a>()</code></span>
+<span class="codeline" id="line-55"><code>	<label for="r7" class="ident">gcdv</label> := <a href="#line-44" class="ident">gcd</a>(<label for="r5" class="ident">c</label>.<a href="config.go.html#line-32" class="ident">RequestsPerMillion</a>, <a href="#line-36" class="ident">million</a>)</code></span>
+<span class="codeline" id="line-56"><code>	<span class="comment">// Return true for RequestPerMillion, false for the rest.</span></code></span>
+<span class="codeline" id="line-57"><code>	<label for="r6" class="ident">w</label>.<a href="../../../../internal/wrr/wrr.go.html#line-27" class="ident">Add</a>(<a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a>, <a href="../../../../../../../pkg/builtin.html#name-int64" class="ident">int64</a>(<label for="r5" class="ident">c</label>.<a href="config.go.html#line-32" class="ident">RequestsPerMillion</a>/<label for="r7" class="ident">gcdv</label>))</code></span>
+<span class="codeline" id="line-58"><code>	<label for="r6" class="ident">w</label>.<a href="../../../../internal/wrr/wrr.go.html#line-27" class="ident">Add</a>(<a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a>, <a href="../../../../../../../pkg/builtin.html#name-int64" class="ident">int64</a>((<a href="#line-36" class="ident">million</a>-<label for="r5" class="ident">c</label>.<a href="config.go.html#line-32" class="ident">RequestsPerMillion</a>)/<label for="r7" class="ident">gcdv</label>))</code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code>	<span class="keyword">return</span> &amp;<a href="#line-38" class="ident">dropper</a>{</code></span>
+<span class="codeline" id="line-61"><code>		<a href="#line-39" class="ident">category</a>: <label for="r5" class="ident">c</label>.<a href="config.go.html#line-31" class="ident">Category</a>,</code></span>
+<span class="codeline" id="line-62"><code>		<a href="#line-40" class="ident">w</a>:        <label for="r6" class="ident">w</label>,</code></span>
+<span class="codeline" id="line-63"><code>	}</code></span>
+<span class="codeline" id="line-64"><code>}</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="keyword">func</span> (<label for="r8" class="ident">d</label> *<a href="#line-38" class="ident">dropper</a>) <label for="r9" class="ident">drop</label>() (<label for="r10" class="ident">ret</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-67"><code>	<span class="keyword">return</span> <label for="r8" class="ident">d</label>.<a href="#line-40" class="ident">w</a>.<a href="../../../../internal/wrr/wrr.go.html#line-31" class="ident">Next</a>().(<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>)</code></span>
+<span class="codeline" id="line-68"><code>}</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-71"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-serverLoadCPUName" class="ident">serverLoadCPUName</a>    = <span class="lit-string">"cpu_utilization"</span></code></span>
+<span class="codeline" id="line-72"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-serverLoadMemoryName" class="ident">serverLoadMemoryName</a> = <span class="lit-string">"mem_utilization"</span></code></span>
+<span class="codeline" id="line-73"><code>)</code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">// loadReporter wraps the methods from the loadStore that are used here.</span></code></span>
+<span class="codeline" id="line-76"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-loadReporter" class="ident">loadReporter</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-77"><code>	<a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clusterimpl.loadReporter^eb019.html#name-CallStarted" class="ident">CallStarted</a>(locality <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)</code></span>
+<span class="codeline" id="line-78"><code>	<a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clusterimpl.loadReporter^eb019.html#name-CallFinished" class="ident">CallFinished</a>(locality <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, err <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-79"><code>	<a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clusterimpl.loadReporter^eb019.html#name-CallServerLoad" class="ident">CallServerLoad</a>(locality, name <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, val <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>)</code></span>
+<span class="codeline" id="line-80"><code>	<a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clusterimpl.loadReporter^eb019.html#name-CallDropped" class="ident">CallDropped</a>(locality <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)</code></span>
+<span class="codeline" id="line-81"><code>}</code></span>
+<span class="codeline" id="line-82"><code></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">// Picker implements RPC drop, circuit breaking drop and load reporting.</span></code></span>
+<span class="codeline" id="line-84"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-picker" class="ident">picker</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-85"><code>	drops     []*<a href="#line-38" class="ident">dropper</a></code></span>
+<span class="codeline" id="line-86"><code>	s         <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a></code></span>
+<span class="codeline" id="line-87"><code>	loadStore <a href="#line-76" class="ident">loadReporter</a></code></span>
+<span class="codeline" id="line-88"><code>	counter   *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html" class="ident i6">xdsclient</a>.<a href="../../xdsclient/requests_counter.go.html#line-42" class="ident">ClusterRequestsCounter</a></code></span>
+<span class="codeline" id="line-89"><code>	countMax  <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-90"><code>}</code></span>
+<span class="codeline" id="line-91"><code></code></span>
+<span class="codeline" id="line-92"><code><span class="keyword">func</span> <label for="r11" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clusterimpl.html#name-newPicker" class="ident">newPicker</a></label>(<label for="r12" class="ident">s</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-130" class="ident">State</a>, <label for="r13" class="ident">config</label> *<a href="clusterimpl.go.html#line-454" class="ident">dropConfigs</a>, <label for="r14" class="ident">loadStore</label> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i7">load</a>.<a href="../../xdsclient/load/reporter.go.html#line-22" class="ident">PerClusterReporter</a>) *<a href="#line-84" class="ident">picker</a> {</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">return</span> &amp;<a href="#line-84" class="ident">picker</a>{</code></span>
+<span class="codeline" id="line-94"><code>		<a href="#line-85" class="ident">drops</a>:     <label for="r13" class="ident">config</label>.<a href="clusterimpl.go.html#line-455" class="ident">drops</a>,</code></span>
+<span class="codeline" id="line-95"><code>		<a href="#line-86" class="ident">s</a>:         <label for="r12" class="ident">s</label>,</code></span>
+<span class="codeline" id="line-96"><code>		<a href="#line-87" class="ident">loadStore</a>: <label for="r14" class="ident">loadStore</label>,</code></span>
+<span class="codeline" id="line-97"><code>		<a href="#line-88" class="ident">counter</a>:   <label for="r13" class="ident">config</label>.<a href="clusterimpl.go.html#line-456" class="ident">requestCounter</a>,</code></span>
+<span class="codeline" id="line-98"><code>		<a href="#line-89" class="ident">countMax</a>:  <label for="r13" class="ident">config</label>.<a href="clusterimpl.go.html#line-457" class="ident">requestCountMax</a>,</code></span>
+<span class="codeline" id="line-99"><code>	}</code></span>
+<span class="codeline" id="line-100"><code>}</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code><span class="keyword">func</span> (<label for="r15" class="ident">d</label> *<a href="#line-84" class="ident">picker</a>) <label for="r16" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clusterimpl.picker^cb031.html#name-.Pick" class="ident">Pick</a></label>(<label for="r17" class="ident">info</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-225" class="ident">PickInfo</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-265" class="ident">PickResult</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-103"><code>	<span class="comment">// Don't drop unless the inner picker is READY. Similar to</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">	// https://github.com/grpc/grpc-go/issues/2622.</span></code></span>
+<span class="codeline" id="line-105"><code>	<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-86" class="ident">s</a>.<a href="../../../../balancer/balancer.go.html#line-133" class="ident">ConnectivityState</a> == <a href="../../../../../../../pkg/google.golang.org/grpc/connectivity.html" class="ident i3">connectivity</a>.<a href="../../../../connectivity/connectivity.go.html#line-57" class="ident">Ready</a> {</code></span>
+<span class="codeline" id="line-106"><code>		<span class="comment">// Check if this RPC should be dropped by category.</span></code></span>
+<span class="codeline" id="line-107"><code>		<span class="keyword">for</span> <label for="r18" class="ident">_</label>, <label for="r19" class="ident">dp</label> := <span class="keyword">range</span> <label for="r15" class="ident">d</label>.<a href="#line-85" class="ident">drops</a> {</code></span>
+<span class="codeline" id="line-108"><code>			<span class="keyword">if</span> <label for="r19" class="ident">dp</label>.<a href="#line-66" class="ident">drop</a>() {</code></span>
+<span class="codeline" id="line-109"><code>				<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-110"><code>					<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-80" class="ident">CallDropped</a>(<label for="r19" class="ident">dp</label>.<a href="#line-39" class="ident">category</a>)</code></span>
+<span class="codeline" id="line-111"><code>				}</code></span>
+<span class="codeline" id="line-112"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-265" class="ident">PickResult</a>{}, <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i5">status</a>.<a href="../../../../status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i2">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>, <span class="lit-string">"RPC is dropped"</span>)</code></span>
+<span class="codeline" id="line-113"><code>			}</code></span>
+<span class="codeline" id="line-114"><code>		}</code></span>
+<span class="codeline" id="line-115"><code>	}</code></span>
+<span class="codeline" id="line-116"><code></code></span>
+<span class="codeline" id="line-117"><code>	<span class="comment">// Check if this RPC should be dropped by circuit breaking.</span></code></span>
+<span class="codeline" id="line-118"><code>	<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-119"><code>		<span class="keyword">if</span> <label for="r20" class="ident">err</label> := <label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a>.<a href="../../xdsclient/requests_counter.go.html#line-67" class="ident">StartRequest</a>(<label for="r15" class="ident">d</label>.<a href="#line-89" class="ident">countMax</a>); <label for="r20" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-120"><code>			<span class="comment">// Drops by circuit breaking are reported with empty category. They</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">			// will be reported only in total drops, but not in per category.</span></code></span>
+<span class="codeline" id="line-122"><code>			<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-123"><code>				<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-80" class="ident">CallDropped</a>(<span class="lit-string">""</span>)</code></span>
+<span class="codeline" id="line-124"><code>			}</code></span>
+<span class="codeline" id="line-125"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-265" class="ident">PickResult</a>{}, <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i5">status</a>.<a href="../../../../status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i2">codes</a>.<a href="../../../../codes/codes.go.html#line-180" class="ident">Unavailable</a>, <label for="r20" class="ident">err</label>.Error())</code></span>
+<span class="codeline" id="line-126"><code>		}</code></span>
+<span class="codeline" id="line-127"><code>	}</code></span>
+<span class="codeline" id="line-128"><code></code></span>
+<span class="codeline" id="line-129"><code>	<span class="keyword">var</span> <label for="r21" class="ident">lIDStr</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-130"><code>	<label for="r22" class="ident">pr</label>, <label for="r23" class="ident">err</label> := <label for="r15" class="ident">d</label>.<a href="#line-86" class="ident">s</a>.<a href="../../../../balancer/balancer.go.html#line-135" class="ident">Picker</a>.<a href="../../../../balancer/balancer.go.html#line-311" class="ident">Pick</a>(<label for="r17" class="ident">info</label>)</code></span>
+<span class="codeline" id="line-131"><code>	<span class="keyword">if</span> <label for="r24" class="ident">scw</label>, <label for="r25" class="ident">ok</label> := <label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-270" class="ident">SubConn</a>.(*<a href="clusterimpl.go.html#line-384" class="ident">scWrapper</a>); <label for="r25" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-132"><code>		<span class="comment">// This OK check also covers the case err!=nil, because SubConn will be</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">		// nil.</span></code></span>
+<span class="codeline" id="line-134"><code>		<label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-270" class="ident">SubConn</a> = <label for="r24" class="ident">scw</label>.<a href="clusterimpl.go.html#line-385" class="ident">SubConn</a></code></span>
+<span class="codeline" id="line-135"><code>		<span class="keyword">var</span> <label for="r26" class="ident">e</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-136"><code>		<span class="comment">// If locality ID isn't found in the wrapper, an empty locality ID will</span></code></span>
+<span class="codeline" id="line-137"><code><span class="comment">		// be used.</span></code></span>
+<span class="codeline" id="line-138"><code>		<label for="r21" class="ident">lIDStr</label>, <label for="r26" class="ident">e</label> = <label for="r24" class="ident">scw</label>.<a href="clusterimpl.go.html#line-395" class="ident">localityID</a>().<a href="../../internal.go.html#line-41" class="ident">ToString</a>()</code></span>
+<span class="codeline" id="line-139"><code>		<span class="keyword">if</span> <label for="r26" class="ident">e</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-140"><code>			<a href="logging.go.html#line-30" class="ident">logger</a>.<a href="../../../../grpclog/loggerv2.go.html#line-41" class="ident">Infof</a>(<span class="lit-string">"failed to marshal LocalityID: %#v, loads won't be reported"</span>, <label for="r24" class="ident">scw</label>.<a href="clusterimpl.go.html#line-395" class="ident">localityID</a>())</code></span>
+<span class="codeline" id="line-141"><code>		}</code></span>
+<span class="codeline" id="line-142"><code>	}</code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-145"><code>		<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-146"><code>			<span class="comment">// Release one request count if this pick fails.</span></code></span>
+<span class="codeline" id="line-147"><code>			<label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a>.<a href="../../xdsclient/requests_counter.go.html#line-81" class="ident">EndRequest</a>()</code></span>
+<span class="codeline" id="line-148"><code>		}</code></span>
+<span class="codeline" id="line-149"><code>		<span class="keyword">return</span> <label for="r22" class="ident">pr</label>, <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-150"><code>	}</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-153"><code>		<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-77" class="ident">CallStarted</a>(<label for="r21" class="ident">lIDStr</label>)</code></span>
+<span class="codeline" id="line-154"><code>		<label for="r27" class="ident">oldDone</label> := <label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-276" class="ident">Done</a></code></span>
+<span class="codeline" id="line-155"><code>		<label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-276" class="ident">Done</a> = <span class="keyword">func</span>(<label for="r28" class="ident">info</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-235" class="ident">DoneInfo</a>) {</code></span>
+<span class="codeline" id="line-156"><code>			<span class="keyword">if</span> <label for="r27" class="ident">oldDone</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-157"><code>				<label for="r27" class="ident">oldDone</label>(<label for="r28" class="ident">info</label>)</code></span>
+<span class="codeline" id="line-158"><code>			}</code></span>
+<span class="codeline" id="line-159"><code>			<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-78" class="ident">CallFinished</a>(<label for="r21" class="ident">lIDStr</label>, <label for="r28" class="ident">info</label>.<a href="../../../../balancer/balancer.go.html#line-237" class="ident">Err</a>)</code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code>			<label for="r29" class="ident">load</label>, <label for="r30" class="ident">ok</label> := <label for="r28" class="ident">info</label>.<a href="../../../../balancer/balancer.go.html#line-248" class="ident">ServerLoad</a>.(*<a href="../../../../../../../pkg/github.com/cncf/xds/go/xds/data/orca/v3.html" class="ident i0">orcapb</a>.<a href="../../../../../../github.com/cncf/xds/go/xds/data/orca/v3/orca_load_report.pb.go.html#line-29" class="ident">OrcaLoadReport</a>)</code></span>
+<span class="codeline" id="line-162"><code>			<span class="keyword">if</span> !<label for="r30" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-163"><code>				<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-164"><code>			}</code></span>
+<span class="codeline" id="line-165"><code>			<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-79" class="ident">CallServerLoad</a>(<label for="r21" class="ident">lIDStr</label>, <a href="#line-71" class="ident">serverLoadCPUName</a>, <label for="r29" class="ident">load</label>.<a href="../../../../../../github.com/cncf/xds/go/xds/data/orca/v3/orca_load_report.pb.go.html#line-34" class="ident">CpuUtilization</a>)</code></span>
+<span class="codeline" id="line-166"><code>			<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-79" class="ident">CallServerLoad</a>(<label for="r21" class="ident">lIDStr</label>, <a href="#line-72" class="ident">serverLoadMemoryName</a>, <label for="r29" class="ident">load</label>.<a href="../../../../../../github.com/cncf/xds/go/xds/data/orca/v3/orca_load_report.pb.go.html#line-35" class="ident">MemUtilization</a>)</code></span>
+<span class="codeline" id="line-167"><code>			<span class="keyword">for</span> <label for="r31" class="ident">n</label>, <label for="r32" class="ident">c</label> := <span class="keyword">range</span> <label for="r29" class="ident">load</label>.<a href="../../../../../../github.com/cncf/xds/go/xds/data/orca/v3/orca_load_report.pb.go.html#line-37" class="ident">RequestCost</a> {</code></span>
+<span class="codeline" id="line-168"><code>				<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-79" class="ident">CallServerLoad</a>(<label for="r21" class="ident">lIDStr</label>, <label for="r31" class="ident">n</label>, <label for="r32" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-169"><code>			}</code></span>
+<span class="codeline" id="line-170"><code>			<span class="keyword">for</span> <label for="r33" class="ident">n</label>, <label for="r34" class="ident">c</label> := <span class="keyword">range</span> <label for="r29" class="ident">load</label>.<a href="../../../../../../github.com/cncf/xds/go/xds/data/orca/v3/orca_load_report.pb.go.html#line-38" class="ident">Utilization</a> {</code></span>
+<span class="codeline" id="line-171"><code>				<label for="r15" class="ident">d</label>.<a href="#line-87" class="ident">loadStore</a>.<a href="#line-79" class="ident">CallServerLoad</a>(<label for="r21" class="ident">lIDStr</label>, <label for="r33" class="ident">n</label>, <label for="r34" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-172"><code>			}</code></span>
+<span class="codeline" id="line-173"><code>		}</code></span>
+<span class="codeline" id="line-174"><code>	}</code></span>
+<span class="codeline" id="line-175"><code></code></span>
+<span class="codeline" id="line-176"><code>	<span class="keyword">if</span> <label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-177"><code>		<span class="comment">// Update Done() so that when the RPC finishes, the request count will</span></code></span>
+<span class="codeline" id="line-178"><code><span class="comment">		// be released.</span></code></span>
+<span class="codeline" id="line-179"><code>		<label for="r35" class="ident">oldDone</label> := <label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-276" class="ident">Done</a></code></span>
+<span class="codeline" id="line-180"><code>		<label for="r22" class="ident">pr</label>.<a href="../../../../balancer/balancer.go.html#line-276" class="ident">Done</a> = <span class="keyword">func</span>(<label for="r36" class="ident">doneInfo</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i1">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-235" class="ident">DoneInfo</a>) {</code></span>
+<span class="codeline" id="line-181"><code>			<label for="r15" class="ident">d</label>.<a href="#line-88" class="ident">counter</a>.<a href="../../xdsclient/requests_counter.go.html#line-81" class="ident">EndRequest</a>()</code></span>
+<span class="codeline" id="line-182"><code>			<span class="keyword">if</span> <label for="r35" class="ident">oldDone</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-183"><code>				<label for="r35" class="ident">oldDone</label>(<label for="r36" class="ident">doneInfo</label>)</code></span>
+<span class="codeline" id="line-184"><code>			}</code></span>
+<span class="codeline" id="line-185"><code>		}</code></span>
+<span class="codeline" id="line-186"><code>	}</code></span>
+<span class="codeline" id="line-187"><code></code></span>
+<span class="codeline" id="line-188"><code>	<span class="keyword">return</span> <label for="r22" class="ident">pr</label>, <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-189"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

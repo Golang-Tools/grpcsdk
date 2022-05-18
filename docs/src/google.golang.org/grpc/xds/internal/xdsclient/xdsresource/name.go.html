@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: name.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	name.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"net/url"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i1"><span class="lit-string i1">"sort"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i2"><span class="lit-string i2">"strings"</span></label></code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/internal/envconfig"</span></label></code></span>
+<span class="codeline" id="line-26"><code>)</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// FederationScheme is the scheme of a federation resource name.</span></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-FederationScheme" class="ident">FederationScheme</a> = <span class="lit-string">"xdstp"</span></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// Name contains the parsed component of an xDS resource name.</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// An xDS resource name is in the format of</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">// xdstp://[{authority}]/{resource type}/{id/*}?{context parameters}{#processing directive,*}</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// See</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// https://github.com/cncf/xds/blob/main/proposals/TP1-xds-transport-next.md#uri-based-xds-resource-names</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// for details, and examples.</span></code></span>
+<span class="codeline" id="line-39"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-Name" class="ident">Name</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-40"><code>	Scheme    <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-41"><code>	Authority <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-42"><code>	Type      <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-43"><code>	ID        <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code>	ContextParams <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-46"><code></code></span>
+<span class="codeline" id="line-47"><code>	processingDirective <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-48"><code>}</code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">// ParseName splits the name and returns a struct representation of the Name.</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">// If the name isn't a valid new-style xDS name, field ID is set to the input.</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">// Note that this is not an error, because we still support the old-style</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// resource names (those not starting with "xdstp:").</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">// The caller can tell if the parsing is successful by checking the returned</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">// Scheme.</span></code></span>
+<span class="codeline" id="line-58"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ParseName" class="ident">ParseName</a></label>(<label for="r1" class="ident">name</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) *<a href="#line-39" class="ident">Name</a> {</code></span>
+<span class="codeline" id="line-59"><code>	<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i3">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-91" class="ident">XDSFederation</a> {</code></span>
+<span class="codeline" id="line-60"><code>		<span class="comment">// Return "" scheme to use the default authority for the server.</span></code></span>
+<span class="codeline" id="line-61"><code>		<span class="keyword">return</span> &amp;<a href="#line-39" class="ident">Name</a>{<a href="#line-43" class="ident">ID</a>: <label for="r1" class="ident">name</label>}</code></span>
+<span class="codeline" id="line-62"><code>	}</code></span>
+<span class="codeline" id="line-63"><code>	<span class="keyword">if</span> !<a href="../../../../../../../pkg/strings.html" class="ident i2">strings</a>.<a href="../../../../../../strings/strings.go.html#line-61" class="ident">Contains</a>(<label for="r1" class="ident">name</label>, <span class="lit-string">"://"</span>) {</code></span>
+<span class="codeline" id="line-64"><code>		<span class="comment">// Only the long form URL, with ://, is valid.</span></code></span>
+<span class="codeline" id="line-65"><code>		<span class="keyword">return</span> &amp;<a href="#line-39" class="ident">Name</a>{<a href="#line-43" class="ident">ID</a>: <label for="r1" class="ident">name</label>}</code></span>
+<span class="codeline" id="line-66"><code>	}</code></span>
+<span class="codeline" id="line-67"><code>	<label for="r2" class="ident">parsed</label>, <label for="r3" class="ident">err</label> := <a href="../../../../../../../pkg/net/url.html" class="ident i0">url</a>.<a href="../../../../../../net/url/url.go.html#line-461" class="ident">Parse</a>(<label for="r1" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-68"><code>	<span class="keyword">if</span> <label for="r3" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-69"><code>		<span class="keyword">return</span> &amp;<a href="#line-39" class="ident">Name</a>{<a href="#line-43" class="ident">ID</a>: <label for="r1" class="ident">name</label>}</code></span>
+<span class="codeline" id="line-70"><code>	}</code></span>
+<span class="codeline" id="line-71"><code></code></span>
+<span class="codeline" id="line-72"><code>	<label for="r4" class="ident">ret</label> := &amp;<a href="#line-39" class="ident">Name</a>{</code></span>
+<span class="codeline" id="line-73"><code>		<a href="#line-40" class="ident">Scheme</a>:    <label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-359" class="ident">Scheme</a>,</code></span>
+<span class="codeline" id="line-74"><code>		<a href="#line-41" class="ident">Authority</a>: <label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-362" class="ident">Host</a>,</code></span>
+<span class="codeline" id="line-75"><code>	}</code></span>
+<span class="codeline" id="line-76"><code>	<label for="r5" class="ident">split</label> := <a href="../../../../../../../pkg/strings.html" class="ident i2">strings</a>.<a href="../../../../../../strings/strings.go.html#line-275" class="ident">SplitN</a>(<label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-363" class="ident">Path</a>, <span class="lit-string">"/"</span>, <span class="lit-number">3</span>)</code></span>
+<span class="codeline" id="line-77"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r5" class="ident">split</label>) &lt; <span class="lit-number">3</span> {</code></span>
+<span class="codeline" id="line-78"><code>		<span class="comment">// Path is in the format of "/type/id". There must be at least 3</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">		// segments after splitting.</span></code></span>
+<span class="codeline" id="line-80"><code>		<span class="keyword">return</span> &amp;<a href="#line-39" class="ident">Name</a>{<a href="#line-43" class="ident">ID</a>: <label for="r1" class="ident">name</label>}</code></span>
+<span class="codeline" id="line-81"><code>	}</code></span>
+<span class="codeline" id="line-82"><code>	<label for="r4" class="ident">ret</label>.<a href="#line-42" class="ident">Type</a> = <label for="r5" class="ident">split</label>[<span class="lit-number">1</span>]</code></span>
+<span class="codeline" id="line-83"><code>	<label for="r4" class="ident">ret</label>.<a href="#line-43" class="ident">ID</a> = <label for="r5" class="ident">split</label>[<span class="lit-number">2</span>]</code></span>
+<span class="codeline" id="line-84"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-1103" class="ident">Query</a>()) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-85"><code>		<label for="r4" class="ident">ret</label>.<a href="#line-45" class="ident">ContextParams</a> = <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>)</code></span>
+<span class="codeline" id="line-86"><code>		<span class="keyword">for</span> <label for="r6" class="ident">k</label>, <label for="r7" class="ident">vs</label> := <span class="keyword">range</span> <label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-1103" class="ident">Query</a>() {</code></span>
+<span class="codeline" id="line-87"><code>			<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r7" class="ident">vs</label>) &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-88"><code>				<span class="comment">// We only keep one value of each key. Behavior for multiple values</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">				// is undefined.</span></code></span>
+<span class="codeline" id="line-90"><code>				<label for="r4" class="ident">ret</label>.<a href="#line-45" class="ident">ContextParams</a>[<label for="r6" class="ident">k</label>] = <label for="r7" class="ident">vs</label>[<span class="lit-number">0</span>]</code></span>
+<span class="codeline" id="line-91"><code>			}</code></span>
+<span class="codeline" id="line-92"><code>		}</code></span>
+<span class="codeline" id="line-93"><code>	}</code></span>
+<span class="codeline" id="line-94"><code>	<span class="comment">// TODO: processing directive (the part comes after "#" in the URL, stored</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">	// in parsed.RawFragment) is kept but not processed. Add support for that</span></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">	// when it's needed.</span></code></span>
+<span class="codeline" id="line-97"><code>	<label for="r4" class="ident">ret</label>.<a href="#line-47" class="ident">processingDirective</a> = <label for="r2" class="ident">parsed</label>.<a href="../../../../../../net/url/url.go.html#line-368" class="ident">RawFragment</a></code></span>
+<span class="codeline" id="line-98"><code>	<span class="keyword">return</span> <label for="r4" class="ident">ret</label></code></span>
+<span class="codeline" id="line-99"><code>}</code></span>
+<span class="codeline" id="line-100"><code></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">// String returns a canonicalized string of name. The context parameters are</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">// sorted by the keys.</span></code></span>
+<span class="codeline" id="line-103"><code><span class="keyword">func</span> (<label for="r8" class="ident">n</label> *<a href="#line-39" class="ident">Name</a>) <label for="r9" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.Name.html#name-.String" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-104"><code>	<span class="keyword">if</span> <label for="r8" class="ident">n</label>.<a href="#line-40" class="ident">Scheme</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-105"><code>		<span class="keyword">return</span> <label for="r8" class="ident">n</label>.<a href="#line-43" class="ident">ID</a></code></span>
+<span class="codeline" id="line-106"><code>	}</code></span>
+<span class="codeline" id="line-107"><code></code></span>
+<span class="codeline" id="line-108"><code>	<span class="comment">// Sort and build query.</span></code></span>
+<span class="codeline" id="line-109"><code>	<label for="r10" class="ident">keys</label> := <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <span class="lit-number">0</span>, <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r8" class="ident">n</label>.<a href="#line-45" class="ident">ContextParams</a>))</code></span>
+<span class="codeline" id="line-110"><code>	<span class="keyword">for</span> <label for="r11" class="ident">k</label> := <span class="keyword">range</span> <label for="r8" class="ident">n</label>.<a href="#line-45" class="ident">ContextParams</a> {</code></span>
+<span class="codeline" id="line-111"><code>		<label for="r10" class="ident">keys</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r10" class="ident">keys</label>, <label for="r11" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-112"><code>	}</code></span>
+<span class="codeline" id="line-113"><code>	<a href="../../../../../../../pkg/sort.html" class="ident i1">sort</a>.<a href="../../../../../../sort/sort.go.html#line-335" class="ident">Strings</a>(<label for="r10" class="ident">keys</label>)</code></span>
+<span class="codeline" id="line-114"><code>	<span class="keyword">var</span> <label for="r12" class="ident">pairs</label> []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-115"><code>	<span class="keyword">for</span> <label for="r13" class="ident">_</label>, <label for="r14" class="ident">k</label> := <span class="keyword">range</span> <label for="r10" class="ident">keys</label> {</code></span>
+<span class="codeline" id="line-116"><code>		<label for="r12" class="ident">pairs</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r12" class="ident">pairs</label>, <a href="../../../../../../../pkg/strings.html" class="ident i2">strings</a>.<a href="../../../../../../strings/strings.go.html#line-425" class="ident">Join</a>([]<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>{<label for="r14" class="ident">k</label>, <label for="r8" class="ident">n</label>.<a href="#line-45" class="ident">ContextParams</a>[<label for="r14" class="ident">k</label>]}, <span class="lit-string">"="</span>))</code></span>
+<span class="codeline" id="line-117"><code>	}</code></span>
+<span class="codeline" id="line-118"><code>	<label for="r15" class="ident">rawQuery</label> := <a href="../../../../../../../pkg/strings.html" class="ident i2">strings</a>.<a href="../../../../../../strings/strings.go.html#line-425" class="ident">Join</a>(<label for="r12" class="ident">pairs</label>, <span class="lit-string">"&amp;"</span>)</code></span>
+<span class="codeline" id="line-119"><code></code></span>
+<span class="codeline" id="line-120"><code>	<label for="r16" class="ident">path</label> := <label for="r8" class="ident">n</label>.<a href="#line-42" class="ident">Type</a></code></span>
+<span class="codeline" id="line-121"><code>	<span class="keyword">if</span> <label for="r8" class="ident">n</label>.<a href="#line-43" class="ident">ID</a> != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-122"><code>		<label for="r16" class="ident">path</label> = <label for="r16" class="ident">path</label> + <span class="lit-string">"/"</span> + <label for="r8" class="ident">n</label>.<a href="#line-43" class="ident">ID</a></code></span>
+<span class="codeline" id="line-123"><code>	}</code></span>
+<span class="codeline" id="line-124"><code></code></span>
+<span class="codeline" id="line-125"><code>	<label for="r17" class="ident">tempURL</label> := &amp;<a href="../../../../../../../pkg/net/url.html" class="ident i0">url</a>.<a href="../../../../../../net/url/url.go.html#line-358" class="ident">URL</a>{</code></span>
+<span class="codeline" id="line-126"><code>		<a href="../../../../../../net/url/url.go.html#line-359" class="ident">Scheme</a>:      <label for="r8" class="ident">n</label>.<a href="#line-40" class="ident">Scheme</a>,</code></span>
+<span class="codeline" id="line-127"><code>		<a href="../../../../../../net/url/url.go.html#line-362" class="ident">Host</a>:        <label for="r8" class="ident">n</label>.<a href="#line-41" class="ident">Authority</a>,</code></span>
+<span class="codeline" id="line-128"><code>		<a href="../../../../../../net/url/url.go.html#line-363" class="ident">Path</a>:        <label for="r16" class="ident">path</label>,</code></span>
+<span class="codeline" id="line-129"><code>		<a href="../../../../../../net/url/url.go.html#line-366" class="ident">RawQuery</a>:    <label for="r15" class="ident">rawQuery</label>,</code></span>
+<span class="codeline" id="line-130"><code>		<a href="../../../../../../net/url/url.go.html#line-368" class="ident">RawFragment</a>: <label for="r8" class="ident">n</label>.<a href="#line-47" class="ident">processingDirective</a>,</code></span>
+<span class="codeline" id="line-131"><code>	}</code></span>
+<span class="codeline" id="line-132"><code>	<span class="keyword">return</span> <label for="r17" class="ident">tempURL</label>.<a href="../../../../../../net/url/url.go.html#line-798" class="ident">String</a>()</code></span>
+<span class="codeline" id="line-133"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

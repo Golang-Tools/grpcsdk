@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/xdsclient/bootstrap</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>bootstrap</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/xdsclient/bootstrap">google.golang.org/grpc/xds/internal/xdsclient/bootstrap</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/xdsclient/bootstrap" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html">22 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html#imported-by">7 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html">bootstrap.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package bootstrap provides the functionality to initialize certain aspects
+		of an xDS client by reading a bootstrap file.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/logging.go.html">logging.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/template.go.html">template.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 7, in which 3 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Authority" data-popularity="100">	<input type='checkbox' class="fold" id="Authority-fold-content"><label for="Authority-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-194">Authority</a> <i>(struct)</i></label><span id='Authority-fold-content-docs' class="fold-docs">
+		Authority contains configuration for an Authority for an xDS control plane
+		server. See the Authorities field in the Config struct for how it's used.
+
+		<input type='checkbox' class="fold" id="Authority-fold-fields"><label for="Authority-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='Authority-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Authority-fold-field-ClientListenerResourceNameTemplate"><label for="Authority-fold-field-ClientListenerResourceNameTemplate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-208">ClientListenerResourceNameTemplate</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Authority-fold-field-ClientListenerResourceNameTemplate-docs' class="fold-docs">
+				ClientListenerResourceNameTemplate is template for the name of the
+				Listener resource to subscribe to for a gRPC client channel.  Used only
+				when the channel is created using an "xds:" URI with this authority name.
+
+				The token "%s", if present in this string, will be replaced
+				with %-encoded service authority (i.e., the path part of the target
+				URI used to create the gRPC channel).
+
+				Must start with "xdstp://&lt;authority_name&gt;/".  If it does not,
+				that is considered a bootstrap file parsing error.
+
+				If not present in the bootstrap file, defaults to
+				"xdstp://&lt;authority_name&gt;/envoy.config.listener.v3.Listener/%s".
+</span></span><span>
+			<input type='checkbox' class="fold" id="Authority-fold-field-XDSServer"><label for="Authority-fold-field-XDSServer"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-211">XDSServer</a> <i>*<a href="#name-ServerConfig">ServerConfig</a></i></label><span id='Authority-fold-field-XDSServer-docs' class="fold-docs">
+				XDSServer contains the management server and config to connect to for
+				this authority.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Authority-fold-methods"><label for="Authority-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='Authority-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Authority-fold-method-UnmarshalJSON"><label for="Authority-fold-method-UnmarshalJSON">(*Authority) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-215">UnmarshalJSON</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='Authority-fold-method-UnmarshalJSON-docs' class="fold-docs">
+				UnmarshalJSON implement json unmarshaller.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Authority-fold-impls"><label for="Authority-fold-impls">Implements (<i>at least one exported</i>)</label><span id='Authority-fold-impls-items' class="fold-items"><span>
+			*Authority : encoding/json.<a href="../../../../../encoding/json.html#name-Unmarshaler">Unmarshaler</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-Config" data-popularity="565">	<input type='checkbox' class="fold" id="Config-fold-content"><label for="Config-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-241">Config</a> <i>(struct)</i></label><span id='Config-fold-content-docs' class="fold-docs">
+		Config provides the xDS client with several key bits of information that it
+		requires in its interaction with the management server. The Config is
+		initialized from the bootstrap file.
+
+		<input type='checkbox' class="fold" id="Config-fold-fields"><label for="Config-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='Config-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Config-fold-field-Authorities"><label for="Config-fold-field-Authorities"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-294">Authorities</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-Authority">Authority</a></i></label><span id='Config-fold-field-Authorities-docs' class="fold-docs">
+				Authorities is a map of authority name to corresponding configuration.
+
+				This is used in the following cases:
+				- A gRPC client channel is created using an "xds:" URI that includes
+				  an authority.
+				- A gRPC client channel is created using an "xds:" URI with no
+				  authority, but the "client_default_listener_resource_name_template"
+				  field above turns it into an "xdstp:" URI.
+				- A gRPC server is created and the
+				  "server_listener_resource_name_template" field is an "xdstp:" URI.
+
+				In any of those cases, it is an error if the specified authority is
+				not present in this map.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Config-fold-field-CertProviderConfigs"><label for="Config-fold-field-CertProviderConfigs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-249">CertProviderConfigs</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-BuildableConfig">BuildableConfig</a></i></label><span id='Config-fold-field-CertProviderConfigs-docs' class="fold-docs">
+				CertProviderConfigs contains a mapping from certificate provider plugin
+				instance names to parsed buildable configs.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Config-fold-field-ClientDefaultListenerResourceNameTemplate"><label for="Config-fold-field-ClientDefaultListenerResourceNameTemplate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-279">ClientDefaultListenerResourceNameTemplate</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Config-fold-field-ClientDefaultListenerResourceNameTemplate-docs' class="fold-docs">
+				A template for the name of the Listener resource to subscribe to
+				for a gRPC client channel.  Used only when the channel is created
+				with an "xds:" URI with no authority.
+
+				If starts with "xdstp:", will be interpreted as a new-style name,
+				in which case the authority of the URI will be used to select the
+				relevant configuration in the "authorities" map.
+
+				The token "%s", if present in this string, will be replaced with
+				the service authority (i.e., the path part of the target URI
+				used to create the gRPC channel).  If the template starts with
+				"xdstp:", the replaced string will be %-encoded.
+
+				Defaults to "%s".
+</span></span><span>
+			<input type='checkbox' class="fold" id="Config-fold-field-ServerListenerResourceNameTemplate"><label for="Config-fold-field-ServerListenerResourceNameTemplate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-264">ServerListenerResourceNameTemplate</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Config-fold-field-ServerListenerResourceNameTemplate-docs' class="fold-docs">
+				ServerListenerResourceNameTemplate is a template for the name of the
+				Listener resource to subscribe to for a gRPC server.
+
+				If starts with "xdstp:", will be interpreted as a new-style name,
+				in which case the authority of the URI will be used to select the
+				relevant configuration in the "authorities" map.
+
+				The token "%s", if present in this string, will be replaced with the IP
+				and port on which the server is listening.  (e.g., "0.0.0.0:8080",
+				"[::]:8080"). For example, a value of "example/resource/%s" could become
+				"example/resource/0.0.0.0:8080". If the template starts with "xdstp:",
+				the replaced string will be %-encoded.
+
+				There is no default; if unset, xDS-based server creation fails.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Config-fold-field-XDSServer"><label for="Config-fold-field-XDSServer"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-246">XDSServer</a> <i>*<a href="#name-ServerConfig">ServerConfig</a></i></label><span id='Config-fold-field-XDSServer-docs' class="fold-docs">
+				XDSServer is the management server to connect to.
+
+				The bootstrap file contains a list of servers (with name+creds), but we
+				pick the first one.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Config-fold-methods"><label for="Config-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='Config-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Config-showhide-methods"><i><label for="Config-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="Config-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Config-fold-method-updateNodeProto"><label for="Config-fold-method-updateNodeProto">(*Config) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-496">updateNodeProto</a>(node *<a href="../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-Node">Node</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='Config-fold-method-updateNodeProto-docs' class="fold-docs">
+				updateNodeProto updates the node proto read from the bootstrap file.
+
+				The input node is a v3.Node protobuf message corresponding to the JSON
+				contents found in the bootstrap file. This method performs some post
+				processing on it:
+				1. If the node is nil, we create an empty one here. That way, callers of this
+				function can always expect that the NodeProto field is non-nil.
+				2. Some additional fields which are not expected to be set in the bootstrap
+				file are populated here.
+				3. For each server config (both top level and in each authority), we set its
+				node field to the v3.Node, or a v2.Node with the same content, depending on
+				the server's transport API version.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Config-fold-results"><label for="Config-fold-results">As Outputs Of (<i>at least 5, in which 4 are exported</i>)</label><span id='Config-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewConfig">NewConfig</a>() (*<b>Config</b>, <a href="../../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-NewConfigFromContentsForTesting">NewConfigFromContentsForTesting</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) (*<b>Config</b>, <a href="../../../../../builtin.html#name-error">error</a>)</span><span>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/attributes.go.html#line-46">BootstrapConfig</a>() *<b>Config</b></span><span>
+			func google.golang.org/grpc/xds/internal/server.<a href="../server.html#name-XDSClient">XDSClient</a>.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/server/listener_wrapper.go.html#line-78">BootstrapConfig</a>() *<b>Config</b></span>
+			<input type='checkbox' class="showhide" id="Config-showhide-inputofs"><i><label for="Config-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="Config-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newConfigFromContents">newConfigFromContents</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) (*<b>Config</b>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="Config-fold-params"><label for="Config-fold-params">As Inputs Of (<i>at least 4, in which 2 are exported</i>)</label><span id='Config-fold-params-items' class="fold-items"><span>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-NewWithConfig">NewWithConfig</a>(config *<b>Config</b>) (<a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span><span>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-NewWithConfigForTesting">NewWithConfigForTesting</a>(config *<b>Config</b>, watchExpiryTimeout <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (<a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span>
+			<input type='checkbox' class="showhide" id="Config-showhide-outputofs"><i><label for="Config-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="Config-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-newRefCountedWithConfig">newRefCountedWithConfig</a>(config *<b>Config</b>) (<a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-newWithConfig">newWithConfig</a>(config *<b>Config</b>, watchExpiryTimeout <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>, idleAuthorityDeleteTimeout <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (*<a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-clientImpl">clientImpl</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-ServerConfig" data-popularity="545">	<input type='checkbox' class="fold" id="ServerConfig-fold-content"><label for="ServerConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-95">ServerConfig</a> <i>(struct)</i></label><span id='ServerConfig-fold-content-docs' class="fold-docs">
+		ServerConfig contains the configuration to connect to a server, including
+		URI, creds, and transport API version (e.g. v2 or v3).
+
+		<input type='checkbox' class="fold" id="ServerConfig-fold-fields"><label for="ServerConfig-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='ServerConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-field-Creds"><label for="ServerConfig-fold-field-Creds"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-103">Creds</a> <i><a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-DialOption">DialOption</a></i></label><span id='ServerConfig-fold-field-Creds-docs' class="fold-docs">
+				Creds contains the credentials to be used while talking to the xDS
+				server, as a grpc.DialOption.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-field-CredsType"><label for="ServerConfig-fold-field-CredsType"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-105">CredsType</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='ServerConfig-fold-field-CredsType-docs' class="fold-docs">
+				CredsType is the type of the creds. It will be used to dedup servers.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-field-NodeProto"><label for="ServerConfig-fold-field-NodeProto"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-116">NodeProto</a> <i><a href="../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a></i></label><span id='ServerConfig-fold-field-NodeProto-docs' class="fold-docs">
+				NodeProto contains the Node proto to be used in xDS requests. The actual
+				type depends on the transport protocol version used.
+
+				Note that it's specified in the bootstrap globally for all the servers,
+				but we keep it in each server config so that its type (e.g. *v2pb.Node or
+				*v3pb.Node) is consistent with the transport API version.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-field-ServerURI"><label for="ServerConfig-fold-field-ServerURI"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-100">ServerURI</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='ServerConfig-fold-field-ServerURI-docs' class="fold-docs">
+				ServerURI is the management server to connect to.
+
+				The bootstrap file contains an ordered list of xDS servers to contact for
+				this authority. The first one is picked.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-field-TransportAPI"><label for="ServerConfig-fold-field-TransportAPI"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-109">TransportAPI</a> <i><a href="xdsresource/version.html">version</a>.<a href="xdsresource/version.html#name-TransportAPI">TransportAPI</a></i></label><span id='ServerConfig-fold-field-TransportAPI-docs' class="fold-docs">
+				TransportAPI indicates the API version of xDS transport protocol to use.
+				This describes the xDS gRPC endpoint and version of
+				DiscoveryRequest/Response used on the wire.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ServerConfig-fold-methods"><label for="ServerConfig-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='ServerConfig-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-method-MarshalJSON"><label for="ServerConfig-fold-method-MarshalJSON">( ServerConfig) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-140">MarshalJSON</a>() ([]<a href="../../../../../builtin.html#name-byte">byte</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='ServerConfig-fold-method-MarshalJSON-docs' class="fold-docs">
+				MarshalJSON marshals the ServerConfig to json.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-method-String"><label for="ServerConfig-fold-method-String">(*ServerConfig) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-128">String</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='ServerConfig-fold-method-String-docs' class="fold-docs">
+				String returns the string representation of the ServerConfig.
+
+				This string representation will be used as map keys in federation
+				(`map[ServerConfig]authority`), so that the xDS ClientConn and stream will be
+				shared by authorities with different names but the same server config.
+
+				It covers (almost) all the fields so the string can represent the config
+				content. It doesn't cover NodeProto because NodeProto isn't used by
+				federation.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerConfig-fold-method-UnmarshalJSON"><label for="ServerConfig-fold-method-UnmarshalJSON">(*ServerConfig) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-152">UnmarshalJSON</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='ServerConfig-fold-method-UnmarshalJSON-docs' class="fold-docs">
+				UnmarshalJSON takes the json data (a server) and unmarshals it to the struct.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ServerConfig-fold-impls"><label for="ServerConfig-fold-impls">Implements (<i>at least 5, in which 3 are exported</i>)</label><span id='ServerConfig-fold-impls-items' class="fold-items"><span>
+			 ServerConfig : encoding/json.<a href="../../../../../encoding/json.html#name-Marshaler">Marshaler</a></span><span>
+			*ServerConfig : encoding/json.<a href="../../../../../encoding/json.html#name-Unmarshaler">Unmarshaler</a></span><span>
+			*ServerConfig : fmt.<a href="../../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="ServerConfig-showhide-impls"><i><label for="ServerConfig-showhide-impls" class="show-inline">/* 2+ unexporteds ... */</label><label for="ServerConfig-showhide-impls" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*ServerConfig : context.<a href="../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*ServerConfig : runtime.<a href="../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="ServerConfig-fold-results"><label for="ServerConfig-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='ServerConfig-fold-results-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ServerConfig-showhide-inputofs"><i><label for="ServerConfig-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="ServerConfig-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-unmarshalJSONServerConfigSlice">unmarshalJSONServerConfigSlice</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) ([]*<b>ServerConfig</b>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="ServerConfig-fold-params"><label for="ServerConfig-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='ServerConfig-fold-params-items' class="fold-items"><span>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/attributes.go.html#line-39">ReportLoad</a>(server *<b>ServerConfig</b>) (*<a href="load.html">load</a>.<a href="load.html#name-Store">Store</a>, func())</span><span>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller.<a href="controller.html#name-New">New</a>(config *<b>ServerConfig</b>, updateHandler <a href="pubsub.html">pubsub</a>.<a href="pubsub.html#name-UpdateHandler">UpdateHandler</a>, validator <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateValidatorFunc">UpdateValidatorFunc</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, boff func(<a href="../../../../../builtin.html#name-int">int</a>) <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (_ *<a href="controller.html">controller</a>.<a href="controller.html#name-Controller">Controller</a>, retErr <a href="../../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-channelCreds" data-popularity="0">	<input type='checkbox' class="fold" id="channelCreds-fold-content"><label for="channelCreds-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-297">channelCreds</a> <i>(struct)</i></label><span id='channelCreds-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="channelCreds-fold-fields"><label for="channelCreds-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='channelCreds-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-299">Config</a> <i><a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-298">Type</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-googleDefaultCredsBuilder" data-popularity="150">	<input type='checkbox' class="fold" id="googleDefaultCredsBuilder-fold-content"><label for="googleDefaultCredsBuilder-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-83">googleDefaultCredsBuilder</a> <i>(struct)</i></label><span id='googleDefaultCredsBuilder-fold-content-docs' class="fold-docs">
+		googleDefaultCredsBuilder implements the `Credentials` interface defined in
+		package `xds/boostrap` and encapsulates a Google Default credential.
+
+		<input type='checkbox' class="fold" id="googleDefaultCredsBuilder-fold-methods"><label for="googleDefaultCredsBuilder-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='googleDefaultCredsBuilder-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*googleDefaultCredsBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-85">Build</a>(<a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../credentials.html">credentials</a>.<a href="../../../credentials.html#name-Bundle">Bundle</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">(*googleDefaultCredsBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-89">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="googleDefaultCredsBuilder-fold-impls"><label for="googleDefaultCredsBuilder-fold-impls">Implements (<i>at least one exported</i>)</label><span id='googleDefaultCredsBuilder-fold-impls-items' class="fold-items"><span>
+			*googleDefaultCredsBuilder : google.golang.org/grpc/xds/bootstrap.<a href="../../bootstrap.html#name-Credentials">Credentials</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-insecureCredsBuilder" data-popularity="150">	<input type='checkbox' class="fold" id="insecureCredsBuilder-fold-content"><label for="insecureCredsBuilder-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-71">insecureCredsBuilder</a> <i>(struct)</i></label><span id='insecureCredsBuilder-fold-content-docs' class="fold-docs">
+		insecureCredsBuilder implements the `Credentials` interface defined in
+		package `xds/bootstrap` and encapsulates an insecure credential.
+
+		<input type='checkbox' class="fold" id="insecureCredsBuilder-fold-methods"><label for="insecureCredsBuilder-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='insecureCredsBuilder-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*insecureCredsBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-73">Build</a>(<a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../credentials.html">credentials</a>.<a href="../../../credentials.html#name-Bundle">Bundle</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">(*insecureCredsBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-77">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="insecureCredsBuilder-fold-impls"><label for="insecureCredsBuilder-fold-impls">Implements (<i>at least one exported</i>)</label><span id='insecureCredsBuilder-fold-impls-items' class="fold-items"><span>
+			*insecureCredsBuilder : google.golang.org/grpc/xds/bootstrap.<a href="../../bootstrap.html#name-Credentials">Credentials</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-xdsServer" data-popularity="0">	<input type='checkbox' class="fold" id="xdsServer-fold-content"><label for="xdsServer-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-302">xdsServer</a> <i>(struct)</i></label><span id='xdsServer-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="xdsServer-fold-fields"><label for="xdsServer-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='xdsServer-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-304">ChannelCreds</a> <i>[]<a href="#name-channelCreds">channelCreds</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-305">ServerFeatures</a> <i>[]<a href="../../../../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-303">ServerURI</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 8, in which 3 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewConfig">	<input type='checkbox' class="fold" id="NewConfig-fold-content"><label for="NewConfig-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-345">NewConfig</a>() (*<a href="#name-Config">Config</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='NewConfig-fold-content-docs' class="fold-docs">
+		NewConfig returns a new instance of Config initialized by reading the
+		bootstrap file found at ${GRPC_XDS_BOOTSTRAP} or bootstrap contents specified
+		at ${GRPC_XDS_BOOTSTRAP_CONFIG}. If both env vars are set, the former is
+		preferred.
+
+		We support a credential registration mechanism and only credentials
+		registered through that mechanism will be accepted here. See package
+		`xds/bootstrap` for details.
+
+		This function tries to process as much of the bootstrap file as possible (in
+		the presence of the errors) and may return a Config object with certain
+		fields left unspecified, in which case the caller should use some sane
+		defaults.
+
+</span></div><div class="anchor value-res" id="name-NewConfigFromContentsForTesting">	<input type='checkbox' class="fold" id="NewConfigFromContentsForTesting-fold-content"><label for="NewConfigFromContentsForTesting-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-360">NewConfigFromContentsForTesting</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) (*<a href="#name-Config">Config</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='NewConfigFromContentsForTesting-fold-content-docs' class="fold-docs">
+		NewConfigFromContentsForTesting returns a new Config using the specified
+		bootstrap file contents instead of reading the environment variable.
+
+		This is only suitable for testing purposes.
+
+</span></div><div class="anchor value-res" id="name-PopulateResourceTemplate">	<input type='checkbox' class="fold" id="PopulateResourceTemplate-fold-content"><label for="PopulateResourceTemplate-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/template.go.html#line-30">PopulateResourceTemplate</a>(template, target <a href="../../../../../builtin.html#name-string">string</a>) <a href="../../../../../builtin.html#name-string">string</a></label><span id='PopulateResourceTemplate-fold-content-docs' class="fold-docs">
+		PopulateResourceTemplate populates the given template using the target
+		string. "%s", if exists in the template, will be replaced with target.
+
+		If the template starts with "xdstp:", the replaced string will be %-encoded.
+		But note that "/" is not percent encoded.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-bootstrapConfigFromEnvVariable"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-308">bootstrapConfigFromEnvVariable</a>() ([]<a href="../../../../../builtin.html#name-byte">byte</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-59">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-newConfigFromContents"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-364">newConfigFromContents</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) (*<a href="#name-Config">Config</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-percentEncode"><i>	<input type='checkbox' class="fold" id="percentEncode-fold-content"><label for="percentEncode-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/template.go.html#line-41">percentEncode</a>(t <a href="../../../../../builtin.html#name-string">string</a>) <a href="../../../../../builtin.html#name-string">string</a></label><span id='percentEncode-fold-content-docs' class="fold-docs">
+		percentEncode percent encode t, except for "/". See the tests for examples.
+
+</span></i></div><div class="anchor value-res hidden" id="name-unmarshalJSONServerConfigSlice"><i>	<input type='checkbox' class="fold" id="unmarshalJSONServerConfigSlice-fold-content"><label for="unmarshalJSONServerConfigSlice-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-181">unmarshalJSONServerConfigSlice</a>(data []<a href="../../../../../builtin.html#name-byte">byte</a>) ([]*<a href="#name-ServerConfig">ServerConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='unmarshalJSONServerConfigSlice-fold-content-docs' class="fold-docs">
+		unmarshalJSONServerConfigSlice unmarshals JSON to a slice.
+
+</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-bootstrapFileReadFunc"><i>	<input type='checkbox' class="fold" id="bootstrapFileReadFunc-fold-content"><label for="bootstrapFileReadFunc-fold-content">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-67">bootstrapFileReadFunc</a> func(filename <a href="../../../../../builtin.html#name-string">string</a>) ([]<a href="../../../../../builtin.html#name-byte">byte</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='bootstrapFileReadFunc-fold-content-docs' class="fold-docs">
+		For overriding in unit tests.
+
+</span></i></div><div class="anchor value-res hidden" id="name-gRPCVersion"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-64">gRPCVersion</a> <a href="../../../../../builtin.html#name-string">string</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/logging.go.html#line-28">logger</a> *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 5, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-clientFeatureNoOverprovisioning"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-55">clientFeatureNoOverprovisioning</a> = "envoy.lb.does_not_support_overprovisioning"</span></i></div><div class="anchor value-res hidden" id="name-clientFeatureResourceWrapper"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-56">clientFeatureResourceWrapper</a> = "xds.config.resource-in-sotw"</span></i></div><div class="anchor value-res hidden" id="name-gRPCUserAgentName"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-54">gRPCUserAgentName</a> = "gRPC Go"</span></i></div><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/logging.go.html#line-26">prefix</a> = "[xds-bootstrap] "</span></i></div><div class="anchor value-res hidden" id="name-serverFeaturesV3"><i>	<input type='checkbox' class="fold" id="serverFeaturesV3-fold-content"><label for="serverFeaturesV3-fold-content">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/bootstrap/bootstrap.go.html#line-52">serverFeaturesV3</a> = "xds_v3"</label><span id='serverFeaturesV3-fold-content-docs' class="fold-docs">
+		The "server_features" field in the bootstrap file contains a list of
+		features supported by the server. A value of "xds_v3" indicates that the
+		server supports the v3 version of the xDS transport protocol.
+
+</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

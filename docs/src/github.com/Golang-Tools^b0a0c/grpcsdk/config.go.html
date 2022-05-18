@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: config.go in package github.com/Golang-Tools/grpcsdk</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	config.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html">github.com/Golang-Tools/grpcsdk</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="keyword">package</span> grpcsdk</code></span>
+<span class="codeline" id="line-2"><code></code></span>
+<span class="codeline" id="line-3"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-4"><code>	<label for="i0"><span class="lit-string i0">"github.com/Golang-Tools/optparams"</span></label></code></span>
+<span class="codeline" id="line-5"><code>	<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a> <label for="i1"><span class="lit-string i1">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-6"><code>)</code></span>
+<span class="codeline" id="line-7"><code></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">//SDKConfig 的客户端类型</span></code></span>
+<span class="codeline" id="line-9"><code><span class="keyword">type</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-SDKConfig" class="ident">SDKConfig</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-10"><code>	Query_Addresses       []<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a> <span class="lit-string">`json:"query_addresses" jsonschema:"required,description=连接服务的主机地址"`</span></code></span>
+<span class="codeline" id="line-11"><code>	Requester_App_Name    <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>   <span class="lit-string">`json:"requester_app_name,omitempty" jsonschema:"description=请求方服务名"`</span></code></span>
+<span class="codeline" id="line-12"><code>	Requester_App_Version <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>   <span class="lit-string">`json:"requester_app_version,omitempty" jsonschema:"description=请求方服务版本"`</span></code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code>	<span class="comment">// 性能设置</span></code></span>
+<span class="codeline" id="line-15"><code>	Initial_Window_Size                         <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"initial_window_size,omitempty" jsonschema:"description=基于Stream的滑动窗口大小"`</span></code></span>
+<span class="codeline" id="line-16"><code>	Initial_Conn_Window_Size                    <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"initial_conn_window_size,omitempty" jsonschema:"description=基于Connection的滑动窗口大小"`</span></code></span>
+<span class="codeline" id="line-17"><code>	Keepalive_Time                              <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"keepalive_time,omitempty" jsonschema:"description=空闲连接每隔n秒ping一次客户端已确保连接存活"`</span></code></span>
+<span class="codeline" id="line-18"><code>	Keepalive_Timeout                           <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"keepalive_timeout,omitempty" jsonschema:"description=ping时长超过n则认为连接已死"`</span></code></span>
+<span class="codeline" id="line-19"><code>	Keepalive_Enforcement_Permit_Without_Stream <a href="../../../../pkg/builtin.html#name-bool" class="ident">bool</a> <span class="lit-string">`json:"keepalive_enforement_permit_without_stream,omitempty" jsonschema:"description=是否当连接空闲时仍然发送PING帧监测"`</span></code></span>
+<span class="codeline" id="line-20"><code>	Conn_With_Block                             <a href="../../../../pkg/builtin.html#name-bool" class="ident">bool</a> <span class="lit-string">`json:"conn_with_block,omitempty" jsonschema:"description=同步的连接建立"`</span></code></span>
+<span class="codeline" id="line-21"><code>	Max_Recv_Msg_Size                           <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"max_rec_msg_size,omitempty" jsonschema:"description=允许接收的最大消息长度"`</span></code></span>
+<span class="codeline" id="line-22"><code>	Max_Send_Msg_Size                           <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"max_send_msg_size,omitempty" jsonschema:"description=允许发送的最大消息长度"`</span></code></span>
+<span class="codeline" id="line-23"><code></code></span>
+<span class="codeline" id="line-24"><code>	<span class="comment">//压缩设置,目前只支持gzip</span></code></span>
+<span class="codeline" id="line-25"><code>	Compression <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a> <span class="lit-string">`json:"compression,omitempty" jsonschema:"description=使用哪种方式压缩发送的消息,enum=gzip"`</span></code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code>	<span class="comment">// TLS设置</span></code></span>
+<span class="codeline" id="line-28"><code>	Ca_Cert_Path     <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a> <span class="lit-string">`json:"ca_cert_path,omitempty" jsonschema:"description=如果要使用tls则需要指定根证书位置"`</span></code></span>
+<span class="codeline" id="line-29"><code>	Client_Cert_Path <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a> <span class="lit-string">`json:"client_cert_path,omitempty" jsonschema:"description=客户端证书位置"`</span></code></span>
+<span class="codeline" id="line-30"><code>	Client_Key_Path  <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a> <span class="lit-string">`json:"client_key_path,omitempty" jsonschema:"description=客户端证书对应的私钥位置"`</span></code></span>
+<span class="codeline" id="line-31"><code></code></span>
+<span class="codeline" id="line-32"><code>	<span class="comment">// XDS设置</span></code></span>
+<span class="codeline" id="line-33"><code>	XDS_CREDS <a href="../../../../pkg/builtin.html#name-bool" class="ident">bool</a> <span class="lit-string">`json:"xds_creds,omitempty" jsonschema:"description=当address的schema是xds时是否使用xds的令牌加密访问"`</span></code></span>
+<span class="codeline" id="line-34"><code></code></span>
+<span class="codeline" id="line-35"><code>	<span class="comment">//客户端连接池</span></code></span>
+<span class="codeline" id="line-36"><code>	Client_Pool                      <a href="../../../../pkg/builtin.html#name-bool" class="ident">bool</a> <span class="lit-string">`json:"client_pool" jsonschema:"description=是否使用grpc的客户端池"`</span></code></span>
+<span class="codeline" id="line-37"><code>	Client_Pool_Reservations         <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"client_pool_reservations" jsonschema:"description=使用客户端池时的池注水水位"`</span></code></span>
+<span class="codeline" id="line-38"><code>	Client_Pool_Limits               <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"client_pool_limits" jsonschema:"description=使用客户端池时的池最大水位"`</span></code></span>
+<span class="codeline" id="line-39"><code>	Client_Pool_Acquire_Wait_Time_MS <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>  <span class="lit-string">`json:"client_pool_acquire_wait_time_ms" jsonschema:"description=获取客户端池时的最大等待时间"`</span></code></span>
+<span class="codeline" id="line-40"><code>	<span class="comment">// 请求超时设置</span></code></span>
+<span class="codeline" id="line-41"><code>	Query_Timeout <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a> <span class="lit-string">`json:"query_timeout,omitempty" jsonschema:"description=请求服务的最大超时时间单位ms"`</span></code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code>	UnaryInterceptors  []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/interceptor.go.html#line-43" class="ident">UnaryClientInterceptor</a>  <span class="lit-string">`json"-"`</span></code></span>
+<span class="codeline" id="line-44"><code>	StreamInterceptors []<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/interceptor.go.html#line-63" class="ident">StreamClientInterceptor</a> <span class="lit-string">`json"-"`</span></code></span>
+<span class="codeline" id="line-45"><code>}</code></span>
+<span class="codeline" id="line-46"><code></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">//UntilEnd NewCtx方法的参数,用于设置ctx为不会超时</span></code></span>
+<span class="codeline" id="line-48"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithConfig" class="ident">WithConfig</a></label>(<label for="r1" class="ident">config</label> *<a href="#line-9" class="ident">SDKConfig</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] { <span class="comment">//&lt;- 2.定义可用的关键字参数项,一般命名上使用`with`开头</span></code></span>
+<span class="codeline" id="line-49"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-50"><code>		<span class="keyword">func</span>(<label for="r2" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-51"><code>			<label for="r2" class="ident">o</label>.<a href="#line-10" class="ident">Query_Addresses</a> = <label for="r1" class="ident">config</label>.<a href="#line-10" class="ident">Query_Addresses</a></code></span>
+<span class="codeline" id="line-52"><code>			<label for="r2" class="ident">o</label>.<a href="#line-11" class="ident">Requester_App_Name</a> = <label for="r1" class="ident">config</label>.<a href="#line-11" class="ident">Requester_App_Name</a></code></span>
+<span class="codeline" id="line-53"><code>			<label for="r2" class="ident">o</label>.<a href="#line-12" class="ident">Requester_App_Version</a> = <label for="r1" class="ident">config</label>.<a href="#line-12" class="ident">Requester_App_Version</a></code></span>
+<span class="codeline" id="line-54"><code>			<label for="r2" class="ident">o</label>.<a href="#line-15" class="ident">Initial_Window_Size</a> = <label for="r1" class="ident">config</label>.<a href="#line-15" class="ident">Initial_Window_Size</a></code></span>
+<span class="codeline" id="line-55"><code>			<label for="r2" class="ident">o</label>.<a href="#line-16" class="ident">Initial_Conn_Window_Size</a> = <label for="r1" class="ident">config</label>.<a href="#line-16" class="ident">Initial_Conn_Window_Size</a></code></span>
+<span class="codeline" id="line-56"><code>			<label for="r2" class="ident">o</label>.<a href="#line-17" class="ident">Keepalive_Time</a> = <label for="r1" class="ident">config</label>.<a href="#line-17" class="ident">Keepalive_Time</a></code></span>
+<span class="codeline" id="line-57"><code>			<label for="r2" class="ident">o</label>.<a href="#line-18" class="ident">Keepalive_Timeout</a> = <label for="r1" class="ident">config</label>.<a href="#line-18" class="ident">Keepalive_Timeout</a></code></span>
+<span class="codeline" id="line-58"><code>			<label for="r2" class="ident">o</label>.<a href="#line-19" class="ident">Keepalive_Enforcement_Permit_Without_Stream</a> = <label for="r1" class="ident">config</label>.<a href="#line-19" class="ident">Keepalive_Enforcement_Permit_Without_Stream</a></code></span>
+<span class="codeline" id="line-59"><code>			<label for="r2" class="ident">o</label>.<a href="#line-20" class="ident">Conn_With_Block</a> = <label for="r1" class="ident">config</label>.<a href="#line-20" class="ident">Conn_With_Block</a></code></span>
+<span class="codeline" id="line-60"><code>			<label for="r2" class="ident">o</label>.<a href="#line-21" class="ident">Max_Recv_Msg_Size</a> = <label for="r1" class="ident">config</label>.<a href="#line-21" class="ident">Max_Recv_Msg_Size</a></code></span>
+<span class="codeline" id="line-61"><code>			<label for="r2" class="ident">o</label>.<a href="#line-22" class="ident">Max_Send_Msg_Size</a> = <label for="r1" class="ident">config</label>.<a href="#line-22" class="ident">Max_Send_Msg_Size</a></code></span>
+<span class="codeline" id="line-62"><code>			<label for="r2" class="ident">o</label>.<a href="#line-25" class="ident">Compression</a> = <label for="r1" class="ident">config</label>.<a href="#line-25" class="ident">Compression</a></code></span>
+<span class="codeline" id="line-63"><code>			<label for="r2" class="ident">o</label>.<a href="#line-28" class="ident">Ca_Cert_Path</a> = <label for="r1" class="ident">config</label>.<a href="#line-28" class="ident">Ca_Cert_Path</a></code></span>
+<span class="codeline" id="line-64"><code>			<label for="r2" class="ident">o</label>.<a href="#line-29" class="ident">Client_Cert_Path</a> = <label for="r1" class="ident">config</label>.<a href="#line-29" class="ident">Client_Cert_Path</a></code></span>
+<span class="codeline" id="line-65"><code>			<label for="r2" class="ident">o</label>.<a href="#line-30" class="ident">Client_Key_Path</a> = <label for="r1" class="ident">config</label>.<a href="#line-30" class="ident">Client_Key_Path</a></code></span>
+<span class="codeline" id="line-66"><code>			<label for="r2" class="ident">o</label>.<a href="#line-33" class="ident">XDS_CREDS</a> = <label for="r1" class="ident">config</label>.<a href="#line-33" class="ident">XDS_CREDS</a></code></span>
+<span class="codeline" id="line-67"><code>			<label for="r2" class="ident">o</label>.<a href="#line-36" class="ident">Client_Pool</a> = <label for="r1" class="ident">config</label>.<a href="#line-36" class="ident">Client_Pool</a></code></span>
+<span class="codeline" id="line-68"><code>			<label for="r2" class="ident">o</label>.<a href="#line-37" class="ident">Client_Pool_Reservations</a> = <label for="r1" class="ident">config</label>.<a href="#line-37" class="ident">Client_Pool_Reservations</a></code></span>
+<span class="codeline" id="line-69"><code>			<label for="r2" class="ident">o</label>.<a href="#line-38" class="ident">Client_Pool_Limits</a> = <label for="r1" class="ident">config</label>.<a href="#line-38" class="ident">Client_Pool_Limits</a></code></span>
+<span class="codeline" id="line-70"><code>			<label for="r2" class="ident">o</label>.<a href="#line-39" class="ident">Client_Pool_Acquire_Wait_Time_MS</a> = <label for="r1" class="ident">config</label>.<a href="#line-39" class="ident">Client_Pool_Acquire_Wait_Time_MS</a></code></span>
+<span class="codeline" id="line-71"><code>			<label for="r2" class="ident">o</label>.<a href="#line-41" class="ident">Query_Timeout</a> = <label for="r1" class="ident">config</label>.<a href="#line-41" class="ident">Query_Timeout</a></code></span>
+<span class="codeline" id="line-72"><code>			<label for="r2" class="ident">o</label>.<a href="#line-43" class="ident">UnaryInterceptors</a> = <label for="r1" class="ident">config</label>.<a href="#line-43" class="ident">UnaryInterceptors</a></code></span>
+<span class="codeline" id="line-73"><code>			<label for="r2" class="ident">o</label>.<a href="#line-44" class="ident">StreamInterceptors</a> = <label for="r1" class="ident">config</label>.<a href="#line-44" class="ident">StreamInterceptors</a></code></span>
+<span class="codeline" id="line-74"><code>		})</code></span>
+<span class="codeline" id="line-75"><code>}</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">//WithQueryAddresses sdk.Init方法的参数,用于设置sdk请求的地址</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">//@params addresses ...string 连接服务的主机地址</span></code></span>
+<span class="codeline" id="line-79"><code><span class="keyword">func</span> <label for="r3" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithQueryAddresses" class="ident">WithQueryAddresses</a></label>(<label for="r4" class="ident">addresses</label> ...<a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-80"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-81"><code>		<span class="keyword">func</span>(<label for="r5" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-82"><code>			<label for="r5" class="ident">o</label>.<a href="#line-10" class="ident">Query_Addresses</a> = <label for="r4" class="ident">addresses</label></code></span>
+<span class="codeline" id="line-83"><code>		})</code></span>
+<span class="codeline" id="line-84"><code>}</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">//WithRequesterAppName sdk.Init方法的参数,用于设置sdk请求方服务名</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">//@params name string 请求端app名</span></code></span>
+<span class="codeline" id="line-88"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithRequesterAppName" class="ident">WithRequesterAppName</a></label>(<label for="r7" class="ident">name</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-90"><code>		<span class="keyword">func</span>(<label for="r8" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-91"><code>			<label for="r8" class="ident">o</label>.<a href="#line-11" class="ident">Requester_App_Name</a> = <label for="r7" class="ident">name</label></code></span>
+<span class="codeline" id="line-92"><code>		})</code></span>
+<span class="codeline" id="line-93"><code>}</code></span>
+<span class="codeline" id="line-94"><code></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">//WithRequesterAppVersion sdk.Init方法的参数,用于设置sdk请求方服务版本</span></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">//@params version string 请求方服务版本</span></code></span>
+<span class="codeline" id="line-97"><code><span class="keyword">func</span> <label for="r9" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithRequesterAppVersion" class="ident">WithRequesterAppVersion</a></label>(<label for="r10" class="ident">version</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-98"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-99"><code>		<span class="keyword">func</span>(<label for="r11" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-100"><code>			<label for="r11" class="ident">o</label>.<a href="#line-12" class="ident">Requester_App_Version</a> = <label for="r10" class="ident">version</label></code></span>
+<span class="codeline" id="line-101"><code>		})</code></span>
+<span class="codeline" id="line-102"><code>}</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">//WithInitialWindowSize sdk.Init方法的参数,用于设置sdk基于Stream的滑动窗口大小</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">//@params size int 基于Stream的滑动窗口大小</span></code></span>
+<span class="codeline" id="line-106"><code><span class="keyword">func</span> <label for="r12" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithInitialWindowSize" class="ident">WithInitialWindowSize</a></label>(<label for="r13" class="ident">size</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-108"><code>		<span class="keyword">func</span>(<label for="r14" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-109"><code>			<label for="r14" class="ident">o</label>.<a href="#line-15" class="ident">Initial_Window_Size</a> = <label for="r13" class="ident">size</label></code></span>
+<span class="codeline" id="line-110"><code>		})</code></span>
+<span class="codeline" id="line-111"><code>}</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">// 性能设置</span></code></span>
+<span class="codeline" id="line-114"><code></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">//WithInitialConnWindowSize sdk.Init方法的参数,用于设置sdk基于Connection的滑动窗口大小</span></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">//@params size int 基于Connection的滑动窗口大小</span></code></span>
+<span class="codeline" id="line-117"><code><span class="keyword">func</span> <label for="r15" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithInitialConnWindowSize" class="ident">WithInitialConnWindowSize</a></label>(<label for="r16" class="ident">size</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-118"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-119"><code>		<span class="keyword">func</span>(<label for="r17" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-120"><code>			<label for="r17" class="ident">o</label>.<a href="#line-16" class="ident">Initial_Conn_Window_Size</a> = <label for="r16" class="ident">size</label></code></span>
+<span class="codeline" id="line-121"><code>		})</code></span>
+<span class="codeline" id="line-122"><code>}</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">//WithKeepaliveTime sdk.Init方法的参数,用于设置sdk空闲连接每隔n秒ping一次客户端已确保连接存活</span></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">//@params alivetime int 空闲连接每隔n秒ping一次客户端已确保连接存活,单位ms</span></code></span>
+<span class="codeline" id="line-126"><code><span class="keyword">func</span> <label for="r18" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithKeepaliveTime" class="ident">WithKeepaliveTime</a></label>(<label for="r19" class="ident">alivetime</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-128"><code>		<span class="keyword">func</span>(<label for="r20" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-129"><code>			<label for="r20" class="ident">o</label>.<a href="#line-17" class="ident">Keepalive_Time</a> = <label for="r19" class="ident">alivetime</label></code></span>
+<span class="codeline" id="line-130"><code>		})</code></span>
+<span class="codeline" id="line-131"><code>}</code></span>
+<span class="codeline" id="line-132"><code></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">//WithKeepaliveTimeout sdk.Init方法的参数,用于设置sdkping时长超过n则认为连接已死</span></code></span>
+<span class="codeline" id="line-134"><code><span class="comment">//@params timeout int ping时长超过n则认为连接已死,单位ms</span></code></span>
+<span class="codeline" id="line-135"><code><span class="keyword">func</span> <label for="r21" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithKeepaliveTimeout" class="ident">WithKeepaliveTimeout</a></label>(<label for="r22" class="ident">timeout</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-136"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-137"><code>		<span class="keyword">func</span>(<label for="r23" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-138"><code>			<label for="r23" class="ident">o</label>.<a href="#line-18" class="ident">Keepalive_Timeout</a> = <label for="r22" class="ident">timeout</label></code></span>
+<span class="codeline" id="line-139"><code>		})</code></span>
+<span class="codeline" id="line-140"><code>}</code></span>
+<span class="codeline" id="line-141"><code></code></span>
+<span class="codeline" id="line-142"><code><span class="comment">//WithKeepaliveEnforcementPermitWithoutStream sdk.Init方法的参数,用于设置sdk是否当连接空闲时仍然发送PING帧监测</span></code></span>
+<span class="codeline" id="line-143"><code><span class="keyword">func</span> <label for="r24" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithKeepaliveEnforcementPermitWithoutStream" class="ident">WithKeepaliveEnforcementPermitWithoutStream</a></label>() <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-145"><code>		<span class="keyword">func</span>(<label for="r25" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-146"><code>			<label for="r25" class="ident">o</label>.<a href="#line-19" class="ident">Keepalive_Enforcement_Permit_Without_Stream</a> = <a href="../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-147"><code>		})</code></span>
+<span class="codeline" id="line-148"><code>}</code></span>
+<span class="codeline" id="line-149"><code></code></span>
+<span class="codeline" id="line-150"><code><span class="comment">//WithConnWithBlock sdk.Init方法的参数,用于设置sdk是否同步的建立连接</span></code></span>
+<span class="codeline" id="line-151"><code><span class="keyword">func</span> <label for="r26" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithConnWithBlock" class="ident">WithConnWithBlock</a></label>() <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-153"><code>		<span class="keyword">func</span>(<label for="r27" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-154"><code>			<label for="r27" class="ident">o</label>.<a href="#line-20" class="ident">Conn_With_Block</a> = <a href="../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-155"><code>		})</code></span>
+<span class="codeline" id="line-156"><code>}</code></span>
+<span class="codeline" id="line-157"><code></code></span>
+<span class="codeline" id="line-158"><code><span class="comment">//WithMaxRecvMsgSize sdk.Init方法的参数,用于设置sdk允许接收的最大消息长度</span></code></span>
+<span class="codeline" id="line-159"><code><span class="comment">//@params size int 允许接收的最大消息长度</span></code></span>
+<span class="codeline" id="line-160"><code><span class="keyword">func</span> <label for="r28" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithMaxRecvMsgSize" class="ident">WithMaxRecvMsgSize</a></label>(<label for="r29" class="ident">size</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-161"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-162"><code>		<span class="keyword">func</span>(<label for="r30" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-163"><code>			<label for="r30" class="ident">o</label>.<a href="#line-21" class="ident">Max_Recv_Msg_Size</a> = <label for="r29" class="ident">size</label></code></span>
+<span class="codeline" id="line-164"><code>		})</code></span>
+<span class="codeline" id="line-165"><code>}</code></span>
+<span class="codeline" id="line-166"><code></code></span>
+<span class="codeline" id="line-167"><code><span class="comment">//WithMaxSendMsgSize sdk.Init方法的参数,用于设置sdk允许发送的最大消息长度</span></code></span>
+<span class="codeline" id="line-168"><code><span class="comment">//@params size int 允许发送的最大消息长度</span></code></span>
+<span class="codeline" id="line-169"><code><span class="keyword">func</span> <label for="r31" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithMaxSendMsgSize" class="ident">WithMaxSendMsgSize</a></label>(<label for="r32" class="ident">size</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-170"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-171"><code>		<span class="keyword">func</span>(<label for="r33" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-172"><code>			<label for="r33" class="ident">o</label>.<a href="#line-22" class="ident">Max_Send_Msg_Size</a> = <label for="r32" class="ident">size</label></code></span>
+<span class="codeline" id="line-173"><code>		})</code></span>
+<span class="codeline" id="line-174"><code>}</code></span>
+<span class="codeline" id="line-175"><code></code></span>
+<span class="codeline" id="line-176"><code><span class="comment">//WithCompression sdk.Init方法的参数,用于设置sdk使用哪种方式压缩发送的消息</span></code></span>
+<span class="codeline" id="line-177"><code><span class="comment">//@params protocol string 协议名,目前可选的只有gzip</span></code></span>
+<span class="codeline" id="line-178"><code><span class="keyword">func</span> <label for="r34" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithCompression" class="ident">WithCompression</a></label>(<label for="r35" class="ident">protocol</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-179"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-180"><code>		<span class="keyword">func</span>(<label for="r36" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-181"><code>			<label for="r36" class="ident">o</label>.<a href="#line-25" class="ident">Compression</a> = <label for="r35" class="ident">protocol</label></code></span>
+<span class="codeline" id="line-182"><code>		})</code></span>
+<span class="codeline" id="line-183"><code>}</code></span>
+<span class="codeline" id="line-184"><code></code></span>
+<span class="codeline" id="line-185"><code><span class="comment">//WithCaCertPath sdk.Init方法的参数,用于设置sdk如果要使用tls则需要指定根证书位置</span></code></span>
+<span class="codeline" id="line-186"><code><span class="comment">//@params path string 根证书路径</span></code></span>
+<span class="codeline" id="line-187"><code><span class="keyword">func</span> <label for="r37" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithCaCertPath" class="ident">WithCaCertPath</a></label>(<label for="r38" class="ident">path</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-188"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-189"><code>		<span class="keyword">func</span>(<label for="r39" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-190"><code>			<label for="r39" class="ident">o</label>.<a href="#line-28" class="ident">Ca_Cert_Path</a> = <label for="r38" class="ident">path</label></code></span>
+<span class="codeline" id="line-191"><code>		})</code></span>
+<span class="codeline" id="line-192"><code>}</code></span>
+<span class="codeline" id="line-193"><code></code></span>
+<span class="codeline" id="line-194"><code><span class="comment">//WithClientCertPath sdk.Init方法的参数,用于设置sdk客户端证书位置</span></code></span>
+<span class="codeline" id="line-195"><code><span class="comment">//@params path string 客户端证书路径</span></code></span>
+<span class="codeline" id="line-196"><code><span class="keyword">func</span> <label for="r40" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientCertPath" class="ident">WithClientCertPath</a></label>(<label for="r41" class="ident">path</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-197"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-198"><code>		<span class="keyword">func</span>(<label for="r42" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-199"><code>			<label for="r42" class="ident">o</label>.<a href="#line-29" class="ident">Client_Cert_Path</a> = <label for="r41" class="ident">path</label></code></span>
+<span class="codeline" id="line-200"><code>		})</code></span>
+<span class="codeline" id="line-201"><code>}</code></span>
+<span class="codeline" id="line-202"><code></code></span>
+<span class="codeline" id="line-203"><code><span class="comment">//WithClientKeyPath sdk.Init方法的参数,用于设置sdk客户端证书对应的私钥位置</span></code></span>
+<span class="codeline" id="line-204"><code><span class="comment">//@params path string 客户端证书对应的私钥路径</span></code></span>
+<span class="codeline" id="line-205"><code><span class="keyword">func</span> <label for="r43" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientKeyPath" class="ident">WithClientKeyPath</a></label>(<label for="r44" class="ident">path</label> <a href="../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-206"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-207"><code>		<span class="keyword">func</span>(<label for="r45" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-208"><code>			<label for="r45" class="ident">o</label>.<a href="#line-30" class="ident">Client_Key_Path</a> = <label for="r44" class="ident">path</label></code></span>
+<span class="codeline" id="line-209"><code>		})</code></span>
+<span class="codeline" id="line-210"><code>}</code></span>
+<span class="codeline" id="line-211"><code></code></span>
+<span class="codeline" id="line-212"><code><span class="comment">//WithXDSCREDS sdk.Init方法的参数,用于设置sdk当address的schema是xds时是否使用xds的令牌加密访问</span></code></span>
+<span class="codeline" id="line-213"><code><span class="keyword">func</span> <label for="r46" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithXDSCREDS" class="ident">WithXDSCREDS</a></label>() <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-214"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-215"><code>		<span class="keyword">func</span>(<label for="r47" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-216"><code>			<label for="r47" class="ident">o</label>.<a href="#line-33" class="ident">XDS_CREDS</a> = <a href="../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-217"><code>		})</code></span>
+<span class="codeline" id="line-218"><code>}</code></span>
+<span class="codeline" id="line-219"><code></code></span>
+<span class="codeline" id="line-220"><code><span class="comment">//WithClientPool sdk.Init方法的参数,用于设置sdk是否使用grpc的客户端池</span></code></span>
+<span class="codeline" id="line-221"><code><span class="keyword">func</span> <label for="r48" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientPool" class="ident">WithClientPool</a></label>() <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-222"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-223"><code>		<span class="keyword">func</span>(<label for="r49" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-224"><code>			<label for="r49" class="ident">o</label>.<a href="#line-36" class="ident">Client_Pool</a> = <a href="../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-225"><code>		})</code></span>
+<span class="codeline" id="line-226"><code>}</code></span>
+<span class="codeline" id="line-227"><code></code></span>
+<span class="codeline" id="line-228"><code><span class="comment">//WithClientPoolReservations sdk.Init方法的参数,用于设置sdk使用客户端池时的池注水水位</span></code></span>
+<span class="codeline" id="line-229"><code><span class="comment">//@params n int 使用客户端池时的池注水水位</span></code></span>
+<span class="codeline" id="line-230"><code><span class="keyword">func</span> <label for="r50" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientPoolReservations" class="ident">WithClientPoolReservations</a></label>(<label for="r51" class="ident">n</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-231"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-232"><code>		<span class="keyword">func</span>(<label for="r52" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-233"><code>			<label for="r52" class="ident">o</label>.<a href="#line-37" class="ident">Client_Pool_Reservations</a> = <label for="r51" class="ident">n</label></code></span>
+<span class="codeline" id="line-234"><code>		})</code></span>
+<span class="codeline" id="line-235"><code>}</code></span>
+<span class="codeline" id="line-236"><code></code></span>
+<span class="codeline" id="line-237"><code><span class="comment">//WithClientPoolLimits sdk.Init方法的参数,用于设置sdk使用客户端池时的池最大水位</span></code></span>
+<span class="codeline" id="line-238"><code><span class="comment">//@params n int 使用客户端池时的池最大水位</span></code></span>
+<span class="codeline" id="line-239"><code><span class="keyword">func</span> <label for="r53" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientPoolLimits" class="ident">WithClientPoolLimits</a></label>(<label for="r54" class="ident">n</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-240"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-241"><code>		<span class="keyword">func</span>(<label for="r55" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-242"><code>			<label for="r55" class="ident">o</label>.<a href="#line-38" class="ident">Client_Pool_Limits</a> = <label for="r54" class="ident">n</label></code></span>
+<span class="codeline" id="line-243"><code>		})</code></span>
+<span class="codeline" id="line-244"><code>}</code></span>
+<span class="codeline" id="line-245"><code></code></span>
+<span class="codeline" id="line-246"><code><span class="comment">//WithClientPoolAcquireWaitTime sdk.Init方法的参数,用于设置sdk获取客户端池时的最大等待时间</span></code></span>
+<span class="codeline" id="line-247"><code><span class="comment">//@params wait int 获取客户端池时的最大等待时间,单位ms</span></code></span>
+<span class="codeline" id="line-248"><code><span class="keyword">func</span> <label for="r56" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithClientPoolAcquireWaitTime" class="ident">WithClientPoolAcquireWaitTime</a></label>(<label for="r57" class="ident">wait</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-249"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-250"><code>		<span class="keyword">func</span>(<label for="r58" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-251"><code>			<label for="r58" class="ident">o</label>.<a href="#line-39" class="ident">Client_Pool_Acquire_Wait_Time_MS</a> = <label for="r57" class="ident">wait</label></code></span>
+<span class="codeline" id="line-252"><code>		})</code></span>
+<span class="codeline" id="line-253"><code>}</code></span>
+<span class="codeline" id="line-254"><code></code></span>
+<span class="codeline" id="line-255"><code><span class="comment">//WithQueryTimeout sdk.Init方法的参数,用于设置sdk请求服务的最大超时时间</span></code></span>
+<span class="codeline" id="line-256"><code><span class="comment">//@params wait int 请求服务的最大超时时间,单位ms</span></code></span>
+<span class="codeline" id="line-257"><code><span class="keyword">func</span> <label for="r59" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithQueryTimeout" class="ident">WithQueryTimeout</a></label>(<label for="r60" class="ident">timeout</label> <a href="../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-258"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-259"><code>		<span class="keyword">func</span>(<label for="r61" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-260"><code>			<label for="r61" class="ident">o</label>.<a href="#line-41" class="ident">Query_Timeout</a> = <label for="r60" class="ident">timeout</label></code></span>
+<span class="codeline" id="line-261"><code>		})</code></span>
+<span class="codeline" id="line-262"><code>}</code></span>
+<span class="codeline" id="line-263"><code></code></span>
+<span class="codeline" id="line-264"><code><span class="comment">//WithUnaryInterceptors sdk.Init方法的参数,用于设置sdk的请求拦截器</span></code></span>
+<span class="codeline" id="line-265"><code><span class="comment">//@params interceptor ...grpc.UnaryClientInterceptor 请求拦截器</span></code></span>
+<span class="codeline" id="line-266"><code><span class="keyword">func</span> <label for="r62" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithUnaryInterceptors" class="ident">WithUnaryInterceptors</a></label>(<label for="r63" class="ident">interceptor</label> ...<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/interceptor.go.html#line-43" class="ident">UnaryClientInterceptor</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-267"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-268"><code>		<span class="keyword">func</span>(<label for="r64" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-269"><code>			<label for="r64" class="ident">o</label>.<a href="#line-43" class="ident">UnaryInterceptors</a> = <label for="r63" class="ident">interceptor</label></code></span>
+<span class="codeline" id="line-270"><code>		})</code></span>
+<span class="codeline" id="line-271"><code>}</code></span>
+<span class="codeline" id="line-272"><code></code></span>
+<span class="codeline" id="line-273"><code><span class="comment">//WithStreamInterceptors sdk.Init方法的参数,用于设置sdk的流请求拦截器</span></code></span>
+<span class="codeline" id="line-274"><code><span class="comment">//@params interceptor ...grpc.StreamClientInterceptor 流请求拦截器</span></code></span>
+<span class="codeline" id="line-275"><code><span class="keyword">func</span> <label for="r65" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-WithStreamInterceptors" class="ident">WithStreamInterceptors</a></label>(<label for="r66" class="ident">interceptor</label> ...<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/interceptor.go.html#line-63" class="ident">StreamClientInterceptor</a>) <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="#line-9" class="ident">SDKConfig</a>] {</code></span>
+<span class="codeline" id="line-276"><code>	<span class="keyword">return</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-29" class="ident">NewFuncOption</a>(</code></span>
+<span class="codeline" id="line-277"><code>		<span class="keyword">func</span>(<label for="r67" class="ident">o</label> *<a href="#line-9" class="ident">SDKConfig</a>) {</code></span>
+<span class="codeline" id="line-278"><code>			<label for="r67" class="ident">o</label>.<a href="#line-44" class="ident">StreamInterceptors</a> = <label for="r66" class="ident">interceptor</label></code></span>
+<span class="codeline" id="line-279"><code>		})</code></span>
+<span class="codeline" id="line-280"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

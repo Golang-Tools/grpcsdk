@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: type_rds.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	type_rds.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"regexp"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i1"><span class="lit-string i1">"time"</span></label></code></span>
+<span class="codeline" id="line-23"><code></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/codes"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/internal/xds/matcher"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/xds/internal/clusterspecifier"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/xds/internal/httpfilter"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i6"><span class="lit-string i6">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-29"><code>)</code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// RouteConfigUpdate contains information received in an RDS response, which is</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// of interest to the registered RDS watcher.</span></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteConfigUpdate" class="ident">RouteConfigUpdate</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-34"><code>	VirtualHosts []*<a href="#line-46" class="ident">VirtualHost</a></code></span>
+<span class="codeline" id="line-35"><code>	<span class="comment">// ClusterSpecifierPlugins are the LB Configurations for any</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">	// ClusterSpecifierPlugins referenced by the Route Table.</span></code></span>
+<span class="codeline" id="line-37"><code>	ClusterSpecifierPlugins <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/clusterspecifier.html" class="ident i4">clusterspecifier</a>.<a href="../../clusterspecifier/cluster_specifier.go.html#line-29" class="ident">BalancerConfig</a></code></span>
+<span class="codeline" id="line-38"><code>	<span class="comment">// Raw is the resource from the xds response.</span></code></span>
+<span class="codeline" id="line-39"><code>	Raw *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i6">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a></code></span>
+<span class="codeline" id="line-40"><code>}</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">// VirtualHost contains the routes for a list of Domains.</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">// Note that the domains in this slice can be a wildcard, not an exact string.</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">// The consumer of this struct needs to find the best match for its hostname.</span></code></span>
+<span class="codeline" id="line-46"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-VirtualHost" class="ident">VirtualHost</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-47"><code>	Domains []<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-48"><code>	<span class="comment">// Routes contains a list of routes, each containing matchers and</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">	// corresponding action.</span></code></span>
+<span class="codeline" id="line-50"><code>	Routes []*<a href="#line-119" class="ident">Route</a></code></span>
+<span class="codeline" id="line-51"><code>	<span class="comment">// HTTPFilterConfigOverride contains any HTTP filter config overrides for</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">	// the virtual host which may be present.  An individual filter's override</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">	// may be unused if the matching Route contains an override for that</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">	// filter.</span></code></span>
+<span class="codeline" id="line-55"><code>	HTTPFilterConfigOverride <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i5">httpfilter</a>.<a href="../../httpfilter/httpfilter.go.html#line-30" class="ident">FilterConfig</a></code></span>
+<span class="codeline" id="line-56"><code>	RetryConfig              *<a href="#line-61" class="ident">RetryConfig</a></code></span>
+<span class="codeline" id="line-57"><code>}</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// RetryConfig contains all retry-related configuration in either a VirtualHost</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// or Route.</span></code></span>
+<span class="codeline" id="line-61"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RetryConfig" class="ident">RetryConfig</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-62"><code>	<span class="comment">// RetryOn is a set of status codes on which to retry.  Only Canceled,</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	// DeadlineExceeded, Internal, ResourceExhausted, and Unavailable are</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	// supported; any other values will be omitted.</span></code></span>
+<span class="codeline" id="line-65"><code>	RetryOn      <span class="keyword">map</span>[<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i2">codes</a>.<a href="../../../../codes/codes.go.html#line-29" class="ident">Code</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-66"><code>	NumRetries   <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>       <span class="comment">// maximum number of retry attempts</span></code></span>
+<span class="codeline" id="line-67"><code>	RetryBackoff <a href="#line-71" class="ident">RetryBackoff</a> <span class="comment">// retry backoff policy</span></code></span>
+<span class="codeline" id="line-68"><code>}</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// RetryBackoff describes the backoff policy for retries.</span></code></span>
+<span class="codeline" id="line-71"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RetryBackoff" class="ident">RetryBackoff</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-72"><code>	BaseInterval <a href="../../../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a> <span class="comment">// initial backoff duration between attempts</span></code></span>
+<span class="codeline" id="line-73"><code>	MaxInterval  <a href="../../../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a> <span class="comment">// maximum backoff duration</span></code></span>
+<span class="codeline" id="line-74"><code>}</code></span>
+<span class="codeline" id="line-75"><code></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">// HashPolicyType specifies the type of HashPolicy from a received RDS Response.</span></code></span>
+<span class="codeline" id="line-77"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HashPolicyType" class="ident">HashPolicyType</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-78"><code></code></span>
+<span class="codeline" id="line-79"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-80"><code>	<span class="comment">// HashPolicyTypeHeader specifies to hash a Header in the incoming request.</span></code></span>
+<span class="codeline" id="line-81"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HashPolicyTypeHeader" class="ident">HashPolicyTypeHeader</a> <a href="#line-77" class="ident">HashPolicyType</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-82"><code>	<span class="comment">// HashPolicyTypeChannelID specifies to hash a unique Identifier of the</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">	// Channel. In grpc-go, this will be done using the ClientConn pointer.</span></code></span>
+<span class="codeline" id="line-84"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HashPolicyTypeChannelID" class="ident">HashPolicyTypeChannelID</a></code></span>
+<span class="codeline" id="line-85"><code>)</code></span>
+<span class="codeline" id="line-86"><code></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">// HashPolicy specifies the HashPolicy if the upstream cluster uses a hashing</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">// load balancer.</span></code></span>
+<span class="codeline" id="line-89"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HashPolicy" class="ident">HashPolicy</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-90"><code>	HashPolicyType <a href="#line-77" class="ident">HashPolicyType</a></code></span>
+<span class="codeline" id="line-91"><code>	Terminal       <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-92"><code>	<span class="comment">// Fields used for type HEADER.</span></code></span>
+<span class="codeline" id="line-93"><code>	HeaderName        <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-94"><code>	Regex             *<a href="../../../../../../../pkg/regexp.html" class="ident i0">regexp</a>.<a href="../../../../../../regexp/regexp.go.html#line-84" class="ident">Regexp</a></code></span>
+<span class="codeline" id="line-95"><code>	RegexSubstitution <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-96"><code>}</code></span>
+<span class="codeline" id="line-97"><code></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">// RouteActionType is the action of the route from a received RDS response.</span></code></span>
+<span class="codeline" id="line-99"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteActionType" class="ident">RouteActionType</a> <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-100"><code></code></span>
+<span class="codeline" id="line-101"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-102"><code>	<span class="comment">// RouteActionUnsupported are routing types currently unsupported by grpc.</span></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">	// According to A36, "A Route with an inappropriate action causes RPCs</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">	// matching that route to fail."</span></code></span>
+<span class="codeline" id="line-105"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteActionUnsupported" class="ident">RouteActionUnsupported</a> <a href="#line-99" class="ident">RouteActionType</a> = <a href="../../../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-106"><code>	<span class="comment">// RouteActionRoute is the expected route type on the client side. Route</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">	// represents routing a request to some upstream cluster. On the client</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">	// side, if an RPC matches to a route that is not RouteActionRoute, the RPC</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">	// will fail according to A36.</span></code></span>
+<span class="codeline" id="line-110"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteActionRoute" class="ident">RouteActionRoute</a></code></span>
+<span class="codeline" id="line-111"><code>	<span class="comment">// RouteActionNonForwardingAction is the expected route type on the server</span></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">	// side. NonForwardingAction represents when a route will generate a</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">	// response directly, without forwarding to an upstream host.</span></code></span>
+<span class="codeline" id="line-114"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteActionNonForwardingAction" class="ident">RouteActionNonForwardingAction</a></code></span>
+<span class="codeline" id="line-115"><code>)</code></span>
+<span class="codeline" id="line-116"><code></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">// Route is both a specification of how to match a request as well as an</span></code></span>
+<span class="codeline" id="line-118"><code><span class="comment">// indication of the action to take upon match.</span></code></span>
+<span class="codeline" id="line-119"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-Route" class="ident">Route</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-120"><code>	Path   *<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-121"><code>	Prefix *<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-122"><code>	Regex  *<a href="../../../../../../../pkg/regexp.html" class="ident i0">regexp</a>.<a href="../../../../../../regexp/regexp.go.html#line-84" class="ident">Regexp</a></code></span>
+<span class="codeline" id="line-123"><code>	<span class="comment">// Indicates if prefix/path matching should be case insensitive. The default</span></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">	// is false (case sensitive).</span></code></span>
+<span class="codeline" id="line-125"><code>	CaseInsensitive <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-126"><code>	Headers         []*<a href="#line-165" class="ident">HeaderMatcher</a></code></span>
+<span class="codeline" id="line-127"><code>	Fraction        *<a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-128"><code></code></span>
+<span class="codeline" id="line-129"><code>	HashPolicies []*<a href="#line-89" class="ident">HashPolicy</a></code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code>	<span class="comment">// If the matchers above indicate a match, the below configuration is used.</span></code></span>
+<span class="codeline" id="line-132"><code><span class="comment">	// If MaxStreamDuration is nil, it indicates neither of the route action's</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">	// max_stream_duration fields (grpc_timeout_header_max nor</span></code></span>
+<span class="codeline" id="line-134"><code><span class="comment">	// max_stream_duration) were set.  In this case, the ListenerUpdate's</span></code></span>
+<span class="codeline" id="line-135"><code><span class="comment">	// MaxStreamDuration field should be used.  If MaxStreamDuration is set to</span></code></span>
+<span class="codeline" id="line-136"><code><span class="comment">	// an explicit zero duration, the application's deadline should be used.</span></code></span>
+<span class="codeline" id="line-137"><code>	MaxStreamDuration *<a href="../../../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-138"><code>	<span class="comment">// HTTPFilterConfigOverride contains any HTTP filter config overrides for</span></code></span>
+<span class="codeline" id="line-139"><code><span class="comment">	// the route which may be present.  An individual filter's override may be</span></code></span>
+<span class="codeline" id="line-140"><code><span class="comment">	// unused if the matching WeightedCluster contains an override for that</span></code></span>
+<span class="codeline" id="line-141"><code><span class="comment">	// filter.</span></code></span>
+<span class="codeline" id="line-142"><code>	HTTPFilterConfigOverride <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i5">httpfilter</a>.<a href="../../httpfilter/httpfilter.go.html#line-30" class="ident">FilterConfig</a></code></span>
+<span class="codeline" id="line-143"><code>	RetryConfig              *<a href="#line-61" class="ident">RetryConfig</a></code></span>
+<span class="codeline" id="line-144"><code></code></span>
+<span class="codeline" id="line-145"><code>	ActionType <a href="#line-99" class="ident">RouteActionType</a></code></span>
+<span class="codeline" id="line-146"><code></code></span>
+<span class="codeline" id="line-147"><code>	<span class="comment">// Only one of the following fields (WeightedClusters or</span></code></span>
+<span class="codeline" id="line-148"><code><span class="comment">	// ClusterSpecifierPlugin) will be set for a route.</span></code></span>
+<span class="codeline" id="line-149"><code>	WeightedClusters <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="#line-156" class="ident">WeightedCluster</a></code></span>
+<span class="codeline" id="line-150"><code>	<span class="comment">// ClusterSpecifierPlugin is the name of the Cluster Specifier Plugin that</span></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">	// this Route is linked to, if specified by xDS.</span></code></span>
+<span class="codeline" id="line-152"><code>	ClusterSpecifierPlugin <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-153"><code>}</code></span>
+<span class="codeline" id="line-154"><code></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">// WeightedCluster contains settings for an xds ActionType.WeightedCluster.</span></code></span>
+<span class="codeline" id="line-156"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-WeightedCluster" class="ident">WeightedCluster</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-157"><code>	<span class="comment">// Weight is the relative weight of the cluster.  It will never be zero.</span></code></span>
+<span class="codeline" id="line-158"><code>	Weight <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a></code></span>
+<span class="codeline" id="line-159"><code>	<span class="comment">// HTTPFilterConfigOverride contains any HTTP filter config overrides for</span></code></span>
+<span class="codeline" id="line-160"><code><span class="comment">	// the weighted cluster which may be present.</span></code></span>
+<span class="codeline" id="line-161"><code>	HTTPFilterConfigOverride <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i5">httpfilter</a>.<a href="../../httpfilter/httpfilter.go.html#line-30" class="ident">FilterConfig</a></code></span>
+<span class="codeline" id="line-162"><code>}</code></span>
+<span class="codeline" id="line-163"><code></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">// HeaderMatcher represents header matchers.</span></code></span>
+<span class="codeline" id="line-165"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HeaderMatcher" class="ident">HeaderMatcher</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-166"><code>	Name         <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-167"><code>	InvertMatch  *<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-168"><code>	ExactMatch   *<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-169"><code>	RegexMatch   *<a href="../../../../../../../pkg/regexp.html" class="ident i0">regexp</a>.<a href="../../../../../../regexp/regexp.go.html#line-84" class="ident">Regexp</a></code></span>
+<span class="codeline" id="line-170"><code>	PrefixMatch  *<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-171"><code>	SuffixMatch  *<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-172"><code>	RangeMatch   *<a href="#line-177" class="ident">Int64Range</a></code></span>
+<span class="codeline" id="line-173"><code>	PresentMatch *<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-174"><code>}</code></span>
+<span class="codeline" id="line-175"><code></code></span>
+<span class="codeline" id="line-176"><code><span class="comment">// Int64Range is a range for header range match.</span></code></span>
+<span class="codeline" id="line-177"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-Int64Range" class="ident">Int64Range</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-178"><code>	Start <a href="../../../../../../../pkg/builtin.html#name-int64" class="ident">int64</a></code></span>
+<span class="codeline" id="line-179"><code>	End   <a href="../../../../../../../pkg/builtin.html#name-int64" class="ident">int64</a></code></span>
+<span class="codeline" id="line-180"><code>}</code></span>
+<span class="codeline" id="line-181"><code></code></span>
+<span class="codeline" id="line-182"><code><span class="comment">// SecurityConfig contains the security configuration received as part of the</span></code></span>
+<span class="codeline" id="line-183"><code><span class="comment">// Cluster resource on the client-side, and as part of the Listener resource on</span></code></span>
+<span class="codeline" id="line-184"><code><span class="comment">// the server-side.</span></code></span>
+<span class="codeline" id="line-185"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-SecurityConfig" class="ident">SecurityConfig</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-186"><code>	<span class="comment">// RootInstanceName identifies the certProvider plugin to be used to fetch</span></code></span>
+<span class="codeline" id="line-187"><code><span class="comment">	// root certificates. This instance name will be resolved to the plugin name</span></code></span>
+<span class="codeline" id="line-188"><code><span class="comment">	// and its associated configuration from the certificate_providers field of</span></code></span>
+<span class="codeline" id="line-189"><code><span class="comment">	// the bootstrap file.</span></code></span>
+<span class="codeline" id="line-190"><code>	RootInstanceName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-191"><code>	<span class="comment">// RootCertName is the certificate name to be passed to the plugin (looked</span></code></span>
+<span class="codeline" id="line-192"><code><span class="comment">	// up from the bootstrap file) while fetching root certificates.</span></code></span>
+<span class="codeline" id="line-193"><code>	RootCertName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-194"><code>	<span class="comment">// IdentityInstanceName identifies the certProvider plugin to be used to</span></code></span>
+<span class="codeline" id="line-195"><code><span class="comment">	// fetch identity certificates. This instance name will be resolved to the</span></code></span>
+<span class="codeline" id="line-196"><code><span class="comment">	// plugin name and its associated configuration from the</span></code></span>
+<span class="codeline" id="line-197"><code><span class="comment">	// certificate_providers field of the bootstrap file.</span></code></span>
+<span class="codeline" id="line-198"><code>	IdentityInstanceName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-199"><code>	<span class="comment">// IdentityCertName is the certificate name to be passed to the plugin</span></code></span>
+<span class="codeline" id="line-200"><code><span class="comment">	// (looked up from the bootstrap file) while fetching identity certificates.</span></code></span>
+<span class="codeline" id="line-201"><code>	IdentityCertName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-202"><code>	<span class="comment">// SubjectAltNameMatchers is an optional list of match criteria for SANs</span></code></span>
+<span class="codeline" id="line-203"><code><span class="comment">	// specified on the peer certificate. Used only on the client-side.</span></code></span>
+<span class="codeline" id="line-204"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-205"><code><span class="comment">	// Some intricacies:</span></code></span>
+<span class="codeline" id="line-206"><code><span class="comment">	// - If this field is empty, then any peer certificate is accepted.</span></code></span>
+<span class="codeline" id="line-207"><code><span class="comment">	// - If the peer certificate contains a wildcard DNS SAN, and an `exact`</span></code></span>
+<span class="codeline" id="line-208"><code><span class="comment">	//   matcher is configured, a wildcard DNS match is performed instead of a</span></code></span>
+<span class="codeline" id="line-209"><code><span class="comment">	//   regular string comparison.</span></code></span>
+<span class="codeline" id="line-210"><code>	SubjectAltNameMatchers []<a href="../../../../../../../pkg/google.golang.org/grpc/internal/xds/matcher.html" class="ident i3">matcher</a>.<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-36" class="ident">StringMatcher</a></code></span>
+<span class="codeline" id="line-211"><code>	<span class="comment">// RequireClientCert indicates if the server handshake process expects the</span></code></span>
+<span class="codeline" id="line-212"><code><span class="comment">	// client to present a certificate. Set to true when performing mTLS. Used</span></code></span>
+<span class="codeline" id="line-213"><code><span class="comment">	// only on the server-side.</span></code></span>
+<span class="codeline" id="line-214"><code>	RequireClientCert <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-215"><code>}</code></span>
+<span class="codeline" id="line-216"><code></code></span>
+<span class="codeline" id="line-217"><code><span class="comment">// Equal returns true if sc is equal to other.</span></code></span>
+<span class="codeline" id="line-218"><code><span class="keyword">func</span> (<label for="r0" class="ident">sc</label> *<a href="#line-185" class="ident">SecurityConfig</a>) <label for="r1" class="ident">Equal</label>(<label for="r2" class="ident">other</label> *<a href="#line-185" class="ident">SecurityConfig</a>) <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-219"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-220"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r2" class="ident">other</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>:</code></span>
+<span class="codeline" id="line-221"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-222"><code>	<span class="keyword">case</span> (<label for="r0" class="ident">sc</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>) != (<label for="r2" class="ident">other</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>):</code></span>
+<span class="codeline" id="line-223"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-224"><code>	}</code></span>
+<span class="codeline" id="line-225"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-226"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label>.<a href="#line-190" class="ident">RootInstanceName</a> != <label for="r2" class="ident">other</label>.<a href="#line-190" class="ident">RootInstanceName</a>:</code></span>
+<span class="codeline" id="line-227"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-228"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label>.<a href="#line-193" class="ident">RootCertName</a> != <label for="r2" class="ident">other</label>.<a href="#line-193" class="ident">RootCertName</a>:</code></span>
+<span class="codeline" id="line-229"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-230"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label>.<a href="#line-198" class="ident">IdentityInstanceName</a> != <label for="r2" class="ident">other</label>.<a href="#line-198" class="ident">IdentityInstanceName</a>:</code></span>
+<span class="codeline" id="line-231"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-232"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label>.<a href="#line-201" class="ident">IdentityCertName</a> != <label for="r2" class="ident">other</label>.<a href="#line-201" class="ident">IdentityCertName</a>:</code></span>
+<span class="codeline" id="line-233"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">case</span> <label for="r0" class="ident">sc</label>.<a href="#line-214" class="ident">RequireClientCert</a> != <label for="r2" class="ident">other</label>.<a href="#line-214" class="ident">RequireClientCert</a>:</code></span>
+<span class="codeline" id="line-235"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-236"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-237"><code>		<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r0" class="ident">sc</label>.<a href="#line-210" class="ident">SubjectAltNameMatchers</a>) != <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r2" class="ident">other</label>.<a href="#line-210" class="ident">SubjectAltNameMatchers</a>) {</code></span>
+<span class="codeline" id="line-238"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-239"><code>		}</code></span>
+<span class="codeline" id="line-240"><code>		<span class="keyword">for</span> <label for="r3" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r3" class="ident">i</label> &lt; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r0" class="ident">sc</label>.<a href="#line-210" class="ident">SubjectAltNameMatchers</a>); <label for="r3" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-241"><code>			<span class="keyword">if</span> !<label for="r0" class="ident">sc</label>.<a href="#line-210" class="ident">SubjectAltNameMatchers</a>[<label for="r3" class="ident">i</label>].<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-158" class="ident">Equal</a>(<label for="r2" class="ident">other</label>.<a href="#line-210" class="ident">SubjectAltNameMatchers</a>[<label for="r3" class="ident">i</label>]) {</code></span>
+<span class="codeline" id="line-242"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-243"><code>			}</code></span>
+<span class="codeline" id="line-244"><code>		}</code></span>
+<span class="codeline" id="line-245"><code>	}</code></span>
+<span class="codeline" id="line-246"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-247"><code>}</code></span>
+<span class="codeline" id="line-248"><code></code></span>
+<span class="codeline" id="line-249"><code><span class="comment">// RouteConfigUpdateErrTuple is a tuple with the update and error. It contains</span></code></span>
+<span class="codeline" id="line-250"><code><span class="comment">// the results from unmarshal functions. It's used to pass unmarshal results of</span></code></span>
+<span class="codeline" id="line-251"><code><span class="comment">// multiple resources together, e.g. in maps like `map[string]{Update,error}`.</span></code></span>
+<span class="codeline" id="line-252"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-RouteConfigUpdateErrTuple" class="ident">RouteConfigUpdateErrTuple</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-253"><code>	Update <a href="#line-33" class="ident">RouteConfigUpdate</a></code></span>
+<span class="codeline" id="line-254"><code>	Err    <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-255"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

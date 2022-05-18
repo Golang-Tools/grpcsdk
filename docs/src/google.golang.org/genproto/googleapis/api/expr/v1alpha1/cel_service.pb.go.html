@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: cel_service.pb.go in package google.golang.org/genproto/googleapis/api/expr/v1alpha1</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	cel_service.pb.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html">google.golang.org/genproto/googleapis/api/expr/v1alpha1</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Code generated by protoc-gen-go. DO NOT EDIT.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// source: google/api/expr/v1alpha1/cel_service.proto</span></code></span>
+<span class="codeline" id="line-3"><code></code></span>
+<span class="codeline" id="line-4"><code><span class="keyword">package</span> expr</code></span>
+<span class="codeline" id="line-5"><code></code></span>
+<span class="codeline" id="line-6"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-7"><code>	<a href="../../../../../../../pkg/context.html" class="ident i0">context</a> <label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-8"><code>	<a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a> <label for="i1"><span class="lit-string i1">"fmt"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<a href="../../../../../../../pkg/math.html" class="ident i2">math</a> <label for="i2"><span class="lit-string i2">"math"</span></label></code></span>
+<span class="codeline" id="line-10"><code></code></span>
+<span class="codeline" id="line-11"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i3">proto</a> <label for="i3"><span class="lit-string i3">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-12"><code>	<a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/annotations.html" class="ident i4">_</a> <label for="i4"><span class="lit-string i4">"google.golang.org/genproto/googleapis/api/annotations"</span></label></code></span>
+<span class="codeline" id="line-13"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a> <label for="i5"><span class="lit-string i5">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-14"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i6">codes</a> <label for="i6"><span class="lit-string i6">"google.golang.org/grpc/codes"</span></label></code></span>
+<span class="codeline" id="line-15"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i7">status</a> <label for="i7"><span class="lit-string i7">"google.golang.org/grpc/status"</span></label></code></span>
+<span class="codeline" id="line-16"><code>)</code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// Reference imports to suppress errors if they are not otherwise used.</span></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i3">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-22" class="ident">Marshal</a></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/math.html" class="ident i2">math</a>.<a href="../../../../../../math/bits.go.html#line-20" class="ident">Inf</a></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// This is a compile-time assertion to ensure that this generated file</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">// is compatible with the proto package it is being compiled against.</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// A compilation error at this line likely means your copy of the</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// proto package needs to be updated.</span></code></span>
+<span class="codeline" id="line-27"><code><span class="keyword">const</span> _ = <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i3">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-25" class="ident">ProtoPackageIsVersion3</a> <span class="comment">// please upgrade the proto package</span></code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-init" class="ident">init</a></label>() {</code></span>
+<span class="codeline" id="line-30"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i3">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/registry.go.html#line-34" class="ident">RegisterFile</a>(<span class="lit-string">"google/api/expr/v1alpha1/cel_service.proto"</span>, <a href="#line-33" class="ident">fileDescriptor_f35b2125e64b6d66</a>)</code></span>
+<span class="codeline" id="line-31"><code>}</code></span>
+<span class="codeline" id="line-32"><code></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-fileDescriptor_f35b2125e64b6d66" class="ident">fileDescriptor_f35b2125e64b6d66</a> = []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>{</code></span>
+<span class="codeline" id="line-34"><code>	<span class="comment">// 287 bytes of a gzipped FileDescriptorProto</span></code></span>
+<span class="codeline" id="line-35"><code>	<span class="lit-number">0x1f</span>, <span class="lit-number">0x8b</span>, <span class="lit-number">0x08</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0x8c</span>, <span class="lit-number">0x91</span>, <span class="lit-number">0x31</span>, <span class="lit-number">0x4b</span>, <span class="lit-number">0x03</span>, <span class="lit-number">0x31</span>,</code></span>
+<span class="codeline" id="line-36"><code>	<span class="lit-number">0x14</span>, <span class="lit-number">0xc7</span>, <span class="lit-number">0xad</span>, <span class="lit-number">0x5a</span>, <span class="lit-number">0x87</span>, <span class="lit-number">0x88</span>, <span class="lit-number">0x0a</span>, <span class="lit-number">0x01</span>, <span class="lit-number">0x51</span>, <span class="lit-number">0x0e</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0xc1</span>, <span class="lit-number">0x0a</span>, <span class="lit-number">0x0e</span>, <span class="lit-number">0x09</span>, <span class="lit-number">0xad</span>,</code></span>
+<span class="codeline" id="line-37"><code>	<span class="lit-number">0xa3</span>, <span class="lit-number">0x2e</span>, <span class="lit-number">0xd7</span>, <span class="lit-number">0xe2</span>, <span class="lit-number">0x7e</span>, <span class="lit-number">0xe8</span>, <span class="lit-number">0xd6</span>, <span class="lit-number">0xa5</span>, <span class="lit-number">0xc4</span>, <span class="lit-number">0xf8</span>, <span class="lit-number">0xcc</span>, <span class="lit-number">0x1d</span>, <span class="lit-number">0xe6</span>, <span class="lit-number">0xf2</span>, <span class="lit-number">0x62</span>, <span class="lit-number">0x72</span>,</code></span>
+<span class="codeline" id="line-38"><code>	<span class="lit-number">0x3d</span>, <span class="lit-number">0xfc</span>, <span class="lit-number">0x8c</span>, <span class="lit-number">0x8e</span>, <span class="lit-number">0x8e</span>, <span class="lit-number">0xf7</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0x1c</span>, <span class="lit-number">0x25</span>, <span class="lit-number">0x77</span>, <span class="lit-number">0x29</span>, <span class="lit-number">0x55</span>, <span class="lit-number">0xe4</span>, <span class="lit-number">0xac</span>, <span class="lit-number">0x63</span>, <span class="lit-number">0x92</span>,</code></span>
+<span class="codeline" id="line-39"><code>	<span class="lit-number">0xdf</span>, <span class="lit-number">0xfb</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xc8</span>, <span class="lit-number">0xfb</span>, <span class="lit-number">0x93</span>, <span class="lit-number">0x2b</span>, <span class="lit-number">0x85</span>, <span class="lit-number">0xa8</span>, <span class="lit-number">0x34</span>, <span class="lit-number">0x70</span>, <span class="lit-number">0x61</span>, <span class="lit-number">0x0b</span>, <span class="lit-number">0x0e</span>, <span class="lit-number">0x6f</span>, <span class="lit-number">0xd6</span>,</code></span>
+<span class="codeline" id="line-40"><code>	<span class="lit-number">0xf1</span>, <span class="lit-number">0x7a</span>, <span class="lit-number">0x2c</span>, <span class="lit-number">0xb4</span>, <span class="lit-number">0xcd</span>, <span class="lit-number">0xc5</span>, <span class="lit-number">0x98</span>, <span class="lit-number">0x4b</span>, <span class="lit-number">0xd0</span>, <span class="lit-number">0x0b</span>, <span class="lit-number">0x0f</span>, <span class="lit-number">0xae</span>, <span class="lit-number">0x2e</span>, <span class="lit-number">0x24</span>, <span class="lit-number">0x30</span>, <span class="lit-number">0xeb</span>,</code></span>
+<span class="codeline" id="line-41"><code>	<span class="lit-number">0xb0</span>, <span class="lit-number">0x42</span>, <span class="lit-number">0x7a</span>, <span class="lit-number">0xda</span>, <span class="lit-number">0xb1</span>, <span class="lit-number">0x4c</span>, <span class="lit-number">0xd8</span>, <span class="lit-number">0x82</span>, <span class="lit-number">0x05</span>, <span class="lit-number">0x96</span>, <span class="lit-number">0xad</span>, <span class="lit-number">0xd8</span>, <span class="lit-number">0xe4</span>, <span class="lit-number">0xe4</span>, <span class="lit-number">0x5b</span>, <span class="lit-number">0x8a</span>,</code></span>
+<span class="codeline" id="line-42"><code>	<span class="lit-number">0xd4</span>, <span class="lit-number">0x05</span>, <span class="lit-number">0x98</span>, <span class="lit-number">0xaa</span>, <span class="lit-number">0x1b</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0x26</span>, <span class="lit-number">0xfd</span>, <span class="lit-number">0xf1</span>, <span class="lit-number">0x68</span>, <span class="lit-number">0x9e</span>, <span class="lit-number">0xd1</span>, <span class="lit-number">0x95</span>, <span class="lit-number">0xc2</span>, <span class="lit-number">0x48</span>, <span class="lit-number">0xf8</span>,</code></span>
+<span class="codeline" id="line-43"><code>	<span class="lit-number">0xa9</span>, <span class="lit-number">0x99</span>, <span class="lit-number">0x7c</span>, <span class="lit-number">0x6c</span>, <span class="lit-number">0x13</span>, <span class="lit-number">0x32</span>, <span class="lit-number">0x03</span>, <span class="lit-number">0xfd</span>, <span class="lit-number">0xd0</span>, <span class="lit-number">0x5d</span>, <span class="lit-number">0x52</span>, <span class="lit-number">0x45</span>, <span class="lit-number">0x86</span>, <span class="lit-number">0x99</span>, <span class="lit-number">0x70</span>, <span class="lit-number">0x1e</span>,</code></span>
+<span class="codeline" id="line-44"><code>	<span class="lit-number">0xe8</span>, <span class="lit-number">0x88</span>, <span class="lit-number">0xf5</span>, <span class="lit-number">0xf9</span>, <span class="lit-number">0x59</span>, <span class="lit-number">0x0b</span>, <span class="lit-number">0xdc</span>, <span class="lit-number">0xc3</span>, <span class="lit-number">0xeb</span>, <span class="lit-number">0x12</span>, <span class="lit-number">0x7c</span>, <span class="lit-number">0x95</span>, <span class="lit-number">0x5c</span>, <span class="lit-number">0x6e</span>, <span class="lit-number">0xe4</span>, <span class="lit-number">0xbc</span>,</code></span>
+<span class="codeline" id="line-45"><code>	<span class="lit-number">0x45</span>, <span class="lit-number">0xe3</span>, <span class="lit-number">0xe1</span>, <span class="lit-number">0xfc</span>, <span class="lit-number">0xa0</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0xfb</span>, <span class="lit-number">0x4b</span>, <span class="lit-number">0x5c</span>, <span class="lit-number">0x3a</span>, <span class="lit-number">0x09</span>, <span class="lit-number">0x34</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0xc3</span>, <span class="lit-number">0x59</span>,</code></span>
+<span class="codeline" id="line-46"><code>	<span class="lit-number">0x0e</span>, <span class="lit-number">0xf2</span>, <span class="lit-number">0xe5</span>, <span class="lit-number">0x2f</span>, <span class="lit-number">0x51</span>, <span class="lit-number">0x0b</span>, <span class="lit-number">0xfc</span>, <span class="lit-number">0x43</span>, <span class="lit-number">0x14</span>, <span class="lit-number">0xb9</span>, <span class="lit-number">0x28</span>, <span class="lit-number">0x3a</span>, <span class="lit-number">0x6c</span>, <span class="lit-number">0xd2</span>, <span class="lit-number">0x7d</span>, <span class="lit-number">0x1b</span>,</code></span>
+<span class="codeline" id="line-47"><code>	<span class="lit-number">0xd4</span>, <span class="lit-number">0x4f</span>, <span class="lit-number">0x8b</span>, <span class="lit-number">0x80</span>, <span class="lit-number">0xd1</span>, <span class="lit-number">0x39</span>, <span class="lit-number">0xd9</span>, <span class="lit-number">0xbd</span>, <span class="lit-number">0xab</span>, <span class="lit-number">0x85</span>, <span class="lit-number">0xa6</span>, <span class="lit-number">0x17</span>, <span class="lit-number">0xfd</span>, <span class="lit-number">0x01</span>, <span class="lit-number">0xe1</span>, <span class="lit-number">0x7d</span>,</code></span>
+<span class="codeline" id="line-48"><code>	<span class="lit-number">0xe5</span>, <span class="lit-number">0x19</span>, <span class="lit-number">0x6d</span>, <span class="lit-number">0xc2</span>, <span class="lit-number">0xa2</span>, <span class="lit-number">0x66</span>, <span class="lit-number">0xa7</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0xb7</span>, <span class="lit-number">0x92</span>, <span class="lit-number">0xe3</span>, <span class="lit-number">0xf7</span>, <span class="lit-number">0x94</span>, <span class="lit-number">0x4a</span>, <span class="lit-number">0xd0</span>, <span class="lit-number">0x71</span>,</code></span>
+<span class="codeline" id="line-49"><code>	<span class="lit-number">0x44</span>, <span class="lit-number">0xd8</span>, <span class="lit-number">0xc2</span>, <span class="lit-number">0x33</span>, <span class="lit-number">0x89</span>, <span class="lit-number">0xe5</span>, <span class="lit-number">0xd4</span>, <span class="lit-number">0x91</span>, <span class="lit-number">0x33</span>, <span class="lit-number">0x89</span>, <span class="lit-number">0x65</span>, <span class="lit-number">0x6f</span>, <span class="lit-number">0xd0</span>, <span class="lit-number">0xf4</span>, <span class="lit-number">0x68</span>, <span class="lit-number">0xbd</span>,</code></span>
+<span class="codeline" id="line-50"><code>	<span class="lit-number">0xf1</span>, <span class="lit-number">0x2c</span>, <span class="lit-number">0xb4</span>, <span class="lit-number">0x90</span>, <span class="lit-number">0x0d</span>, <span class="lit-number">0xe6</span>, <span class="lit-number">0xb7</span>, <span class="lit-number">0x11</span>, <span class="lit-number">0x56</span>, <span class="lit-number">0xa8</span>, <span class="lit-number">0x85</span>, <span class="lit-number">0x51</span>, <span class="lit-number">0x0c</span>, <span class="lit-number">0x9d</span>, <span class="lit-number">0xe2</span>, <span class="lit-number">0x0a</span>,</code></span>
+<span class="codeline" id="line-51"><code>	<span class="lit-number">0x4c</span>, <span class="lit-number">0xdb</span>, <span class="lit-number">0x11</span>, <span class="lit-number">0x5f</span>, <span class="lit-number">0xa7</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xae</span>, <span class="lit-number">0xf6</span>, <span class="lit-number">0x26</span>, <span class="lit-number">0x9c</span>, <span class="lit-number">0x3e</span>, <span class="lit-number">0x07</span>, <span class="lit-number">0x83</span>, <span class="lit-number">0xc7</span>, <span class="lit-number">0xbd</span>, <span class="lit-number">0x96</span>,</code></span>
+<span class="codeline" id="line-52"><code>	<span class="lit-number">0xbd</span>, <span class="lit-number">0xfe</span>, <span class="lit-number">0x0a</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xe3</span>, <span class="lit-number">0x25</span>, <span class="lit-number">0x59</span>, <span class="lit-number">0x35</span>, <span class="lit-number">0x64</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>,</code></span>
+<span class="codeline" id="line-53"><code>}</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// Reference imports to suppress errors if they are not otherwise used.</span></code></span>
+<span class="codeline" id="line-56"><code><span class="keyword">var</span> _ <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a></code></span>
+<span class="codeline" id="line-57"><code><span class="keyword">var</span> _ <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/clientconn.go.html#line-440" class="ident">ClientConnInterface</a></code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// This is a compile-time assertion to ensure that this generated file</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// is compatible with the grpc package it is being compiled against.</span></code></span>
+<span class="codeline" id="line-61"><code><span class="keyword">const</span> _ = <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-910" class="ident">SupportPackageIsVersion6</a></code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">// CelServiceClient is the client API for CelService service.</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.</span></code></span>
+<span class="codeline" id="line-66"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-CelServiceClient" class="ident">CelServiceClient</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-67"><code>	<span class="comment">// Transforms CEL source text into a parsed representation.</span></code></span>
+<span class="codeline" id="line-68"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceClient.html#name-Parse" class="ident">Parse</a>(ctx <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, in *<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>, opts ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-136" class="ident">ParseResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-69"><code>	<span class="comment">// Runs static checks on a parsed CEL representation and return</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">	// an annotated representation, or a set of issues.</span></code></span>
+<span class="codeline" id="line-71"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceClient.html#name-Check" class="ident">Check</a>(ctx <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, in *<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>, opts ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-259" class="ident">CheckResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-72"><code>	<span class="comment">// Evaluates a parsed or annotation CEL representation given</span></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">	// values of external bindings.</span></code></span>
+<span class="codeline" id="line-74"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceClient.html#name-Eval" class="ident">Eval</a>(ctx <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, in *<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>, opts ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-411" class="ident">EvalResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-75"><code>}</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-celServiceClient" class="ident">celServiceClient</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-78"><code>	cc <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/clientconn.go.html#line-440" class="ident">ClientConnInterface</a></code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> <label for="r1" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-NewCelServiceClient" class="ident">NewCelServiceClient</a></label>(<label for="r2" class="ident">cc</label> <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/clientconn.go.html#line-440" class="ident">ClientConnInterface</a>) <a href="#line-66" class="ident">CelServiceClient</a> {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">return</span> &amp;<a href="#line-77" class="ident">celServiceClient</a>{<label for="r2" class="ident">cc</label>}</code></span>
+<span class="codeline" id="line-83"><code>}</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="keyword">func</span> (<label for="r3" class="ident">c</label> *<a href="#line-77" class="ident">celServiceClient</a>) <label for="r4" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.celServiceClient^a1f9a.html#name-.Parse" class="ident">Parse</a></label>(<label for="r5" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r6" class="ident">in</label> *<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>, <label for="r7" class="ident">opts</label> ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-136" class="ident">ParseResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-86"><code>	<label for="r8" class="ident">out</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-136" class="ident">ParseResponse</a>)</code></span>
+<span class="codeline" id="line-87"><code>	<label for="r9" class="ident">err</label> := <label for="r3" class="ident">c</label>.<a href="#line-78" class="ident">cc</a>.<a href="../../../../../grpc/clientconn.go.html#line-443" class="ident">Invoke</a>(<label for="r5" class="ident">ctx</label>, <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Parse"</span>, <label for="r6" class="ident">in</label>, <label for="r8" class="ident">out</label>, <label for="r7" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-88"><code>	<span class="keyword">if</span> <label for="r9" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-89"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r9" class="ident">err</label></code></span>
+<span class="codeline" id="line-90"><code>	}</code></span>
+<span class="codeline" id="line-91"><code>	<span class="keyword">return</span> <label for="r8" class="ident">out</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-92"><code>}</code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code><span class="keyword">func</span> (<label for="r10" class="ident">c</label> *<a href="#line-77" class="ident">celServiceClient</a>) <label for="r11" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.celServiceClient^a1f9a.html#name-.Check" class="ident">Check</a></label>(<label for="r12" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r13" class="ident">in</label> *<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>, <label for="r14" class="ident">opts</label> ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-259" class="ident">CheckResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-95"><code>	<label for="r15" class="ident">out</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-259" class="ident">CheckResponse</a>)</code></span>
+<span class="codeline" id="line-96"><code>	<label for="r16" class="ident">err</label> := <label for="r10" class="ident">c</label>.<a href="#line-78" class="ident">cc</a>.<a href="../../../../../grpc/clientconn.go.html#line-443" class="ident">Invoke</a>(<label for="r12" class="ident">ctx</label>, <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Check"</span>, <label for="r13" class="ident">in</label>, <label for="r15" class="ident">out</label>, <label for="r14" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-97"><code>	<span class="keyword">if</span> <label for="r16" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-98"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r16" class="ident">err</label></code></span>
+<span class="codeline" id="line-99"><code>	}</code></span>
+<span class="codeline" id="line-100"><code>	<span class="keyword">return</span> <label for="r15" class="ident">out</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-101"><code>}</code></span>
+<span class="codeline" id="line-102"><code></code></span>
+<span class="codeline" id="line-103"><code><span class="keyword">func</span> (<label for="r17" class="ident">c</label> *<a href="#line-77" class="ident">celServiceClient</a>) <label for="r18" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.celServiceClient^a1f9a.html#name-.Eval" class="ident">Eval</a></label>(<label for="r19" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r20" class="ident">in</label> *<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>, <label for="r21" class="ident">opts</label> ...<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/rpc_util.go.html#line-174" class="ident">CallOption</a>) (*<a href="conformance_service.pb.go.html#line-411" class="ident">EvalResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-104"><code>	<label for="r22" class="ident">out</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-411" class="ident">EvalResponse</a>)</code></span>
+<span class="codeline" id="line-105"><code>	<label for="r23" class="ident">err</label> := <label for="r17" class="ident">c</label>.<a href="#line-78" class="ident">cc</a>.<a href="../../../../../grpc/clientconn.go.html#line-443" class="ident">Invoke</a>(<label for="r19" class="ident">ctx</label>, <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Eval"</span>, <label for="r20" class="ident">in</label>, <label for="r22" class="ident">out</label>, <label for="r21" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-106"><code>	<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-107"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-108"><code>	}</code></span>
+<span class="codeline" id="line-109"><code>	<span class="keyword">return</span> <label for="r22" class="ident">out</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-110"><code>}</code></span>
+<span class="codeline" id="line-111"><code></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">// CelServiceServer is the server API for CelService service.</span></code></span>
+<span class="codeline" id="line-113"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-CelServiceServer" class="ident">CelServiceServer</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-114"><code>	<span class="comment">// Transforms CEL source text into a parsed representation.</span></code></span>
+<span class="codeline" id="line-115"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceServer.html#name-Parse" class="ident">Parse</a>(<a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, *<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>) (*<a href="conformance_service.pb.go.html#line-136" class="ident">ParseResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-116"><code>	<span class="comment">// Runs static checks on a parsed CEL representation and return</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">	// an annotated representation, or a set of issues.</span></code></span>
+<span class="codeline" id="line-118"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceServer.html#name-Check" class="ident">Check</a>(<a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, *<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>) (*<a href="conformance_service.pb.go.html#line-259" class="ident">CheckResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-119"><code>	<span class="comment">// Evaluates a parsed or annotation CEL representation given</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">	// values of external bindings.</span></code></span>
+<span class="codeline" id="line-121"><code>	<a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.CelServiceServer.html#name-Eval" class="ident">Eval</a>(<a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, *<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>) (*<a href="conformance_service.pb.go.html#line-411" class="ident">EvalResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-122"><code>}</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">// UnimplementedCelServiceServer can be embedded to have forward compatible implementations.</span></code></span>
+<span class="codeline" id="line-125"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-UnimplementedCelServiceServer" class="ident">UnimplementedCelServiceServer</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-126"><code>}</code></span>
+<span class="codeline" id="line-127"><code></code></span>
+<span class="codeline" id="line-128"><code><span class="keyword">func</span> (*<a href="#line-125" class="ident">UnimplementedCelServiceServer</a>) <label for="r24" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.UnimplementedCelServiceServer.html#name-.Parse" class="ident">Parse</a></label>(<label for="r25" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r26" class="ident">req</label> *<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>) (*<a href="conformance_service.pb.go.html#line-136" class="ident">ParseResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-129"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i7">status</a>.<a href="../../../../../grpc/status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i6">codes</a>.<a href="../../../../../grpc/codes/codes.go.html#line-160" class="ident">Unimplemented</a>, <span class="lit-string">"method Parse not implemented"</span>)</code></span>
+<span class="codeline" id="line-130"><code>}</code></span>
+<span class="codeline" id="line-131"><code><span class="keyword">func</span> (*<a href="#line-125" class="ident">UnimplementedCelServiceServer</a>) <label for="r27" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.UnimplementedCelServiceServer.html#name-.Check" class="ident">Check</a></label>(<label for="r28" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r29" class="ident">req</label> *<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>) (*<a href="conformance_service.pb.go.html#line-259" class="ident">CheckResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-132"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i7">status</a>.<a href="../../../../../grpc/status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i6">codes</a>.<a href="../../../../../grpc/codes/codes.go.html#line-160" class="ident">Unimplemented</a>, <span class="lit-string">"method Check not implemented"</span>)</code></span>
+<span class="codeline" id="line-133"><code>}</code></span>
+<span class="codeline" id="line-134"><code><span class="keyword">func</span> (*<a href="#line-125" class="ident">UnimplementedCelServiceServer</a>) <label for="r30" class="ident"><a href="../../../../../../../imp/google.golang.org/genproto/googleapis/api/expr/v1alpha1.UnimplementedCelServiceServer.html#name-.Eval" class="ident">Eval</a></label>(<label for="r31" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r32" class="ident">req</label> *<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>) (*<a href="conformance_service.pb.go.html#line-411" class="ident">EvalResponse</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-135"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/google.golang.org/grpc/status.html" class="ident i7">status</a>.<a href="../../../../../grpc/status/status.go.html#line-63" class="ident">Errorf</a>(<a href="../../../../../../../pkg/google.golang.org/grpc/codes.html" class="ident i6">codes</a>.<a href="../../../../../grpc/codes/codes.go.html#line-160" class="ident">Unimplemented</a>, <span class="lit-string">"method Eval not implemented"</span>)</code></span>
+<span class="codeline" id="line-136"><code>}</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code><span class="keyword">func</span> <label for="r33" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-RegisterCelServiceServer" class="ident">RegisterCelServiceServer</a></label>(<label for="r34" class="ident">s</label> *<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/server.go.html#line-117" class="ident">Server</a>, <label for="r35" class="ident">srv</label> <a href="#line-113" class="ident">CelServiceServer</a>) {</code></span>
+<span class="codeline" id="line-139"><code>	<label for="r34" class="ident">s</label>.<a href="../../../../../grpc/server.go.html#line-624" class="ident">RegisterService</a>(&amp;<a href="#line-196" class="ident">_CelService_serviceDesc</a>, <label for="r35" class="ident">srv</label>)</code></span>
+<span class="codeline" id="line-140"><code>}</code></span>
+<span class="codeline" id="line-141"><code></code></span>
+<span class="codeline" id="line-142"><code><span class="keyword">func</span> <label for="r36" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-_CelService_Parse_Handler" class="ident">_CelService_Parse_Handler</a></label>(<label for="r37" class="ident">srv</label> <span class="keyword">interface</span>{}, <label for="r38" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r39" class="ident">dec</label> <span class="keyword">func</span>(<span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>, <label for="r40" class="ident">interceptor</label> <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-87" class="ident">UnaryServerInterceptor</a>) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-143"><code>	<label for="r41" class="ident">in</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>)</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">if</span> <label for="r42" class="ident">err</label> := <label for="r39" class="ident">dec</label>(<label for="r41" class="ident">in</label>); <label for="r42" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-145"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r42" class="ident">err</label></code></span>
+<span class="codeline" id="line-146"><code>	}</code></span>
+<span class="codeline" id="line-147"><code>	<span class="keyword">if</span> <label for="r40" class="ident">interceptor</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-148"><code>		<span class="keyword">return</span> <label for="r37" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-115" class="ident">Parse</a>(<label for="r38" class="ident">ctx</label>, <label for="r41" class="ident">in</label>)</code></span>
+<span class="codeline" id="line-149"><code>	}</code></span>
+<span class="codeline" id="line-150"><code>	<label for="r43" class="ident">info</label> := &amp;<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-67" class="ident">UnaryServerInfo</a>{</code></span>
+<span class="codeline" id="line-151"><code>		<a href="../../../../../grpc/interceptor.go.html#line-69" class="ident">Server</a>:     <label for="r37" class="ident">srv</label>,</code></span>
+<span class="codeline" id="line-152"><code>		<a href="../../../../../grpc/interceptor.go.html#line-71" class="ident">FullMethod</a>: <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Parse"</span>,</code></span>
+<span class="codeline" id="line-153"><code>	}</code></span>
+<span class="codeline" id="line-154"><code>	<label for="r44" class="ident">handler</label> := <span class="keyword">func</span>(<label for="r45" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r46" class="ident">req</label> <span class="keyword">interface</span>{}) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-155"><code>		<span class="keyword">return</span> <label for="r37" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-115" class="ident">Parse</a>(<label for="r45" class="ident">ctx</label>, <label for="r46" class="ident">req</label>.(*<a href="conformance_service.pb.go.html#line-68" class="ident">ParseRequest</a>))</code></span>
+<span class="codeline" id="line-156"><code>	}</code></span>
+<span class="codeline" id="line-157"><code>	<span class="keyword">return</span> <label for="r40" class="ident">interceptor</label>(<label for="r38" class="ident">ctx</label>, <label for="r41" class="ident">in</label>, <label for="r43" class="ident">info</label>, <label for="r44" class="ident">handler</label>)</code></span>
+<span class="codeline" id="line-158"><code>}</code></span>
+<span class="codeline" id="line-159"><code></code></span>
+<span class="codeline" id="line-160"><code><span class="keyword">func</span> <label for="r47" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-_CelService_Check_Handler" class="ident">_CelService_Check_Handler</a></label>(<label for="r48" class="ident">srv</label> <span class="keyword">interface</span>{}, <label for="r49" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r50" class="ident">dec</label> <span class="keyword">func</span>(<span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>, <label for="r51" class="ident">interceptor</label> <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-87" class="ident">UnaryServerInterceptor</a>) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-161"><code>	<label for="r52" class="ident">in</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>)</code></span>
+<span class="codeline" id="line-162"><code>	<span class="keyword">if</span> <label for="r53" class="ident">err</label> := <label for="r50" class="ident">dec</label>(<label for="r52" class="ident">in</label>); <label for="r53" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-163"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r53" class="ident">err</label></code></span>
+<span class="codeline" id="line-164"><code>	}</code></span>
+<span class="codeline" id="line-165"><code>	<span class="keyword">if</span> <label for="r51" class="ident">interceptor</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-166"><code>		<span class="keyword">return</span> <label for="r48" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-118" class="ident">Check</a>(<label for="r49" class="ident">ctx</label>, <label for="r52" class="ident">in</label>)</code></span>
+<span class="codeline" id="line-167"><code>	}</code></span>
+<span class="codeline" id="line-168"><code>	<label for="r54" class="ident">info</label> := &amp;<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-67" class="ident">UnaryServerInfo</a>{</code></span>
+<span class="codeline" id="line-169"><code>		<a href="../../../../../grpc/interceptor.go.html#line-69" class="ident">Server</a>:     <label for="r48" class="ident">srv</label>,</code></span>
+<span class="codeline" id="line-170"><code>		<a href="../../../../../grpc/interceptor.go.html#line-71" class="ident">FullMethod</a>: <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Check"</span>,</code></span>
+<span class="codeline" id="line-171"><code>	}</code></span>
+<span class="codeline" id="line-172"><code>	<label for="r55" class="ident">handler</label> := <span class="keyword">func</span>(<label for="r56" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r57" class="ident">req</label> <span class="keyword">interface</span>{}) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-173"><code>		<span class="keyword">return</span> <label for="r48" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-118" class="ident">Check</a>(<label for="r56" class="ident">ctx</label>, <label for="r57" class="ident">req</label>.(*<a href="conformance_service.pb.go.html#line-186" class="ident">CheckRequest</a>))</code></span>
+<span class="codeline" id="line-174"><code>	}</code></span>
+<span class="codeline" id="line-175"><code>	<span class="keyword">return</span> <label for="r51" class="ident">interceptor</label>(<label for="r49" class="ident">ctx</label>, <label for="r52" class="ident">in</label>, <label for="r54" class="ident">info</label>, <label for="r55" class="ident">handler</label>)</code></span>
+<span class="codeline" id="line-176"><code>}</code></span>
+<span class="codeline" id="line-177"><code></code></span>
+<span class="codeline" id="line-178"><code><span class="keyword">func</span> <label for="r58" class="ident"><a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-_CelService_Eval_Handler" class="ident">_CelService_Eval_Handler</a></label>(<label for="r59" class="ident">srv</label> <span class="keyword">interface</span>{}, <label for="r60" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r61" class="ident">dec</label> <span class="keyword">func</span>(<span class="keyword">interface</span>{}) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>, <label for="r62" class="ident">interceptor</label> <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-87" class="ident">UnaryServerInterceptor</a>) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-179"><code>	<label for="r63" class="ident">in</label> := <a href="../../../../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>)</code></span>
+<span class="codeline" id="line-180"><code>	<span class="keyword">if</span> <label for="r64" class="ident">err</label> := <label for="r61" class="ident">dec</label>(<label for="r63" class="ident">in</label>); <label for="r64" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-181"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r64" class="ident">err</label></code></span>
+<span class="codeline" id="line-182"><code>	}</code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">if</span> <label for="r62" class="ident">interceptor</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">return</span> <label for="r59" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-121" class="ident">Eval</a>(<label for="r60" class="ident">ctx</label>, <label for="r63" class="ident">in</label>)</code></span>
+<span class="codeline" id="line-185"><code>	}</code></span>
+<span class="codeline" id="line-186"><code>	<label for="r65" class="ident">info</label> := &amp;<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/interceptor.go.html#line-67" class="ident">UnaryServerInfo</a>{</code></span>
+<span class="codeline" id="line-187"><code>		<a href="../../../../../grpc/interceptor.go.html#line-69" class="ident">Server</a>:     <label for="r59" class="ident">srv</label>,</code></span>
+<span class="codeline" id="line-188"><code>		<a href="../../../../../grpc/interceptor.go.html#line-71" class="ident">FullMethod</a>: <span class="lit-string">"/google.api.expr.v1alpha1.CelService/Eval"</span>,</code></span>
+<span class="codeline" id="line-189"><code>	}</code></span>
+<span class="codeline" id="line-190"><code>	<label for="r66" class="ident">handler</label> := <span class="keyword">func</span>(<label for="r67" class="ident">ctx</label> <a href="../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../context/context.go.html#line-62" class="ident">Context</a>, <label for="r68" class="ident">req</label> <span class="keyword">interface</span>{}) (<span class="keyword">interface</span>{}, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-191"><code>		<span class="keyword">return</span> <label for="r59" class="ident">srv</label>.(<a href="#line-113" class="ident">CelServiceServer</a>).<a href="#line-121" class="ident">Eval</a>(<label for="r67" class="ident">ctx</label>, <label for="r68" class="ident">req</label>.(*<a href="conformance_service.pb.go.html#line-309" class="ident">EvalRequest</a>))</code></span>
+<span class="codeline" id="line-192"><code>	}</code></span>
+<span class="codeline" id="line-193"><code>	<span class="keyword">return</span> <label for="r62" class="ident">interceptor</label>(<label for="r60" class="ident">ctx</label>, <label for="r63" class="ident">in</label>, <label for="r65" class="ident">info</label>, <label for="r66" class="ident">handler</label>)</code></span>
+<span class="codeline" id="line-194"><code>}</code></span>
+<span class="codeline" id="line-195"><code></code></span>
+<span class="codeline" id="line-196"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/genproto/googleapis/api/expr/v1alpha1.html#name-_CelService_serviceDesc" class="ident">_CelService_serviceDesc</a> = <a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/server.go.html#line-90" class="ident">ServiceDesc</a>{</code></span>
+<span class="codeline" id="line-197"><code>	<a href="../../../../../grpc/server.go.html#line-91" class="ident">ServiceName</a>: <span class="lit-string">"google.api.expr.v1alpha1.CelService"</span>,</code></span>
+<span class="codeline" id="line-198"><code>	<a href="../../../../../grpc/server.go.html#line-94" class="ident">HandlerType</a>: (*<a href="#line-113" class="ident">CelServiceServer</a>)(<a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>),</code></span>
+<span class="codeline" id="line-199"><code>	<a href="../../../../../grpc/server.go.html#line-95" class="ident">Methods</a>: []<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/server.go.html#line-84" class="ident">MethodDesc</a>{</code></span>
+<span class="codeline" id="line-200"><code>		{</code></span>
+<span class="codeline" id="line-201"><code>			<a href="../../../../../grpc/server.go.html#line-85" class="ident">MethodName</a>: <span class="lit-string">"Parse"</span>,</code></span>
+<span class="codeline" id="line-202"><code>			<a href="../../../../../grpc/server.go.html#line-86" class="ident">Handler</a>:    <a href="#line-142" class="ident">_CelService_Parse_Handler</a>,</code></span>
+<span class="codeline" id="line-203"><code>		},</code></span>
+<span class="codeline" id="line-204"><code>		{</code></span>
+<span class="codeline" id="line-205"><code>			<a href="../../../../../grpc/server.go.html#line-85" class="ident">MethodName</a>: <span class="lit-string">"Check"</span>,</code></span>
+<span class="codeline" id="line-206"><code>			<a href="../../../../../grpc/server.go.html#line-86" class="ident">Handler</a>:    <a href="#line-160" class="ident">_CelService_Check_Handler</a>,</code></span>
+<span class="codeline" id="line-207"><code>		},</code></span>
+<span class="codeline" id="line-208"><code>		{</code></span>
+<span class="codeline" id="line-209"><code>			<a href="../../../../../grpc/server.go.html#line-85" class="ident">MethodName</a>: <span class="lit-string">"Eval"</span>,</code></span>
+<span class="codeline" id="line-210"><code>			<a href="../../../../../grpc/server.go.html#line-86" class="ident">Handler</a>:    <a href="#line-178" class="ident">_CelService_Eval_Handler</a>,</code></span>
+<span class="codeline" id="line-211"><code>		},</code></span>
+<span class="codeline" id="line-212"><code>	},</code></span>
+<span class="codeline" id="line-213"><code>	<a href="../../../../../grpc/server.go.html#line-96" class="ident">Streams</a>:  []<a href="../../../../../../../pkg/google.golang.org/grpc.html" class="ident i5">grpc</a>.<a href="../../../../../grpc/stream.go.html#line-61" class="ident">StreamDesc</a>{},</code></span>
+<span class="codeline" id="line-214"><code>	<a href="../../../../../grpc/server.go.html#line-97" class="ident">Metadata</a>: <span class="lit-string">"google/api/expr/v1alpha1/cel_service.proto"</span>,</code></span>
+<span class="codeline" id="line-215"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

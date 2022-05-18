@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/clusterspecifier</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>clusterspecifier</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/clusterspecifier">google.golang.org/grpc/xds/internal/clusterspecifier</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/clusterspecifier" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/xds/internal/clusterspecifier.html">one package</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/xds/internal/clusterspecifier.html#imported-by">3 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html">cluster_specifier.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package clusterspecifier contains the ClusterSpecifier interface and a registry for
+		storing and retrieving their implementations.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 2, both are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-BalancerConfig" data-popularity="185">	<input type='checkbox' class="fold" id="BalancerConfig-fold-content"><label for="BalancerConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-29">BalancerConfig</a> <i>([])</i></label><span id='BalancerConfig-fold-content-docs' class="fold-docs">
+		BalancerConfig is the Go Native JSON representation of a balancer
+		configuration.
+
+		<input type='checkbox' class="fold" id="BalancerConfig-fold-results"><label for="BalancerConfig-fold-results">As Outputs Of (<i>at least 2, in which 1 are exported</i>)</label><span id='BalancerConfig-fold-results-items' class="fold-items"><span>
+			func <a href="#name-ClusterSpecifier">ClusterSpecifier</a>.<a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-41">ParseClusterSpecifierConfig</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<b>BalancerConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</span>
+			<input type='checkbox' class="showhide" id="BalancerConfig-showhide-inputofs"><i><label for="BalancerConfig-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="BalancerConfig-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/xdsresource.<a href="xdsclient/xdsresource.html#name-processClusterSpecifierPlugins">processClusterSpecifierPlugins</a>(csps []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html">v3routepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html#name-ClusterSpecifierPlugin">ClusterSpecifierPlugin</a>) (map[<a href="../../../../builtin.html#name-string">string</a>]<b>BalancerConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="BalancerConfig-fold-params"><label for="BalancerConfig-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='BalancerConfig-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="BalancerConfig-showhide-outputofs"><i><label for="BalancerConfig-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="BalancerConfig-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/xdsresource.<a href="xdsclient/xdsresource.html#name-routesProtoToSlice">routesProtoToSlice</a>(routes []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html">v3routepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html#name-Route">Route</a>, csps map[<a href="../../../../builtin.html#name-string">string</a>]<b>BalancerConfig</b>, logger *<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, v2 <a href="../../../../builtin.html#name-bool">bool</a>) ([]*<a href="xdsclient/xdsresource.html">xdsresource</a>.<a href="xdsclient/xdsresource.html#name-Route">Route</a>, map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-bool">bool</a>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-ClusterSpecifier" data-popularity="360">	<input type='checkbox' class="fold" id="ClusterSpecifier-fold-content"><label for="ClusterSpecifier-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-32">ClusterSpecifier</a> <b><i>(interface)</i></b></label><span id='ClusterSpecifier-fold-content-docs' class="fold-docs">
+		ClusterSpecifier defines the parsing functionality of a Cluster Specifier.
+
+		<input type='checkbox' class="fold" id="ClusterSpecifier-fold-methods"><label for="ClusterSpecifier-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='ClusterSpecifier-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ClusterSpecifier-fold-method-ParseClusterSpecifierConfig"><label for="ClusterSpecifier-fold-method-ParseClusterSpecifierConfig">( ClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-41">ParseClusterSpecifierConfig</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<a href="#name-BalancerConfig">BalancerConfig</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='ClusterSpecifier-fold-method-ParseClusterSpecifierConfig-docs' class="fold-docs">
+				ParseClusterSpecifierConfig parses the provided configuration
+				proto.Message from the top level RDS configuration. The resulting
+				BalancerConfig will be used as configuration for a child LB Policy of the
+				Cluster Manager LB Policy. A nil BalancerConfig is invalid.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ClusterSpecifier-fold-method-TypeURLs"><label for="ClusterSpecifier-fold-method-TypeURLs">( ClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-36">TypeURLs</a>() []<a href="../../../../builtin.html#name-string">string</a></label><span id='ClusterSpecifier-fold-method-TypeURLs-docs' class="fold-docs">
+				TypeURLs are the proto message types supported by this
+				ClusterSpecifierPlugin. A ClusterSpecifierPlugin will be registered by
+				each of its supported message types.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ClusterSpecifier-fold-impledby"><label for="ClusterSpecifier-fold-impledby">Implemented By (<i>at least one unexported</i>)</label><span id='ClusterSpecifier-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ClusterSpecifier-showhide-impedBys"><i><label for="ClusterSpecifier-showhide-impedBys" class="show-inline">/* at least one unexported ... */</label><label for="ClusterSpecifier-showhide-impedBys" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/clusterspecifier/rls.<a href="clusterspecifier/rls.html#name-rls">rls</a></i></span></span>
+		<input type='checkbox' class="fold" id="ClusterSpecifier-fold-results"><label for="ClusterSpecifier-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='ClusterSpecifier-fold-results-items' class="fold-items"><span>
+			func <a href="#name-Get">Get</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>) <b>ClusterSpecifier</b></span></span>
+		<input type='checkbox' class="fold" id="ClusterSpecifier-fold-params"><label for="ClusterSpecifier-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='ClusterSpecifier-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Register">Register</a>(cs <b>ClusterSpecifier</b>)</span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 3, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Get">	<input type='checkbox' class="fold" id="Get-fold-content"><label for="Get-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-65">Get</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>) <a href="#name-ClusterSpecifier">ClusterSpecifier</a></label><span id='Get-fold-content-docs' class="fold-docs">
+		Get returns the ClusterSpecifier registered with typeURL.
+
+		If no cluster specifier is registered with typeURL, nil will be returned.
+
+</span></div><div class="anchor value-res" id="name-Register">	<input type='checkbox' class="fold" id="Register-fold-content"><label for="Register-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-56">Register</a>(cs <a href="#name-ClusterSpecifier">ClusterSpecifier</a>)</label><span id='Register-fold-content-docs' class="fold-docs">
+		Register registers the ClusterSpecifierPlugin to the ClusterSpecifier map.
+		cs.TypeURLs() will be used as the types for this ClusterSpecifierPlugin.
+
+		NOTE: this function must only be called during initialization time (i.e. in
+		an init() function), and is not thread-safe. If multiple cluster specifier
+		plugins are registered with the same type URL, the one registered last will
+		take effect.
+
+</span></div><div class="anchor value-res" id="name-UnregisterForTesting">	<input type='checkbox' class="fold" id="UnregisterForTesting-fold-content"><label for="UnregisterForTesting-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-70">UnregisterForTesting</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>)</label><span id='UnregisterForTesting-fold-content-docs' class="fold-docs">
+		UnregisterForTesting unregisters the ClusterSpecifier for testing purposes.
+
+</span></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-m"><i>	<input type='checkbox' class="fold" id="m-fold-content"><label for="m-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/clusterspecifier/cluster_specifier.go.html#line-46">m</a> map[<a href="../../../../builtin.html#name-string">string</a>]<a href="#name-ClusterSpecifier">ClusterSpecifier</a></label><span id='m-fold-content-docs' class="fold-docs">
+		m is a map from scheme to filter.
+
+</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

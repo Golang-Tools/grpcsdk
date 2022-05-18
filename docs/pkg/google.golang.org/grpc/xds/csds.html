@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/csds</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>csds</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../index.html#pkg-google.golang.org/grpc/xds/csds">google.golang.org/grpc/xds/csds</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/csds" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../dep/google.golang.org/grpc/xds/csds.html">15 packages</a>, and imported by <a href="../../../../dep/google.golang.org/grpc/xds/csds.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#doc">#d</a> <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html">csds.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package csds implements features to dump the status (xDS responses) the
+		xds_client is using.
+
+		Notice: This package is EXPERIMENTAL and may be changed or removed in a later
+		release.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-ClientStatusDiscoveryServer" data-popularity="325">	<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-content"><label for="ClientStatusDiscoveryServer-fold-content"> type <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-67">ClientStatusDiscoveryServer</a> <i>(struct)</i></label><span id='ClientStatusDiscoveryServer-fold-content-docs' class="fold-docs">
+		ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
+
+		<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-fields"><label for="ClientStatusDiscoveryServer-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='ClientStatusDiscoveryServer-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ClientStatusDiscoveryServer-showhide-fields"><i><label for="ClientStatusDiscoveryServer-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ClientStatusDiscoveryServer-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-field-xdsClient"><label for="ClientStatusDiscoveryServer-fold-field-xdsClient"><a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-70">xdsClient</a> <i><a href="internal/xdsclient.html">xdsclient</a>.<a href="internal/xdsclient.html#name-XDSClient">XDSClient</a></i></label><span id='ClientStatusDiscoveryServer-fold-field-xdsClient-docs' class="fold-docs">
+				xdsClient will always be the same in practice. But we keep a copy in each
+				server instance for testing.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-methods"><label for="ClientStatusDiscoveryServer-fold-methods">Methods (<i>total 4, in which 3 are exported</i>)</label><span id='ClientStatusDiscoveryServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-method-Close"><label for="ClientStatusDiscoveryServer-fold-method-Close">(*ClientStatusDiscoveryServer) <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-140">Close</a>()</label><span id='ClientStatusDiscoveryServer-fold-method-Close-docs' class="fold-docs">
+				Close cleans up the resources.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-method-FetchClientStatus"><label for="ClientStatusDiscoveryServer-fold-method-FetchClientStatus">(*ClientStatusDiscoveryServer) <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-100">FetchClientStatus</a>(_ <a href="../../../context.html">context</a>.<a href="../../../context.html#name-Context">Context</a>, req *<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statuspb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusRequest">ClientStatusRequest</a>) (*<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statuspb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusResponse">ClientStatusResponse</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='ClientStatusDiscoveryServer-fold-method-FetchClientStatus-docs' class="fold-docs">
+				FetchClientStatus implementations interface ClientStatusDiscoveryServiceServer.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-method-StreamClientStatus"><label for="ClientStatusDiscoveryServer-fold-method-StreamClientStatus">(*ClientStatusDiscoveryServer) <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-80">StreamClientStatus</a>(stream <a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statusgrpc</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusDiscoveryService_StreamClientStatusServer">ClientStatusDiscoveryService_StreamClientStatusServer</a>) <a href="../../../builtin.html#name-error">error</a></label><span id='ClientStatusDiscoveryServer-fold-method-StreamClientStatus-docs' class="fold-docs">
+				StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.
+</span></span>
+			<input type='checkbox' class="showhide" id="ClientStatusDiscoveryServer-showhide-methods"><i><label for="ClientStatusDiscoveryServer-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="ClientStatusDiscoveryServer-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-method-buildClientStatusRespForReq"><label for="ClientStatusDiscoveryServer-fold-method-buildClientStatusRespForReq">(*ClientStatusDiscoveryServer) <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-108">buildClientStatusRespForReq</a>(req *<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statuspb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusRequest">ClientStatusRequest</a>) (*<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statuspb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusResponse">ClientStatusResponse</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='ClientStatusDiscoveryServer-fold-method-buildClientStatusRespForReq-docs' class="fold-docs">
+				buildClientStatusRespForReq fetches the status from the client, and returns
+				the response to be sent back to xdsclient.
+
+				If it returns an error, the error is a status error.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-impls"><label for="ClientStatusDiscoveryServer-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ClientStatusDiscoveryServer-fold-impls-items' class="fold-items"><span>
+			*ClientStatusDiscoveryServer : github.com/envoyproxy/go-control-plane/envoy/service/status/v3.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientStatusDiscoveryServiceServer">ClientStatusDiscoveryServiceServer</a></span></span>
+		<input type='checkbox' class="fold" id="ClientStatusDiscoveryServer-fold-results"><label for="ClientStatusDiscoveryServer-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='ClientStatusDiscoveryServer-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewClientStatusDiscoveryServer">NewClientStatusDiscoveryServer</a>() (*<b>ClientStatusDiscoveryServer</b>, <a href="../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 4, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewClientStatusDiscoveryServer">	<input type='checkbox' class="fold" id="NewClientStatusDiscoveryServer-fold-content"><label for="NewClientStatusDiscoveryServer-fold-content"> func <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-75">NewClientStatusDiscoveryServer</a>() (*<a href="#name-ClientStatusDiscoveryServer">ClientStatusDiscoveryServer</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='NewClientStatusDiscoveryServer-fold-content-docs' class="fold-docs">
+		NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
+		registered on a gRPC server.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-dumpToGenericXdsConfig"><i>	<span class="nodocs"> func <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-177">dumpToGenericXdsConfig</a>(typeURL <a href="../../../builtin.html#name-string">string</a>, dumpF func() map[<a href="../../../builtin.html#name-string">string</a>]<a href="internal/xdsclient/xdsresource.html">xdsresource</a>.<a href="internal/xdsclient/xdsresource.html#name-UpdateWithMD">UpdateWithMD</a>) []*<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html">v3statuspb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/service/status/v3.html#name-ClientConfig_GenericXdsConfig">ClientConfig_GenericXdsConfig</a></span></i></div><div class="anchor value-res hidden" id="name-nodeProtoToV3"><i>	<input type='checkbox' class="fold" id="nodeProtoToV3-fold-content"><label for="nodeProtoToV3-fold-content"> func <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-156">nodeProtoToV3</a>(n <a href="../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) *<a href="../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-Node">Node</a></label><span id='nodeProtoToV3-fold-content-docs' class="fold-docs">
+		nodeProtoToV3 converts the given proto into a v3.Node. n is from bootstrap
+		config, it can be either v2.Node or v3.Node.
+
+		If n is already a v3.Node, return it.
+		If n is v2.Node, marshal and unmarshal it to v3.
+		Otherwise, return nil.
+
+		The default case (not v2 or v3) is nil, instead of error, because the
+		resources in the response are more important than the node. The worst case is
+		that the user will receive no Node info, but will still get resources.
+
+</span></i></div><div class="anchor value-res hidden" id="name-serviceStatusToProto"><i>	<span class="nodocs"> func <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-201">serviceStatusToProto</a>(serviceStatus <a href="internal/xdsclient/xdsresource.html">xdsresource</a>.<a href="internal/xdsclient/xdsresource.html#name-ServiceStatus">ServiceStatus</a>) <a href="../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3.html">v3adminpb</a>.<a href="../../../github.com/envoyproxy/go-control-plane/envoy/admin/v3.html#name-ClientResourceStatus">ClientResourceStatus</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 2, neither is exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-48">logger</a> <a href="../grpclog.html">grpclog</a>.<a href="../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div><div class="anchor value-res hidden" id="name-newXDSClient"><i>	<span class="nodocs">  var <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-49">newXDSClient</a> func() <a href="internal/xdsclient.html">xdsclient</a>.<a href="internal/xdsclient.html#name-XDSClient">XDSClient</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 4, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-clusterTypeURL"><i>	<span class="nodocs">const <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-62">clusterTypeURL</a> = "envoy.config.cluster.v3.Cluster"</span></i></div><div class="anchor value-res hidden" id="name-endpointsTypeURL"><i>	<span class="nodocs">const <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-63">endpointsTypeURL</a> = "envoy.config.endpoint.v3.ClusterLoadAssignment"</span></i></div><div class="anchor value-res hidden" id="name-listenerTypeURL"><i>	<span class="nodocs">const <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-60">listenerTypeURL</a> = "envoy.config.listener.v3.Listener"</span></i></div><div class="anchor value-res hidden" id="name-routeConfigTypeURL"><i>	<span class="nodocs">const <a href="../../../../src/google.golang.org/grpc/xds/csds/csds.go.html#line-61">routeConfigTypeURL</a> = "envoy.config.route.v3.RouteConfiguration"</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

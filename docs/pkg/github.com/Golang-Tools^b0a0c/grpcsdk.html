@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/Golang-Tools/grpcsdk</title>
+<link href="../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>grpcsdk</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../index.html#pkg-github.com/Golang-Tools/grpcsdk">github.com/Golang-Tools/grpcsdk</a><i> (on <a href="https://pkg.go.dev/github.com/Golang-Tools/grpcsdk" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../dep/github.com/Golang-Tools^b0a0c/grpcsdk.html">23 packages</a>, and imported by 0 packages
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/acquireopts.go.html">acquireopts.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html">client.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html">clientnewopts.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html">clientpool.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html">clientpoolnewopts.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html">config.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html">ctxopts.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html">exceptions.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html">grpcsdk.go</a></span>
+	<span class="nodocs">      <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html">sdk.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 13, all are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-AcquireOptions" data-popularity="0">	<input type='checkbox' class="fold" id="AcquireOptions-fold-content"><label for="AcquireOptions-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/acquireopts.go.html#line-8">AcquireOptions</a> <i>(struct)</i></label><span id='AcquireOptions-fold-content-docs' class="fold-docs">
+		AcquireOptions 设置Acquire方法的选项
+
+		<input type='checkbox' class="fold" id="AcquireOptions-fold-fields"><label for="AcquireOptions-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='AcquireOptions-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/acquireopts.go.html#line-9">Force</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span></span>
+
+</span></div><div class="anchor type-res" id="name-Client" data-popularity="375">	<input type='checkbox' class="fold" id="Client-fold-content"><label for="Client-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-10">Client</a>[T] <i>(struct)</i></label><span id='Client-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		Client 客户端类,满足接口GrpcClientGetter和GrpcClientInterface
+		@generics T any 需要指定返回的客户端接口
+
+		<input type='checkbox' class="fold" id="Client-fold-fields"><label for="Client-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='Client-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Client-showhide-fields"><i><label for="Client-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="Client-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-11">cli</a> <i>T</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-14">clientfactory</a> <i><a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T]</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-12">conn</a> <i>*<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-13">opts</a> <i><a href="#name-NewClientOptions">NewClientOptions</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="Client-fold-methods"><label for="Client-fold-methods">Methods (<i>total 5, all are exported</i>)</label><span id='Client-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Client-fold-method-Acquire"><label for="Client-fold-method-Acquire">(*Client[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-22">Acquire</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='Client-fold-method-Acquire-docs' class="fold-docs">
+				Acquire  维持接口,返回自身
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params opts ...optparams.Option[AcquireOptions] acquire方法的参数,只有`Force()`可用,不会生效
+				@returns GrpcClientInterface[T] 客户端接口对象
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="Client-fold-method-AsGrpcClient"><label for="Client-fold-method-AsGrpcClient">(*Client[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-42">AsGrpcClient</a>() T</label><span id='Client-fold-method-AsGrpcClient-docs' class="fold-docs">
+				AsGrpcClient 将对象转成满足T接口的对象,此处返回自身
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns T 返回自身
+</span></span><span>
+			<input type='checkbox' class="fold" id="Client-fold-method-Close"><label for="Client-fold-method-Close">(*Client[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-69">Close</a>() <a href="../../builtin.html#name-error">error</a></label><span id='Client-fold-method-Close-docs' class="fold-docs">
+				Close 断开连接
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="Client-fold-method-GetConn"><label for="Client-fold-method-GetConn">(*Client[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-35">GetConn</a>() <a href="#name-GrpcConnInterface">GrpcConnInterface</a></label><span id='Client-fold-method-GetConn-docs' class="fold-docs">
+				GetConn 获取客户端资源,即获取自身
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns GrpcConnInterface 返回自身
+</span></span><span>
+			<input type='checkbox' class="fold" id="Client-fold-method-Release"><label for="Client-fold-method-Release">(*Client[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-29">Release</a>(cli <a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T])</label><span id='Client-fold-method-Release-docs' class="fold-docs">
+				Release 释放客户端资源,维持接口不做任何操作
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params cli GrpcClientInterface[T] 要释放的客户端资源
+</span></span></span>
+		<input type='checkbox' class="fold" id="Client-fold-impls"><label for="Client-fold-impls">Implements (<i>at least one exported</i>)</label><span id='Client-fold-impls-items' class="fold-items"><span>
+			*Client : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="Client-fold-results"><label for="Client-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Client-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewClient">NewClient</a>[T](newgrpcclientfunc <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]) (*<b>Client</b>[T], <a href="../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-CtxOptions" data-popularity="0">	<input type='checkbox' class="fold" id="CtxOptions-fold-content"><label for="CtxOptions-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-11">CtxOptions</a> <i>(struct)</i></label><span id='CtxOptions-fold-content-docs' class="fold-docs">
+		CtxOptions 设置ctx行为的选项
+
+		<input type='checkbox' class="fold" id="CtxOptions-fold-fields"><label for="CtxOptions-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='CtxOptions-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-14">MetaData</a> <i><a href="../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../google.golang.org/grpc/metadata.html#name-MD">MD</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-13">Timeout</a> <i><a href="../../time.html">time</a>.<a href="../../time.html#name-Duration">Duration</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-12">UntilEnd</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcClientGetter" data-popularity="350">	<input type='checkbox' class="fold" id="GrpcClientGetter-fold-content"><label for="GrpcClientGetter-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-28">GrpcClientGetter</a>[T] <b><i>(interface)</i></b></label><span id='GrpcClientGetter-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		GrpcClientGetter 客户获取客户端的对象
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+
+		<input type='checkbox' class="fold" id="GrpcClientGetter-fold-methods"><label for="GrpcClientGetter-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='GrpcClientGetter-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( GrpcClientGetter[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-29">Acquire</a>(...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T], <a href="../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">( GrpcClientGetter[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-31">Close</a>() <a href="../../builtin.html#name-error">error</a></span></span><span>
+			<span class="nodocs">( GrpcClientGetter[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-30">Release</a>(cli <a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T])</span></span></span>
+		<input type='checkbox' class="fold" id="GrpcClientGetter-fold-impls"><label for="GrpcClientGetter-fold-impls">Implements (<i>at least one exported</i>)</label><span id='GrpcClientGetter-fold-impls-items' class="fold-items"><span>
+			 GrpcClientGetter : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="GrpcClientGetter-fold-results"><label for="GrpcClientGetter-fold-results">As Outputs Of (<i>at least 2, in which 1 are exported</i>)</label><span id='GrpcClientGetter-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-SDK">SDK</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-373">NewClientGetter</a>() (<b>GrpcClientGetter</b>[T], <a href="../../builtin.html#name-error">error</a>)</span>
+			<input type='checkbox' class="showhide" id="GrpcClientGetter-showhide-inputofs"><i><label for="GrpcClientGetter-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="GrpcClientGetter-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-SDK">SDK</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-343">newClientGetter</a>() (<b>GrpcClientGetter</b>[T], <a href="../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcClientInterface" data-popularity="605">	<input type='checkbox' class="fold" id="GrpcClientInterface-fold-content"><label for="GrpcClientInterface-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-20">GrpcClientInterface</a>[T] <b><i>(interface)</i></b></label><span id='GrpcClientInterface-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		GrpcClientInterface grpc的客户端接口
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+
+		<input type='checkbox' class="fold" id="GrpcClientInterface-fold-methods"><label for="GrpcClientInterface-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='GrpcClientInterface-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( GrpcClientInterface[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-22">AsGrpcClient</a>() T</span></span><span>
+			<span class="nodocs">( GrpcClientInterface[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-23">Close</a>() <a href="../../builtin.html#name-error">error</a></span></span><span>
+			<span class="nodocs">( GrpcClientInterface[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-21">GetConn</a>() <a href="#name-GrpcConnInterface">GrpcConnInterface</a></span></span></span>
+		<input type='checkbox' class="fold" id="GrpcClientInterface-fold-impls"><label for="GrpcClientInterface-fold-impls">Implements (<i>at least one exported</i>)</label><span id='GrpcClientInterface-fold-impls-items' class="fold-items"><span>
+			 GrpcClientInterface : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="GrpcClientInterface-fold-results"><label for="GrpcClientInterface-fold-results">As Outputs Of (<i>at least 4, in which 3 are exported</i>)</label><span id='GrpcClientInterface-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-Client">Client</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-22">Acquire</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<b>GrpcClientInterface</b>[T], <a href="../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-GrpcClientGetter">GrpcClientGetter</a>[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-29">Acquire</a>(...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<b>GrpcClientInterface</b>[T], <a href="../../builtin.html#name-error">error</a>)</span><span>
+			func (*<a href="#name-GrpcConnPool">GrpcConnPool</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-82">Acquire</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<b>GrpcClientInterface</b>[T], <a href="../../builtin.html#name-error">error</a>)</span>
+			<input type='checkbox' class="showhide" id="GrpcClientInterface-showhide-inputofs"><i><label for="GrpcClientInterface-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="GrpcClientInterface-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-GrpcConnPool">GrpcConnPool</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-40">acquire</a>() (<b>GrpcClientInterface</b>[T], <a href="../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="GrpcClientInterface-fold-params"><label for="GrpcClientInterface-fold-params">As Inputs Of (<i>at least 3, all are exported</i>)</label><span id='GrpcClientInterface-fold-params-items' class="fold-items"><span>
+			func (*<a href="#name-Client">Client</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-29">Release</a>(cli <b>GrpcClientInterface</b>[T])</span><span>
+			func <a href="#name-GrpcClientGetter">GrpcClientGetter</a>[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-30">Release</a>(cli <b>GrpcClientInterface</b>[T])</span><span>
+			func (*<a href="#name-GrpcConnPool">GrpcConnPool</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-107">Release</a>(cli <b>GrpcClientInterface</b>[T])</span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcConnInterface" data-popularity="700">	<input type='checkbox' class="fold" id="GrpcConnInterface-fold-content"><label for="GrpcConnInterface-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-10">GrpcConnInterface</a> <b><i>(interface)</i></b></label><span id='GrpcConnInterface-fold-content-docs' class="fold-docs">
+		GrpcConnInterface grpc的连接接口
+
+		<input type='checkbox' class="fold" id="GrpcConnInterface-fold-methods"><label for="GrpcConnInterface-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='GrpcConnInterface-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( GrpcConnInterface) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-15">Close</a>() <a href="../../builtin.html#name-error">error</a></span></span><span>
+			<span class="nodocs">( GrpcConnInterface) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-13">Connect</a>()</span></span><span>
+			<span class="nodocs">( GrpcConnInterface) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-12">GetState</a>() <a href="../../google.golang.org/grpc/connectivity.html">connectivity</a>.<a href="../../google.golang.org/grpc/connectivity.html#name-State">State</a></span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnInterface-fold-method-Invoke"><label for="GrpcConnInterface-fold-method-Invoke">( GrpcConnInterface) <a href="../../../src/google.golang.org/grpc/clientconn.go.html#line-443">Invoke</a>(ctx <a href="../../context.html">context</a>.<a href="../../context.html#name-Context">Context</a>, method <a href="../../builtin.html#name-string">string</a>, args interface{}, reply interface{}, opts ...<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-CallOption">CallOption</a>) <a href="../../builtin.html#name-error">error</a></label><span id='GrpcConnInterface-fold-method-Invoke-docs' class="fold-docs">
+				Invoke performs a unary RPC and returns after the response is received
+				into reply.
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnInterface-fold-method-NewStream"><label for="GrpcConnInterface-fold-method-NewStream">( GrpcConnInterface) <a href="../../../src/google.golang.org/grpc/clientconn.go.html#line-445">NewStream</a>(ctx <a href="../../context.html">context</a>.<a href="../../context.html#name-Context">Context</a>, desc *<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-StreamDesc">StreamDesc</a>, method <a href="../../builtin.html#name-string">string</a>, opts ...<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-CallOption">CallOption</a>) (<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-ClientStream">ClientStream</a>, <a href="../../builtin.html#name-error">error</a>)</label><span id='GrpcConnInterface-fold-method-NewStream-docs' class="fold-docs">
+				NewStream begins a streaming RPC.
+</span></span><span>
+			<span class="nodocs">( GrpcConnInterface) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-14">ResetConnectBackoff</a>()</span></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnInterface-fold-impledby"><label for="GrpcConnInterface-fold-impledby">Implemented By (<i>at least one exported</i>)</label><span id='GrpcConnInterface-fold-impledby-items' class="fold-items"><span>
+			*google.golang.org/grpc.<a href="../../google.golang.org/grpc.html#name-ClientConn">ClientConn</a></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnInterface-fold-impls"><label for="GrpcConnInterface-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='GrpcConnInterface-fold-impls-items' class="fold-items"><span>
+			 GrpcConnInterface : google.golang.org/grpc.<a href="../../google.golang.org/grpc.html#name-ClientConnInterface">ClientConnInterface</a></span><span>
+			 GrpcConnInterface : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnInterface-fold-results"><label for="GrpcConnInterface-fold-results">As Outputs Of (<i>at least 2, both are exported</i>)</label><span id='GrpcConnInterface-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-Client">Client</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-35">GetConn</a>() <b>GrpcConnInterface</b></span><span>
+			func <a href="#name-GrpcClientInterface">GrpcClientInterface</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-21">GetConn</a>() <b>GrpcConnInterface</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcConnPool" data-popularity="525">	<input type='checkbox' class="fold" id="GrpcConnPool-fold-content"><label for="GrpcConnPool-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-13">GrpcConnPool</a>[T] <i>(struct)</i></label><span id='GrpcConnPool-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		GrpcConnPool 客户端连接池,满足接口GrpcClientGetter
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+
+		<input type='checkbox' class="fold" id="GrpcConnPool-fold-fields"><label for="GrpcConnPool-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='GrpcConnPool-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="GrpcConnPool-showhide-fields"><i><label for="GrpcConnPool-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="GrpcConnPool-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-17">clientfactory</a> <i><a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T]</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-15">clis</a> <i>chan <a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T]</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-16">mu</a> <i>*<a href="../../sync.html">sync</a>.<a href="../../sync.html#name-RWMutex">RWMutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-14">opts</a> <i><a href="#name-NewClientPoolOptions">NewClientPoolOptions</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnPool-fold-methods"><label for="GrpcConnPool-fold-methods">Methods (<i>total 8, in which 6 are exported</i>)</label><span id='GrpcConnPool-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-Acquire"><label for="GrpcConnPool-fold-method-Acquire">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-82">Acquire</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (<a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='GrpcConnPool-fold-method-Acquire-docs' class="fold-docs">
+				Acquire 获取客户端接口
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params opts ...optparams.Option[AcquireOptions] acquire方法的参数,只有`Force()`可用,表示是否强制获取,如果队列中已经没有可用的客户端了则创建一个客户端对象
+				@returns GrpcClientInterface[T] 客户端接口对象
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-Available"><label for="GrpcConnPool-fold-method-Available">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-145">Available</a>() <a href="../../builtin.html#name-int">int</a></label><span id='GrpcConnPool-fold-method-Available-docs' class="fold-docs">
+				Available 获取当前池可用的客户端数
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns int 可用客户端数
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-Close"><label for="GrpcConnPool-fold-method-Close">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-155">Close</a>() <a href="../../builtin.html#name-error">error</a></label><span id='GrpcConnPool-fold-method-Close-docs' class="fold-docs">
+				Close 关闭连接池
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-IsClosed"><label for="GrpcConnPool-fold-method-IsClosed">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-126">IsClosed</a>() <a href="../../builtin.html#name-bool">bool</a></label><span id='GrpcConnPool-fold-method-IsClosed-docs' class="fold-docs">
+				IsClosed 监测池是否已经关闭
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns bool 是否已经关闭
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-Limits"><label for="GrpcConnPool-fold-method-Limits">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-138">Limits</a>() <a href="../../builtin.html#name-int">int</a></label><span id='GrpcConnPool-fold-method-Limits-docs' class="fold-docs">
+				Limits 返回池最大容量限制
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns int 最大容量
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-Release"><label for="GrpcConnPool-fold-method-Release">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-107">Release</a>(cli <a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T])</label><span id='GrpcConnPool-fold-method-Release-docs' class="fold-docs">
+				Release 释放连接放回池中
+				关闭状态的连接不会被放入池中
+				当池子当前容量小于设置的最小值时才会放回,否则关闭连接
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params cli GrpcClientInterface[T] 要释放的客户端资源
+</span></span>
+			<input type='checkbox' class="showhide" id="GrpcConnPool-showhide-methods"><i><label for="GrpcConnPool-showhide-methods" class="show-inline">/* 2 unexporteds ... */</label><label for="GrpcConnPool-showhide-methods" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-acquire"><label for="GrpcConnPool-fold-method-acquire">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-40">acquire</a>() (<a href="#name-GrpcClientInterface">GrpcClientInterface</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='GrpcConnPool-fold-method-acquire-docs' class="fold-docs">
+				acquire 从池中获取连接
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns GrpcClientInterface[T] 客户端接口对象
+				@returns error 错误信息
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrpcConnPool-fold-method-fillConns"><label for="GrpcConnPool-fold-method-fillConns">(*GrpcConnPool[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-24">fillConns</a>(n <a href="../../builtin.html#name-int">int</a>) <a href="../../builtin.html#name-error">error</a></label><span id='GrpcConnPool-fold-method-fillConns-docs' class="fold-docs">
+				fillConns 向conns中填入指定数量的连接
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params n int 填入的数量
+				@returns error 错误信息
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnPool-fold-impls"><label for="GrpcConnPool-fold-impls">Implements (<i>at least one exported</i>)</label><span id='GrpcConnPool-fold-impls-items' class="fold-items"><span>
+			*GrpcConnPool : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="GrpcConnPool-fold-results"><label for="GrpcConnPool-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GrpcConnPool-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewPool">NewPool</a>[T](newgrpcclientfunc <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]) (*<b>GrpcConnPool</b>[T], <a href="../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-NewClientOptions" data-popularity="40">	<input type='checkbox' class="fold" id="NewClientOptions-fold-content"><label for="NewClientOptions-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-9">NewClientOptions</a> <i>(struct)</i></label><span id='NewClientOptions-fold-content-docs' class="fold-docs">
+		NewClientOptions 设置新建客户端的选项
+
+		<input type='checkbox' class="fold" id="NewClientOptions-fold-fields"><label for="NewClientOptions-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='NewClientOptions-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-10">Addr</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-11">DialOpts</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-DialOption">DialOption</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="NewClientOptions-fold-params"><label for="NewClientOptions-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='NewClientOptions-fold-params-items' class="fold-items"><span>
+			func <a href="#name-WithClientConfig">WithClientConfig</a>(conf *<b>NewClientOptions</b>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<b>NewClientOptions</b>]</span></span>
+		<input type='checkbox' class="fold" id="NewClientOptions-fold-values"><label for="NewClientOptions-fold-values">As Types Of (<i>only one, which is exported</i>)</label><span id='NewClientOptions-fold-values-items' class="fold-items"><span>
+			  var <a href="#name-DefaultNewClientOpts">DefaultNewClientOpts</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-NewClientPoolOptions" data-popularity="5">	<input type='checkbox' class="fold" id="NewClientPoolOptions-fold-content"><label for="NewClientPoolOptions-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-11">NewClientPoolOptions</a> <i>(struct)</i></label><span id='NewClientPoolOptions-fold-content-docs' class="fold-docs">
+		NewClientPoolOptions 设置新建客户端池的选项
+
+		<input type='checkbox' class="fold" id="NewClientPoolOptions-fold-fields"><label for="NewClientPoolOptions-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='NewClientPoolOptions-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-15">AcquireWaitTime</a> <i><a href="../../time.html">time</a>.<a href="../../time.html#name-Duration">Duration</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-14">Limits</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-12">NewClientOptions</a> <i>*<a href="#name-NewClientOptions">NewClientOptions</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-12" class="path-duplicate">NewClientOptions</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-10">Addr</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-12" class="path-duplicate">NewClientOptions</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-11">DialOpts</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-DialOption">DialOption</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-13">Reservations</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="NewClientPoolOptions-fold-values"><label for="NewClientPoolOptions-fold-values">As Types Of (<i>only one, which is exported</i>)</label><span id='NewClientPoolOptions-fold-values-items' class="fold-items"><span>
+			  var <a href="#name-DefaultNewClientPoolOpts">DefaultNewClientPoolOpts</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-NewGrpcClientFunc" data-popularity="105">	<input type='checkbox' class="fold" id="NewGrpcClientFunc-fold-content"><label for="NewGrpcClientFunc-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-36">NewGrpcClientFunc</a>[T] <i>(func)</i></label><span id='NewGrpcClientFunc-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		NewGrpcClientFunc 用于构造可以被池使用对象的工厂函数
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+
+		<input type='checkbox' class="fold" id="NewGrpcClientFunc-fold-params"><label for="NewGrpcClientFunc-fold-params">As Inputs Of (<i>at least 3, all are exported</i>)</label><span id='NewGrpcClientFunc-fold-params-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>[T](factory <b>NewGrpcClientFunc</b>[T], desc *<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-ServiceDesc">ServiceDesc</a>) *<a href="#name-SDK">SDK</a>[T]</span><span>
+			func <a href="#name-NewClient">NewClient</a>[T](newgrpcclientfunc <b>NewGrpcClientFunc</b>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]) (*<a href="#name-Client">Client</a>[T], <a href="../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-NewPool">NewPool</a>[T](newgrpcclientfunc <b>NewGrpcClientFunc</b>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]) (*<a href="#name-GrpcConnPool">GrpcConnPool</a>[T], <a href="../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-ReleaseFunc" data-popularity="75">	<input type='checkbox' class="fold" id="ReleaseFunc-fold-content"><label for="ReleaseFunc-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/grpcsdk.go.html#line-38">ReleaseFunc</a> <i>(func)</i></label><span id='ReleaseFunc-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="ReleaseFunc-fold-results"><label for="ReleaseFunc-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='ReleaseFunc-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-SDK">SDK</a>)[T].<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-309">GetClient</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (T, <b>ReleaseFunc</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-SDK" data-popularity="975">	<input type='checkbox' class="fold" id="SDK-fold-content"><label for="SDK-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-33">SDK</a>[T] <i>(struct)</i></label><span id='SDK-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		SDK 的客户端类型
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+
+		<input type='checkbox' class="fold" id="SDK-fold-fields"><label for="SDK-fold-fields">Fields (<i>total 32, in which 25 are exported</i>)</label><span id='SDK-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-42">Logger</a> <i>*<a href="loggerhelper/v2.html">log</a>.<a href="loggerhelper/v2.html#name-Log">Log</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34">SDKConfig</a> <i>*<a href="#name-SDKConfig">SDKConfig</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-Ca_Cert_Path"><label for="SDK-fold-field-Ca_Cert_Path"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-28">Ca_Cert_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></label><span id='SDK-fold-field-Ca_Cert_Path-docs' class="fold-docs">
+				TLS设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-29">Client_Cert_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-30">Client_Key_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-Client_Pool"><label for="SDK-fold-field-Client_Pool"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-36">Client_Pool</a> <i><a href="../../builtin.html#name-bool">bool</a></i></label><span id='SDK-fold-field-Client_Pool-docs' class="fold-docs">
+				客户端连接池
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-39">Client_Pool_Acquire_Wait_Time_MS</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-38">Client_Pool_Limits</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-37">Client_Pool_Reservations</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-Compression"><label for="SDK-fold-field-Compression"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-25">Compression</a> <i><a href="../../builtin.html#name-string">string</a></i></label><span id='SDK-fold-field-Compression-docs' class="fold-docs">
+				压缩设置,目前只支持gzip
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-20">Conn_With_Block</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-16">Initial_Conn_Window_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-Initial_Window_Size"><label for="SDK-fold-field-Initial_Window_Size"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-15">Initial_Window_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></label><span id='SDK-fold-field-Initial_Window_Size-docs' class="fold-docs">
+				性能设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-19">Keepalive_Enforcement_Permit_Without_Stream</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-17">Keepalive_Time</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-18">Keepalive_Timeout</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-21">Max_Recv_Msg_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-22">Max_Send_Msg_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-10">Query_Addresses</a> <i>[]<a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-Query_Timeout"><label for="SDK-fold-field-Query_Timeout"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-41">Query_Timeout</a> <i><a href="../../builtin.html#name-int">int</a></i></label><span id='SDK-fold-field-Query_Timeout-docs' class="fold-docs">
+				请求超时设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-11">Requester_App_Name</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-12">Requester_App_Version</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-44">StreamInterceptors</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-StreamClientInterceptor">StreamClientInterceptor</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-43">UnaryInterceptors</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-UnaryClientInterceptor">UnaryClientInterceptor</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-field-XDS_CREDS"><label for="SDK-fold-field-XDS_CREDS"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-34" class="path-duplicate">SDKConfig</a>.<a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-33">XDS_CREDS</a> <i><a href="../../builtin.html#name-bool">bool</a></i></label><span id='SDK-fold-field-XDS_CREDS-docs' class="fold-docs">
+				XDS设置
+</span></span>
+			<input type='checkbox' class="showhide" id="SDK-showhide-fields"><i><label for="SDK-showhide-fields" class="show-inline">/* 7 unexporteds ... */</label><label for="SDK-showhide-fields" class="hide-inline">/* 7 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-38">addr</a> <i><a href="../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-36">callopts</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-CallOption">CallOption</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-40">clientgetter</a> <i><a href="#name-GrpcClientGetter">GrpcClientGetter</a>[T]</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-39">factory</a> <i><a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T]</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-41">getClientGetterLock</a> <i>*<a href="../../sync.html">sync</a>.<a href="../../sync.html#name-RWMutex">RWMutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-35">opts</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-DialOption">DialOption</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-37">serviceconfig</a> <i>map[<a href="../../builtin.html#name-string">string</a>]interface{}</i></span></i></span></span>
+		<input type='checkbox' class="fold" id="SDK-fold-methods"><label for="SDK-fold-methods">Methods (<i>total 17, in which 7 are exported</i>)</label><span id='SDK-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-Close"><label for="SDK-fold-method-Close">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-387">Close</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-Close-docs' class="fold-docs">
+				NewClientGetter 建立一个新的客户端获取器,并绑定至sdk中
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-GetClient"><label for="SDK-fold-method-GetClient">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-309">GetClient</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]) (T, <a href="#name-ReleaseFunc">ReleaseFunc</a>)</label><span id='SDK-fold-method-GetClient-docs' class="fold-docs">
+				GetClient 返回接口和回收函数
+				注意如果获取连接时报错会报panic
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params opts ...optparams.Option[AcquireOptions] acquire方法的参数,只有`Force()`可用,表示是否强制获取,如果队列中已经没有可用的客户端了则创建一个客户端对象
+				@returns T grpc客户端对象
+				@returns ReleaseFunc grpc客户端回收函数
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-Init"><label for="SDK-fold-method-Init">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-222">Init</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]) <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-Init-docs' class="fold-docs">
+				Init 初始化sdk客户端的连接信息
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-NewClientGetter"><label for="SDK-fold-method-NewClientGetter">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-373">NewClientGetter</a>() (<a href="#name-GrpcClientGetter">GrpcClientGetter</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='SDK-fold-method-NewClientGetter-docs' class="fold-docs">
+				NewClientGetter 建立一个新的客户端获取器,并绑定至sdk中
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns GrpcClientGetter[T] 客户端获取器
+				@returns error 错误信息
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-NewCtx"><label for="SDK-fold-method-NewCtx">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-283">NewCtx</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-CtxOptions">CtxOptions</a>]) (ctx <a href="../../context.html">context</a>.<a href="../../context.html#name-Context">Context</a>, cancel <a href="../../context.html">context</a>.<a href="../../context.html#name-CancelFunc">CancelFunc</a>)</label><span id='SDK-fold-method-NewCtx-docs' class="fold-docs">
+				NewCtx 创建请求的上下文,这个上下问可以带元数据信息
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@params opts ...optparams.Option[CtxOptions] 构造上下文的参数
+				@returns ctx context.Context 上下文对象
+				@returns cancel context.CancelFunc 上下文取消函数
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-RegistInterceptor"><label for="SDK-fold-method-RegistInterceptor">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-207">RegistInterceptor</a>()</label><span id='SDK-fold-method-RegistInterceptor-docs' class="fold-docs">
+				RegistInterceptor 注册拦截器
+</span></span><span>
+			<input type='checkbox' class="fold" id="SDK-fold-method-WithRequestMeta"><label for="SDK-fold-method-WithRequestMeta">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-36">WithRequestMeta</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-CtxOptions">CtxOptions</a>]</label><span id='SDK-fold-method-WithRequestMeta-docs' class="fold-docs">
+				WithRequestMeta NewCtx方法的参数,用于设置请求端信息到meta数据
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></span>
+			<input type='checkbox' class="showhide" id="SDK-showhide-methods"><i><label for="SDK-showhide-methods" class="show-inline">/* 10 unexporteds ... */</label><label for="SDK-showhide-methods" class="hide-inline">/* 10 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initCompression"><label for="SDK-fold-method-initCompression">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-78">initCompression</a>()</label><span id='SDK-fold-method-initCompression-docs' class="fold-docs">
+				initCompression 初始化压缩设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initKeepalive"><label for="SDK-fold-method-initKeepalive">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-89">initKeepalive</a>()</label><span id='SDK-fold-method-initKeepalive-docs' class="fold-docs">
+				initKeepalive 初始化keepalive的相关设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initMsgSize"><label for="SDK-fold-method-initMsgSize">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-66">initMsgSize</a>()</label><span id='SDK-fold-method-initMsgSize-docs' class="fold-docs">
+				initMsgSize 初始化消息大小设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initPerformanceOpts"><label for="SDK-fold-method-initPerformanceOpts">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-102">initPerformanceOpts</a>()</label><span id='SDK-fold-method-initPerformanceOpts-docs' class="fold-docs">
+				initPerformanceOpts 初始化连接的性能选项
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initTLS"><label for="SDK-fold-method-initTLS">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-116">initTLS</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-initTLS-docs' class="fold-docs">
+				initTLS 初始化TLS设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initWithDNSLB"><label for="SDK-fold-method-initWithDNSLB">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-159">initWithDNSLB</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-initWithDNSLB-docs' class="fold-docs">
+				initWithDNSLB 初始化使用外部dns做负载均衡的设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initWithLocalBalance"><label for="SDK-fold-method-initWithLocalBalance">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-181">initWithLocalBalance</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-initWithLocalBalance-docs' class="fold-docs">
+				InitWithLocalBalance 初始化本地负载均衡的连接配置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initWithXDSLB"><label for="SDK-fold-method-initWithXDSLB">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-166">initWithXDSLB</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-initWithXDSLB-docs' class="fold-docs">
+				InitWithStandalone 初始化使用XDS协议做负载均衡的设置
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-initWithoutBL"><label for="SDK-fold-method-initWithoutBL">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-153">initWithoutBL</a>() <a href="../../builtin.html#name-error">error</a></label><span id='SDK-fold-method-initWithoutBL-docs' class="fold-docs">
+				initWithoutBL 初始化没有堵在均衡设置的服务
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="SDK-fold-method-newClientGetter"><label for="SDK-fold-method-newClientGetter">(*SDK[T]) <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-343">newClientGetter</a>() (<a href="#name-GrpcClientGetter">GrpcClientGetter</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='SDK-fold-method-newClientGetter-docs' class="fold-docs">
+				newClientGetter 建立一个新的客户端获取器
+				@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+				@returns GrpcClientGetter[T] 客户端获取器
+				@returns error 错误信息
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="SDK-fold-impls"><label for="SDK-fold-impls">Implements (<i>at least one exported</i>)</label><span id='SDK-fold-impls-items' class="fold-items"><span>
+			*SDK : io.<a href="../../io.html#name-Closer">Closer</a></span></span>
+		<input type='checkbox' class="fold" id="SDK-fold-results"><label for="SDK-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='SDK-fold-results-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>[T](factory <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], desc *<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-ServiceDesc">ServiceDesc</a>) *<b>SDK</b>[T]</span></span>
+
+</span></div><div class="anchor type-res" id="name-SDKConfig" data-popularity="35">	<input type='checkbox' class="fold" id="SDKConfig-fold-content"><label for="SDKConfig-fold-content"> type <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-9">SDKConfig</a> <i>(struct)</i></label><span id='SDKConfig-fold-content-docs' class="fold-docs">
+		SDKConfig 的客户端类型
+
+		<input type='checkbox' class="fold" id="SDKConfig-fold-fields"><label for="SDKConfig-fold-fields">Fields (<i>total 23, all are exported</i>)</label><span id='SDKConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-Ca_Cert_Path"><label for="SDKConfig-fold-field-Ca_Cert_Path"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-28">Ca_Cert_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></label><span id='SDKConfig-fold-field-Ca_Cert_Path-docs' class="fold-docs">
+				TLS设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-29">Client_Cert_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-30">Client_Key_Path</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-Client_Pool"><label for="SDKConfig-fold-field-Client_Pool"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-36">Client_Pool</a> <i><a href="../../builtin.html#name-bool">bool</a></i></label><span id='SDKConfig-fold-field-Client_Pool-docs' class="fold-docs">
+				客户端连接池
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-39">Client_Pool_Acquire_Wait_Time_MS</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-38">Client_Pool_Limits</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-37">Client_Pool_Reservations</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-Compression"><label for="SDKConfig-fold-field-Compression"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-25">Compression</a> <i><a href="../../builtin.html#name-string">string</a></i></label><span id='SDKConfig-fold-field-Compression-docs' class="fold-docs">
+				压缩设置,目前只支持gzip
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-20">Conn_With_Block</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-16">Initial_Conn_Window_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-Initial_Window_Size"><label for="SDKConfig-fold-field-Initial_Window_Size"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-15">Initial_Window_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></label><span id='SDKConfig-fold-field-Initial_Window_Size-docs' class="fold-docs">
+				性能设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-19">Keepalive_Enforcement_Permit_Without_Stream</a> <i><a href="../../builtin.html#name-bool">bool</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-17">Keepalive_Time</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-18">Keepalive_Timeout</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-21">Max_Recv_Msg_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-22">Max_Send_Msg_Size</a> <i><a href="../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-10">Query_Addresses</a> <i>[]<a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-Query_Timeout"><label for="SDKConfig-fold-field-Query_Timeout"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-41">Query_Timeout</a> <i><a href="../../builtin.html#name-int">int</a></i></label><span id='SDKConfig-fold-field-Query_Timeout-docs' class="fold-docs">
+				请求超时设置
+</span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-11">Requester_App_Name</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-12">Requester_App_Version</a> <i><a href="../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-44">StreamInterceptors</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-StreamClientInterceptor">StreamClientInterceptor</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-43">UnaryInterceptors</a> <i>[]<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-UnaryClientInterceptor">UnaryClientInterceptor</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="SDKConfig-fold-field-XDS_CREDS"><label for="SDKConfig-fold-field-XDS_CREDS"><a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-33">XDS_CREDS</a> <i><a href="../../builtin.html#name-bool">bool</a></i></label><span id='SDKConfig-fold-field-XDS_CREDS-docs' class="fold-docs">
+				XDS设置
+</span></span></span>
+		<input type='checkbox' class="fold" id="SDKConfig-fold-params"><label for="SDKConfig-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='SDKConfig-fold-params-items' class="fold-items"><span>
+			func <a href="#name-WithConfig">WithConfig</a>(config *<b>SDKConfig</b>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<b>SDKConfig</b>]</span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 38, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Force">	<input type='checkbox' class="fold" id="Force-fold-content"><label for="Force-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/acquireopts.go.html#line-13">Force</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-AcquireOptions">AcquireOptions</a>]</label><span id='Force-fold-content-docs' class="fold-docs">
+		UntilEnd NewCtx方法的参数,用于设置ctx为不会超时
+
+</span></div><div class="anchor value-res" id="name-HasClientConfig">	<input type='checkbox' class="fold" id="HasClientConfig-fold-content"><label for="HasClientConfig-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-28">HasClientConfig</a>(opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]</label><span id='HasClientConfig-fold-content-docs' class="fold-docs">
+		HasClientConfig 复用创建客户端的选项用于创建池
+		@params opts ...optparams.Option[NewClientOptions] 用于创建客户端的配置项
+
+</span></div><div class="anchor value-res" id="name-New">	<input type='checkbox' class="fold" id="New-fold-content"><label for="New-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-50">New</a>[T](factory <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], desc *<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-ServiceDesc">ServiceDesc</a>) *<a href="#name-SDK">SDK</a>[T]</label><span id='New-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		New 创建客户端对象
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+		@params factory NewGrpcClientFunc[T] 将grpc连接转化为grpc客户端的程序,可以在pb生成的模块中找到,通常以`NewXXXXXXClient`命名
+		@params desc *grpc.ServiceDesc grpc服务的描述对象,可以在pb生成的模块中找到,通常以`XXXXX_ServiceDesc`命名
+		@returns *SDK[T] SDK对象
+
+</span></div><div class="anchor value-res" id="name-NewClient">	<input type='checkbox' class="fold" id="NewClient-fold-content"><label for="NewClient-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/client.go.html#line-52">NewClient</a>[T](newgrpcclientfunc <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]) (*<a href="#name-Client">Client</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='NewClient-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		NewClient 创建一个客户端对象
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+		@params newgrpcclientfunc NewGrpcClientFunc[T] 将grpc连接转化为grpc客户端的程序,可以在pb生成的模块中找到,通常以`NewXXXXXXClient`命名
+		@params opts ...optparams.Option[NewClientOptions] 创建客户端的配置项,详细可以看clientnewopts.go文件
+		@returns *Client[T] 返回客户端对象
+		@returns error 错误信息
+
+</span></div><div class="anchor value-res" id="name-NewPool">	<input type='checkbox' class="fold" id="NewPool-fold-content"><label for="NewPool-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpool.go.html#line-178">NewPool</a>[T](newgrpcclientfunc <a href="#name-NewGrpcClientFunc">NewGrpcClientFunc</a>[T], opts ...<a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]) (*<a href="#name-GrpcConnPool">GrpcConnPool</a>[T], <a href="../../builtin.html#name-error">error</a>)</label><span id='NewPool-fold-content-docs' class="fold-docs">
+
+		Type Parameters:
+			T: <a href="../../builtin.html#name-any">any</a>
+
+		NewPool 创建一个池
+		@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+		@params newclientfunc NewGrpcClientFunc[T] 将grpc连接转化为grpc客户端的程序,可以在pb生成的模块中找到,通常以`NewXXXXXXClient`命名
+		@params opts ...optparams.Option[NewClientPoolOptions] 创建池对象的参数选项,详细可以看clientpoolnewopts.go文件
+		@returns *GrpcConnPool[T] 返回客户端连接池对象
+		@returns error 错误信息
+
+</span></div><div class="anchor value-res" id="name-UntilEnd">	<input type='checkbox' class="fold" id="UntilEnd-fold-content"><label for="UntilEnd-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-18">UntilEnd</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-CtxOptions">CtxOptions</a>]</label><span id='UntilEnd-fold-content-docs' class="fold-docs">
+		UntilEnd NewCtx方法的参数,用于设置ctx为不会超时
+
+</span></div><div class="anchor value-res" id="name-WithAcquireWaitTimeMS">	<input type='checkbox' class="fold" id="WithAcquireWaitTimeMS-fold-content"><label for="WithAcquireWaitTimeMS-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-57">WithAcquireWaitTimeMS</a>(wait <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]</label><span id='WithAcquireWaitTimeMS-fold-content-docs' class="fold-docs">
+		WithAcquireWaitTimeMS 创建池对象方法的参数,用于设置从连接池中获取连接的最大等待时长,单位ms.
+		@params wait int 获取客户端等待时长
+
+</span></div><div class="anchor value-res" id="name-WithAddr">	<input type='checkbox' class="fold" id="WithAddr-fold-content"><label for="WithAddr-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-21">WithAddr</a>(addr <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]</label><span id='WithAddr-fold-content-docs' class="fold-docs">
+		WithAddr 创建客户端对象方法的参数,用于设置连接地址
+		@params addr string 连接地址,如果是多个地址,则会做本地负载均衡后生成一个地址填入
+
+</span></div><div class="anchor value-res" id="name-WithCaCertPath">	<input type='checkbox' class="fold" id="WithCaCertPath-fold-content"><label for="WithCaCertPath-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-187">WithCaCertPath</a>(path <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithCaCertPath-fold-content-docs' class="fold-docs">
+		WithCaCertPath sdk.Init方法的参数,用于设置sdk如果要使用tls则需要指定根证书位置
+		@params path string 根证书路径
+
+</span></div><div class="anchor value-res" id="name-WithClientCertPath">	<input type='checkbox' class="fold" id="WithClientCertPath-fold-content"><label for="WithClientCertPath-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-196">WithClientCertPath</a>(path <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientCertPath-fold-content-docs' class="fold-docs">
+		WithClientCertPath sdk.Init方法的参数,用于设置sdk客户端证书位置
+		@params path string 客户端证书路径
+
+</span></div><div class="anchor value-res" id="name-WithClientConfig">	<input type='checkbox' class="fold" id="WithClientConfig-fold-content"><label for="WithClientConfig-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-39">WithClientConfig</a>(conf *<a href="#name-NewClientOptions">NewClientOptions</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]</label><span id='WithClientConfig-fold-content-docs' class="fold-docs">
+		WithClientConfig 创建客户端对象方法的参数,用于通过NewClientOptions对象设置客户端
+		@params conf *NewClientOptions 设置新建客户端的选项
+
+</span></div><div class="anchor value-res" id="name-WithClientKeyPath">	<input type='checkbox' class="fold" id="WithClientKeyPath-fold-content"><label for="WithClientKeyPath-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-205">WithClientKeyPath</a>(path <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientKeyPath-fold-content-docs' class="fold-docs">
+		WithClientKeyPath sdk.Init方法的参数,用于设置sdk客户端证书对应的私钥位置
+		@params path string 客户端证书对应的私钥路径
+
+</span></div><div class="anchor value-res" id="name-WithClientPool">	<input type='checkbox' class="fold" id="WithClientPool-fold-content"><label for="WithClientPool-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-221">WithClientPool</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientPool-fold-content-docs' class="fold-docs">
+		WithClientPool sdk.Init方法的参数,用于设置sdk是否使用grpc的客户端池
+
+</span></div><div class="anchor value-res" id="name-WithClientPoolAcquireWaitTime">	<input type='checkbox' class="fold" id="WithClientPoolAcquireWaitTime-fold-content"><label for="WithClientPoolAcquireWaitTime-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-248">WithClientPoolAcquireWaitTime</a>(wait <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientPoolAcquireWaitTime-fold-content-docs' class="fold-docs">
+		WithClientPoolAcquireWaitTime sdk.Init方法的参数,用于设置sdk获取客户端池时的最大等待时间
+		@params wait int 获取客户端池时的最大等待时间,单位ms
+
+</span></div><div class="anchor value-res" id="name-WithClientPoolLimits">	<input type='checkbox' class="fold" id="WithClientPoolLimits-fold-content"><label for="WithClientPoolLimits-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-239">WithClientPoolLimits</a>(n <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientPoolLimits-fold-content-docs' class="fold-docs">
+		WithClientPoolLimits sdk.Init方法的参数,用于设置sdk使用客户端池时的池最大水位
+		@params n int 使用客户端池时的池最大水位
+
+</span></div><div class="anchor value-res" id="name-WithClientPoolReservations">	<input type='checkbox' class="fold" id="WithClientPoolReservations-fold-content"><label for="WithClientPoolReservations-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-230">WithClientPoolReservations</a>(n <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithClientPoolReservations-fold-content-docs' class="fold-docs">
+		WithClientPoolReservations sdk.Init方法的参数,用于设置sdk使用客户端池时的池注水水位
+		@params n int 使用客户端池时的池注水水位
+
+</span></div><div class="anchor value-res" id="name-WithCompression">	<input type='checkbox' class="fold" id="WithCompression-fold-content"><label for="WithCompression-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-178">WithCompression</a>(protocol <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithCompression-fold-content-docs' class="fold-docs">
+		WithCompression sdk.Init方法的参数,用于设置sdk使用哪种方式压缩发送的消息
+		@params protocol string 协议名,目前可选的只有gzip
+
+</span></div><div class="anchor value-res" id="name-WithConfig">	<input type='checkbox' class="fold" id="WithConfig-fold-content"><label for="WithConfig-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-48">WithConfig</a>(config *<a href="#name-SDKConfig">SDKConfig</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithConfig-fold-content-docs' class="fold-docs">
+		UntilEnd NewCtx方法的参数,用于设置ctx为不会超时
+
+</span></div><div class="anchor value-res" id="name-WithConnWithBlock">	<input type='checkbox' class="fold" id="WithConnWithBlock-fold-content"><label for="WithConnWithBlock-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-151">WithConnWithBlock</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithConnWithBlock-fold-content-docs' class="fold-docs">
+		WithConnWithBlock sdk.Init方法的参数,用于设置sdk是否同步的建立连接
+
+</span></div><div class="anchor value-res" id="name-WithDialOpts">	<input type='checkbox' class="fold" id="WithDialOpts-fold-content"><label for="WithDialOpts-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-30">WithDialOpts</a>(opts ...<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-DialOption">DialOption</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientOptions">NewClientOptions</a>]</label><span id='WithDialOpts-fold-content-docs' class="fold-docs">
+		WithDialOpts 创建客户端对象方法的参数,用于设置连接时的参数
+		@params opts ...grpc.DialOption grpc的拨号设置
+
+</span></div><div class="anchor value-res" id="name-WithInitialConnWindowSize">	<input type='checkbox' class="fold" id="WithInitialConnWindowSize-fold-content"><label for="WithInitialConnWindowSize-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-117">WithInitialConnWindowSize</a>(size <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithInitialConnWindowSize-fold-content-docs' class="fold-docs">
+		WithInitialConnWindowSize sdk.Init方法的参数,用于设置sdk基于Connection的滑动窗口大小
+		@params size int 基于Connection的滑动窗口大小
+
+</span></div><div class="anchor value-res" id="name-WithInitialWindowSize">	<input type='checkbox' class="fold" id="WithInitialWindowSize-fold-content"><label for="WithInitialWindowSize-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-106">WithInitialWindowSize</a>(size <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithInitialWindowSize-fold-content-docs' class="fold-docs">
+		WithInitialWindowSize sdk.Init方法的参数,用于设置sdk基于Stream的滑动窗口大小
+		@params size int 基于Stream的滑动窗口大小
+
+</span></div><div class="anchor value-res" id="name-WithKeepaliveEnforcementPermitWithoutStream">	<input type='checkbox' class="fold" id="WithKeepaliveEnforcementPermitWithoutStream-fold-content"><label for="WithKeepaliveEnforcementPermitWithoutStream-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-143">WithKeepaliveEnforcementPermitWithoutStream</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithKeepaliveEnforcementPermitWithoutStream-fold-content-docs' class="fold-docs">
+		WithKeepaliveEnforcementPermitWithoutStream sdk.Init方法的参数,用于设置sdk是否当连接空闲时仍然发送PING帧监测
+
+</span></div><div class="anchor value-res" id="name-WithKeepaliveTime">	<input type='checkbox' class="fold" id="WithKeepaliveTime-fold-content"><label for="WithKeepaliveTime-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-126">WithKeepaliveTime</a>(alivetime <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithKeepaliveTime-fold-content-docs' class="fold-docs">
+		WithKeepaliveTime sdk.Init方法的参数,用于设置sdk空闲连接每隔n秒ping一次客户端已确保连接存活
+		@params alivetime int 空闲连接每隔n秒ping一次客户端已确保连接存活,单位ms
+
+</span></div><div class="anchor value-res" id="name-WithKeepaliveTimeout">	<input type='checkbox' class="fold" id="WithKeepaliveTimeout-fold-content"><label for="WithKeepaliveTimeout-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-135">WithKeepaliveTimeout</a>(timeout <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithKeepaliveTimeout-fold-content-docs' class="fold-docs">
+		WithKeepaliveTimeout sdk.Init方法的参数,用于设置sdkping时长超过n则认为连接已死
+		@params timeout int ping时长超过n则认为连接已死,单位ms
+
+</span></div><div class="anchor value-res" id="name-WithLimits">	<input type='checkbox' class="fold" id="WithLimits-fold-content"><label for="WithLimits-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-47">WithLimits</a>(limits <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]</label><span id='WithLimits-fold-content-docs' class="fold-docs">
+		WithLimits 创建池对象方法的参数,用于设置连接池的最大连接数
+		@params limits int 池最大水位
+
+</span></div><div class="anchor value-res" id="name-WithMaxRecvMsgSize">	<input type='checkbox' class="fold" id="WithMaxRecvMsgSize-fold-content"><label for="WithMaxRecvMsgSize-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-160">WithMaxRecvMsgSize</a>(size <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithMaxRecvMsgSize-fold-content-docs' class="fold-docs">
+		WithMaxRecvMsgSize sdk.Init方法的参数,用于设置sdk允许接收的最大消息长度
+		@params size int 允许接收的最大消息长度
+
+</span></div><div class="anchor value-res" id="name-WithMaxSendMsgSize">	<input type='checkbox' class="fold" id="WithMaxSendMsgSize-fold-content"><label for="WithMaxSendMsgSize-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-169">WithMaxSendMsgSize</a>(size <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithMaxSendMsgSize-fold-content-docs' class="fold-docs">
+		WithMaxSendMsgSize sdk.Init方法的参数,用于设置sdk允许发送的最大消息长度
+		@params size int 允许发送的最大消息长度
+
+</span></div><div class="anchor value-res" id="name-WithMeta">	<input type='checkbox' class="fold" id="WithMeta-fold-content"><label for="WithMeta-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-54">WithMeta</a>(key <a href="../../builtin.html#name-string">string</a>, value ...<a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-CtxOptions">CtxOptions</a>]</label><span id='WithMeta-fold-content-docs' class="fold-docs">
+		WithMeta NewCtx方法的参数,用于设置信息到meta数据
+		@params key string meta键
+		@params value ...string meta值
+
+</span></div><div class="anchor value-res" id="name-WithQueryAddresses">	<input type='checkbox' class="fold" id="WithQueryAddresses-fold-content"><label for="WithQueryAddresses-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-79">WithQueryAddresses</a>(addresses ...<a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithQueryAddresses-fold-content-docs' class="fold-docs">
+		WithQueryAddresses sdk.Init方法的参数,用于设置sdk请求的地址
+		@params addresses ...string 连接服务的主机地址
+
+</span></div><div class="anchor value-res" id="name-WithQueryTimeout">	<input type='checkbox' class="fold" id="WithQueryTimeout-fold-content"><label for="WithQueryTimeout-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-257">WithQueryTimeout</a>(timeout <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithQueryTimeout-fold-content-docs' class="fold-docs">
+		WithQueryTimeout sdk.Init方法的参数,用于设置sdk请求服务的最大超时时间
+		@params wait int 请求服务的最大超时时间,单位ms
+
+</span></div><div class="anchor value-res" id="name-WithRequesterAppName">	<input type='checkbox' class="fold" id="WithRequesterAppName-fold-content"><label for="WithRequesterAppName-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-88">WithRequesterAppName</a>(name <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithRequesterAppName-fold-content-docs' class="fold-docs">
+		WithRequesterAppName sdk.Init方法的参数,用于设置sdk请求方服务名
+		@params name string 请求端app名
+
+</span></div><div class="anchor value-res" id="name-WithRequesterAppVersion">	<input type='checkbox' class="fold" id="WithRequesterAppVersion-fold-content"><label for="WithRequesterAppVersion-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-97">WithRequesterAppVersion</a>(version <a href="../../builtin.html#name-string">string</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithRequesterAppVersion-fold-content-docs' class="fold-docs">
+		WithRequesterAppVersion sdk.Init方法的参数,用于设置sdk请求方服务版本
+		@params version string 请求方服务版本
+
+</span></div><div class="anchor value-res" id="name-WithReservations">	<input type='checkbox' class="fold" id="WithReservations-fold-content"><label for="WithReservations-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-37">WithReservations</a>(reservations <a href="../../builtin.html#name-int">int</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-NewClientPoolOptions">NewClientPoolOptions</a>]</label><span id='WithReservations-fold-content-docs' class="fold-docs">
+		WithReservations 创建池对象方法的参数,用于设置连接池的最小连接数
+		@params reservations int 池安全水位
+
+</span></div><div class="anchor value-res" id="name-WithStreamInterceptors">	<input type='checkbox' class="fold" id="WithStreamInterceptors-fold-content"><label for="WithStreamInterceptors-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-275">WithStreamInterceptors</a>(interceptor ...<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-StreamClientInterceptor">StreamClientInterceptor</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithStreamInterceptors-fold-content-docs' class="fold-docs">
+		WithStreamInterceptors sdk.Init方法的参数,用于设置sdk的流请求拦截器
+		@params interceptor ...grpc.StreamClientInterceptor 流请求拦截器
+
+</span></div><div class="anchor value-res" id="name-WithTimeout">	<input type='checkbox' class="fold" id="WithTimeout-fold-content"><label for="WithTimeout-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/ctxopts.go.html#line-27">WithTimeout</a>(timeout <a href="../../time.html">time</a>.<a href="../../time.html#name-Duration">Duration</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-CtxOptions">CtxOptions</a>]</label><span id='WithTimeout-fold-content-docs' class="fold-docs">
+		WithTimeout NewCtx方法的参数,用于设置ctx为指定的超时时长
+		@params timeout time.Duration 请求超时,单位ms
+
+</span></div><div class="anchor value-res" id="name-WithUnaryInterceptors">	<input type='checkbox' class="fold" id="WithUnaryInterceptors-fold-content"><label for="WithUnaryInterceptors-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-266">WithUnaryInterceptors</a>(interceptor ...<a href="../../google.golang.org/grpc.html">grpc</a>.<a href="../../google.golang.org/grpc.html#name-UnaryClientInterceptor">UnaryClientInterceptor</a>) <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithUnaryInterceptors-fold-content-docs' class="fold-docs">
+		WithUnaryInterceptors sdk.Init方法的参数,用于设置sdk的请求拦截器
+		@params interceptor ...grpc.UnaryClientInterceptor 请求拦截器
+
+</span></div><div class="anchor value-res" id="name-WithXDSCREDS">	<input type='checkbox' class="fold" id="WithXDSCREDS-fold-content"><label for="WithXDSCREDS-fold-content"> func <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/config.go.html#line-213">WithXDSCREDS</a>() <a href="optparams.html">optparams</a>.<a href="optparams.html#name-Option">Option</a>[<a href="#name-SDKConfig">SDKConfig</a>]</label><span id='WithXDSCREDS-fold-content-docs' class="fold-docs">
+		WithXDSCREDS sdk.Init方法的参数,用于设置sdk当address的schema是xds时是否使用xds的令牌加密访问
+
+</span></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 9, in which 8 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-DefaultNewClientOpts">	<input type='checkbox' class="fold" id="DefaultNewClientOpts-fold-content"><label for="DefaultNewClientOpts-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientnewopts.go.html#line-15">DefaultNewClientOpts</a> <a href="#name-NewClientOptions">NewClientOptions</a></label><span id='DefaultNewClientOpts-fold-content-docs' class="fold-docs">
+		DefaultNewClientOpts 默认新建客户端的选项
+
+</span></div><div class="anchor value-res" id="name-DefaultNewClientPoolOpts">	<input type='checkbox' class="fold" id="DefaultNewClientPoolOpts-fold-content"><label for="DefaultNewClientPoolOpts-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/clientpoolnewopts.go.html#line-19">DefaultNewClientPoolOpts</a> <a href="#name-NewClientPoolOptions">NewClientPoolOptions</a></label><span id='DefaultNewClientPoolOpts-fold-content-docs' class="fold-docs">
+		DefaultNewClientPoolOpts 默认新建客户端池的选项
+
+</span></div><div class="anchor value-res" id="name-ErrAlreadyClosed">	<input type='checkbox' class="fold" id="ErrAlreadyClosed-fold-content"><label for="ErrAlreadyClosed-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-11">ErrAlreadyClosed</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrAlreadyClosed-fold-content-docs' class="fold-docs">
+		ErrAlreadyClosed is the error when the client conn was already closed
+
+</span></div><div class="anchor value-res" id="name-ErrClosed">	<input type='checkbox' class="fold" id="ErrClosed-fold-content"><label for="ErrClosed-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-7">ErrClosed</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrClosed-fold-content-docs' class="fold-docs">
+		ErrClosed is the error when the client pool is closed
+
+</span></div><div class="anchor value-res" id="name-ErrFullPool">	<input type='checkbox' class="fold" id="ErrFullPool-fold-content"><label for="ErrFullPool-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-13">ErrFullPool</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrFullPool-fold-content-docs' class="fold-docs">
+		ErrFullPool is the error when the pool is already full
+
+</span></div><div class="anchor value-res" id="name-ErrLimitsSmallThanReservation">	<input type='checkbox' class="fold" id="ErrLimitsSmallThanReservation-fold-content"><label for="ErrLimitsSmallThanReservation-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-15">ErrLimitsSmallThanReservation</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrLimitsSmallThanReservation-fold-content-docs' class="fold-docs">
+		ErrLimitsSmallThanReservation 初始化参数limits比reservations小
+
+</span></div><div class="anchor value-res" id="name-ErrReservationSmallThanOne">	<input type='checkbox' class="fold" id="ErrReservationSmallThanOne-fold-content"><label for="ErrReservationSmallThanOne-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-17">ErrReservationSmallThanOne</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrReservationSmallThanOne-fold-content-docs' class="fold-docs">
+		ErrReservationSmallThanOne 初始化参数reservations比1小
+
+</span></div><div class="anchor value-res" id="name-ErrTimeout">	<input type='checkbox' class="fold" id="ErrTimeout-fold-content"><label for="ErrTimeout-fold-content">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/exceptions.go.html#line-9">ErrTimeout</a> <a href="../../builtin.html#name-error">error</a></label><span id='ErrTimeout-fold-content-docs' class="fold-docs">
+		ErrTimeout is the error when the client pool timed out
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-json"><i>	<span class="nodocs">  var <a href="../../../src/github.com/Golang-Tools^b0a0c/grpcsdk/sdk.go.html#line-29">json</a> <a href="../json-iterator/go.html">jsoniter</a>.<a href="../json-iterator/go.html#name-API">API</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

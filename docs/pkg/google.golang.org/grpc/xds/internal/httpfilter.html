@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/httpfilter</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>httpfilter</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/httpfilter">google.golang.org/grpc/xds/internal/httpfilter</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/httpfilter" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/xds/internal/httpfilter.html">2 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/xds/internal/httpfilter.html#imported-by">5 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html">httpfilter.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package httpfilter contains the HTTPFilter interface and a registry for
+		storing and retrieving their implementations.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 4, all are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-ClientInterceptorBuilder" data-popularity="350">	<input type='checkbox' class="fold" id="ClientInterceptorBuilder-fold-content"><label for="ClientInterceptorBuilder-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-61">ClientInterceptorBuilder</a> <b><i>(interface)</i></b></label><span id='ClientInterceptorBuilder-fold-content-docs' class="fold-docs">
+		ClientInterceptorBuilder constructs a Client Interceptor.  If this type is
+		implemented by a Filter, it is capable of working on a client.
+
+		<input type='checkbox' class="fold" id="ClientInterceptorBuilder-fold-methods"><label for="ClientInterceptorBuilder-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='ClientInterceptorBuilder-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ClientInterceptorBuilder-fold-method-BuildClientInterceptor"><label for="ClientInterceptorBuilder-fold-method-BuildClientInterceptor">( ClientInterceptorBuilder) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-67">BuildClientInterceptor</a>(config, override <a href="#name-FilterConfig">FilterConfig</a>) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientInterceptor">ClientInterceptor</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='ClientInterceptorBuilder-fold-method-BuildClientInterceptor-docs' class="fold-docs">
+				BuildClientInterceptor uses the FilterConfigs produced above to produce
+				an HTTP filter interceptor for clients.  config will always be non-nil,
+				but override may be nil if no override config exists for the filter.  It
+				is valid for Build to return a nil Interceptor and a nil error.  In this
+				case, the RPC will not be intercepted by this filter.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ClientInterceptorBuilder-fold-impledby"><label for="ClientInterceptorBuilder-fold-impledby">Implemented By (<i>at least 2, neither is exported</i>)</label><span id='ClientInterceptorBuilder-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ClientInterceptorBuilder-showhide-impedBys"><i><label for="ClientInterceptorBuilder-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="ClientInterceptorBuilder-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/fault.<a href="httpfilter/fault.html#name-builder">builder</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/router.<a href="httpfilter/router.html#name-builder">builder</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-Filter" data-popularity="870">	<input type='checkbox' class="fold" id="Filter-fold-content"><label for="Filter-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-38">Filter</a> <b><i>(interface)</i></b></label><span id='Filter-fold-content-docs' class="fold-docs">
+		Filter defines the parsing functionality of an HTTP filter.  A Filter may
+		optionally implement either ClientInterceptorBuilder or
+		ServerInterceptorBuilder or both, indicating it is capable of working on the
+		client side or server side or both, respectively.
+
+		<input type='checkbox' class="fold" id="Filter-fold-methods"><label for="Filter-fold-methods">Methods (<i>total 4, all are exported</i>)</label><span id='Filter-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Filter-fold-method-IsTerminal"><label for="Filter-fold-method-IsTerminal">( Filter) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-56">IsTerminal</a>() <a href="../../../../builtin.html#name-bool">bool</a></label><span id='Filter-fold-method-IsTerminal-docs' class="fold-docs">
+				IsTerminal returns whether this Filter is terminal or not (i.e. it must
+				be last filter in the filter chain).
+</span></span><span>
+			<input type='checkbox' class="fold" id="Filter-fold-method-ParseFilterConfig"><label for="Filter-fold-method-ParseFilterConfig">( Filter) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-47">ParseFilterConfig</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<a href="#name-FilterConfig">FilterConfig</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='Filter-fold-method-ParseFilterConfig-docs' class="fold-docs">
+				ParseFilterConfig parses the provided configuration proto.Message from
+				the LDS configuration of this filter.  This may be an anypb.Any, a
+				udpa.type.v1.TypedStruct, or an xds.type.v3.TypedStruct for filters that
+				do not accept a custom type. The resulting FilterConfig will later be
+				passed to Build.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Filter-fold-method-ParseFilterConfigOverride"><label for="Filter-fold-method-ParseFilterConfigOverride">( Filter) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-53">ParseFilterConfigOverride</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<a href="#name-FilterConfig">FilterConfig</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='Filter-fold-method-ParseFilterConfigOverride-docs' class="fold-docs">
+				ParseFilterConfigOverride parses the provided override configuration
+				proto.Message from the RDS override configuration of this filter.  This
+				may be an anypb.Any, a udpa.type.v1.TypedStruct, or an
+				xds.type.v3.TypedStruct for filters that do not accept a custom type.
+				The resulting FilterConfig will later be passed to Build.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Filter-fold-method-TypeURLs"><label for="Filter-fold-method-TypeURLs">( Filter) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-41">TypeURLs</a>() []<a href="../../../../builtin.html#name-string">string</a></label><span id='Filter-fold-method-TypeURLs-docs' class="fold-docs">
+				TypeURLs are the proto message types supported by this filter.  A filter
+				will be registered by each of its supported message types.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Filter-fold-impledby"><label for="Filter-fold-impledby">Implemented By (<i>at least 3, none are exported</i>)</label><span id='Filter-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Filter-showhide-impedBys"><i><label for="Filter-showhide-impedBys" class="show-inline">/* 3+ unexporteds ... */</label><label for="Filter-showhide-impedBys" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/fault.<a href="httpfilter/fault.html#name-builder">builder</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/rbac.<a href="httpfilter/rbac.html#name-builder">builder</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/router.<a href="httpfilter/router.html#name-builder">builder</a></i></span></span>
+		<input type='checkbox' class="fold" id="Filter-fold-results"><label for="Filter-fold-results">As Outputs Of (<i>at least 2, in which 1 are exported</i>)</label><span id='Filter-fold-results-items' class="fold-items"><span>
+			func <a href="#name-Get">Get</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>) <b>Filter</b></span>
+			<input type='checkbox' class="showhide" id="Filter-showhide-inputofs"><i><label for="Filter-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="Filter-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/xdsresource.<a href="xdsclient/xdsresource.html#name-validateHTTPFilterConfig">validateHTTPFilterConfig</a>(cfg *<a href="../../../protobuf/types/known/anypb.html">anypb</a>.<a href="../../../protobuf/types/known/anypb.html#name-Any">Any</a>, lds, optional <a href="../../../../builtin.html#name-bool">bool</a>) (<b>Filter</b>, <a href="#name-FilterConfig">FilterConfig</a>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="Filter-fold-params"><label for="Filter-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='Filter-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Register">Register</a>(b <b>Filter</b>)</span><span>
+			func google.golang.org/grpc/xds/internal/httpfilter/router.<a href="httpfilter/router.html#name-IsRouterFilter">IsRouterFilter</a>(b <b>Filter</b>) <a href="../../../../builtin.html#name-bool">bool</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-FilterConfig" data-popularity="1020">	<input type='checkbox' class="fold" id="FilterConfig-fold-content"><label for="FilterConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-30">FilterConfig</a> <b><i>(interface)</i></b></label><span id='FilterConfig-fold-content-docs' class="fold-docs">
+		FilterConfig represents an opaque data structure holding configuration for a
+		filter.  Embed this interface to implement it.
+
+		<input type='checkbox' class="fold" id="FilterConfig-fold-methods"><label for="FilterConfig-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='FilterConfig-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FilterConfig-showhide-methods"><i><label for="FilterConfig-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="FilterConfig-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( FilterConfig) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-31">isFilterConfig</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="FilterConfig-fold-impledby"><label for="FilterConfig-fold-impledby">Implemented By (<i>at least 3, none are exported</i>)</label><span id='FilterConfig-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="FilterConfig-showhide-impedBys"><i><label for="FilterConfig-showhide-impedBys" class="show-inline">/* 3+ unexporteds ... */</label><label for="FilterConfig-showhide-impedBys" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/fault.<a href="httpfilter/fault.html#name-config">config</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/rbac.<a href="httpfilter/rbac.html#name-config">config</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/router.<a href="httpfilter/router.html#name-config">config</a></i></span></span>
+		<input type='checkbox' class="fold" id="FilterConfig-fold-results"><label for="FilterConfig-fold-results">As Outputs Of (<i>at least 6, in which 2 are exported</i>)</label><span id='FilterConfig-fold-results-items' class="fold-items"><span>
+			func <a href="#name-Filter">Filter</a>.<a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-47">ParseFilterConfig</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-Filter">Filter</a>.<a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-53">ParseFilterConfigOverride</a>(<a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</span>
+			<input type='checkbox' class="showhide" id="FilterConfig-showhide-inputofs"><i><label for="FilterConfig-showhide-inputofs" class="show-inline">/* 4+ unexporteds ... */</label><label for="FilterConfig-showhide-inputofs" class="hide-inline">/* 4+ unexporteds: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/httpfilter/fault.<a href="httpfilter/fault.html#name-parseConfig">parseConfig</a>(cfg <a href="../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/httpfilter/rbac.<a href="httpfilter/rbac.html#name-parseConfig">parseConfig</a>(rbacCfg *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/rbac/v3.html">rpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/rbac/v3.html#name-RBAC">RBAC</a>) (<b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/xdsresource.<a href="xdsclient/xdsresource.html#name-processHTTPFilterOverrides">processHTTPFilterOverrides</a>(cfgs map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="../../../protobuf/types/known/anypb.html">anypb</a>.<a href="../../../protobuf/types/known/anypb.html#name-Any">Any</a>) (map[<a href="../../../../builtin.html#name-string">string</a>]<b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/xdsresource.<a href="xdsclient/xdsresource.html#name-validateHTTPFilterConfig">validateHTTPFilterConfig</a>(cfg *<a href="../../../protobuf/types/known/anypb.html">anypb</a>.<a href="../../../protobuf/types/known/anypb.html#name-Any">Any</a>, lds, optional <a href="../../../../builtin.html#name-bool">bool</a>) (<a href="#name-Filter">Filter</a>, <b>FilterConfig</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="FilterConfig-fold-params"><label for="FilterConfig-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='FilterConfig-fold-params-items' class="fold-items"><span>
+			func <a href="#name-ClientInterceptorBuilder">ClientInterceptorBuilder</a>.<a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-67">BuildClientInterceptor</a>(config, override <b>FilterConfig</b>) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ClientInterceptor">ClientInterceptor</a>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-ServerInterceptorBuilder">ServerInterceptorBuilder</a>.<a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-78">BuildServerInterceptor</a>(config, override <b>FilterConfig</b>) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ServerInterceptor">ServerInterceptor</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-ServerInterceptorBuilder" data-popularity="350">	<input type='checkbox' class="fold" id="ServerInterceptorBuilder-fold-content"><label for="ServerInterceptorBuilder-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-72">ServerInterceptorBuilder</a> <b><i>(interface)</i></b></label><span id='ServerInterceptorBuilder-fold-content-docs' class="fold-docs">
+		ServerInterceptorBuilder constructs a Server Interceptor.  If this type is
+		implemented by a Filter, it is capable of working on a server.
+
+		<input type='checkbox' class="fold" id="ServerInterceptorBuilder-fold-methods"><label for="ServerInterceptorBuilder-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='ServerInterceptorBuilder-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ServerInterceptorBuilder-fold-method-BuildServerInterceptor"><label for="ServerInterceptorBuilder-fold-method-BuildServerInterceptor">( ServerInterceptorBuilder) <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-78">BuildServerInterceptor</a>(config, override <a href="#name-FilterConfig">FilterConfig</a>) (<a href="../../internal/resolver.html">iresolver</a>.<a href="../../internal/resolver.html#name-ServerInterceptor">ServerInterceptor</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='ServerInterceptorBuilder-fold-method-BuildServerInterceptor-docs' class="fold-docs">
+				BuildServerInterceptor uses the FilterConfigs produced above to produce
+				an HTTP filter interceptor for servers.  config will always be non-nil,
+				but override may be nil if no override config exists for the filter.  It
+				is valid for Build to return a nil Interceptor and a nil error.  In this
+				case, the RPC will not be intercepted by this filter.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ServerInterceptorBuilder-fold-impledby"><label for="ServerInterceptorBuilder-fold-impledby">Implemented By (<i>at least 2, neither is exported</i>)</label><span id='ServerInterceptorBuilder-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ServerInterceptorBuilder-showhide-impedBys"><i><label for="ServerInterceptorBuilder-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="ServerInterceptorBuilder-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/rbac.<a href="httpfilter/rbac.html#name-builder">builder</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/httpfilter/router.<a href="httpfilter/router.html#name-builder">builder</a></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 3, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Get">	<input type='checkbox' class="fold" id="Get-fold-content"><label for="Get-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-106">Get</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>) <a href="#name-Filter">Filter</a></label><span id='Get-fold-content-docs' class="fold-docs">
+		Get returns the HTTPFilter registered with typeURL.
+
+		If no filter is register with typeURL, nil will be returned.
+
+</span></div><div class="anchor value-res" id="name-Register">	<input type='checkbox' class="fold" id="Register-fold-content"><label for="Register-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-92">Register</a>(b <a href="#name-Filter">Filter</a>)</label><span id='Register-fold-content-docs' class="fold-docs">
+		Register registers the HTTP filter Builder to the filter map. b.TypeURLs()
+		will be used as the types for this filter.
+
+		NOTE: this function must only be called during initialization time (i.e. in
+		an init() function), and is not thread-safe. If multiple filters are
+		registered with the same type URL, the one registered last will take effect.
+
+</span></div><div class="anchor value-res" id="name-UnregisterForTesting">	<input type='checkbox' class="fold" id="UnregisterForTesting-fold-content"><label for="UnregisterForTesting-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-99">UnregisterForTesting</a>(typeURL <a href="../../../../builtin.html#name-string">string</a>)</label><span id='UnregisterForTesting-fold-content-docs' class="fold-docs">
+		UnregisterForTesting unregisters the HTTP Filter for testing purposes.
+
+</span></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-m"><i>	<input type='checkbox' class="fold" id="m-fold-content"><label for="m-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/xds/internal/httpfilter/httpfilter.go.html#line-83">m</a> map[<a href="../../../../builtin.html#name-string">string</a>]<a href="#name-Filter">Filter</a></label><span id='m-fold-content-docs' class="fold-docs">
+		m is a map from scheme to filter.
+
+</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

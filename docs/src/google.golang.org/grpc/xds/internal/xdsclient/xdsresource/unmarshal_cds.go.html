@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: unmarshal_cds.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	unmarshal_cds.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91],
+input[id=r92]:checked ~pre label[for=r92],
+input[id=r93]:checked ~pre label[for=r93],
+input[id=r94]:checked ~pre label[for=r94],
+input[id=r95]:checked ~pre label[for=r95],
+input[id=r96]:checked ~pre label[for=r96],
+input[id=r97]:checked ~pre label[for=r97],
+input[id=r98]:checked ~pre label[for=r98],
+input[id=r99]:checked ~pre label[for=r99],
+input[id=r100]:checked ~pre label[for=r100],
+input[id=r101]:checked ~pre label[for=r101],
+input[id=r102]:checked ~pre label[for=r102],
+input[id=r103]:checked ~pre label[for=r103],
+input[id=r104]:checked ~pre label[for=r104],
+input[id=r105]:checked ~pre label[for=r105],
+input[id=r106]:checked ~pre label[for=r106],
+input[id=r107]:checked ~pre label[for=r107],
+input[id=r108]:checked ~pre label[for=r108],
+input[id=r109]:checked ~pre label[for=r109],
+input[id=r110]:checked ~pre label[for=r110],
+input[id=r111]:checked ~pre label[for=r111],
+input[id=r112]:checked ~pre label[for=r112],
+input[id=r113]:checked ~pre label[for=r113],
+input[id=r114]:checked ~pre label[for=r114],
+input[id=r115]:checked ~pre label[for=r115],
+input[id=r116]:checked ~pre label[for=r116],
+input[id=r117]:checked ~pre label[for=r117],
+input[id=r118]:checked ~pre label[for=r118],
+input[id=r119]:checked ~pre label[for=r119],
+input[id=r120]:checked ~pre label[for=r120],
+input[id=r121]:checked ~pre label[for=r121],
+input[id=r122]:checked ~pre label[for=r122],
+input[id=r123]:checked ~pre label[for=r123],
+input[id=r124]:checked ~pre label[for=r124],
+input[id=r125]:checked ~pre label[for=r125],
+input[id=r126]:checked ~pre label[for=r126],
+input[id=r127]:checked ~pre label[for=r127],
+input[id=r128]:checked ~pre label[for=r128],
+input[id=r129]:checked ~pre label[for=r129]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11,
+input[id=i12]:checked ~pre .i12,
+input[id=i13]:checked ~pre .i13,
+input[id=i14]:checked ~pre .i14,
+input[id=i15]:checked ~pre .i15
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="r92" type="radio" name="g"/>
+<input id="r93" type="radio" name="g"/>
+<input id="r94" type="radio" name="g"/>
+<input id="r95" type="radio" name="g"/>
+<input id="r96" type="radio" name="g"/>
+<input id="r97" type="radio" name="g"/>
+<input id="r98" type="radio" name="g"/>
+<input id="r99" type="radio" name="g"/>
+<input id="r100" type="radio" name="g"/>
+<input id="r101" type="radio" name="g"/>
+<input id="r102" type="radio" name="g"/>
+<input id="r103" type="radio" name="g"/>
+<input id="r104" type="radio" name="g"/>
+<input id="r105" type="radio" name="g"/>
+<input id="r106" type="radio" name="g"/>
+<input id="r107" type="radio" name="g"/>
+<input id="r108" type="radio" name="g"/>
+<input id="r109" type="radio" name="g"/>
+<input id="r110" type="radio" name="g"/>
+<input id="r111" type="radio" name="g"/>
+<input id="r112" type="radio" name="g"/>
+<input id="r113" type="radio" name="g"/>
+<input id="r114" type="radio" name="g"/>
+<input id="r115" type="radio" name="g"/>
+<input id="r116" type="radio" name="g"/>
+<input id="r117" type="radio" name="g"/>
+<input id="r118" type="radio" name="g"/>
+<input id="r119" type="radio" name="g"/>
+<input id="r120" type="radio" name="g"/>
+<input id="r121" type="radio" name="g"/>
+<input id="r122" type="radio" name="g"/>
+<input id="r123" type="radio" name="g"/>
+<input id="r124" type="radio" name="g"/>
+<input id="r125" type="radio" name="g"/>
+<input id="r126" type="radio" name="g"/>
+<input id="r127" type="radio" name="g"/>
+<input id="r128" type="radio" name="g"/>
+<input id="r129" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+<input id="i12" type="radio" name="i"/>
+<input id="i13" type="radio" name="i"/>
+<input id="i14" type="radio" name="i"/>
+<input id="i15" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"errors"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i1"><span class="lit-string i1">"fmt"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i2"><span class="lit-string i2">"net"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i3"><span class="lit-string i3">"strconv"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i4"><span class="lit-string i4">"time"</span></label></code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a> <label for="i5"><span class="lit-string i5">"github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i6">v3corepb</a> <label for="i6"><span class="lit-string i6">"github.com/envoyproxy/go-control-plane/envoy/config/core/v3"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3.html" class="ident i7">v3aggregateclusterpb</a> <label for="i7"><span class="lit-string i7">"github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"</span></label></code></span>
+<span class="codeline" id="line-30"><code>	<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a> <label for="i8"><span class="lit-string i8">"github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"</span></label></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i9"><span class="lit-string i9">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<label for="i10"><span class="lit-string i10">"google.golang.org/grpc/internal/envconfig"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<label for="i11"><span class="lit-string i11">"google.golang.org/grpc/internal/grpclog"</span></label></code></span>
+<span class="codeline" id="line-34"><code>	<label for="i12"><span class="lit-string i12">"google.golang.org/grpc/internal/pretty"</span></label></code></span>
+<span class="codeline" id="line-35"><code>	<label for="i13"><span class="lit-string i13">"google.golang.org/grpc/internal/xds/matcher"</span></label></code></span>
+<span class="codeline" id="line-36"><code>	<label for="i14"><span class="lit-string i14">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"</span></label></code></span>
+<span class="codeline" id="line-37"><code>	<label for="i15"><span class="lit-string i15">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-38"><code>)</code></span>
+<span class="codeline" id="line-39"><code></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// TransportSocket proto message has a `name` field which is expected to be set</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// to this value by the management server.</span></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-transportSocketName" class="ident">transportSocketName</a> = <span class="lit-string">"envoy.transport_sockets.tls"</span></code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">// UnmarshalCluster processes resources received in an CDS response, validates</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">// them, and transforms them into a native struct which contains only fields we</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">// are interested in.</span></code></span>
+<span class="codeline" id="line-47"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-UnmarshalCluster" class="ident">UnmarshalCluster</a></label>(<label for="r1" class="ident">opts</label> *<a href="unmarshal.go.html#line-33" class="ident">UnmarshalOptions</a>) (<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="type_cds.go.html#line-171" class="ident">ClusterUpdateErrTuple</a>, <a href="type.go.html#line-37" class="ident">UpdateMetadata</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-48"><code>	<label for="r2" class="ident">update</label> := <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="type_cds.go.html#line-171" class="ident">ClusterUpdateErrTuple</a>)</code></span>
+<span class="codeline" id="line-49"><code>	<label for="r3" class="ident">md</label>, <label for="r4" class="ident">err</label> := <a href="unmarshal.go.html#line-54" class="ident">processAllResources</a>(<label for="r1" class="ident">opts</label>, <label for="r2" class="ident">update</label>)</code></span>
+<span class="codeline" id="line-50"><code>	<span class="keyword">return</span> <label for="r2" class="ident">update</label>, <label for="r3" class="ident">md</label>, <label for="r4" class="ident">err</label></code></span>
+<span class="codeline" id="line-51"><code>}</code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code><span class="keyword">func</span> <label for="r5" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-unmarshalClusterResource" class="ident">unmarshalClusterResource</a></label>(<label for="r6" class="ident">r</label> *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i15">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>, <label for="r7" class="ident">f</label> <a href="type.go.html#line-33" class="ident">UpdateValidatorFunc</a>, <label for="r8" class="ident">logger</label> *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i11">grpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a>) (<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-54"><code>	<label for="r6" class="ident">r</label>, <label for="r9" class="ident">err</label> := <a href="type.go.html#line-83" class="ident">unwrapResource</a>(<label for="r6" class="ident">r</label>)</code></span>
+<span class="codeline" id="line-55"><code>	<span class="keyword">if</span> <label for="r9" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-56"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to unwrap resource: %v"</span>, <label for="r9" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-57"><code>	}</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code>	<span class="keyword">if</span> !<a href="type.go.html#line-71" class="ident">IsClusterResource</a>(<label for="r6" class="ident">r</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-403" class="ident">GetTypeUrl</a>()) {</code></span>
+<span class="codeline" id="line-60"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected resource type: %q "</span>, <label for="r6" class="ident">r</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-403" class="ident">GetTypeUrl</a>())</code></span>
+<span class="codeline" id="line-61"><code>	}</code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code>	<label for="r10" class="ident">cluster</label> := &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>{}</code></span>
+<span class="codeline" id="line-64"><code>	<span class="keyword">if</span> <label for="r11" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i9">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r6" class="ident">r</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-410" class="ident">GetValue</a>(), <label for="r10" class="ident">cluster</label>); <label for="r11" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-65"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to unmarshal resource: %v"</span>, <label for="r11" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-66"><code>	}</code></span>
+<span class="codeline" id="line-67"><code>	<label for="r8" class="ident">logger</label>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Resource with name: %v, type: %T, contains: %v"</span>, <label for="r10" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-965" class="ident">GetName</a>(), <label for="r10" class="ident">cluster</label>, <a href="../../../../../../../pkg/google.golang.org/grpc/internal/pretty.html" class="ident i12">pretty</a>.<a href="../../../../internal/pretty/pretty.go.html#line-38" class="ident">ToJSON</a>(<label for="r10" class="ident">cluster</label>))</code></span>
+<span class="codeline" id="line-68"><code>	<label for="r12" class="ident">cu</label>, <label for="r9" class="ident">err</label> := <a href="#line-88" class="ident">validateClusterAndConstructClusterUpdate</a>(<label for="r10" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-69"><code>	<span class="keyword">if</span> <label for="r9" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-70"><code>		<span class="keyword">return</span> <label for="r10" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-965" class="ident">GetName</a>(), <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <label for="r9" class="ident">err</label></code></span>
+<span class="codeline" id="line-71"><code>	}</code></span>
+<span class="codeline" id="line-72"><code>	<label for="r12" class="ident">cu</label>.<a href="type_cds.go.html#line-165" class="ident">Raw</a> = <label for="r6" class="ident">r</label></code></span>
+<span class="codeline" id="line-73"><code>	<span class="keyword">if</span> <label for="r7" class="ident">f</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-74"><code>		<span class="keyword">if</span> <label for="r13" class="ident">err</label> := <label for="r7" class="ident">f</label>(<label for="r12" class="ident">cu</label>); <label for="r13" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-75"><code>			<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <label for="r13" class="ident">err</label></code></span>
+<span class="codeline" id="line-76"><code>		}</code></span>
+<span class="codeline" id="line-77"><code>	}</code></span>
+<span class="codeline" id="line-78"><code></code></span>
+<span class="codeline" id="line-79"><code>	<span class="keyword">return</span> <label for="r10" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-965" class="ident">GetName</a>(), <label for="r12" class="ident">cu</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-80"><code>}</code></span>
+<span class="codeline" id="line-81"><code></code></span>
+<span class="codeline" id="line-82"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-83"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-defaultRingHashMinSize" class="ident">defaultRingHashMinSize</a> = <span class="lit-number">1024</span></code></span>
+<span class="codeline" id="line-84"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-defaultRingHashMaxSize" class="ident">defaultRingHashMaxSize</a> = <span class="lit-number">8</span> * <span class="lit-number">1024</span> * <span class="lit-number">1024</span> <span class="comment">// 8M</span></code></span>
+<span class="codeline" id="line-85"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ringHashSizeUpperBound" class="ident">ringHashSizeUpperBound</a> = <span class="lit-number">8</span> * <span class="lit-number">1024</span> * <span class="lit-number">1024</span> <span class="comment">// 8M</span></code></span>
+<span class="codeline" id="line-86"><code>)</code></span>
+<span class="codeline" id="line-87"><code></code></span>
+<span class="codeline" id="line-88"><code><span class="keyword">func</span> <label for="r14" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-validateClusterAndConstructClusterUpdate" class="ident">validateClusterAndConstructClusterUpdate</a></label>(<label for="r15" class="ident">cluster</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>) (<a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">var</span> <label for="r16" class="ident">lbPolicy</label> *<a href="type_cds.go.html#line-56" class="ident">ClusterLBPolicyRingHash</a></code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">switch</span> <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1021" class="ident">GetLbPolicy</a>() {</code></span>
+<span class="codeline" id="line-91"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-112" class="ident">Cluster_ROUND_ROBIN</a>:</code></span>
+<span class="codeline" id="line-92"><code>		<label for="r16" class="ident">lbPolicy</label> = <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> <span class="comment">// The default is round_robin, and there's no config to set.</span></code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-120" class="ident">Cluster_RING_HASH</a>:</code></span>
+<span class="codeline" id="line-94"><code>		<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i10">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-67" class="ident">XDSRingHash</a> {</code></span>
+<span class="codeline" id="line-95"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected lbPolicy %v in response: %+v"</span>, <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1021" class="ident">GetLbPolicy</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-96"><code>		}</code></span>
+<span class="codeline" id="line-97"><code>		<label for="r17" class="ident">rhc</label> := <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1197" class="ident">GetRingHashLbConfig</a>()</code></span>
+<span class="codeline" id="line-98"><code>		<span class="keyword">if</span> <label for="r17" class="ident">rhc</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-2260" class="ident">GetHashFunction</a>() != <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-439" class="ident">Cluster_RingHashLbConfig_XX_HASH</a> {</code></span>
+<span class="codeline" id="line-99"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported ring_hash hash function %v in response: %+v"</span>, <label for="r17" class="ident">rhc</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-2260" class="ident">GetHashFunction</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-100"><code>		}</code></span>
+<span class="codeline" id="line-101"><code>		<span class="comment">// Minimum defaults to 1024 entries, and limited to 8M entries Maximum</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">		// defaults to 8M entries, and limited to 8M entries</span></code></span>
+<span class="codeline" id="line-103"><code>		<span class="keyword">var</span> <label for="r18" class="ident">minSize</label>, <label for="r19" class="ident">maxSize</label> <a href="../../../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a> = <a href="#line-83" class="ident">defaultRingHashMinSize</a>, <a href="#line-84" class="ident">defaultRingHashMaxSize</a></code></span>
+<span class="codeline" id="line-104"><code>		<span class="keyword">if</span> <label for="r20" class="ident">min</label> := <label for="r17" class="ident">rhc</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-2253" class="ident">GetMinimumRingSize</a>(); <label for="r20" class="ident">min</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-105"><code>			<span class="keyword">if</span> <label for="r20" class="ident">min</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>() &gt; <a href="#line-85" class="ident">ringHashSizeUpperBound</a> {</code></span>
+<span class="codeline" id="line-106"><code>				<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected ring_hash mininum ring size %v in response: %+v"</span>, <label for="r20" class="ident">min</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-107"><code>			}</code></span>
+<span class="codeline" id="line-108"><code>			<label for="r18" class="ident">minSize</label> = <label for="r20" class="ident">min</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-109"><code>		}</code></span>
+<span class="codeline" id="line-110"><code>		<span class="keyword">if</span> <label for="r21" class="ident">max</label> := <label for="r17" class="ident">rhc</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-2267" class="ident">GetMaximumRingSize</a>(); <label for="r21" class="ident">max</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-111"><code>			<span class="keyword">if</span> <label for="r21" class="ident">max</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>() &gt; <a href="#line-85" class="ident">ringHashSizeUpperBound</a> {</code></span>
+<span class="codeline" id="line-112"><code>				<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected ring_hash maxinum ring size %v in response: %+v"</span>, <label for="r21" class="ident">max</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-113"><code>			}</code></span>
+<span class="codeline" id="line-114"><code>			<label for="r19" class="ident">maxSize</label> = <label for="r21" class="ident">max</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-270" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-115"><code>		}</code></span>
+<span class="codeline" id="line-116"><code>		<span class="keyword">if</span> <label for="r18" class="ident">minSize</label> &gt; <label for="r19" class="ident">maxSize</label> {</code></span>
+<span class="codeline" id="line-117"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"ring_hash config min size %v is greater than max %v"</span>, <label for="r18" class="ident">minSize</label>, <label for="r19" class="ident">maxSize</label>)</code></span>
+<span class="codeline" id="line-118"><code>		}</code></span>
+<span class="codeline" id="line-119"><code>		<label for="r16" class="ident">lbPolicy</label> = &amp;<a href="type_cds.go.html#line-56" class="ident">ClusterLBPolicyRingHash</a>{<a href="type_cds.go.html#line-57" class="ident">MinimumRingSize</a>: <label for="r18" class="ident">minSize</label>, <a href="type_cds.go.html#line-58" class="ident">MaximumRingSize</a>: <label for="r19" class="ident">maxSize</label>}</code></span>
+<span class="codeline" id="line-120"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-121"><code>		<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected lbPolicy %v in response: %+v"</span>, <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1021" class="ident">GetLbPolicy</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-122"><code>	}</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code>	<span class="comment">// Process security configuration received from the control plane iff the</span></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">	// corresponding environment variable is set.</span></code></span>
+<span class="codeline" id="line-126"><code>	<span class="keyword">var</span> <label for="r22" class="ident">sc</label> *<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a></code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i10">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-74" class="ident">XDSClientSideSecurity</a> {</code></span>
+<span class="codeline" id="line-128"><code>		<span class="keyword">var</span> <label for="r23" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-129"><code>		<span class="keyword">if</span> <label for="r22" class="ident">sc</label>, <label for="r23" class="ident">err</label> = <a href="#line-239" class="ident">securityConfigFromCluster</a>(<label for="r15" class="ident">cluster</label>); <label for="r23" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-130"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-131"><code>		}</code></span>
+<span class="codeline" id="line-132"><code>	}</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code>	<span class="comment">// Process outlier detection received from the control plane iff the</span></code></span>
+<span class="codeline" id="line-135"><code><span class="comment">	// corresponding environment variable is set.</span></code></span>
+<span class="codeline" id="line-136"><code>	<span class="keyword">var</span> <label for="r24" class="ident">od</label> *<a href="type_cds.go.html#line-62" class="ident">OutlierDetection</a></code></span>
+<span class="codeline" id="line-137"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i10">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-89" class="ident">XDSOutlierDetection</a> {</code></span>
+<span class="codeline" id="line-138"><code>		<span class="keyword">var</span> <label for="r25" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-139"><code>		<span class="keyword">if</span> <label for="r24" class="ident">od</label>, <label for="r25" class="ident">err</label> = <a href="#line-487" class="ident">outlierConfigFromCluster</a>(<label for="r15" class="ident">cluster</label>); <label for="r25" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-140"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <label for="r25" class="ident">err</label></code></span>
+<span class="codeline" id="line-141"><code>		}</code></span>
+<span class="codeline" id="line-142"><code>	}</code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code>	<label for="r26" class="ident">ret</label> := <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{</code></span>
+<span class="codeline" id="line-145"><code>		<a href="type_cds.go.html#line-131" class="ident">ClusterName</a>:      <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-965" class="ident">GetName</a>(),</code></span>
+<span class="codeline" id="line-146"><code>		<a href="type_cds.go.html#line-140" class="ident">SecurityCfg</a>:      <label for="r22" class="ident">sc</label>,</code></span>
+<span class="codeline" id="line-147"><code>		<a href="type_cds.go.html#line-142" class="ident">MaxRequests</a>:      <a href="#line-469" class="ident">circuitBreakersFromCluster</a>(<label for="r15" class="ident">cluster</label>),</code></span>
+<span class="codeline" id="line-148"><code>		<a href="type_cds.go.html#line-158" class="ident">LBPolicy</a>:         <label for="r16" class="ident">lbPolicy</label>,</code></span>
+<span class="codeline" id="line-149"><code>		<a href="type_cds.go.html#line-162" class="ident">OutlierDetection</a>: <label for="r24" class="ident">od</label>,</code></span>
+<span class="codeline" id="line-150"><code>	}</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code>	<span class="comment">// Note that this is different from the gRFC (gRFC A47 says to include the</span></code></span>
+<span class="codeline" id="line-153"><code><span class="comment">	// full ServerConfig{URL,creds,server feature} here). This information is</span></code></span>
+<span class="codeline" id="line-154"><code><span class="comment">	// not available here, because this function doesn't have access to the</span></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">	// xdsclient bootstrap information now (can be added if necessary). The</span></code></span>
+<span class="codeline" id="line-156"><code><span class="comment">	// ServerConfig will be read and populated by the CDS balancer when</span></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">	// processing this field.</span></code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">if</span> <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1296" class="ident">GetLrsServer</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/config_source.pb.go.html#line-658" class="ident">GetSelf</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-159"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-138" class="ident">LRSServerConfig</a> = <a href="type_cds.go.html#line-51" class="ident">ClusterLRSServerSelf</a></code></span>
+<span class="codeline" id="line-160"><code>	}</code></span>
+<span class="codeline" id="line-161"><code></code></span>
+<span class="codeline" id="line-162"><code>	<span class="comment">// Validate and set cluster type from the response.</span></code></span>
+<span class="codeline" id="line-163"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-164"><code>	<span class="keyword">case</span> <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-986" class="ident">GetType</a>() == <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-52" class="ident">Cluster_EDS</a>:</code></span>
+<span class="codeline" id="line-165"><code>		<span class="keyword">if</span> <label for="r27" class="ident">configsource</label> := <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1000" class="ident">GetEdsClusterConfig</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1817" class="ident">GetEdsConfig</a>(); <label for="r27" class="ident">configsource</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/config_source.pb.go.html#line-651" class="ident">GetAds</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r27" class="ident">configsource</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/config_source.pb.go.html#line-658" class="ident">GetSelf</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-166"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"CDS's EDS config source is not ADS or Self: %+v"</span>, <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-167"><code>		}</code></span>
+<span class="codeline" id="line-168"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-129" class="ident">ClusterType</a> = <a href="type_cds.go.html#line-32" class="ident">ClusterTypeEDS</a></code></span>
+<span class="codeline" id="line-169"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-134" class="ident">EDSServiceName</a> = <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1000" class="ident">GetEdsClusterConfig</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1824" class="ident">GetServiceName</a>()</code></span>
+<span class="codeline" id="line-170"><code>		<span class="keyword">return</span> <label for="r26" class="ident">ret</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-171"><code>	<span class="keyword">case</span> <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-986" class="ident">GetType</a>() == <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-49" class="ident">Cluster_LOGICAL_DNS</a>:</code></span>
+<span class="codeline" id="line-172"><code>		<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i10">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-80" class="ident">XDSAggregateAndDNS</a> {</code></span>
+<span class="codeline" id="line-173"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported cluster type (%v, %v) in response: %+v"</span>, <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-986" class="ident">GetType</a>(), <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-174"><code>		}</code></span>
+<span class="codeline" id="line-175"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-129" class="ident">ClusterType</a> = <a href="type_cds.go.html#line-35" class="ident">ClusterTypeLogicalDNS</a></code></span>
+<span class="codeline" id="line-176"><code>		<label for="r28" class="ident">dnsHN</label>, <label for="r29" class="ident">err</label> := <a href="#line-203" class="ident">dnsHostNameFromCluster</a>(<label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-177"><code>		<span class="keyword">if</span> <label for="r29" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-178"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <label for="r29" class="ident">err</label></code></span>
+<span class="codeline" id="line-179"><code>		}</code></span>
+<span class="codeline" id="line-180"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-145" class="ident">DNSHostName</a> = <label for="r28" class="ident">dnsHN</label></code></span>
+<span class="codeline" id="line-181"><code>		<span class="keyword">return</span> <label for="r26" class="ident">ret</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-182"><code>	<span class="keyword">case</span> <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1718" class="ident">Name</a> == <span class="lit-string">"envoy.clusters.aggregate"</span>:</code></span>
+<span class="codeline" id="line-183"><code>		<span class="keyword">if</span> !<a href="../../../../../../../pkg/google.golang.org/grpc/internal/envconfig.html" class="ident i10">envconfig</a>.<a href="../../../../internal/envconfig/xds.go.html#line-80" class="ident">XDSAggregateAndDNS</a> {</code></span>
+<span class="codeline" id="line-184"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported cluster type (%v, %v) in response: %+v"</span>, <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-986" class="ident">GetType</a>(), <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-185"><code>		}</code></span>
+<span class="codeline" id="line-186"><code>		<label for="r30" class="ident">clusters</label> := &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3.html" class="ident i7">v3aggregateclusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3/cluster.pb.go.html#line-28" class="ident">ClusterConfig</a>{}</code></span>
+<span class="codeline" id="line-187"><code>		<span class="keyword">if</span> <label for="r31" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i9">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1764" class="ident">GetTypedConfig</a>().<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-410" class="ident">GetValue</a>(), <label for="r30" class="ident">clusters</label>); <label for="r31" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-188"><code>			<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to unmarshal resource: %v"</span>, <label for="r31" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-189"><code>		}</code></span>
+<span class="codeline" id="line-190"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-129" class="ident">ClusterType</a> = <a href="type_cds.go.html#line-39" class="ident">ClusterTypeAggregate</a></code></span>
+<span class="codeline" id="line-191"><code>		<label for="r26" class="ident">ret</label>.<a href="type_cds.go.html#line-148" class="ident">PrioritizedClusterNames</a> = <label for="r30" class="ident">clusters</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3/cluster.pb.go.html#line-35" class="ident">Clusters</a></code></span>
+<span class="codeline" id="line-192"><code>		<span class="keyword">return</span> <label for="r26" class="ident">ret</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-193"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-194"><code>		<span class="keyword">return</span> <a href="type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{}, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported cluster type (%v, %v) in response: %+v"</span>, <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-986" class="ident">GetType</a>(), <label for="r15" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-993" class="ident">GetClusterType</a>(), <label for="r15" class="ident">cluster</label>)</code></span>
+<span class="codeline" id="line-195"><code>	}</code></span>
+<span class="codeline" id="line-196"><code>}</code></span>
+<span class="codeline" id="line-197"><code></code></span>
+<span class="codeline" id="line-198"><code><span class="comment">// dnsHostNameFromCluster extracts the DNS host name from the cluster's load</span></code></span>
+<span class="codeline" id="line-199"><code><span class="comment">// assignment.</span></code></span>
+<span class="codeline" id="line-200"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-201"><code><span class="comment">// There should be exactly one locality, with one endpoint, whose address</span></code></span>
+<span class="codeline" id="line-202"><code><span class="comment">// contains the address and port.</span></code></span>
+<span class="codeline" id="line-203"><code><span class="keyword">func</span> <label for="r32" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-dnsHostNameFromCluster" class="ident">dnsHostNameFromCluster</a></label>(<label for="r33" class="ident">cluster</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>) (<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-204"><code>	<label for="r34" class="ident">loadAssignment</label> := <label for="r33" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1028" class="ident">GetLoadAssignment</a>()</code></span>
+<span class="codeline" id="line-205"><code>	<span class="keyword">if</span> <label for="r34" class="ident">loadAssignment</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-206"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"load_assignment not present for LOGICAL_DNS cluster"</span>)</code></span>
+<span class="codeline" id="line-207"><code>	}</code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r34" class="ident">loadAssignment</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3/endpoint.pb.go.html#line-96" class="ident">GetEndpoints</a>()) != <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-209"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"load_assignment for LOGICAL_DNS cluster must have exactly one locality, got: %+v"</span>, <label for="r34" class="ident">loadAssignment</label>)</code></span>
+<span class="codeline" id="line-210"><code>	}</code></span>
+<span class="codeline" id="line-211"><code>	<label for="r35" class="ident">endpoints</label> := <label for="r34" class="ident">loadAssignment</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3/endpoint.pb.go.html#line-96" class="ident">GetEndpoints</a>()[<span class="lit-number">0</span>].<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3/endpoint_components.pb.go.html#line-389" class="ident">GetLbEndpoints</a>()</code></span>
+<span class="codeline" id="line-212"><code>	<span class="keyword">if</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r35" class="ident">endpoints</label>) != <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-213"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"locality for LOGICAL_DNS cluster must have exactly one endpoint, got: %+v"</span>, <label for="r35" class="ident">endpoints</label>)</code></span>
+<span class="codeline" id="line-214"><code>	}</code></span>
+<span class="codeline" id="line-215"><code>	<label for="r36" class="ident">endpoint</label> := <label for="r35" class="ident">endpoints</label>[<span class="lit-number">0</span>].<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3/endpoint_components.pb.go.html#line-185" class="ident">GetEndpoint</a>()</code></span>
+<span class="codeline" id="line-216"><code>	<span class="keyword">if</span> <label for="r36" class="ident">endpoint</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-217"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"endpoint for LOGICAL_DNS cluster not set"</span>)</code></span>
+<span class="codeline" id="line-218"><code>	}</code></span>
+<span class="codeline" id="line-219"><code>	<label for="r37" class="ident">socketAddr</label> := <label for="r36" class="ident">endpoint</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3/endpoint_components.pb.go.html#line-90" class="ident">GetAddress</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/address.pb.go.html#line-536" class="ident">GetSocketAddress</a>()</code></span>
+<span class="codeline" id="line-220"><code>	<span class="keyword">if</span> <label for="r37" class="ident">socketAddr</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-221"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"socket address for endpoint for LOGICAL_DNS cluster not set"</span>)</code></span>
+<span class="codeline" id="line-222"><code>	}</code></span>
+<span class="codeline" id="line-223"><code>	<span class="keyword">if</span> <label for="r37" class="ident">socketAddr</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/address.pb.go.html#line-305" class="ident">GetResolverName</a>() != <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-224"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"socket address for endpoint for LOGICAL_DNS cluster not set has unexpected custom resolver name: %v"</span>, <label for="r37" class="ident">socketAddr</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/address.pb.go.html#line-305" class="ident">GetResolverName</a>())</code></span>
+<span class="codeline" id="line-225"><code>	}</code></span>
+<span class="codeline" id="line-226"><code>	<label for="r38" class="ident">host</label> := <label for="r37" class="ident">socketAddr</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/address.pb.go.html#line-277" class="ident">GetAddress</a>()</code></span>
+<span class="codeline" id="line-227"><code>	<span class="keyword">if</span> <label for="r38" class="ident">host</label> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-228"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"host for endpoint for LOGICAL_DNS cluster not set"</span>)</code></span>
+<span class="codeline" id="line-229"><code>	}</code></span>
+<span class="codeline" id="line-230"><code>	<label for="r39" class="ident">port</label> := <label for="r37" class="ident">socketAddr</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/address.pb.go.html#line-291" class="ident">GetPortValue</a>()</code></span>
+<span class="codeline" id="line-231"><code>	<span class="keyword">if</span> <label for="r39" class="ident">port</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-232"><code>		<span class="keyword">return</span> <span class="lit-string">""</span>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"port for endpoint for LOGICAL_DNS cluster not set"</span>)</code></span>
+<span class="codeline" id="line-233"><code>	}</code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/net.html" class="ident i2">net</a>.<a href="../../../../../../net/ipsock.go.html#line-235" class="ident">JoinHostPort</a>(<label for="r38" class="ident">host</label>, <a href="../../../../../../../pkg/strconv.html" class="ident i3">strconv</a>.<a href="../../../../../../strconv/itoa.go.html#line-34" class="ident">Itoa</a>(<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r39" class="ident">port</label>))), <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-235"><code>}</code></span>
+<span class="codeline" id="line-236"><code></code></span>
+<span class="codeline" id="line-237"><code><span class="comment">// securityConfigFromCluster extracts the relevant security configuration from</span></code></span>
+<span class="codeline" id="line-238"><code><span class="comment">// the received Cluster resource.</span></code></span>
+<span class="codeline" id="line-239"><code><span class="keyword">func</span> <label for="r40" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-securityConfigFromCluster" class="ident">securityConfigFromCluster</a></label>(<label for="r41" class="ident">cluster</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>) (*<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-240"><code>	<span class="keyword">if</span> <label for="r42" class="ident">tsm</label> := <label for="r41" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-958" class="ident">GetTransportSocketMatches</a>(); <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r42" class="ident">tsm</label>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-241"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupport transport_socket_matches field is non-empty: %+v"</span>, <label for="r42" class="ident">tsm</label>)</code></span>
+<span class="codeline" id="line-242"><code>	}</code></span>
+<span class="codeline" id="line-243"><code>	<span class="comment">// The Cluster resource contains a `transport_socket` field, which contains</span></code></span>
+<span class="codeline" id="line-244"><code><span class="comment">	// a oneof `typed_config` field of type `protobuf.Any`. The any proto</span></code></span>
+<span class="codeline" id="line-245"><code><span class="comment">	// contains a marshaled representation of an `UpstreamTlsContext` message.</span></code></span>
+<span class="codeline" id="line-246"><code>	<label for="r43" class="ident">ts</label> := <label for="r41" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1239" class="ident">GetTransportSocket</a>()</code></span>
+<span class="codeline" id="line-247"><code>	<span class="keyword">if</span> <label for="r43" class="ident">ts</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-248"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-249"><code>	}</code></span>
+<span class="codeline" id="line-250"><code>	<span class="keyword">if</span> <label for="r44" class="ident">name</label> := <label for="r43" class="ident">ts</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-1683" class="ident">GetName</a>(); <label for="r44" class="ident">name</label> != <a href="#line-42" class="ident">transportSocketName</a> {</code></span>
+<span class="codeline" id="line-251"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"transport_socket field has unexpected name: %s"</span>, <label for="r44" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-252"><code>	}</code></span>
+<span class="codeline" id="line-253"><code>	<label for="r45" class="ident">any</label> := <label for="r43" class="ident">ts</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-1697" class="ident">GetTypedConfig</a>()</code></span>
+<span class="codeline" id="line-254"><code>	<span class="keyword">if</span> <label for="r45" class="ident">any</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> || <label for="r45" class="ident">any</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-247" class="ident">TypeUrl</a> != <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i14">version</a>.<a href="version/version.go.html#line-63" class="ident">V3UpstreamTLSContextURL</a> {</code></span>
+<span class="codeline" id="line-255"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"transport_socket field has unexpected typeURL: %s"</span>, <label for="r45" class="ident">any</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-247" class="ident">TypeUrl</a>)</code></span>
+<span class="codeline" id="line-256"><code>	}</code></span>
+<span class="codeline" id="line-257"><code>	<label for="r46" class="ident">upstreamCtx</label> := &amp;<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-92" class="ident">UpstreamTlsContext</a>{}</code></span>
+<span class="codeline" id="line-258"><code>	<span class="keyword">if</span> <label for="r47" class="ident">err</label> := <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i9">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/wire.go.html#line-56" class="ident">Unmarshal</a>(<label for="r45" class="ident">any</label>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-410" class="ident">GetValue</a>(), <label for="r46" class="ident">upstreamCtx</label>); <label for="r47" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-259"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"failed to unmarshal UpstreamTlsContext in CDS response: %v"</span>, <label for="r47" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-260"><code>	}</code></span>
+<span class="codeline" id="line-261"><code>	<span class="comment">// The following fields from `UpstreamTlsContext` are ignored:</span></code></span>
+<span class="codeline" id="line-262"><code><span class="comment">	// - sni</span></code></span>
+<span class="codeline" id="line-263"><code><span class="comment">	// - allow_renegotiation</span></code></span>
+<span class="codeline" id="line-264"><code><span class="comment">	// - max_session_keys</span></code></span>
+<span class="codeline" id="line-265"><code>	<span class="keyword">if</span> <label for="r46" class="ident">upstreamCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-152" class="ident">GetCommonTlsContext</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-266"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/errors.html" class="ident i0">errors</a>.<a href="../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"UpstreamTlsContext in CDS response does not contain a CommonTlsContext"</span>)</code></span>
+<span class="codeline" id="line-267"><code>	}</code></span>
+<span class="codeline" id="line-268"><code></code></span>
+<span class="codeline" id="line-269"><code>	<span class="keyword">return</span> <a href="#line-274" class="ident">securityConfigFromCommonTLSContext</a>(<label for="r46" class="ident">upstreamCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-152" class="ident">GetCommonTlsContext</a>(), <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a>)</code></span>
+<span class="codeline" id="line-270"><code>}</code></span>
+<span class="codeline" id="line-271"><code></code></span>
+<span class="codeline" id="line-272"><code><span class="comment">// common is expected to be not nil.</span></code></span>
+<span class="codeline" id="line-273"><code><span class="comment">// The `alpn_protocols` field is ignored.</span></code></span>
+<span class="codeline" id="line-274"><code><span class="keyword">func</span> <label for="r48" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-securityConfigFromCommonTLSContext" class="ident">securityConfigFromCommonTLSContext</a></label>(<label for="r49" class="ident">common</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-410" class="ident">CommonTlsContext</a>, <label for="r50" class="ident">server</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) (*<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-275"><code>	<span class="keyword">if</span> <label for="r49" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-515" class="ident">GetTlsParams</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-276"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported tls_params field in CommonTlsContext message: %+v"</span>, <label for="r49" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-277"><code>	}</code></span>
+<span class="codeline" id="line-278"><code>	<span class="keyword">if</span> <label for="r49" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-610" class="ident">GetCustomHandshaker</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-279"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported custom_handshaker field in CommonTlsContext message: %+v"</span>, <label for="r49" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-280"><code>	}</code></span>
+<span class="codeline" id="line-281"><code></code></span>
+<span class="codeline" id="line-282"><code>	<span class="comment">// For now, if we can't get a valid security config from the new fields, we</span></code></span>
+<span class="codeline" id="line-283"><code><span class="comment">	// fallback to the old deprecated fields.</span></code></span>
+<span class="codeline" id="line-284"><code><span class="comment">	// TODO: Drop support for deprecated fields. NACK if err != nil here.</span></code></span>
+<span class="codeline" id="line-285"><code>	<label for="r51" class="ident">sc</label>, <label for="r52" class="ident">_</label> := <a href="#line-371" class="ident">securityConfigFromCommonTLSContextUsingNewFields</a>(<label for="r49" class="ident">common</label>, <label for="r50" class="ident">server</label>)</code></span>
+<span class="codeline" id="line-286"><code>	<span class="keyword">if</span> <label for="r51" class="ident">sc</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> || <label for="r51" class="ident">sc</label>.<a href="type_rds.go.html#line-218" class="ident">Equal</a>(&amp;<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>{}) {</code></span>
+<span class="codeline" id="line-287"><code>		<span class="keyword">var</span> <label for="r53" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-288"><code>		<label for="r51" class="ident">sc</label>, <label for="r53" class="ident">err</label> = <a href="#line-309" class="ident">securityConfigFromCommonTLSContextWithDeprecatedFields</a>(<label for="r49" class="ident">common</label>, <label for="r50" class="ident">server</label>)</code></span>
+<span class="codeline" id="line-289"><code>		<span class="keyword">if</span> <label for="r53" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-290"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r53" class="ident">err</label></code></span>
+<span class="codeline" id="line-291"><code>		}</code></span>
+<span class="codeline" id="line-292"><code>	}</code></span>
+<span class="codeline" id="line-293"><code>	<span class="keyword">if</span> <label for="r51" class="ident">sc</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-294"><code>		<span class="comment">// sc == nil is a valid case where the control plane has not sent us any</span></code></span>
+<span class="codeline" id="line-295"><code><span class="comment">		// security configuration. xDS creds will use fallback creds.</span></code></span>
+<span class="codeline" id="line-296"><code>		<span class="keyword">if</span> <label for="r50" class="ident">server</label> {</code></span>
+<span class="codeline" id="line-297"><code>			<span class="keyword">if</span> <label for="r51" class="ident">sc</label>.<a href="type_rds.go.html#line-198" class="ident">IdentityInstanceName</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-298"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/errors.html" class="ident i0">errors</a>.<a href="../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"security configuration on the server-side does not contain identity certificate provider instance name"</span>)</code></span>
+<span class="codeline" id="line-299"><code>			}</code></span>
+<span class="codeline" id="line-300"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-301"><code>			<span class="keyword">if</span> <label for="r51" class="ident">sc</label>.<a href="type_rds.go.html#line-190" class="ident">RootInstanceName</a> == <span class="lit-string">""</span> {</code></span>
+<span class="codeline" id="line-302"><code>				<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/errors.html" class="ident i0">errors</a>.<a href="../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"security configuration on the client-side does not contain root certificate provider instance name"</span>)</code></span>
+<span class="codeline" id="line-303"><code>			}</code></span>
+<span class="codeline" id="line-304"><code>		}</code></span>
+<span class="codeline" id="line-305"><code>	}</code></span>
+<span class="codeline" id="line-306"><code>	<span class="keyword">return</span> <label for="r51" class="ident">sc</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-307"><code>}</code></span>
+<span class="codeline" id="line-308"><code></code></span>
+<span class="codeline" id="line-309"><code><span class="keyword">func</span> <label for="r54" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-securityConfigFromCommonTLSContextWithDeprecatedFields" class="ident">securityConfigFromCommonTLSContextWithDeprecatedFields</a></label>(<label for="r55" class="ident">common</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-410" class="ident">CommonTlsContext</a>, <label for="r56" class="ident">server</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) (*<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-310"><code>	<span class="comment">// The `CommonTlsContext` contains a</span></code></span>
+<span class="codeline" id="line-311"><code><span class="comment">	// `tls_certificate_certificate_provider_instance` field of type</span></code></span>
+<span class="codeline" id="line-312"><code><span class="comment">	// `CertificateProviderInstance`, which contains the provider instance name</span></code></span>
+<span class="codeline" id="line-313"><code><span class="comment">	// and the certificate name to fetch identity certs.</span></code></span>
+<span class="codeline" id="line-314"><code>	<label for="r57" class="ident">sc</label> := &amp;<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>{}</code></span>
+<span class="codeline" id="line-315"><code>	<span class="keyword">if</span> <label for="r58" class="ident">identity</label> := <label for="r55" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-552" class="ident">GetTlsCertificateCertificateProviderInstance</a>(); <label for="r58" class="ident">identity</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-316"><code>		<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-198" class="ident">IdentityInstanceName</a> = <label for="r58" class="ident">identity</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-831" class="ident">GetInstanceName</a>()</code></span>
+<span class="codeline" id="line-317"><code>		<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-201" class="ident">IdentityCertName</a> = <label for="r58" class="ident">identity</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-838" class="ident">GetCertificateName</a>()</code></span>
+<span class="codeline" id="line-318"><code>	}</code></span>
+<span class="codeline" id="line-319"><code></code></span>
+<span class="codeline" id="line-320"><code>	<span class="comment">// The `CommonTlsContext` contains a `validation_context_type` field which</span></code></span>
+<span class="codeline" id="line-321"><code><span class="comment">	// is a oneof. We can get the values that we are interested in from two of</span></code></span>
+<span class="codeline" id="line-322"><code><span class="comment">	// those possible values:</span></code></span>
+<span class="codeline" id="line-323"><code><span class="comment">	//  - combined validation context:</span></code></span>
+<span class="codeline" id="line-324"><code><span class="comment">	//    - contains a default validation context which holds the list of</span></code></span>
+<span class="codeline" id="line-325"><code><span class="comment">	//      matchers for accepted SANs.</span></code></span>
+<span class="codeline" id="line-326"><code><span class="comment">	//    - contains certificate provider instance configuration</span></code></span>
+<span class="codeline" id="line-327"><code><span class="comment">	//  - certificate provider instance configuration</span></code></span>
+<span class="codeline" id="line-328"><code><span class="comment">	//    - in this case, we do not get a list of accepted SANs.</span></code></span>
+<span class="codeline" id="line-329"><code>	<span class="keyword">switch</span> t := <label for="r55" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-559" class="ident">GetValidationContextType</a>().(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-330"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-639" class="ident">CommonTlsContext_CombinedValidationContext</a>:</code></span>
+<span class="codeline" id="line-331"><code>		<label for="r59" class="ident">combined</label> := <label for="r55" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-580" class="ident">GetCombinedValidationContext</a>()</code></span>
+<span class="codeline" id="line-332"><code>		<span class="keyword">var</span> <label for="r60" class="ident">matchers</label> []<a href="../../../../../../../pkg/google.golang.org/grpc/internal/xds/matcher.html" class="ident i13">matcher</a>.<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-36" class="ident">StringMatcher</a></code></span>
+<span class="codeline" id="line-333"><code>		<span class="keyword">if</span> <label for="r61" class="ident">def</label> := <label for="r59" class="ident">combined</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-901" class="ident">GetDefaultValidationContext</a>(); <label for="r61" class="ident">def</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-334"><code>			<span class="keyword">for</span> <label for="r62" class="ident">_</label>, <label for="r63" class="ident">m</label> := <span class="keyword">range</span> <label for="r61" class="ident">def</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1019" class="ident">GetMatchSubjectAltNames</a>() {</code></span>
+<span class="codeline" id="line-335"><code>				<label for="r64" class="ident">matcher</label>, <label for="r65" class="ident">err</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal/xds/matcher.html" class="ident i13">matcher</a>.<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-73" class="ident">StringMatcherFromProto</a>(<label for="r63" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-336"><code>				<span class="keyword">if</span> <label for="r65" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-337"><code>					<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r65" class="ident">err</label></code></span>
+<span class="codeline" id="line-338"><code>				}</code></span>
+<span class="codeline" id="line-339"><code>				<label for="r60" class="ident">matchers</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r60" class="ident">matchers</label>, <label for="r64" class="ident">matcher</label>)</code></span>
+<span class="codeline" id="line-340"><code>			}</code></span>
+<span class="codeline" id="line-341"><code>		}</code></span>
+<span class="codeline" id="line-342"><code>		<span class="keyword">if</span> <label for="r56" class="ident">server</label> &amp;&amp; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r60" class="ident">matchers</label>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-343"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"match_subject_alt_names field in validation context is not supported on the server: %v"</span>, <label for="r55" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-344"><code>		}</code></span>
+<span class="codeline" id="line-345"><code>		<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-210" class="ident">SubjectAltNameMatchers</a> = <label for="r60" class="ident">matchers</label></code></span>
+<span class="codeline" id="line-346"><code>		<span class="keyword">if</span> <label for="r66" class="ident">pi</label> := <label for="r59" class="ident">combined</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-924" class="ident">GetValidationContextCertificateProviderInstance</a>(); <label for="r66" class="ident">pi</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-347"><code>			<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-190" class="ident">RootInstanceName</a> = <label for="r66" class="ident">pi</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-831" class="ident">GetInstanceName</a>()</code></span>
+<span class="codeline" id="line-348"><code>			<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-193" class="ident">RootCertName</a> = <label for="r66" class="ident">pi</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-838" class="ident">GetCertificateName</a>()</code></span>
+<span class="codeline" id="line-349"><code>		}</code></span>
+<span class="codeline" id="line-350"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-658" class="ident">CommonTlsContext_ValidationContextCertificateProviderInstance</a>:</code></span>
+<span class="codeline" id="line-351"><code>		<label for="r67" class="ident">pi</label> := <label for="r55" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-596" class="ident">GetValidationContextCertificateProviderInstance</a>()</code></span>
+<span class="codeline" id="line-352"><code>		<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-190" class="ident">RootInstanceName</a> = <label for="r67" class="ident">pi</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-831" class="ident">GetInstanceName</a>()</code></span>
+<span class="codeline" id="line-353"><code>		<label for="r57" class="ident">sc</label>.<a href="type_rds.go.html#line-193" class="ident">RootCertName</a> = <label for="r67" class="ident">pi</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-838" class="ident">GetCertificateName</a>()</code></span>
+<span class="codeline" id="line-354"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>:</code></span>
+<span class="codeline" id="line-355"><code>		<span class="comment">// It is valid for the validation context to be nil on the server side.</span></code></span>
+<span class="codeline" id="line-356"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-357"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"validation context contains unexpected type: %T"</span>, <label for="r68" class="ident">t</label>)</code></span>
+<span class="codeline" id="line-358"><code>	}</code></span>
+<span class="codeline" id="line-359"><code>	<span class="keyword">return</span> <label for="r57" class="ident">sc</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-360"><code>}</code></span>
+<span class="codeline" id="line-361"><code></code></span>
+<span class="codeline" id="line-362"><code><span class="comment">// gRFC A29 https://github.com/grpc/proposal/blob/master/A29-xds-tls-security.md</span></code></span>
+<span class="codeline" id="line-363"><code><span class="comment">// specifies the new way to fetch security configuration and says the following:</span></code></span>
+<span class="codeline" id="line-364"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-365"><code><span class="comment">// Although there are various ways to obtain certificates as per this proto</span></code></span>
+<span class="codeline" id="line-366"><code><span class="comment">// (which are supported by Envoy), gRPC supports only one of them and that is</span></code></span>
+<span class="codeline" id="line-367"><code><span class="comment">// the `CertificateProviderPluginInstance` proto.</span></code></span>
+<span class="codeline" id="line-368"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-369"><code><span class="comment">// This helper function attempts to fetch security configuration from the</span></code></span>
+<span class="codeline" id="line-370"><code><span class="comment">// `CertificateProviderPluginInstance` message, given a CommonTlsContext.</span></code></span>
+<span class="codeline" id="line-371"><code><span class="keyword">func</span> <label for="r69" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-securityConfigFromCommonTLSContextUsingNewFields" class="ident">securityConfigFromCommonTLSContextUsingNewFields</a></label>(<label for="r70" class="ident">common</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-410" class="ident">CommonTlsContext</a>, <label for="r71" class="ident">server</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) (*<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-372"><code>	<span class="comment">// The `tls_certificate_provider_instance` field of type</span></code></span>
+<span class="codeline" id="line-373"><code><span class="comment">	// `CertificateProviderPluginInstance` is used to fetch the identity</span></code></span>
+<span class="codeline" id="line-374"><code><span class="comment">	// certificate provider.</span></code></span>
+<span class="codeline" id="line-375"><code>	<label for="r72" class="ident">sc</label> := &amp;<a href="type_rds.go.html#line-185" class="ident">SecurityConfig</a>{}</code></span>
+<span class="codeline" id="line-376"><code>	<label for="r73" class="ident">identity</label> := <label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-536" class="ident">GetTlsCertificateProviderInstance</a>()</code></span>
+<span class="codeline" id="line-377"><code>	<span class="keyword">if</span> <label for="r73" class="ident">identity</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-522" class="ident">GetTlsCertificates</a>()) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-378"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"expected field tls_certificate_provider_instance is not set, while unsupported field tls_certificates is set in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-379"><code>	}</code></span>
+<span class="codeline" id="line-380"><code>	<span class="keyword">if</span> <label for="r73" class="ident">identity</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-529" class="ident">GetTlsCertificateSdsSecretConfigs</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-381"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"expected field tls_certificate_provider_instance is not set, while unsupported field tls_certificate_sds_secret_configs is set in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-382"><code>	}</code></span>
+<span class="codeline" id="line-383"><code>	<label for="r72" class="ident">sc</label>.<a href="type_rds.go.html#line-198" class="ident">IdentityInstanceName</a> = <label for="r73" class="ident">identity</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-702" class="ident">GetInstanceName</a>()</code></span>
+<span class="codeline" id="line-384"><code>	<label for="r72" class="ident">sc</label>.<a href="type_rds.go.html#line-201" class="ident">IdentityCertName</a> = <label for="r73" class="ident">identity</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-709" class="ident">GetCertificateName</a>()</code></span>
+<span class="codeline" id="line-385"><code></code></span>
+<span class="codeline" id="line-386"><code>	<span class="comment">// The `CommonTlsContext` contains a oneof field `validation_context_type`,</span></code></span>
+<span class="codeline" id="line-387"><code><span class="comment">	// which contains the `CertificateValidationContext` message in one of the</span></code></span>
+<span class="codeline" id="line-388"><code><span class="comment">	// following ways:</span></code></span>
+<span class="codeline" id="line-389"><code><span class="comment">	//  - `validation_context` field</span></code></span>
+<span class="codeline" id="line-390"><code><span class="comment">	//    - this is directly of type `CertificateValidationContext`</span></code></span>
+<span class="codeline" id="line-391"><code><span class="comment">	//  - `combined_validation_context` field</span></code></span>
+<span class="codeline" id="line-392"><code><span class="comment">	//    - this is of type `CombinedCertificateValidationContext` and contains</span></code></span>
+<span class="codeline" id="line-393"><code><span class="comment">	//      a `default validation context` field of type</span></code></span>
+<span class="codeline" id="line-394"><code><span class="comment">	//      `CertificateValidationContext`</span></code></span>
+<span class="codeline" id="line-395"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-396"><code><span class="comment">	// The `CertificateValidationContext` message has the following fields that</span></code></span>
+<span class="codeline" id="line-397"><code><span class="comment">	// we are interested in:</span></code></span>
+<span class="codeline" id="line-398"><code><span class="comment">	//  - `ca_certificate_provider_instance`</span></code></span>
+<span class="codeline" id="line-399"><code><span class="comment">	//    - this is of type `CertificateProviderPluginInstance`</span></code></span>
+<span class="codeline" id="line-400"><code><span class="comment">	//  - `match_subject_alt_names`</span></code></span>
+<span class="codeline" id="line-401"><code><span class="comment">	//    - this is a list of string matchers</span></code></span>
+<span class="codeline" id="line-402"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-403"><code><span class="comment">	// The `CertificateProviderPluginInstance` message contains two fields</span></code></span>
+<span class="codeline" id="line-404"><code><span class="comment">	//  - instance_name</span></code></span>
+<span class="codeline" id="line-405"><code><span class="comment">	//    - this is the certificate provider instance name to be looked up in</span></code></span>
+<span class="codeline" id="line-406"><code><span class="comment">	//      the bootstrap configuration</span></code></span>
+<span class="codeline" id="line-407"><code><span class="comment">	//  - certificate_name</span></code></span>
+<span class="codeline" id="line-408"><code><span class="comment">	//    -  this is an opaque name passed to the certificate provider</span></code></span>
+<span class="codeline" id="line-409"><code>	<span class="keyword">var</span> <label for="r74" class="ident">validationCtx</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-775" class="ident">CertificateValidationContext</a></code></span>
+<span class="codeline" id="line-410"><code>	<span class="keyword">switch</span> typ := <label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-559" class="ident">GetValidationContextType</a>().(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-411"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-628" class="ident">CommonTlsContext_ValidationContext</a>:</code></span>
+<span class="codeline" id="line-412"><code>		<label for="r74" class="ident">validationCtx</label> = <label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-566" class="ident">GetValidationContext</a>()</code></span>
+<span class="codeline" id="line-413"><code>	<span class="keyword">case</span> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3.html" class="ident i8">v3tlspb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-639" class="ident">CommonTlsContext_CombinedValidationContext</a>:</code></span>
+<span class="codeline" id="line-414"><code>		<label for="r74" class="ident">validationCtx</label> = <label for="r70" class="ident">common</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-580" class="ident">GetCombinedValidationContext</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/tls.pb.go.html#line-901" class="ident">GetDefaultValidationContext</a>()</code></span>
+<span class="codeline" id="line-415"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>:</code></span>
+<span class="codeline" id="line-416"><code>		<span class="comment">// It is valid for the validation context to be nil on the server side.</span></code></span>
+<span class="codeline" id="line-417"><code>		<span class="keyword">return</span> <label for="r72" class="ident">sc</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-418"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-419"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"validation context contains unexpected type: %T"</span>, <label for="r75" class="ident">typ</label>)</code></span>
+<span class="codeline" id="line-420"><code>	}</code></span>
+<span class="codeline" id="line-421"><code>	<span class="comment">// If we get here, it means that the `CertificateValidationContext` message</span></code></span>
+<span class="codeline" id="line-422"><code><span class="comment">	// was found through one of the supported ways. It is an error if the</span></code></span>
+<span class="codeline" id="line-423"><code><span class="comment">	// validation context is specified, but it does not contain the</span></code></span>
+<span class="codeline" id="line-424"><code><span class="comment">	// ca_certificate_provider_instance field which contains information about</span></code></span>
+<span class="codeline" id="line-425"><code><span class="comment">	// the certificate provider to be used for the root certificates.</span></code></span>
+<span class="codeline" id="line-426"><code>	<span class="keyword">if</span> <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-983" class="ident">GetCaCertificateProviderInstance</a>() == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-427"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"expected field ca_certificate_provider_instance is missing in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-428"><code>	}</code></span>
+<span class="codeline" id="line-429"><code>	<span class="comment">// The following fields are ignored:</span></code></span>
+<span class="codeline" id="line-430"><code><span class="comment">	// - trusted_ca</span></code></span>
+<span class="codeline" id="line-431"><code><span class="comment">	// - watched_directory</span></code></span>
+<span class="codeline" id="line-432"><code><span class="comment">	// - allow_expired_certificate</span></code></span>
+<span class="codeline" id="line-433"><code><span class="comment">	// - trust_chain_verification</span></code></span>
+<span class="codeline" id="line-434"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-435"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-997" class="ident">GetVerifyCertificateSpki</a>()) != <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-436"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported verify_certificate_spki field in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-437"><code>	<span class="keyword">case</span> <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1004" class="ident">GetVerifyCertificateHash</a>()) != <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-438"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported verify_certificate_hash field in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-439"><code>	<span class="keyword">case</span> <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1026" class="ident">GetRequireSignedCertificateTimestamp</a>().<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-438" class="ident">GetValue</a>():</code></span>
+<span class="codeline" id="line-440"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported require_sugned_ceritificate_timestamp field in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-441"><code>	<span class="keyword">case</span> <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1033" class="ident">GetCrl</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>:</code></span>
+<span class="codeline" id="line-442"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported crl field in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-443"><code>	<span class="keyword">case</span> <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1054" class="ident">GetCustomValidatorConfig</a>() != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>:</code></span>
+<span class="codeline" id="line-444"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unsupported custom_validator_config field in CommonTlsContext message: %+v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-445"><code>	}</code></span>
+<span class="codeline" id="line-446"><code></code></span>
+<span class="codeline" id="line-447"><code>	<span class="keyword">if</span> <label for="r76" class="ident">rootProvider</label> := <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-983" class="ident">GetCaCertificateProviderInstance</a>(); <label for="r76" class="ident">rootProvider</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-448"><code>		<label for="r72" class="ident">sc</label>.<a href="type_rds.go.html#line-190" class="ident">RootInstanceName</a> = <label for="r76" class="ident">rootProvider</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-702" class="ident">GetInstanceName</a>()</code></span>
+<span class="codeline" id="line-449"><code>		<label for="r72" class="ident">sc</label>.<a href="type_rds.go.html#line-193" class="ident">RootCertName</a> = <label for="r76" class="ident">rootProvider</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-709" class="ident">GetCertificateName</a>()</code></span>
+<span class="codeline" id="line-450"><code>	}</code></span>
+<span class="codeline" id="line-451"><code>	<span class="keyword">var</span> <label for="r77" class="ident">matchers</label> []<a href="../../../../../../../pkg/google.golang.org/grpc/internal/xds/matcher.html" class="ident i13">matcher</a>.<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-36" class="ident">StringMatcher</a></code></span>
+<span class="codeline" id="line-452"><code>	<span class="keyword">for</span> <label for="r78" class="ident">_</label>, <label for="r79" class="ident">m</label> := <span class="keyword">range</span> <label for="r74" class="ident">validationCtx</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3/common.pb.go.html#line-1019" class="ident">GetMatchSubjectAltNames</a>() {</code></span>
+<span class="codeline" id="line-453"><code>		<label for="r80" class="ident">matcher</label>, <label for="r81" class="ident">err</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal/xds/matcher.html" class="ident i13">matcher</a>.<a href="../../../../internal/xds/matcher/string_matcher.go.html#line-73" class="ident">StringMatcherFromProto</a>(<label for="r79" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-454"><code>		<span class="keyword">if</span> <label for="r81" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-455"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r81" class="ident">err</label></code></span>
+<span class="codeline" id="line-456"><code>		}</code></span>
+<span class="codeline" id="line-457"><code>		<label for="r77" class="ident">matchers</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r77" class="ident">matchers</label>, <label for="r80" class="ident">matcher</label>)</code></span>
+<span class="codeline" id="line-458"><code>	}</code></span>
+<span class="codeline" id="line-459"><code>	<span class="keyword">if</span> <label for="r71" class="ident">server</label> &amp;&amp; <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r77" class="ident">matchers</label>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-460"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"match_subject_alt_names field in validation context is not supported on the server: %v"</span>, <label for="r70" class="ident">common</label>)</code></span>
+<span class="codeline" id="line-461"><code>	}</code></span>
+<span class="codeline" id="line-462"><code>	<label for="r72" class="ident">sc</label>.<a href="type_rds.go.html#line-210" class="ident">SubjectAltNameMatchers</a> = <label for="r77" class="ident">matchers</label></code></span>
+<span class="codeline" id="line-463"><code>	<span class="keyword">return</span> <label for="r72" class="ident">sc</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-464"><code>}</code></span>
+<span class="codeline" id="line-465"><code></code></span>
+<span class="codeline" id="line-466"><code><span class="comment">// circuitBreakersFromCluster extracts the circuit breakers configuration from</span></code></span>
+<span class="codeline" id="line-467"><code><span class="comment">// the received cluster resource. Returns nil if no CircuitBreakers or no</span></code></span>
+<span class="codeline" id="line-468"><code><span class="comment">// Thresholds in CircuitBreakers.</span></code></span>
+<span class="codeline" id="line-469"><code><span class="keyword">func</span> <label for="r82" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-circuitBreakersFromCluster" class="ident">circuitBreakersFromCluster</a></label>(<label for="r83" class="ident">cluster</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>) *<a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a> {</code></span>
+<span class="codeline" id="line-470"><code>	<span class="keyword">for</span> <label for="r84" class="ident">_</label>, <label for="r85" class="ident">threshold</label> := <span class="keyword">range</span> <label for="r83" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1050" class="ident">GetCircuitBreakers</a>().<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/circuit_breaker.pb.go.html#line-87" class="ident">GetThresholds</a>() {</code></span>
+<span class="codeline" id="line-471"><code>		<span class="keyword">if</span> <label for="r85" class="ident">threshold</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/circuit_breaker.pb.go.html#line-183" class="ident">GetPriority</a>() != <a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html" class="ident i6">v3corepb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3/base.pb.go.html#line-41" class="ident">RoutingPriority_DEFAULT</a> {</code></span>
+<span class="codeline" id="line-472"><code>			<span class="keyword">continue</span></code></span>
+<span class="codeline" id="line-473"><code>		}</code></span>
+<span class="codeline" id="line-474"><code>		<label for="r86" class="ident">maxRequestsPb</label> := <label for="r85" class="ident">threshold</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/circuit_breaker.pb.go.html#line-204" class="ident">GetMaxRequests</a>()</code></span>
+<span class="codeline" id="line-475"><code>		<span class="keyword">if</span> <label for="r86" class="ident">maxRequestsPb</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-476"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-477"><code>		}</code></span>
+<span class="codeline" id="line-478"><code>		<label for="r87" class="ident">maxRequests</label> := <label for="r86" class="ident">maxRequestsPb</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-479"><code>		<span class="keyword">return</span> &amp;<label for="r87" class="ident">maxRequests</label></code></span>
+<span class="codeline" id="line-480"><code>	}</code></span>
+<span class="codeline" id="line-481"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-482"><code>}</code></span>
+<span class="codeline" id="line-483"><code></code></span>
+<span class="codeline" id="line-484"><code><span class="comment">// outlierConfigFromCluster extracts the relevant outlier detection</span></code></span>
+<span class="codeline" id="line-485"><code><span class="comment">// configuration from the received cluster resource. Returns nil if no</span></code></span>
+<span class="codeline" id="line-486"><code><span class="comment">// OutlierDetection field set in the cluster resource.</span></code></span>
+<span class="codeline" id="line-487"><code><span class="keyword">func</span> <label for="r88" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-outlierConfigFromCluster" class="ident">outlierConfigFromCluster</a></label>(<label for="r89" class="ident">cluster</label> *<a href="../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3.html" class="ident i5">v3clusterpb</a>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-536" class="ident">Cluster</a>) (*<a href="type_cds.go.html#line-62" class="ident">OutlierDetection</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-488"><code>	<label for="r90" class="ident">od</label> := <label for="r89" class="ident">cluster</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/cluster.pb.go.html#line-1162" class="ident">GetOutlierDetection</a>()</code></span>
+<span class="codeline" id="line-489"><code>	<span class="keyword">if</span> <label for="r90" class="ident">od</label> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-490"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-491"><code>	}</code></span>
+<span class="codeline" id="line-492"><code>	<span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-493"><code>		<label for="r91" class="ident">defaultInterval</label>                       = <span class="lit-number">10</span> * <a href="../../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../../time/time.go.html#line-611" class="ident">Second</a></code></span>
+<span class="codeline" id="line-494"><code>		<label for="r92" class="ident">defaultBaseEjectionTime</label>               = <span class="lit-number">30</span> * <a href="../../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../../time/time.go.html#line-611" class="ident">Second</a></code></span>
+<span class="codeline" id="line-495"><code>		<label for="r93" class="ident">defaultMaxEjectionTime</label>                = <span class="lit-number">300</span> * <a href="../../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../../time/time.go.html#line-611" class="ident">Second</a></code></span>
+<span class="codeline" id="line-496"><code>		<label for="r94" class="ident">defaultMaxEjectionPercent</label>             = <span class="lit-number">10</span></code></span>
+<span class="codeline" id="line-497"><code>		<label for="r95" class="ident">defaultSuccessRateStdevFactor</label>         = <span class="lit-number">1900</span></code></span>
+<span class="codeline" id="line-498"><code>		<label for="r96" class="ident">defaultEnforcingSuccessRate</label>           = <span class="lit-number">100</span></code></span>
+<span class="codeline" id="line-499"><code>		<label for="r97" class="ident">defaultSuccessRateMinimumHosts</label>        = <span class="lit-number">5</span></code></span>
+<span class="codeline" id="line-500"><code>		<label for="r98" class="ident">defaultSuccessRateRequestVolume</label>       = <span class="lit-number">100</span></code></span>
+<span class="codeline" id="line-501"><code>		<label for="r99" class="ident">defaultFailurePercentageThreshold</label>     = <span class="lit-number">85</span></code></span>
+<span class="codeline" id="line-502"><code>		<label for="r100" class="ident">defaultEnforcingFailurePercentage</label>     = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-503"><code>		<label for="r101" class="ident">defaultFailurePercentageMinimumHosts</label>  = <span class="lit-number">5</span></code></span>
+<span class="codeline" id="line-504"><code>		<label for="r102" class="ident">defaultFailurePercentageRequestVolume</label> = <span class="lit-number">50</span></code></span>
+<span class="codeline" id="line-505"><code>	)</code></span>
+<span class="codeline" id="line-506"><code>	<span class="comment">// "The google.protobuf.Duration fields interval, base_ejection_time, and</span></code></span>
+<span class="codeline" id="line-507"><code><span class="comment">	// max_ejection_time must obey the restrictions in the</span></code></span>
+<span class="codeline" id="line-508"><code><span class="comment">	// google.protobuf.Duration documentation and they must have non-negative</span></code></span>
+<span class="codeline" id="line-509"><code><span class="comment">	// values." - A50</span></code></span>
+<span class="codeline" id="line-510"><code>	<label for="r103" class="ident">interval</label> := <label for="r91" class="ident">defaultInterval</label></code></span>
+<span class="codeline" id="line-511"><code>	<span class="keyword">if</span> <label for="r104" class="ident">i</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-186" class="ident">GetInterval</a>(); <label for="r104" class="ident">i</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-512"><code>		<span class="keyword">if</span> <label for="r105" class="ident">err</label> := <label for="r104" class="ident">i</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-205" class="ident">CheckValid</a>(); <label for="r105" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-513"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.interval is invalid with error %v"</span>, <label for="r105" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-514"><code>		}</code></span>
+<span class="codeline" id="line-515"><code>		<span class="keyword">if</span> <label for="r103" class="ident">interval</label> = <label for="r104" class="ident">i</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-176" class="ident">AsDuration</a>(); <label for="r103" class="ident">interval</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-516"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.interval = %v; must be a valid duration and &gt;= 0"</span>, <label for="r103" class="ident">interval</label>)</code></span>
+<span class="codeline" id="line-517"><code>		}</code></span>
+<span class="codeline" id="line-518"><code>	}</code></span>
+<span class="codeline" id="line-519"><code></code></span>
+<span class="codeline" id="line-520"><code>	<label for="r106" class="ident">baseEjectionTime</label> := <label for="r92" class="ident">defaultBaseEjectionTime</label></code></span>
+<span class="codeline" id="line-521"><code>	<span class="keyword">if</span> <label for="r107" class="ident">bet</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-193" class="ident">GetBaseEjectionTime</a>(); <label for="r107" class="ident">bet</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-522"><code>		<span class="keyword">if</span> <label for="r108" class="ident">err</label> := <label for="r107" class="ident">bet</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-205" class="ident">CheckValid</a>(); <label for="r108" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-523"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.base_ejection_time is invalid with error %v"</span>, <label for="r108" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-524"><code>		}</code></span>
+<span class="codeline" id="line-525"><code>		<span class="keyword">if</span> <label for="r106" class="ident">baseEjectionTime</label> = <label for="r107" class="ident">bet</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-176" class="ident">AsDuration</a>(); <label for="r106" class="ident">baseEjectionTime</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-526"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.base_ejection_time = %v; must be &gt;= 0"</span>, <label for="r106" class="ident">baseEjectionTime</label>)</code></span>
+<span class="codeline" id="line-527"><code>		}</code></span>
+<span class="codeline" id="line-528"><code>	}</code></span>
+<span class="codeline" id="line-529"><code></code></span>
+<span class="codeline" id="line-530"><code>	<label for="r109" class="ident">maxEjectionTime</label> := <label for="r93" class="ident">defaultMaxEjectionTime</label></code></span>
+<span class="codeline" id="line-531"><code>	<span class="keyword">if</span> <label for="r110" class="ident">met</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-319" class="ident">GetMaxEjectionTime</a>(); <label for="r110" class="ident">met</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-532"><code>		<span class="keyword">if</span> <label for="r111" class="ident">err</label> := <label for="r110" class="ident">met</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-205" class="ident">CheckValid</a>(); <label for="r111" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-533"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.max_ejection_time is invalid with error %v"</span>, <label for="r111" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-534"><code>		}</code></span>
+<span class="codeline" id="line-535"><code>		<span class="keyword">if</span> <label for="r109" class="ident">maxEjectionTime</label> = <label for="r110" class="ident">met</label>.<a href="../../../../../protobuf/types/known/durationpb/duration.pb.go.html#line-176" class="ident">AsDuration</a>(); <label for="r109" class="ident">maxEjectionTime</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-536"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.max_ejection_time = %v; must be &gt;= 0"</span>, <label for="r109" class="ident">maxEjectionTime</label>)</code></span>
+<span class="codeline" id="line-537"><code>		}</code></span>
+<span class="codeline" id="line-538"><code>	}</code></span>
+<span class="codeline" id="line-539"><code></code></span>
+<span class="codeline" id="line-540"><code>	<span class="comment">// "The fields max_ejection_percent, enforcing_success_rate,</span></code></span>
+<span class="codeline" id="line-541"><code><span class="comment">	// failure_percentage_threshold, and enforcing_failure_percentage must have</span></code></span>
+<span class="codeline" id="line-542"><code><span class="comment">	// values less than or equal to 100. If any of these requirements is</span></code></span>
+<span class="codeline" id="line-543"><code><span class="comment">	// violated, the Cluster resource should be NACKed." - A50</span></code></span>
+<span class="codeline" id="line-544"><code>	<label for="r112" class="ident">maxEjectionPercent</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r94" class="ident">defaultMaxEjectionPercent</label>)</code></span>
+<span class="codeline" id="line-545"><code>	<span class="keyword">if</span> <label for="r113" class="ident">mep</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-200" class="ident">GetMaxEjectionPercent</a>(); <label for="r113" class="ident">mep</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-546"><code>		<span class="keyword">if</span> <label for="r112" class="ident">maxEjectionPercent</label> = <label for="r113" class="ident">mep</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>(); <label for="r112" class="ident">maxEjectionPercent</label> &gt; <span class="lit-number">100</span> {</code></span>
+<span class="codeline" id="line-547"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.max_ejection_percent = %v; must be &lt;= 100"</span>, <label for="r112" class="ident">maxEjectionPercent</label>)</code></span>
+<span class="codeline" id="line-548"><code>		}</code></span>
+<span class="codeline" id="line-549"><code>	}</code></span>
+<span class="codeline" id="line-550"><code>	<label for="r114" class="ident">enforcingSuccessRate</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r96" class="ident">defaultEnforcingSuccessRate</label>)</code></span>
+<span class="codeline" id="line-551"><code>	<span class="keyword">if</span> <label for="r115" class="ident">esr</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-214" class="ident">GetEnforcingSuccessRate</a>(); <label for="r115" class="ident">esr</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-552"><code>		<span class="keyword">if</span> <label for="r114" class="ident">enforcingSuccessRate</label> = <label for="r115" class="ident">esr</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>(); <label for="r114" class="ident">enforcingSuccessRate</label> &gt; <span class="lit-number">100</span> {</code></span>
+<span class="codeline" id="line-553"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.enforcing_success_rate = %v; must be &lt;= 100"</span>, <label for="r114" class="ident">enforcingSuccessRate</label>)</code></span>
+<span class="codeline" id="line-554"><code>		}</code></span>
+<span class="codeline" id="line-555"><code>	}</code></span>
+<span class="codeline" id="line-556"><code>	<label for="r116" class="ident">failurePercentageThreshold</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r99" class="ident">defaultFailurePercentageThreshold</label>)</code></span>
+<span class="codeline" id="line-557"><code>	<span class="keyword">if</span> <label for="r117" class="ident">fpt</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-284" class="ident">GetFailurePercentageThreshold</a>(); <label for="r117" class="ident">fpt</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-558"><code>		<span class="keyword">if</span> <label for="r116" class="ident">failurePercentageThreshold</label> = <label for="r117" class="ident">fpt</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>(); <label for="r116" class="ident">failurePercentageThreshold</label> &gt; <span class="lit-number">100</span> {</code></span>
+<span class="codeline" id="line-559"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.failure_percentage_threshold = %v; must be &lt;= 100"</span>, <label for="r116" class="ident">failurePercentageThreshold</label>)</code></span>
+<span class="codeline" id="line-560"><code>		}</code></span>
+<span class="codeline" id="line-561"><code>	}</code></span>
+<span class="codeline" id="line-562"><code>	<label for="r118" class="ident">enforcingFailurePercentage</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r100" class="ident">defaultEnforcingFailurePercentage</label>)</code></span>
+<span class="codeline" id="line-563"><code>	<span class="keyword">if</span> <label for="r119" class="ident">efp</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-291" class="ident">GetEnforcingFailurePercentage</a>(); <label for="r119" class="ident">efp</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-564"><code>		<span class="keyword">if</span> <label for="r118" class="ident">enforcingFailurePercentage</label> = <label for="r119" class="ident">efp</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>(); <label for="r118" class="ident">enforcingFailurePercentage</label> &gt; <span class="lit-number">100</span> {</code></span>
+<span class="codeline" id="line-565"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"outlier_detection.enforcing_failure_percentage = %v; must be &lt;= 100"</span>, <label for="r118" class="ident">enforcingFailurePercentage</label>)</code></span>
+<span class="codeline" id="line-566"><code>		}</code></span>
+<span class="codeline" id="line-567"><code>	}</code></span>
+<span class="codeline" id="line-568"><code></code></span>
+<span class="codeline" id="line-569"><code>	<label for="r120" class="ident">successRateStdevFactor</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r95" class="ident">defaultSuccessRateStdevFactor</label>)</code></span>
+<span class="codeline" id="line-570"><code>	<span class="keyword">if</span> <label for="r121" class="ident">srsf</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-235" class="ident">GetSuccessRateStdevFactor</a>(); <label for="r121" class="ident">srsf</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-571"><code>		<label for="r120" class="ident">successRateStdevFactor</label> = <label for="r121" class="ident">srsf</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-572"><code>	}</code></span>
+<span class="codeline" id="line-573"><code>	<label for="r122" class="ident">successRateMinimumHosts</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r97" class="ident">defaultSuccessRateMinimumHosts</label>)</code></span>
+<span class="codeline" id="line-574"><code>	<span class="keyword">if</span> <label for="r123" class="ident">srmh</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-221" class="ident">GetSuccessRateMinimumHosts</a>(); <label for="r123" class="ident">srmh</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-575"><code>		<label for="r122" class="ident">successRateMinimumHosts</label> = <label for="r123" class="ident">srmh</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-576"><code>	}</code></span>
+<span class="codeline" id="line-577"><code>	<label for="r124" class="ident">successRateRequestVolume</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r98" class="ident">defaultSuccessRateRequestVolume</label>)</code></span>
+<span class="codeline" id="line-578"><code>	<span class="keyword">if</span> <label for="r125" class="ident">srrv</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-228" class="ident">GetSuccessRateRequestVolume</a>(); <label for="r125" class="ident">srrv</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-579"><code>		<label for="r124" class="ident">successRateRequestVolume</label> = <label for="r125" class="ident">srrv</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-580"><code>	}</code></span>
+<span class="codeline" id="line-581"><code>	<label for="r126" class="ident">failurePercentageMinimumHosts</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r101" class="ident">defaultFailurePercentageMinimumHosts</label>)</code></span>
+<span class="codeline" id="line-582"><code>	<span class="keyword">if</span> <label for="r127" class="ident">fpmh</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-305" class="ident">GetFailurePercentageMinimumHosts</a>(); <label for="r127" class="ident">fpmh</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-583"><code>		<label for="r126" class="ident">failurePercentageMinimumHosts</label> = <label for="r127" class="ident">fpmh</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-584"><code>	}</code></span>
+<span class="codeline" id="line-585"><code>	<label for="r128" class="ident">failurePercentageRequestVolume</label> := <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>(<label for="r102" class="ident">defaultFailurePercentageRequestVolume</label>)</code></span>
+<span class="codeline" id="line-586"><code>	<span class="keyword">if</span> <label for="r129" class="ident">fprv</label> := <label for="r90" class="ident">od</label>.<a href="../../../../../../github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3/outlier_detection.pb.go.html#line-312" class="ident">GetFailurePercentageRequestVolume</a>(); <label for="r129" class="ident">fprv</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-587"><code>		<label for="r128" class="ident">failurePercentageRequestVolume</label> = <label for="r129" class="ident">fprv</label>.<a href="../../../../../protobuf/types/known/wrapperspb/wrappers.pb.go.html#line-382" class="ident">GetValue</a>()</code></span>
+<span class="codeline" id="line-588"><code>	}</code></span>
+<span class="codeline" id="line-589"><code></code></span>
+<span class="codeline" id="line-590"><code>	<span class="keyword">return</span> &amp;<a href="type_cds.go.html#line-62" class="ident">OutlierDetection</a>{</code></span>
+<span class="codeline" id="line-591"><code>		<a href="type_cds.go.html#line-66" class="ident">Interval</a>:                       <label for="r103" class="ident">interval</label>,</code></span>
+<span class="codeline" id="line-592"><code>		<a href="type_cds.go.html#line-70" class="ident">BaseEjectionTime</a>:               <label for="r106" class="ident">baseEjectionTime</label>,</code></span>
+<span class="codeline" id="line-593"><code>		<a href="type_cds.go.html#line-74" class="ident">MaxEjectionTime</a>:                <label for="r109" class="ident">maxEjectionTime</label>,</code></span>
+<span class="codeline" id="line-594"><code>		<a href="type_cds.go.html#line-78" class="ident">MaxEjectionPercent</a>:             <label for="r112" class="ident">maxEjectionPercent</label>,</code></span>
+<span class="codeline" id="line-595"><code>		<a href="type_cds.go.html#line-91" class="ident">EnforcingSuccessRate</a>:           <label for="r114" class="ident">enforcingSuccessRate</label>,</code></span>
+<span class="codeline" id="line-596"><code>		<a href="type_cds.go.html#line-107" class="ident">FailurePercentageThreshold</a>:     <label for="r116" class="ident">failurePercentageThreshold</label>,</code></span>
+<span class="codeline" id="line-597"><code>		<a href="type_cds.go.html#line-112" class="ident">EnforcingFailurePercentage</a>:     <label for="r118" class="ident">enforcingFailurePercentage</label>,</code></span>
+<span class="codeline" id="line-598"><code>		<a href="type_cds.go.html#line-86" class="ident">SuccessRateStdevFactor</a>:         <label for="r120" class="ident">successRateStdevFactor</label>,</code></span>
+<span class="codeline" id="line-599"><code>		<a href="type_cds.go.html#line-96" class="ident">SuccessRateMinimumHosts</a>:        <label for="r122" class="ident">successRateMinimumHosts</label>,</code></span>
+<span class="codeline" id="line-600"><code>		<a href="type_cds.go.html#line-102" class="ident">SuccessRateRequestVolume</a>:       <label for="r124" class="ident">successRateRequestVolume</label>,</code></span>
+<span class="codeline" id="line-601"><code>		<a href="type_cds.go.html#line-117" class="ident">FailurePercentageMinimumHosts</a>:  <label for="r126" class="ident">failurePercentageMinimumHosts</label>,</code></span>
+<span class="codeline" id="line-602"><code>		<a href="type_cds.go.html#line-123" class="ident">FailurePercentageRequestVolume</a>: <label for="r128" class="ident">failurePercentageRequestVolume</label>,</code></span>
+<span class="codeline" id="line-603"><code>	}, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-604"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

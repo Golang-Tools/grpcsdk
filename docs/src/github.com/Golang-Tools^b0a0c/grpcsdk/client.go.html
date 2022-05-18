@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: client.go in package github.com/Golang-Tools/grpcsdk</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	client.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html">github.com/Golang-Tools/grpcsdk</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="keyword">package</span> grpcsdk</code></span>
+<span class="codeline" id="line-2"><code></code></span>
+<span class="codeline" id="line-3"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-4"><code>	<label for="i0"><span class="lit-string i0">"github.com/Golang-Tools/optparams"</span></label></code></span>
+<span class="codeline" id="line-5"><code>	<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a> <label for="i1"><span class="lit-string i1">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-6"><code>)</code></span>
+<span class="codeline" id="line-7"><code></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">//Client 客户端类,满足接口GrpcClientGetter和GrpcClientInterface</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">//@generics T any 需要指定返回的客户端接口</span></code></span>
+<span class="codeline" id="line-10"><code><span class="keyword">type</span> <a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-Client" class="ident">Client</a>[<label for="r0" class="ident">T</label> <a href="../../../../pkg/builtin.html#name-any" class="ident">any</a>] <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-11"><code>	cli           <label for="r0" class="ident">T</label></code></span>
+<span class="codeline" id="line-12"><code>	conn          *<a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/clientconn.go.html#line-463" class="ident">ClientConn</a></code></span>
+<span class="codeline" id="line-13"><code>	opts          <a href="clientnewopts.go.html#line-9" class="ident">NewClientOptions</a></code></span>
+<span class="codeline" id="line-14"><code>	clientfactory <a href="grpcsdk.go.html#line-36" class="ident">NewGrpcClientFunc</a>[<label for="r0" class="ident">T</label>]</code></span>
+<span class="codeline" id="line-15"><code>}</code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">//Acquire  维持接口,返回自身</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">//@params opts ...optparams.Option[AcquireOptions] acquire方法的参数,只有`Force()`可用,不会生效</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">//@returns GrpcClientInterface[T] 客户端接口对象</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-22"><code><span class="keyword">func</span> (<label for="r1" class="ident">p</label> *<a href="#line-10" class="ident">Client</a>[<label for="r2" class="ident">T</label>]) <label for="r3" class="ident">Acquire</label>(<label for="r4" class="ident">opts</label> ...<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="acquireopts.go.html#line-8" class="ident">AcquireOptions</a>]) (<a href="grpcsdk.go.html#line-20" class="ident">GrpcClientInterface</a>[<label for="r2" class="ident">T</label>], <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-23"><code>	<span class="keyword">return</span> <label for="r1" class="ident">p</label>, <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-24"><code>}</code></span>
+<span class="codeline" id="line-25"><code></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">//Release 释放客户端资源,维持接口不做任何操作</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">//@params cli GrpcClientInterface[T] 要释放的客户端资源</span></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">func</span> (<label for="r5" class="ident">p</label> *<a href="#line-10" class="ident">Client</a>[<label for="r6" class="ident">T</label>]) <label for="r7" class="ident">Release</label>(<label for="r8" class="ident">cli</label> <a href="grpcsdk.go.html#line-20" class="ident">GrpcClientInterface</a>[<label for="r6" class="ident">T</label>]) {</code></span>
+<span class="codeline" id="line-30"><code>}</code></span>
+<span class="codeline" id="line-31"><code></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//GetConn 获取客户端资源,即获取自身</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//@returns GrpcConnInterface 返回自身</span></code></span>
+<span class="codeline" id="line-35"><code><span class="keyword">func</span> (<label for="r9" class="ident">c</label> *<a href="#line-10" class="ident">Client</a>[<label for="r10" class="ident">T</label>]) <label for="r11" class="ident">GetConn</label>() <a href="grpcsdk.go.html#line-10" class="ident">GrpcConnInterface</a> {</code></span>
+<span class="codeline" id="line-36"><code>	<span class="keyword">return</span> <label for="r9" class="ident">c</label>.<a href="#line-12" class="ident">conn</a></code></span>
+<span class="codeline" id="line-37"><code>}</code></span>
+<span class="codeline" id="line-38"><code></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">//AsGrpcClient 将对象转成满足T接口的对象,此处返回自身</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">//@returns T 返回自身</span></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">func</span> (<label for="r12" class="ident">c</label> *<a href="#line-10" class="ident">Client</a>[<label for="r13" class="ident">T</label>]) <label for="r14" class="ident">AsGrpcClient</label>() <label for="r13" class="ident">T</label> {</code></span>
+<span class="codeline" id="line-43"><code>	<span class="keyword">return</span> <label for="r12" class="ident">c</label>.<a href="#line-11" class="ident">cli</a></code></span>
+<span class="codeline" id="line-44"><code>}</code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">//NewClient 创建一个客户端对象</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">//@params newgrpcclientfunc NewGrpcClientFunc[T] 将grpc连接转化为grpc客户端的程序,可以在pb生成的模块中找到,通常以`NewXXXXXXClient`命名</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">//@params opts ...optparams.Option[NewClientOptions] 创建客户端的配置项,详细可以看clientnewopts.go文件</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">//@returns *Client[T] 返回客户端对象</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-52"><code><span class="keyword">func</span> <label for="r15" class="ident"><a href="../../../../pkg/github.com/Golang-Tools^b0a0c/grpcsdk.html#name-NewClient" class="ident">NewClient</a></label>[<label for="r16" class="ident">T</label> <a href="../../../../pkg/builtin.html#name-any" class="ident">any</a>](<label for="r17" class="ident">newgrpcclientfunc</label> <a href="grpcsdk.go.html#line-36" class="ident">NewGrpcClientFunc</a>[<label for="r16" class="ident">T</label>], <label for="r18" class="ident">opts</label> ...<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-6" class="ident">Option</a>[<a href="clientnewopts.go.html#line-9" class="ident">NewClientOptions</a>]) (*<a href="#line-10" class="ident">Client</a>[<label for="r16" class="ident">T</label>], <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-53"><code>	<label for="r19" class="ident">c</label> := <a href="../../../../pkg/builtin.html#name-new" class="ident">new</a>(<a href="#line-10" class="ident">Client</a>[<label for="r16" class="ident">T</label>])</code></span>
+<span class="codeline" id="line-54"><code>	<label for="r19" class="ident">c</label>.<a href="#line-14" class="ident">clientfactory</a> = <label for="r17" class="ident">newgrpcclientfunc</label></code></span>
+<span class="codeline" id="line-55"><code>	<label for="r19" class="ident">c</label>.<a href="#line-13" class="ident">opts</a> = <a href="clientnewopts.go.html#line-15" class="ident">DefaultNewClientOpts</a></code></span>
+<span class="codeline" id="line-56"><code>	<a href="../../../../pkg/github.com/Golang-Tools^b0a0c/optparams.html" class="ident i0">optparams</a>.<a href="../optparams/optparams.go.html#line-36" class="ident">GetOption</a>(&amp;<label for="r19" class="ident">c</label>.<a href="#line-13" class="ident">opts</a>, <label for="r18" class="ident">opts</label>...)</code></span>
+<span class="codeline" id="line-57"><code>	<label for="r20" class="ident">conn</label>, <label for="r21" class="ident">err</label> := <a href="../../../../pkg/google.golang.org/grpc.html" class="ident i1">grpc</a>.<a href="../../../google.golang.org/grpc/clientconn.go.html#line-104" class="ident">Dial</a>(<label for="r19" class="ident">c</label>.<a href="#line-13" class="ident">opts</a>.<a href="clientnewopts.go.html#line-10" class="ident">Addr</a>, <label for="r19" class="ident">c</label>.<a href="#line-13" class="ident">opts</a>.<a href="clientnewopts.go.html#line-11" class="ident">DialOpts</a>...)</code></span>
+<span class="codeline" id="line-58"><code>	<span class="keyword">if</span> <label for="r21" class="ident">err</label> != <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-59"><code>		<span class="keyword">return</span> <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r21" class="ident">err</label></code></span>
+<span class="codeline" id="line-60"><code>	}</code></span>
+<span class="codeline" id="line-61"><code>	<label for="r19" class="ident">c</label>.<a href="#line-12" class="ident">conn</a> = <label for="r20" class="ident">conn</label></code></span>
+<span class="codeline" id="line-62"><code>	<label for="r19" class="ident">c</label>.<a href="#line-11" class="ident">cli</a> = <label for="r17" class="ident">newgrpcclientfunc</label>(<label for="r20" class="ident">conn</label>)</code></span>
+<span class="codeline" id="line-63"><code>	<span class="keyword">return</span> <label for="r19" class="ident">c</label>, <a href="../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-64"><code>}</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">//Close 断开连接</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">//@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">//@returns error 错误信息</span></code></span>
+<span class="codeline" id="line-69"><code><span class="keyword">func</span> (<label for="r22" class="ident">c</label> *<a href="#line-10" class="ident">Client</a>[<label for="r23" class="ident">T</label>]) <label for="r24" class="ident"><a href="../../../../imp/github.com/Golang-Tools^b0a0c/grpcsdk.Client.html#name-.Close" class="ident">Close</a></label>() <a href="../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-70"><code>	<span class="keyword">return</span> <label for="r22" class="ident">c</label>.<a href="#line-35" class="ident">GetConn</a>().<a href="grpcsdk.go.html#line-15" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-71"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

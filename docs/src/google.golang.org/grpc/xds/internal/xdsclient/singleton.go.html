@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: singleton.go in package google.golang.org/grpc/xds/internal/xdsclient</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	singleton.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html">google.golang.org/grpc/xds/internal/xdsclient</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">package</span> xdsclient</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-22"><code>	<label for="i0"><span class="lit-string i0">"bytes"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"encoding/json"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"fmt"</span></label></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i3"><span class="lit-string i3">"sync"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i4"><span class="lit-string i4">"time"</span></label></code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"</span></label></code></span>
+<span class="codeline" id="line-29"><code>)</code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-32"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-defaultWatchExpiryTimeout" class="ident">defaultWatchExpiryTimeout</a>         = <span class="lit-number">15</span> * <a href="../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../time/time.go.html#line-611" class="ident">Second</a></code></span>
+<span class="codeline" id="line-33"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-defaultIdleAuthorityDeleteTimeout" class="ident">defaultIdleAuthorityDeleteTimeout</a> = <span class="lit-number">5</span> * <a href="../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../time/time.go.html#line-612" class="ident">Minute</a></code></span>
+<span class="codeline" id="line-34"><code>)</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-37"><code>	<span class="comment">// This is the Client returned by New(). It contains one client implementation,</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// and maintains the refcount.</span></code></span>
+<span class="codeline" id="line-39"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-singletonClient" class="ident">singletonClient</a> = &amp;<a href="#line-68" class="ident">clientRefCounted</a>{}</code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>	<span class="comment">// The following functions are no-ops in the actual code, but can be</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	// overridden in tests to give them visibility into certain events.</span></code></span>
+<span class="codeline" id="line-43"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-singletonClientImplCreateHook" class="ident">singletonClientImplCreateHook</a> = <span class="keyword">func</span>() {}</code></span>
+<span class="codeline" id="line-44"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-singletonClientImplCloseHook" class="ident">singletonClientImplCloseHook</a>  = <span class="keyword">func</span>() {}</code></span>
+<span class="codeline" id="line-45"><code>)</code></span>
+<span class="codeline" id="line-46"><code></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">// To override in tests.</span></code></span>
+<span class="codeline" id="line-48"><code><span class="keyword">var</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-bootstrapNewConfig" class="ident">bootstrapNewConfig</a> = <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html" class="ident i5">bootstrap</a>.<a href="bootstrap/bootstrap.go.html#line-345" class="ident">NewConfig</a></code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">// onceClosingClient is a thin wrapper around clientRefCounted. The Close()</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">// method is overridden such that the underlying reference counted client's</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">// Close() is called at most once, thereby making Close() idempotent.</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// This is the type which is returned by New() and NewWithConfig(), making it</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// safe for these callers to call Close() any number of times.</span></code></span>
+<span class="codeline" id="line-56"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-onceClosingClient" class="ident">onceClosingClient</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-57"><code>	<a href="attributes.go.html#line-34" class="ident">XDSClient</a></code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code>	once <a href="../../../../../../pkg/sync.html" class="ident i3">sync</a>.<a href="../../../../../sync/once.go.html#line-14" class="ident">Once</a></code></span>
+<span class="codeline" id="line-60"><code>}</code></span>
+<span class="codeline" id="line-61"><code></code></span>
+<span class="codeline" id="line-62"><code><span class="keyword">func</span> (<label for="r0" class="ident">o</label> *<a href="#line-56" class="ident">onceClosingClient</a>) <label for="r1" class="ident"><a href="../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient.onceClosingClient^2d69a.html#name-.Close" class="ident">Close</a></label>() {</code></span>
+<span class="codeline" id="line-63"><code>	<label for="r0" class="ident">o</label>.<a href="#line-59" class="ident">once</a>.<a href="../../../../../sync/once.go.html#line-42" class="ident">Do</a>(<label for="r0" class="ident">o</label>.<a href="#line-57" class="ident">XDSClient</a>.<a href="attributes.go.html#line-47" class="ident">Close</a>)</code></span>
+<span class="codeline" id="line-64"><code>}</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">// clientRefCounted is ref-counted, and to be shared by the xds resolver and</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">// balancer implementations, across multiple ClientConns and Servers.</span></code></span>
+<span class="codeline" id="line-68"><code><span class="keyword">type</span> <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-clientRefCounted" class="ident">clientRefCounted</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-69"><code>	*<a href="client.go.html#line-42" class="ident">clientImpl</a></code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code>	<span class="comment">// This mu protects all the fields, including the embedded clientImpl above.</span></code></span>
+<span class="codeline" id="line-72"><code>	mu       <a href="../../../../../../pkg/sync.html" class="ident i3">sync</a>.<a href="../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-73"><code>	refCount <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-74"><code>}</code></span>
+<span class="codeline" id="line-75"><code></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">// New returns a new xdsClient configured by the bootstrap file specified in env</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">// variable GRPC_XDS_BOOTSTRAP or GRPC_XDS_BOOTSTRAP_CONFIG.</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">// The returned xdsClient is a singleton. This function creates the xds client</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">// if it doesn't already exist.</span></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">// Note that the first invocation of New() or NewWithConfig() sets the client</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">// singleton. The following calls will return the singleton xds client without</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">// checking or using the config.</span></code></span>
+<span class="codeline" id="line-85"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-New" class="ident">New</a></label>() (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-86"><code>	<span class="comment">// This cannot just return newRefCounted(), because in error cases, the</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">	// returned nil is a typed nil (*clientRefCounted), which may cause nil</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">	// checks fail.</span></code></span>
+<span class="codeline" id="line-89"><code>	<label for="r3" class="ident">c</label>, <label for="r4" class="ident">err</label> := <a href="#line-96" class="ident">newRefCounted</a>()</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r4" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r4" class="ident">err</label></code></span>
+<span class="codeline" id="line-92"><code>	}</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">return</span> <label for="r3" class="ident">c</label>, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-94"><code>}</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code><span class="keyword">func</span> <label for="r5" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-newRefCounted" class="ident">newRefCounted</a></label>() (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-97"><code>	<span class="keyword">return</span> <a href="#line-115" class="ident">newRefCountedWithConfig</a>(<a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-98"><code>}</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">// NewWithConfig returns a new xdsClient configured by the given config.</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">// The returned xdsClient is a singleton. This function creates the xds client</span></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">// if it doesn't already exist.</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">// Note that the first invocation of New() or NewWithConfig() sets the client</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">// singleton. The following calls will return the singleton xds client without</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">// checking or using the config.</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">// This function is internal only, for c2p resolver and testing to use. DO NOT</span></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">// use this elsewhere. Use New() instead.</span></code></span>
+<span class="codeline" id="line-111"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-NewWithConfig" class="ident">NewWithConfig</a></label>(<label for="r7" class="ident">config</label> *<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html" class="ident i5">bootstrap</a>.<a href="bootstrap/bootstrap.go.html#line-241" class="ident">Config</a>) (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-112"><code>	<span class="keyword">return</span> <a href="#line-115" class="ident">newRefCountedWithConfig</a>(<label for="r7" class="ident">config</label>)</code></span>
+<span class="codeline" id="line-113"><code>}</code></span>
+<span class="codeline" id="line-114"><code></code></span>
+<span class="codeline" id="line-115"><code><span class="keyword">func</span> <label for="r8" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-newRefCountedWithConfig" class="ident">newRefCountedWithConfig</a></label>(<label for="r9" class="ident">config</label> *<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html" class="ident i5">bootstrap</a>.<a href="bootstrap/bootstrap.go.html#line-241" class="ident">Config</a>) (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-116"><code>	<a href="#line-39" class="ident">singletonClient</a>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-117"><code>	<span class="keyword">defer</span> <a href="#line-39" class="ident">singletonClient</a>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code>	<span class="comment">// If the client implementation was created, increment ref count and return</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">	// the client.</span></code></span>
+<span class="codeline" id="line-121"><code>	<span class="keyword">if</span> <a href="#line-39" class="ident">singletonClient</a>.<a href="#line-69" class="ident">clientImpl</a> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-122"><code>		<a href="#line-39" class="ident">singletonClient</a>.<a href="#line-73" class="ident">refCount</a>++</code></span>
+<span class="codeline" id="line-123"><code>		<span class="keyword">return</span> &amp;<a href="#line-56" class="ident">onceClosingClient</a>{<a href="#line-57" class="ident">XDSClient</a>: <a href="#line-39" class="ident">singletonClient</a>}, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-124"><code>	}</code></span>
+<span class="codeline" id="line-125"><code></code></span>
+<span class="codeline" id="line-126"><code>	<span class="comment">// If the passed in config is nil, perform bootstrap to read config.</span></code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">if</span> <label for="r9" class="ident">config</label> == <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-128"><code>		<span class="keyword">var</span> <label for="r10" class="ident">err</label> <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-129"><code>		<label for="r9" class="ident">config</label>, <label for="r10" class="ident">err</label> = <a href="#line-48" class="ident">bootstrapNewConfig</a>()</code></span>
+<span class="codeline" id="line-130"><code>		<span class="keyword">if</span> <label for="r10" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-131"><code>			<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: failed to read bootstrap file: %v"</span>, <label for="r10" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-132"><code>		}</code></span>
+<span class="codeline" id="line-133"><code>	}</code></span>
+<span class="codeline" id="line-134"><code></code></span>
+<span class="codeline" id="line-135"><code>	<span class="comment">// Create the new client implementation.</span></code></span>
+<span class="codeline" id="line-136"><code>	<label for="r11" class="ident">c</label>, <label for="r12" class="ident">err</label> := <a href="client.go.html#line-71" class="ident">newWithConfig</a>(<label for="r9" class="ident">config</label>, <a href="#line-32" class="ident">defaultWatchExpiryTimeout</a>, <a href="#line-33" class="ident">defaultIdleAuthorityDeleteTimeout</a>)</code></span>
+<span class="codeline" id="line-137"><code>	<span class="keyword">if</span> <label for="r12" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-138"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r12" class="ident">err</label></code></span>
+<span class="codeline" id="line-139"><code>	}</code></span>
+<span class="codeline" id="line-140"><code></code></span>
+<span class="codeline" id="line-141"><code>	<a href="#line-39" class="ident">singletonClient</a>.<a href="#line-69" class="ident">clientImpl</a> = <label for="r11" class="ident">c</label></code></span>
+<span class="codeline" id="line-142"><code>	<a href="#line-39" class="ident">singletonClient</a>.<a href="#line-73" class="ident">refCount</a>++</code></span>
+<span class="codeline" id="line-143"><code>	<a href="#line-43" class="ident">singletonClientImplCreateHook</a>()</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">return</span> &amp;<a href="#line-56" class="ident">onceClosingClient</a>{<a href="#line-57" class="ident">XDSClient</a>: <a href="#line-39" class="ident">singletonClient</a>}, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-145"><code>}</code></span>
+<span class="codeline" id="line-146"><code></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">// Close closes the client. It does ref count of the xds client implementation,</span></code></span>
+<span class="codeline" id="line-148"><code><span class="comment">// and closes the gRPC connection to the management server when ref count</span></code></span>
+<span class="codeline" id="line-149"><code><span class="comment">// reaches 0.</span></code></span>
+<span class="codeline" id="line-150"><code><span class="keyword">func</span> (<label for="r13" class="ident">c</label> *<a href="#line-68" class="ident">clientRefCounted</a>) <label for="r14" class="ident"><a href="../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient.clientRefCounted^56882.html#name-.Close" class="ident">Close</a></label>() {</code></span>
+<span class="codeline" id="line-151"><code>	<label for="r13" class="ident">c</label>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">defer</span> <label for="r13" class="ident">c</label>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-153"><code>	<label for="r13" class="ident">c</label>.<a href="#line-73" class="ident">refCount</a>--</code></span>
+<span class="codeline" id="line-154"><code>	<span class="keyword">if</span> <label for="r13" class="ident">c</label>.<a href="#line-73" class="ident">refCount</a> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-155"><code>		<label for="r13" class="ident">c</label>.<a href="#line-69" class="ident">clientImpl</a>.<a href="client.go.html#line-93" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-156"><code>		<span class="comment">// Set clientImpl back to nil. So if New() is called after this, a new</span></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">		// implementation will be created.</span></code></span>
+<span class="codeline" id="line-158"><code>		<label for="r13" class="ident">c</label>.<a href="#line-69" class="ident">clientImpl</a> = <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-159"><code>		<a href="#line-44" class="ident">singletonClientImplCloseHook</a>()</code></span>
+<span class="codeline" id="line-160"><code>	}</code></span>
+<span class="codeline" id="line-161"><code>}</code></span>
+<span class="codeline" id="line-162"><code></code></span>
+<span class="codeline" id="line-163"><code><span class="comment">// NewWithConfigForTesting returns an xdsClient for the specified bootstrap</span></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">// config, separate from the global singleton.</span></code></span>
+<span class="codeline" id="line-165"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-166"><code><span class="comment">// This should be used for testing purposes only.</span></code></span>
+<span class="codeline" id="line-167"><code><span class="keyword">func</span> <label for="r15" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-NewWithConfigForTesting" class="ident">NewWithConfigForTesting</a></label>(<label for="r16" class="ident">config</label> *<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html" class="ident i5">bootstrap</a>.<a href="bootstrap/bootstrap.go.html#line-241" class="ident">Config</a>, <label for="r17" class="ident">watchExpiryTimeout</label> <a href="../../../../../../pkg/time.html" class="ident i4">time</a>.<a href="../../../../../time/time.go.html#line-589" class="ident">Duration</a>) (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-168"><code>	<label for="r18" class="ident">cl</label>, <label for="r19" class="ident">err</label> := <a href="client.go.html#line-71" class="ident">newWithConfig</a>(<label for="r16" class="ident">config</label>, <label for="r17" class="ident">watchExpiryTimeout</label>, <a href="#line-33" class="ident">defaultIdleAuthorityDeleteTimeout</a>)</code></span>
+<span class="codeline" id="line-169"><code>	<span class="keyword">if</span> <label for="r19" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-170"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r19" class="ident">err</label></code></span>
+<span class="codeline" id="line-171"><code>	}</code></span>
+<span class="codeline" id="line-172"><code>	<span class="keyword">return</span> &amp;<a href="#line-68" class="ident">clientRefCounted</a>{<a href="#line-69" class="ident">clientImpl</a>: <label for="r18" class="ident">cl</label>, <a href="#line-73" class="ident">refCount</a>: <span class="lit-number">1</span>}, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-173"><code>}</code></span>
+<span class="codeline" id="line-174"><code></code></span>
+<span class="codeline" id="line-175"><code><span class="comment">// NewWithBootstrapContentsForTesting returns an xdsClient for this config,</span></code></span>
+<span class="codeline" id="line-176"><code><span class="comment">// separate from the global singleton.</span></code></span>
+<span class="codeline" id="line-177"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-178"><code><span class="comment">// This should be used for testing purposes only.</span></code></span>
+<span class="codeline" id="line-179"><code><span class="keyword">func</span> <label for="r20" class="ident"><a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-NewWithBootstrapContentsForTesting" class="ident">NewWithBootstrapContentsForTesting</a></label>(<label for="r21" class="ident">contents</label> []<a href="../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) (<a href="attributes.go.html#line-34" class="ident">XDSClient</a>, <a href="../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-180"><code>	<span class="comment">// Normalize the contents</span></code></span>
+<span class="codeline" id="line-181"><code>	<label for="r22" class="ident">buf</label> := <a href="../../../../../../pkg/bytes.html" class="ident i0">bytes</a>.<a href="../../../../../bytes/buffer.go.html#line-20" class="ident">Buffer</a>{}</code></span>
+<span class="codeline" id="line-182"><code>	<label for="r23" class="ident">err</label> := <a href="../../../../../../pkg/encoding/json.html" class="ident i1">json</a>.<a href="../../../../../encoding/json/indent.go.html#line-81" class="ident">Indent</a>(&amp;<label for="r22" class="ident">buf</label>, <label for="r21" class="ident">contents</label>, <span class="lit-string">""</span>, <span class="lit-string">""</span>)</code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: error normalizing JSON: %v"</span>, <label for="r23" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-185"><code>	}</code></span>
+<span class="codeline" id="line-186"><code>	<label for="r21" class="ident">contents</label> = <a href="../../../../../../pkg/bytes.html" class="ident i0">bytes</a>.<a href="../../../../../bytes/bytes.go.html#line-1018" class="ident">TrimSpace</a>(<label for="r22" class="ident">buf</label>.<a href="../../../../../bytes/buffer.go.html#line-54" class="ident">Bytes</a>())</code></span>
+<span class="codeline" id="line-187"><code></code></span>
+<span class="codeline" id="line-188"><code>	<a href="#line-219" class="ident">clientsMu</a>.<a href="../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-189"><code>	<span class="keyword">defer</span> <a href="#line-219" class="ident">clientsMu</a>.<a href="../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-190"><code>	<span class="keyword">if</span> <label for="r24" class="ident">c</label> := <a href="#line-218" class="ident">clients</a>[<a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r21" class="ident">contents</label>)]; <label for="r24" class="ident">c</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-191"><code>		<label for="r24" class="ident">c</label>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-192"><code>		<span class="comment">// Since we don't remove the *Client from the map when it is closed, we</span></code></span>
+<span class="codeline" id="line-193"><code><span class="comment">		// need to recreate the impl if the ref count dropped to zero.</span></code></span>
+<span class="codeline" id="line-194"><code>		<span class="keyword">if</span> <label for="r24" class="ident">c</label>.<a href="#line-73" class="ident">refCount</a> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-195"><code>			<label for="r24" class="ident">c</label>.<a href="#line-73" class="ident">refCount</a>++</code></span>
+<span class="codeline" id="line-196"><code>			<label for="r24" class="ident">c</label>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-197"><code>			<span class="keyword">return</span> <label for="r24" class="ident">c</label>, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-198"><code>		}</code></span>
+<span class="codeline" id="line-199"><code>		<label for="r24" class="ident">c</label>.<a href="#line-72" class="ident">mu</a>.<a href="../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-200"><code>	}</code></span>
+<span class="codeline" id="line-201"><code></code></span>
+<span class="codeline" id="line-202"><code>	<label for="r25" class="ident">bcfg</label>, <label for="r23" class="ident">err</label> := <a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/bootstrap.html" class="ident i5">bootstrap</a>.<a href="bootstrap/bootstrap.go.html#line-360" class="ident">NewConfigFromContentsForTesting</a>(<label for="r21" class="ident">contents</label>)</code></span>
+<span class="codeline" id="line-203"><code>	<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-204"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"xds: error with bootstrap config: %v"</span>, <label for="r23" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-205"><code>	}</code></span>
+<span class="codeline" id="line-206"><code></code></span>
+<span class="codeline" id="line-207"><code>	<label for="r26" class="ident">cImpl</label>, <label for="r23" class="ident">err</label> := <a href="client.go.html#line-71" class="ident">newWithConfig</a>(<label for="r25" class="ident">bcfg</label>, <a href="#line-32" class="ident">defaultWatchExpiryTimeout</a>, <a href="#line-33" class="ident">defaultIdleAuthorityDeleteTimeout</a>)</code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">if</span> <label for="r23" class="ident">err</label> != <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-209"><code>		<span class="keyword">return</span> <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r23" class="ident">err</label></code></span>
+<span class="codeline" id="line-210"><code>	}</code></span>
+<span class="codeline" id="line-211"><code></code></span>
+<span class="codeline" id="line-212"><code>	<label for="r27" class="ident">c</label> := &amp;<a href="#line-68" class="ident">clientRefCounted</a>{<a href="#line-69" class="ident">clientImpl</a>: <label for="r26" class="ident">cImpl</label>, <a href="#line-73" class="ident">refCount</a>: <span class="lit-number">1</span>}</code></span>
+<span class="codeline" id="line-213"><code>	<a href="#line-218" class="ident">clients</a>[<a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>(<label for="r21" class="ident">contents</label>)] = <label for="r27" class="ident">c</label></code></span>
+<span class="codeline" id="line-214"><code>	<span class="keyword">return</span> <label for="r27" class="ident">c</label>, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-215"><code>}</code></span>
+<span class="codeline" id="line-216"><code></code></span>
+<span class="codeline" id="line-217"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-218"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-clients" class="ident">clients</a>   = <span class="keyword">map</span>[<a href="../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-68" class="ident">clientRefCounted</a>{}</code></span>
+<span class="codeline" id="line-219"><code>	<a href="../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html#name-clientsMu" class="ident">clientsMu</a> <a href="../../../../../../pkg/sync.html" class="ident i3">sync</a>.<a href="../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-220"><code>)</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: load_store_wrapper.go in package google.golang.org/grpc/xds/internal/balancer/loadstore</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	load_store_wrapper.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/loadstore.html">google.golang.org/grpc/xds/internal/balancer/loadstore</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package loadstore contains the loadStoreWrapper shared by the balancers.</span></code></span></div><span class="codeline" id="line-20"><code><span class="keyword">package</span> loadstore</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-23"><code>	<label for="i0"><span class="lit-string i0">"sync"</span></label></code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i1"><span class="lit-string i1">"google.golang.org/grpc/xds/internal/xdsclient/load"</span></label></code></span>
+<span class="codeline" id="line-26"><code>)</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// NewWrapper creates a Wrapper.</span></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/loadstore.html#name-NewWrapper" class="ident">NewWrapper</a></label>() *<a href="#line-49" class="ident">Wrapper</a> {</code></span>
+<span class="codeline" id="line-30"><code>	<span class="keyword">return</span> &amp;<a href="#line-49" class="ident">Wrapper</a>{}</code></span>
+<span class="codeline" id="line-31"><code>}</code></span>
+<span class="codeline" id="line-32"><code></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// Wrapper wraps a load store with cluster and edsService.</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// It's store and cluster/edsService can be updated separately. And it will</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// update its internal perCluster store so that new stats will be added to the</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// correct perCluster.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// Note that this struct is a temporary walkaround before we implement graceful</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// switch for EDS. Any update to the clusterName and serviceName is too early,</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// the perfect timing is when the picker is updated with the new connection.</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">// This early update could cause picks for the old SubConn being reported to the</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">// new services.</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">// When the graceful switch in EDS is done, there should be no need for this</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">// struct. The policies that record/report load shouldn't need to handle update</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">// of lrsServerName/cluster/edsService. Its parent should do a graceful switch</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// of the whole tree when one of that changes.</span></code></span>
+<span class="codeline" id="line-49"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/loadstore.html#name-Wrapper" class="ident">Wrapper</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-50"><code>	mu         <a href="../../../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../../../sync/rwmutex.go.html#line-28" class="ident">RWMutex</a></code></span>
+<span class="codeline" id="line-51"><code>	cluster    <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-52"><code>	edsService <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-53"><code>	<span class="comment">// store and perCluster are initialized as nil. They are only set by the</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">	// balancer when LRS is enabled. Before that, all functions to record loads</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">	// are no-op.</span></code></span>
+<span class="codeline" id="line-56"><code>	store      *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i1">load</a>.<a href="../../xdsclient/load/store.go.html#line-33" class="ident">Store</a></code></span>
+<span class="codeline" id="line-57"><code>	perCluster <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i1">load</a>.<a href="../../xdsclient/load/reporter.go.html#line-22" class="ident">PerClusterReporter</a></code></span>
+<span class="codeline" id="line-58"><code>}</code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// UpdateClusterAndService updates the cluster name and eds service for this</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">// wrapper. If any one of them is changed from before, the perCluster store in</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">// this wrapper will also be updated.</span></code></span>
+<span class="codeline" id="line-63"><code><span class="keyword">func</span> (<label for="r1" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r2" class="ident">UpdateClusterAndService</label>(<label for="r3" class="ident">cluster</label>, <label for="r4" class="ident">edsService</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-64"><code>	<label for="r1" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-133" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-65"><code>	<span class="keyword">defer</span> <label for="r1" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-190" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-66"><code>	<span class="keyword">if</span> <label for="r3" class="ident">cluster</label> == <label for="r1" class="ident">lsw</label>.<a href="#line-51" class="ident">cluster</a> &amp;&amp; <label for="r4" class="ident">edsService</label> == <label for="r1" class="ident">lsw</label>.<a href="#line-52" class="ident">edsService</a> {</code></span>
+<span class="codeline" id="line-67"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-68"><code>	}</code></span>
+<span class="codeline" id="line-69"><code>	<label for="r1" class="ident">lsw</label>.<a href="#line-51" class="ident">cluster</a> = <label for="r3" class="ident">cluster</label></code></span>
+<span class="codeline" id="line-70"><code>	<label for="r1" class="ident">lsw</label>.<a href="#line-52" class="ident">edsService</a> = <label for="r4" class="ident">edsService</label></code></span>
+<span class="codeline" id="line-71"><code>	<label for="r1" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> = <label for="r1" class="ident">lsw</label>.<a href="#line-56" class="ident">store</a>.<a href="../../xdsclient/load/store.go.html#line-101" class="ident">PerCluster</a>(<label for="r1" class="ident">lsw</label>.<a href="#line-51" class="ident">cluster</a>, <label for="r1" class="ident">lsw</label>.<a href="#line-52" class="ident">edsService</a>)</code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">// UpdateLoadStore updates the load store for this wrapper. If it is changed</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">// from before, the perCluster store in this wrapper will also be updated.</span></code></span>
+<span class="codeline" id="line-76"><code><span class="keyword">func</span> (<label for="r5" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r6" class="ident">UpdateLoadStore</label>(<label for="r7" class="ident">store</label> *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i1">load</a>.<a href="../../xdsclient/load/store.go.html#line-33" class="ident">Store</a>) {</code></span>
+<span class="codeline" id="line-77"><code>	<label for="r5" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-133" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-78"><code>	<span class="keyword">defer</span> <label for="r5" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-190" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-79"><code>	<span class="keyword">if</span> <label for="r7" class="ident">store</label> == <label for="r5" class="ident">lsw</label>.<a href="#line-56" class="ident">store</a> {</code></span>
+<span class="codeline" id="line-80"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-81"><code>	}</code></span>
+<span class="codeline" id="line-82"><code>	<label for="r5" class="ident">lsw</label>.<a href="#line-56" class="ident">store</a> = <label for="r7" class="ident">store</label></code></span>
+<span class="codeline" id="line-83"><code>	<label for="r5" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> = <label for="r5" class="ident">lsw</label>.<a href="#line-56" class="ident">store</a>.<a href="../../xdsclient/load/store.go.html#line-101" class="ident">PerCluster</a>(<label for="r5" class="ident">lsw</label>.<a href="#line-51" class="ident">cluster</a>, <label for="r5" class="ident">lsw</label>.<a href="#line-52" class="ident">edsService</a>)</code></span>
+<span class="codeline" id="line-84"><code>}</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// CallStarted records a call started in the store.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="keyword">func</span> (<label for="r8" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r9" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/loadstore.Wrapper.html#name-.CallStarted" class="ident">CallStarted</a></label>(<label for="r10" class="ident">locality</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-88"><code>	<label for="r8" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-56" class="ident">RLock</a>()</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">defer</span> <label for="r8" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-103" class="ident">RUnlock</a>()</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r8" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<label for="r8" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a>.<a href="../../xdsclient/load/reporter.go.html#line-23" class="ident">CallStarted</a>(<label for="r10" class="ident">locality</label>)</code></span>
+<span class="codeline" id="line-92"><code>	}</code></span>
+<span class="codeline" id="line-93"><code>}</code></span>
+<span class="codeline" id="line-94"><code></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">// CallFinished records a call finished in the store.</span></code></span>
+<span class="codeline" id="line-96"><code><span class="keyword">func</span> (<label for="r11" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r12" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/loadstore.Wrapper.html#name-.CallFinished" class="ident">CallFinished</a></label>(<label for="r13" class="ident">locality</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r14" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-97"><code>	<label for="r11" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-56" class="ident">RLock</a>()</code></span>
+<span class="codeline" id="line-98"><code>	<span class="keyword">defer</span> <label for="r11" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-103" class="ident">RUnlock</a>()</code></span>
+<span class="codeline" id="line-99"><code>	<span class="keyword">if</span> <label for="r11" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-100"><code>		<label for="r11" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a>.<a href="../../xdsclient/load/reporter.go.html#line-24" class="ident">CallFinished</a>(<label for="r13" class="ident">locality</label>, <label for="r14" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-101"><code>	}</code></span>
+<span class="codeline" id="line-102"><code>}</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">// CallServerLoad records the server load in the store.</span></code></span>
+<span class="codeline" id="line-105"><code><span class="keyword">func</span> (<label for="r15" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r16" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/loadstore.Wrapper.html#name-.CallServerLoad" class="ident">CallServerLoad</a></label>(<label for="r17" class="ident">locality</label>, <label for="r18" class="ident">name</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r19" class="ident">val</label> <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-106"><code>	<label for="r15" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-56" class="ident">RLock</a>()</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">defer</span> <label for="r15" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-103" class="ident">RUnlock</a>()</code></span>
+<span class="codeline" id="line-108"><code>	<span class="keyword">if</span> <label for="r15" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-109"><code>		<label for="r15" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a>.<a href="../../xdsclient/load/reporter.go.html#line-25" class="ident">CallServerLoad</a>(<label for="r17" class="ident">locality</label>, <label for="r18" class="ident">name</label>, <label for="r19" class="ident">val</label>)</code></span>
+<span class="codeline" id="line-110"><code>	}</code></span>
+<span class="codeline" id="line-111"><code>}</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">// CallDropped records a call dropped in the store.</span></code></span>
+<span class="codeline" id="line-114"><code><span class="keyword">func</span> (<label for="r20" class="ident">lsw</label> *<a href="#line-49" class="ident">Wrapper</a>) <label for="r21" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/loadstore.Wrapper.html#name-.CallDropped" class="ident">CallDropped</a></label>(<label for="r22" class="ident">category</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-115"><code>	<label for="r20" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-56" class="ident">RLock</a>()</code></span>
+<span class="codeline" id="line-116"><code>	<span class="keyword">defer</span> <label for="r20" class="ident">lsw</label>.<a href="#line-50" class="ident">mu</a>.<a href="../../../../../../sync/rwmutex.go.html#line-103" class="ident">RUnlock</a>()</code></span>
+<span class="codeline" id="line-117"><code>	<span class="keyword">if</span> <label for="r20" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-118"><code>		<label for="r20" class="ident">lsw</label>.<a href="#line-57" class="ident">perCluster</a>.<a href="../../xdsclient/load/reporter.go.html#line-26" class="ident">CallDropped</a>(<label for="r22" class="ident">category</label>)</code></span>
+<span class="codeline" id="line-119"><code>	}</code></span>
+<span class="codeline" id="line-120"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

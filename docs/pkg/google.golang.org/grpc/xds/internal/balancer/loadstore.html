@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/balancer/loadstore</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>loadstore</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/balancer/loadstore">google.golang.org/grpc/xds/internal/balancer/loadstore</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/balancer/loadstore" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/loadstore.html">2 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/loadstore.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html">load_store_wrapper.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package loadstore contains the loadStoreWrapper shared by the balancers.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Wrapper" data-popularity="475">	<input type='checkbox' class="fold" id="Wrapper-fold-content"><label for="Wrapper-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-49">Wrapper</a> <i>(struct)</i></label><span id='Wrapper-fold-content-docs' class="fold-docs">
+		Wrapper wraps a load store with cluster and edsService.
+
+		It's store and cluster/edsService can be updated separately. And it will
+		update its internal perCluster store so that new stats will be added to the
+		correct perCluster.
+
+		Note that this struct is a temporary walkaround before we implement graceful
+		switch for EDS. Any update to the clusterName and serviceName is too early,
+		the perfect timing is when the picker is updated with the new connection.
+		This early update could cause picks for the old SubConn being reported to the
+		new services.
+
+		When the graceful switch in EDS is done, there should be no need for this
+		struct. The policies that record/report load shouldn't need to handle update
+		of lrsServerName/cluster/edsService. Its parent should do a graceful switch
+		of the whole tree when one of that changes.
+
+		<input type='checkbox' class="fold" id="Wrapper-fold-fields"><label for="Wrapper-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='Wrapper-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Wrapper-showhide-fields"><i><label for="Wrapper-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="Wrapper-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-51">cluster</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-52">edsService</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-50">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-RWMutex">RWMutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-57">perCluster</a> <i><a href="../xdsclient/load.html">load</a>.<a href="../xdsclient/load.html#name-PerClusterReporter">PerClusterReporter</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Wrapper-fold-field-store"><label for="Wrapper-fold-field-store"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-56">store</a> <i>*<a href="../xdsclient/load.html">load</a>.<a href="../xdsclient/load.html#name-Store">Store</a></i></label><span id='Wrapper-fold-field-store-docs' class="fold-docs">
+				store and perCluster are initialized as nil. They are only set by the
+				balancer when LRS is enabled. Before that, all functions to record loads
+				are no-op.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Wrapper-fold-methods"><label for="Wrapper-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='Wrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-CallDropped"><label for="Wrapper-fold-method-CallDropped">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-114">CallDropped</a>(category <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Wrapper-fold-method-CallDropped-docs' class="fold-docs">
+				CallDropped records a call dropped in the store.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-CallFinished"><label for="Wrapper-fold-method-CallFinished">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-96">CallFinished</a>(locality <a href="../../../../../builtin.html#name-string">string</a>, err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='Wrapper-fold-method-CallFinished-docs' class="fold-docs">
+				CallFinished records a call finished in the store.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-CallServerLoad"><label for="Wrapper-fold-method-CallServerLoad">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-105">CallServerLoad</a>(locality, name <a href="../../../../../builtin.html#name-string">string</a>, val <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='Wrapper-fold-method-CallServerLoad-docs' class="fold-docs">
+				CallServerLoad records the server load in the store.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-CallStarted"><label for="Wrapper-fold-method-CallStarted">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-87">CallStarted</a>(locality <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Wrapper-fold-method-CallStarted-docs' class="fold-docs">
+				CallStarted records a call started in the store.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-UpdateClusterAndService"><label for="Wrapper-fold-method-UpdateClusterAndService">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-63">UpdateClusterAndService</a>(cluster, edsService <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Wrapper-fold-method-UpdateClusterAndService-docs' class="fold-docs">
+				UpdateClusterAndService updates the cluster name and eds service for this
+				wrapper. If any one of them is changed from before, the perCluster store in
+				this wrapper will also be updated.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Wrapper-fold-method-UpdateLoadStore"><label for="Wrapper-fold-method-UpdateLoadStore">(*Wrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-76">UpdateLoadStore</a>(store *<a href="../xdsclient/load.html">load</a>.<a href="../xdsclient/load.html#name-Store">Store</a>)</label><span id='Wrapper-fold-method-UpdateLoadStore-docs' class="fold-docs">
+				UpdateLoadStore updates the load store for this wrapper. If it is changed
+				from before, the perCluster store in this wrapper will also be updated.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Wrapper-fold-impls"><label for="Wrapper-fold-impls">Implements (<i>at least 2, in which 1 are exported</i>)</label><span id='Wrapper-fold-impls-items' class="fold-items"><span>
+			*Wrapper : google.golang.org/grpc/xds/internal/xdsclient/load.<a href="../xdsclient/load.html#name-PerClusterReporter">PerClusterReporter</a></span>
+			<input type='checkbox' class="showhide" id="Wrapper-showhide-impls"><i><label for="Wrapper-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="Wrapper-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*Wrapper : google.golang.org/grpc/xds/internal/balancer/clusterimpl.<a href="clusterimpl.html#name-loadReporter">loadReporter</a></i></span></span>
+		<input type='checkbox' class="fold" id="Wrapper-fold-results"><label for="Wrapper-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Wrapper-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewWrapper">NewWrapper</a>() *<b>Wrapper</b></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewWrapper">	<input type='checkbox' class="fold" id="NewWrapper-fold-content"><label for="NewWrapper-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-29">NewWrapper</a>() *<a href="#name-Wrapper">Wrapper</a></label><span id='NewWrapper-fold-content-docs' class="fold-docs">
+		NewWrapper creates a Wrapper.
+
+</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

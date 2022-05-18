@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/xdsclient/load</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>load</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/xdsclient/load">google.golang.org/grpc/xds/internal/xdsclient/load</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/xdsclient/load" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/load.html">3 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/load.html#imported-by">7 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html">reporter.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-1-fold-content"><label for="file-1-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html">store.go</a></label><span id='file-1-fold-content-items' class="fold-items">
+		Package load provides functionality to record and maintain load data.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 9, in which 6 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Data" data-popularity="295">	<input type='checkbox' class="fold" id="Data-fold-content"><label for="Data-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-218">Data</a> <i>(struct)</i></label><span id='Data-fold-content-docs' class="fold-docs">
+		Data contains all load data reported to the Store since the most recent call
+		to stats().
+
+		<input type='checkbox' class="fold" id="Data-fold-fields"><label for="Data-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='Data-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-Cluster"><label for="Data-fold-field-Cluster"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-220">Cluster</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Data-fold-field-Cluster-docs' class="fold-docs">
+				Cluster is the name of the cluster this data is for.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-Drops"><label for="Data-fold-field-Drops"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-226">Drops</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='Data-fold-field-Drops-docs' class="fold-docs">
+				Drops is the number of dropped requests per category.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-LocalityStats"><label for="Data-fold-field-LocalityStats"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-228">LocalityStats</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="#name-LocalityData">LocalityData</a></i></label><span id='Data-fold-field-LocalityStats-docs' class="fold-docs">
+				LocalityStats contains load reports per locality.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-ReportInterval"><label for="Data-fold-field-ReportInterval"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-231">ReportInterval</a> <i><a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a></i></label><span id='Data-fold-field-ReportInterval-docs' class="fold-docs">
+				ReportInternal is the duration since last time load was reported (stats()
+				was called).
+</span></span><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-Service"><label for="Data-fold-field-Service"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-222">Service</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Data-fold-field-Service-docs' class="fold-docs">
+				Service is the name of the EDS service this data is for.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Data-fold-field-TotalDrops"><label for="Data-fold-field-TotalDrops"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-224">TotalDrops</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='Data-fold-field-TotalDrops-docs' class="fold-docs">
+				TotalDrops is the total number of dropped requests.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Data-fold-results"><label for="Data-fold-results">As Outputs Of (<i>at least 3, in which 1 are exported</i>)</label><span id='Data-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-Store">Store</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-63">Stats</a>(clusterNames []<a href="../../../../../builtin.html#name-string">string</a>) []*<b>Data</b></span>
+			<input type='checkbox' class="showhide" id="Data-showhide-inputofs"><i><label for="Data-showhide-inputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="Data-showhide-inputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-appendClusterStats">appendClusterStats</a>(ret []*<b>Data</b>, cluster map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-perClusterStore">perClusterStore</a>) []*<b>Data</b></i></span><span class="hidden"><i>
+			func <a href="#name-newData">newData</a>(cluster, service <a href="../../../../../builtin.html#name-string">string</a>) *<b>Data</b></i></span></span>
+		<input type='checkbox' class="fold" id="Data-fold-params"><label for="Data-fold-params">As Inputs Of (<i>at least 2, in which 1 are exported</i>)</label><span id='Data-fold-params-items' class="fold-items"><span>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller/version.<a href="controller/version.html#name-VersionedClient">VersionedClient</a>.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/version/version.go.html#line-122">SendLoadStatsRequest</a>(s <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>, loads []*<b>Data</b>) <a href="../../../../../builtin.html#name-error">error</a></span>
+			<input type='checkbox' class="showhide" id="Data-showhide-outputofs"><i><label for="Data-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="Data-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-appendClusterStats">appendClusterStats</a>(ret []*<b>Data</b>, cluster map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-perClusterStore">perClusterStore</a>) []*<b>Data</b></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-LocalityData" data-popularity="0">	<input type='checkbox' class="fold" id="LocalityData-fold-content"><label for="LocalityData-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-235">LocalityData</a> <i>(struct)</i></label><span id='LocalityData-fold-content-docs' class="fold-docs">
+		LocalityData contains load data for a single locality.
+
+		<input type='checkbox' class="fold" id="LocalityData-fold-fields"><label for="LocalityData-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='LocalityData-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LocalityData-fold-field-LoadStats"><label for="LocalityData-fold-field-LoadStats"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-240">LoadStats</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="#name-ServerLoadData">ServerLoadData</a></i></label><span id='LocalityData-fold-field-LoadStats-docs' class="fold-docs">
+				LoadStats contains server load data for requests made to the locality,
+				indexed by the load type.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LocalityData-fold-field-RequestStats"><label for="LocalityData-fold-field-RequestStats"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-237">RequestStats</a> <i><a href="#name-RequestData">RequestData</a></i></label><span id='LocalityData-fold-field-RequestStats-docs' class="fold-docs">
+				RequestStats contains counts of requests made to the locality.
+</span></span></span>
+
+</span></div><div class="anchor type-res" id="name-PerClusterReporter" data-popularity="810">	<input type='checkbox' class="fold" id="PerClusterReporter-fold-content"><label for="PerClusterReporter-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html#line-22">PerClusterReporter</a> <b><i>(interface)</i></b></label><span id='PerClusterReporter-fold-content-docs' class="fold-docs">
+		PerClusterReporter wraps the methods from the loadStore that are used here.
+
+		<input type='checkbox' class="fold" id="PerClusterReporter-fold-methods"><label for="PerClusterReporter-fold-methods">Methods (<i>total 4, all are exported</i>)</label><span id='PerClusterReporter-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( PerClusterReporter) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html#line-26">CallDropped</a>(category <a href="../../../../../builtin.html#name-string">string</a>)</span></span><span>
+			<span class="nodocs">( PerClusterReporter) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html#line-24">CallFinished</a>(locality <a href="../../../../../builtin.html#name-string">string</a>, err <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">( PerClusterReporter) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html#line-25">CallServerLoad</a>(locality, name <a href="../../../../../builtin.html#name-string">string</a>, val <a href="../../../../../builtin.html#name-float64">float64</a>)</span></span><span>
+			<span class="nodocs">( PerClusterReporter) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/reporter.go.html#line-23">CallStarted</a>(locality <a href="../../../../../builtin.html#name-string">string</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="PerClusterReporter-fold-impledby"><label for="PerClusterReporter-fold-impledby">Implemented By (<i>at least 3, in which 1 are exported</i>)</label><span id='PerClusterReporter-fold-impledby-items' class="fold-items"><span>
+			*google.golang.org/grpc/xds/internal/balancer/loadstore.<a href="../balancer/loadstore.html#name-Wrapper">Wrapper</a></span>
+			<input type='checkbox' class="showhide" id="PerClusterReporter-showhide-impedBys"><i><label for="PerClusterReporter-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="PerClusterReporter-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*<a href="#name-perClusterStore">perClusterStore</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/balancer/clusterimpl.<a href="../balancer/clusterimpl.html#name-loadReporter">loadReporter</a> <i>(interface)</i></i></span></span>
+		<input type='checkbox' class="fold" id="PerClusterReporter-fold-impls"><label for="PerClusterReporter-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='PerClusterReporter-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="PerClusterReporter-showhide-impls"><i><label for="PerClusterReporter-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="PerClusterReporter-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			 PerClusterReporter : google.golang.org/grpc/xds/internal/balancer/clusterimpl.<a href="../balancer/clusterimpl.html#name-loadReporter">loadReporter</a></i></span></span>
+		<input type='checkbox' class="fold" id="PerClusterReporter-fold-results"><label for="PerClusterReporter-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='PerClusterReporter-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-Store">Store</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-101">PerCluster</a>(clusterName, serviceName <a href="../../../../../builtin.html#name-string">string</a>) <b>PerClusterReporter</b></span></span>
+		<input type='checkbox' class="fold" id="PerClusterReporter-fold-params"><label for="PerClusterReporter-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='PerClusterReporter-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="PerClusterReporter-showhide-outputofs"><i><label for="PerClusterReporter-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="PerClusterReporter-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/balancer/clusterimpl.<a href="../balancer/clusterimpl.html#name-newPicker">newPicker</a>(s <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>, config *<a href="../balancer/clusterimpl.html">clusterimpl</a>.<a href="../balancer/clusterimpl.html#name-dropConfigs">dropConfigs</a>, loadStore <b>PerClusterReporter</b>) *<a href="../balancer/clusterimpl.html">clusterimpl</a>.<a href="../balancer/clusterimpl.html#name-picker">picker</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-RequestData" data-popularity="0">	<input type='checkbox' class="fold" id="RequestData-fold-content"><label for="RequestData-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-244">RequestData</a> <i>(struct)</i></label><span id='RequestData-fold-content-docs' class="fold-docs">
+		RequestData contains request counts.
+
+		<input type='checkbox' class="fold" id="RequestData-fold-fields"><label for="RequestData-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='RequestData-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RequestData-fold-field-Errored"><label for="RequestData-fold-field-Errored"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-248">Errored</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='RequestData-fold-field-Errored-docs' class="fold-docs">
+				Errored is the number of requests which ran into errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RequestData-fold-field-InProgress"><label for="RequestData-fold-field-InProgress"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-250">InProgress</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='RequestData-fold-field-InProgress-docs' class="fold-docs">
+				InProgress is the number of requests in flight.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RequestData-fold-field-Succeeded"><label for="RequestData-fold-field-Succeeded"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-246">Succeeded</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='RequestData-fold-field-Succeeded-docs' class="fold-docs">
+				Succeeded is the number of succeeded requests.
+</span></span></span>
+
+</span></div><div class="anchor type-res" id="name-ServerLoadData" data-popularity="0">	<input type='checkbox' class="fold" id="ServerLoadData-fold-content"><label for="ServerLoadData-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-254">ServerLoadData</a> <i>(struct)</i></label><span id='ServerLoadData-fold-content-docs' class="fold-docs">
+		ServerLoadData contains server load data.
+
+		<input type='checkbox' class="fold" id="ServerLoadData-fold-fields"><label for="ServerLoadData-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='ServerLoadData-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ServerLoadData-fold-field-Count"><label for="ServerLoadData-fold-field-Count"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-256">Count</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='ServerLoadData-fold-field-Count-docs' class="fold-docs">
+				Count is the number of load reports.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ServerLoadData-fold-field-Sum"><label for="ServerLoadData-fold-field-Sum"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-258">Sum</a> <i><a href="../../../../../builtin.html#name-float64">float64</a></i></label><span id='ServerLoadData-fold-field-Sum-docs' class="fold-docs">
+				Sum is the total value of all load reports.
+</span></span></span>
+
+</span></div><div class="anchor type-res" id="name-Store" data-popularity="395">	<input type='checkbox' class="fold" id="Store-fold-content"><label for="Store-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-33">Store</a> <i>(struct)</i></label><span id='Store-fold-content-docs' class="fold-docs">
+		Store keeps the loads for multiple clusters and services to be reported via
+		LRS. It contains loads to reported to one LRS server. Create multiple stores
+		for multiple servers.
+
+		It is safe for concurrent use.
+
+		<input type='checkbox' class="fold" id="Store-fold-fields"><label for="Store-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='Store-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Store-showhide-fields"><i><label for="Store-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="Store-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Store-fold-field-clusters"><label for="Store-fold-field-clusters"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-45">clusters</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-perClusterStore">perClusterStore</a></i></label><span id='Store-fold-field-clusters-docs' class="fold-docs">
+				clusters is a map with cluster name as the key. The second layer is a map
+				with service name as the key. Each value (perClusterStore) contains data
+				for a (cluster, service) pair.
+
+				Note that new entries are added to this map, but never removed. This is
+				potentially a memory leak. But the memory is allocated for each new
+				(cluster,service) pair, and the memory allocated is just pointers and
+				maps. So this shouldn't get too bad.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Store-fold-field-mu"><label for="Store-fold-field-mu"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-36">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='Store-fold-field-mu-docs' class="fold-docs">
+				mu only protects the map (2 layers). The read/write to *perClusterStore
+				doesn't need to hold the mu.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Store-fold-methods"><label for="Store-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='Store-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Store-fold-method-PerCluster"><label for="Store-fold-method-PerCluster">(*Store) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-101">PerCluster</a>(clusterName, serviceName <a href="../../../../../builtin.html#name-string">string</a>) <a href="#name-PerClusterReporter">PerClusterReporter</a></label><span id='Store-fold-method-PerCluster-docs' class="fold-docs">
+				PerCluster returns the perClusterStore for the given clusterName +
+				serviceName.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Store-fold-method-Stats"><label for="Store-fold-method-Stats">(*Store) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-63">Stats</a>(clusterNames []<a href="../../../../../builtin.html#name-string">string</a>) []*<a href="#name-Data">Data</a></label><span id='Store-fold-method-Stats-docs' class="fold-docs">
+				Stats returns the load data for the given cluster names. Data is returned in
+				a slice with no specific order.
+
+				If no clusterName is given (an empty slice), all data for all known clusters
+				is returned.
+
+				If a cluster's Data is empty (no load to report), it's not appended to the
+				returned slice.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Store-fold-results"><label for="Store-fold-results">As Outputs Of (<i>at least 3, all are exported</i>)</label><span id='Store-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewStore">NewStore</a>() *<b>Store</b></span><span>
+			func google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/attributes.go.html#line-39">ReportLoad</a>(server *<a href="bootstrap.html">bootstrap</a>.<a href="bootstrap.html#name-ServerConfig">ServerConfig</a>) (*<b>Store</b>, func())</span><span>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller.(*<a href="controller.html#name-Controller">Controller</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-42">ReportLoad</a>(server <a href="../../../../../builtin.html#name-string">string</a>) (*<b>Store</b>, func())</span></span>
+		<input type='checkbox' class="fold" id="Store-fold-params"><label for="Store-fold-params">As Inputs Of (<i>at least 2, in which 1 are exported</i>)</label><span id='Store-fold-params-items' class="fold-items"><span>
+			func google.golang.org/grpc/xds/internal/balancer/loadstore.(*<a href="../balancer/loadstore.html#name-Wrapper">Wrapper</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/loadstore/load_store_wrapper.go.html#line-76">UpdateLoadStore</a>(store *<b>Store</b>)</span>
+			<input type='checkbox' class="showhide" id="Store-showhide-outputofs"><i><label for="Store-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="Store-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/xdsclient/controller.(*<a href="controller.html#name-Controller">Controller</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-406">sendLoads</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>, stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>, store *<b>Store</b>, clusterNames []<a href="../../../../../builtin.html#name-string">string</a>, interval <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>)</i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-perClusterStore" data-popularity="385">	<input type='checkbox' class="fold" id="perClusterStore-fold-content"><label for="perClusterStore-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-139">perClusterStore</a> <i>(struct)</i></label><span id='perClusterStore-fold-content-docs' class="fold-docs">
+		perClusterStore is a repository for LB policy implementations to report store
+		load data. It contains load for a (cluster, edsService) pair.
+
+		It is safe for concurrent use.
+
+		TODO(easwars): Use regular maps with mutexes instead of sync.Map here. The
+		latter is optimized for two common use cases: (1) when the entry for a given
+		key is only ever written once but read many times, as in caches that only
+		grow, or (2) when multiple goroutines read, write, and overwrite entries for
+		disjoint sets of keys. In these two cases, use of a Map may significantly
+		reduce lock contention compared to a Go map paired with a separate Mutex or
+		RWMutex.
+		Neither of these conditions are met here, and we should transition to a
+		regular map with a mutex for better type safety.
+
+		<input type='checkbox' class="fold" id="perClusterStore-fold-fields"><label for="perClusterStore-fold-fields">Fields (<i>total 6, none are exported</i>)</label><span id='perClusterStore-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="perClusterStore-showhide-fields"><i><label for="perClusterStore-showhide-fields" class="show-inline">/* 6 unexporteds ... */</label><label for="perClusterStore-showhide-fields" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-140">cluster</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-field-drops"><label for="perClusterStore-fold-field-drops"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-141">drops</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Map">Map</a></i></label><span id='perClusterStore-fold-field-drops-docs' class="fold-docs">
+				// map[string]*uint64
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-145">lastLoadReportAt</a> <i><a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Time">Time</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-field-localityRPCCount"><label for="perClusterStore-fold-field-localityRPCCount"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-142">localityRPCCount</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Map">Map</a></i></label><span id='perClusterStore-fold-field-localityRPCCount-docs' class="fold-docs">
+				// map[string]*rpcCountData
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-144">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-140">service</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="perClusterStore-fold-methods"><label for="perClusterStore-fold-methods">Methods (<i>total 5, in which 4 are exported</i>)</label><span id='perClusterStore-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-method-CallDropped"><label for="perClusterStore-fold-method-CallDropped">(*perClusterStore) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-152">CallDropped</a>(category <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='perClusterStore-fold-method-CallDropped-docs' class="fold-docs">
+				CallDropped adds one drop record with the given category to store.
+</span></span><span>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-method-CallFinished"><label for="perClusterStore-fold-method-CallFinished">(*perClusterStore) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-181">CallFinished</a>(locality <a href="../../../../../builtin.html#name-string">string</a>, err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='perClusterStore-fold-method-CallFinished-docs' class="fold-docs">
+				CallFinished adds one call finished record for the given locality.
+				For successful calls, err needs to be nil.
+</span></span><span>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-method-CallServerLoad"><label for="perClusterStore-fold-method-CallServerLoad">(*perClusterStore) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-202">CallServerLoad</a>(locality, name <a href="../../../../../builtin.html#name-string">string</a>, d <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='perClusterStore-fold-method-CallServerLoad-docs' class="fold-docs">
+				CallServerLoad adds one server load record for the given locality. The
+				load type is specified by desc, and its value by val.
+</span></span><span>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-method-CallStarted"><label for="perClusterStore-fold-method-CallStarted">(*perClusterStore) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-166">CallStarted</a>(locality <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='perClusterStore-fold-method-CallStarted-docs' class="fold-docs">
+				CallStarted adds one call started record for the given locality.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="perClusterStore-showhide-methods"><i><label for="perClusterStore-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="perClusterStore-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="perClusterStore-fold-method-stats"><label for="perClusterStore-fold-method-stats">(*perClusterStore) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-274">stats</a>() *<a href="#name-Data">Data</a></label><span id='perClusterStore-fold-method-stats-docs' class="fold-docs">
+				stats returns and resets all loads reported to the store, except inProgress
+				rpc counts.
+
+				It returns nil if the store doesn't contain any (new) data.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="perClusterStore-fold-impls"><label for="perClusterStore-fold-impls">Implements (<i>at least 2, in which 1 are exported</i>)</label><span id='perClusterStore-fold-impls-items' class="fold-items"><span>
+			*perClusterStore : <a href="#name-PerClusterReporter">PerClusterReporter</a></span>
+			<input type='checkbox' checked class="showhide" id="perClusterStore-showhide-impls"><i><label for="perClusterStore-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="perClusterStore-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*perClusterStore : google.golang.org/grpc/xds/internal/balancer/clusterimpl.<a href="../balancer/clusterimpl.html#name-loadReporter">loadReporter</a></i></span></span>
+		<input type='checkbox' class="fold" id="perClusterStore-fold-params"><label for="perClusterStore-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='perClusterStore-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="perClusterStore-showhide-outputofs"><i><label for="perClusterStore-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="perClusterStore-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-appendClusterStats">appendClusterStats</a>(ret []*<a href="#name-Data">Data</a>, cluster map[<a href="../../../../../builtin.html#name-string">string</a>]*<b>perClusterStore</b>) []*<a href="#name-Data">Data</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-rpcCountData" data-popularity="475">	<input type='checkbox' class="fold" id="rpcCountData-fold-content"><label for="rpcCountData-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-337">rpcCountData</a> <i>(struct)</i></label><span id='rpcCountData-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="rpcCountData-fold-fields"><label for="rpcCountData-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='rpcCountData-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcCountData-showhide-fields"><i><label for="rpcCountData-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="rpcCountData-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-340">errored</a> <i>*<a href="../../../../../builtin.html#name-uint64">uint64</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-341">inProgress</a> <i>*<a href="../../../../../builtin.html#name-uint64">uint64</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcCountData-fold-field-serverLoads"><label for="rpcCountData-fold-field-serverLoads"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-348">serverLoads</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Map">Map</a></i></label><span id='rpcCountData-fold-field-serverLoads-docs' class="fold-docs">
+				Map from load desc to load data (sum+count). Loading data from map is
+				atomic, but updating data takes a lock, which could cause contention when
+				multiple RPCs try to report loads for the same desc.
+
+				To fix the contention, shard this map.
+				// map[string]*rpcLoadData
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcCountData-fold-field-succeeded"><label for="rpcCountData-fold-field-succeeded"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-339">succeeded</a> <i>*<a href="../../../../../builtin.html#name-uint64">uint64</a></i></label><span id='rpcCountData-fold-field-succeeded-docs' class="fold-docs">
+				Only atomic accesses are allowed for the fields.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="rpcCountData-fold-methods"><label for="rpcCountData-fold-methods">Methods (<i>total 8, none are exported</i>)</label><span id='rpcCountData-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcCountData-showhide-methods"><i><label for="rpcCountData-showhide-methods" class="show-inline">/* 8 unexporteds ... */</label><label for="rpcCountData-showhide-methods" class="hide-inline">/* 8 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-387">addServerLoad</a>(name <a href="../../../../../builtin.html#name-string">string</a>, d <a href="../../../../../builtin.html#name-float64">float64</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-379">decrInProgress</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-367">incrErrored</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-375">incrInProgress</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-359">incrSucceeded</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-371">loadAndClearErrored</a>() <a href="../../../../../builtin.html#name-uint64">uint64</a></span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-363">loadAndClearSucceeded</a>() <a href="../../../../../builtin.html#name-uint64">uint64</a></span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcCountData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-383">loadInProgress</a>() <a href="../../../../../builtin.html#name-uint64">uint64</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="rpcCountData-fold-results"><label for="rpcCountData-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='rpcCountData-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcCountData-showhide-inputofs"><i><label for="rpcCountData-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="rpcCountData-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRPCCountData">newRPCCountData</a>() *<b>rpcCountData</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-rpcLoadData" data-popularity="175">	<input type='checkbox' class="fold" id="rpcLoadData-fold-content"><label for="rpcLoadData-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-401">rpcLoadData</a> <i>(struct)</i></label><span id='rpcLoadData-fold-content-docs' class="fold-docs">
+		Data for server loads (from trailers or oob). Fields in this struct must be
+		updated consistently.
+
+		The current solution is to hold a lock, which could cause contention. To fix,
+		shard serverLoads map in rpcCountData.
+
+		<input type='checkbox' class="fold" id="rpcLoadData-fold-fields"><label for="rpcLoadData-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='rpcLoadData-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcLoadData-showhide-fields"><i><label for="rpcLoadData-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="rpcLoadData-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-404">count</a> <i><a href="../../../../../builtin.html#name-uint64">uint64</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-402">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-403">sum</a> <i><a href="../../../../../builtin.html#name-float64">float64</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="rpcLoadData-fold-methods"><label for="rpcLoadData-fold-methods">Methods (<i>total 2, neither is exported</i>)</label><span id='rpcLoadData-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcLoadData-showhide-methods"><i><label for="rpcLoadData-showhide-methods" class="show-inline">/* 2 unexporteds ... */</label><label for="rpcLoadData-showhide-methods" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*rpcLoadData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-411">add</a>(v <a href="../../../../../builtin.html#name-float64">float64</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*rpcLoadData) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-418">loadAndClear</a>() (s <a href="../../../../../builtin.html#name-float64">float64</a>, c <a href="../../../../../builtin.html#name-uint64">uint64</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="rpcLoadData-fold-results"><label for="rpcLoadData-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='rpcLoadData-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcLoadData-showhide-inputofs"><i><label for="rpcLoadData-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="rpcLoadData-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRPCLoadData">newRPCLoadData</a>() *<b>rpcLoadData</b></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 5, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewStore">	<input type='checkbox' class="fold" id="NewStore-fold-content"><label for="NewStore-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-49">NewStore</a>() *<a href="#name-Store">Store</a></label><span id='NewStore-fold-content-docs' class="fold-docs">
+		NewStore creates a Store.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-appendClusterStats"><i>	<input type='checkbox' class="fold" id="appendClusterStats-fold-content"><label for="appendClusterStats-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-87">appendClusterStats</a>(ret []*<a href="#name-Data">Data</a>, cluster map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-perClusterStore">perClusterStore</a>) []*<a href="#name-Data">Data</a></label><span id='appendClusterStats-fold-content-docs' class="fold-docs">
+		appendClusterStats gets Data for the given cluster, append to ret, and return
+		the new slice.
+
+		Data is only appended to ret if it's not empty.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newData"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-261">newData</a>(cluster, service <a href="../../../../../builtin.html#name-string">string</a>) *<a href="#name-Data">Data</a></span></i></div><div class="anchor value-res hidden" id="name-newRPCCountData"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-351">newRPCCountData</a>() *<a href="#name-rpcCountData">rpcCountData</a></span></i></div><div class="anchor value-res hidden" id="name-newRPCLoadData"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-407">newRPCLoadData</a>() *<a href="#name-rpcLoadData">rpcLoadData</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-negativeOneUInt64"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/load/store.go.html#line-26">negativeOneUInt64</a> <a href="../../../../../builtin.html#name-uint64">uint64</a> = 18446744073709551615</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

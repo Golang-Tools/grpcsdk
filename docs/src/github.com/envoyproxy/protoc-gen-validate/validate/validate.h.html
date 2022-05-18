@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: validate.h in package github.com/envoyproxy/protoc-gen-validate/validate</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	validate.h
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/github.com/envoyproxy/protoc-gen-validate/validate.html">github.com/envoyproxy/protoc-gen-validate/validate</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>#ifndef _VALIDATE_H</code></span>
+<span class="codeline" id="line-2"><code>#define _VALIDATE_H</code></span>
+<span class="codeline" id="line-3"><code></code></span>
+<span class="codeline" id="line-4"><code>#include &lt;functional&gt;</code></span>
+<span class="codeline" id="line-5"><code>#include &lt;regex&gt;</code></span>
+<span class="codeline" id="line-6"><code>#include &lt;stdexcept&gt;</code></span>
+<span class="codeline" id="line-7"><code>#include &lt;string&gt;</code></span>
+<span class="codeline" id="line-8"><code>#include &lt;typeinfo&gt;</code></span>
+<span class="codeline" id="line-9"><code>#include &lt;typeindex&gt;</code></span>
+<span class="codeline" id="line-10"><code>#include &lt;unordered_map&gt;</code></span>
+<span class="codeline" id="line-11"><code></code></span>
+<span class="codeline" id="line-12"><code>#if !defined(_WIN32)</code></span>
+<span class="codeline" id="line-13"><code>#include &lt;arpa/inet.h&gt;</code></span>
+<span class="codeline" id="line-14"><code>#else</code></span>
+<span class="codeline" id="line-15"><code>#include &lt;winsock.h&gt;</code></span>
+<span class="codeline" id="line-16"><code>#include &lt;ws2tcpip.h&gt;</code></span>
+<span class="codeline" id="line-17"><code>#endif</code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code>namespace pgv {</code></span>
+<span class="codeline" id="line-20"><code>using std::string;</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code>class UnimplementedException : public std::runtime_error {</code></span>
+<span class="codeline" id="line-23"><code>public:</code></span>
+<span class="codeline" id="line-24"><code>  UnimplementedException() : std::runtime_error("not yet implemented") {}</code></span>
+<span class="codeline" id="line-25"><code>  // Thrown by C++ validation code that is not yet implemented.</code></span>
+<span class="codeline" id="line-26"><code>};</code></span>
+<span class="codeline" id="line-27"><code></code></span>
+<span class="codeline" id="line-28"><code>using ValidationMsg = std::string;</code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>class BaseValidator {</code></span>
+<span class="codeline" id="line-31"><code>protected:</code></span>
+<span class="codeline" id="line-32"><code>  static std::unordered_map&lt;std::type_index, BaseValidator*&gt;&amp; validators() {</code></span>
+<span class="codeline" id="line-33"><code>    static auto* validator_map = new std::unordered_map&lt;std::type_index, BaseValidator*&gt;();</code></span>
+<span class="codeline" id="line-34"><code>    return *validator_map;</code></span>
+<span class="codeline" id="line-35"><code>  }</code></span>
+<span class="codeline" id="line-36"><code>};</code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code>template &lt;typename T&gt;</code></span>
+<span class="codeline" id="line-39"><code>class Validator : public BaseValidator {</code></span>
+<span class="codeline" id="line-40"><code>public:</code></span>
+<span class="codeline" id="line-41"><code>  Validator(std::function&lt;bool(const T&amp;, ValidationMsg*)&gt; check) : check_(check)</code></span>
+<span class="codeline" id="line-42"><code>  {</code></span>
+<span class="codeline" id="line-43"><code>    validators()[std::type_index(typeid(T))] = this;</code></span>
+<span class="codeline" id="line-44"><code>  }</code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code>  static bool CheckMessage(const T&amp; m, ValidationMsg* err)</code></span>
+<span class="codeline" id="line-47"><code>  {</code></span>
+<span class="codeline" id="line-48"><code>    auto val = static_cast&lt;Validator&lt;T&gt;*&gt;(validators()[std::type_index(typeid(T))]);</code></span>
+<span class="codeline" id="line-49"><code>    if (val) {</code></span>
+<span class="codeline" id="line-50"><code>      return val-&gt;check_(m, err);</code></span>
+<span class="codeline" id="line-51"><code>    }</code></span>
+<span class="codeline" id="line-52"><code>    return true;</code></span>
+<span class="codeline" id="line-53"><code>  }</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code>private:</code></span>
+<span class="codeline" id="line-56"><code>  std::function&lt;bool(const T&amp;, ValidationMsg*)&gt; check_;</code></span>
+<span class="codeline" id="line-57"><code>};</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code>static inline std::string String(const ValidationMsg&amp; msg)</code></span>
+<span class="codeline" id="line-60"><code>{</code></span>
+<span class="codeline" id="line-61"><code>  return std::string(msg);</code></span>
+<span class="codeline" id="line-62"><code>}</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>static inline bool IsPrefix(const string&amp; maybe_prefix, const string&amp; search_in)</code></span>
+<span class="codeline" id="line-65"><code>{</code></span>
+<span class="codeline" id="line-66"><code>  return search_in.compare(0, maybe_prefix.size(), maybe_prefix) == 0;</code></span>
+<span class="codeline" id="line-67"><code>}</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code>static inline bool IsSuffix(const string&amp; maybe_suffix, const string&amp; search_in)</code></span>
+<span class="codeline" id="line-70"><code>{</code></span>
+<span class="codeline" id="line-71"><code>  return maybe_suffix.size() &lt;= search_in.size() &amp;&amp; search_in.compare(search_in.size() - maybe_suffix.size(), maybe_suffix.size(), maybe_suffix) == 0;</code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code>static inline bool Contains(const string&amp; search_in, const string&amp; to_find)</code></span>
+<span class="codeline" id="line-75"><code>{</code></span>
+<span class="codeline" id="line-76"><code>  return search_in.find(to_find) != string::npos;</code></span>
+<span class="codeline" id="line-77"><code>}</code></span>
+<span class="codeline" id="line-78"><code></code></span>
+<span class="codeline" id="line-79"><code>static inline bool IsIpv4(const string&amp; to_validate) {</code></span>
+<span class="codeline" id="line-80"><code>	struct sockaddr_in sa;</code></span>
+<span class="codeline" id="line-81"><code>	return !(inet_pton(AF_INET, to_validate.c_str(), &amp;sa.sin_addr) &lt; 1);</code></span>
+<span class="codeline" id="line-82"><code>}</code></span>
+<span class="codeline" id="line-83"><code></code></span>
+<span class="codeline" id="line-84"><code>static inline bool IsIpv6(const string&amp; to_validate) {</code></span>
+<span class="codeline" id="line-85"><code>  struct sockaddr_in6 sa_six;</code></span>
+<span class="codeline" id="line-86"><code>	return !(inet_pton(AF_INET6, to_validate.c_str(), &amp;sa_six.sin6_addr) &lt; 1);</code></span>
+<span class="codeline" id="line-87"><code>}</code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code>static inline bool IsIp(const string&amp; to_validate) {</code></span>
+<span class="codeline" id="line-90"><code>  return IsIpv4(to_validate) || IsIpv6(to_validate);</code></span>
+<span class="codeline" id="line-91"><code>}</code></span>
+<span class="codeline" id="line-92"><code></code></span>
+<span class="codeline" id="line-93"><code>static inline bool IsHostname(const string&amp; to_validate) {</code></span>
+<span class="codeline" id="line-94"><code>  if (to_validate.length() &gt; 253) {</code></span>
+<span class="codeline" id="line-95"><code>    return false;</code></span>
+<span class="codeline" id="line-96"><code>  }</code></span>
+<span class="codeline" id="line-97"><code></code></span>
+<span class="codeline" id="line-98"><code>  const std::regex dot_regex{"\\."};</code></span>
+<span class="codeline" id="line-99"><code>  const auto iter_end = std::sregex_token_iterator();</code></span>
+<span class="codeline" id="line-100"><code>  auto iter = std::sregex_token_iterator(to_validate.begin(), to_validate.end(), dot_regex, -1);</code></span>
+<span class="codeline" id="line-101"><code>  for (; iter != iter_end; ++iter) {</code></span>
+<span class="codeline" id="line-102"><code>    const std::string &amp;part = *iter;</code></span>
+<span class="codeline" id="line-103"><code>    if (part.empty() || part.length() &gt; 63) {</code></span>
+<span class="codeline" id="line-104"><code>      return false;</code></span>
+<span class="codeline" id="line-105"><code>    }</code></span>
+<span class="codeline" id="line-106"><code>    if (part.at(0) == '-') {</code></span>
+<span class="codeline" id="line-107"><code>      return false;</code></span>
+<span class="codeline" id="line-108"><code>    }</code></span>
+<span class="codeline" id="line-109"><code>    if (part.at(part.length() - 1) == '-') {</code></span>
+<span class="codeline" id="line-110"><code>      return false;</code></span>
+<span class="codeline" id="line-111"><code>    }</code></span>
+<span class="codeline" id="line-112"><code>    for (const auto &amp;character : part) {</code></span>
+<span class="codeline" id="line-113"><code>      if ((character &lt; 'A' || character &gt; 'Z') &amp;&amp; (character &lt; 'a' || character &gt; 'z') &amp;&amp; (character &lt; '0' || character &gt; '9') &amp;&amp; character != '-') {</code></span>
+<span class="codeline" id="line-114"><code>        return false;</code></span>
+<span class="codeline" id="line-115"><code>      }</code></span>
+<span class="codeline" id="line-116"><code>    }</code></span>
+<span class="codeline" id="line-117"><code>  }</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code>  return true;</code></span>
+<span class="codeline" id="line-120"><code>}</code></span>
+<span class="codeline" id="line-121"><code></code></span>
+<span class="codeline" id="line-122"><code>} // namespace pgv</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code>#endif // _VALIDATE_H</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

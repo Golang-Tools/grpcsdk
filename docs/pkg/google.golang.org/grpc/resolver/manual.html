@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/resolver/manual</title>
+<link href="../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>manual</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../index.html#pkg-google.golang.org/grpc/resolver/manual">google.golang.org/grpc/resolver/manual</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/resolver/manual" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../dep/google.golang.org/grpc/resolver/manual.html">one package</a>, and imported by <a href="../../../../dep/google.golang.org/grpc/resolver/manual.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#doc">#d</a> <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html">manual.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package manual defines a resolver that can be used to manually send resolved
+		addresses to ClientConn.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Resolver" data-popularity="525">	<input type='checkbox' class="fold" id="Resolver-fold-content"><label for="Resolver-fold-content"> type <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-39">Resolver</a> <i>(struct)</i></label><span id='Resolver-fold-content-docs' class="fold-docs">
+		Resolver is also a resolver builder.
+		It's build() function always returns itself.
+
+		<input type='checkbox' class="fold" id="Resolver-fold-fields"><label for="Resolver-fold-fields">Fields (<i>total 6, in which 4 are exported</i>)</label><span id='Resolver-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-field-BuildCallback"><label for="Resolver-fold-field-BuildCallback"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-42">BuildCallback</a> <i>func(<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Target">Target</a>, <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ClientConn">ClientConn</a>, <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-BuildOptions">BuildOptions</a>)</i></label><span id='Resolver-fold-field-BuildCallback-docs' class="fold-docs">
+				BuildCallback is called when the Build method is called.  Must not be
+				nil.  Must not be changed after the resolver may be built.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-field-CC"><label for="Resolver-fold-field-CC"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-53">CC</a> <i><a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ClientConn">ClientConn</a></i></label><span id='Resolver-fold-field-CC-docs' class="fold-docs">
+				Fields actually belong to the resolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-field-CloseCallback"><label for="Resolver-fold-field-CloseCallback"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-49">CloseCallback</a> <i>func()</i></label><span id='Resolver-fold-field-CloseCallback-docs' class="fold-docs">
+				CloseCallback is called when the Close method is called.  Must not be
+				nil.  Must not be changed after the resolver may be built.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-field-ResolveNowCallback"><label for="Resolver-fold-field-ResolveNowCallback"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-46">ResolveNowCallback</a> <i>func(<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</i></label><span id='Resolver-fold-field-ResolveNowCallback-docs' class="fold-docs">
+				ResolveNowCallback is called when the ResolveNow method is called on the
+				resolver.  Must not be nil.  Must not be changed after the resolver may
+				be built.
+</span></span>
+			<input type='checkbox' class="showhide" id="Resolver-showhide-fields"><i><label for="Resolver-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="Resolver-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-54">bootstrapState</a> <i>*<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-State">State</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-50">scheme</a> <i><a href="../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="Resolver-fold-methods"><label for="Resolver-fold-methods">Methods (<i>total 7, all are exported</i>)</label><span id='Resolver-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-Build"><label for="Resolver-fold-method-Build">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-64">Build</a>(target <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Target">Target</a>, cc <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ClientConn">ClientConn</a>, opts <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-BuildOptions">BuildOptions</a>) (<a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-Resolver">Resolver</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='Resolver-fold-method-Build-docs' class="fold-docs">
+				Build returns itself for Resolver, because it's both a builder and a resolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-Close"><label for="Resolver-fold-method-Close">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-84">Close</a>()</label><span id='Resolver-fold-method-Close-docs' class="fold-docs">
+				Close is a noop for Resolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-InitialState"><label for="Resolver-fold-method-InitialState">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-59">InitialState</a>(s <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-State">State</a>)</label><span id='Resolver-fold-method-InitialState-docs' class="fold-docs">
+				InitialState adds initial state to the resolver so that UpdateState doesn't
+				need to be explicitly called after Dial.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-ReportError"><label for="Resolver-fold-method-ReportError">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-94">ReportError</a>(err <a href="../../../builtin.html#name-error">error</a>)</label><span id='Resolver-fold-method-ReportError-docs' class="fold-docs">
+				ReportError calls CC.ReportError.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-ResolveNow"><label for="Resolver-fold-method-ResolveNow">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-79">ResolveNow</a>(o <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</label><span id='Resolver-fold-method-ResolveNow-docs' class="fold-docs">
+				ResolveNow is a noop for Resolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-Scheme"><label for="Resolver-fold-method-Scheme">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-74">Scheme</a>() <a href="../../../builtin.html#name-string">string</a></label><span id='Resolver-fold-method-Scheme-docs' class="fold-docs">
+				Scheme returns the test scheme.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Resolver-fold-method-UpdateState"><label for="Resolver-fold-method-UpdateState">(*Resolver) <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-89">UpdateState</a>(s <a href="../resolver.html">resolver</a>.<a href="../resolver.html#name-State">State</a>)</label><span id='Resolver-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState calls CC.UpdateState.
+</span></span></span>
+		<input type='checkbox' class="fold" id="Resolver-fold-impls"><label for="Resolver-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='Resolver-fold-impls-items' class="fold-items"><span>
+			*Resolver : google.golang.org/grpc/resolver.<a href="../resolver.html#name-Builder">Builder</a></span><span>
+			*Resolver : google.golang.org/grpc/resolver.<a href="../resolver.html#name-Resolver">Resolver</a></span></span>
+		<input type='checkbox' class="fold" id="Resolver-fold-results"><label for="Resolver-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Resolver-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewBuilderWithScheme">NewBuilderWithScheme</a>(scheme <a href="../../../builtin.html#name-string">string</a>) *<b>Resolver</b></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewBuilderWithScheme">	<input type='checkbox' class="fold" id="NewBuilderWithScheme-fold-content"><label for="NewBuilderWithScheme-fold-content"> func <a href="../../../../src/google.golang.org/grpc/resolver/manual/manual.go.html#line-28">NewBuilderWithScheme</a>(scheme <a href="../../../builtin.html#name-string">string</a>) *<a href="#name-Resolver">Resolver</a></label><span id='NewBuilderWithScheme-fold-content-docs' class="fold-docs">
+		NewBuilderWithScheme creates a new test resolver builder with the given scheme.
+
+</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: methods.go in package google.golang.org/protobuf/reflect/protoreflect</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	methods.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html">google.golang.org/protobuf/reflect/protoreflect</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright 2020 The Go Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> protoreflect</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<label for="i0"><span class="lit-string i0">"google.golang.org/protobuf/internal/pragma"</span></label></code></span>
+<span class="codeline" id="line-9"><code>)</code></span>
+<span class="codeline" id="line-10"><code></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// The following types are used by the fast-path Message.ProtoMethods method.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// To avoid polluting the public protoreflect API with types used only by</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// low-level implementations, the canonical definitions of these types are</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// in the runtime/protoiface package. The definitions here and in protoiface</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// must be kept in sync.</span></code></span>
+<span class="codeline" id="line-17"><code><span class="keyword">type</span> (</code></span>
+<span class="codeline" id="line-18"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-methods" class="ident">methods</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-19"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-20"><code>		Flags            <a href="#line-27" class="ident">supportFlags</a></code></span>
+<span class="codeline" id="line-21"><code>		Size             <span class="keyword">func</span>(<a href="#line-28" class="ident">sizeInput</a>) <a href="#line-33" class="ident">sizeOutput</a></code></span>
+<span class="codeline" id="line-22"><code>		Marshal          <span class="keyword">func</span>(<a href="#line-37" class="ident">marshalInput</a>) (<a href="#line-43" class="ident">marshalOutput</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-23"><code>		Unmarshal        <span class="keyword">func</span>(<a href="#line-47" class="ident">unmarshalInput</a>) (<a href="#line-57" class="ident">unmarshalOutput</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-24"><code>		Merge            <span class="keyword">func</span>(<a href="#line-61" class="ident">mergeInput</a>) <a href="#line-66" class="ident">mergeOutput</a></code></span>
+<span class="codeline" id="line-25"><code>		CheckInitialized <span class="keyword">func</span>(<a href="#line-70" class="ident">checkInitializedInput</a>) (<a href="#line-74" class="ident">checkInitializedOutput</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-26"><code>	}</code></span>
+<span class="codeline" id="line-27"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-supportFlags" class="ident">supportFlags</a> = <a href="../../../../../pkg/builtin.html#name-uint64" class="ident">uint64</a></code></span>
+<span class="codeline" id="line-28"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-sizeInput" class="ident">sizeInput</a>    = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-29"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-30"><code>		Message <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-31"><code>		Flags   <a href="../../../../../pkg/builtin.html#name-uint8" class="ident">uint8</a></code></span>
+<span class="codeline" id="line-32"><code>	}</code></span>
+<span class="codeline" id="line-33"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-sizeOutput" class="ident">sizeOutput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-34"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-35"><code>		Size <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-36"><code>	}</code></span>
+<span class="codeline" id="line-37"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-marshalInput" class="ident">marshalInput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-38"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-39"><code>		Message <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-40"><code>		Buf     []<a href="../../../../../pkg/builtin.html#name-byte" class="ident">byte</a></code></span>
+<span class="codeline" id="line-41"><code>		Flags   <a href="../../../../../pkg/builtin.html#name-uint8" class="ident">uint8</a></code></span>
+<span class="codeline" id="line-42"><code>	}</code></span>
+<span class="codeline" id="line-43"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-marshalOutput" class="ident">marshalOutput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-44"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-45"><code>		Buf []<a href="../../../../../pkg/builtin.html#name-byte" class="ident">byte</a></code></span>
+<span class="codeline" id="line-46"><code>	}</code></span>
+<span class="codeline" id="line-47"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-unmarshalInput" class="ident">unmarshalInput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-48"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-49"><code>		Message  <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-50"><code>		Buf      []<a href="../../../../../pkg/builtin.html#name-byte" class="ident">byte</a></code></span>
+<span class="codeline" id="line-51"><code>		Flags    <a href="../../../../../pkg/builtin.html#name-uint8" class="ident">uint8</a></code></span>
+<span class="codeline" id="line-52"><code>		Resolver <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-53"><code>			FindExtensionByName(field <a href="proto.go.html#line-438" class="ident">FullName</a>) (<a href="type.go.html#line-494" class="ident">ExtensionType</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-54"><code>			FindExtensionByNumber(message <a href="proto.go.html#line-438" class="ident">FullName</a>, field <a href="proto.go.html#line-369" class="ident">FieldNumber</a>) (<a href="type.go.html#line-494" class="ident">ExtensionType</a>, <a href="../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-55"><code>		}</code></span>
+<span class="codeline" id="line-56"><code>	}</code></span>
+<span class="codeline" id="line-57"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-unmarshalOutput" class="ident">unmarshalOutput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-58"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-59"><code>		Flags <a href="../../../../../pkg/builtin.html#name-uint8" class="ident">uint8</a></code></span>
+<span class="codeline" id="line-60"><code>	}</code></span>
+<span class="codeline" id="line-61"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-mergeInput" class="ident">mergeInput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-62"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-63"><code>		Source      <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-64"><code>		Destination <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-65"><code>	}</code></span>
+<span class="codeline" id="line-66"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-mergeOutput" class="ident">mergeOutput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-67"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-68"><code>		Flags <a href="../../../../../pkg/builtin.html#name-uint8" class="ident">uint8</a></code></span>
+<span class="codeline" id="line-69"><code>	}</code></span>
+<span class="codeline" id="line-70"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-checkInitializedInput" class="ident">checkInitializedInput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-71"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-72"><code>		Message <a href="value.go.html#line-40" class="ident">Message</a></code></span>
+<span class="codeline" id="line-73"><code>	}</code></span>
+<span class="codeline" id="line-74"><code>	<a href="../../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html#name-checkInitializedOutput" class="ident">checkInitializedOutput</a> = <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-75"><code>		<a href="../../../../../pkg/google.golang.org/protobuf/internal/pragma.html" class="ident i0">pragma</a>.<a href="../../internal/pragma/pragma.go.html#line-12" class="ident">NoUnkeyedLiterals</a></code></span>
+<span class="codeline" id="line-76"><code>	}</code></span>
+<span class="codeline" id="line-77"><code>)</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/internal/xds/rbac</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>rbac</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/internal/xds/rbac">google.golang.org/grpc/internal/xds/rbac</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/internal/xds/rbac" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/internal/xds/rbac.html">20 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/internal/xds/rbac.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html">matchers.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-1-fold-content"><label for="file-1-fold-content">   <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html">rbac_engine.go</a></label><span id='file-1-fold-content-items' class="fold-items">
+		Package rbac provides service-level and method-level access control for a
+		service. See
+		https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
+		for documentation.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 15, in which 1 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-ChainEngine" data-popularity="175">	<input type='checkbox' class="fold" id="ChainEngine-fold-content"><label for="ChainEngine-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-48">ChainEngine</a> <i>(struct)</i></label><span id='ChainEngine-fold-content-docs' class="fold-docs">
+		ChainEngine represents a chain of RBAC Engines, used to make authorization
+		decisions on incoming RPCs.
+
+		<input type='checkbox' class="fold" id="ChainEngine-fold-fields"><label for="ChainEngine-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='ChainEngine-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="ChainEngine-showhide-fields"><i><label for="ChainEngine-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ChainEngine-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-49">chainedEngines</a> <i>[]*<a href="#name-engine">engine</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="ChainEngine-fold-methods"><label for="ChainEngine-fold-methods">Methods (<i>total 2, in which 1 are exported</i>)</label><span id='ChainEngine-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ChainEngine-fold-method-IsAuthorized"><label for="ChainEngine-fold-method-IsAuthorized">(*ChainEngine) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-80">IsAuthorized</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>) <a href="../../../../builtin.html#name-error">error</a></label><span id='ChainEngine-fold-method-IsAuthorized-docs' class="fold-docs">
+				IsAuthorized determines if an incoming RPC is authorized based on the chain of RBAC
+				engines and their associated actions.
+
+				Errors returned by this function are compatible with the status package.
+</span></span>
+			<input type='checkbox' class="showhide" id="ChainEngine-showhide-methods"><i><label for="ChainEngine-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="ChainEngine-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*ChainEngine) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-66">logRequestDetails</a>(rpcData *<a href="#name-rpcData">rpcData</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="ChainEngine-fold-results"><label for="ChainEngine-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='ChainEngine-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewChainEngine">NewChainEngine</a>(policies []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-RBAC">RBAC</a>) (*<b>ChainEngine</b>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 14 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 14 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-alwaysMatcher" data-popularity="100">	<input type='checkbox' class="fold" id="alwaysMatcher-fold-content"><label for="alwaysMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-241">alwaysMatcher</a> <i>(struct)</i></label><span id='alwaysMatcher-fold-content-docs' class="fold-docs">
+		alwaysMatcher is a matcher that will always match. This logically
+		represents an any rule for a permission or a principal. alwaysMatcher
+		implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="alwaysMatcher-fold-methods"><label for="alwaysMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='alwaysMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="alwaysMatcher-showhide-methods"><i><label for="alwaysMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="alwaysMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*alwaysMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-244">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="alwaysMatcher-fold-impls"><label for="alwaysMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='alwaysMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="alwaysMatcher-showhide-impls"><i><label for="alwaysMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="alwaysMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*alwaysMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-andMatcher" data-popularity="100">	<input type='checkbox' class="fold" id="andMatcher-fold-content"><label for="andMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-225">andMatcher</a> <i>(struct)</i></label><span id='andMatcher-fold-content-docs' class="fold-docs">
+		andMatcher is a matcher that is successful if every child matcher
+		matches. andMatcher implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="andMatcher-fold-fields"><label for="andMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='andMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="andMatcher-showhide-fields"><i><label for="andMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="andMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-209">matchers</a> <i>[]<a href="#name-matcher">matcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="andMatcher-fold-methods"><label for="andMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='andMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="andMatcher-showhide-methods"><i><label for="andMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="andMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*andMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-229">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="andMatcher-fold-impls"><label for="andMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='andMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="andMatcher-showhide-impls"><i><label for="andMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="andMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*andMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-authenticatedMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="authenticatedMatcher-fold-content"><label for="authenticatedMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-377">authenticatedMatcher</a> <i>(struct)</i></label><span id='authenticatedMatcher-fold-content-docs' class="fold-docs">
+		authenticatedMatcher matches on the name of the Principal. If set, the URI
+		SAN or DNS SAN in that order is used from the certificate, otherwise the
+		subject field is used. If unset, it applies to any user that is
+		authenticated. authenticatedMatcher implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="authenticatedMatcher-fold-fields"><label for="authenticatedMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='authenticatedMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="authenticatedMatcher-showhide-fields"><i><label for="authenticatedMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="authenticatedMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-378">stringMatcher</a> <i>*<a href="matcher.html">internalmatcher</a>.<a href="matcher.html#name-StringMatcher">StringMatcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="authenticatedMatcher-fold-methods"><label for="authenticatedMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='authenticatedMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="authenticatedMatcher-showhide-methods"><i><label for="authenticatedMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="authenticatedMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*authenticatedMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-394">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="authenticatedMatcher-fold-impls"><label for="authenticatedMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='authenticatedMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="authenticatedMatcher-showhide-impls"><i><label for="authenticatedMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="authenticatedMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*authenticatedMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="authenticatedMatcher-fold-results"><label for="authenticatedMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='authenticatedMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="authenticatedMatcher-showhide-inputofs"><i><label for="authenticatedMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="authenticatedMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newAuthenticatedMatcher">newAuthenticatedMatcher</a>(authenticatedMatcherConfig *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Principal_Authenticated">Principal_Authenticated</a>) (*<b>authenticatedMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-engine" data-popularity="125">	<input type='checkbox' class="fold" id="engine-fold-content"><label for="engine-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-112">engine</a> <i>(struct)</i></label><span id='engine-fold-content-docs' class="fold-docs">
+		engine is used for matching incoming RPCs to policies.
+
+		<input type='checkbox' class="fold" id="engine-fold-fields"><label for="engine-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='engine-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="engine-showhide-fields"><i><label for="engine-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="engine-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="engine-fold-field-action"><label for="engine-fold-field-action"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-115">action</a> <i><a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-RBAC_Action">RBAC_Action</a></i></label><span id='engine-fold-field-action-docs' class="fold-docs">
+				action must be ALLOW or DENY.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-113">policies</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="#name-policyMatcher">policyMatcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="engine-fold-methods"><label for="engine-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='engine-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="engine-showhide-methods"><i><label for="engine-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="engine-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="engine-fold-method-findMatchingPolicy"><label for="engine-fold-method-findMatchingPolicy">(*engine) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-144">findMatchingPolicy</a>(rpcData *<a href="#name-rpcData">rpcData</a>) (<a href="../../../../builtin.html#name-string">string</a>, <a href="../../../../builtin.html#name-bool">bool</a>)</label><span id='engine-fold-method-findMatchingPolicy-docs' class="fold-docs">
+				findMatchingPolicy determines if an incoming RPC matches a policy. On a
+				successful match, it returns the name of the matching policy and a true bool
+				to specify that there was a matching policy found.  It returns false in
+				the case of not finding a matching policy.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="engine-fold-results"><label for="engine-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='engine-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="engine-showhide-inputofs"><i><label for="engine-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="engine-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newEngine">newEngine</a>(config *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-RBAC">RBAC</a>) (*<b>engine</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-headerMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="headerMatcher-fold-content"><label for="headerMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-260">headerMatcher</a> <i>(struct)</i></label><span id='headerMatcher-fold-content-docs' class="fold-docs">
+		headerMatcher is a matcher that matches on incoming HTTP Headers present
+		in the incoming RPC. headerMatcher implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="headerMatcher-fold-fields"><label for="headerMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='headerMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="headerMatcher-showhide-fields"><i><label for="headerMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="headerMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-261">matcher</a> <i><a href="matcher.html">internalmatcher</a>.<a href="matcher.html#name-HeaderMatcher">HeaderMatcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="headerMatcher-fold-methods"><label for="headerMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='headerMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="headerMatcher-showhide-methods"><i><label for="headerMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="headerMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*headerMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-291">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="headerMatcher-fold-impls"><label for="headerMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='headerMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="headerMatcher-showhide-impls"><i><label for="headerMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="headerMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*headerMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="headerMatcher-fold-results"><label for="headerMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='headerMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="headerMatcher-showhide-inputofs"><i><label for="headerMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="headerMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newHeaderMatcher">newHeaderMatcher</a>(headerMatcherConfig *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html">v3route_componentspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html#name-HeaderMatcher">HeaderMatcher</a>) (*<b>headerMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-localIPMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="localIPMatcher-fold-content"><label for="localIPMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-341">localIPMatcher</a> <i>(struct)</i></label><span id='localIPMatcher-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="localIPMatcher-fold-fields"><label for="localIPMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='localIPMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="localIPMatcher-showhide-fields"><i><label for="localIPMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="localIPMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="localIPMatcher-fold-field-ipNet"><label for="localIPMatcher-fold-field-ipNet"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-323">ipNet</a> <i>*<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-IPNet">IPNet</a></i></label><span id='localIPMatcher-fold-field-ipNet-docs' class="fold-docs">
+				ipNet represents the CidrRange that this matcher was configured with.
+				This is what will remote and destination IP's will be matched against.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="localIPMatcher-fold-methods"><label for="localIPMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='localIPMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="localIPMatcher-showhide-methods"><i><label for="localIPMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="localIPMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*localIPMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-354">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="localIPMatcher-fold-impls"><label for="localIPMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='localIPMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="localIPMatcher-showhide-impls"><i><label for="localIPMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="localIPMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*localIPMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="localIPMatcher-fold-results"><label for="localIPMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='localIPMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="localIPMatcher-showhide-inputofs"><i><label for="localIPMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="localIPMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newLocalIPMatcher">newLocalIPMatcher</a>(cidrRange *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-CidrRange">CidrRange</a>) (*<b>localIPMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-matcher" data-popularity="1850">	<input type='checkbox' class="fold" id="matcher-fold-content"><label for="matcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-34">matcher</a> <b><i>(interface)</i></b></label><span id='matcher-fold-content-docs' class="fold-docs">
+		matcher is an interface that takes data about incoming RPC's and returns
+		whether it matches with whatever matcher implements this interface.
+
+		<input type='checkbox' class="fold" id="matcher-fold-methods"><label for="matcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='matcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="matcher-showhide-methods"><i><label for="matcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="matcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( matcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-35">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="matcher-fold-impledby"><label for="matcher-fold-impledby">Implemented By (<i>at least 11, none are exported</i>)</label><span id='matcher-fold-impledby-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="matcher-showhide-impedBys"><i><label for="matcher-showhide-impedBys" class="show-inline">/* 11+ unexporteds ... */</label><label for="matcher-showhide-impedBys" class="hide-inline">/* 11+ unexporteds: */</label></i><span class="hidden"><i>
+			*<a href="#name-alwaysMatcher">alwaysMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-andMatcher">andMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-authenticatedMatcher">authenticatedMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-headerMatcher">headerMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-localIPMatcher">localIPMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-notMatcher">notMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-orMatcher">orMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-policyMatcher">policyMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-portMatcher">portMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-remoteIPMatcher">remoteIPMatcher</a></i></span><span class="hidden"><i>
+			*<a href="#name-urlPathMatcher">urlPathMatcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="matcher-fold-results"><label for="matcher-fold-results">As Outputs Of (<i>at least 2, neither is exported</i>)</label><span id='matcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="matcher-showhide-inputofs"><i><label for="matcher-showhide-inputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="matcher-showhide-inputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-matchersFromPermissions">matchersFromPermissions</a>(permissions []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Permission">Permission</a>) ([]<b>matcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func <a href="#name-matchersFromPrincipals">matchersFromPrincipals</a>(principals []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Principal">Principal</a>) ([]<b>matcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-notMatcher" data-popularity="100">	<input type='checkbox' class="fold" id="notMatcher-fold-content"><label for="notMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-250">notMatcher</a> <i>(struct)</i></label><span id='notMatcher-fold-content-docs' class="fold-docs">
+		notMatcher is a matcher that nots an underlying matcher. notMatcher
+		implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="notMatcher-fold-fields"><label for="notMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='notMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="notMatcher-showhide-fields"><i><label for="notMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="notMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-251">matcherToNot</a> <i><a href="#name-matcher">matcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="notMatcher-fold-methods"><label for="notMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='notMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="notMatcher-showhide-methods"><i><label for="notMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="notMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*notMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-254">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="notMatcher-fold-impls"><label for="notMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='notMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="notMatcher-showhide-impls"><i><label for="notMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="notMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*notMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-orMatcher" data-popularity="100">	<input type='checkbox' class="fold" id="orMatcher-fold-content"><label for="orMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-208">orMatcher</a> <i>(struct)</i></label><span id='orMatcher-fold-content-docs' class="fold-docs">
+		orMatcher is a matcher where it successfully matches if one of it's
+		children successfully match. It also logically represents a principal or
+		permission, but can also be it's own entity further down the tree of
+		matchers. orMatcher implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="orMatcher-fold-fields"><label for="orMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='orMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="orMatcher-showhide-fields"><i><label for="orMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="orMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-209">matchers</a> <i>[]<a href="#name-matcher">matcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="orMatcher-fold-methods"><label for="orMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='orMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="orMatcher-showhide-methods"><i><label for="orMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="orMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*orMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-212">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="orMatcher-fold-impls"><label for="orMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='orMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="orMatcher-showhide-impls"><i><label for="orMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="orMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*orMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-policyMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="policyMatcher-fold-content"><label for="policyMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-46">policyMatcher</a> <i>(struct)</i></label><span id='policyMatcher-fold-content-docs' class="fold-docs">
+		policyMatcher helps determine whether an incoming RPC call matches a policy.
+		A policy is a logical role (e.g. Service Admin), which is comprised of
+		permissions and principals. A principal is an identity (or identities) for a
+		downstream subject which are assigned the policy (role), and a permission is
+		an action(s) that a principal(s) can take. A policy matches if both a
+		permission and a principal match, which will be determined by the child or
+		permissions and principal matchers. policyMatcher implements the matcher
+		interface.
+
+		<input type='checkbox' class="fold" id="policyMatcher-fold-fields"><label for="policyMatcher-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='policyMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="policyMatcher-showhide-fields"><i><label for="policyMatcher-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="policyMatcher-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-47">permissions</a> <i>*<a href="#name-orMatcher">orMatcher</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-48">principals</a> <i>*<a href="#name-orMatcher">orMatcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="policyMatcher-fold-methods"><label for="policyMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='policyMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="policyMatcher-showhide-methods"><i><label for="policyMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="policyMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*policyMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-66">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="policyMatcher-fold-impls"><label for="policyMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='policyMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="policyMatcher-showhide-impls"><i><label for="policyMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="policyMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*policyMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="policyMatcher-fold-results"><label for="policyMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='policyMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="policyMatcher-showhide-inputofs"><i><label for="policyMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="policyMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newPolicyMatcher">newPolicyMatcher</a>(policy *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Policy">Policy</a>) (*<b>policyMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-portMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="portMatcher-fold-content"><label for="portMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-361">portMatcher</a> <i>(struct)</i></label><span id='portMatcher-fold-content-docs' class="fold-docs">
+		portMatcher matches on whether the destination port of the RPC matches the
+		destination port this matcher was instantiated with. portMatcher
+		implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="portMatcher-fold-fields"><label for="portMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='portMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="portMatcher-showhide-fields"><i><label for="portMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="portMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-362">destinationPort</a> <i><a href="../../../../builtin.html#name-uint32">uint32</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="portMatcher-fold-methods"><label for="portMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='portMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="portMatcher-showhide-methods"><i><label for="portMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="portMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*portMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-369">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="portMatcher-fold-impls"><label for="portMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='portMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="portMatcher-showhide-impls"><i><label for="portMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="portMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*portMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="portMatcher-fold-results"><label for="portMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='portMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="portMatcher-showhide-inputofs"><i><label for="portMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="portMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newPortMatcher">newPortMatcher</a>(destinationPort <a href="../../../../builtin.html#name-uint32">uint32</a>) *<b>portMatcher</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-remoteIPMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="remoteIPMatcher-fold-content"><label for="remoteIPMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-320">remoteIPMatcher</a> <i>(struct)</i></label><span id='remoteIPMatcher-fold-content-docs' class="fold-docs">
+		remoteIPMatcher and localIPMatcher both are matchers that match against
+		a CIDR Range. Two different matchers are needed as the remote and destination
+		ip addresses come from different parts of the data about incoming RPC's
+		passed in. Matching a CIDR Range means to determine whether the IP Address
+		falls within the CIDR Range or not. They both implement the matcher
+		interface.
+
+		<input type='checkbox' class="fold" id="remoteIPMatcher-fold-fields"><label for="remoteIPMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='remoteIPMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="remoteIPMatcher-showhide-fields"><i><label for="remoteIPMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="remoteIPMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="remoteIPMatcher-fold-field-ipNet"><label for="remoteIPMatcher-fold-field-ipNet"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-323">ipNet</a> <i>*<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-IPNet">IPNet</a></i></label><span id='remoteIPMatcher-fold-field-ipNet-docs' class="fold-docs">
+				ipNet represents the CidrRange that this matcher was configured with.
+				This is what will remote and destination IP's will be matched against.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="remoteIPMatcher-fold-methods"><label for="remoteIPMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='remoteIPMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="remoteIPMatcher-showhide-methods"><i><label for="remoteIPMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="remoteIPMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*remoteIPMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-337">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="remoteIPMatcher-fold-impls"><label for="remoteIPMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='remoteIPMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="remoteIPMatcher-showhide-impls"><i><label for="remoteIPMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="remoteIPMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*remoteIPMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="remoteIPMatcher-fold-results"><label for="remoteIPMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='remoteIPMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="remoteIPMatcher-showhide-inputofs"><i><label for="remoteIPMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="remoteIPMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRemoteIPMatcher">newRemoteIPMatcher</a>(cidrRange *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-CidrRange">CidrRange</a>) (*<b>remoteIPMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-rpcData" data-popularity="110">	<input type='checkbox' class="fold" id="rpcData-fold-content"><label for="rpcData-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-223">rpcData</a> <i>(struct)</i></label><span id='rpcData-fold-content-docs' class="fold-docs">
+		rpcData wraps data pulled from an incoming RPC that the RBAC engine needs to
+		find a matching policy.
+
+		<input type='checkbox' class="fold" id="rpcData-fold-fields"><label for="rpcData-fold-fields">Fields (<i>total 7, none are exported</i>)</label><span id='rpcData-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcData-showhide-fields"><i><label for="rpcData-showhide-fields" class="show-inline">/* 7 unexporteds ... */</label><label for="rpcData-showhide-fields" class="hide-inline">/* 7 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-authType"><label for="rpcData-fold-field-authType"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-236">authType</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='rpcData-fold-field-authType-docs' class="fold-docs">
+				authType is the type of authentication e.g. "tls".
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-certs"><label for="rpcData-fold-field-certs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-239">certs</a> <i>[]*<a href="../../../../crypto/x509.html">x509</a>.<a href="../../../../crypto/x509.html#name-Certificate">Certificate</a></i></label><span id='rpcData-fold-field-certs-docs' class="fold-docs">
+				certs are the certificates presented by the peer during a TLS
+				handshake.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-destinationPort"><label for="rpcData-fold-field-destinationPort"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-232">destinationPort</a> <i><a href="../../../../builtin.html#name-uint32">uint32</a></i></label><span id='rpcData-fold-field-destinationPort-docs' class="fold-docs">
+				destinationPort is the port that the RPC is being sent to on the
+				server.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-fullMethod"><label for="rpcData-fold-field-fullMethod"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-229">fullMethod</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='rpcData-fold-field-fullMethod-docs' class="fold-docs">
+				fullMethod is the method name being called on the upstream service.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-localAddr"><label for="rpcData-fold-field-localAddr"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-234">localAddr</a> <i><a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Addr">Addr</a></i></label><span id='rpcData-fold-field-localAddr-docs' class="fold-docs">
+				localAddr is the address that the RPC is being sent to.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-md"><label for="rpcData-fold-field-md"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-225">md</a> <i><a href="../../metadata.html">metadata</a>.<a href="../../metadata.html#name-MD">MD</a></i></label><span id='rpcData-fold-field-md-docs' class="fold-docs">
+				md is the HTTP Headers that are present in the incoming RPC.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="rpcData-fold-field-peerInfo"><label for="rpcData-fold-field-peerInfo"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-227">peerInfo</a> <i>*<a href="../../peer.html">peer</a>.<a href="../../peer.html#name-Peer">Peer</a></i></label><span id='rpcData-fold-field-peerInfo-docs' class="fold-docs">
+				peerInfo is information about the downstream peer.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="rpcData-fold-results"><label for="rpcData-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='rpcData-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcData-showhide-inputofs"><i><label for="rpcData-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="rpcData-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newRPCData">newRPCData</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>) (*<b>rpcData</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+		<input type='checkbox' class="fold" id="rpcData-fold-params"><label for="rpcData-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='rpcData-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="rpcData-showhide-outputofs"><i><label for="rpcData-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="rpcData-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-ChainEngine">ChainEngine</a>).<a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-66">logRequestDetails</a>(rpcData *<b>rpcData</b>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-urlPathMatcher" data-popularity="175">	<input type='checkbox' class="fold" id="urlPathMatcher-fold-content"><label for="urlPathMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-298">urlPathMatcher</a> <i>(struct)</i></label><span id='urlPathMatcher-fold-content-docs' class="fold-docs">
+		urlPathMatcher matches on the URL Path of the incoming RPC. In gRPC, this
+		logically maps to the full method name the RPC is calling on the server side.
+		urlPathMatcher implements the matcher interface.
+
+		<input type='checkbox' class="fold" id="urlPathMatcher-fold-fields"><label for="urlPathMatcher-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='urlPathMatcher-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="urlPathMatcher-showhide-fields"><i><label for="urlPathMatcher-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="urlPathMatcher-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-299">stringMatcher</a> <i><a href="matcher.html">internalmatcher</a>.<a href="matcher.html#name-StringMatcher">StringMatcher</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="urlPathMatcher-fold-methods"><label for="urlPathMatcher-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='urlPathMatcher-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="urlPathMatcher-showhide-methods"><i><label for="urlPathMatcher-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="urlPathMatcher-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*urlPathMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-310">match</a>(data *<a href="#name-rpcData">rpcData</a>) <a href="../../../../builtin.html#name-bool">bool</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="urlPathMatcher-fold-impls"><label for="urlPathMatcher-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='urlPathMatcher-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="urlPathMatcher-showhide-impls"><i><label for="urlPathMatcher-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="urlPathMatcher-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*urlPathMatcher : <a href="#name-matcher">matcher</a></i></span></span>
+		<input type='checkbox' class="fold" id="urlPathMatcher-fold-results"><label for="urlPathMatcher-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='urlPathMatcher-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="urlPathMatcher-showhide-inputofs"><i><label for="urlPathMatcher-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="urlPathMatcher-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newURLPathMatcher">newURLPathMatcher</a>(pathMatcher *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html">v3matcherpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html#name-PathMatcher">PathMatcher</a>) (*<b>urlPathMatcher</b>, <a href="../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 12, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewChainEngine">	<input type='checkbox' class="fold" id="NewChainEngine-fold-content"><label for="NewChainEngine-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-54">NewChainEngine</a>(policies []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-RBAC">RBAC</a>) (*<a href="#name-ChainEngine">ChainEngine</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='NewChainEngine-fold-content-docs' class="fold-docs">
+		NewChainEngine returns a chain of RBAC engines, used to make authorization
+		decisions on incoming RPCs. Returns a non-nil error for invalid policies.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 11 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 11 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-matchersFromPermissions"><i>	<input type='checkbox' class="fold" id="matchersFromPermissions-fold-content"><label for="matchersFromPermissions-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-78">matchersFromPermissions</a>(permissions []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Permission">Permission</a>) ([]<a href="#name-matcher">matcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='matchersFromPermissions-fold-content-docs' class="fold-docs">
+		matchersFromPermissions takes a list of permissions (can also be
+		a single permission, e.g. from a not matcher which is logically !permission)
+		and returns a list of matchers which correspond to that permission. This will
+		be called in many instances throughout the initial construction of the RBAC
+		engine from the AND and OR matchers and also from the NOT matcher.
+
+</span></i></div><div class="anchor value-res hidden" id="name-matchersFromPrincipals"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-135">matchersFromPrincipals</a>(principals []*<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Principal">Principal</a>) ([]<a href="#name-matcher">matcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newAuthenticatedMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-381">newAuthenticatedMatcher</a>(authenticatedMatcherConfig *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Principal_Authenticated">Principal_Authenticated</a>) (*<a href="#name-authenticatedMatcher">authenticatedMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newEngine"><i>	<input type='checkbox' class="fold" id="newEngine-fold-content"><label for="newEngine-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-120">newEngine</a>(config *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-RBAC">RBAC</a>) (*<a href="#name-engine">engine</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='newEngine-fold-content-docs' class="fold-docs">
+		newEngine creates an RBAC Engine based on the contents of policy. Returns a
+		non-nil error if the policy is invalid.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newHeaderMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-264">newHeaderMatcher</a>(headerMatcherConfig *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html">v3route_componentspb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/route/v3.html#name-HeaderMatcher">HeaderMatcher</a>) (*<a href="#name-headerMatcher">headerMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newLocalIPMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-345">newLocalIPMatcher</a>(cidrRange *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-CidrRange">CidrRange</a>) (*<a href="#name-localIPMatcher">localIPMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newPolicyMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-51">newPolicyMatcher</a>(policy *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html">v3rbacpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3.html#name-Policy">Policy</a>) (*<a href="#name-policyMatcher">policyMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newPortMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-365">newPortMatcher</a>(destinationPort <a href="../../../../builtin.html#name-uint32">uint32</a>) *<a href="#name-portMatcher">portMatcher</a></span></i></div><div class="anchor value-res hidden" id="name-newRemoteIPMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-326">newRemoteIPMatcher</a>(cidrRange *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html">v3corepb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/config/core/v3.html#name-CidrRange">CidrRange</a>) (*<a href="#name-remoteIPMatcher">remoteIPMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-newRPCData"><i>	<input type='checkbox' class="fold" id="newRPCData-fold-content"><label for="newRPCData-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-159">newRPCData</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>) (*<a href="#name-rpcData">rpcData</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='newRPCData-fold-content-docs' class="fold-docs">
+		newRPCData takes an incoming context (should be a context representing state
+		needed for server RPC Call with metadata, peer info (used for source ip/port
+		and TLS information) and connection (used for destination ip/port) piped into
+		it) and the method name of the Service being called server side and populates
+		an rpcData struct ready to be passed to the RBAC Engine to find a matching
+		policy.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newURLPathMatcher"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/matchers.go.html#line-302">newURLPathMatcher</a>(pathMatcher *<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html">v3matcherpb</a>.<a href="../../../../github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html#name-PathMatcher">PathMatcher</a>) (*<a href="#name-urlPathMatcher">urlPathMatcher</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 2, neither is exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-getConnection"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-44">getConnection</a> func(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>) <a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-Conn">Conn</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/xds/rbac/rbac_engine.go.html#line-42">logger</a> <a href="../../grpclog.html">grpclog</a>.<a href="../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

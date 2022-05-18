@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/balancer/priority</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>priority</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/balancer/priority">google.golang.org/grpc/xds/internal/balancer/priority</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/balancer/priority" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/priority.html">19 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/priority.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html">balancer.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package priority implements the priority balancer.
+
+		This balancer will be kept in internal until we use it in the xds balancers,
+		and are confident its functionalities are stable. It will then be exported
+		for more users.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html">balancer_child.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html">balancer_priority.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html">config.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html">ignore_resolve_now.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/logging.go.html">logging.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/utils.go.html">utils.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 9, in which 2 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Child" data-popularity="0">	<input type='checkbox' class="fold" id="Child-fold-content"><label for="Child-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-30">Child</a> <i>(struct)</i></label><span id='Child-fold-content-docs' class="fold-docs">
+		Child is a child of priority balancer.
+
+		<input type='checkbox' class="fold" id="Child-fold-fields"><label for="Child-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='Child-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-31">Config</a> <i>*<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-32">IgnoreReresolutionRequests</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></span></span>
+
+</span></div><div class="anchor type-res" id="name-LBConfig" data-popularity="250">	<input type='checkbox' class="fold" id="LBConfig-fold-content"><label for="LBConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-36">LBConfig</a> <i>(struct)</i></label><span id='LBConfig-fold-content-docs' class="fold-docs">
+		LBConfig represents priority balancer's config.
+
+		<input type='checkbox' class="fold" id="LBConfig-fold-fields"><label for="LBConfig-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='LBConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LBConfig-fold-field-Children"><label for="LBConfig-fold-field-Children"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-41">Children</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-Child">Child</a></i></label><span id='LBConfig-fold-field-Children-docs' class="fold-docs">
+				Children is a map from the child balancer names to their configs. Child
+				names can be found in field Priorities.
+</span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-37">LoadBalancingConfig</a> <i><a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="LBConfig-fold-field-Priorities"><label for="LBConfig-fold-field-Priorities"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-45">Priorities</a> <i>[]<a href="../../../../../builtin.html#name-string">string</a></i></label><span id='LBConfig-fold-field-Priorities-docs' class="fold-docs">
+				Priorities is a list of child balancer names. They are sorted from
+				highest priority to low. The type/config for each child can be found in
+				field Children, with the balancer name as the key.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-methods"><label for="LBConfig-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='LBConfig-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LBConfig-showhide-methods"><i><label for="LBConfig-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="LBConfig-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( LBConfig) <a href="../../../../../../src/google.golang.org/grpc/serviceconfig/serviceconfig.go.html#line-36">isLoadBalancingConfig</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-impls"><label for="LBConfig-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LBConfig-fold-impls-items' class="fold-items"><span>
+			 LBConfig : google.golang.org/grpc/serviceconfig.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-results"><label for="LBConfig-fold-results">As Outputs Of (<i>at least 2, neither is exported</i>)</label><span id='LBConfig-fold-results-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LBConfig-showhide-inputofs"><i><label for="LBConfig-showhide-inputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="LBConfig-showhide-inputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-parseConfig">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<b>LBConfig</b>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func google.golang.org/grpc/xds/internal/balancer/clusterresolver.<a href="clusterresolver.html#name-buildPriorityConfig">buildPriorityConfig</a>(priorities []<a href="clusterresolver.html">clusterresolver</a>.<a href="clusterresolver.html#name-priorityConfig">priorityConfig</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<b>LBConfig</b>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 7 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 7 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-bb" data-popularity="250">	<input type='checkbox' class="fold" id="bb-fold-content"><label for="bb-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-50">bb</a> <i>(struct)</i></label><span id='bb-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="bb-fold-methods"><label for="bb-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='bb-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-52">Build</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, bOpts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-73">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-69">ParseConfig</a>(s <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="bb-fold-impls"><label for="bb-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='bb-fold-impls-items' class="fold-items"><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Builder">Builder</a></span><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ConfigParser">ConfigParser</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-childBalancer" data-popularity="325">	<input type='checkbox' class="fold" id="childBalancer-fold-content"><label for="childBalancer-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-29">childBalancer</a> <i>(struct)</i></label><span id='childBalancer-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="childBalancer-fold-fields"><label for="childBalancer-fold-fields">Fields (<i>total 8, none are exported</i>)</label><span id='childBalancer-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="childBalancer-showhide-fields"><i><label for="childBalancer-showhide-fields" class="show-inline">/* 8 unexporteds ... */</label><label for="childBalancer-showhide-fields" class="hide-inline">/* 8 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-32">bb</a> <i>*<a href="#name-ignoreResolveNowBalancerBuilder">ignoreResolveNowBalancerBuilder</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-35">config</a> <i><a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-34">ignoreReresolutionRequests</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-30">name</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-31">parent</a> <i>*<a href="#name-priorityBalancer">priorityBalancer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-36">rState</a> <i><a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-State">State</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-38">started</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-39">state</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="childBalancer-fold-methods"><label for="childBalancer-fold-methods">Methods (<i>total 5, none are exported</i>)</label><span id='childBalancer-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="childBalancer-showhide-methods"><i><label for="childBalancer-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="childBalancer-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="childBalancer-fold-method-sendUpdate"><label for="childBalancer-fold-method-sendUpdate">(*childBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-85">sendUpdate</a>()</label><span id='childBalancer-fold-method-sendUpdate-docs' class="fold-docs">
+				sendUpdate sends the addresses and config to the child balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="childBalancer-fold-method-start"><label for="childBalancer-fold-method-start">(*childBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-76">start</a>()</label><span id='childBalancer-fold-method-start-docs' class="fold-docs">
+				start builds the child balancer if it's not already started.
+
+				It doesn't do it directly. It asks the balancer group to build it.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="childBalancer-fold-method-stop"><label for="childBalancer-fold-method-stop">(*childBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-102">stop</a>()</label><span id='childBalancer-fold-method-stop-docs' class="fold-docs">
+				stop stops the child balancer and resets the state.
+
+				It doesn't do it directly. It asks the balancer group to remove it.
+
+				Note that the underlying balancer group could keep the child in a cache.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="childBalancer-fold-method-updateBuilder"><label for="childBalancer-fold-method-updateBuilder">(*childBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-61">updateBuilder</a>(bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>)</label><span id='childBalancer-fold-method-updateBuilder-docs' class="fold-docs">
+				updateBuilder updates builder for the child, but doesn't build.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="childBalancer-fold-method-updateConfig"><label for="childBalancer-fold-method-updateConfig">(*childBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-67">updateConfig</a>(child *<a href="#name-Child">Child</a>, rState <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-State">State</a>)</label><span id='childBalancer-fold-method-updateConfig-docs' class="fold-docs">
+				updateConfig sets childBalancer's config and state, but doesn't send update to
+				the child balancer.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="childBalancer-fold-results"><label for="childBalancer-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='childBalancer-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="childBalancer-showhide-inputofs"><i><label for="childBalancer-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="childBalancer-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newChildBalancer">newChildBalancer</a>(name <a href="../../../../../builtin.html#name-string">string</a>, parent *<a href="#name-priorityBalancer">priorityBalancer</a>, bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>) *<b>childBalancer</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-childBalancerState" data-popularity="0">	<input type='checkbox' class="fold" id="childBalancerState-fold-content"><label for="childBalancerState-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-231">childBalancerState</a> <i>(struct)</i></label><span id='childBalancerState-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="childBalancerState-fold-fields"><label for="childBalancerState-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='childBalancerState-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="childBalancerState-showhide-fields"><i><label for="childBalancerState-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="childBalancerState-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-232">name</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-233">s</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ignoreResolveNowBalancerBuilder" data-popularity="275">	<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-content"><label for="ignoreResolveNowBalancerBuilder-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-28">ignoreResolveNowBalancerBuilder</a> <i>(struct)</i></label><span id='ignoreResolveNowBalancerBuilder-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-fields"><label for="ignoreResolveNowBalancerBuilder-fold-fields">Fields (<i>total 2, in which 1 are exported</i>)</label><span id='ignoreResolveNowBalancerBuilder-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-29">Builder</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="ignoreResolveNowBalancerBuilder-showhide-fields"><i><label for="ignoreResolveNowBalancerBuilder-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ignoreResolveNowBalancerBuilder-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-30">ignoreResolveNow</a> <i>*<a href="../../../../../builtin.html#name-uint32">uint32</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-methods"><label for="ignoreResolveNowBalancerBuilder-fold-methods">Methods (<i>total 3, in which 2 are exported</i>)</label><span id='ignoreResolveNowBalancerBuilder-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*ignoreResolveNowBalancerBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-56">Build</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></span></span><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-method-Name"><label for="ignoreResolveNowBalancerBuilder-fold-method-Name">( ignoreResolveNowBalancerBuilder) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-213">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='ignoreResolveNowBalancerBuilder-fold-method-Name-docs' class="fold-docs">
+				Name returns the name of balancers built by this builder.
+				It will be used to pick balancers (for example in service config).
+</span></span>
+			<input type='checkbox' checked class="showhide" id="ignoreResolveNowBalancerBuilder-showhide-methods"><i><label for="ignoreResolveNowBalancerBuilder-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="ignoreResolveNowBalancerBuilder-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*ignoreResolveNowBalancerBuilder) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-47">updateIgnoreResolveNow</a>(b <a href="../../../../../builtin.html#name-bool">bool</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-impls"><label for="ignoreResolveNowBalancerBuilder-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ignoreResolveNowBalancerBuilder-fold-impls-items' class="fold-items"><span>
+			*ignoreResolveNowBalancerBuilder : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Builder">Builder</a></span></span>
+		<input type='checkbox' class="fold" id="ignoreResolveNowBalancerBuilder-fold-results"><label for="ignoreResolveNowBalancerBuilder-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='ignoreResolveNowBalancerBuilder-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ignoreResolveNowBalancerBuilder-showhide-inputofs"><i><label for="ignoreResolveNowBalancerBuilder-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="ignoreResolveNowBalancerBuilder-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newIgnoreResolveNowBalancerBuilder">newIgnoreResolveNowBalancerBuilder</a>(bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>, ignore <a href="../../../../../builtin.html#name-bool">bool</a>) *<b>ignoreResolveNowBalancerBuilder</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ignoreResolveNowClientConn" data-popularity="350">	<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-content"><label for="ignoreResolveNowClientConn-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-63">ignoreResolveNowClientConn</a> <i>(struct)</i></label><span id='ignoreResolveNowClientConn-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-fields"><label for="ignoreResolveNowClientConn-fold-fields">Fields (<i>total 2, in which 1 are exported</i>)</label><span id='ignoreResolveNowClientConn-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-64">ClientConn</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="ignoreResolveNowClientConn-showhide-fields"><i><label for="ignoreResolveNowClientConn-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ignoreResolveNowClientConn-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-65">ignoreResolveNow</a> <i>*<a href="../../../../../builtin.html#name-uint32">uint32</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-methods"><label for="ignoreResolveNowClientConn-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='ignoreResolveNowClientConn-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-method-NewSubConn"><label for="ignoreResolveNowClientConn-fold-method-NewSubConn">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-148">NewSubConn</a>([]<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='ignoreResolveNowClientConn-fold-method-NewSubConn-docs' class="fold-docs">
+				NewSubConn is called by balancer to create a new SubConn.
+				It doesn't block and wait for the connections to be established.
+				Behaviors of the SubConn can be controlled by options.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-method-RemoveSubConn"><label for="ignoreResolveNowClientConn-fold-method-RemoveSubConn">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-151">RemoveSubConn</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>)</label><span id='ignoreResolveNowClientConn-fold-method-RemoveSubConn-docs' class="fold-docs">
+				RemoveSubConn removes the SubConn from ClientConn.
+				The SubConn will be shutdown.
+</span></span><span>
+			<span class="nodocs">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-68">ResolveNow</a>(o <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-method-Target"><label for="ignoreResolveNowClientConn-fold-method-Target">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-173">Target</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='ignoreResolveNowClientConn-fold-method-Target-docs' class="fold-docs">
+				Target returns the dial target for this ClientConn.
+
+				Deprecated: Use the Target field in the BuildOptions instead.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-method-UpdateAddresses"><label for="ignoreResolveNowClientConn-fold-method-UpdateAddresses">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-158">UpdateAddresses</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</label><span id='ignoreResolveNowClientConn-fold-method-UpdateAddresses-docs' class="fold-docs">
+				UpdateAddresses updates the addresses used in the passed in SubConn.
+				gRPC checks if the currently connected address is still in the new list.
+				If so, the connection will be kept. Else, the connection will be
+				gracefully closed, and a new connection will be created.
+
+				This will trigger a state transition for the SubConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-method-UpdateState"><label for="ignoreResolveNowClientConn-fold-method-UpdateState">( ignoreResolveNowClientConn) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-165">UpdateState</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='ignoreResolveNowClientConn-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState notifies gRPC that the balancer's internal state has
+				changed.
+
+				gRPC will update the connectivity state of the ClientConn, and will call
+				Pick on the new Picker to pick new SubConns.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ignoreResolveNowClientConn-fold-impls"><label for="ignoreResolveNowClientConn-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ignoreResolveNowClientConn-fold-impls-items' class="fold-items"><span>
+			 ignoreResolveNowClientConn : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-priorityBalancer" data-popularity="970">	<input type='checkbox' class="fold" id="priorityBalancer-fold-content"><label for="priorityBalancer-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-84">priorityBalancer</a> <i>(struct)</i></label><span id='priorityBalancer-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="priorityBalancer-fold-fields"><label for="priorityBalancer-fold-fields">Fields (<i>total 12, none are exported</i>)</label><span id='priorityBalancer-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="priorityBalancer-showhide-fields"><i><label for="priorityBalancer-showhide-fields" class="show-inline">/* 12 unexporteds ... */</label><label for="priorityBalancer-showhide-fields" class="hide-inline">/* 12 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-87">bg</a> <i>*<a href="../../../internal/balancergroup.html">balancergroup</a>.<a href="../../../internal/balancergroup.html#name-BalancerGroup">BalancerGroup</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-86">cc</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-89">childBalancerStateUpdate</a> <i>*<a href="../../../internal/buffer.html">buffer</a>.<a href="../../../internal/buffer.html#name-Unbounded">Unbounded</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-92">childInUse</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-field-childToPriority"><label for="priorityBalancer-fold-field-childToPriority"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-100">childToPriority</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="../../../../../builtin.html#name-int">int</a></i></label><span id='priorityBalancer-fold-field-childToPriority-docs' class="fold-docs">
+				childToPriority is a map from the child name to it's priority. Priority
+				is an int start from 0, and 0 is the higher priority.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-field-children"><label for="priorityBalancer-fold-field-children"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-102">children</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-childBalancer">childBalancer</a></i></label><span id='priorityBalancer-fold-field-children-docs' class="fold-docs">
+				children is a map from child name to sub-balancers.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-88">done</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-85">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-91">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-field-priorities"><label for="priorityBalancer-fold-field-priorities"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-97">priorities</a> <i>[]<a href="../../../../../builtin.html#name-string">string</a></i></label><span id='priorityBalancer-fold-field-priorities-docs' class="fold-docs">
+				priorities is a list of child names from higher to lower priority.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-field-priorityInUse"><label for="priorityBalancer-fold-field-priorityInUse"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-95">priorityInUse</a> <i><a href="../../../../../builtin.html#name-int">int</a></i></label><span id='priorityBalancer-fold-field-priorityInUse-docs' class="fold-docs">
+				priority of the child that's current in use. Int starting from 0, and 0
+				is the higher priority.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-field-priorityInitTimer"><label for="priorityBalancer-fold-field-priorityInitTimer"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-108">priorityInitTimer</a> <i>*<a href="#name-timerWrapper">timerWrapper</a></i></label><span id='priorityBalancer-fold-field-priorityInitTimer-docs' class="fold-docs">
+				The timer to give a priority some time to connect. And if the priority
+				doesn't go into Ready/Failure, the next priority will be started.
+
+				One timer is enough because there can be at most one priority in init
+				state.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="priorityBalancer-fold-methods"><label for="priorityBalancer-fold-methods">Methods (<i>total 15, in which 6 are exported</i>)</label><span id='priorityBalancer-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-192">Close</a>()</span></span><span>
+			<span class="nodocs">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-204">ExitIdle</a>()</span></span><span>
+			<span class="nodocs">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-184">ResolverError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-111">UpdateClientConnState</a>(s <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../../../builtin.html#name-error">error</a></span></span><span>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-UpdateState"><label for="priorityBalancer-fold-method-UpdateState">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-224">UpdateState</a>(childName <a href="../../../../../builtin.html#name-string">string</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='priorityBalancer-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState implements balancergroup.BalancerStateAggregator interface. The
+				balancer group sends new connectivity state and picker here.
+</span></span><span>
+			<span class="nodocs">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-188">UpdateSubConnState</a>(sc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a>)</span></span>
+			<input type='checkbox' checked class="showhide" id="priorityBalancer-showhide-methods"><i><label for="priorityBalancer-showhide-methods" class="show-inline">/* 9 unexporteds ... */</label><label for="priorityBalancer-showhide-methods" class="hide-inline">/* 9 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-handleChildStateUpdate"><label for="priorityBalancer-fold-method-handleChildStateUpdate">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-191">handleChildStateUpdate</a>(childName <a href="../../../../../builtin.html#name-string">string</a>, s <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='priorityBalancer-fold-method-handleChildStateUpdate-docs' class="fold-docs">
+				handleChildStateUpdate start/close priorities based on the connectivity
+				state.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-handlePriorityWithNewStateConnecting"><label for="priorityBalancer-fold-method-handlePriorityWithNewStateConnecting">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-334">handlePriorityWithNewStateConnecting</a>(child *<a href="#name-childBalancer">childBalancer</a>, priority <a href="../../../../../builtin.html#name-int">int</a>, oldState <a href="../../../connectivity.html">connectivity</a>.<a href="../../../connectivity.html#name-State">State</a>)</label><span id='priorityBalancer-fold-method-handlePriorityWithNewStateConnecting-docs' class="fold-docs">
+				handlePriorityWithNewStateConnecting handles state Connecting from a higher
+				than or equal priority.
+
+				An update with state Connecting:
+				- If it's from a higher priority
+				  - Do nothing
+				- If it's from priorityInUse, the behavior depends on previous state.
+
+				When new state is Connecting, the behavior depends on previous state. If the
+				previous state was Ready, this is a transition out from Ready to Connecting.
+				Assuming there are multiple backends in the same priority, this mean we are
+				in a bad situation and we should failover to the next priority (Side note:
+				the current connectivity state aggregating algorithm (e.g. round-robin) is
+				not handling this right, because if many backends all go from Ready to
+				Connecting, the overall situation is more like TransientFailure, not
+				Connecting).
+
+				If the previous state was Idle, we don't do anything special with failure,
+				and simply forward the update. The init timer should be in process, will
+				handle failover if it timeouts. If the previous state was TransientFailure,
+				we do not forward, because the lower priority is in use.
+
+				Caller must make sure priorityInUse is not higher than priority.
+
+				Caller must hold mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-handlePriorityWithNewStateReady"><label for="priorityBalancer-fold-method-handlePriorityWithNewStateReady">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-256">handlePriorityWithNewStateReady</a>(child *<a href="#name-childBalancer">childBalancer</a>, priority <a href="../../../../../builtin.html#name-int">int</a>)</label><span id='priorityBalancer-fold-method-handlePriorityWithNewStateReady-docs' class="fold-docs">
+				handlePriorityWithNewStateReady handles state Ready from a higher or equal
+				priority.
+
+				An update with state Ready:
+				- If it's from higher priority:
+				  - Switch to this priority
+				  - Forward the update
+				- If it's from priorityInUse:
+				  - Forward only
+
+				Caller must make sure priorityInUse is not higher than priority.
+
+				Caller must hold mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-handlePriorityWithNewStateTransientFailure"><label for="priorityBalancer-fold-method-handlePriorityWithNewStateTransientFailure">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-288">handlePriorityWithNewStateTransientFailure</a>(child *<a href="#name-childBalancer">childBalancer</a>, priority <a href="../../../../../builtin.html#name-int">int</a>)</label><span id='priorityBalancer-fold-method-handlePriorityWithNewStateTransientFailure-docs' class="fold-docs">
+				handlePriorityWithNewStateTransientFailure handles state TransientFailure
+				from a higher or equal priority.
+
+				An update with state TransientFailure:
+				- If it's from a higher priority:
+				  - Do not forward, and do nothing
+				- If it's from priorityInUse:
+				  - If there's no lower:
+				    - Forward and do nothing else
+				  - If there's a lower priority:
+				    - Switch to the lower
+				    - Forward the lower child's state
+				    - Do NOT forward this update
+
+				Caller must make sure priorityInUse is not higher than priority.
+
+				Caller must hold mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-run"><label for="priorityBalancer-fold-method-run">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-239">run</a>()</label><span id='priorityBalancer-fold-method-run-docs' class="fold-docs">
+				run handles child update in a separate goroutine, so if the child sends
+				updates inline (when called by parent), it won't cause deadlocks (by trying
+				to hold the same mutex).
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-stopPriorityInitTimer"><label for="priorityBalancer-fold-method-stopPriorityInitTimer">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-212">stopPriorityInitTimer</a>()</label><span id='priorityBalancer-fold-method-stopPriorityInitTimer-docs' class="fold-docs">
+				stopPriorityInitTimer stops the priorityInitTimer if it's not nil, and set it
+				to nil.
+
+				Caller must hold b.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-stopSubBalancersLowerThanPriority"><label for="priorityBalancer-fold-method-stopSubBalancersLowerThanPriority">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-110">stopSubBalancersLowerThanPriority</a>(p <a href="../../../../../builtin.html#name-int">int</a>)</label><span id='priorityBalancer-fold-method-stopSubBalancersLowerThanPriority-docs' class="fold-docs">
+				Stop priorities [p+1, lowest].
+
+				Caller must hold b.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-switchToChild"><label for="priorityBalancer-fold-method-switchToChild">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-140">switchToChild</a>(child *<a href="#name-childBalancer">childBalancer</a>, priority <a href="../../../../../builtin.html#name-int">int</a>)</label><span id='priorityBalancer-fold-method-switchToChild-docs' class="fold-docs">
+				switchToChild does the following:
+				- stop all child with lower priorities
+				- if childInUse is not this child
+				  - set childInUse to this child
+				  - stops init timer
+				  - if this child is not started, start it, and start a init timer
+
+				Note that it does NOT send the current child state (picker) to the parent
+				ClientConn. The caller needs to send it if necessary.
+
+				this can be called when
+				1. first update, start p0
+				2. an update moves a READY child from a lower priority to higher
+				2. a different builder is updated for this child
+				3. a high priority goes Failure, start next
+				4. a high priority init timeout, start next
+
+				Caller must hold b.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityBalancer-fold-method-syncPriority"><label for="priorityBalancer-fold-method-syncPriority">(*priorityBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-67">syncPriority</a>()</label><span id='priorityBalancer-fold-method-syncPriority-docs' class="fold-docs">
+				syncPriority handles priority after a config update. It makes sure the
+				balancer state (started or not) is in sync with the priorities (even in
+				tricky cases where a child is moved from a priority to another).
+
+				It's guaranteed that after this function returns:
+				- If some child is READY, it is childInUse, and all lower priorities are
+				closed.
+				- If some child is newly started(in Connecting for the first time), it is
+				childInUse, and all lower priorities are closed.
+				- Otherwise, the lowest priority is childInUse (none of the children is
+				ready, and the overall state is not ready).
+
+				Steps:
+				- If all priorities were deleted, unset childInUse (to an empty string), and
+				set parent ClientConn to TransientFailure
+				- Otherwise, Scan all children from p0, and check balancer stats:
+				  - For any of the following cases:
+					   - If balancer is not started (not built), this is either a new child
+				      with high priority, or a new builder for an existing child.
+					   - If balancer is READY
+					   - If this is the lowest priority
+				  - do the following:
+				    - if this is not the old childInUse, override picker so old picker is no
+				      longer used.
+				    - switch to it (because all higher priorities are neither new or Ready)
+				    - forward the new addresses and config
+
+				Caller must hold b.mu.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="priorityBalancer-fold-impls"><label for="priorityBalancer-fold-impls">Implements (<i>at least 3, all are exported</i>)</label><span id='priorityBalancer-fold-impls-items' class="fold-items"><span>
+			*priorityBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Balancer">Balancer</a></span><span>
+			*priorityBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ExitIdler">ExitIdler</a></span><span>
+			*priorityBalancer : google.golang.org/grpc/internal/balancergroup.<a href="../../../internal/balancergroup.html#name-BalancerStateAggregator">BalancerStateAggregator</a></span></span>
+		<input type='checkbox' class="fold" id="priorityBalancer-fold-params"><label for="priorityBalancer-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='priorityBalancer-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="priorityBalancer-showhide-outputofs"><i><label for="priorityBalancer-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="priorityBalancer-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-newChildBalancer">newChildBalancer</a>(name <a href="../../../../../builtin.html#name-string">string</a>, parent *<b>priorityBalancer</b>, bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>) *<a href="#name-childBalancer">childBalancer</a></i></span><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>priorityBalancer</b>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-timerWrapper" data-popularity="0">	<input type='checkbox' class="fold" id="timerWrapper-fold-content"><label for="timerWrapper-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-79">timerWrapper</a> <i>(struct)</i></label><span id='timerWrapper-fold-content-docs' class="fold-docs">
+		timerWrapper wraps a timer with a boolean. So that when a race happens
+		between AfterFunc and Stop, the func is guaranteed to not execute.
+
+		<input type='checkbox' class="fold" id="timerWrapper-fold-fields"><label for="timerWrapper-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='timerWrapper-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="timerWrapper-showhide-fields"><i><label for="timerWrapper-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="timerWrapper-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-80">stopped</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-81">timer</a> <i>*<a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Timer">Timer</a></i></span></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 6, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 6 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 6 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-equalStringSlice"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/utils.go.html#line-21">equalStringSlice</a>(a, b []<a href="../../../../../builtin.html#name-string">string</a>) <a href="../../../../../builtin.html#name-bool">bool</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-46">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-newChildBalancer"><i>	<input type='checkbox' class="fold" id="newChildBalancer-fold-content"><label for="newChildBalancer-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_child.go.html#line-44">newChildBalancer</a>(name <a href="../../../../../builtin.html#name-string">string</a>, parent *<a href="#name-priorityBalancer">priorityBalancer</a>, bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>) *<a href="#name-childBalancer">childBalancer</a></label><span id='newChildBalancer-fold-content-docs' class="fold-docs">
+		newChildBalancer creates a child balancer place holder, but doesn't
+		build/start the child balancer.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newIgnoreResolveNowBalancerBuilder"><i>	<input type='checkbox' class="fold" id="newIgnoreResolveNowBalancerBuilder-fold-content"><label for="newIgnoreResolveNowBalancerBuilder-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/ignore_resolve_now.go.html#line-38">newIgnoreResolveNowBalancerBuilder</a>(bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>, ignore <a href="../../../../../builtin.html#name-bool">bool</a>) *<a href="#name-ignoreResolveNowBalancerBuilder">ignoreResolveNowBalancerBuilder</a></label><span id='newIgnoreResolveNowBalancerBuilder-fold-content-docs' class="fold-docs">
+		If `ignore` is true, all `ResolveNow()` from the balancer built from this
+		builder will be ignored.
+
+		`ignore` can be updated later by `updateIgnoreResolveNow`, and the update
+		will be propagated to all the old and new balancers built with this.
+
+</span></i></div><div class="anchor value-res hidden" id="name-parseConfig"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/config.go.html#line-48">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<a href="#name-LBConfig">LBConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/logging.go.html#line-32">prefixLogger</a>(p *<a href="#name-priorityBalancer">priorityBalancer</a>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 3, in which 2 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-DefaultPriorityInitTimeout">	<input type='checkbox' class="fold" id="DefaultPriorityInitTimeout-fold-content"><label for="DefaultPriorityInitTimeout-fold-content">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-36">DefaultPriorityInitTimeout</a> <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a></label><span id='DefaultPriorityInitTimeout-fold-content-docs' class="fold-docs">
+		DefaultPriorityInitTimeout is the timeout after which if a priority is
+		not READY, the next will be started. It's exported to be overridden by
+		tests.
+
+</span></div><div class="anchor value-res" id="name-ErrAllPrioritiesRemoved">	<input type='checkbox' class="fold" id="ErrAllPrioritiesRemoved-fold-content"><label for="ErrAllPrioritiesRemoved-fold-content">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer_priority.go.html#line-32">ErrAllPrioritiesRemoved</a> <a href="../../../../../builtin.html#name-error">error</a></label><span id='ErrAllPrioritiesRemoved-fold-content-docs' class="fold-docs">
+		ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/logging.go.html#line-30">logger</a> <a href="../../../grpclog.html">grpclog</a>.<a href="../../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 2, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Name">	<input type='checkbox' class="fold" id="Name-fold-content"><label for="Name-fold-content">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/balancer.go.html#line-44">Name</a> = "priority_experimental"</label><span id='Name-fold-content-docs' class="fold-docs">
+		Name is the name of the priority balancer.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/priority/logging.go.html#line-28">prefix</a> = "[priority-lb %p] "</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

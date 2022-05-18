@@ -217,7 +217,7 @@ func (c *SDK[T]) RegistInterceptor() {
 	}
 }
 
-//Init 初始化sdk客户端的连接信息 //todo
+//Init 初始化sdk客户端的连接信息
 //@generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
 func (c *SDK[T]) Init(opts ...optparams.Option[SDKConfig]) error {
 	optparams.GetOption(c.SDKConfig, opts...)

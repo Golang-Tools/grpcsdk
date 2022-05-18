@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/balancer/clusterresolver</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>clusterresolver</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/balancer/clusterresolver">google.golang.org/grpc/xds/internal/balancer/clusterresolver</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/balancer/clusterresolver" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/clusterresolver.html">30 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/clusterresolver.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html">clusterresolver.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package clusterresolver contains EDS balancer implementation.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html">config.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html">configbuilder.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/logging.go.html">logging.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html">resource_resolver.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html">resource_resolver_dns.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 17, in which 3 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-DiscoveryMechanism" data-popularity="225">	<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-content"><label for="DiscoveryMechanism-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-85">DiscoveryMechanism</a> <i>(struct)</i></label><span id='DiscoveryMechanism-fold-content-docs' class="fold-docs">
+		DiscoveryMechanism is the discovery mechanism, can be either EDS or DNS.
+
+		For DNS, the ClientConn target will be used for name resolution.
+
+		For EDS, if EDSServiceName is not empty, it will be used for watching. If
+		EDSServiceName is empty, Cluster will be used.
+
+		<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-fields"><label for="DiscoveryMechanism-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='DiscoveryMechanism-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-Cluster"><label for="DiscoveryMechanism-fold-field-Cluster"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-87">Cluster</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='DiscoveryMechanism-fold-field-Cluster-docs' class="fold-docs">
+				Cluster is the cluster name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-DNSHostname"><label for="DiscoveryMechanism-fold-field-DNSHostname"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-104">DNSHostname</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='DiscoveryMechanism-fold-field-DNSHostname-docs' class="fold-docs">
+				DNSHostname is the DNS name to resolve in "host:port" form. For type
+				LOGICAL_DNS only.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-EDSServiceName"><label for="DiscoveryMechanism-fold-field-EDSServiceName"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-101">EDSServiceName</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='DiscoveryMechanism-fold-field-EDSServiceName-docs' class="fold-docs">
+				EDSServiceName is the EDS service name, as returned in CDS. May be unset
+				if not specified in CDS. For type EDS only.
+
+				This is used for EDS watch if set. If unset, Cluster is used for EDS
+				watch.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-LoadReportingServer"><label for="DiscoveryMechanism-fold-field-LoadReportingServer"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-90">LoadReportingServer</a> <i>*<a href="../xdsclient/bootstrap.html">bootstrap</a>.<a href="../xdsclient/bootstrap.html#name-ServerConfig">ServerConfig</a></i></label><span id='DiscoveryMechanism-fold-field-LoadReportingServer-docs' class="fold-docs">
+				LoadReportingServer is the LRS server to send load reports to. If not
+				present, load reporting will be disabled.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-MaxConcurrentRequests"><label for="DiscoveryMechanism-fold-field-MaxConcurrentRequests"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-93">MaxConcurrentRequests</a> <i>*<a href="../../../../../builtin.html#name-uint32">uint32</a></i></label><span id='DiscoveryMechanism-fold-field-MaxConcurrentRequests-docs' class="fold-docs">
+				MaxConcurrentRequests is the maximum number of outstanding requests can
+				be made to the upstream cluster. Default is 1024.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-field-Type"><label for="DiscoveryMechanism-fold-field-Type"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-95">Type</a> <i><a href="#name-DiscoveryMechanismType">DiscoveryMechanismType</a></i></label><span id='DiscoveryMechanism-fold-field-Type-docs' class="fold-docs">
+				Type is the discovery mechanism type.
+</span></span></span>
+		<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-methods"><label for="DiscoveryMechanism-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='DiscoveryMechanism-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-method-Equal"><label for="DiscoveryMechanism-fold-method-Equal">( DiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-108">Equal</a>(b <b>DiscoveryMechanism</b>) <a href="../../../../../builtin.html#name-bool">bool</a></label><span id='DiscoveryMechanism-fold-method-Equal-docs' class="fold-docs">
+				Equal returns whether the DiscoveryMechanism is the same with the parameter.
+</span></span></span>
+		<input type='checkbox' class="fold" id="DiscoveryMechanism-fold-params"><label for="DiscoveryMechanism-fold-params">As Inputs Of (<i>at least 5, in which 1 are exported</i>)</label><span id='DiscoveryMechanism-fold-params-items' class="fold-items"><span>
+			func DiscoveryMechanism.<a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-108">Equal</a>(b <b>DiscoveryMechanism</b>) <a href="../../../../../builtin.html#name-bool">bool</a></span>
+			<input type='checkbox' class="showhide" id="DiscoveryMechanism-showhide-outputofs"><i><label for="DiscoveryMechanism-showhide-outputofs" class="show-inline">/* 4+ unexporteds ... */</label><label for="DiscoveryMechanism-showhide-outputofs" class="hide-inline">/* 4+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-buildClusterImplConfigForDNS">buildClusterImplConfigForDNS</a>(parentPriority <a href="../../../../../builtin.html#name-int">int</a>, addrStrs []<a href="../../../../../builtin.html#name-string">string</a>, mechanism <b>DiscoveryMechanism</b>) (<a href="../../../../../builtin.html#name-string">string</a>, *<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</i></span><span class="hidden"><i>
+			func <a href="#name-buildClusterImplConfigForEDS">buildClusterImplConfigForEDS</a>(parentPriority <a href="../../../../../builtin.html#name-int">int</a>, edsResp <a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a>, mechanism <b>DiscoveryMechanism</b>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) ([]<a href="../../../../../builtin.html#name-string">string</a>, map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func <a href="#name-equalDiscoveryMechanisms">equalDiscoveryMechanisms</a>(a, b []<b>DiscoveryMechanism</b>) <a href="../../../../../builtin.html#name-bool">bool</a></i></span><span class="hidden"><i>
+			func <a href="#name-priorityLocalitiesToClusterImpl">priorityLocalitiesToClusterImpl</a>(localities []<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>, priorityName <a href="../../../../../builtin.html#name-string">string</a>, mechanism <b>DiscoveryMechanism</b>, drops []<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-DropConfig">DropConfig</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res" id="name-DiscoveryMechanismType" data-popularity="210">	<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-content"><label for="DiscoveryMechanismType-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-34">DiscoveryMechanismType</a> <a href="../../../../../builtin.html#name-int">int</a> <i>(basic type)</i></label><span id='DiscoveryMechanismType-fold-content-docs' class="fold-docs">
+		DiscoveryMechanismType is the type of discovery mechanism.
+
+		<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-methods"><label for="DiscoveryMechanismType-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='DiscoveryMechanismType-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-method-MarshalJSON"><label for="DiscoveryMechanismType-fold-method-MarshalJSON">( DiscoveryMechanismType) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-49">MarshalJSON</a>() ([]<a href="../../../../../builtin.html#name-byte">byte</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='DiscoveryMechanismType-fold-method-MarshalJSON-docs' class="fold-docs">
+				MarshalJSON marshals a DiscoveryMechanismType to a quoted json string.
+
+				This is necessary to handle enum (as strings) from JSON.
+
+				Note that this needs to be defined on the type not pointer, otherwise the
+				variables of this type will marshal to int not string.
+</span></span><span>
+			<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-method-UnmarshalJSON"><label for="DiscoveryMechanismType-fold-method-UnmarshalJSON">(*DiscoveryMechanismType) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-62">UnmarshalJSON</a>(b []<a href="../../../../../builtin.html#name-byte">byte</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='DiscoveryMechanismType-fold-method-UnmarshalJSON-docs' class="fold-docs">
+				UnmarshalJSON unmarshals a quoted json string to the DiscoveryMechanismType.
+</span></span></span>
+		<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-impls"><label for="DiscoveryMechanismType-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='DiscoveryMechanismType-fold-impls-items' class="fold-items"><span>
+			 DiscoveryMechanismType : encoding/json.<a href="../../../../../encoding/json.html#name-Marshaler">Marshaler</a></span><span>
+			*DiscoveryMechanismType : encoding/json.<a href="../../../../../encoding/json.html#name-Unmarshaler">Unmarshaler</a></span></span>
+		<input type='checkbox' class="fold" id="DiscoveryMechanismType-fold-values"><label for="DiscoveryMechanismType-fold-values">As Types Of (<i>total 2, both are exported</i>)</label><span id='DiscoveryMechanismType-fold-values-items' class="fold-items"><span>
+			const <a href="#name-DiscoveryMechanismTypeEDS">DiscoveryMechanismTypeEDS</a></span><span>
+			const <a href="#name-DiscoveryMechanismTypeLogicalDNS">DiscoveryMechanismTypeLogicalDNS</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LBConfig" data-popularity="175">	<input type='checkbox' class="fold" id="LBConfig-fold-content"><label for="LBConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-142">LBConfig</a> <i>(struct)</i></label><span id='LBConfig-fold-content-docs' class="fold-docs">
+		LBConfig is the config for cluster resolver balancer.
+
+		<input type='checkbox' class="fold" id="LBConfig-fold-fields"><label for="LBConfig-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='LBConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LBConfig-fold-field-DiscoveryMechanisms"><label for="LBConfig-fold-field-DiscoveryMechanisms"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-148">DiscoveryMechanisms</a> <i>[]<a href="#name-DiscoveryMechanism">DiscoveryMechanism</a></i></label><span id='LBConfig-fold-field-DiscoveryMechanisms-docs' class="fold-docs">
+				DiscoveryMechanisms is an ordered list of discovery mechanisms.
+
+				Must have at least one element. Results from each discovery mechanism are
+				concatenated together in successive priorities.
+</span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-143">LoadBalancingConfig</a> <i><a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="LBConfig-fold-field-XDSLBPolicy"><label for="LBConfig-fold-field-XDSLBPolicy"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-162">XDSLBPolicy</a> <i>*<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a></i></label><span id='LBConfig-fold-field-XDSLBPolicy-docs' class="fold-docs">
+				XDSLBPolicy specifies the policy for locality picking and endpoint picking.
+
+				Note that it's not normal balancing policy, and it can only be either
+				ROUND_ROBIN or RING_HASH.
+
+				For ROUND_ROBIN, the policy name will be "ROUND_ROBIN", and the config
+				will be empty. This sets the locality-picking policy to weighted_target
+				and the endpoint-picking policy to round_robin.
+
+				For RING_HASH, the policy name will be "RING_HASH", and the config will
+				be lb config for the ring_hash_experimental LB Policy. ring_hash policy
+				is responsible for both locality picking and endpoint picking.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-methods"><label for="LBConfig-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='LBConfig-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LBConfig-showhide-methods"><i><label for="LBConfig-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="LBConfig-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( LBConfig) <a href="../../../../../../src/google.golang.org/grpc/serviceconfig/serviceconfig.go.html#line-36">isLoadBalancingConfig</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-impls"><label for="LBConfig-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LBConfig-fold-impls-items' class="fold-items"><span>
+			 LBConfig : google.golang.org/grpc/serviceconfig.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></span></span>
+		<input type='checkbox' class="fold" id="LBConfig-fold-results"><label for="LBConfig-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='LBConfig-fold-results-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LBConfig-showhide-inputofs"><i><label for="LBConfig-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="LBConfig-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-parseConfig">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<b>LBConfig</b>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 14 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 14 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-bb" data-popularity="250">	<input type='checkbox' class="fold" id="bb-fold-content"><label for="bb-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-56">bb</a> <i>(struct)</i></label><span id='bb-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="bb-fold-methods"><label for="bb-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='bb-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="bb-fold-method-Build"><label for="bb-fold-method-Build">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-59">Build</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></label><span id='bb-fold-method-Build-docs' class="fold-docs">
+				Build helps implement the balancer.Builder interface.
+</span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-93">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-97">ParseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="bb-fold-impls"><label for="bb-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='bb-fold-impls-items' class="fold-items"><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Builder">Builder</a></span><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ConfigParser">ConfigParser</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ccUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="ccUpdate-fold-content"><label for="ccUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-107">ccUpdate</a> <i>(struct)</i></label><span id='ccUpdate-fold-content-docs' class="fold-docs">
+		ccUpdate wraps a clientConn update received from gRPC (pushed from the
+		xdsResolver).
+
+		<input type='checkbox' class="fold" id="ccUpdate-fold-fields"><label for="ccUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='ccUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ccUpdate-showhide-fields"><i><label for="ccUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="ccUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-109">err</a> <i><a href="../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-108">state</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ccWrapper" data-popularity="350">	<input type='checkbox' class="fold" id="ccWrapper-fold-content"><label for="ccWrapper-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-372">ccWrapper</a> <i>(struct)</i></label><span id='ccWrapper-fold-content-docs' class="fold-docs">
+		ccWrapper overrides ResolveNow(), so that re-resolution from the child
+		policies will trigger the DNS resolver in cluster_resolver balancer.
+
+		<input type='checkbox' class="fold" id="ccWrapper-fold-fields"><label for="ccWrapper-fold-fields">Fields (<i>total 2, in which 1 are exported</i>)</label><span id='ccWrapper-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-373">ClientConn</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="ccWrapper-showhide-fields"><i><label for="ccWrapper-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ccWrapper-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-374">resourceWatcher</a> <i>*<a href="#name-resourceResolver">resourceResolver</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="ccWrapper-fold-methods"><label for="ccWrapper-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='ccWrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-NewSubConn"><label for="ccWrapper-fold-method-NewSubConn">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-148">NewSubConn</a>([]<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='ccWrapper-fold-method-NewSubConn-docs' class="fold-docs">
+				NewSubConn is called by balancer to create a new SubConn.
+				It doesn't block and wait for the connections to be established.
+				Behaviors of the SubConn can be controlled by options.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-RemoveSubConn"><label for="ccWrapper-fold-method-RemoveSubConn">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-151">RemoveSubConn</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>)</label><span id='ccWrapper-fold-method-RemoveSubConn-docs' class="fold-docs">
+				RemoveSubConn removes the SubConn from ClientConn.
+				The SubConn will be shutdown.
+</span></span><span>
+			<span class="nodocs">(*ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-377">ResolveNow</a>(<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-Target"><label for="ccWrapper-fold-method-Target">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-173">Target</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='ccWrapper-fold-method-Target-docs' class="fold-docs">
+				Target returns the dial target for this ClientConn.
+
+				Deprecated: Use the Target field in the BuildOptions instead.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-UpdateAddresses"><label for="ccWrapper-fold-method-UpdateAddresses">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-158">UpdateAddresses</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</label><span id='ccWrapper-fold-method-UpdateAddresses-docs' class="fold-docs">
+				UpdateAddresses updates the addresses used in the passed in SubConn.
+				gRPC checks if the currently connected address is still in the new list.
+				If so, the connection will be kept. Else, the connection will be
+				gracefully closed, and a new connection will be created.
+
+				This will trigger a state transition for the SubConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-UpdateState"><label for="ccWrapper-fold-method-UpdateState">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-165">UpdateState</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='ccWrapper-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState notifies gRPC that the balancer's internal state has
+				changed.
+
+				gRPC will update the connectivity state of the ClientConn, and will call
+				Pick on the new Picker to pick new SubConns.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ccWrapper-fold-impls"><label for="ccWrapper-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ccWrapper-fold-impls-items' class="fold-items"><span>
+			*ccWrapper : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterResolverBalancer" data-popularity="670">	<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-content"><label for="clusterResolverBalancer-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-125">clusterResolverBalancer</a> <i>(struct)</i></label><span id='clusterResolverBalancer-fold-content-docs' class="fold-docs">
+		clusterResolverBalancer manages xdsClient and the actual EDS balancer implementation that
+		does load balancing.
+
+		It currently has only an clusterResolverBalancer. Later, we may add fallback.
+
+		<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-fields"><label for="clusterResolverBalancer-fold-fields">Fields (<i>total 16, none are exported</i>)</label><span id='clusterResolverBalancer-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterResolverBalancer-showhide-fields"><i><label for="clusterResolverBalancer-showhide-fields" class="show-inline">/* 16 unexporteds ... */</label><label for="clusterResolverBalancer-showhide-fields" class="hide-inline">/* 16 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-field-attrsWithClient"><label for="clusterResolverBalancer-fold-field-attrsWithClient"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-140">attrsWithClient</a> <i>*<a href="../../../attributes.html">attributes</a>.<a href="../../../attributes.html#name-Attributes">Attributes</a></i></label><span id='clusterResolverBalancer-fold-field-attrsWithClient-docs' class="fold-docs">
+				// Attributes with xdsClient attached to be passed to the child policies.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-127">bOpts</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-126">cc</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-142">child</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-131">closed</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-137">config</a> <i>*<a href="#name-LBConfig">LBConfig</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-138">configRaw</a> <i>*<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-ParseResult">ParseResult</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-132">done</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-130">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-143">priorities</a> <i>[]<a href="#name-priorityConfig">priorityConfig</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-134">priorityBuilder</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-135">priorityConfigParser</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ConfigParser">ConfigParser</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-129">resourceWatcher</a> <i>*<a href="#name-resourceResolver">resourceResolver</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-field-updateCh"><label for="clusterResolverBalancer-fold-field-updateCh"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-128">updateCh</a> <i>*<a href="../../../internal/buffer.html">buffer</a>.<a href="../../../internal/buffer.html#name-Unbounded">Unbounded</a></i></label><span id='clusterResolverBalancer-fold-field-updateCh-docs' class="fold-docs">
+				// Channel for updates from gRPC.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-144">watchUpdateReceived</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-field-xdsClient"><label for="clusterResolverBalancer-fold-field-xdsClient"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-139">xdsClient</a> <i><a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a></i></label><span id='clusterResolverBalancer-fold-field-xdsClient-docs' class="fold-docs">
+				// xDS client to watch EDS resource.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-methods"><label for="clusterResolverBalancer-fold-methods">Methods (<i>total 10, in which 5 are exported</i>)</label><span id='clusterResolverBalancer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-Close"><label for="clusterResolverBalancer-fold-method-Close">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-361">Close</a>()</label><span id='clusterResolverBalancer-fold-method-Close-docs' class="fold-docs">
+				Close closes the cdsBalancer and the underlying child balancer.
+</span></span><span>
+			<span class="nodocs">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-366">ExitIdle</a>()</span></span><span>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-ResolverError"><label for="clusterResolverBalancer-fold-method-ResolverError">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-343">ResolverError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='clusterResolverBalancer-fold-method-ResolverError-docs' class="fold-docs">
+				ResolverError handles errors reported by the xdsResolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-UpdateClientConnState"><label for="clusterResolverBalancer-fold-method-UpdateClientConnState">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-323">UpdateClientConnState</a>(state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='clusterResolverBalancer-fold-method-UpdateClientConnState-docs' class="fold-docs">
+				UpdateClientConnState receives the serviceConfig (which contains the
+				clusterName to watch for in CDS) and the xdsClient object from the
+				xdsResolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-UpdateSubConnState"><label for="clusterResolverBalancer-fold-method-UpdateSubConnState">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-352">UpdateSubConnState</a>(sc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a>)</label><span id='clusterResolverBalancer-fold-method-UpdateSubConnState-docs' class="fold-docs">
+				UpdateSubConnState handles subConn updates from gRPC.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="clusterResolverBalancer-showhide-methods"><i><label for="clusterResolverBalancer-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="clusterResolverBalancer-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-handleClientConnUpdate"><label for="clusterResolverBalancer-fold-method-handleClientConnUpdate">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-151">handleClientConnUpdate</a>(update *<a href="#name-ccUpdate">ccUpdate</a>)</label><span id='clusterResolverBalancer-fold-method-handleClientConnUpdate-docs' class="fold-docs">
+				handleClientConnUpdate handles a ClientConnUpdate received from gRPC. Good
+				updates lead to registration of EDS and DNS watches. Updates with error lead
+				to cancellation of existing watch and propagation of the same error to the
+				child balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-handleErrorFromUpdate"><label for="clusterResolverBalancer-fold-method-handleErrorFromUpdate">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-246">handleErrorFromUpdate</a>(err <a href="../../../../../builtin.html#name-error">error</a>, fromParent <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='clusterResolverBalancer-fold-method-handleErrorFromUpdate-docs' class="fold-docs">
+				handleErrorFromUpdate handles both the error from parent ClientConn (from CDS
+				balancer) and the error from xds client (from the watcher). fromParent is
+				true if error is from parent ClientConn.
+
+				If the error is connection error, it should be handled for fallback purposes.
+
+				If the error is resource-not-found:
+				- If it's from CDS balancer (shows as a resolver error), it means LDS or CDS
+				resources were removed. The EDS watch should be canceled.
+				- If it's from xds client, it means EDS resource were removed. The EDS
+				watcher should keep watching.
+				In both cases, the sub-balancers will be receive the error.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-handleWatchUpdate"><label for="clusterResolverBalancer-fold-method-handleWatchUpdate">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-184">handleWatchUpdate</a>(update *<a href="#name-resourceUpdate">resourceUpdate</a>)</label><span id='clusterResolverBalancer-fold-method-handleWatchUpdate-docs' class="fold-docs">
+				handleWatchUpdate handles a watch update from the xDS Client. Good updates
+				lead to clientConn updates being invoked on the underlying child balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-run"><label for="clusterResolverBalancer-fold-method-run">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-269">run</a>()</label><span id='clusterResolverBalancer-fold-method-run-docs' class="fold-docs">
+				run is a long-running goroutine which handles all updates from gRPC and
+				xdsClient. All methods which are invoked directly by gRPC or xdsClient simply
+				push an update onto a channel which is read and acted upon right here.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-method-updateChildConfig"><label for="clusterResolverBalancer-fold-method-updateChildConfig">(*clusterResolverBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-208">updateChildConfig</a>() <a href="../../../../../builtin.html#name-error">error</a></label><span id='clusterResolverBalancer-fold-method-updateChildConfig-docs' class="fold-docs">
+				updateChildConfig builds a balancer config from eb's cached eds resp and
+				service config, and sends that to the child balancer. Note that it also
+				generates the addresses, because the endpoints come from the EDS resp.
+
+				If child balancer doesn't already exist, one will be created.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-impls"><label for="clusterResolverBalancer-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='clusterResolverBalancer-fold-impls-items' class="fold-items"><span>
+			*clusterResolverBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Balancer">Balancer</a></span><span>
+			*clusterResolverBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ExitIdler">ExitIdler</a></span></span>
+		<input type='checkbox' class="fold" id="clusterResolverBalancer-fold-params"><label for="clusterResolverBalancer-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='clusterResolverBalancer-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterResolverBalancer-showhide-outputofs"><i><label for="clusterResolverBalancer-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="clusterResolverBalancer-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-newResourceResolver">newResourceResolver</a>(parent *<b>clusterResolverBalancer</b>) *<a href="#name-resourceResolver">resourceResolver</a></i></span><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>clusterResolverBalancer</b>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-discoveryMechanism" data-popularity="450">	<input type='checkbox' class="fold" id="discoveryMechanism-fold-content"><label for="discoveryMechanism-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-35">discoveryMechanism</a> <b><i>(interface)</i></b></label><span id='discoveryMechanism-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="discoveryMechanism-fold-methods"><label for="discoveryMechanism-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='discoveryMechanism-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="discoveryMechanism-showhide-methods"><i><label for="discoveryMechanism-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="discoveryMechanism-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( discoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-36">lastUpdate</a>() (interface{}, <a href="../../../../../builtin.html#name-bool">bool</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">( discoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-37">resolveNow</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">( discoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-38">stop</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="discoveryMechanism-fold-impledby"><label for="discoveryMechanism-fold-impledby">Implemented By (<i>at least 2, neither is exported</i>)</label><span id='discoveryMechanism-fold-impledby-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="discoveryMechanism-showhide-impedBys"><i><label for="discoveryMechanism-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="discoveryMechanism-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*<a href="#name-dnsDiscoveryMechanism">dnsDiscoveryMechanism</a></i></span><span class="hidden"><i>
+			*<a href="#name-edsDiscoveryMechanism">edsDiscoveryMechanism</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-discoveryMechanismKey" data-popularity="0">	<input type='checkbox' class="fold" id="discoveryMechanismKey-fold-content"><label for="discoveryMechanismKey-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-45">discoveryMechanismKey</a> <i>(struct)</i></label><span id='discoveryMechanismKey-fold-content-docs' class="fold-docs">
+		discoveryMechanismKey is {type+resource_name}, it's used as the map key, so
+		that the same resource resolver can be reused (e.g. when there are two
+		mechanisms, both for the same EDS resource, but has different circuit
+		breaking config.
+
+		<input type='checkbox' class="fold" id="discoveryMechanismKey-fold-fields"><label for="discoveryMechanismKey-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='discoveryMechanismKey-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="discoveryMechanismKey-showhide-fields"><i><label for="discoveryMechanismKey-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="discoveryMechanismKey-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-47">name</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-46">typ</a> <i><a href="#name-DiscoveryMechanismType">DiscoveryMechanismType</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-dnsDiscoveryMechanism" data-popularity="575">	<input type='checkbox' class="fold" id="dnsDiscoveryMechanism-fold-content"><label for="dnsDiscoveryMechanism-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-39">dnsDiscoveryMechanism</a> <i>(struct)</i></label><span id='dnsDiscoveryMechanism-fold-content-docs' class="fold-docs">
+		dnsDiscoveryMechanism watches updates for the given DNS hostname.
+
+		It implements resolver.ClientConn interface to work with the DNS resolver.
+
+		<input type='checkbox' class="fold" id="dnsDiscoveryMechanism-fold-fields"><label for="dnsDiscoveryMechanism-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='dnsDiscoveryMechanism-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="dnsDiscoveryMechanism-showhide-fields"><i><label for="dnsDiscoveryMechanism-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="dnsDiscoveryMechanism-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-44">addrs</a> <i>[]<a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-42">r</a> <i><a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Resolver">Resolver</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-40">target</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-41">topLevelResolver</a> <i>*<a href="#name-resourceResolver">resourceResolver</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-45">updateReceived</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="dnsDiscoveryMechanism-fold-methods"><label for="dnsDiscoveryMechanism-fold-methods">Methods (<i>total 8, in which 5 are exported</i>)</label><span id='dnsDiscoveryMechanism-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-104">NewAddress</a>(addresses []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</span></span><span>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-108">NewServiceConfig</a>(<a href="../../../../../builtin.html#name-string">string</a>)</span></span><span>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-112">ParseServiceConfig</a>(<a href="../../../../../builtin.html#name-string">string</a>) *<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-ParseResult">ParseResult</a></span></span><span>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-96">ReportError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-83">UpdateState</a>(state <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-State">State</a>) <a href="../../../../../builtin.html#name-error">error</a></span></span>
+			<input type='checkbox' checked class="showhide" id="dnsDiscoveryMechanism-showhide-methods"><i><label for="dnsDiscoveryMechanism-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="dnsDiscoveryMechanism-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-65">lastUpdate</a>() (interface{}, <a href="../../../../../builtin.html#name-bool">bool</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-72">resolveNow</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*dnsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-76">stop</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="dnsDiscoveryMechanism-fold-impls"><label for="dnsDiscoveryMechanism-fold-impls">Implements (<i>at least 2, in which 1 are exported</i>)</label><span id='dnsDiscoveryMechanism-fold-impls-items' class="fold-items"><span>
+			*dnsDiscoveryMechanism : google.golang.org/grpc/resolver.<a href="../../../resolver.html#name-ClientConn">ClientConn</a></span>
+			<input type='checkbox' checked class="showhide" id="dnsDiscoveryMechanism-showhide-impls"><i><label for="dnsDiscoveryMechanism-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="dnsDiscoveryMechanism-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*dnsDiscoveryMechanism : <a href="#name-discoveryMechanism">discoveryMechanism</a></i></span></span>
+		<input type='checkbox' class="fold" id="dnsDiscoveryMechanism-fold-results"><label for="dnsDiscoveryMechanism-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='dnsDiscoveryMechanism-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="dnsDiscoveryMechanism-showhide-inputofs"><i><label for="dnsDiscoveryMechanism-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="dnsDiscoveryMechanism-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newDNSResolver">newDNSResolver</a>(target <a href="../../../../../builtin.html#name-string">string</a>, topLevelResolver *<a href="#name-resourceResolver">resourceResolver</a>) *<b>dnsDiscoveryMechanism</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-edsDiscoveryMechanism" data-popularity="275">	<input type='checkbox' class="fold" id="edsDiscoveryMechanism-fold-content"><label for="edsDiscoveryMechanism-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-203">edsDiscoveryMechanism</a> <i>(struct)</i></label><span id='edsDiscoveryMechanism-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="edsDiscoveryMechanism-fold-fields"><label for="edsDiscoveryMechanism-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='edsDiscoveryMechanism-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="edsDiscoveryMechanism-showhide-fields"><i><label for="edsDiscoveryMechanism-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="edsDiscoveryMechanism-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-204">cancel</a> <i>func()</i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-206">update</a> <i><a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-207">updateReceived</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="edsDiscoveryMechanism-fold-methods"><label for="edsDiscoveryMechanism-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='edsDiscoveryMechanism-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="edsDiscoveryMechanism-showhide-methods"><i><label for="edsDiscoveryMechanism-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="edsDiscoveryMechanism-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*edsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-210">lastUpdate</a>() (interface{}, <a href="../../../../../builtin.html#name-bool">bool</a>)</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*edsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-217">resolveNow</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*edsDiscoveryMechanism) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-220">stop</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="edsDiscoveryMechanism-fold-impls"><label for="edsDiscoveryMechanism-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='edsDiscoveryMechanism-fold-impls-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="edsDiscoveryMechanism-showhide-impls"><i><label for="edsDiscoveryMechanism-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="edsDiscoveryMechanism-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*edsDiscoveryMechanism : <a href="#name-discoveryMechanism">discoveryMechanism</a></i></span></span>
+		<input type='checkbox' class="fold" id="edsDiscoveryMechanism-fold-results"><label for="edsDiscoveryMechanism-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='edsDiscoveryMechanism-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="edsDiscoveryMechanism-showhide-inputofs"><i><label for="edsDiscoveryMechanism-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="edsDiscoveryMechanism-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newEDSResolver">newEDSResolver</a>(nameToWatch <a href="../../../../../builtin.html#name-string">string</a>, xdsc <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelResolver *<a href="#name-resourceResolver">resourceResolver</a>) *<b>edsDiscoveryMechanism</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-exitIdle" data-popularity="0">	<span class="nodocs"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-119">exitIdle</a> <i>(struct)</i></span></div><div class="anchor type-res hidden" id="name-priorityConfig" data-popularity="70">	<input type='checkbox' class="fold" id="priorityConfig-fold-content"><label for="priorityConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-48">priorityConfig</a> <i>(struct)</i></label><span id='priorityConfig-fold-content-docs' class="fold-docs">
+		priorityConfig is config for one priority. For example, if there an EDS and a
+		DNS, the priority list will be [priorityConfig{EDS}, priorityConfig{DNS}].
+
+		Each priorityConfig corresponds to one discovery mechanism from the LBConfig
+		generated by the CDS balancer. The CDS balancer resolves the cluster name to
+		an ordered list of discovery mechanisms (if the top cluster is an aggregated
+		cluster), one for each underlying cluster.
+
+		<input type='checkbox' class="fold" id="priorityConfig-fold-fields"><label for="priorityConfig-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='priorityConfig-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="priorityConfig-showhide-fields"><i><label for="priorityConfig-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="priorityConfig-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityConfig-fold-field-addresses"><label for="priorityConfig-fold-field-addresses"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-53">addresses</a> <i>[]<a href="../../../../../builtin.html#name-string">string</a></i></label><span id='priorityConfig-fold-field-addresses-docs' class="fold-docs">
+				addresses is set only if type is DNS.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="priorityConfig-fold-field-edsResp"><label for="priorityConfig-fold-field-edsResp"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-51">edsResp</a> <i><a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a></i></label><span id='priorityConfig-fold-field-edsResp-docs' class="fold-docs">
+				edsResp is set only if type is EDS.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-49">mechanism</a> <i><a href="#name-DiscoveryMechanism">DiscoveryMechanism</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="priorityConfig-fold-params"><label for="priorityConfig-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='priorityConfig-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="priorityConfig-showhide-outputofs"><i><label for="priorityConfig-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="priorityConfig-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-buildPriorityConfig">buildPriorityConfig</a>(priorities []<b>priorityConfig</b>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<a href="priority.html">priority</a>.<a href="priority.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span><span class="hidden"><i>
+			func <a href="#name-buildPriorityConfigJSON">buildPriorityConfigJSON</a>(priorities []<b>priorityConfig</b>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) ([]<a href="../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-resolverMechanismTuple" data-popularity="0">	<input type='checkbox' class="fold" id="resolverMechanismTuple-fold-content"><label for="resolverMechanismTuple-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-54">resolverMechanismTuple</a> <i>(struct)</i></label><span id='resolverMechanismTuple-fold-content-docs' class="fold-docs">
+		resolverMechanismTuple is needed to keep the resolver and the discovery
+		mechanism together, because resolvers can be shared. And we need the
+		mechanism for fields like circuit breaking, LRS etc when generating the
+		balancer config.
+
+		<input type='checkbox' class="fold" id="resolverMechanismTuple-fold-fields"><label for="resolverMechanismTuple-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='resolverMechanismTuple-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resolverMechanismTuple-showhide-fields"><i><label for="resolverMechanismTuple-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="resolverMechanismTuple-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-55">dm</a> <i><a href="#name-DiscoveryMechanism">DiscoveryMechanism</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-56">dmKey</a> <i><a href="#name-discoveryMechanismKey">discoveryMechanismKey</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-57">r</a> <i><a href="#name-discoveryMechanism">discoveryMechanism</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-resourceResolver" data-popularity="345">	<input type='checkbox' class="fold" id="resourceResolver-fold-content"><label for="resourceResolver-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-60">resourceResolver</a> <i>(struct)</i></label><span id='resourceResolver-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="resourceResolver-fold-fields"><label for="resourceResolver-fold-fields">Fields (<i>total 6, none are exported</i>)</label><span id='resourceResolver-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resourceResolver-showhide-fields"><i><label for="resourceResolver-showhide-fields" class="show-inline">/* 6 unexporteds ... */</label><label for="resourceResolver-showhide-fields" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-67">children</a> <i>[]<a href="#name-resolverMechanismTuple">resolverMechanismTuple</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-68">childrenMap</a> <i>map[<a href="#name-discoveryMechanismKey">discoveryMechanismKey</a>]<a href="#name-discoveryMechanism">discoveryMechanism</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-66">mechanisms</a> <i>[]<a href="#name-DiscoveryMechanism">DiscoveryMechanism</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="resourceResolver-fold-field-mu"><label for="resourceResolver-fold-field-mu"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-65">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='resourceResolver-fold-field-mu-docs' class="fold-docs">
+				mu protects the slice and map, and content of the resolvers in the slice.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-61">parent</a> <i>*<a href="#name-clusterResolverBalancer">clusterResolverBalancer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-62">updateChannel</a> <i>chan *<a href="#name-resourceUpdate">resourceUpdate</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="resourceResolver-fold-methods"><label for="resourceResolver-fold-methods">Methods (<i>total 4, none are exported</i>)</label><span id='resourceResolver-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resourceResolver-showhide-methods"><i><label for="resourceResolver-showhide-methods" class="show-inline">/* 4 unexporteds ... */</label><label for="resourceResolver-showhide-methods" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="resourceResolver-fold-method-generate"><label for="resourceResolver-fold-method-generate">(*resourceResolver) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-174">generate</a>()</label><span id='resourceResolver-fold-method-generate-docs' class="fold-docs">
+				generate collects all the updates from all the resolvers, and push the
+				combined result into the update channel. It only pushes the update when all
+				the child resolvers have received at least one update, otherwise it will
+				wait.
+
+				caller must hold rr.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="resourceResolver-fold-method-resolveNow"><label for="resourceResolver-fold-method-resolveNow">(*resourceResolver) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-149">resolveNow</a>()</label><span id='resourceResolver-fold-method-resolveNow-docs' class="fold-docs">
+				resolveNow is typically called to trigger re-resolve of DNS. The EDS
+				resolveNow() is a noop.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*resourceResolver) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-157">stop</a>()</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*resourceResolver) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-92">updateMechanisms</a>(mechanisms []<a href="#name-DiscoveryMechanism">DiscoveryMechanism</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="resourceResolver-fold-results"><label for="resourceResolver-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='resourceResolver-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resourceResolver-showhide-inputofs"><i><label for="resourceResolver-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="resourceResolver-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newResourceResolver">newResourceResolver</a>(parent *<a href="#name-clusterResolverBalancer">clusterResolverBalancer</a>) *<b>resourceResolver</b></i></span></span>
+		<input type='checkbox' class="fold" id="resourceResolver-fold-params"><label for="resourceResolver-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='resourceResolver-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resourceResolver-showhide-outputofs"><i><label for="resourceResolver-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="resourceResolver-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-newDNSResolver">newDNSResolver</a>(target <a href="../../../../../builtin.html#name-string">string</a>, topLevelResolver *<b>resourceResolver</b>) *<a href="#name-dnsDiscoveryMechanism">dnsDiscoveryMechanism</a></i></span><span class="hidden"><i>
+			func <a href="#name-newEDSResolver">newEDSResolver</a>(nameToWatch <a href="../../../../../builtin.html#name-string">string</a>, xdsc <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelResolver *<b>resourceResolver</b>) *<a href="#name-edsDiscoveryMechanism">edsDiscoveryMechanism</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-resourceUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="resourceUpdate-fold-content"><label for="resourceUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-30">resourceUpdate</a> <i>(struct)</i></label><span id='resourceUpdate-fold-content-docs' class="fold-docs">
+		resourceUpdate is a combined update from all the resources, in the order of
+		priority. For example, it can be {EDS, EDS, DNS}.
+
+		<input type='checkbox' class="fold" id="resourceUpdate-fold-fields"><label for="resourceUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='resourceUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="resourceUpdate-showhide-fields"><i><label for="resourceUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="resourceUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-32">err</a> <i><a href="../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-31">priorities</a> <i>[]<a href="#name-priorityConfig">priorityConfig</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-scUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="scUpdate-fold-content"><label for="scUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-114">scUpdate</a> <i>(struct)</i></label><span id='scUpdate-fold-content-docs' class="fold-docs">
+		scUpdate wraps a subConn update received from gRPC. This is directly passed
+		on to the child balancer.
+
+		<input type='checkbox' class="fold" id="scUpdate-fold-fields"><label for="scUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='scUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="scUpdate-showhide-fields"><i><label for="scUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="scUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-116">state</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-115">subConn</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a></i></span></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 17, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 17 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 17 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-buildClusterImplConfigForDNS"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-152">buildClusterImplConfigForDNS</a>(parentPriority <a href="../../../../../builtin.html#name-int">int</a>, addrStrs []<a href="../../../../../builtin.html#name-string">string</a>, mechanism <a href="#name-DiscoveryMechanism">DiscoveryMechanism</a>) (<a href="../../../../../builtin.html#name-string">string</a>, *<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</span></i></div><div class="anchor value-res hidden" id="name-buildClusterImplConfigForEDS"><i>	<input type='checkbox' class="fold" id="buildClusterImplConfigForEDS-fold-content"><label for="buildClusterImplConfigForEDS-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-175">buildClusterImplConfigForEDS</a>(parentPriority <a href="../../../../../builtin.html#name-int">int</a>, edsResp <a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-EndpointsUpdate">EndpointsUpdate</a>, mechanism <a href="#name-DiscoveryMechanism">DiscoveryMechanism</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) ([]<a href="../../../../../builtin.html#name-string">string</a>, map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='buildClusterImplConfigForEDS-fold-content-docs' class="fold-docs">
+		buildClusterImplConfigForEDS returns a list of cluster_impl configs, one for
+		each priority, sorted by priority, and the addresses for each priority (with
+		hierarchy attributes set).
+
+		For example, if there are two priorities, the returned values will be
+		- ["p0", "p1"]
+		- map{"p0":p0_config, "p1":p1_config}
+		- [p0_address_0, p0_address_1, p1_address_0, p1_address_1]
+		  - p0 addresses' hierarchy attributes are set to p0
+
+</span></i></div><div class="anchor value-res hidden" id="name-buildPriorityConfig"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-116">buildPriorityConfig</a>(priorities []<a href="#name-priorityConfig">priorityConfig</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<a href="priority.html">priority</a>.<a href="priority.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-buildPriorityConfigJSON"><i>	<input type='checkbox' class="fold" id="buildPriorityConfigJSON-fold-content"><label for="buildPriorityConfigJSON-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-104">buildPriorityConfigJSON</a>(priorities []<a href="#name-priorityConfig">priorityConfig</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) ([]<a href="../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='buildPriorityConfigJSON-fold-content-docs' class="fold-docs">
+		buildPriorityConfigJSON builds balancer config for the passed in
+		priorities.
+
+		The built tree of balancers (see test for the output struct).
+
+		If xds lb policy is ROUND_ROBIN, the children will be weighted_target for
+		locality picking, and round_robin for endpoint picking.
+
+		                                  ┌────────┐
+		                                  │priority│
+		                                  └┬──────┬┘
+		                                   │      │
+		                       ┌───────────▼┐    ┌▼───────────┐
+		                       │cluster_impl│    │cluster_impl│
+		                       └─┬──────────┘    └──────────┬─┘
+		                         │                          │
+		          ┌──────────────▼─┐                      ┌─▼──────────────┐
+		          │locality_picking│                      │locality_picking│
+		          └┬──────────────┬┘                      └┬──────────────┬┘
+		           │              │                        │              │
+		         ┌─▼─┐          ┌─▼─┐                    ┌─▼─┐          ┌─▼─┐
+		         │LRS│          │LRS│                    │LRS│          │LRS│
+		         └─┬─┘          └─┬─┘                    └─┬─┘          └─┬─┘
+		           │              │                        │              │
+		┌──────────▼─────┐  ┌─────▼──────────┐  ┌──────────▼─────┐  ┌─────▼──────────┐
+		│endpoint_picking│  │endpoint_picking│  │endpoint_picking│  │endpoint_picking│
+		└────────────────┘  └────────────────┘  └────────────────┘  └────────────────┘
+
+		If xds lb policy is RING_HASH, the children will be just a ring_hash policy.
+		The endpoints from all localities will be flattened to one addresses list,
+		and the ring_hash policy will pick endpoints from it.
+
+		          ┌────────┐
+		          │priority│
+		          └┬──────┬┘
+		           │      │
+		┌──────────▼─┐  ┌─▼──────────┐
+		│cluster_impl│  │cluster_impl│
+		└──────┬─────┘  └─────┬──────┘
+		       │              │
+		┌──────▼─────┐  ┌─────▼──────┐
+		│ ring_hash  │  │ ring_hash  │
+		└────────────┘  └────────────┘
+
+		If endpointPickingPolicy is nil, roundrobin will be used.
+
+		Custom locality picking policy isn't support, and weighted_target is always
+		used.
+
+</span></i></div><div class="anchor value-res hidden" id="name-dedupSortedIntSlice"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-234">dedupSortedIntSlice</a>(a []<a href="../../../../../builtin.html#name-int">int</a>) []<a href="../../../../../builtin.html#name-int">int</a></span></i></div><div class="anchor value-res hidden" id="name-equalDiscoveryMechanisms"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-79">equalDiscoveryMechanisms</a>(a, b []<a href="#name-DiscoveryMechanism">DiscoveryMechanism</a>) <a href="../../../../../builtin.html#name-bool">bool</a></span></i></div><div class="anchor value-res hidden" id="name-equalUint32P"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-131">equalUint32P</a>(a, b *<a href="../../../../../builtin.html#name-uint32">uint32</a>) <a href="../../../../../builtin.html#name-bool">bool</a></span></i></div><div class="anchor value-res hidden" id="name-groupLocalitiesByPriority"><i>	<input type='checkbox' class="fold" id="groupLocalitiesByPriority-fold-content"><label for="groupLocalitiesByPriority-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-211">groupLocalitiesByPriority</a>(localities []<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>) ([]<a href="../../../../../builtin.html#name-string">string</a>, map[<a href="../../../../../builtin.html#name-string">string</a>][]<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>)</label><span id='groupLocalitiesByPriority-fold-content-docs' class="fold-docs">
+		groupLocalitiesByPriority returns the localities grouped by priority.
+
+		It also returns a list of strings where each string represents a priority,
+		and the list is sorted from higher priority to lower priority.
+
+		For example, for L0-p0, L1-p0, L2-p1, results will be
+		- ["p0", "p1"]
+		- map{"p0":[L0, L1], "p1":[L2]}
+
+</span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-52">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-localitiesToRingHash"><i>	<input type='checkbox' class="fold" id="localitiesToRingHash-fold-content"><label for="localitiesToRingHash-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-299">localitiesToRingHash</a>(localities []<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>, priorityName <a href="../../../../../builtin.html#name-string">string</a>) []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a></label><span id='localitiesToRingHash-fold-content-docs' class="fold-docs">
+		localitiesToRingHash takes a list of localities (with the same priority), and
+		generates a list of addresses.
+
+		The addresses have path hierarchy set to [priority-name], so priority knows
+		which child policy they are for.
+
+</span></i></div><div class="anchor value-res hidden" id="name-localitiesToWeightedTarget"><i>	<input type='checkbox' class="fold" id="localitiesToWeightedTarget-fold-content"><label for="localitiesToWeightedTarget-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-339">localitiesToWeightedTarget</a>(localities []<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>, priorityName <a href="../../../../../builtin.html#name-string">string</a>, childPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<a href="../../../balancer/weightedtarget.html">weightedtarget</a>.<a href="../../../balancer/weightedtarget.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</label><span id='localitiesToWeightedTarget-fold-content-docs' class="fold-docs">
+		localitiesToWeightedTarget takes a list of localities (with the same
+		priority), and generates a weighted target config, and list of addresses.
+
+		The addresses have path hierarchy set to [priority-name, locality-name], so
+		priority and weighted target know which child policy they are for.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newDNSResolver"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-48">newDNSResolver</a>(target <a href="../../../../../builtin.html#name-string">string</a>, topLevelResolver *<a href="#name-resourceResolver">resourceResolver</a>) *<a href="#name-dnsDiscoveryMechanism">dnsDiscoveryMechanism</a></span></i></div><div class="anchor value-res hidden" id="name-newEDSResolver"><i>	<input type='checkbox' class="fold" id="newEDSResolver-fold-content"><label for="newEDSResolver-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-225">newEDSResolver</a>(nameToWatch <a href="../../../../../builtin.html#name-string">string</a>, xdsc <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelResolver *<a href="#name-resourceResolver">resourceResolver</a>) *<a href="#name-edsDiscoveryMechanism">edsDiscoveryMechanism</a></label><span id='newEDSResolver-fold-content-docs' class="fold-docs">
+		newEDSResolver starts the EDS watch on the given xds client.
+
+</span></i></div><div class="anchor value-res hidden" id="name-newResourceResolver"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver.go.html#line-71">newResourceResolver</a>(parent *<a href="#name-clusterResolverBalancer">clusterResolverBalancer</a>) *<a href="#name-resourceResolver">resourceResolver</a></span></i></div><div class="anchor value-res hidden" id="name-parseConfig"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-170">parseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (*<a href="#name-LBConfig">LBConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/logging.go.html#line-32">prefixLogger</a>(p *<a href="#name-clusterResolverBalancer">clusterResolverBalancer</a>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div><div class="anchor value-res hidden" id="name-priorityLocalitiesToClusterImpl"><i>	<input type='checkbox' class="fold" id="priorityLocalitiesToClusterImpl-fold-content"><label for="priorityLocalitiesToClusterImpl-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-258">priorityLocalitiesToClusterImpl</a>(localities []<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-Locality">Locality</a>, priorityName <a href="../../../../../builtin.html#name-string">string</a>, mechanism <a href="#name-DiscoveryMechanism">DiscoveryMechanism</a>, drops []<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-DropConfig">DropConfig</a>, xdsLBPolicy *<a href="../../../internal/serviceconfig.html">internalserviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a>) (*<a href="clusterimpl.html">clusterimpl</a>.<a href="clusterimpl.html#name-LBConfig">LBConfig</a>, []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='priorityLocalitiesToClusterImpl-fold-content-docs' class="fold-docs">
+		priorityLocalitiesToClusterImpl takes a list of localities (with the same
+		priority), and generates a cluster impl policy config, and a list of
+		addresses.
+
+</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 5, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-errBalancerClosed"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-46">errBalancerClosed</a> <a href="../../../../../builtin.html#name-error">error</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/logging.go.html#line-30">logger</a> <a href="../../../grpclog.html">grpclog</a>.<a href="../../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div><div class="anchor value-res hidden" id="name-newChildBalancer"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-47">newChildBalancer</a> func(bb <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Builder">Builder</a>, cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, o <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></span></i></div><div class="anchor value-res hidden" id="name-newDNS"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/resource_resolver_dns.go.html#line-29">newDNS</a> func(target <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Target">Target</a>, cc <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-ClientConn">ClientConn</a>, opts <a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-BuildOptions">BuildOptions</a>) (<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Resolver">Resolver</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-rrBalancerConfig"><i>	<input type='checkbox' class="fold" id="rrBalancerConfig-fold-content"><label for="rrBalancerConfig-fold-content">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-253">rrBalancerConfig</a> *<a href="../../../internal/serviceconfig.html">serviceconfig</a>.<a href="../../../internal/serviceconfig.html#name-BalancerConfig">BalancerConfig</a></label><span id='rrBalancerConfig-fold-content-docs' class="fold-docs">
+		rrBalancerConfig is a const roundrobin config, used as child of
+		weighted-roundrobin. To avoid allocating memory everytime.
+
+</span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 7, in which 3 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-DiscoveryMechanismTypeEDS">	<input type='checkbox' class="fold" id="DiscoveryMechanismTypeEDS-fold-content"><label for="DiscoveryMechanismTypeEDS-fold-content">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-38">DiscoveryMechanismTypeEDS</a> <a href="#name-DiscoveryMechanismType">DiscoveryMechanismType</a> = 0 // `json:"EDS"`</label><span id='DiscoveryMechanismTypeEDS-fold-content-docs' class="fold-docs">
+		DiscoveryMechanismTypeEDS is eds.
+
+</span></div><div class="anchor value-res" id="name-DiscoveryMechanismTypeLogicalDNS">	<input type='checkbox' class="fold" id="DiscoveryMechanismTypeLogicalDNS-fold-content"><label for="DiscoveryMechanismTypeLogicalDNS-fold-content">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-40">DiscoveryMechanismTypeLogicalDNS</a> <a href="#name-DiscoveryMechanismType">DiscoveryMechanismType</a> = 1 // `json:"LOGICAL_DNS"`</label><span id='DiscoveryMechanismTypeLogicalDNS-fold-content-docs' class="fold-docs">
+		DiscoveryMechanismTypeLogicalDNS is DNS.
+
+</span></div><div class="anchor value-res" id="name-Name">	<input type='checkbox' class="fold" id="Name-fold-content"><label for="Name-fold-content">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/clusterresolver.go.html#line-43">Name</a> = "cluster_resolver_experimental"</label><span id='Name-fold-content-docs' class="fold-docs">
+		Name is the name of the cluster_resolver balancer.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-million"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/configbuilder.go.html#line-39">million</a> = 1000000</span></i></div><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/logging.go.html#line-28">prefix</a> = "[xds-cluster-resolver-lb %p] "</span></i></div><div class="anchor value-res hidden" id="name-rhName"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-167">rhName</a> = "ring_hash_experimental"</span></i></div><div class="anchor value-res hidden" id="name-rrName"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/clusterresolver/config.go.html#line-166">rrName</a> = "round_robin"</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

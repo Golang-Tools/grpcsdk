@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: type_lds.go in package google.golang.org/grpc/xds/internal/xdsclient/xdsresource</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	type_lds.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html">google.golang.org/grpc/xds/internal/xdsclient/xdsresource</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2
+{background: brown; color: #eed;}
+</style><input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">package</span> xdsresource</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"time"</span></label></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"google.golang.org/grpc/xds/internal/httpfilter"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-25"><code>)</code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">// ListenerUpdate contains information received in an LDS response, which is of</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// interest to the registered LDS watcher.</span></code></span>
+<span class="codeline" id="line-29"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ListenerUpdate" class="ident">ListenerUpdate</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-30"><code>	<span class="comment">// RouteConfigName is the route configuration name corresponding to the</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">	// target which is being watched through LDS.</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">	// Exactly one of RouteConfigName and InlineRouteConfig is set.</span></code></span>
+<span class="codeline" id="line-34"><code>	RouteConfigName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-35"><code>	<span class="comment">// InlineRouteConfig is the inline route configuration (RDS response)</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">	// returned inside LDS.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// Exactly one of RouteConfigName and InlineRouteConfig is set.</span></code></span>
+<span class="codeline" id="line-39"><code>	InlineRouteConfig *<a href="type_rds.go.html#line-33" class="ident">RouteConfigUpdate</a></code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>	<span class="comment">// MaxStreamDuration contains the HTTP connection manager's</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	// common_http_protocol_options.max_stream_duration field, or zero if</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">	// unset.</span></code></span>
+<span class="codeline" id="line-44"><code>	MaxStreamDuration <a href="../../../../../../../pkg/time.html" class="ident i0">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-45"><code>	<span class="comment">// HTTPFilters is a list of HTTP filters (name, config) from the LDS</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">	// response.</span></code></span>
+<span class="codeline" id="line-47"><code>	HTTPFilters []<a href="#line-57" class="ident">HTTPFilter</a></code></span>
+<span class="codeline" id="line-48"><code>	<span class="comment">// InboundListenerCfg contains inbound listener configuration.</span></code></span>
+<span class="codeline" id="line-49"><code>	InboundListenerCfg *<a href="#line-70" class="ident">InboundListenerConfig</a></code></span>
+<span class="codeline" id="line-50"><code></code></span>
+<span class="codeline" id="line-51"><code>	<span class="comment">// Raw is the resource from the xds response.</span></code></span>
+<span class="codeline" id="line-52"><code>	Raw *<a href="../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i2">anypb</a>.<a href="../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a></code></span>
+<span class="codeline" id="line-53"><code>}</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// HTTPFilter represents one HTTP filter from an LDS response's HTTP connection</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">// manager field.</span></code></span>
+<span class="codeline" id="line-57"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-HTTPFilter" class="ident">HTTPFilter</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-58"><code>	<span class="comment">// Name is an arbitrary name of the filter.  Used for applying override</span></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">	// settings in virtual host / route / weighted cluster configuration (not</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">	// yet supported).</span></code></span>
+<span class="codeline" id="line-61"><code>	Name <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-62"><code>	<span class="comment">// Filter is the HTTP filter found in the registry for the config type.</span></code></span>
+<span class="codeline" id="line-63"><code>	Filter <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i1">httpfilter</a>.<a href="../../httpfilter/httpfilter.go.html#line-38" class="ident">Filter</a></code></span>
+<span class="codeline" id="line-64"><code>	<span class="comment">// Config contains the filter's configuration</span></code></span>
+<span class="codeline" id="line-65"><code>	Config <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/httpfilter.html" class="ident i1">httpfilter</a>.<a href="../../httpfilter/httpfilter.go.html#line-30" class="ident">FilterConfig</a></code></span>
+<span class="codeline" id="line-66"><code>}</code></span>
+<span class="codeline" id="line-67"><code></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">// InboundListenerConfig contains information about the inbound listener, i.e</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// the server-side listener.</span></code></span>
+<span class="codeline" id="line-70"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-InboundListenerConfig" class="ident">InboundListenerConfig</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-71"><code>	<span class="comment">// Address is the local address on which the inbound listener is expected to</span></code></span>
+<span class="codeline" id="line-72"><code><span class="comment">	// accept incoming connections.</span></code></span>
+<span class="codeline" id="line-73"><code>	Address <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-74"><code>	<span class="comment">// Port is the local port on which the inbound listener is expected to</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">	// accept incoming connections.</span></code></span>
+<span class="codeline" id="line-76"><code>	Port <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-77"><code>	<span class="comment">// FilterChains is the list of filter chains associated with this listener.</span></code></span>
+<span class="codeline" id="line-78"><code>	FilterChains *<a href="filter_chain.go.html#line-179" class="ident">FilterChainManager</a></code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">// ListenerUpdateErrTuple is a tuple with the update and error. It contains the</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">// results from unmarshal functions. It's used to pass unmarshal results of</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">// multiple resources together, e.g. in maps like `map[string]{Update,error}`.</span></code></span>
+<span class="codeline" id="line-84"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html#name-ListenerUpdateErrTuple" class="ident">ListenerUpdateErrTuple</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-85"><code>	Update <a href="#line-29" class="ident">ListenerUpdate</a></code></span>
+<span class="codeline" id="line-86"><code>	Err    <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-87"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

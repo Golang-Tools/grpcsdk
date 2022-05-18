@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: pubsub.go in package google.golang.org/grpc/xds/internal/xdsclient/pubsub</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	pubsub.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/pubsub.html">google.golang.org/grpc/xds/internal/xdsclient/pubsub</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-18"><code><span class="comment">// Package pubsub implements a utility type to maintain resource watchers and</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// the updates.</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// This package is designed to work with the xds resources. It could be made a</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// general system that works with all types.</span></code></span></div><span class="codeline" id="line-23"><code><span class="keyword">package</span> pubsub</code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-26"><code>	<label for="i0"><span class="lit-string i0">"fmt"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i1"><span class="lit-string i1">"sync"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i2"><span class="lit-string i2">"time"</span></label></code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>	<label for="i3"><span class="lit-string i3">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/internal/buffer"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/internal/grpclog"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<label for="i6"><span class="lit-string i6">"google.golang.org/grpc/internal/grpcsync"</span></label></code></span>
+<span class="codeline" id="line-34"><code>	<label for="i7"><span class="lit-string i7">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"</span></label></code></span>
+<span class="codeline" id="line-35"><code>)</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// Pubsub maintains resource watchers and resource updates.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// There can be multiple watchers for the same resource. An update to a resource</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// triggers updates to all the existing watchers. Watchers can be canceled at</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// any time.</span></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/pubsub.html#name-Pubsub" class="ident">Pubsub</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-43"><code>	done               *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpcsync.html" class="ident i6">grpcsync</a>.<a href="../../../../internal/grpcsync/event.go.html#line-29" class="ident">Event</a></code></span>
+<span class="codeline" id="line-44"><code>	logger             *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">grpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a></code></span>
+<span class="codeline" id="line-45"><code>	watchExpiryTimeout <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-46"><code>	nodeIDJSON         <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code>	updateCh *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/buffer.html" class="ident i4">buffer</a>.<a href="../../../../internal/buffer/unbounded.go.html#line-36" class="ident">Unbounded</a> <span class="comment">// chan *watcherInfoWithUpdate</span></code></span>
+<span class="codeline" id="line-49"><code>	<span class="comment">// All the following maps are to keep the updates/metadata in a cache.</span></code></span>
+<span class="codeline" id="line-50"><code>	mu          <a href="../../../../../../../pkg/sync.html" class="ident i1">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-51"><code>	ldsWatchers <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-52"><code>	ldsCache    <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_lds.go.html#line-29" class="ident">ListenerUpdate</a></code></span>
+<span class="codeline" id="line-53"><code>	ldsMD       <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a></code></span>
+<span class="codeline" id="line-54"><code>	rdsWatchers <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-55"><code>	rdsCache    <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_rds.go.html#line-33" class="ident">RouteConfigUpdate</a></code></span>
+<span class="codeline" id="line-56"><code>	rdsMD       <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a></code></span>
+<span class="codeline" id="line-57"><code>	cdsWatchers <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-58"><code>	cdsCache    <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a></code></span>
+<span class="codeline" id="line-59"><code>	cdsMD       <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a></code></span>
+<span class="codeline" id="line-60"><code>	edsWatchers <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-61"><code>	edsCache    <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_eds.go.html#line-66" class="ident">EndpointsUpdate</a></code></span>
+<span class="codeline" id="line-62"><code>	edsMD       <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a></code></span>
+<span class="codeline" id="line-63"><code>}</code></span>
+<span class="codeline" id="line-64"><code></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">// New creates a new Pubsub.</span></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">// The passed in nodeID will be attached to all errors sent to the watchers.</span></code></span>
+<span class="codeline" id="line-68"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/pubsub.html#name-New" class="ident">New</a></label>(<label for="r1" class="ident">watchExpiryTimeout</label> <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/time.go.html#line-589" class="ident">Duration</a>, <label for="r2" class="ident">nodeID</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i3">proto</a>.<a href="../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>, <label for="r3" class="ident">logger</label> *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">grpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a>) *<a href="#line-42" class="ident">Pubsub</a> {</code></span>
+<span class="codeline" id="line-69"><code>	<label for="r4" class="ident">pb</label> := &amp;<a href="#line-42" class="ident">Pubsub</a>{</code></span>
+<span class="codeline" id="line-70"><code>		<a href="#line-43" class="ident">done</a>:               <a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpcsync.html" class="ident i6">grpcsync</a>.<a href="../../../../internal/grpcsync/event.go.html#line-59" class="ident">NewEvent</a>(),</code></span>
+<span class="codeline" id="line-71"><code>		<a href="#line-44" class="ident">logger</a>:             <label for="r3" class="ident">logger</label>,</code></span>
+<span class="codeline" id="line-72"><code>		<a href="#line-45" class="ident">watchExpiryTimeout</a>: <label for="r1" class="ident">watchExpiryTimeout</label>,</code></span>
+<span class="codeline" id="line-73"><code>		<a href="#line-46" class="ident">nodeIDJSON</a>:         <a href="../../../../../../../pkg/fmt.html" class="ident i0">fmt</a>.<a href="../../../../../../fmt/print.go.html#line-247" class="ident">Sprint</a>(<label for="r2" class="ident">nodeID</label>),</code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code>		<a href="#line-48" class="ident">updateCh</a>:    <a href="../../../../../../../pkg/google.golang.org/grpc/internal/buffer.html" class="ident i4">buffer</a>.<a href="../../../../internal/buffer/unbounded.go.html#line-43" class="ident">NewUnbounded</a>(),</code></span>
+<span class="codeline" id="line-76"><code>		<a href="#line-51" class="ident">ldsWatchers</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>),</code></span>
+<span class="codeline" id="line-77"><code>		<a href="#line-52" class="ident">ldsCache</a>:    <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_lds.go.html#line-29" class="ident">ListenerUpdate</a>),</code></span>
+<span class="codeline" id="line-78"><code>		<a href="#line-53" class="ident">ldsMD</a>:       <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a>),</code></span>
+<span class="codeline" id="line-79"><code>		<a href="#line-54" class="ident">rdsWatchers</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>),</code></span>
+<span class="codeline" id="line-80"><code>		<a href="#line-55" class="ident">rdsCache</a>:    <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_rds.go.html#line-33" class="ident">RouteConfigUpdate</a>),</code></span>
+<span class="codeline" id="line-81"><code>		<a href="#line-56" class="ident">rdsMD</a>:       <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a>),</code></span>
+<span class="codeline" id="line-82"><code>		<a href="#line-57" class="ident">cdsWatchers</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>),</code></span>
+<span class="codeline" id="line-83"><code>		<a href="#line-58" class="ident">cdsCache</a>:    <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a>),</code></span>
+<span class="codeline" id="line-84"><code>		<a href="#line-59" class="ident">cdsMD</a>:       <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a>),</code></span>
+<span class="codeline" id="line-85"><code>		<a href="#line-60" class="ident">edsWatchers</a>: <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<span class="keyword">map</span>[*<a href="watch.go.html#line-39" class="ident">watchInfo</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>),</code></span>
+<span class="codeline" id="line-86"><code>		<a href="#line-61" class="ident">edsCache</a>:    <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_eds.go.html#line-66" class="ident">EndpointsUpdate</a>),</code></span>
+<span class="codeline" id="line-87"><code>		<a href="#line-62" class="ident">edsMD</a>:       <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-37" class="ident">UpdateMetadata</a>),</code></span>
+<span class="codeline" id="line-88"><code>	}</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">go</span> <label for="r4" class="ident">pb</label>.<a href="#line-175" class="ident">run</a>()</code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">return</span> <label for="r4" class="ident">pb</label></code></span>
+<span class="codeline" id="line-91"><code>}</code></span>
+<span class="codeline" id="line-92"><code></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">// WatchListener registers a watcher for the LDS resource.</span></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">// It also returns whether this is the first watch for this resource.</span></code></span>
+<span class="codeline" id="line-96"><code><span class="keyword">func</span> (<label for="r5" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r6" class="ident">WatchListener</label>(<label for="r7" class="ident">serviceName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r8" class="ident">cb</label> <span class="keyword">func</span>(<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_lds.go.html#line-29" class="ident">ListenerUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) (<label for="r9" class="ident">first</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>, <label for="r10" class="ident">cancel</label> <span class="keyword">func</span>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-97"><code>	<label for="r11" class="ident">wi</label> := &amp;<a href="watch.go.html#line-39" class="ident">watchInfo</a>{</code></span>
+<span class="codeline" id="line-98"><code>		<a href="watch.go.html#line-40" class="ident">c</a>:           <label for="r5" class="ident">pb</label>,</code></span>
+<span class="codeline" id="line-99"><code>		<a href="watch.go.html#line-41" class="ident">rType</a>:       <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-145" class="ident">ListenerResource</a>,</code></span>
+<span class="codeline" id="line-100"><code>		<a href="watch.go.html#line-42" class="ident">target</a>:      <label for="r7" class="ident">serviceName</label>,</code></span>
+<span class="codeline" id="line-101"><code>		<a href="watch.go.html#line-44" class="ident">ldsCallback</a>: <label for="r8" class="ident">cb</label>,</code></span>
+<span class="codeline" id="line-102"><code>	}</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code>	<label for="r11" class="ident">wi</label>.<a href="watch.go.html#line-49" class="ident">expiryTimer</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/sleep.go.html#line-163" class="ident">AfterFunc</a>(<label for="r5" class="ident">pb</label>.<a href="#line-45" class="ident">watchExpiryTimeout</a>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-105"><code>		<label for="r11" class="ident">wi</label>.<a href="watch.go.html#line-91" class="ident">timeout</a>()</code></span>
+<span class="codeline" id="line-106"><code>	})</code></span>
+<span class="codeline" id="line-107"><code>	<span class="keyword">return</span> <label for="r5" class="ident">pb</label>.<a href="watch.go.html#line-136" class="ident">watch</a>(<label for="r11" class="ident">wi</label>)</code></span>
+<span class="codeline" id="line-108"><code>}</code></span>
+<span class="codeline" id="line-109"><code></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">// WatchRouteConfig register a watcher for the RDS resource.</span></code></span>
+<span class="codeline" id="line-111"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">// It also returns whether this is the first watch for this resource.</span></code></span>
+<span class="codeline" id="line-113"><code><span class="keyword">func</span> (<label for="r12" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r13" class="ident">WatchRouteConfig</label>(<label for="r14" class="ident">routeName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r15" class="ident">cb</label> <span class="keyword">func</span>(<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_rds.go.html#line-33" class="ident">RouteConfigUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) (<label for="r16" class="ident">first</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>, <label for="r17" class="ident">cancel</label> <span class="keyword">func</span>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-114"><code>	<label for="r18" class="ident">wi</label> := &amp;<a href="watch.go.html#line-39" class="ident">watchInfo</a>{</code></span>
+<span class="codeline" id="line-115"><code>		<a href="watch.go.html#line-40" class="ident">c</a>:           <label for="r12" class="ident">pb</label>,</code></span>
+<span class="codeline" id="line-116"><code>		<a href="watch.go.html#line-41" class="ident">rType</a>:       <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-147" class="ident">RouteConfigResource</a>,</code></span>
+<span class="codeline" id="line-117"><code>		<a href="watch.go.html#line-42" class="ident">target</a>:      <label for="r14" class="ident">routeName</label>,</code></span>
+<span class="codeline" id="line-118"><code>		<a href="watch.go.html#line-45" class="ident">rdsCallback</a>: <label for="r15" class="ident">cb</label>,</code></span>
+<span class="codeline" id="line-119"><code>	}</code></span>
+<span class="codeline" id="line-120"><code></code></span>
+<span class="codeline" id="line-121"><code>	<label for="r18" class="ident">wi</label>.<a href="watch.go.html#line-49" class="ident">expiryTimer</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/sleep.go.html#line-163" class="ident">AfterFunc</a>(<label for="r12" class="ident">pb</label>.<a href="#line-45" class="ident">watchExpiryTimeout</a>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-122"><code>		<label for="r18" class="ident">wi</label>.<a href="watch.go.html#line-91" class="ident">timeout</a>()</code></span>
+<span class="codeline" id="line-123"><code>	})</code></span>
+<span class="codeline" id="line-124"><code>	<span class="keyword">return</span> <label for="r12" class="ident">pb</label>.<a href="watch.go.html#line-136" class="ident">watch</a>(<label for="r18" class="ident">wi</label>)</code></span>
+<span class="codeline" id="line-125"><code>}</code></span>
+<span class="codeline" id="line-126"><code></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">// WatchCluster register a watcher for the CDS resource.</span></code></span>
+<span class="codeline" id="line-128"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-129"><code><span class="comment">// It also returns whether this is the first watch for this resource.</span></code></span>
+<span class="codeline" id="line-130"><code><span class="keyword">func</span> (<label for="r19" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r20" class="ident">WatchCluster</label>(<label for="r21" class="ident">clusterName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r22" class="ident">cb</label> <span class="keyword">func</span>(<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) (<label for="r23" class="ident">first</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>, <label for="r24" class="ident">cancel</label> <span class="keyword">func</span>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-131"><code>	<label for="r25" class="ident">wi</label> := &amp;<a href="watch.go.html#line-39" class="ident">watchInfo</a>{</code></span>
+<span class="codeline" id="line-132"><code>		<a href="watch.go.html#line-40" class="ident">c</a>:           <label for="r19" class="ident">pb</label>,</code></span>
+<span class="codeline" id="line-133"><code>		<a href="watch.go.html#line-41" class="ident">rType</a>:       <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-148" class="ident">ClusterResource</a>,</code></span>
+<span class="codeline" id="line-134"><code>		<a href="watch.go.html#line-42" class="ident">target</a>:      <label for="r21" class="ident">clusterName</label>,</code></span>
+<span class="codeline" id="line-135"><code>		<a href="watch.go.html#line-46" class="ident">cdsCallback</a>: <label for="r22" class="ident">cb</label>,</code></span>
+<span class="codeline" id="line-136"><code>	}</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code>	<label for="r25" class="ident">wi</label>.<a href="watch.go.html#line-49" class="ident">expiryTimer</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/sleep.go.html#line-163" class="ident">AfterFunc</a>(<label for="r19" class="ident">pb</label>.<a href="#line-45" class="ident">watchExpiryTimeout</a>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-139"><code>		<label for="r25" class="ident">wi</label>.<a href="watch.go.html#line-91" class="ident">timeout</a>()</code></span>
+<span class="codeline" id="line-140"><code>	})</code></span>
+<span class="codeline" id="line-141"><code>	<span class="keyword">return</span> <label for="r19" class="ident">pb</label>.<a href="watch.go.html#line-136" class="ident">watch</a>(<label for="r25" class="ident">wi</label>)</code></span>
+<span class="codeline" id="line-142"><code>}</code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code><span class="comment">// WatchEndpoints registers a watcher for the EDS resource.</span></code></span>
+<span class="codeline" id="line-145"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-146"><code><span class="comment">// It also returns whether this is the first watch for this resource.</span></code></span>
+<span class="codeline" id="line-147"><code><span class="keyword">func</span> (<label for="r26" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r27" class="ident">WatchEndpoints</label>(<label for="r28" class="ident">clusterName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r29" class="ident">cb</label> <span class="keyword">func</span>(<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type_eds.go.html#line-66" class="ident">EndpointsUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) (<label for="r30" class="ident">first</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>, <label for="r31" class="ident">cancel</label> <span class="keyword">func</span>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-148"><code>	<label for="r32" class="ident">wi</label> := &amp;<a href="watch.go.html#line-39" class="ident">watchInfo</a>{</code></span>
+<span class="codeline" id="line-149"><code>		<a href="watch.go.html#line-40" class="ident">c</a>:           <label for="r26" class="ident">pb</label>,</code></span>
+<span class="codeline" id="line-150"><code>		<a href="watch.go.html#line-41" class="ident">rType</a>:       <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i7">xdsresource</a>.<a href="../xdsresource/type.go.html#line-149" class="ident">EndpointsResource</a>,</code></span>
+<span class="codeline" id="line-151"><code>		<a href="watch.go.html#line-42" class="ident">target</a>:      <label for="r28" class="ident">clusterName</label>,</code></span>
+<span class="codeline" id="line-152"><code>		<a href="watch.go.html#line-47" class="ident">edsCallback</a>: <label for="r29" class="ident">cb</label>,</code></span>
+<span class="codeline" id="line-153"><code>	}</code></span>
+<span class="codeline" id="line-154"><code></code></span>
+<span class="codeline" id="line-155"><code>	<label for="r32" class="ident">wi</label>.<a href="watch.go.html#line-49" class="ident">expiryTimer</a> = <a href="../../../../../../../pkg/time.html" class="ident i2">time</a>.<a href="../../../../../../time/sleep.go.html#line-163" class="ident">AfterFunc</a>(<label for="r26" class="ident">pb</label>.<a href="#line-45" class="ident">watchExpiryTimeout</a>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-156"><code>		<label for="r32" class="ident">wi</label>.<a href="watch.go.html#line-91" class="ident">timeout</a>()</code></span>
+<span class="codeline" id="line-157"><code>	})</code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">return</span> <label for="r26" class="ident">pb</label>.<a href="watch.go.html#line-136" class="ident">watch</a>(<label for="r32" class="ident">wi</label>)</code></span>
+<span class="codeline" id="line-159"><code>}</code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code><span class="comment">// Close closes the pubsub.</span></code></span>
+<span class="codeline" id="line-162"><code><span class="keyword">func</span> (<label for="r33" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r34" class="ident">Close</label>() {</code></span>
+<span class="codeline" id="line-163"><code>	<span class="keyword">if</span> <label for="r33" class="ident">pb</label>.<a href="#line-43" class="ident">done</a>.<a href="../../../../internal/grpcsync/event.go.html#line-54" class="ident">HasFired</a>() {</code></span>
+<span class="codeline" id="line-164"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-165"><code>	}</code></span>
+<span class="codeline" id="line-166"><code>	<label for="r33" class="ident">pb</label>.<a href="#line-43" class="ident">done</a>.<a href="../../../../internal/grpcsync/event.go.html#line-38" class="ident">Fire</a>()</code></span>
+<span class="codeline" id="line-167"><code>}</code></span>
+<span class="codeline" id="line-168"><code></code></span>
+<span class="codeline" id="line-169"><code><span class="comment">// run is a goroutine for all the callbacks.</span></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-171"><code><span class="comment">// Callback can be called in watch(), if an item is found in cache. Without this</span></code></span>
+<span class="codeline" id="line-172"><code><span class="comment">// goroutine, the callback will be called inline, which might cause a deadlock</span></code></span>
+<span class="codeline" id="line-173"><code><span class="comment">// in user's code. Callbacks also cannot be simple `go callback()` because the</span></code></span>
+<span class="codeline" id="line-174"><code><span class="comment">// order matters.</span></code></span>
+<span class="codeline" id="line-175"><code><span class="keyword">func</span> (<label for="r35" class="ident">pb</label> *<a href="#line-42" class="ident">Pubsub</a>) <label for="r36" class="ident">run</label>() {</code></span>
+<span class="codeline" id="line-176"><code>	<span class="keyword">for</span> {</code></span>
+<span class="codeline" id="line-177"><code>		<a href="../../../../../../runtime/select.go.html#line-122"><span class="keyword">select</span></a> {</code></span>
+<span class="codeline" id="line-178"><code>		<span class="keyword">case</span> <label for="r37" class="ident">t</label> := <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r35" class="ident">pb</label>.<a href="#line-48" class="ident">updateCh</a>.<a href="../../../../internal/buffer/unbounded.go.html#line-83" class="ident">Get</a>():</code></span>
+<span class="codeline" id="line-179"><code>			<label for="r35" class="ident">pb</label>.<a href="#line-48" class="ident">updateCh</a>.<a href="../../../../internal/buffer/unbounded.go.html#line-65" class="ident">Load</a>()</code></span>
+<span class="codeline" id="line-180"><code>			<span class="keyword">if</span> <label for="r35" class="ident">pb</label>.<a href="#line-43" class="ident">done</a>.<a href="../../../../internal/grpcsync/event.go.html#line-54" class="ident">HasFired</a>() {</code></span>
+<span class="codeline" id="line-181"><code>				<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-182"><code>			}</code></span>
+<span class="codeline" id="line-183"><code>			<label for="r35" class="ident">pb</label>.<a href="update.go.html#line-42" class="ident">callCallback</a>(<label for="r37" class="ident">t</label>.(*<a href="update.go.html#line-26" class="ident">watcherInfoWithUpdate</a>))</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">case</span> <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r35" class="ident">pb</label>.<a href="#line-43" class="ident">done</a>.<a href="../../../../internal/grpcsync/event.go.html#line-49" class="ident">Done</a>():</code></span>
+<span class="codeline" id="line-185"><code>			<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-186"><code>		}</code></span>
+<span class="codeline" id="line-187"><code>	}</code></span>
+<span class="codeline" id="line-188"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

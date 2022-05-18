@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/xdsclient/controller</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>controller</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/xdsclient/controller">google.golang.org/grpc/xds/internal/xdsclient/controller</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/xdsclient/controller" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/controller.html">16 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/xdsclient/controller.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html">controller.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package controller contains implementation to connect to the control plane.
+		Including starting the ClientConn, starting the xDS stream, and
+		sending/receiving messages.
+
+		All the messages are parsed by the resource package (e.g.
+		UnmarshalListener()) and sent to the Pubsub watchers.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html">loadreport.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html">transport.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 4, in which 1 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Controller" data-popularity="810">	<input type='checkbox' class="fold" id="Controller-fold-content"><label for="Controller-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-51">Controller</a> <i>(struct)</i></label><span id='Controller-fold-content-docs' class="fold-docs">
+		Controller manages the connection and stream to the control plane.
+
+		It keeps track of what resources are being watched, and send new requests
+		when new watches are added.
+
+		It takes a pubsub (as an interface) as input. When a response is received,
+		it's parsed, and the updates are sent to the pubsub.
+
+		<input type='checkbox' class="fold" id="Controller-fold-fields"><label for="Controller-fold-fields">Fields (<i>total 16, none are exported</i>)</label><span id='Controller-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Controller-showhide-fields"><i><label for="Controller-showhide-fields" class="show-inline">/* 16 unexporteds ... */</label><label for="Controller-showhide-fields" class="hide-inline">/* 16 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-61">backoff</a> <i>func(<a href="../../../../../builtin.html#name-int">int</a>) <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-field-cc"><label for="Controller-fold-field-cc"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-57">cc</a> <i>*<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientConn">ClientConn</a></i></label><span id='Controller-fold-field-cc-docs' class="fold-docs">
+				// Connection to the management server.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-52">config</a> <i>*<a href="bootstrap.html">bootstrap</a>.<a href="bootstrap.html#name-ServerConfig">ServerConfig</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-55">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-88">lrsClients</a> <i>map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="#name-lrsClient">lrsClient</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-field-lrsMu"><label for="Controller-fold-field-lrsMu"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-87">lrsMu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='Controller-fold-field-lrsMu-docs' class="fold-docs">
+				Changes to map lrsClients and the lrsClient inside the map need to be
+				protected by lrsMu.
+
+				TODO: after LRS refactoring, each controller should only manage the LRS
+				stream to its server. LRS streams to other servers should be managed by
+				other controllers.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-65">mu</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-field-nonceMap"><label for="Controller-fold-field-nonceMap"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-79">nonceMap</a> <i>map[<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>]<a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Controller-fold-field-nonceMap-docs' class="fold-docs">
+				nonceMap contains the nonce from the most recent received response.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-63">sendCh</a> <i>*<a href="../../../internal/buffer.html">buffer</a>.<a href="../../../internal/buffer.html#name-Unbounded">Unbounded</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-59">stopRunGoroutine</a> <i><a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-CancelFunc">CancelFunc</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-62">streamCh</a> <i>chan <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-53">updateHandler</a> <i><a href="pubsub.html">pubsub</a>.<a href="pubsub.html#name-UpdateHandler">UpdateHandler</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-54">updateValidator</a> <i><a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateValidatorFunc">UpdateValidatorFunc</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-58">vClient</a> <i><a href="controller/version.html">version</a>.<a href="controller/version.html#name-VersionedClient">VersionedClient</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-field-versionMap"><label for="Controller-fold-field-versionMap"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-77">versionMap</a> <i>map[<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>]<a href="../../../../../builtin.html#name-string">string</a></i></label><span id='Controller-fold-field-versionMap-docs' class="fold-docs">
+				versionMap contains the version that was acked (the version in the ack
+				request that was sent on wire). The key is rType, the value is the
+				version string, becaues the versions for different resource types should
+				be independent.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-field-watchMap"><label for="Controller-fold-field-watchMap"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-72">watchMap</a> <i>map[<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>]map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="../../../../../builtin.html#name-bool">bool</a></i></label><span id='Controller-fold-field-watchMap-docs' class="fold-docs">
+				Message specific watch infos, protected by the above mutex. These are
+				written to, after successfully reading from the update channel, and are
+				read from when recovering from a broken stream to resend the xDS
+				messages. When the user of this client object cancels a watch call,
+				these are set to nil. All accesses to the map protected and any value
+				inside the map should be protected with the above mutex.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Controller-fold-methods"><label for="Controller-fold-methods">Methods (<i>total 13, in which 4 are exported</i>)</label><span id='Controller-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Controller-fold-method-AddWatch"><label for="Controller-fold-method-AddWatch">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-35">AddWatch</a>(rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, resourceName <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Controller-fold-method-AddWatch-docs' class="fold-docs">
+				AddWatch adds a watch for an xDS resource given its type and name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Controller-fold-method-Close"><label for="Controller-fold-method-Close">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-172">Close</a>()</label><span id='Controller-fold-method-Close-docs' class="fold-docs">
+				Close closes the controller.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Controller-fold-method-RemoveWatch"><label for="Controller-fold-method-RemoveWatch">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-45">RemoveWatch</a>(rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, resourceName <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Controller-fold-method-RemoveWatch-docs' class="fold-docs">
+				RemoveWatch cancels an already registered watch for an xDS resource
+				given its type and name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Controller-fold-method-ReportLoad"><label for="Controller-fold-method-ReportLoad">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-42">ReportLoad</a>(server <a href="../../../../../builtin.html#name-string">string</a>) (*<a href="load.html">load</a>.<a href="load.html#name-Store">Store</a>, func())</label><span id='Controller-fold-method-ReportLoad-docs' class="fold-docs">
+				ReportLoad starts an load reporting stream to the given server. If the server
+				is not an empty string, and is different from the management server, a new
+				ClientConn will be created.
+
+				The same options used for creating the Client will be used (including
+				NodeProto, and dial options if necessary).
+
+				It returns a Store for the user to report loads, a function to cancel the
+				load reporting stream.
+
+				TODO(xdsfed): LRS refactor, delete the parameter of this function, and
+				cleanup the multiple LRS ClientConn code. Each controller should have one
+				ClientConn to the authority it's created for, all LRS streams (and ADS
+				streams) in this controller should all share that ClientConn.
+</span></span>
+			<input type='checkbox' class="showhide" id="Controller-showhide-methods"><i><label for="Controller-showhide-methods" class="show-inline">/* 9 unexporteds ... */</label><label for="Controller-showhide-methods" class="hide-inline">/* 9 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-222">handleResponse</a>(resp <a href="../../../../../github.com/golang/protobuf/proto.html">proto</a>.<a href="../../../../../github.com/golang/protobuf/proto.html#name-Message">Message</a>) (<a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, <a href="../../../../../builtin.html#name-string">string</a>, <a href="../../../../../builtin.html#name-string">string</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-processAckInfo"><label for="Controller-fold-method-processAckInfo">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-320">processAckInfo</a>(ack *<a href="#name-ackAction">ackAction</a>, stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>) (target []<a href="../../../../../builtin.html#name-string">string</a>, rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, version, nonce <a href="../../../../../builtin.html#name-string">string</a>, send <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='Controller-fold-method-processAckInfo-docs' class="fold-docs">
+				processAckInfo pulls the fields needed by the ack request from a ackAction.
+
+				If no active watch is found for this ack, it returns false for send.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-processWatchInfo"><label for="Controller-fold-method-processWatchInfo">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-276">processWatchInfo</a>(w *<a href="#name-watchAction">watchAction</a>) (target []<a href="../../../../../builtin.html#name-string">string</a>, rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, ver, nonce <a href="../../../../../builtin.html#name-string">string</a>)</label><span id='Controller-fold-method-processWatchInfo-docs' class="fold-docs">
+				processWatchInfo pulls the fields needed by the request from a watchAction.
+
+				It also updates the watch map.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-recv"><label for="Controller-fold-method-recv">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-185">recv</a>(stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>) <a href="../../../../../builtin.html#name-bool">bool</a></label><span id='Controller-fold-method-recv-docs' class="fold-docs">
+				recv receives xDS responses on the provided ADS stream and branches out to
+				message specific handlers.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-reportLoad"><label for="Controller-fold-method-reportLoad">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-366">reportLoad</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>, cc *<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientConn">ClientConn</a>, opts <a href="controller/version.html">controllerversion</a>.<a href="controller/version.html#name-LoadReportingOptions">LoadReportingOptions</a>)</label><span id='Controller-fold-method-reportLoad-docs' class="fold-docs">
+				reportLoad starts an LRS stream to report load data to the management server.
+				It blocks until the context is cancelled.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-run"><label for="Controller-fold-method-run">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-56">run</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>)</label><span id='Controller-fold-method-run-docs' class="fold-docs">
+				run starts an ADS stream (and backs off exponentially, if the previous
+				stream failed without receiving a single reply) and runs the sender and
+				receiver routines to send and receive data from the stream respectively.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-send"><label for="Controller-fold-method-send">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-112">send</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>)</label><span id='Controller-fold-method-send-docs' class="fold-docs">
+				send is a separate goroutine for sending watch requests on the xds stream.
+
+				It watches the stream channel for new streams, and the request channel for
+				new requests to send on the stream.
+
+				For each new request (watchAction), it's
+				 - processed and added to the watch map
+				   - so resend will pick them up when there are new streams
+				 - sent on the current stream if there's one
+				   - the current stream is cleared when any send on it fails
+
+				For each new stream, all the existing requests will be resent.
+
+				Note that this goroutine doesn't do anything to the old stream when there's a
+				new one. In fact, there should be only one stream in progress, and new one
+				should only be created when the old one fails (recv returns an error).
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Controller-fold-method-sendExisting"><label for="Controller-fold-method-sendExisting">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-165">sendExisting</a>(stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>) <a href="../../../../../builtin.html#name-bool">bool</a></label><span id='Controller-fold-method-sendExisting-docs' class="fold-docs">
+				sendExisting sends out xDS requests for registered watchers when recovering
+				from a broken stream.
+
+				We call stream.Send() here with the lock being held. It should be OK to do
+				that here because the stream has just started and Send() usually returns
+				quickly (once it pushes the message onto the transport layer) and is only
+				ever blocked if we don't have enough flow control quota.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*Controller) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-406">sendLoads</a>(ctx <a href="../../../../../context.html">context</a>.<a href="../../../../../context.html#name-Context">Context</a>, stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>, store *<a href="load.html">load</a>.<a href="load.html#name-Store">Store</a>, clusterNames []<a href="../../../../../builtin.html#name-string">string</a>, interval <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="Controller-fold-impls"><label for="Controller-fold-impls">Implements (<i>at least one unexported</i>)</label><span id='Controller-fold-impls-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Controller-showhide-impls"><i><label for="Controller-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="Controller-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*Controller : google.golang.org/grpc/xds/internal/xdsclient.<a href="../xdsclient.html#name-controllerInterface">controllerInterface</a></i></span></span>
+		<input type='checkbox' class="fold" id="Controller-fold-results"><label for="Controller-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Controller-fold-results-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>(config *<a href="bootstrap.html">bootstrap</a>.<a href="bootstrap.html#name-ServerConfig">ServerConfig</a>, updateHandler <a href="pubsub.html">pubsub</a>.<a href="pubsub.html#name-UpdateHandler">UpdateHandler</a>, validator <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateValidatorFunc">UpdateValidatorFunc</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, boff func(<a href="../../../../../builtin.html#name-int">int</a>) <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (_ *<b>Controller</b>, retErr <a href="../../../../../builtin.html#name-error">error</a>)</span></span>
+		<input type='checkbox' class="fold" id="Controller-fold-params"><label for="Controller-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='Controller-fold-params-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Controller-showhide-outputofs"><i><label for="Controller-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="Controller-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newLRSClient">newLRSClient</a>(parent *<b>Controller</b>, server <a href="../../../../../builtin.html#name-string">string</a>) *<a href="#name-lrsClient">lrsClient</a></i></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-ackAction" data-popularity="35">	<input type='checkbox' class="fold" id="ackAction-fold-content"><label for="ackAction-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-306">ackAction</a> <i>(struct)</i></label><span id='ackAction-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="ackAction-fold-fields"><label for="ackAction-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='ackAction-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ackAction-showhide-fields"><i><label for="ackAction-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="ackAction-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ackAction-fold-field-errMsg"><label for="ackAction-fold-field-errMsg"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-310">errMsg</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='ackAction-fold-field-errMsg-docs' class="fold-docs">
+				// Empty unless it's a NACK.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-309">nonce</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-307">rType</a> <i><a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ackAction-fold-field-stream"><label for="ackAction-fold-field-stream"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-314">stream</a> <i><a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a></i></label><span id='ackAction-fold-field-stream-docs' class="fold-docs">
+				ACK/NACK are tagged with the stream it's for. When the stream is down,
+				all the ACK/NACK for this stream will be dropped, and the version/nonce
+				won't be updated.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ackAction-fold-field-version"><label for="ackAction-fold-field-version"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-308">version</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></label><span id='ackAction-fold-field-version-docs' class="fold-docs">
+				// NACK if version is an empty string.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="ackAction-fold-params"><label for="ackAction-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='ackAction-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ackAction-showhide-outputofs"><i><label for="ackAction-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="ackAction-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-Controller">Controller</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-320">processAckInfo</a>(ack *<b>ackAction</b>, stream <a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientStream">ClientStream</a>) (target []<a href="../../../../../builtin.html#name-string">string</a>, rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, version, nonce <a href="../../../../../builtin.html#name-string">string</a>, send <a href="../../../../../builtin.html#name-bool">bool</a>)</i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-lrsClient" data-popularity="225">	<input type='checkbox' class="fold" id="lrsClient-fold-content"><label for="lrsClient-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-70">lrsClient</a> <i>(struct)</i></label><span id='lrsClient-fold-content-docs' class="fold-docs">
+		lrsClient maps to one lrsServer. It contains:
+		- a ClientConn to this server (only if it's different from the management
+		server)
+		- a load.Store that contains loads only for this server
+
+		<input type='checkbox' class="fold" id="lrsClient-fold-fields"><label for="lrsClient-fold-fields">Fields (<i>total 6, none are exported</i>)</label><span id='lrsClient-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lrsClient-showhide-fields"><i><label for="lrsClient-showhide-fields" class="show-inline">/* 6 unexporteds ... */</label><label for="lrsClient-showhide-fields" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-76">cancelStream</a> <i>func()</i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="lrsClient-fold-field-cc"><label for="lrsClient-fold-field-cc"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-74">cc</a> <i>*<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientConn">ClientConn</a></i></label><span id='lrsClient-fold-field-cc-docs' class="fold-docs">
+				// nil if the server is same as the management server
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-77">loadStore</a> <i>*<a href="load.html">load</a>.<a href="load.html#name-Store">Store</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-71">parent</a> <i>*<a href="#name-Controller">Controller</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-75">refCount</a> <i><a href="../../../../../builtin.html#name-int">int</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-72">server</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="lrsClient-fold-methods"><label for="lrsClient-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='lrsClient-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lrsClient-showhide-methods"><i><label for="lrsClient-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="lrsClient-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="lrsClient-fold-method-ref"><label for="lrsClient-fold-method-ref">(*lrsClient) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-92">ref</a>() *<a href="load.html">load</a>.<a href="load.html#name-Store">Store</a></label><span id='lrsClient-fold-method-ref-docs' class="fold-docs">
+				ref increments the refCount. If this is the first ref, it starts the LRS stream.
+
+				Not thread-safe, caller needs to synchronize.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="lrsClient-fold-method-startStream"><label for="lrsClient-fold-method-startStream">(*lrsClient) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-120">startStream</a>()</label><span id='lrsClient-fold-method-startStream-docs' class="fold-docs">
+				startStream starts the LRS stream to the server. If server is not the same
+				management server from the parent, it also creates a ClientConn.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="lrsClient-fold-method-unRef"><label for="lrsClient-fold-method-unRef">(*lrsClient) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-105">unRef</a>() (closed <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='lrsClient-fold-method-unRef-docs' class="fold-docs">
+				unRef decrements the refCount, and closes the stream if refCount reaches 0
+				(and close the cc if cc is not xDS cc). It returns whether refCount reached 0
+				after this call.
+
+				Not thread-safe, caller needs to synchronize.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="lrsClient-fold-results"><label for="lrsClient-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='lrsClient-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lrsClient-showhide-inputofs"><i><label for="lrsClient-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="lrsClient-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newLRSClient">newLRSClient</a>(parent *<a href="#name-Controller">Controller</a>, server <a href="../../../../../builtin.html#name-string">string</a>) *<b>lrsClient</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-watchAction" data-popularity="35">	<input type='checkbox' class="fold" id="watchAction-fold-content"><label for="watchAction-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-267">watchAction</a> <i>(struct)</i></label><span id='watchAction-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="watchAction-fold-fields"><label for="watchAction-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='watchAction-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchAction-showhide-fields"><i><label for="watchAction-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="watchAction-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-268">rType</a> <i><a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="watchAction-fold-field-remove"><label for="watchAction-fold-field-remove"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-269">remove</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></label><span id='watchAction-fold-field-remove-docs' class="fold-docs">
+				// Whether this is to remove watch for the resource.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-270">resource</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="watchAction-fold-params"><label for="watchAction-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='watchAction-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="watchAction-showhide-outputofs"><i><label for="watchAction-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="watchAction-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func (*<a href="#name-Controller">Controller</a>).<a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-276">processWatchInfo</a>(w *<b>watchAction</b>) (target []<a href="../../../../../builtin.html#name-string">string</a>, rType <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-ResourceType">ResourceType</a>, ver, nonce <a href="../../../../../builtin.html#name-string">string</a>)</i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 4, in which 2 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-New">	<input type='checkbox' class="fold" id="New-fold-content"><label for="New-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-103">New</a>(config *<a href="bootstrap.html">bootstrap</a>.<a href="bootstrap.html#name-ServerConfig">ServerConfig</a>, updateHandler <a href="pubsub.html">pubsub</a>.<a href="pubsub.html#name-UpdateHandler">UpdateHandler</a>, validator <a href="xdsresource.html">xdsresource</a>.<a href="xdsresource.html#name-UpdateValidatorFunc">UpdateValidatorFunc</a>, logger *<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, boff func(<a href="../../../../../builtin.html#name-int">int</a>) <a href="../../../../../time.html">time</a>.<a href="../../../../../time.html#name-Duration">Duration</a>) (_ *<a href="#name-Controller">Controller</a>, retErr <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='New-fold-content-docs' class="fold-docs">
+		New creates a new controller.
+
+</span></div><div class="anchor value-res" id="name-SetGRPCDial">	<input type='checkbox' class="fold" id="SetGRPCDial-fold-content"><label for="SetGRPCDial-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-98">SetGRPCDial</a>(dialer func(target <a href="../../../../../builtin.html#name-string">string</a>, opts ...<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-DialOption">DialOption</a>) (*<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientConn">ClientConn</a>, <a href="../../../../../builtin.html#name-error">error</a>))</label><span id='SetGRPCDial-fold-content-docs' class="fold-docs">
+		SetGRPCDial sets the dialer for the controller. The dial can be used to
+		manipulate the dial options or change the target if needed.
+		The SetGRPCDial must be called before gRPC initialization to make sure it
+		affects all the controllers created.
+		To reset any dialer set, pass in grpc.Dial as the parameter.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-mapToSlice"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/transport.go.html#line-259">mapToSlice</a>(m map[<a href="../../../../../builtin.html#name-string">string</a>]<a href="../../../../../builtin.html#name-bool">bool</a>) []<a href="../../../../../builtin.html#name-string">string</a></span></i></div><div class="anchor value-res hidden" id="name-newLRSClient"><i>	<input type='checkbox' class="fold" id="newLRSClient-fold-content"><label for="newLRSClient-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/loadreport.go.html#line-81">newLRSClient</a>(parent *<a href="#name-Controller">Controller</a>, server <a href="../../../../../builtin.html#name-string">string</a>) *<a href="#name-lrsClient">lrsClient</a></label><span id='newLRSClient-fold-content-docs' class="fold-docs">
+		newLRSClient creates a new LRS stream to the server.
+
+</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-grpcDial"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/xdsclient/controller/controller.go.html#line-91">grpcDial</a> func(target <a href="../../../../../builtin.html#name-string">string</a>, opts ...<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-DialOption">DialOption</a>) (*<a href="../../../../grpc.html">grpc</a>.<a href="../../../../grpc.html#name-ClientConn">ClientConn</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

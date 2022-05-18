@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: doc.go in package golang.org/x/oauth2/google</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	doc.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/golang.org/x/oauth2/google.html">golang.org/x/oauth2/google</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright 2018 The Go Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-5"><code><span class="comment">// Package google provides support for making OAuth2 authorized and authenticated</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment">// HTTP requests to Google APIs. It supports the Web server flow, client-side</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment">// credentials, service accounts, Google Compute Engine service accounts, and Google</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">// App Engine service accounts.</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// A brief overview of the package follows. For more information, please read</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// https://developers.google.com/accounts/docs/OAuth2</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">// and</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// https://developers.google.com/accounts/docs/application-default-credentials.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// OAuth2 Configs</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// Two functions in this package return golang.org/x/oauth2.Config values from Google credential</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// data. Google supports two JSON formats for OAuth2 credentials: one is handled by ConfigFromJSON,</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// the other by JWTConfigFromJSON. The returned Config can be used to obtain a TokenSource or</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// create an http.Client.</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// Credentials</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// The Credentials type represents Google credentials, including Application Default</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// Credentials.</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// Use FindDefaultCredentials to obtain Application Default Credentials.</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// FindDefaultCredentials looks in some well-known places for a credentials file, and</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">// will call AppEngineTokenSource or ComputeTokenSource as needed.</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// DefaultClient and DefaultTokenSource are convenience methods. They first call FindDefaultCredentials,</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// then use the credentials to construct an http.Client or an oauth2.TokenSource.</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// Use CredentialsFromJSON to obtain credentials from either of the two JSON formats</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// described in OAuth2 Configs, above. The TokenSource in the returned value is the</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// same as the one obtained from the oauth2.Config returned from ConfigFromJSON or</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// JWTConfigFromJSON, but the Credentials may contain additional information</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// that is useful is some circumstances.</span></code></span></div><span class="codeline" id="line-40"><code><span class="keyword">package</span> google <span class="comment">// import "golang.org/x/oauth2/google"</span></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

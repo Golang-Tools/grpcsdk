@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: node.pb.validate.go in package github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3</title>
+<link href="../../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	node.pb.validate.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html">github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9,
+input[id=i10]:checked ~pre .i10,
+input[id=i11]:checked ~pre .i11
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+<input id="i10" type="radio" name="i"/>
+<input id="i11" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Code generated by protoc-gen-validate. DO NOT EDIT.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// source: envoy/type/matcher/v3/node.proto</span></code></span>
+<span class="codeline" id="line-3"><code></code></span>
+<span class="codeline" id="line-4"><code><span class="keyword">package</span> matcherv3</code></span>
+<span class="codeline" id="line-5"><code></code></span>
+<span class="codeline" id="line-6"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-7"><code>	<label for="i0"><span class="lit-string i0">"bytes"</span></label></code></span>
+<span class="codeline" id="line-8"><code>	<label for="i1"><span class="lit-string i1">"errors"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<label for="i2"><span class="lit-string i2">"fmt"</span></label></code></span>
+<span class="codeline" id="line-10"><code>	<label for="i3"><span class="lit-string i3">"net"</span></label></code></span>
+<span class="codeline" id="line-11"><code>	<label for="i4"><span class="lit-string i4">"net/mail"</span></label></code></span>
+<span class="codeline" id="line-12"><code>	<label for="i5"><span class="lit-string i5">"net/url"</span></label></code></span>
+<span class="codeline" id="line-13"><code>	<label for="i6"><span class="lit-string i6">"regexp"</span></label></code></span>
+<span class="codeline" id="line-14"><code>	<label for="i7"><span class="lit-string i7">"sort"</span></label></code></span>
+<span class="codeline" id="line-15"><code>	<label for="i8"><span class="lit-string i8">"strings"</span></label></code></span>
+<span class="codeline" id="line-16"><code>	<label for="i9"><span class="lit-string i9">"time"</span></label></code></span>
+<span class="codeline" id="line-17"><code>	<label for="i10"><span class="lit-string i10">"unicode/utf8"</span></label></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code>	<label for="i11"><span class="lit-string i11">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-20"><code>)</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// ensure the imports are used</span></code></span>
+<span class="codeline" id="line-23"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-24"><code>	_ = <a href="../../../../../../../../pkg/bytes.html" class="ident i0">bytes</a>.<a href="../../../../../../../bytes/buffer.go.html#line-193" class="ident">MinRead</a></code></span>
+<span class="codeline" id="line-25"><code>	_ = <a href="../../../../../../../../pkg/errors.html" class="ident i1">errors</a>.<a href="../../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">""</span>)</code></span>
+<span class="codeline" id="line-26"><code>	_ = <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-241" class="ident">Print</a></code></span>
+<span class="codeline" id="line-27"><code>	_ = <a href="../../../../../../../../pkg/unicode/utf8.html" class="ident i10">utf8</a>.<a href="../../../../../../../unicode/utf8/utf8.go.html#line-19" class="ident">UTFMax</a></code></span>
+<span class="codeline" id="line-28"><code>	_ = (*<a href="../../../../../../../../pkg/regexp.html" class="ident i6">regexp</a>.<a href="../../../../../../../regexp/regexp.go.html#line-84" class="ident">Regexp</a>)(<a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-29"><code>	_ = (*<a href="../../../../../../../../pkg/strings.html" class="ident i8">strings</a>.<a href="../../../../../../../strings/reader.go.html#line-17" class="ident">Reader</a>)(<a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-30"><code>	_ = <a href="../../../../../../../../pkg/net.html" class="ident i3">net</a>.<a href="../../../../../../../net/ip.go.html#line-22" class="ident">IPv4len</a></code></span>
+<span class="codeline" id="line-31"><code>	_ = <a href="../../../../../../../../pkg/time.html" class="ident i9">time</a>.<a href="../../../../../../../time/time.go.html#line-589" class="ident">Duration</a>(<span class="lit-number">0</span>)</code></span>
+<span class="codeline" id="line-32"><code>	_ = (*<a href="../../../../../../../../pkg/net/url.html" class="ident i5">url</a>.<a href="../../../../../../../net/url/url.go.html#line-358" class="ident">URL</a>)(<a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-33"><code>	_ = (*<a href="../../../../../../../../pkg/net/mail.html" class="ident i4">mail</a>.<a href="../../../../../../../net/mail/message.go.html#line-183" class="ident">Address</a>)(<a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-34"><code>	_ = <a href="../../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i11">anypb</a>.<a href="../../../../../../../google.golang.org/protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>{}</code></span>
+<span class="codeline" id="line-35"><code>	_ = <a href="../../../../../../../../pkg/sort.html" class="ident i7">sort</a>.<a href="../../../../../../../sort/sort.go.html#line-229" class="ident">Sort</a></code></span>
+<span class="codeline" id="line-36"><code>)</code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// Validate checks the field values on NodeMatcher with the rules defined in</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// the proto definition for this message. If any rules are violated, the first</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// error encountered is returned, or nil if there are no violations.</span></code></span>
+<span class="codeline" id="line-41"><code><span class="keyword">func</span> (<label for="r0" class="ident">m</label> *<a href="node.pb.go.html#line-26" class="ident">NodeMatcher</a>) <label for="r1" class="ident">Validate</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-42"><code>	<span class="keyword">return</span> <label for="r0" class="ident">m</label>.<a href="#line-53" class="ident">validate</a>(<a href="../../../../../../../../pkg/builtin.html#name-false" class="ident">false</a>)</code></span>
+<span class="codeline" id="line-43"><code>}</code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">// ValidateAll checks the field values on NodeMatcher with the rules defined in</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">// the proto definition for this message. If any rules are violated, the</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">// result is a list of violation errors wrapped in NodeMatcherMultiError, or</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// nil if none found.</span></code></span>
+<span class="codeline" id="line-49"><code><span class="keyword">func</span> (<label for="r2" class="ident">m</label> *<a href="node.pb.go.html#line-26" class="ident">NodeMatcher</a>) <label for="r3" class="ident">ValidateAll</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-50"><code>	<span class="keyword">return</span> <label for="r2" class="ident">m</label>.<a href="#line-53" class="ident">validate</a>(<a href="../../../../../../../../pkg/builtin.html#name-true" class="ident">true</a>)</code></span>
+<span class="codeline" id="line-51"><code>}</code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code><span class="keyword">func</span> (<label for="r4" class="ident">m</label> *<a href="node.pb.go.html#line-26" class="ident">NodeMatcher</a>) <label for="r5" class="ident">validate</label>(<label for="r6" class="ident">all</label> <a href="../../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-54"><code>	<span class="keyword">if</span> <label for="r4" class="ident">m</label> == <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-55"><code>		<span class="keyword">return</span> <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-56"><code>	}</code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code>	<span class="keyword">var</span> <label for="r7" class="ident">errors</label> []<a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code>	<span class="keyword">if</span> <label for="r6" class="ident">all</label> {</code></span>
+<span class="codeline" id="line-61"><code>		<span class="keyword">switch</span> v := <span class="keyword">interface</span>{}(<label for="r4" class="ident">m</label>.<a href="node.pb.go.html#line-69" class="ident">GetNodeId</a>()).(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-62"><code>		<span class="keyword">case</span> <span class="keyword">interface</span>{ <label for="r8" class="ident">ValidateAll</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }:</code></span>
+<span class="codeline" id="line-63"><code>			<span class="keyword">if</span> <label for="r9" class="ident">err</label> := <label for="r10" class="ident">v</label>.<label for="r8" class="ident">ValidateAll</label>(); <label for="r9" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-64"><code>				<label for="r7" class="ident">errors</label> = <a href="../../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r7" class="ident">errors</label>, <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-65"><code>					<a href="#line-149" class="ident">field</a>:  <span class="lit-string">"NodeId"</span>,</code></span>
+<span class="codeline" id="line-66"><code>					<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-67"><code>					<a href="#line-151" class="ident">cause</a>:  <label for="r9" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-68"><code>				})</code></span>
+<span class="codeline" id="line-69"><code>			}</code></span>
+<span class="codeline" id="line-70"><code>		<span class="keyword">case</span> <span class="keyword">interface</span>{ <label for="r11" class="ident">Validate</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }:</code></span>
+<span class="codeline" id="line-71"><code>			<span class="keyword">if</span> <label for="r12" class="ident">err</label> := <label for="r13" class="ident">v</label>.<label for="r11" class="ident">Validate</label>(); <label for="r12" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-72"><code>				<label for="r7" class="ident">errors</label> = <a href="../../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r7" class="ident">errors</label>, <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-73"><code>					<a href="#line-149" class="ident">field</a>:  <span class="lit-string">"NodeId"</span>,</code></span>
+<span class="codeline" id="line-74"><code>					<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-75"><code>					<a href="#line-151" class="ident">cause</a>:  <label for="r12" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-76"><code>				})</code></span>
+<span class="codeline" id="line-77"><code>			}</code></span>
+<span class="codeline" id="line-78"><code>		}</code></span>
+<span class="codeline" id="line-79"><code>	} <span class="keyword">else</span> <span class="keyword">if</span> <label for="r14" class="ident">v</label>, <label for="r15" class="ident">ok</label> := <span class="keyword">interface</span>{}(<label for="r4" class="ident">m</label>.<a href="node.pb.go.html#line-69" class="ident">GetNodeId</a>()).(<span class="keyword">interface</span>{ <label for="r16" class="ident">Validate</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }); <label for="r15" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-80"><code>		<span class="keyword">if</span> <label for="r17" class="ident">err</label> := <label for="r14" class="ident">v</label>.<label for="r16" class="ident">Validate</label>(); <label for="r17" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-81"><code>			<span class="keyword">return</span> <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-82"><code>				<a href="#line-149" class="ident">field</a>:  <span class="lit-string">"NodeId"</span>,</code></span>
+<span class="codeline" id="line-83"><code>				<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-84"><code>				<a href="#line-151" class="ident">cause</a>:  <label for="r17" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-85"><code>			}</code></span>
+<span class="codeline" id="line-86"><code>		}</code></span>
+<span class="codeline" id="line-87"><code>	}</code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">for</span> <label for="r18" class="ident">idx</label>, <label for="r19" class="ident">item</label> := <span class="keyword">range</span> <label for="r4" class="ident">m</label>.<a href="node.pb.go.html#line-76" class="ident">GetNodeMetadatas</a>() {</code></span>
+<span class="codeline" id="line-90"><code>		_, _ = <label for="r18" class="ident">idx</label>, <label for="r19" class="ident">item</label></code></span>
+<span class="codeline" id="line-91"><code></code></span>
+<span class="codeline" id="line-92"><code>		<span class="keyword">if</span> <label for="r6" class="ident">all</label> {</code></span>
+<span class="codeline" id="line-93"><code>			<span class="keyword">switch</span> v := <span class="keyword">interface</span>{}(<label for="r19" class="ident">item</label>).(<span class="keyword">type</span>) {</code></span>
+<span class="codeline" id="line-94"><code>			<span class="keyword">case</span> <span class="keyword">interface</span>{ <label for="r20" class="ident">ValidateAll</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }:</code></span>
+<span class="codeline" id="line-95"><code>				<span class="keyword">if</span> <label for="r21" class="ident">err</label> := <label for="r22" class="ident">v</label>.<label for="r20" class="ident">ValidateAll</label>(); <label for="r21" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-96"><code>					<label for="r7" class="ident">errors</label> = <a href="../../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r7" class="ident">errors</label>, <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-97"><code>						<a href="#line-149" class="ident">field</a>:  <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"NodeMetadatas[%v]"</span>, <label for="r18" class="ident">idx</label>),</code></span>
+<span class="codeline" id="line-98"><code>						<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-99"><code>						<a href="#line-151" class="ident">cause</a>:  <label for="r21" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-100"><code>					})</code></span>
+<span class="codeline" id="line-101"><code>				}</code></span>
+<span class="codeline" id="line-102"><code>			<span class="keyword">case</span> <span class="keyword">interface</span>{ <label for="r23" class="ident">Validate</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }:</code></span>
+<span class="codeline" id="line-103"><code>				<span class="keyword">if</span> <label for="r24" class="ident">err</label> := <label for="r25" class="ident">v</label>.<label for="r23" class="ident">Validate</label>(); <label for="r24" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-104"><code>					<label for="r7" class="ident">errors</label> = <a href="../../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r7" class="ident">errors</label>, <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-105"><code>						<a href="#line-149" class="ident">field</a>:  <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"NodeMetadatas[%v]"</span>, <label for="r18" class="ident">idx</label>),</code></span>
+<span class="codeline" id="line-106"><code>						<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-107"><code>						<a href="#line-151" class="ident">cause</a>:  <label for="r24" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-108"><code>					})</code></span>
+<span class="codeline" id="line-109"><code>				}</code></span>
+<span class="codeline" id="line-110"><code>			}</code></span>
+<span class="codeline" id="line-111"><code>		} <span class="keyword">else</span> <span class="keyword">if</span> <label for="r26" class="ident">v</label>, <label for="r27" class="ident">ok</label> := <span class="keyword">interface</span>{}(<label for="r19" class="ident">item</label>).(<span class="keyword">interface</span>{ <label for="r28" class="ident">Validate</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> }); <label for="r27" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-112"><code>			<span class="keyword">if</span> <label for="r29" class="ident">err</label> := <label for="r26" class="ident">v</label>.<label for="r28" class="ident">Validate</label>(); <label for="r29" class="ident">err</label> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-113"><code>				<span class="keyword">return</span> <a href="#line-148" class="ident">NodeMatcherValidationError</a>{</code></span>
+<span class="codeline" id="line-114"><code>					<a href="#line-149" class="ident">field</a>:  <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">"NodeMetadatas[%v]"</span>, <label for="r18" class="ident">idx</label>),</code></span>
+<span class="codeline" id="line-115"><code>					<a href="#line-150" class="ident">reason</a>: <span class="lit-string">"embedded message failed validation"</span>,</code></span>
+<span class="codeline" id="line-116"><code>					<a href="#line-151" class="ident">cause</a>:  <label for="r29" class="ident">err</label>,</code></span>
+<span class="codeline" id="line-117"><code>				}</code></span>
+<span class="codeline" id="line-118"><code>			}</code></span>
+<span class="codeline" id="line-119"><code>		}</code></span>
+<span class="codeline" id="line-120"><code></code></span>
+<span class="codeline" id="line-121"><code>	}</code></span>
+<span class="codeline" id="line-122"><code></code></span>
+<span class="codeline" id="line-123"><code>	<span class="keyword">if</span> <a href="../../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r7" class="ident">errors</label>) &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-124"><code>		<span class="keyword">return</span> <a href="#line-132" class="ident">NodeMatcherMultiError</a>(<label for="r7" class="ident">errors</label>)</code></span>
+<span class="codeline" id="line-125"><code>	}</code></span>
+<span class="codeline" id="line-126"><code></code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">return</span> <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-128"><code>}</code></span>
+<span class="codeline" id="line-129"><code></code></span>
+<span class="codeline" id="line-130"><code><span class="comment">// NodeMatcherMultiError is an error wrapping multiple validation errors</span></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">// returned by NodeMatcher.ValidateAll() if the designated constraints aren't met.</span></code></span>
+<span class="codeline" id="line-132"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html#name-NodeMatcherMultiError" class="ident">NodeMatcherMultiError</a> []<a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code><span class="comment">// Error returns a concatenation of all the error messages it wraps.</span></code></span>
+<span class="codeline" id="line-135"><code><span class="keyword">func</span> (<label for="r30" class="ident">m</label> <a href="#line-132" class="ident">NodeMatcherMultiError</a>) <label for="r31" class="ident"><a href="../../../../../../../../imp/github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.NodeMatcherMultiError.html#name-.Error" class="ident">Error</a></label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-136"><code>	<span class="keyword">var</span> <label for="r32" class="ident">msgs</label> []<a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-137"><code>	<span class="keyword">for</span> <label for="r33" class="ident">_</label>, <label for="r34" class="ident">err</label> := <span class="keyword">range</span> <label for="r30" class="ident">m</label> {</code></span>
+<span class="codeline" id="line-138"><code>		<label for="r32" class="ident">msgs</label> = <a href="../../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r32" class="ident">msgs</label>, <label for="r34" class="ident">err</label>.Error())</code></span>
+<span class="codeline" id="line-139"><code>	}</code></span>
+<span class="codeline" id="line-140"><code>	<span class="keyword">return</span> <a href="../../../../../../../../pkg/strings.html" class="ident i8">strings</a>.<a href="../../../../../../../strings/strings.go.html#line-425" class="ident">Join</a>(<label for="r32" class="ident">msgs</label>, <span class="lit-string">"; "</span>)</code></span>
+<span class="codeline" id="line-141"><code>}</code></span>
+<span class="codeline" id="line-142"><code></code></span>
+<span class="codeline" id="line-143"><code><span class="comment">// AllErrors returns a list of validation violation errors.</span></code></span>
+<span class="codeline" id="line-144"><code><span class="keyword">func</span> (<label for="r35" class="ident">m</label> <a href="#line-132" class="ident">NodeMatcherMultiError</a>) <label for="r36" class="ident">AllErrors</label>() []<a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> { <span class="keyword">return</span> <label for="r35" class="ident">m</label> }</code></span>
+<span class="codeline" id="line-145"><code></code></span>
+<span class="codeline" id="line-146"><code><span class="comment">// NodeMatcherValidationError is the validation error returned by</span></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">// NodeMatcher.Validate if the designated constraints aren't met.</span></code></span>
+<span class="codeline" id="line-148"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.html#name-NodeMatcherValidationError" class="ident">NodeMatcherValidationError</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-149"><code>	field  <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-150"><code>	reason <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-151"><code>	cause  <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-152"><code>	key    <a href="../../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-153"><code>}</code></span>
+<span class="codeline" id="line-154"><code></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">// Field function returns field value.</span></code></span>
+<span class="codeline" id="line-156"><code><span class="keyword">func</span> (<label for="r37" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r38" class="ident">Field</label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <label for="r37" class="ident">e</label>.<a href="#line-149" class="ident">field</a> }</code></span>
+<span class="codeline" id="line-157"><code></code></span>
+<span class="codeline" id="line-158"><code><span class="comment">// Reason function returns reason value.</span></code></span>
+<span class="codeline" id="line-159"><code><span class="keyword">func</span> (<label for="r39" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r40" class="ident">Reason</label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <label for="r39" class="ident">e</label>.<a href="#line-150" class="ident">reason</a> }</code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code><span class="comment">// Cause function returns cause value.</span></code></span>
+<span class="codeline" id="line-162"><code><span class="keyword">func</span> (<label for="r41" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r42" class="ident">Cause</label>() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> { <span class="keyword">return</span> <label for="r41" class="ident">e</label>.<a href="#line-151" class="ident">cause</a> }</code></span>
+<span class="codeline" id="line-163"><code></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">// Key function returns key value.</span></code></span>
+<span class="codeline" id="line-165"><code><span class="keyword">func</span> (<label for="r43" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r44" class="ident">Key</label>() <a href="../../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> { <span class="keyword">return</span> <label for="r43" class="ident">e</label>.<a href="#line-152" class="ident">key</a> }</code></span>
+<span class="codeline" id="line-166"><code></code></span>
+<span class="codeline" id="line-167"><code><span class="comment">// ErrorName returns error name.</span></code></span>
+<span class="codeline" id="line-168"><code><span class="keyword">func</span> (<label for="r45" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r46" class="ident">ErrorName</label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <span class="lit-string">"NodeMatcherValidationError"</span> }</code></span>
+<span class="codeline" id="line-169"><code></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">// Error satisfies the builtin error interface</span></code></span>
+<span class="codeline" id="line-171"><code><span class="keyword">func</span> (<label for="r47" class="ident">e</label> <a href="#line-148" class="ident">NodeMatcherValidationError</a>) <label for="r48" class="ident"><a href="../../../../../../../../imp/github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3.NodeMatcherValidationError.html#name-.Error" class="ident">Error</a></label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-172"><code>	<label for="r49" class="ident">cause</label> := <span class="lit-string">""</span></code></span>
+<span class="codeline" id="line-173"><code>	<span class="keyword">if</span> <label for="r47" class="ident">e</label>.<a href="#line-151" class="ident">cause</a> != <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-174"><code>		<label for="r49" class="ident">cause</label> = <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<span class="lit-string">" | caused by: %v"</span>, <label for="r47" class="ident">e</label>.<a href="#line-151" class="ident">cause</a>)</code></span>
+<span class="codeline" id="line-175"><code>	}</code></span>
+<span class="codeline" id="line-176"><code></code></span>
+<span class="codeline" id="line-177"><code>	<label for="r50" class="ident">key</label> := <span class="lit-string">""</span></code></span>
+<span class="codeline" id="line-178"><code>	<span class="keyword">if</span> <label for="r47" class="ident">e</label>.<a href="#line-152" class="ident">key</a> {</code></span>
+<span class="codeline" id="line-179"><code>		<label for="r50" class="ident">key</label> = <span class="lit-string">"key for "</span></code></span>
+<span class="codeline" id="line-180"><code>	}</code></span>
+<span class="codeline" id="line-181"><code></code></span>
+<span class="codeline" id="line-182"><code>	<span class="keyword">return</span> <a href="../../../../../../../../pkg/fmt.html" class="ident i2">fmt</a>.<a href="../../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(</code></span>
+<span class="codeline" id="line-183"><code>		<span class="lit-string">"invalid %sNodeMatcher.%s: %s%s"</span>,</code></span>
+<span class="codeline" id="line-184"><code>		<label for="r50" class="ident">key</label>,</code></span>
+<span class="codeline" id="line-185"><code>		<label for="r47" class="ident">e</label>.<a href="#line-149" class="ident">field</a>,</code></span>
+<span class="codeline" id="line-186"><code>		<label for="r47" class="ident">e</label>.<a href="#line-150" class="ident">reason</a>,</code></span>
+<span class="codeline" id="line-187"><code>		<label for="r49" class="ident">cause</label>)</code></span>
+<span class="codeline" id="line-188"><code>}</code></span>
+<span class="codeline" id="line-189"><code></code></span>
+<span class="codeline" id="line-190"><code><span class="keyword">var</span> _ <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> = <a href="#line-148" class="ident">NodeMatcherValidationError</a>{}</code></span>
+<span class="codeline" id="line-191"><code></code></span>
+<span class="codeline" id="line-192"><code><span class="keyword">var</span> _ <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-193"><code>	Field() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-194"><code>	Reason() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-195"><code>	Key() <a href="../../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-196"><code>	Cause() <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-197"><code>	ErrorName() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-198"><code>} = <a href="#line-148" class="ident">NodeMatcherValidationError</a>{}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

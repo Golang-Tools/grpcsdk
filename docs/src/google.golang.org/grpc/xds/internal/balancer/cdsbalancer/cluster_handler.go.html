@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: cluster_handler.go in package google.golang.org/grpc/xds/internal/balancer/cdsbalancer</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	cluster_handler.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html">google.golang.org/grpc/xds/internal/balancer/cdsbalancer</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<span class="codeline" id="line-17"><code><span class="keyword">package</span> cdsbalancer</code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-20"><code>	<label for="i0"><span class="lit-string i0">"errors"</span></label></code></span>
+<span class="codeline" id="line-21"><code>	<label for="i1"><span class="lit-string i1">"sync"</span></label></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/xds/internal/xdsclient"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"</span></label></code></span>
+<span class="codeline" id="line-25"><code>)</code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-errNotReceivedUpdate" class="ident">errNotReceivedUpdate</a> = <a href="../../../../../../../pkg/errors.html" class="ident i0">errors</a>.<a href="../../../../../../errors/errors.go.html#line-58" class="ident">New</a>(<span class="lit-string">"tried to construct a cluster update on a cluster that has not received an update"</span>)</code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// clusterHandlerUpdate wraps the information received from the registered CDS</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">// watcher. A non-nil error is propagated to the underlying cluster_resolver</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// balancer. A valid update results in creating a new cluster_resolver balancer</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// (if one doesn't already exist) and pushing the update to it.</span></code></span>
+<span class="codeline" id="line-33"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-clusterHandlerUpdate" class="ident">clusterHandlerUpdate</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-34"><code>	<span class="comment">// securityCfg is the Security Config from the top (root) cluster.</span></code></span>
+<span class="codeline" id="line-35"><code>	securityCfg *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_rds.go.html#line-185" class="ident">SecurityConfig</a></code></span>
+<span class="codeline" id="line-36"><code>	<span class="comment">// lbPolicy is the lb policy from the top (root) cluster.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// Currently, we only support roundrobin or ringhash, and since roundrobin</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">	// does need configs, this is only set to the ringhash config, if the policy</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">	// is ringhash. In the future, if we support more policies, we can make this</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">	// an interface, and set it to config of the other policies.</span></code></span>
+<span class="codeline" id="line-42"><code>	lbPolicy *<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-56" class="ident">ClusterLBPolicyRingHash</a></code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code>	<span class="comment">// updates is a list of ClusterUpdates from all the leaf clusters.</span></code></span>
+<span class="codeline" id="line-45"><code>	updates []<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a></code></span>
+<span class="codeline" id="line-46"><code>	err     <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-47"><code>}</code></span>
+<span class="codeline" id="line-48"><code></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">// clusterHandler will be given a name representing a cluster. It will then</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">// update the CDS policy constantly with a list of Clusters to pass down to</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">// XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.</span></code></span>
+<span class="codeline" id="line-52"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-clusterHandler" class="ident">clusterHandler</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-53"><code>	parent *<a href="cdsbalancer.go.html#line-152" class="ident">cdsBalancer</a></code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code>	<span class="comment">// A mutex to protect entire tree of clusters.</span></code></span>
+<span class="codeline" id="line-56"><code>	clusterMutex    <a href="../../../../../../../pkg/sync.html" class="ident i1">sync</a>.<a href="../../../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-57"><code>	root            *<a href="#line-134" class="ident">clusterNode</a></code></span>
+<span class="codeline" id="line-58"><code>	rootClusterName <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code>	<span class="comment">// A way to ping CDS Balancer about any updates or errors to a Node in the</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">	// tree. This will either get called from this handler constructing an</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">	// update or from a child with an error. Capacity of one as the only update</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	// CDS Balancer cares about is the most recent update.</span></code></span>
+<span class="codeline" id="line-64"><code>	updateChannel <span class="keyword">chan</span> <a href="#line-33" class="ident">clusterHandlerUpdate</a></code></span>
+<span class="codeline" id="line-65"><code>}</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-newClusterHandler" class="ident">newClusterHandler</a></label>(<label for="r1" class="ident">parent</label> *<a href="cdsbalancer.go.html#line-152" class="ident">cdsBalancer</a>) *<a href="#line-52" class="ident">clusterHandler</a> {</code></span>
+<span class="codeline" id="line-68"><code>	<span class="keyword">return</span> &amp;<a href="#line-52" class="ident">clusterHandler</a>{</code></span>
+<span class="codeline" id="line-69"><code>		<a href="#line-53" class="ident">parent</a>:        <label for="r1" class="ident">parent</label>,</code></span>
+<span class="codeline" id="line-70"><code>		<a href="#line-64" class="ident">updateChannel</a>: <a href="../../../../../../runtime/chan.go.html#line-72">make</a>(<span class="keyword">chan</span> <a href="#line-33" class="ident">clusterHandlerUpdate</a>, <span class="lit-number">1</span>),</code></span>
+<span class="codeline" id="line-71"><code>	}</code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="keyword">func</span> (<label for="r2" class="ident">ch</label> *<a href="#line-52" class="ident">clusterHandler</a>) <label for="r3" class="ident">updateRootCluster</label>(<label for="r4" class="ident">rootClusterName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) {</code></span>
+<span class="codeline" id="line-75"><code>	<label for="r2" class="ident">ch</label>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-76"><code>	<span class="keyword">defer</span> <label for="r2" class="ident">ch</label>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-77"><code>	<span class="keyword">if</span> <label for="r2" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-78"><code>		<span class="comment">// Construct a root node on first update.</span></code></span>
+<span class="codeline" id="line-79"><code>		<label for="r2" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> = <a href="#line-156" class="ident">createClusterNode</a>(<label for="r4" class="ident">rootClusterName</label>, <label for="r2" class="ident">ch</label>.<a href="#line-53" class="ident">parent</a>.<a href="cdsbalancer.go.html#line-156" class="ident">xdsClient</a>, <label for="r2" class="ident">ch</label>)</code></span>
+<span class="codeline" id="line-80"><code>		<label for="r2" class="ident">ch</label>.<a href="#line-58" class="ident">rootClusterName</a> = <label for="r4" class="ident">rootClusterName</label></code></span>
+<span class="codeline" id="line-81"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-82"><code>	}</code></span>
+<span class="codeline" id="line-83"><code>	<span class="comment">// Check if root cluster was changed. If it was, delete old one and start</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">	// new one, if not do nothing.</span></code></span>
+<span class="codeline" id="line-85"><code>	<span class="keyword">if</span> <label for="r4" class="ident">rootClusterName</label> != <label for="r2" class="ident">ch</label>.<a href="#line-58" class="ident">rootClusterName</a> {</code></span>
+<span class="codeline" id="line-86"><code>		<label for="r2" class="ident">ch</label>.<a href="#line-57" class="ident">root</a>.<a href="#line-172" class="ident">delete</a>()</code></span>
+<span class="codeline" id="line-87"><code>		<label for="r2" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> = <a href="#line-156" class="ident">createClusterNode</a>(<label for="r4" class="ident">rootClusterName</label>, <label for="r2" class="ident">ch</label>.<a href="#line-53" class="ident">parent</a>.<a href="cdsbalancer.go.html#line-156" class="ident">xdsClient</a>, <label for="r2" class="ident">ch</label>)</code></span>
+<span class="codeline" id="line-88"><code>		<label for="r2" class="ident">ch</label>.<a href="#line-58" class="ident">rootClusterName</a> = <label for="r4" class="ident">rootClusterName</label></code></span>
+<span class="codeline" id="line-89"><code>	}</code></span>
+<span class="codeline" id="line-90"><code>}</code></span>
+<span class="codeline" id="line-91"><code></code></span>
+<span class="codeline" id="line-92"><code><span class="comment">// This function tries to construct a cluster update to send to CDS.</span></code></span>
+<span class="codeline" id="line-93"><code><span class="keyword">func</span> (<label for="r5" class="ident">ch</label> *<a href="#line-52" class="ident">clusterHandler</a>) <label for="r6" class="ident">constructClusterUpdate</label>() {</code></span>
+<span class="codeline" id="line-94"><code>	<span class="keyword">if</span> <label for="r5" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-95"><code>		<span class="comment">// If root is nil, this handler is closed, ignore the update.</span></code></span>
+<span class="codeline" id="line-96"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-97"><code>	}</code></span>
+<span class="codeline" id="line-98"><code>	<label for="r7" class="ident">clusterUpdate</label>, <label for="r8" class="ident">err</label> := <label for="r5" class="ident">ch</label>.<a href="#line-57" class="ident">root</a>.<a href="#line-180" class="ident">constructClusterUpdate</a>()</code></span>
+<span class="codeline" id="line-99"><code>	<span class="keyword">if</span> <label for="r8" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-100"><code>		<span class="comment">// If there was an error received no op, as this simply means one of the</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">		// children hasn't received an update yet.</span></code></span>
+<span class="codeline" id="line-102"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-103"><code>	}</code></span>
+<span class="codeline" id="line-104"><code>	<span class="comment">// For a ClusterUpdate, the only update CDS cares about is the most</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">	// recent one, so opportunistically drain the update channel before</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">	// sending the new update.</span></code></span>
+<span class="codeline" id="line-107"><code>	<a href="../../../../../../runtime/chan.go.html#line-708"><span class="keyword">select</span></a> {</code></span>
+<span class="codeline" id="line-108"><code>	<span class="keyword">case</span> <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r5" class="ident">ch</label>.<a href="#line-64" class="ident">updateChannel</a>:</code></span>
+<span class="codeline" id="line-109"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-110"><code>	}</code></span>
+<span class="codeline" id="line-111"><code>	<label for="r5" class="ident">ch</label>.<a href="#line-64" class="ident">updateChannel</a> &lt;- <a href="#line-33" class="ident">clusterHandlerUpdate</a>{</code></span>
+<span class="codeline" id="line-112"><code>		<a href="#line-35" class="ident">securityCfg</a>: <label for="r5" class="ident">ch</label>.<a href="#line-57" class="ident">root</a>.<a href="#line-143" class="ident">clusterUpdate</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-140" class="ident">SecurityCfg</a>,</code></span>
+<span class="codeline" id="line-113"><code>		<a href="#line-42" class="ident">lbPolicy</a>:    <label for="r5" class="ident">ch</label>.<a href="#line-57" class="ident">root</a>.<a href="#line-143" class="ident">clusterUpdate</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-158" class="ident">LBPolicy</a>,</code></span>
+<span class="codeline" id="line-114"><code>		<a href="#line-45" class="ident">updates</a>:     <label for="r7" class="ident">clusterUpdate</label>,</code></span>
+<span class="codeline" id="line-115"><code>	}</code></span>
+<span class="codeline" id="line-116"><code>}</code></span>
+<span class="codeline" id="line-117"><code></code></span>
+<span class="codeline" id="line-118"><code><span class="comment">// close() is meant to be called by CDS when the CDS balancer is closed, and it</span></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">// cancels the watches for every cluster in the cluster tree.</span></code></span>
+<span class="codeline" id="line-120"><code><span class="keyword">func</span> (<label for="r9" class="ident">ch</label> *<a href="#line-52" class="ident">clusterHandler</a>) <label for="r10" class="ident">close</label>() {</code></span>
+<span class="codeline" id="line-121"><code>	<label for="r9" class="ident">ch</label>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-122"><code>	<span class="keyword">defer</span> <label for="r9" class="ident">ch</label>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-123"><code>	<span class="keyword">if</span> <label for="r9" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> == <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-124"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-125"><code>	}</code></span>
+<span class="codeline" id="line-126"><code>	<label for="r9" class="ident">ch</label>.<a href="#line-57" class="ident">root</a>.<a href="#line-172" class="ident">delete</a>()</code></span>
+<span class="codeline" id="line-127"><code>	<label for="r9" class="ident">ch</label>.<a href="#line-57" class="ident">root</a> = <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-128"><code>	<label for="r9" class="ident">ch</label>.<a href="#line-58" class="ident">rootClusterName</a> = <span class="lit-string">""</span></code></span>
+<span class="codeline" id="line-129"><code>}</code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">// This logically represents a cluster. This handles all the logic for starting</span></code></span>
+<span class="codeline" id="line-132"><code><span class="comment">// and stopping a cluster watch, handling any updates, and constructing a list</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">// recursively for the ClusterHandler.</span></code></span>
+<span class="codeline" id="line-134"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-clusterNode" class="ident">clusterNode</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-135"><code>	<span class="comment">// A way to cancel the watch for the cluster.</span></code></span>
+<span class="codeline" id="line-136"><code>	cancelFunc <span class="keyword">func</span>()</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code>	<span class="comment">// A list of children, as the Node can be an aggregate Cluster.</span></code></span>
+<span class="codeline" id="line-139"><code>	children []*<a href="#line-134" class="ident">clusterNode</a></code></span>
+<span class="codeline" id="line-140"><code></code></span>
+<span class="codeline" id="line-141"><code>	<span class="comment">// A ClusterUpdate in order to build a list of cluster updates for CDS to</span></code></span>
+<span class="codeline" id="line-142"><code><span class="comment">	// send down to child XdsClusterResolverLoadBalancingPolicy.</span></code></span>
+<span class="codeline" id="line-143"><code>	clusterUpdate <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a></code></span>
+<span class="codeline" id="line-144"><code></code></span>
+<span class="codeline" id="line-145"><code>	<span class="comment">// This boolean determines whether this Node has received an update or not.</span></code></span>
+<span class="codeline" id="line-146"><code><span class="comment">	// This isn't the best practice, but this will protect a list of Cluster</span></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">	// Updates from being constructed if a cluster in the tree has not received</span></code></span>
+<span class="codeline" id="line-148"><code><span class="comment">	// an update yet.</span></code></span>
+<span class="codeline" id="line-149"><code>	receivedUpdate <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-150"><code></code></span>
+<span class="codeline" id="line-151"><code>	clusterHandler *<a href="#line-52" class="ident">clusterHandler</a></code></span>
+<span class="codeline" id="line-152"><code>}</code></span>
+<span class="codeline" id="line-153"><code></code></span>
+<span class="codeline" id="line-154"><code><span class="comment">// CreateClusterNode creates a cluster node from a given clusterName. This will</span></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">// also start the watch for that cluster.</span></code></span>
+<span class="codeline" id="line-156"><code><span class="keyword">func</span> <label for="r11" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#name-createClusterNode" class="ident">createClusterNode</a></label>(<label for="r12" class="ident">clusterName</label> <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <label for="r13" class="ident">xdsClient</label> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient.html" class="ident i2">xdsclient</a>.<a href="../../xdsclient/attributes.go.html#line-34" class="ident">XDSClient</a>, <label for="r14" class="ident">topLevelHandler</label> *<a href="#line-52" class="ident">clusterHandler</a>) *<a href="#line-134" class="ident">clusterNode</a> {</code></span>
+<span class="codeline" id="line-157"><code>	<label for="r15" class="ident">c</label> := &amp;<a href="#line-134" class="ident">clusterNode</a>{</code></span>
+<span class="codeline" id="line-158"><code>		<a href="#line-151" class="ident">clusterHandler</a>: <label for="r14" class="ident">topLevelHandler</label>,</code></span>
+<span class="codeline" id="line-159"><code>	}</code></span>
+<span class="codeline" id="line-160"><code>	<span class="comment">// Communicate with the xds client here.</span></code></span>
+<span class="codeline" id="line-161"><code>	<label for="r14" class="ident">topLevelHandler</label>.<a href="#line-53" class="ident">parent</a>.<a href="cdsbalancer.go.html#line-159" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"CDS watch started on %v"</span>, <label for="r12" class="ident">clusterName</label>)</code></span>
+<span class="codeline" id="line-162"><code>	<label for="r16" class="ident">cancel</label> := <label for="r13" class="ident">xdsClient</label>.<a href="../../xdsclient/attributes.go.html#line-37" class="ident">WatchCluster</a>(<label for="r12" class="ident">clusterName</label>, <label for="r15" class="ident">c</label>.<a href="#line-210" class="ident">handleResp</a>)</code></span>
+<span class="codeline" id="line-163"><code>	<label for="r15" class="ident">c</label>.<a href="#line-136" class="ident">cancelFunc</a> = <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-164"><code>		<label for="r14" class="ident">topLevelHandler</label>.<a href="#line-53" class="ident">parent</a>.<a href="cdsbalancer.go.html#line-159" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"CDS watch canceled on %v"</span>, <label for="r12" class="ident">clusterName</label>)</code></span>
+<span class="codeline" id="line-165"><code>		<label for="r16" class="ident">cancel</label>()</code></span>
+<span class="codeline" id="line-166"><code>	}</code></span>
+<span class="codeline" id="line-167"><code>	<span class="keyword">return</span> <label for="r15" class="ident">c</label></code></span>
+<span class="codeline" id="line-168"><code>}</code></span>
+<span class="codeline" id="line-169"><code></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">// This function cancels the cluster watch on the cluster and all of it's</span></code></span>
+<span class="codeline" id="line-171"><code><span class="comment">// children.</span></code></span>
+<span class="codeline" id="line-172"><code><span class="keyword">func</span> (<label for="r17" class="ident">c</label> *<a href="#line-134" class="ident">clusterNode</a>) <label for="r18" class="ident">delete</label>() {</code></span>
+<span class="codeline" id="line-173"><code>	<label for="r17" class="ident">c</label>.<a href="#line-136" class="ident">cancelFunc</a>()</code></span>
+<span class="codeline" id="line-174"><code>	<span class="keyword">for</span> <label for="r19" class="ident">_</label>, <label for="r20" class="ident">child</label> := <span class="keyword">range</span> <label for="r17" class="ident">c</label>.<a href="#line-139" class="ident">children</a> {</code></span>
+<span class="codeline" id="line-175"><code>		<label for="r20" class="ident">child</label>.<label for="r18" class="ident">delete</label>()</code></span>
+<span class="codeline" id="line-176"><code>	}</code></span>
+<span class="codeline" id="line-177"><code>}</code></span>
+<span class="codeline" id="line-178"><code></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">// Construct cluster update (potentially a list of ClusterUpdates) for a node.</span></code></span>
+<span class="codeline" id="line-180"><code><span class="keyword">func</span> (<label for="r21" class="ident">c</label> *<a href="#line-134" class="ident">clusterNode</a>) <label for="r22" class="ident">constructClusterUpdate</label>() ([]<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-181"><code>	<span class="comment">// If the cluster has not yet received an update, the cluster update is not</span></code></span>
+<span class="codeline" id="line-182"><code><span class="comment">	// yet ready.</span></code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">if</span> !<label for="r21" class="ident">c</label>.<a href="#line-149" class="ident">receivedUpdate</a> {</code></span>
+<span class="codeline" id="line-184"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="#line-27" class="ident">errNotReceivedUpdate</a></code></span>
+<span class="codeline" id="line-185"><code>	}</code></span>
+<span class="codeline" id="line-186"><code></code></span>
+<span class="codeline" id="line-187"><code>	<span class="comment">// Base case - LogicalDNS or EDS. Both of these cluster types will be tied</span></code></span>
+<span class="codeline" id="line-188"><code><span class="comment">	// to a single ClusterUpdate.</span></code></span>
+<span class="codeline" id="line-189"><code>	<span class="keyword">if</span> <label for="r21" class="ident">c</label>.<a href="#line-143" class="ident">clusterUpdate</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-129" class="ident">ClusterType</a> != <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-39" class="ident">ClusterTypeAggregate</a> {</code></span>
+<span class="codeline" id="line-190"><code>		<span class="keyword">return</span> []<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a>{<label for="r21" class="ident">c</label>.<a href="#line-143" class="ident">clusterUpdate</a>}, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-191"><code>	}</code></span>
+<span class="codeline" id="line-192"><code></code></span>
+<span class="codeline" id="line-193"><code>	<span class="comment">// If an aggregate construct a list by recursively calling down to all of</span></code></span>
+<span class="codeline" id="line-194"><code><span class="comment">	// it's children.</span></code></span>
+<span class="codeline" id="line-195"><code>	<span class="keyword">var</span> <label for="r23" class="ident">childrenUpdates</label> []<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a></code></span>
+<span class="codeline" id="line-196"><code>	<span class="keyword">for</span> <label for="r24" class="ident">_</label>, <label for="r25" class="ident">child</label> := <span class="keyword">range</span> <label for="r21" class="ident">c</label>.<a href="#line-139" class="ident">children</a> {</code></span>
+<span class="codeline" id="line-197"><code>		<label for="r26" class="ident">childUpdateList</label>, <label for="r27" class="ident">err</label> := <label for="r25" class="ident">child</label>.<label for="r22" class="ident">constructClusterUpdate</label>()</code></span>
+<span class="codeline" id="line-198"><code>		<span class="keyword">if</span> <label for="r27" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-199"><code>			<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <label for="r27" class="ident">err</label></code></span>
+<span class="codeline" id="line-200"><code>		}</code></span>
+<span class="codeline" id="line-201"><code>		<label for="r23" class="ident">childrenUpdates</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r23" class="ident">childrenUpdates</label>, <label for="r26" class="ident">childUpdateList</label>...)</code></span>
+<span class="codeline" id="line-202"><code>	}</code></span>
+<span class="codeline" id="line-203"><code>	<span class="keyword">return</span> <label for="r23" class="ident">childrenUpdates</label>, <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-204"><code>}</code></span>
+<span class="codeline" id="line-205"><code></code></span>
+<span class="codeline" id="line-206"><code><span class="comment">// handleResp handles a xds response for a particular cluster. This function</span></code></span>
+<span class="codeline" id="line-207"><code><span class="comment">// also handles any logic with regards to any child state that may have changed.</span></code></span>
+<span class="codeline" id="line-208"><code><span class="comment">// At the end of the handleResp(), the clusterUpdate will be pinged in certain</span></code></span>
+<span class="codeline" id="line-209"><code><span class="comment">// situations to try and construct an update to send back to CDS.</span></code></span>
+<span class="codeline" id="line-210"><code><span class="keyword">func</span> (<label for="r28" class="ident">c</label> *<a href="#line-134" class="ident">clusterNode</a>) <label for="r29" class="ident">handleResp</label>(<label for="r30" class="ident">clusterUpdate</label> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-128" class="ident">ClusterUpdate</a>, <label for="r31" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-211"><code>	<label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-212"><code>	<span class="keyword">defer</span> <label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-56" class="ident">clusterMutex</a>.<a href="../../../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-213"><code>	<span class="keyword">if</span> <label for="r31" class="ident">err</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> { <span class="comment">// Write this error for run() to pick up in CDS LB policy.</span></code></span>
+<span class="codeline" id="line-214"><code>		<span class="comment">// For a ClusterUpdate, the only update CDS cares about is the most</span></code></span>
+<span class="codeline" id="line-215"><code><span class="comment">		// recent one, so opportunistically drain the update channel before</span></code></span>
+<span class="codeline" id="line-216"><code><span class="comment">		// sending the new update.</span></code></span>
+<span class="codeline" id="line-217"><code>		<a href="../../../../../../runtime/chan.go.html#line-708"><span class="keyword">select</span></a> {</code></span>
+<span class="codeline" id="line-218"><code>		<span class="keyword">case</span> <a href="../../../../../../runtime/chan.go.html#line-439">&lt;-</a><label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-64" class="ident">updateChannel</a>:</code></span>
+<span class="codeline" id="line-219"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-220"><code>		}</code></span>
+<span class="codeline" id="line-221"><code>		<label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-64" class="ident">updateChannel</a> &lt;- <a href="#line-33" class="ident">clusterHandlerUpdate</a>{<a href="#line-46" class="ident">err</a>: <label for="r31" class="ident">err</label>}</code></span>
+<span class="codeline" id="line-222"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-223"><code>	}</code></span>
+<span class="codeline" id="line-224"><code></code></span>
+<span class="codeline" id="line-225"><code>	<label for="r28" class="ident">c</label>.<a href="#line-149" class="ident">receivedUpdate</a> = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-226"><code>	<label for="r28" class="ident">c</label>.<a href="#line-143" class="ident">clusterUpdate</a> = <label for="r30" class="ident">clusterUpdate</label></code></span>
+<span class="codeline" id="line-227"><code></code></span>
+<span class="codeline" id="line-228"><code>	<span class="comment">// If the cluster was a leaf node, if the cluster update received had change</span></code></span>
+<span class="codeline" id="line-229"><code><span class="comment">	// in the cluster update then the overall cluster update would change and</span></code></span>
+<span class="codeline" id="line-230"><code><span class="comment">	// there is a possibility for the overall update to build so ping cluster</span></code></span>
+<span class="codeline" id="line-231"><code><span class="comment">	// handler to return. Also, if there was any children from previously,</span></code></span>
+<span class="codeline" id="line-232"><code><span class="comment">	// delete the children, as the cluster type is no longer an aggregate</span></code></span>
+<span class="codeline" id="line-233"><code><span class="comment">	// cluster.</span></code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">if</span> <label for="r30" class="ident">clusterUpdate</label>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-129" class="ident">ClusterType</a> != <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i3">xdsresource</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-39" class="ident">ClusterTypeAggregate</a> {</code></span>
+<span class="codeline" id="line-235"><code>		<span class="keyword">for</span> <label for="r32" class="ident">_</label>, <label for="r33" class="ident">child</label> := <span class="keyword">range</span> <label for="r28" class="ident">c</label>.<a href="#line-139" class="ident">children</a> {</code></span>
+<span class="codeline" id="line-236"><code>			<label for="r33" class="ident">child</label>.<a href="#line-172" class="ident">delete</a>()</code></span>
+<span class="codeline" id="line-237"><code>		}</code></span>
+<span class="codeline" id="line-238"><code>		<label for="r28" class="ident">c</label>.<a href="#line-139" class="ident">children</a> = <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-239"><code>		<span class="comment">// This is an update in the one leaf node, should try to send an update</span></code></span>
+<span class="codeline" id="line-240"><code><span class="comment">		// to the parent CDS balancer.</span></code></span>
+<span class="codeline" id="line-241"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-242"><code><span class="comment">		// Note that this update might be a duplicate from the previous one.</span></code></span>
+<span class="codeline" id="line-243"><code><span class="comment">		// Because the update contains not only the cluster name to watch, but</span></code></span>
+<span class="codeline" id="line-244"><code><span class="comment">		// also the extra fields (e.g. security config). There's no good way to</span></code></span>
+<span class="codeline" id="line-245"><code><span class="comment">		// compare all the fields.</span></code></span>
+<span class="codeline" id="line-246"><code>		<label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-93" class="ident">constructClusterUpdate</a>()</code></span>
+<span class="codeline" id="line-247"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-248"><code>	}</code></span>
+<span class="codeline" id="line-249"><code></code></span>
+<span class="codeline" id="line-250"><code>	<span class="comment">// Aggregate cluster handling.</span></code></span>
+<span class="codeline" id="line-251"><code>	<label for="r34" class="ident">newChildren</label> := <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>)</code></span>
+<span class="codeline" id="line-252"><code>	<span class="keyword">for</span> <label for="r35" class="ident">_</label>, <label for="r36" class="ident">childName</label> := <span class="keyword">range</span> <label for="r30" class="ident">clusterUpdate</label>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-148" class="ident">PrioritizedClusterNames</a> {</code></span>
+<span class="codeline" id="line-253"><code>		<label for="r34" class="ident">newChildren</label>[<label for="r36" class="ident">childName</label>] = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-254"><code>	}</code></span>
+<span class="codeline" id="line-255"><code></code></span>
+<span class="codeline" id="line-256"><code>	<span class="comment">// These booleans help determine whether this callback will ping the overall</span></code></span>
+<span class="codeline" id="line-257"><code><span class="comment">	// clusterHandler to try and construct an update to send back to CDS. This</span></code></span>
+<span class="codeline" id="line-258"><code><span class="comment">	// will be determined by whether there would be a change in the overall</span></code></span>
+<span class="codeline" id="line-259"><code><span class="comment">	// clusterUpdate for the whole tree (ex. change in clusterUpdate for current</span></code></span>
+<span class="codeline" id="line-260"><code><span class="comment">	// cluster or a deleted child) and also if there's even a possibility for</span></code></span>
+<span class="codeline" id="line-261"><code><span class="comment">	// the update to build (ex. if a child is created and a watch is started,</span></code></span>
+<span class="codeline" id="line-262"><code><span class="comment">	// that child hasn't received an update yet due to the mutex lock on this</span></code></span>
+<span class="codeline" id="line-263"><code><span class="comment">	// callback).</span></code></span>
+<span class="codeline" id="line-264"><code>	<span class="keyword">var</span> <label for="r37" class="ident">createdChild</label>, <label for="r38" class="ident">deletedChild</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-265"><code></code></span>
+<span class="codeline" id="line-266"><code>	<span class="comment">// This map will represent the current children of the cluster. It will be</span></code></span>
+<span class="codeline" id="line-267"><code><span class="comment">	// first added to in order to represent the new children. It will then have</span></code></span>
+<span class="codeline" id="line-268"><code><span class="comment">	// any children deleted that are no longer present. Then, from the cluster</span></code></span>
+<span class="codeline" id="line-269"><code><span class="comment">	// update received, will be used to construct the new child list.</span></code></span>
+<span class="codeline" id="line-270"><code>	<label for="r39" class="ident">mapCurrentChildren</label> := <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]*<a href="#line-134" class="ident">clusterNode</a>)</code></span>
+<span class="codeline" id="line-271"><code>	<span class="keyword">for</span> <label for="r40" class="ident">_</label>, <label for="r41" class="ident">child</label> := <span class="keyword">range</span> <label for="r28" class="ident">c</label>.<a href="#line-139" class="ident">children</a> {</code></span>
+<span class="codeline" id="line-272"><code>		<label for="r39" class="ident">mapCurrentChildren</label>[<label for="r41" class="ident">child</label>.<a href="#line-143" class="ident">clusterUpdate</a>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-131" class="ident">ClusterName</a>] = <label for="r41" class="ident">child</label></code></span>
+<span class="codeline" id="line-273"><code>	}</code></span>
+<span class="codeline" id="line-274"><code></code></span>
+<span class="codeline" id="line-275"><code>	<span class="comment">// Add and construct any new child nodes.</span></code></span>
+<span class="codeline" id="line-276"><code>	<span class="keyword">for</span> <label for="r42" class="ident">child</label> := <span class="keyword">range</span> <label for="r34" class="ident">newChildren</label> {</code></span>
+<span class="codeline" id="line-277"><code>		<span class="keyword">if</span> <label for="r43" class="ident">_</label>, <label for="r44" class="ident">inChildrenAlready</label> := <label for="r39" class="ident">mapCurrentChildren</label>[<label for="r42" class="ident">child</label>]; !<label for="r44" class="ident">inChildrenAlready</label> {</code></span>
+<span class="codeline" id="line-278"><code>			<label for="r37" class="ident">createdChild</label> = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-279"><code>			<label for="r39" class="ident">mapCurrentChildren</label>[<label for="r42" class="ident">child</label>] = <a href="#line-156" class="ident">createClusterNode</a>(<label for="r42" class="ident">child</label>, <label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-53" class="ident">parent</a>.<a href="cdsbalancer.go.html#line-156" class="ident">xdsClient</a>, <label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>)</code></span>
+<span class="codeline" id="line-280"><code>		}</code></span>
+<span class="codeline" id="line-281"><code>	}</code></span>
+<span class="codeline" id="line-282"><code></code></span>
+<span class="codeline" id="line-283"><code>	<span class="comment">// Delete any child nodes no longer in the aggregate cluster's children.</span></code></span>
+<span class="codeline" id="line-284"><code>	<span class="keyword">for</span> <label for="r45" class="ident">child</label> := <span class="keyword">range</span> <label for="r39" class="ident">mapCurrentChildren</label> {</code></span>
+<span class="codeline" id="line-285"><code>		<span class="keyword">if</span> <label for="r46" class="ident">_</label>, <label for="r47" class="ident">stillAChild</label> := <label for="r34" class="ident">newChildren</label>[<label for="r45" class="ident">child</label>]; !<label for="r47" class="ident">stillAChild</label> {</code></span>
+<span class="codeline" id="line-286"><code>			<label for="r38" class="ident">deletedChild</label> = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-287"><code>			<label for="r39" class="ident">mapCurrentChildren</label>[<label for="r45" class="ident">child</label>].<a href="#line-172" class="ident">delete</a>()</code></span>
+<span class="codeline" id="line-288"><code>			<a href="../../../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<label for="r39" class="ident">mapCurrentChildren</label>, <label for="r45" class="ident">child</label>)</code></span>
+<span class="codeline" id="line-289"><code>		}</code></span>
+<span class="codeline" id="line-290"><code>	}</code></span>
+<span class="codeline" id="line-291"><code></code></span>
+<span class="codeline" id="line-292"><code>	<span class="comment">// The order of the children list matters, so use the clusterUpdate from</span></code></span>
+<span class="codeline" id="line-293"><code><span class="comment">	// xdsclient as the ordering, and use that logical ordering for the new</span></code></span>
+<span class="codeline" id="line-294"><code><span class="comment">	// children list. This will be a mixture of child nodes which are all</span></code></span>
+<span class="codeline" id="line-295"><code><span class="comment">	// already constructed in the mapCurrentChildrenMap.</span></code></span>
+<span class="codeline" id="line-296"><code>	<span class="keyword">var</span> <label for="r48" class="ident">children</label> = <a href="../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]*<a href="#line-134" class="ident">clusterNode</a>, <span class="lit-number">0</span>, <a href="../../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r30" class="ident">clusterUpdate</label>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-148" class="ident">PrioritizedClusterNames</a>))</code></span>
+<span class="codeline" id="line-297"><code></code></span>
+<span class="codeline" id="line-298"><code>	<span class="keyword">for</span> <label for="r49" class="ident">_</label>, <label for="r50" class="ident">orderedChild</label> := <span class="keyword">range</span> <label for="r30" class="ident">clusterUpdate</label>.<a href="../../xdsclient/xdsresource/type_cds.go.html#line-148" class="ident">PrioritizedClusterNames</a> {</code></span>
+<span class="codeline" id="line-299"><code>		<span class="comment">// The cluster's already have watches started for them in xds client, so</span></code></span>
+<span class="codeline" id="line-300"><code><span class="comment">		// you can use these pointers to construct the new children list, you</span></code></span>
+<span class="codeline" id="line-301"><code><span class="comment">		// just have to put them in the correct order using the original cluster</span></code></span>
+<span class="codeline" id="line-302"><code><span class="comment">		// update.</span></code></span>
+<span class="codeline" id="line-303"><code>		<label for="r51" class="ident">currentChild</label> := <label for="r39" class="ident">mapCurrentChildren</label>[<label for="r50" class="ident">orderedChild</label>]</code></span>
+<span class="codeline" id="line-304"><code>		<label for="r48" class="ident">children</label> = <a href="../../../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r48" class="ident">children</label>, <label for="r51" class="ident">currentChild</label>)</code></span>
+<span class="codeline" id="line-305"><code>	}</code></span>
+<span class="codeline" id="line-306"><code></code></span>
+<span class="codeline" id="line-307"><code>	<label for="r28" class="ident">c</label>.<a href="#line-139" class="ident">children</a> = <label for="r48" class="ident">children</label></code></span>
+<span class="codeline" id="line-308"><code></code></span>
+<span class="codeline" id="line-309"><code>	<span class="comment">// If the cluster is an aggregate cluster, if this callback created any new</span></code></span>
+<span class="codeline" id="line-310"><code><span class="comment">	// child cluster nodes, then there's no possibility for a full cluster</span></code></span>
+<span class="codeline" id="line-311"><code><span class="comment">	// update to successfully build, as those created children will not have</span></code></span>
+<span class="codeline" id="line-312"><code><span class="comment">	// received an update yet. However, if there was simply a child deleted,</span></code></span>
+<span class="codeline" id="line-313"><code><span class="comment">	// then there is a possibility that it will have a full cluster update to</span></code></span>
+<span class="codeline" id="line-314"><code><span class="comment">	// build and also will have a changed overall cluster update from the</span></code></span>
+<span class="codeline" id="line-315"><code><span class="comment">	// deleted child.</span></code></span>
+<span class="codeline" id="line-316"><code>	<span class="keyword">if</span> <label for="r38" class="ident">deletedChild</label> &amp;&amp; !<label for="r37" class="ident">createdChild</label> {</code></span>
+<span class="codeline" id="line-317"><code>		<label for="r28" class="ident">c</label>.<a href="#line-151" class="ident">clusterHandler</a>.<a href="#line-93" class="ident">constructClusterUpdate</a>()</code></span>
+<span class="codeline" id="line-318"><code>	}</code></span>
+<span class="codeline" id="line-319"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

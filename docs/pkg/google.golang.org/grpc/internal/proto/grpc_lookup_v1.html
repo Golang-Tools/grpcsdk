@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/internal/proto/grpc_lookup_v1</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>grpc_lookup_v1</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/internal/proto/grpc_lookup_v1">google.golang.org/grpc/internal/proto/grpc_lookup_v1</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/internal/proto/grpc_lookup_v1" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/internal/proto/grpc_lookup_v1.html">10 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/internal/proto/grpc_lookup_v1.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html">rls.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html">rls_config.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html">rls_grpc.pb.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 15, in which 14 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-GrpcKeyBuilder" data-popularity="825">	<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-content"><label for="GrpcKeyBuilder-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-119">GrpcKeyBuilder</a> <i>(struct)</i></label><span id='GrpcKeyBuilder-fold-content-docs' class="fold-docs">
+		A GrpcKeyBuilder applies to a given gRPC service, name, and headers.
+
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-fields"><label for="GrpcKeyBuilder-fold-fields">Fields (<i>total 7, in which 4 are exported</i>)</label><span id='GrpcKeyBuilder-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-field-ConstantKeys"><label for="GrpcKeyBuilder-fold-field-ConstantKeys"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-134">ConstantKeys</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='GrpcKeyBuilder-fold-field-ConstantKeys-docs' class="fold-docs">
+				You can optionally set one or more specific key/value pairs to be added to
+				the key_map.  This can be useful to identify which builder built the key,
+				for example if you are suppressing the actual method, but need to
+				separately cache and request all the matched methods.
+</span></span><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-125">ExtraKeys</a> <i>*<a href="#name-GrpcKeyBuilder_ExtraKeys">GrpcKeyBuilder_ExtraKeys</a></i></span></span><span>
+			<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-field-Headers"><label for="GrpcKeyBuilder-fold-field-Headers"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-129">Headers</a> <i>[]*<a href="#name-NameMatcher">NameMatcher</a></i></label><span id='GrpcKeyBuilder-fold-field-Headers-docs' class="fold-docs">
+				Extract keys from all listed headers.
+				For gRPC, it is an error to specify "required_match" on the NameMatcher
+				protos.
+</span></span><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-124">Names</a> <i>[]*<a href="#name-GrpcKeyBuilder_Name">GrpcKeyBuilder_Name</a></i></span></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder-showhide-fields"><i><label for="GrpcKeyBuilder-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="GrpcKeyBuilder-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-121">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-120">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-122">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-methods"><label for="GrpcKeyBuilder-fold-methods">Methods (<i>total 9, all are exported</i>)</label><span id='GrpcKeyBuilder-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-method-Descriptor"><label for="GrpcKeyBuilder-fold-method-Descriptor">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-165">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='GrpcKeyBuilder-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use GrpcKeyBuilder.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-190">GetConstantKeys</a>() map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-176">GetExtraKeys</a>() *<a href="#name-GrpcKeyBuilder_ExtraKeys">GrpcKeyBuilder_ExtraKeys</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-183">GetHeaders</a>() []*<a href="#name-NameMatcher">NameMatcher</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-169">GetNames</a>() []*<a href="#name-GrpcKeyBuilder_Name">GrpcKeyBuilder_Name</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-150">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-152">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-137">Reset</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-146">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-impls"><label for="GrpcKeyBuilder-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='GrpcKeyBuilder-fold-impls-items' class="fold-items"><span>
+			*GrpcKeyBuilder : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*GrpcKeyBuilder : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*GrpcKeyBuilder : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder-showhide-impls"><i><label for="GrpcKeyBuilder-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="GrpcKeyBuilder-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*GrpcKeyBuilder : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder-fold-results"><label for="GrpcKeyBuilder-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GrpcKeyBuilder-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-RouteLookupConfig">RouteLookupConfig</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-433">GetGrpcKeybuilders</a>() []*<b>GrpcKeyBuilder</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcKeyBuilder_ExtraKeys" data-popularity="775">	<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-content"><label for="GrpcKeyBuilder_ExtraKeys-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-604">GrpcKeyBuilder_ExtraKeys</a> <i>(struct)</i></label><span id='GrpcKeyBuilder_ExtraKeys-fold-content-docs' class="fold-docs">
+		If you wish to include the host, service, or method names as keys in the
+		generated RouteLookupRequest, specify key names to use in the extra_keys
+		submessage. If a key name is empty, no key will be set for that value.
+		If this submessage is specified, the normal host/path fields will be left
+		unset in the RouteLookupRequest. We are deprecating host/path in the
+		RouteLookupRequest, so services should migrate to the ExtraKeys approach.
+
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-fields"><label for="GrpcKeyBuilder_ExtraKeys-fold-fields">Fields (<i>total 6, in which 3 are exported</i>)</label><span id='GrpcKeyBuilder_ExtraKeys-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-609">Host</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-611">Method</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-610">Service</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder_ExtraKeys-showhide-fields"><i><label for="GrpcKeyBuilder_ExtraKeys-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="GrpcKeyBuilder_ExtraKeys-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-606">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-605">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-607">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-methods"><label for="GrpcKeyBuilder_ExtraKeys-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='GrpcKeyBuilder_ExtraKeys-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-method-Descriptor"><label for="GrpcKeyBuilder_ExtraKeys-fold-method-Descriptor">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-642">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='GrpcKeyBuilder_ExtraKeys-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use GrpcKeyBuilder_ExtraKeys.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-646">GetHost</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-660">GetMethod</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-653">GetService</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-627">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-629">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-614">Reset</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_ExtraKeys) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-623">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-impls"><label for="GrpcKeyBuilder_ExtraKeys-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='GrpcKeyBuilder_ExtraKeys-fold-impls-items' class="fold-items"><span>
+			*GrpcKeyBuilder_ExtraKeys : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*GrpcKeyBuilder_ExtraKeys : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*GrpcKeyBuilder_ExtraKeys : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder_ExtraKeys-showhide-impls"><i><label for="GrpcKeyBuilder_ExtraKeys-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="GrpcKeyBuilder_ExtraKeys-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*GrpcKeyBuilder_ExtraKeys : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder_ExtraKeys : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder_ExtraKeys : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_ExtraKeys-fold-results"><label for="GrpcKeyBuilder_ExtraKeys-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GrpcKeyBuilder_ExtraKeys-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-GrpcKeyBuilder">GrpcKeyBuilder</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-176">GetExtraKeys</a>() *<b>GrpcKeyBuilder_ExtraKeys</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-GrpcKeyBuilder_Name" data-popularity="725">	<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-content"><label for="GrpcKeyBuilder_Name-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-543">GrpcKeyBuilder_Name</a> <i>(struct)</i></label><span id='GrpcKeyBuilder_Name-fold-content-docs' class="fold-docs">
+		To match, one of the given Name fields must match; the service and method
+		fields are specified as fixed strings.  The service name is required and
+		includes the proto package name.  The method name may be omitted, in
+		which case any method on the given service is matched.
+
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-fields"><label for="GrpcKeyBuilder_Name-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='GrpcKeyBuilder_Name-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-549">Method</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-548">Service</a> <i><a href="../../../../builtin.html#name-string">string</a></i></span></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder_Name-showhide-fields"><i><label for="GrpcKeyBuilder_Name-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="GrpcKeyBuilder_Name-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-545">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-544">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-546">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-methods"><label for="GrpcKeyBuilder_Name-fold-methods">Methods (<i>total 7, all are exported</i>)</label><span id='GrpcKeyBuilder_Name-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-method-Descriptor"><label for="GrpcKeyBuilder_Name-fold-method-Descriptor">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-580">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='GrpcKeyBuilder_Name-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use GrpcKeyBuilder_Name.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-591">GetMethod</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-584">GetService</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-565">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-567">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-552">Reset</a>()</span></span><span>
+			<span class="nodocs">(*GrpcKeyBuilder_Name) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-561">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-impls"><label for="GrpcKeyBuilder_Name-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='GrpcKeyBuilder_Name-fold-impls-items' class="fold-items"><span>
+			*GrpcKeyBuilder_Name : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*GrpcKeyBuilder_Name : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*GrpcKeyBuilder_Name : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="GrpcKeyBuilder_Name-showhide-impls"><i><label for="GrpcKeyBuilder_Name-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="GrpcKeyBuilder_Name-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*GrpcKeyBuilder_Name : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder_Name : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*GrpcKeyBuilder_Name : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="GrpcKeyBuilder_Name-fold-results"><label for="GrpcKeyBuilder_Name-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GrpcKeyBuilder_Name-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-GrpcKeyBuilder">GrpcKeyBuilder</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-169">GetNames</a>() []*<b>GrpcKeyBuilder_Name</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-HttpKeyBuilder" data-popularity="875">	<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-content"><label for="HttpKeyBuilder-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-213">HttpKeyBuilder</a> <i>(struct)</i></label><span id='HttpKeyBuilder-fold-content-docs' class="fold-docs">
+		An HttpKeyBuilder applies to a given HTTP URL and headers.
+
+		Path and host patterns use the matching syntax from gRPC transcoding to
+		extract named key/value pairs from the path and host components of the URL:
+		https://github.com/googleapis/googleapis/blob/master/google/api/http.proto
+
+		It is invalid to specify the same key name in multiple places in a pattern.
+
+		For a service where the project id can be expressed either as a subdomain or
+		in the path, separate HttpKeyBuilders must be used:
+		    host_pattern: 'example.com' path_pattern: '/{id}/{object}/**'
+		    host_pattern: '{id}.example.com' path_pattern: '/{object}/**'
+		If the host is exactly 'example.com', the first path segment will be used as
+		the id and the second segment as the object. If the host has a subdomain, the
+		subdomain will be used as the id and the first segment as the object. If
+		neither pattern matches, no keys will be extracted.
+
+		<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-fields"><label for="HttpKeyBuilder-fold-fields">Fields (<i>total 8, in which 5 are exported</i>)</label><span id='HttpKeyBuilder-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-field-ConstantKeys"><label for="HttpKeyBuilder-fold-field-ConstantKeys"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-275">ConstantKeys</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='HttpKeyBuilder-fold-field-ConstantKeys-docs' class="fold-docs">
+				You can optionally set one or more specific key/value pairs to be added to
+				the key_map.  This can be useful to identify which builder built the key,
+				for example if you are suppressing a lot of information from the URL, but
+				need to separately cache and request URLs with that content.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-field-Headers"><label for="HttpKeyBuilder-fold-field-Headers"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-270">Headers</a> <i>[]*<a href="#name-NameMatcher">NameMatcher</a></i></label><span id='HttpKeyBuilder-fold-field-Headers-docs' class="fold-docs">
+				List of headers to try to match.
+				We extract all the specified header values (case-insensitively).  If any
+				are marked as "required_match" and are not present, this keybuilder fails
+				to match.  If a given header appears multiple times in the request we will
+				report it as a comma-separated string, in standard HTTP fashion.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-field-HostPatterns"><label for="HttpKeyBuilder-fold-field-HostPatterns"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-236">HostPatterns</a> <i>[]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='HttpKeyBuilder-fold-field-HostPatterns-docs' class="fold-docs">
+				host_pattern is an ordered list of host template patterns for the desired
+				value.  If any host_pattern values are specified, then at least one must
+				match, and the last one wins and sets any specified variables.  A host
+				consists of labels separated by dots. Each label is matched against the
+				label in the pattern as follows:
+				  - "*": Matches any single label.
+				  - "**": Matches zero or more labels (first or last part of host only).
+				  - "{&lt;name&gt;=...}": One or more label capture, where "..." can be any
+				     template that does not include a capture.
+				  - "{&lt;name&gt;}": A single label capture. Identical to {&lt;name&gt;=*}.
+
+				Examples:
+				  - "example.com": Only applies to the exact host example.com.
+				  - "*.example.com": Matches subdomains of example.com.
+				  - "**.example.com": matches example.com, and all levels of subdomains.
+				  - "{project}.example.com": Extracts the third level subdomain.
+				  - "{project=**}.example.com": Extracts the third level+ subdomains.
+				  - "{project=**}": Extracts the entire host.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-field-PathPatterns"><label for="HttpKeyBuilder-fold-field-PathPatterns"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-257">PathPatterns</a> <i>[]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='HttpKeyBuilder-fold-field-PathPatterns-docs' class="fold-docs">
+				path_pattern is an ordered list of path template patterns for the desired
+				value.  If any path_pattern values are specified, then at least one must
+				match, and the last one wins and sets any specified variables.  A path
+				consists of segments separated by slashes. Each segment is matched against
+				the segment in the pattern as follows:
+				  - "*": Matches any single segment.
+				  - "**": Matches zero or more segments (first or last part of path only).
+				  - "{&lt;name&gt;=...}": One or more segment capture, where "..." can be any
+				     template that does not include a capture.
+				  - "{&lt;name&gt;}": A single segment capture. Identical to {&lt;name&gt;=*}.
+				A custom method may also be specified by appending ":" and the custom
+				method name or "*" to indicate any custom method (including no custom
+				method).  For example, "/*/projects/{project_id}/**:*" extracts
+				`{project_id}` for any version, resource and custom method that includes
+				it.  By default, any custom method will be matched.
+
+				Examples:
+				  - "/v1/{name=messages/*}": extracts a name like "messages/12345".
+				  - "/v1/messages/{message_id}": extracts a message_id like "12345".
+				  - "/v1/users/{user_id}/messages/{message_id}": extracts two key values.
+</span></span><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-field-QueryParameters"><label for="HttpKeyBuilder-fold-field-QueryParameters"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-264">QueryParameters</a> <i>[]*<a href="#name-NameMatcher">NameMatcher</a></i></label><span id='HttpKeyBuilder-fold-field-QueryParameters-docs' class="fold-docs">
+				List of query parameter names to try to match.
+				For example: ["parent", "name", "resource.name"]
+				We extract all the specified query_parameters (case-sensitively).  If any
+				are marked as "required_match" and are not present, this keybuilder fails
+				to match.  If a given parameter appears multiple times (?foo=a&amp;foo=b) we
+				will report it as a comma-separated string (foo=a,b).
+</span></span>
+			<input type='checkbox' class="showhide" id="HttpKeyBuilder-showhide-fields"><i><label for="HttpKeyBuilder-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="HttpKeyBuilder-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-215">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-214">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-216">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-methods"><label for="HttpKeyBuilder-fold-methods">Methods (<i>total 10, all are exported</i>)</label><span id='HttpKeyBuilder-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-method-Descriptor"><label for="HttpKeyBuilder-fold-method-Descriptor">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-306">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='HttpKeyBuilder-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use HttpKeyBuilder.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-338">GetConstantKeys</a>() map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-331">GetHeaders</a>() []*<a href="#name-NameMatcher">NameMatcher</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-310">GetHostPatterns</a>() []<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-317">GetPathPatterns</a>() []<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-324">GetQueryParameters</a>() []*<a href="#name-NameMatcher">NameMatcher</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-291">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-293">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-278">Reset</a>()</span></span><span>
+			<span class="nodocs">(*HttpKeyBuilder) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-287">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-impls"><label for="HttpKeyBuilder-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='HttpKeyBuilder-fold-impls-items' class="fold-items"><span>
+			*HttpKeyBuilder : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*HttpKeyBuilder : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*HttpKeyBuilder : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="HttpKeyBuilder-showhide-impls"><i><label for="HttpKeyBuilder-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="HttpKeyBuilder-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*HttpKeyBuilder : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*HttpKeyBuilder : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*HttpKeyBuilder : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="HttpKeyBuilder-fold-results"><label for="HttpKeyBuilder-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='HttpKeyBuilder-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-RouteLookupConfig">RouteLookupConfig</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-426">GetHttpKeybuilders</a>() []*<b>HttpKeyBuilder</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-NameMatcher" data-popularity="925">	<input type='checkbox' class="fold" id="NameMatcher-fold-content"><label for="NameMatcher-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-47">NameMatcher</a> <i>(struct)</i></label><span id='NameMatcher-fold-content-docs' class="fold-docs">
+		Extract a key based on a given name (e.g. header name or query parameter
+		name).  The name must match one of the names listed in the "name" field.  If
+		the "required_match" field is true, one of the specified names must be
+		present for the keybuilder to match.
+
+		<input type='checkbox' class="fold" id="NameMatcher-fold-fields"><label for="NameMatcher-fold-fields">Fields (<i>total 6, in which 3 are exported</i>)</label><span id='NameMatcher-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="NameMatcher-fold-field-Key"><label for="NameMatcher-fold-field-Key"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-56">Key</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='NameMatcher-fold-field-Key-docs' class="fold-docs">
+				The name that will be used in the RLS key_map to refer to this value.
+				If required_match is true, you may omit this field or set it to an empty
+				string, in which case the matcher will require a match, but won't update
+				the key_map.
+</span></span><span>
+			<input type='checkbox' class="fold" id="NameMatcher-fold-field-Names"><label for="NameMatcher-fold-field-Names"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-59">Names</a> <i>[]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='NameMatcher-fold-field-Names-docs' class="fold-docs">
+				Ordered list of names (headers or query parameter names) that can supply
+				this value; the first one with a non-empty value is used.
+</span></span><span>
+			<input type='checkbox' class="fold" id="NameMatcher-fold-field-RequiredMatch"><label for="NameMatcher-fold-field-RequiredMatch"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-62">RequiredMatch</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></label><span id='NameMatcher-fold-field-RequiredMatch-docs' class="fold-docs">
+				If true, make this extraction required; the key builder will not match
+				if no value is found.
+</span></span>
+			<input type='checkbox' class="showhide" id="NameMatcher-showhide-fields"><i><label for="NameMatcher-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="NameMatcher-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-49">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-48">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-50">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="NameMatcher-fold-methods"><label for="NameMatcher-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='NameMatcher-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="NameMatcher-fold-method-Descriptor"><label for="NameMatcher-fold-method-Descriptor">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-93">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='NameMatcher-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use NameMatcher.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-97">GetKey</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-104">GetNames</a>() []<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-111">GetRequiredMatch</a>() <a href="../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-78">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-80">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-65">Reset</a>()</span></span><span>
+			<span class="nodocs">(*NameMatcher) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-74">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="NameMatcher-fold-impls"><label for="NameMatcher-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='NameMatcher-fold-impls-items' class="fold-items"><span>
+			*NameMatcher : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*NameMatcher : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*NameMatcher : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="NameMatcher-showhide-impls"><i><label for="NameMatcher-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="NameMatcher-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*NameMatcher : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*NameMatcher : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*NameMatcher : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="NameMatcher-fold-results"><label for="NameMatcher-fold-results">As Outputs Of (<i>at least 3, all are exported</i>)</label><span id='NameMatcher-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-GrpcKeyBuilder">GrpcKeyBuilder</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-183">GetHeaders</a>() []*<b>NameMatcher</b></span><span>
+			func (*<a href="#name-HttpKeyBuilder">HttpKeyBuilder</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-331">GetHeaders</a>() []*<b>NameMatcher</b></span><span>
+			func (*<a href="#name-HttpKeyBuilder">HttpKeyBuilder</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-324">GetQueryParameters</a>() []*<b>NameMatcher</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupClusterSpecifier" data-popularity="600">	<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-content"><label for="RouteLookupClusterSpecifier-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-491">RouteLookupClusterSpecifier</a> <i>(struct)</i></label><span id='RouteLookupClusterSpecifier-fold-content-docs' class="fold-docs">
+		RouteLookupClusterSpecifier is used in xDS to represent a cluster specifier
+		plugin for RLS.
+
+		<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-fields"><label for="RouteLookupClusterSpecifier-fold-fields">Fields (<i>total 4, in which 1 are exported</i>)</label><span id='RouteLookupClusterSpecifier-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-field-RouteLookupConfig"><label for="RouteLookupClusterSpecifier-fold-field-RouteLookupConfig"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-497">RouteLookupConfig</a> <i>*<a href="#name-RouteLookupConfig">RouteLookupConfig</a></i></label><span id='RouteLookupClusterSpecifier-fold-field-RouteLookupConfig-docs' class="fold-docs">
+				The RLS config for this cluster specifier plugin instance.
+</span></span>
+			<input type='checkbox' class="showhide" id="RouteLookupClusterSpecifier-showhide-fields"><i><label for="RouteLookupClusterSpecifier-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="RouteLookupClusterSpecifier-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-493">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-492">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-494">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-methods"><label for="RouteLookupClusterSpecifier-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='RouteLookupClusterSpecifier-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-method-Descriptor"><label for="RouteLookupClusterSpecifier-fold-method-Descriptor">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-528">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='RouteLookupClusterSpecifier-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use RouteLookupClusterSpecifier.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-532">GetRouteLookupConfig</a>() *<a href="#name-RouteLookupConfig">RouteLookupConfig</a></span></span><span>
+			<span class="nodocs">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-513">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-515">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-500">Reset</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupClusterSpecifier) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-509">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupClusterSpecifier-fold-impls"><label for="RouteLookupClusterSpecifier-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='RouteLookupClusterSpecifier-fold-impls-items' class="fold-items"><span>
+			*RouteLookupClusterSpecifier : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*RouteLookupClusterSpecifier : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*RouteLookupClusterSpecifier : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="RouteLookupClusterSpecifier-showhide-impls"><i><label for="RouteLookupClusterSpecifier-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="RouteLookupClusterSpecifier-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*RouteLookupClusterSpecifier : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*RouteLookupClusterSpecifier : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*RouteLookupClusterSpecifier : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupConfig" data-popularity="1075">	<input type='checkbox' class="fold" id="RouteLookupConfig-fold-content"><label for="RouteLookupConfig-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-345">RouteLookupConfig</a> <i>(struct)</i></label><span id='RouteLookupConfig-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="RouteLookupConfig-fold-fields"><label for="RouteLookupConfig-fold-fields">Fields (<i>total 12, in which 9 are exported</i>)</label><span id='RouteLookupConfig-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-CacheSizeBytes"><label for="RouteLookupConfig-fold-field-CacheSizeBytes"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-382">CacheSizeBytes</a> <i><a href="../../../../builtin.html#name-int64">int64</a></i></label><span id='RouteLookupConfig-fold-field-CacheSizeBytes-docs' class="fold-docs">
+				Rough indicator of amount of memory to use for the client cache.  Some of
+				the data structure overhead is not accounted for, so actual memory consumed
+				will be somewhat greater than this value.  If this field is omitted or set
+				to zero, a client default will be used.  The value may be capped to a lower
+				amount based on client configuration.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-DefaultTarget"><label for="RouteLookupConfig-fold-field-DefaultTarget"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-391">DefaultTarget</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupConfig-fold-field-DefaultTarget-docs' class="fold-docs">
+				This value provides a default target to use if needed.  If set, it will be
+				used if RLS returns an error, times out, or returns an invalid response.
+				Note that requests can be routed only to a subdomain of the original
+				target, e.g. "us_east_1.cloudbigtable.googleapis.com".
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-GrpcKeybuilders"><label for="RouteLookupConfig-fold-field-GrpcKeybuilders"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-360">GrpcKeybuilders</a> <i>[]*<a href="#name-GrpcKeyBuilder">GrpcKeyBuilder</a></i></label><span id='RouteLookupConfig-fold-field-GrpcKeybuilders-docs' class="fold-docs">
+				Unordered specifications for constructing keys for gRPC requests.  All
+				GrpcKeyBuilders on this list must have unique "name" fields so that the
+				client is free to prebuild a hash map keyed by name.  If no GrpcKeyBuilder
+				matches, an empty key_map will be sent to the lookup service; it should
+				likely reply with a global default route and raise an alert.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-HttpKeybuilders"><label for="RouteLookupConfig-fold-field-HttpKeybuilders"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-354">HttpKeybuilders</a> <i>[]*<a href="#name-HttpKeyBuilder">HttpKeyBuilder</a></i></label><span id='RouteLookupConfig-fold-field-HttpKeybuilders-docs' class="fold-docs">
+				Ordered specifications for constructing keys for HTTP requests.  Last
+				match wins.  If no HttpKeyBuilder matches, an empty key_map will be sent to
+				the lookup service; it should likely reply with a global default route
+				and raise an alert.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-LookupService"><label for="RouteLookupConfig-fold-field-LookupService"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-363">LookupService</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupConfig-fold-field-LookupService-docs' class="fold-docs">
+				The name of the lookup service as a gRPC URI.  Typically, this will be
+				a subdomain of the target, such as "lookup.datastore.googleapis.com".
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-LookupServiceTimeout"><label for="RouteLookupConfig-fold-field-LookupServiceTimeout"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-366">LookupServiceTimeout</a> <i>*<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></i></label><span id='RouteLookupConfig-fold-field-LookupServiceTimeout-docs' class="fold-docs">
+				Configure a timeout value for lookup service requests.
+				Defaults to 10 seconds if not specified.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-MaxAge"><label for="RouteLookupConfig-fold-field-MaxAge"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-370">MaxAge</a> <i>*<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></i></label><span id='RouteLookupConfig-fold-field-MaxAge-docs' class="fold-docs">
+				How long are responses valid for (like HTTP Cache-Control).
+				If omitted or zero, the longest valid cache time is used.
+				This value is clamped to 5 minutes to avoid unflushable bad responses.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-StaleAge"><label for="RouteLookupConfig-fold-field-StaleAge"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-376">StaleAge</a> <i>*<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></i></label><span id='RouteLookupConfig-fold-field-StaleAge-docs' class="fold-docs">
+				After a response has been in the client cache for this amount of time
+				and is re-requested, start an asynchronous RPC to re-validate it.
+				This value should be less than max_age by at least the length of a
+				typical RTT to the Route Lookup Service to fully mask the RTT latency.
+				If omitted, keys are only re-requested after they have expired.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-field-ValidTargets"><label for="RouteLookupConfig-fold-field-ValidTargets"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-386">ValidTargets</a> <i>[]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupConfig-fold-field-ValidTargets-docs' class="fold-docs">
+				This is a list of all the possible targets that can be returned by the
+				lookup service.  If a target not on this list is returned, it will be
+				treated the same as an unhealthy target.
+</span></span>
+			<input type='checkbox' class="showhide" id="RouteLookupConfig-showhide-fields"><i><label for="RouteLookupConfig-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="RouteLookupConfig-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-347">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-346">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-348">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupConfig-fold-methods"><label for="RouteLookupConfig-fold-methods">Methods (<i>total 14, all are exported</i>)</label><span id='RouteLookupConfig-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupConfig-fold-method-Descriptor"><label for="RouteLookupConfig-fold-method-Descriptor">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-422">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='RouteLookupConfig-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use RouteLookupConfig.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-468">GetCacheSizeBytes</a>() <a href="../../../../builtin.html#name-int64">int64</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-482">GetDefaultTarget</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-433">GetGrpcKeybuilders</a>() []*<a href="#name-GrpcKeyBuilder">GrpcKeyBuilder</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-426">GetHttpKeybuilders</a>() []*<a href="#name-HttpKeyBuilder">HttpKeyBuilder</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-440">GetLookupService</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-447">GetLookupServiceTimeout</a>() *<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-454">GetMaxAge</a>() *<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-461">GetStaleAge</a>() *<a href="../../../protobuf/types/known/durationpb.html">durationpb</a>.<a href="../../../protobuf/types/known/durationpb.html#name-Duration">Duration</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-475">GetValidTargets</a>() []<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-407">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-409">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-394">Reset</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupConfig) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-403">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupConfig-fold-impls"><label for="RouteLookupConfig-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='RouteLookupConfig-fold-impls-items' class="fold-items"><span>
+			*RouteLookupConfig : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*RouteLookupConfig : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*RouteLookupConfig : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="RouteLookupConfig-showhide-impls"><i><label for="RouteLookupConfig-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="RouteLookupConfig-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*RouteLookupConfig : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*RouteLookupConfig : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*RouteLookupConfig : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupConfig-fold-results"><label for="RouteLookupConfig-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='RouteLookupConfig-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-RouteLookupClusterSpecifier">RouteLookupClusterSpecifier</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-532">GetRouteLookupConfig</a>() *<b>RouteLookupConfig</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupRequest" data-popularity="855">	<input type='checkbox' class="fold" id="RouteLookupRequest-fold-content"><label for="RouteLookupRequest-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-92">RouteLookupRequest</a> <i>(struct)</i></label><span id='RouteLookupRequest-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="RouteLookupRequest-fold-fields"><label for="RouteLookupRequest-fold-fields">Fields (<i>total 7, in which 4 are exported</i>)</label><span id='RouteLookupRequest-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest-fold-field-KeyMap"><label for="RouteLookupRequest-fold-field-KeyMap"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-105">KeyMap</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupRequest-fold-field-KeyMap-docs' class="fold-docs">
+				Map of key values extracted via key builders for the gRPC or HTTP request.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest-fold-field-Reason"><label for="RouteLookupRequest-fold-field-Reason"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-101">Reason</a> <i><a href="#name-RouteLookupRequest_Reason">RouteLookupRequest_Reason</a></i></label><span id='RouteLookupRequest-fold-field-Reason-docs' class="fold-docs">
+				Reason for making this request.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest-fold-field-StaleHeaderData"><label for="RouteLookupRequest-fold-field-StaleHeaderData"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-103">StaleHeaderData</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupRequest-fold-field-StaleHeaderData-docs' class="fold-docs">
+				For REASON_STALE, the header_data from the stale response, if any.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest-fold-field-TargetType"><label for="RouteLookupRequest-fold-field-TargetType"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-99">TargetType</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupRequest-fold-field-TargetType-docs' class="fold-docs">
+				Target type allows the client to specify what kind of target format it
+				would like from RLS to allow it to find the regional server, e.g. "grpc".
+</span></span>
+			<input type='checkbox' class="showhide" id="RouteLookupRequest-showhide-fields"><i><label for="RouteLookupRequest-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="RouteLookupRequest-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-94">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-93">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-95">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest-fold-methods"><label for="RouteLookupRequest-fold-methods">Methods (<i>total 9, all are exported</i>)</label><span id='RouteLookupRequest-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest-fold-method-Descriptor"><label for="RouteLookupRequest-fold-method-Descriptor">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-136">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='RouteLookupRequest-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use RouteLookupRequest.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-161">GetKeyMap</a>() map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-147">GetReason</a>() <a href="#name-RouteLookupRequest_Reason">RouteLookupRequest_Reason</a></span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-154">GetStaleHeaderData</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-140">GetTargetType</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-121">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-123">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-108">Reset</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupRequest) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-117">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest-fold-impls"><label for="RouteLookupRequest-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='RouteLookupRequest-fold-impls-items' class="fold-items"><span>
+			*RouteLookupRequest : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*RouteLookupRequest : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*RouteLookupRequest : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="RouteLookupRequest-showhide-impls"><i><label for="RouteLookupRequest-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="RouteLookupRequest-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*RouteLookupRequest : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*RouteLookupRequest : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*RouteLookupRequest : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest-fold-params"><label for="RouteLookupRequest-fold-params">As Inputs Of (<i>at least 3, all are exported</i>)</label><span id='RouteLookupRequest-fold-params-items' class="fold-items"><span>
+			func <a href="#name-RouteLookupServiceClient">RouteLookupServiceClient</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-26">RouteLookup</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, in *<b>RouteLookupRequest</b>, opts ...<a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-CallOption">CallOption</a>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-RouteLookupServiceServer">RouteLookupServiceServer</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-51">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<b>RouteLookupRequest</b>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-UnimplementedRouteLookupServiceServer">UnimplementedRouteLookupServiceServer</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-59">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<b>RouteLookupRequest</b>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupRequest_Reason" data-popularity="715">	<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-content"><label for="RouteLookupRequest_Reason-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-43">RouteLookupRequest_Reason</a> <a href="../../../../builtin.html#name-int32">int32</a> <i>(basic type)</i></label><span id='RouteLookupRequest_Reason-fold-content-docs' class="fold-docs">
+		Possible reasons for making a request.
+
+		<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-methods"><label for="RouteLookupRequest_Reason-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='RouteLookupRequest_Reason-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-75">Descriptor</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-EnumDescriptor">EnumDescriptor</a></span></span><span>
+			<span class="nodocs">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-65">Enum</a>() *<b>RouteLookupRequest_Reason</b></span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-method-EnumDescriptor"><label for="RouteLookupRequest_Reason-fold-method-EnumDescriptor">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-88">EnumDescriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='RouteLookupRequest_Reason-fold-method-EnumDescriptor-docs' class="fold-docs">
+				Deprecated: Use RouteLookupRequest_Reason.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-83">Number</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-EnumNumber">EnumNumber</a></span></span><span>
+			<span class="nodocs">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-71">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">( RouteLookupRequest_Reason) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-79">Type</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-EnumType">EnumType</a></span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-impls"><label for="RouteLookupRequest_Reason-fold-impls">Implements (<i>at least 5, in which 2 are exported</i>)</label><span id='RouteLookupRequest_Reason-fold-impls-items' class="fold-items"><span>
+			 RouteLookupRequest_Reason : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-Enum">Enum</a></span><span>
+			 RouteLookupRequest_Reason : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="RouteLookupRequest_Reason-showhide-impls"><i><label for="RouteLookupRequest_Reason-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="RouteLookupRequest_Reason-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			 RouteLookupRequest_Reason : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-enumV1">enumV1</a></i></span><span class="hidden"><i>
+			 RouteLookupRequest_Reason : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			 RouteLookupRequest_Reason : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-results"><label for="RouteLookupRequest_Reason-fold-results">As Outputs Of (<i>at least 2, both are exported</i>)</label><span id='RouteLookupRequest_Reason-fold-results-items' class="fold-items"><span>
+			func (*<a href="#name-RouteLookupRequest">RouteLookupRequest</a>).<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-147">GetReason</a>() <b>RouteLookupRequest_Reason</b></span><span>
+			func RouteLookupRequest_Reason.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-65">Enum</a>() *<b>RouteLookupRequest_Reason</b></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupRequest_Reason-fold-values"><label for="RouteLookupRequest_Reason-fold-values">As Types Of (<i>total 3, all are exported</i>)</label><span id='RouteLookupRequest_Reason-fold-values-items' class="fold-items"><span>
+			const <a href="#name-RouteLookupRequest_REASON_MISS">RouteLookupRequest_REASON_MISS</a></span><span>
+			const <a href="#name-RouteLookupRequest_REASON_STALE">RouteLookupRequest_REASON_STALE</a></span><span>
+			const <a href="#name-RouteLookupRequest_REASON_UNKNOWN">RouteLookupRequest_REASON_UNKNOWN</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupResponse" data-popularity="875">	<input type='checkbox' class="fold" id="RouteLookupResponse-fold-content"><label for="RouteLookupResponse-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-168">RouteLookupResponse</a> <i>(struct)</i></label><span id='RouteLookupResponse-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="RouteLookupResponse-fold-fields"><label for="RouteLookupResponse-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='RouteLookupResponse-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupResponse-fold-field-HeaderData"><label for="RouteLookupResponse-fold-field-HeaderData"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-180">HeaderData</a> <i><a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupResponse-fold-field-HeaderData-docs' class="fold-docs">
+				Optional header value to pass along to AFE in the X-Google-RLS-Data header.
+				Cached with "target" and sent with all requests that match the request key.
+				Allows the RLS to pass its work product to the eventual target.
+</span></span><span>
+			<input type='checkbox' class="fold" id="RouteLookupResponse-fold-field-Targets"><label for="RouteLookupResponse-fold-field-Targets"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-176">Targets</a> <i>[]<a href="../../../../builtin.html#name-string">string</a></i></label><span id='RouteLookupResponse-fold-field-Targets-docs' class="fold-docs">
+				Prioritized list (best one first) of addressable entities to use
+				for routing, using syntax requested by the request target_type.
+				The targets will be tried in order until a healthy one is found.
+</span></span>
+			<input type='checkbox' class="showhide" id="RouteLookupResponse-showhide-fields"><i><label for="RouteLookupResponse-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="RouteLookupResponse-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-170">sizeCache</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-169">state</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-171">unknownFields</a> <i><a href="../../../protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupResponse-fold-methods"><label for="RouteLookupResponse-fold-methods">Methods (<i>total 7, all are exported</i>)</label><span id='RouteLookupResponse-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupResponse-fold-method-Descriptor"><label for="RouteLookupResponse-fold-method-Descriptor">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-211">Descriptor</a>() ([]<a href="../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../builtin.html#name-int">int</a>)</label><span id='RouteLookupResponse-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use RouteLookupResponse.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-222">GetHeaderData</a>() <a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-215">GetTargets</a>() []<a href="../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-196">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-198">ProtoReflect</a>() <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-183">Reset</a>()</span></span><span>
+			<span class="nodocs">(*RouteLookupResponse) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-192">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupResponse-fold-impls"><label for="RouteLookupResponse-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='RouteLookupResponse-fold-impls-items' class="fold-items"><span>
+			*RouteLookupResponse : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*RouteLookupResponse : google.golang.org/protobuf/runtime/protoiface.<a href="../../../protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span><span>
+			*RouteLookupResponse : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' class="showhide" id="RouteLookupResponse-showhide-impls"><i><label for="RouteLookupResponse-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="RouteLookupResponse-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*RouteLookupResponse : google.golang.org/protobuf/internal/impl.<a href="../../../protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*RouteLookupResponse : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*RouteLookupResponse : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupResponse-fold-results"><label for="RouteLookupResponse-fold-results">As Outputs Of (<i>at least 3, all are exported</i>)</label><span id='RouteLookupResponse-fold-results-items' class="fold-items"><span>
+			func <a href="#name-RouteLookupServiceClient">RouteLookupServiceClient</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-26">RouteLookup</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, in *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>, opts ...<a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-CallOption">CallOption</a>) (*<b>RouteLookupResponse</b>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-RouteLookupServiceServer">RouteLookupServiceServer</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-51">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>) (*<b>RouteLookupResponse</b>, <a href="../../../../builtin.html#name-error">error</a>)</span><span>
+			func <a href="#name-UnimplementedRouteLookupServiceServer">UnimplementedRouteLookupServiceServer</a>.<a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-59">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>) (*<b>RouteLookupResponse</b>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupServiceClient" data-popularity="275">	<input type='checkbox' class="fold" id="RouteLookupServiceClient-fold-content"><label for="RouteLookupServiceClient-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-24">RouteLookupServiceClient</a> <b><i>(interface)</i></b></label><span id='RouteLookupServiceClient-fold-content-docs' class="fold-docs">
+		RouteLookupServiceClient is the client API for RouteLookupService service.
+
+		For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+
+		<input type='checkbox' class="fold" id="RouteLookupServiceClient-fold-methods"><label for="RouteLookupServiceClient-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='RouteLookupServiceClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupServiceClient-fold-method-RouteLookup"><label for="RouteLookupServiceClient-fold-method-RouteLookup">( RouteLookupServiceClient) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-26">RouteLookup</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, in *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>, opts ...<a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-CallOption">CallOption</a>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='RouteLookupServiceClient-fold-method-RouteLookup-docs' class="fold-docs">
+				Lookup returns a target for a single key.
+</span></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupServiceClient-fold-impledby"><label for="RouteLookupServiceClient-fold-impledby">Implemented By (<i>at least one unexported</i>)</label><span id='RouteLookupServiceClient-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="RouteLookupServiceClient-showhide-impedBys"><i><label for="RouteLookupServiceClient-showhide-impedBys" class="show-inline">/* at least one unexported ... */</label><label for="RouteLookupServiceClient-showhide-impedBys" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*<a href="#name-routeLookupServiceClient">routeLookupServiceClient</a></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupServiceClient-fold-results"><label for="RouteLookupServiceClient-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='RouteLookupServiceClient-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewRouteLookupServiceClient">NewRouteLookupServiceClient</a>(cc <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ClientConnInterface">ClientConnInterface</a>) <b>RouteLookupServiceClient</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-RouteLookupServiceServer" data-popularity="335">	<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-content"><label for="RouteLookupServiceServer-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-49">RouteLookupServiceServer</a> <b><i>(interface)</i></b></label><span id='RouteLookupServiceServer-fold-content-docs' class="fold-docs">
+		RouteLookupServiceServer is the server API for RouteLookupService service.
+		All implementations must embed UnimplementedRouteLookupServiceServer
+		for forward compatibility
+
+		<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-methods"><label for="RouteLookupServiceServer-fold-methods">Methods (<i>total 2, in which 1 are exported</i>)</label><span id='RouteLookupServiceServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-method-RouteLookup"><label for="RouteLookupServiceServer-fold-method-RouteLookup">( RouteLookupServiceServer) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-51">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</label><span id='RouteLookupServiceServer-fold-method-RouteLookup-docs' class="fold-docs">
+				Lookup returns a target for a single key.
+</span></span>
+			<input type='checkbox' class="showhide" id="RouteLookupServiceServer-showhide-methods"><i><label for="RouteLookupServiceServer-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="RouteLookupServiceServer-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( RouteLookupServiceServer) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-52">mustEmbedUnimplementedRouteLookupServiceServer</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-impledby"><label for="RouteLookupServiceServer-fold-impledby">Implemented By (<i>at least one exported</i>)</label><span id='RouteLookupServiceServer-fold-impledby-items' class="fold-items"><span>
+			 <a href="#name-UnimplementedRouteLookupServiceServer">UnimplementedRouteLookupServiceServer</a></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-impls"><label for="RouteLookupServiceServer-fold-impls">Implements (<i>at least one exported</i>)</label><span id='RouteLookupServiceServer-fold-impls-items' class="fold-items"><span>
+			 RouteLookupServiceServer : <a href="#name-UnsafeRouteLookupServiceServer">UnsafeRouteLookupServiceServer</a></span></span>
+		<input type='checkbox' class="fold" id="RouteLookupServiceServer-fold-params"><label for="RouteLookupServiceServer-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='RouteLookupServiceServer-fold-params-items' class="fold-items"><span>
+			func <a href="#name-RegisterRouteLookupServiceServer">RegisterRouteLookupServiceServer</a>(s <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ServiceRegistrar">ServiceRegistrar</a>, srv <b>RouteLookupServiceServer</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-UnimplementedRouteLookupServiceServer" data-popularity="200">	<input type='checkbox' class="fold" id="UnimplementedRouteLookupServiceServer-fold-content"><label for="UnimplementedRouteLookupServiceServer-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-56">UnimplementedRouteLookupServiceServer</a> <i>(struct)</i></label><span id='UnimplementedRouteLookupServiceServer-fold-content-docs' class="fold-docs">
+		UnimplementedRouteLookupServiceServer must be embedded to have forward compatible implementations.
+
+		<input type='checkbox' class="fold" id="UnimplementedRouteLookupServiceServer-fold-methods"><label for="UnimplementedRouteLookupServiceServer-fold-methods">Methods (<i>total 2, in which 1 are exported</i>)</label><span id='UnimplementedRouteLookupServiceServer-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( UnimplementedRouteLookupServiceServer) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-59">RouteLookup</a>(<a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+			<input type='checkbox' class="showhide" id="UnimplementedRouteLookupServiceServer-showhide-methods"><i><label for="UnimplementedRouteLookupServiceServer-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="UnimplementedRouteLookupServiceServer-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( UnimplementedRouteLookupServiceServer) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-62">mustEmbedUnimplementedRouteLookupServiceServer</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="UnimplementedRouteLookupServiceServer-fold-impls"><label for="UnimplementedRouteLookupServiceServer-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='UnimplementedRouteLookupServiceServer-fold-impls-items' class="fold-items"><span>
+			 UnimplementedRouteLookupServiceServer : <a href="#name-RouteLookupServiceServer">RouteLookupServiceServer</a></span><span>
+			 UnimplementedRouteLookupServiceServer : <a href="#name-UnsafeRouteLookupServiceServer">UnsafeRouteLookupServiceServer</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-UnsafeRouteLookupServiceServer" data-popularity="350">	<input type='checkbox' class="fold" id="UnsafeRouteLookupServiceServer-fold-content"><label for="UnsafeRouteLookupServiceServer-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-67">UnsafeRouteLookupServiceServer</a> <b><i>(interface)</i></b></label><span id='UnsafeRouteLookupServiceServer-fold-content-docs' class="fold-docs">
+		UnsafeRouteLookupServiceServer may be embedded to opt out of forward compatibility for this service.
+		Use of this interface is not recommended, as added methods to RouteLookupServiceServer will
+		result in compilation errors.
+
+		<input type='checkbox' class="fold" id="UnsafeRouteLookupServiceServer-fold-methods"><label for="UnsafeRouteLookupServiceServer-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='UnsafeRouteLookupServiceServer-fold-methods-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="UnsafeRouteLookupServiceServer-showhide-methods"><i><label for="UnsafeRouteLookupServiceServer-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="UnsafeRouteLookupServiceServer-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( UnsafeRouteLookupServiceServer) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-68">mustEmbedUnimplementedRouteLookupServiceServer</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="UnsafeRouteLookupServiceServer-fold-impledby"><label for="UnsafeRouteLookupServiceServer-fold-impledby">Implemented By (<i>at least 2, both are exported</i>)</label><span id='UnsafeRouteLookupServiceServer-fold-impledby-items' class="fold-items"><span>
+			 <a href="#name-RouteLookupServiceServer">RouteLookupServiceServer</a> <i>(interface)</i></span><span>
+			 <a href="#name-UnimplementedRouteLookupServiceServer">UnimplementedRouteLookupServiceServer</a></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor type-res hidden" id="name-routeLookupServiceClient" data-popularity="100">	<input type='checkbox' class="fold" id="routeLookupServiceClient-fold-content"><label for="routeLookupServiceClient-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-29">routeLookupServiceClient</a> <i>(struct)</i></label><span id='routeLookupServiceClient-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="routeLookupServiceClient-fold-fields"><label for="routeLookupServiceClient-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='routeLookupServiceClient-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="routeLookupServiceClient-showhide-fields"><i><label for="routeLookupServiceClient-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="routeLookupServiceClient-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-30">cc</a> <i><a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ClientConnInterface">ClientConnInterface</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="routeLookupServiceClient-fold-methods"><label for="routeLookupServiceClient-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='routeLookupServiceClient-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*routeLookupServiceClient) <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-37">RouteLookup</a>(ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, in *<a href="#name-RouteLookupRequest">RouteLookupRequest</a>, opts ...<a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-CallOption">CallOption</a>) (*<a href="#name-RouteLookupResponse">RouteLookupResponse</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="routeLookupServiceClient-fold-impls"><label for="routeLookupServiceClient-fold-impls">Implements (<i>at least one exported</i>)</label><span id='routeLookupServiceClient-fold-impls-items' class="fold-items"><span>
+			*routeLookupServiceClient : <a href="#name-RouteLookupServiceClient">RouteLookupServiceClient</a></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 9, in which 2 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewRouteLookupServiceClient">	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-33">NewRouteLookupServiceClient</a>(cc <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ClientConnInterface">ClientConnInterface</a>) <a href="#name-RouteLookupServiceClient">RouteLookupServiceClient</a></span></div><div class="anchor value-res" id="name-RegisterRouteLookupServiceServer">	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-71">RegisterRouteLookupServiceServer</a>(s <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ServiceRegistrar">ServiceRegistrar</a>, srv <a href="#name-RouteLookupServiceServer">RouteLookupServiceServer</a>)</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 7 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 7 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-_RouteLookupService_RouteLookup_Handler"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-75">_RouteLookupService_RouteLookup_Handler</a>(srv interface{}, ctx <a href="../../../../context.html">context</a>.<a href="../../../../context.html#name-Context">Context</a>, dec func(interface{}) <a href="../../../../builtin.html#name-error">error</a>, interceptor <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-UnaryServerInterceptor">UnaryServerInterceptor</a>) (interface{}, <a href="../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-832">file_grpc_lookup_v1_rls_config_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-790">file_grpc_lookup_v1_rls_config_proto_rawDescGZIP</a>() []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-313">file_grpc_lookup_v1_rls_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-285">file_grpc_lookup_v1_rls_proto_rawDescGZIP</a>() []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-831">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-312">init</a>()</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 18, in which 5 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-File_grpc_lookup_v1_rls_config_proto">	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-667">File_grpc_lookup_v1_rls_config_proto</a> <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div><div class="anchor value-res" id="name-File_grpc_lookup_v1_rls_proto">	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-229">File_grpc_lookup_v1_rls_proto</a> <a href="../../../protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div><div class="anchor value-res" id="name-RouteLookupRequest_Reason_name">	<input type='checkbox' class="fold" id="RouteLookupRequest_Reason_name-fold-content"><label for="RouteLookupRequest_Reason_name-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-53">RouteLookupRequest_Reason_name</a> map[<a href="../../../../builtin.html#name-int32">int32</a>]<a href="../../../../builtin.html#name-string">string</a></label><span id='RouteLookupRequest_Reason_name-fold-content-docs' class="fold-docs">
+		Enum value maps for RouteLookupRequest_Reason.
+
+</span></div><div class="anchor value-res" id="name-RouteLookupRequest_Reason_value">	<input type='checkbox' class="fold" id="RouteLookupRequest_Reason_value-fold-content"><label for="RouteLookupRequest_Reason_value-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-58">RouteLookupRequest_Reason_value</a> map[<a href="../../../../builtin.html#name-string">string</a>]<a href="../../../../builtin.html#name-int32">int32</a></label><span id='RouteLookupRequest_Reason_value-fold-content-docs' class="fold-docs">
+		Enum value maps for RouteLookupRequest_Reason.
+
+</span></div><div class="anchor value-res" id="name-RouteLookupService_ServiceDesc">	<input type='checkbox' class="fold" id="RouteLookupService_ServiceDesc-fold-content"><label for="RouteLookupService_ServiceDesc-fold-content">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_grpc.pb.go.html#line-96">RouteLookupService_ServiceDesc</a> <a href="../../../grpc.html">grpc</a>.<a href="../../../grpc.html#name-ServiceDesc">ServiceDesc</a></label><span id='RouteLookupService_ServiceDesc-fold-content-docs' class="fold-docs">
+		RouteLookupService_ServiceDesc is the grpc.ServiceDesc for RouteLookupService service.
+		It's only intended for direct use with grpc.RegisterService,
+		and not to be introspected or modified (even as a copy)
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 13 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 13 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-810">file_grpc_lookup_v1_rls_config_proto_depIdxs</a> []<a href="../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-798">file_grpc_lookup_v1_rls_config_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-797">file_grpc_lookup_v1_rls_config_proto_msgTypes</a> []<a href="../../../protobuf/internal/impl.html">impl</a>.<a href="../../../protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-669">file_grpc_lookup_v1_rls_config_proto_rawDesc</a> []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-787">file_grpc_lookup_v1_rls_config_proto_rawDescData</a> []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_config_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls_config.pb.go.html#line-786">file_grpc_lookup_v1_rls_config_proto_rawDescOnce</a> <a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Once">Once</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-300">file_grpc_lookup_v1_rls_proto_depIdxs</a> []<a href="../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_enumTypes"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-292">file_grpc_lookup_v1_rls_proto_enumTypes</a> []<a href="../../../protobuf/internal/impl.html">impl</a>.<a href="../../../protobuf/internal/impl.html#name-EnumInfo">EnumInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-294">file_grpc_lookup_v1_rls_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-293">file_grpc_lookup_v1_rls_proto_msgTypes</a> []<a href="../../../protobuf/internal/impl.html">impl</a>.<a href="../../../protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-231">file_grpc_lookup_v1_rls_proto_rawDesc</a> []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-282">file_grpc_lookup_v1_rls_proto_rawDescData</a> []<a href="../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_grpc_lookup_v1_rls_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-281">file_grpc_lookup_v1_rls_proto_rawDescOnce</a> <a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Once">Once</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 3, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-RouteLookupRequest_REASON_MISS">	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-47">RouteLookupRequest_REASON_MISS</a> <a href="#name-RouteLookupRequest_Reason">RouteLookupRequest_Reason</a> = 1 // No data available in local cache</span></div><div class="anchor value-res" id="name-RouteLookupRequest_REASON_STALE">	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-48">RouteLookupRequest_REASON_STALE</a> <a href="#name-RouteLookupRequest_Reason">RouteLookupRequest_Reason</a> = 2 // Data in local cache is stale</span></div><div class="anchor value-res" id="name-RouteLookupRequest_REASON_UNKNOWN">	<span class="nodocs">const <a href="../../../../../src/google.golang.org/grpc/internal/proto/grpc_lookup_v1/rls.pb.go.html#line-46">RouteLookupRequest_REASON_UNKNOWN</a> <a href="#name-RouteLookupRequest_Reason">RouteLookupRequest_Reason</a> = 0 // Unused</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

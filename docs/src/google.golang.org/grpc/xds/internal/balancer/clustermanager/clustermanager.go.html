@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: clustermanager.go in package google.golang.org/grpc/xds/internal/balancer/clustermanager</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	clustermanager.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html">google.golang.org/grpc/xds/internal/balancer/clustermanager</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8,
+input[id=i9]:checked ~pre .i9
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+<input id="i9" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2020 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-19"><code><span class="comment">// Package clustermanager implements the cluster manager LB policy for xds.</span></code></span></div><span class="codeline" id="line-20"><code><span class="keyword">package</span> clustermanager</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-23"><code>	<label for="i0"><span class="lit-string i0">"encoding/json"</span></label></code></span>
+<span class="codeline" id="line-24"><code>	<label for="i1"><span class="lit-string i1">"fmt"</span></label></code></span>
+<span class="codeline" id="line-25"><code></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i2"><span class="lit-string i2">"google.golang.org/grpc/balancer"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc/grpclog"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/internal/balancergroup"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">internalgrpclog</a> <label for="i5"><span class="lit-string i5">"google.golang.org/grpc/internal/grpclog"</span></label></code></span>
+<span class="codeline" id="line-30"><code>	<label for="i6"><span class="lit-string i6">"google.golang.org/grpc/internal/hierarchy"</span></label></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i7"><span class="lit-string i7">"google.golang.org/grpc/internal/pretty"</span></label></code></span>
+<span class="codeline" id="line-32"><code>	<label for="i8"><span class="lit-string i8">"google.golang.org/grpc/resolver"</span></label></code></span>
+<span class="codeline" id="line-33"><code>	<label for="i9"><span class="lit-string i9">"google.golang.org/grpc/serviceconfig"</span></label></code></span>
+<span class="codeline" id="line-34"><code>)</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-balancerName" class="ident">balancerName</a> = <span class="lit-string">"xds_cluster_manager_experimental"</span></code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-init" class="ident">init</a></label>() {</code></span>
+<span class="codeline" id="line-39"><code>	<a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-53" class="ident">Register</a>(<a href="#line-42" class="ident">bb</a>{})</code></span>
+<span class="codeline" id="line-40"><code>}</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-bb" class="ident">bb</a> <span class="keyword">struct</span>{}</code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code><span class="keyword">func</span> (<a href="#line-42" class="ident">bb</a>) <label for="r1" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bb^3b64d.html#name-.Build" class="ident">Build</a></label>(<label for="r2" class="ident">cc</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-144" class="ident">ClientConn</a>, <label for="r3" class="ident">opts</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-177" class="ident">BuildOptions</a>) <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-322" class="ident">Balancer</a> {</code></span>
+<span class="codeline" id="line-45"><code>	<label for="r4" class="ident">b</label> := &amp;<a href="#line-63" class="ident">bal</a>{}</code></span>
+<span class="codeline" id="line-46"><code>	<label for="r4" class="ident">b</label>.<a href="#line-64" class="ident">logger</a> = <a href="#line-152" class="ident">prefixLogger</a>(<label for="r4" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-47"><code>	<label for="r4" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a> = <a href="balancerstateaggregator.go.html#line-62" class="ident">newBalancerStateAggregator</a>(<label for="r2" class="ident">cc</label>, <label for="r4" class="ident">b</label>.<a href="#line-64" class="ident">logger</a>)</code></span>
+<span class="codeline" id="line-48"><code>	<label for="r4" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>.<a href="balancerstateaggregator.go.html#line-72" class="ident">start</a>()</code></span>
+<span class="codeline" id="line-49"><code>	<label for="r4" class="ident">b</label>.<a href="#line-68" class="ident">bg</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/internal/balancergroup.html" class="ident i4">balancergroup</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-264" class="ident">New</a>(<label for="r2" class="ident">cc</label>, <label for="r3" class="ident">opts</label>, <label for="r4" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>, <label for="r4" class="ident">b</label>.<a href="#line-64" class="ident">logger</a>)</code></span>
+<span class="codeline" id="line-50"><code>	<label for="r4" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-283" class="ident">Start</a>()</code></span>
+<span class="codeline" id="line-51"><code>	<label for="r4" class="ident">b</label>.<a href="#line-64" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Created"</span>)</code></span>
+<span class="codeline" id="line-52"><code>	<span class="keyword">return</span> <label for="r4" class="ident">b</label></code></span>
+<span class="codeline" id="line-53"><code>}</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code><span class="keyword">func</span> (<a href="#line-42" class="ident">bb</a>) <label for="r5" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bb^3b64d.html#name-.Name" class="ident">Name</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-56"><code>	<span class="keyword">return</span> <a href="#line-36" class="ident">balancerName</a></code></span>
+<span class="codeline" id="line-57"><code>}</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="keyword">func</span> (<a href="#line-42" class="ident">bb</a>) <label for="r6" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bb^3b64d.html#name-.ParseConfig" class="ident">ParseConfig</a></label>(<label for="r7" class="ident">c</label> <a href="../../../../../../../pkg/encoding/json.html" class="ident i0">json</a>.<a href="../../../../../../encoding/json/stream.go.html#line-260" class="ident">RawMessage</a>) (<a href="../../../../../../../pkg/google.golang.org/grpc/serviceconfig.html" class="ident i9">serviceconfig</a>.<a href="../../../../serviceconfig/serviceconfig.go.html#line-35" class="ident">LoadBalancingConfig</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-60"><code>	<span class="keyword">return</span> <a href="config.go.html#line-39" class="ident">parseConfig</a>(<label for="r7" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-61"><code>}</code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-bal" class="ident">bal</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-64"><code>	logger *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">internalgrpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a></code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code>	<span class="comment">// TODO: make this package not dependent on xds specific code. Same as for</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">	// weighted target balancer.</span></code></span>
+<span class="codeline" id="line-68"><code>	bg              *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/balancergroup.html" class="ident i4">balancergroup</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-206" class="ident">BalancerGroup</a></code></span>
+<span class="codeline" id="line-69"><code>	stateAggregator *<a href="balancerstateaggregator.go.html#line-45" class="ident">balancerStateAggregator</a></code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code>	children <span class="keyword">map</span>[<a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>]<a href="config.go.html#line-28" class="ident">childConfig</a></code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="keyword">func</span> (<label for="r8" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r9" class="ident">updateChildren</label>(<label for="r10" class="ident">s</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-364" class="ident">ClientConnState</a>, <label for="r11" class="ident">newConfig</label> *<a href="config.go.html#line-34" class="ident">lbConfig</a>) {</code></span>
+<span class="codeline" id="line-75"><code>	<label for="r12" class="ident">update</label> := <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-76"><code>	<label for="r13" class="ident">addressesSplit</label> := <a href="../../../../../../../pkg/google.golang.org/grpc/internal/hierarchy.html" class="ident i6">hierarchy</a>.<a href="../../../../internal/hierarchy/hierarchy.go.html#line-96" class="ident">Group</a>(<label for="r10" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-365" class="ident">ResolverState</a>.<a href="../../../../resolver/resolver.go.html#line-184" class="ident">Addresses</a>)</code></span>
+<span class="codeline" id="line-77"><code></code></span>
+<span class="codeline" id="line-78"><code>	<span class="comment">// Remove sub-pickers and sub-balancers that are not in the new cluster list.</span></code></span>
+<span class="codeline" id="line-79"><code>	<span class="keyword">for</span> <label for="r14" class="ident">name</label> := <span class="keyword">range</span> <label for="r8" class="ident">b</label>.<a href="#line-71" class="ident">children</a> {</code></span>
+<span class="codeline" id="line-80"><code>		<span class="keyword">if</span> <label for="r15" class="ident">_</label>, <label for="r16" class="ident">ok</label> := <label for="r11" class="ident">newConfig</label>.<a href="config.go.html#line-36" class="ident">Children</a>[<label for="r14" class="ident">name</label>]; !<label for="r16" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-81"><code>			<label for="r8" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>.<a href="balancerstateaggregator.go.html#line-110" class="ident">remove</a>(<label for="r14" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-82"><code>			<label for="r8" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-371" class="ident">Remove</a>(<label for="r14" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-83"><code>			<label for="r12" class="ident">update</label> = <a href="../../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-84"><code>		}</code></span>
+<span class="codeline" id="line-85"><code>	}</code></span>
+<span class="codeline" id="line-86"><code></code></span>
+<span class="codeline" id="line-87"><code>	<span class="comment">// For sub-balancers in the new cluster list,</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">	// - add to balancer group if it's new,</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">	// - forward the address/balancer config update.</span></code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">for</span> <label for="r17" class="ident">name</label>, <label for="r18" class="ident">newT</label> := <span class="keyword">range</span> <label for="r11" class="ident">newConfig</label>.<a href="config.go.html#line-36" class="ident">Children</a> {</code></span>
+<span class="codeline" id="line-91"><code>		<span class="keyword">if</span> <label for="r19" class="ident">_</label>, <label for="r20" class="ident">ok</label> := <label for="r8" class="ident">b</label>.<a href="#line-71" class="ident">children</a>[<label for="r17" class="ident">name</label>]; !<label for="r20" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-92"><code>			<span class="comment">// If this is a new sub-balancer, add it to the picker map.</span></code></span>
+<span class="codeline" id="line-93"><code>			<label for="r8" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>.<a href="balancerstateaggregator.go.html#line-91" class="ident">add</a>(<label for="r17" class="ident">name</label>)</code></span>
+<span class="codeline" id="line-94"><code>			<span class="comment">// Then add to the balancer group.</span></code></span>
+<span class="codeline" id="line-95"><code>			<label for="r8" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-302" class="ident">Add</a>(<label for="r17" class="ident">name</label>, <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-72" class="ident">Get</a>(<label for="r18" class="ident">newT</label>.<a href="config.go.html#line-30" class="ident">ChildPolicy</a>.<a href="../../../../internal/serviceconfig/serviceconfig.go.html#line-43" class="ident">Name</a>))</code></span>
+<span class="codeline" id="line-96"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-97"><code>			<span class="comment">// Already present, check for type change and if so send down a new builder.</span></code></span>
+<span class="codeline" id="line-98"><code>			<span class="keyword">if</span> <label for="r18" class="ident">newT</label>.<a href="config.go.html#line-30" class="ident">ChildPolicy</a>.<a href="../../../../internal/serviceconfig/serviceconfig.go.html#line-43" class="ident">Name</a> != <label for="r8" class="ident">b</label>.<a href="#line-71" class="ident">children</a>[<label for="r17" class="ident">name</label>].<a href="config.go.html#line-30" class="ident">ChildPolicy</a>.<a href="../../../../internal/serviceconfig/serviceconfig.go.html#line-43" class="ident">Name</a> {</code></span>
+<span class="codeline" id="line-99"><code>				<label for="r8" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-351" class="ident">UpdateBuilder</a>(<label for="r17" class="ident">name</label>, <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-72" class="ident">Get</a>(<label for="r18" class="ident">newT</label>.<a href="config.go.html#line-30" class="ident">ChildPolicy</a>.<a href="../../../../internal/serviceconfig/serviceconfig.go.html#line-43" class="ident">Name</a>))</code></span>
+<span class="codeline" id="line-100"><code>			}</code></span>
+<span class="codeline" id="line-101"><code>		}</code></span>
+<span class="codeline" id="line-102"><code>		<span class="comment">// TODO: handle error? How to aggregate errors and return?</span></code></span>
+<span class="codeline" id="line-103"><code>		_ = <label for="r8" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-449" class="ident">UpdateClientConnState</a>(<label for="r17" class="ident">name</label>, <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-364" class="ident">ClientConnState</a>{</code></span>
+<span class="codeline" id="line-104"><code>			<a href="../../../../balancer/balancer.go.html#line-365" class="ident">ResolverState</a>: <a href="../../../../../../../pkg/google.golang.org/grpc/resolver.html" class="ident i8">resolver</a>.<a href="../../../../resolver/resolver.go.html#line-182" class="ident">State</a>{</code></span>
+<span class="codeline" id="line-105"><code>				<a href="../../../../resolver/resolver.go.html#line-184" class="ident">Addresses</a>:     <label for="r13" class="ident">addressesSplit</label>[<label for="r17" class="ident">name</label>],</code></span>
+<span class="codeline" id="line-106"><code>				<a href="../../../../resolver/resolver.go.html#line-189" class="ident">ServiceConfig</a>: <label for="r10" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-365" class="ident">ResolverState</a>.<a href="../../../../resolver/resolver.go.html#line-189" class="ident">ServiceConfig</a>,</code></span>
+<span class="codeline" id="line-107"><code>				<a href="../../../../resolver/resolver.go.html#line-193" class="ident">Attributes</a>:    <label for="r10" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-365" class="ident">ResolverState</a>.<a href="../../../../resolver/resolver.go.html#line-193" class="ident">Attributes</a>,</code></span>
+<span class="codeline" id="line-108"><code>			},</code></span>
+<span class="codeline" id="line-109"><code>			<a href="../../../../balancer/balancer.go.html#line-368" class="ident">BalancerConfig</a>: <label for="r18" class="ident">newT</label>.<a href="config.go.html#line-30" class="ident">ChildPolicy</a>.<a href="../../../../internal/serviceconfig/serviceconfig.go.html#line-44" class="ident">Config</a>,</code></span>
+<span class="codeline" id="line-110"><code>		})</code></span>
+<span class="codeline" id="line-111"><code>	}</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code>	<label for="r8" class="ident">b</label>.<a href="#line-71" class="ident">children</a> = <label for="r11" class="ident">newConfig</label>.<a href="config.go.html#line-36" class="ident">Children</a></code></span>
+<span class="codeline" id="line-114"><code>	<span class="keyword">if</span> <label for="r12" class="ident">update</label> {</code></span>
+<span class="codeline" id="line-115"><code>		<label for="r8" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>.<a href="balancerstateaggregator.go.html#line-165" class="ident">buildAndUpdate</a>()</code></span>
+<span class="codeline" id="line-116"><code>	}</code></span>
+<span class="codeline" id="line-117"><code>}</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code><span class="keyword">func</span> (<label for="r21" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r22" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bal^1b5a6.html#name-.UpdateClientConnState" class="ident">UpdateClientConnState</a></label>(<label for="r23" class="ident">s</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-364" class="ident">ClientConnState</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-120"><code>	<label for="r24" class="ident">newConfig</label>, <label for="r25" class="ident">ok</label> := <label for="r23" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-368" class="ident">BalancerConfig</a>.(*<a href="config.go.html#line-34" class="ident">lbConfig</a>)</code></span>
+<span class="codeline" id="line-121"><code>	<span class="keyword">if</span> !<label for="r25" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-122"><code>		<span class="keyword">return</span> <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-17" class="ident">Errorf</a>(<span class="lit-string">"unexpected balancer config with type: %T"</span>, <label for="r23" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-368" class="ident">BalancerConfig</a>)</code></span>
+<span class="codeline" id="line-123"><code>	}</code></span>
+<span class="codeline" id="line-124"><code>	<label for="r21" class="ident">b</label>.<a href="#line-64" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"update with config %+v, resolver state %+v"</span>, <a href="../../../../../../../pkg/google.golang.org/grpc/internal/pretty.html" class="ident i7">pretty</a>.<a href="../../../../internal/pretty/pretty.go.html#line-38" class="ident">ToJSON</a>(<label for="r23" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-368" class="ident">BalancerConfig</a>), <label for="r23" class="ident">s</label>.<a href="../../../../balancer/balancer.go.html#line-365" class="ident">ResolverState</a>)</code></span>
+<span class="codeline" id="line-125"><code></code></span>
+<span class="codeline" id="line-126"><code>	<label for="r21" class="ident">b</label>.<a href="#line-74" class="ident">updateChildren</a>(<label for="r23" class="ident">s</label>, <label for="r24" class="ident">newConfig</label>)</code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-128"><code>}</code></span>
+<span class="codeline" id="line-129"><code></code></span>
+<span class="codeline" id="line-130"><code><span class="keyword">func</span> (<label for="r26" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r27" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bal^1b5a6.html#name-.ResolverError" class="ident">ResolverError</a></label>(<label for="r28" class="ident">err</label> <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-131"><code>	<label for="r26" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-459" class="ident">ResolverError</a>(<label for="r28" class="ident">err</label>)</code></span>
+<span class="codeline" id="line-132"><code>}</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code><span class="keyword">func</span> (<label for="r29" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r30" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bal^1b5a6.html#name-.UpdateSubConnState" class="ident">UpdateSubConnState</a></label>(<label for="r31" class="ident">sc</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-99" class="ident">SubConn</a>, <label for="r32" class="ident">state</label> <a href="../../../../../../../pkg/google.golang.org/grpc/balancer.html" class="ident i2">balancer</a>.<a href="../../../../balancer/balancer.go.html#line-354" class="ident">SubConnState</a>) {</code></span>
+<span class="codeline" id="line-135"><code>	<label for="r29" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-429" class="ident">UpdateSubConnState</a>(<label for="r31" class="ident">sc</label>, <label for="r32" class="ident">state</label>)</code></span>
+<span class="codeline" id="line-136"><code>}</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code><span class="keyword">func</span> (<label for="r33" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r34" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bal^1b5a6.html#name-.Close" class="ident">Close</a></label>() {</code></span>
+<span class="codeline" id="line-139"><code>	<label for="r33" class="ident">b</label>.<a href="#line-69" class="ident">stateAggregator</a>.<a href="balancerstateaggregator.go.html#line-80" class="ident">close</a>()</code></span>
+<span class="codeline" id="line-140"><code>	<label for="r33" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-512" class="ident">Close</a>()</code></span>
+<span class="codeline" id="line-141"><code>	<label for="r33" class="ident">b</label>.<a href="#line-64" class="ident">logger</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-34" class="ident">Infof</a>(<span class="lit-string">"Shutdown"</span>)</code></span>
+<span class="codeline" id="line-142"><code>}</code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code><span class="keyword">func</span> (<label for="r35" class="ident">b</label> *<a href="#line-63" class="ident">bal</a>) <label for="r36" class="ident"><a href="../../../../../../../imp/google.golang.org/grpc/xds/internal/balancer/clustermanager.bal^1b5a6.html#name-.ExitIdle" class="ident">ExitIdle</a></label>() {</code></span>
+<span class="codeline" id="line-145"><code>	<label for="r35" class="ident">b</label>.<a href="#line-68" class="ident">bg</a>.<a href="../../../../internal/balancergroup/balancergroup.go.html#line-541" class="ident">ExitIdle</a>()</code></span>
+<span class="codeline" id="line-146"><code>}</code></span>
+<span class="codeline" id="line-147"><code></code></span>
+<span class="codeline" id="line-148"><code><span class="keyword">const</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-prefix" class="ident">prefix</a> = <span class="lit-string">"[xds-cluster-manager-lb %p] "</span></code></span>
+<span class="codeline" id="line-149"><code></code></span>
+<span class="codeline" id="line-150"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-logger" class="ident">logger</a> = <a href="../../../../../../../pkg/google.golang.org/grpc/grpclog.html" class="ident i3">grpclog</a>.<a href="../../../../grpclog/component.go.html#line-110" class="ident">Component</a>(<span class="lit-string">"xds"</span>)</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code><span class="keyword">func</span> <label for="r37" class="ident"><a href="../../../../../../../pkg/google.golang.org/grpc/xds/internal/balancer/clustermanager.html#name-prefixLogger" class="ident">prefixLogger</a></label>(<label for="r38" class="ident">p</label> *<a href="#line-63" class="ident">bal</a>) *<a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">internalgrpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a> {</code></span>
+<span class="codeline" id="line-153"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i5">internalgrpclog</a>.<a href="../../../../internal/grpclog/prefixLogger.go^6d178.html#line-79" class="ident">NewPrefixLogger</a>(<a href="#line-150" class="ident">logger</a>, <a href="../../../../../../../pkg/fmt.html" class="ident i1">fmt</a>.<a href="../../../../../../fmt/print.go.html#line-217" class="ident">Sprintf</a>(<a href="#line-148" class="ident">prefix</a>, <label for="r38" class="ident">p</label>))</code></span>
+<span class="codeline" id="line-154"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

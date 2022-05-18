@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/xds/internal/balancer/cdsbalancer</title>
+<link href="../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>cdsbalancer</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-google.golang.org/grpc/xds/internal/balancer/cdsbalancer">google.golang.org/grpc/xds/internal/balancer/cdsbalancer</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/xds/internal/balancer/cdsbalancer" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html">22 packages</a>, and imported by <a href="../../../../../../dep/google.golang.org/grpc/xds/internal/balancer/cdsbalancer.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#doc">#d</a> <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html">cdsbalancer.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package cdsbalancer implements a balancer to handle CDS responses.
+</span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html">cluster_handler.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/logging.go.html">logging.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 10, none are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 10 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 10 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-bb" data-popularity="250">	<input type='checkbox' class="fold" id="bb-fold-content"><label for="bb-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-73">bb</a> <i>(struct)</i></label><span id='bb-fold-content-docs' class="fold-docs">
+		bb implements the balancer.Builder interface to help build a cdsBalancer.
+		It also implements the balancer.ConfigParser interface to help parse the
+		JSON service config, to be passed to the cdsBalancer.
+
+		<input type='checkbox' class="fold" id="bb-fold-methods"><label for="bb-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='bb-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="bb-fold-method-Build"><label for="bb-fold-method-Build">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-76">Build</a>(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></label><span id='bb-fold-method-Build-docs' class="fold-docs">
+				Build creates a new CDS balancer with the ClientConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="bb-fold-method-Name"><label for="bb-fold-method-Name">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-107">Name</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='bb-fold-method-Name-docs' class="fold-docs">
+				Name returns the name of balancers built by this builder.
+</span></span><span>
+			<input type='checkbox' class="fold" id="bb-fold-method-ParseConfig"><label for="bb-fold-method-ParseConfig">( bb) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-120">ParseConfig</a>(c <a href="../../../../../encoding/json.html">json</a>.<a href="../../../../../encoding/json.html#name-RawMessage">RawMessage</a>) (<a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='bb-fold-method-ParseConfig-docs' class="fold-docs">
+				ParseConfig parses the JSON load balancer config provided into an
+				internal form or returns an error if the config is invalid.
+</span></span></span>
+		<input type='checkbox' class="fold" id="bb-fold-impls"><label for="bb-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='bb-fold-impls-items' class="fold-items"><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Builder">Builder</a></span><span>
+			 bb : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ConfigParser">ConfigParser</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ccUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="ccUpdate-fold-content"><label for="ccUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-133">ccUpdate</a> <i>(struct)</i></label><span id='ccUpdate-fold-content-docs' class="fold-docs">
+		ccUpdate wraps a clientConn update received from gRPC (pushed from the
+		xdsResolver). A valid clusterName causes the cdsBalancer to register a CDS
+		watcher with the xdsClient, while a non-nil error causes it to cancel the
+		existing watch and propagate the error to the underlying cluster_resolver
+		balancer.
+
+		<input type='checkbox' class="fold" id="ccUpdate-fold-fields"><label for="ccUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='ccUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="ccUpdate-showhide-fields"><i><label for="ccUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="ccUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-134">clusterName</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-135">err</a> <i><a href="../../../../../builtin.html#name-error">error</a></i></span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-ccWrapper" data-popularity="350">	<input type='checkbox' class="fold" id="ccWrapper-fold-content"><label for="ccWrapper-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-531">ccWrapper</a> <i>(struct)</i></label><span id='ccWrapper-fold-content-docs' class="fold-docs">
+		ccWrapper wraps the balancer.ClientConn passed to the CDS balancer at
+		creation and intercepts the NewSubConn() and UpdateAddresses() call from the
+		child policy to add security configuration required by xDS credentials.
+
+		Other methods of the balancer.ClientConn interface are not overridden and
+		hence get the original implementation.
+
+		<input type='checkbox' class="fold" id="ccWrapper-fold-fields"><label for="ccWrapper-fold-fields">Fields (<i>total 2, in which 1 are exported</i>)</label><span id='ccWrapper-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-532">ClientConn</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></i></span></span>
+			<input type='checkbox' checked class="showhide" id="ccWrapper-showhide-fields"><i><label for="ccWrapper-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="ccWrapper-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-field-xdsHI"><label for="ccWrapper-fold-field-xdsHI"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-536">xdsHI</a> <i>*<a href="../../../internal/credentials/xds.html">xdsinternal</a>.<a href="../../../internal/credentials/xds.html#name-HandshakeInfo">HandshakeInfo</a></i></label><span id='ccWrapper-fold-field-xdsHI-docs' class="fold-docs">
+				The certificate providers in this HandshakeInfo are updated based on the
+				received security configuration in the Cluster resource.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="ccWrapper-fold-methods"><label for="ccWrapper-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='ccWrapper-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-NewSubConn"><label for="ccWrapper-fold-method-NewSubConn">(*ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-542">NewSubConn</a>(addrs []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-NewSubConnOptions">NewSubConnOptions</a>) (<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='ccWrapper-fold-method-NewSubConn-docs' class="fold-docs">
+				NewSubConn intercepts NewSubConn() calls from the child policy and adds an
+				address attribute which provides all information required by the xdsCreds
+				handshaker to perform the TLS handshake.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-RemoveSubConn"><label for="ccWrapper-fold-method-RemoveSubConn">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-151">RemoveSubConn</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>)</label><span id='ccWrapper-fold-method-RemoveSubConn-docs' class="fold-docs">
+				RemoveSubConn removes the SubConn from ClientConn.
+				The SubConn will be shutdown.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-ResolveNow"><label for="ccWrapper-fold-method-ResolveNow">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-168">ResolveNow</a>(<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-ResolveNowOptions">ResolveNowOptions</a>)</label><span id='ccWrapper-fold-method-ResolveNow-docs' class="fold-docs">
+				ResolveNow is called by balancer to notify gRPC to do a name resolving.
+</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-Target"><label for="ccWrapper-fold-method-Target">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-173">Target</a>() <a href="../../../../../builtin.html#name-string">string</a></label><span id='ccWrapper-fold-method-Target-docs' class="fold-docs">
+				Target returns the dial target for this ClientConn.
+
+				Deprecated: Use the Target field in the BuildOptions instead.
+</span></span><span>
+			<span class="nodocs">(*ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-550">UpdateAddresses</a>(sc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, addrs []<a href="../../../resolver.html">resolver</a>.<a href="../../../resolver.html#name-Address">Address</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="ccWrapper-fold-method-UpdateState"><label for="ccWrapper-fold-method-UpdateState">( ccWrapper) <a href="../../../../../../src/google.golang.org/grpc/balancer/balancer.go.html#line-165">UpdateState</a>(<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-State">State</a>)</label><span id='ccWrapper-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState notifies gRPC that the balancer's internal state has
+				changed.
+
+				gRPC will update the connectivity state of the ClientConn, and will call
+				Pick on the new Picker to pick new SubConns.
+</span></span></span>
+		<input type='checkbox' class="fold" id="ccWrapper-fold-impls"><label for="ccWrapper-fold-impls">Implements (<i>at least one exported</i>)</label><span id='ccWrapper-fold-impls-items' class="fold-items"><span>
+			*ccWrapper : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ClientConn">ClientConn</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-cdsBalancer" data-popularity="670">	<input type='checkbox' class="fold" id="cdsBalancer-fold-content"><label for="cdsBalancer-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-152">cdsBalancer</a> <i>(struct)</i></label><span id='cdsBalancer-fold-content-docs' class="fold-docs">
+		cdsBalancer implements a CDS based LB policy. It instantiates a
+		cluster_resolver balancer to further resolve the serviceName received from
+		CDS, into localities and endpoints. Implements the balancer.Balancer
+		interface which is exposed to gRPC and implements the balancer.ClientConn
+		interface which is exposed to the cluster_resolver balancer.
+
+		<input type='checkbox' class="fold" id="cdsBalancer-fold-fields"><label for="cdsBalancer-fold-fields">Fields (<i>total 13, none are exported</i>)</label><span id='cdsBalancer-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="cdsBalancer-showhide-fields"><i><label for="cdsBalancer-showhide-fields" class="show-inline">/* 13 unexporteds ... */</label><label for="cdsBalancer-showhide-fields" class="hide-inline">/* 13 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-bOpts"><label for="cdsBalancer-fold-field-bOpts"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-154">bOpts</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a></i></label><span id='cdsBalancer-fold-field-bOpts-docs' class="fold-docs">
+				// BuildOptions passed to child LB.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-166">cachedIdentity</a> <i><a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-Provider">Provider</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-cachedRoot"><label for="cdsBalancer-fold-field-cachedRoot"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-165">cachedRoot</a> <i><a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-Provider">Provider</a></i></label><span id='cdsBalancer-fold-field-cachedRoot-docs' class="fold-docs">
+				The certificate providers are cached here to that they can be closed when
+				a new provider is to be created.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-ccw"><label for="cdsBalancer-fold-field-ccw"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-153">ccw</a> <i>*<a href="#name-ccWrapper">ccWrapper</a></i></label><span id='cdsBalancer-fold-field-ccw-docs' class="fold-docs">
+				// ClientConn interface passed to child LB.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-158">childLB</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-160">closed</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-clusterHandler"><label for="cdsBalancer-fold-field-clusterHandler"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-157">clusterHandler</a> <i>*<a href="#name-clusterHandler">clusterHandler</a></i></label><span id='cdsBalancer-fold-field-clusterHandler-docs' class="fold-docs">
+				// To watch the clusters.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-161">done</a> <i>*<a href="../../../internal/grpcsync.html">grpcsync</a>.<a href="../../../internal/grpcsync.html#name-Event">Event</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-159">logger</a> <i>*<a href="../../../internal/grpclog.html">grpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-updateCh"><label for="cdsBalancer-fold-field-updateCh"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-155">updateCh</a> <i>*<a href="../../../internal/buffer.html">buffer</a>.<a href="../../../internal/buffer.html#name-Unbounded">Unbounded</a></i></label><span id='cdsBalancer-fold-field-updateCh-docs' class="fold-docs">
+				// Channel for gRPC and xdsClient updates.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-field-xdsClient"><label for="cdsBalancer-fold-field-xdsClient"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-156">xdsClient</a> <i><a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a></i></label><span id='cdsBalancer-fold-field-xdsClient-docs' class="fold-docs">
+				// xDS client to watch Cluster resource.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-168">xdsCredsInUse</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-167">xdsHI</a> <i>*<a href="../../../internal/credentials/xds.html">xdsinternal</a>.<a href="../../../internal/credentials/xds.html#name-HandshakeInfo">HandshakeInfo</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="cdsBalancer-fold-methods"><label for="cdsBalancer-fold-methods">Methods (<i>total 10, in which 5 are exported</i>)</label><span id='cdsBalancer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-Close"><label for="cdsBalancer-fold-method-Close">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-516">Close</a>()</label><span id='cdsBalancer-fold-method-Close-docs' class="fold-docs">
+				Close cancels the CDS watch, closes the child policy and closes the
+				cdsBalancer.
+</span></span><span>
+			<span class="nodocs">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-521">ExitIdle</a>()</span></span><span>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-ResolverError"><label for="cdsBalancer-fold-method-ResolverError">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-497">ResolverError</a>(err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='cdsBalancer-fold-method-ResolverError-docs' class="fold-docs">
+				ResolverError handles errors reported by the xdsResolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-UpdateClientConnState"><label for="cdsBalancer-fold-method-UpdateClientConnState">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-465">UpdateClientConnState</a>(state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConnState">ClientConnState</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='cdsBalancer-fold-method-UpdateClientConnState-docs' class="fold-docs">
+				UpdateClientConnState receives the serviceConfig (which contains the
+				clusterName to watch for in CDS) and the xdsClient object from the
+				xdsResolver.
+</span></span><span>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-UpdateSubConnState"><label for="cdsBalancer-fold-method-UpdateSubConnState">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-506">UpdateSubConnState</a>(sc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a>, state <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a>)</label><span id='cdsBalancer-fold-method-UpdateSubConnState-docs' class="fold-docs">
+				UpdateSubConnState handles subConn updates from gRPC.
+</span></span>
+			<input type='checkbox' checked class="showhide" id="cdsBalancer-showhide-methods"><i><label for="cdsBalancer-showhide-methods" class="show-inline">/* 5 unexporteds ... */</label><label for="cdsBalancer-showhide-methods" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-handleClientConnUpdate"><label for="cdsBalancer-fold-method-handleClientConnUpdate">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-175">handleClientConnUpdate</a>(update *<a href="#name-ccUpdate">ccUpdate</a>)</label><span id='cdsBalancer-fold-method-handleClientConnUpdate-docs' class="fold-docs">
+				handleClientConnUpdate handles a ClientConnUpdate received from gRPC. Good
+				updates lead to registration of a CDS watch. Updates with error lead to
+				cancellation of existing watch and propagation of the same error to the
+				cluster_resolver balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-handleErrorFromUpdate"><label for="cdsBalancer-fold-method-handleErrorFromUpdate">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-440">handleErrorFromUpdate</a>(err <a href="../../../../../builtin.html#name-error">error</a>, fromParent <a href="../../../../../builtin.html#name-bool">bool</a>)</label><span id='cdsBalancer-fold-method-handleErrorFromUpdate-docs' class="fold-docs">
+				handleErrorFromUpdate handles both the error from parent ClientConn (from
+				resolver) and the error from xds client (from the watcher). fromParent is
+				true if error is from parent ClientConn.
+
+				If the error is connection error, it's passed down to the child policy.
+				Nothing needs to be done in CDS (e.g. it doesn't go into fallback).
+
+				If the error is resource-not-found:
+				- If it's from resolver, it means LDS resources were removed. The CDS watch
+				should be canceled.
+				- If it's from xds client, it means CDS resource were removed. The CDS
+				watcher should keep watching.
+
+				In both cases, the error will be forwarded to the child balancer. And if
+				error is resource-not-found, the child balancer will stop watching EDS.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-handleSecurityConfig"><label for="cdsBalancer-fold-method-handleSecurityConfig">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-189">handleSecurityConfig</a>(config *<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-SecurityConfig">SecurityConfig</a>) <a href="../../../../../builtin.html#name-error">error</a></label><span id='cdsBalancer-fold-method-handleSecurityConfig-docs' class="fold-docs">
+				handleSecurityConfig processes the security configuration received from the
+				management server, creates appropriate certificate provider plugins, and
+				updates the HandhakeInfo which is added as an address attribute in
+				NewSubConn() calls.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-handleWatchUpdate"><label for="cdsBalancer-fold-method-handleWatchUpdate">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-275">handleWatchUpdate</a>(update <a href="#name-clusterHandlerUpdate">clusterHandlerUpdate</a>)</label><span id='cdsBalancer-fold-method-handleWatchUpdate-docs' class="fold-docs">
+				handleWatchUpdate handles a watch update from the xDS Client. Good updates
+				lead to clientConn updates being invoked on the underlying cluster_resolver balancer.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="cdsBalancer-fold-method-run"><label for="cdsBalancer-fold-method-run">(*cdsBalancer) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-375">run</a>()</label><span id='cdsBalancer-fold-method-run-docs' class="fold-docs">
+				run is a long-running goroutine which handles all updates from gRPC. All
+				methods which are invoked directly by gRPC or xdsClient simply push an
+				update onto a channel which is read and acted upon right here.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="cdsBalancer-fold-impls"><label for="cdsBalancer-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='cdsBalancer-fold-impls-items' class="fold-items"><span>
+			*cdsBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-Balancer">Balancer</a></span><span>
+			*cdsBalancer : google.golang.org/grpc/balancer.<a href="../../../balancer.html#name-ExitIdler">ExitIdler</a></span></span>
+		<input type='checkbox' class="fold" id="cdsBalancer-fold-params"><label for="cdsBalancer-fold-params">As Inputs Of (<i>at least 2, neither is exported</i>)</label><span id='cdsBalancer-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="cdsBalancer-showhide-outputofs"><i><label for="cdsBalancer-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="cdsBalancer-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func <a href="#name-newClusterHandler">newClusterHandler</a>(parent *<b>cdsBalancer</b>) *<a href="#name-clusterHandler">clusterHandler</a></i></span><span class="hidden"><i>
+			func <a href="#name-prefixLogger">prefixLogger</a>(p *<b>cdsBalancer</b>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterHandler" data-popularity="260">	<input type='checkbox' class="fold" id="clusterHandler-fold-content"><label for="clusterHandler-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-52">clusterHandler</a> <i>(struct)</i></label><span id='clusterHandler-fold-content-docs' class="fold-docs">
+		clusterHandler will be given a name representing a cluster. It will then
+		update the CDS policy constantly with a list of Clusters to pass down to
+		XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
+
+		<input type='checkbox' class="fold" id="clusterHandler-fold-fields"><label for="clusterHandler-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='clusterHandler-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterHandler-showhide-fields"><i><label for="clusterHandler-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="clusterHandler-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandler-fold-field-clusterMutex"><label for="clusterHandler-fold-field-clusterMutex"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-56">clusterMutex</a> <i><a href="../../../../../sync.html">sync</a>.<a href="../../../../../sync.html#name-Mutex">Mutex</a></i></label><span id='clusterHandler-fold-field-clusterMutex-docs' class="fold-docs">
+				A mutex to protect entire tree of clusters.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-53">parent</a> <i>*<a href="#name-cdsBalancer">cdsBalancer</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-57">root</a> <i>*<a href="#name-clusterNode">clusterNode</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-58">rootClusterName</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandler-fold-field-updateChannel"><label for="clusterHandler-fold-field-updateChannel"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-64">updateChannel</a> <i>chan <a href="#name-clusterHandlerUpdate">clusterHandlerUpdate</a></i></label><span id='clusterHandler-fold-field-updateChannel-docs' class="fold-docs">
+				A way to ping CDS Balancer about any updates or errors to a Node in the
+				tree. This will either get called from this handler constructing an
+				update or from a child with an error. Capacity of one as the only update
+				CDS Balancer cares about is the most recent update.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterHandler-fold-methods"><label for="clusterHandler-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='clusterHandler-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterHandler-showhide-methods"><i><label for="clusterHandler-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="clusterHandler-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandler-fold-method-close"><label for="clusterHandler-fold-method-close">(*clusterHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-120">close</a>()</label><span id='clusterHandler-fold-method-close-docs' class="fold-docs">
+				close() is meant to be called by CDS when the CDS balancer is closed, and it
+				cancels the watches for every cluster in the cluster tree.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandler-fold-method-constructClusterUpdate"><label for="clusterHandler-fold-method-constructClusterUpdate">(*clusterHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-93">constructClusterUpdate</a>()</label><span id='clusterHandler-fold-method-constructClusterUpdate-docs' class="fold-docs">
+				This function tries to construct a cluster update to send to CDS.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs">(*clusterHandler) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-74">updateRootCluster</a>(rootClusterName <a href="../../../../../builtin.html#name-string">string</a>)</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterHandler-fold-results"><label for="clusterHandler-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='clusterHandler-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterHandler-showhide-inputofs"><i><label for="clusterHandler-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="clusterHandler-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newClusterHandler">newClusterHandler</a>(parent *<a href="#name-cdsBalancer">cdsBalancer</a>) *<b>clusterHandler</b></i></span></span>
+		<input type='checkbox' class="fold" id="clusterHandler-fold-params"><label for="clusterHandler-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='clusterHandler-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterHandler-showhide-outputofs"><i><label for="clusterHandler-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="clusterHandler-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-createClusterNode">createClusterNode</a>(clusterName <a href="../../../../../builtin.html#name-string">string</a>, xdsClient <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelHandler *<b>clusterHandler</b>) *<a href="#name-clusterNode">clusterNode</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterHandlerUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="clusterHandlerUpdate-fold-content"><label for="clusterHandlerUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-33">clusterHandlerUpdate</a> <i>(struct)</i></label><span id='clusterHandlerUpdate-fold-content-docs' class="fold-docs">
+		clusterHandlerUpdate wraps the information received from the registered CDS
+		watcher. A non-nil error is propagated to the underlying cluster_resolver
+		balancer. A valid update results in creating a new cluster_resolver balancer
+		(if one doesn't already exist) and pushing the update to it.
+
+		<input type='checkbox' class="fold" id="clusterHandlerUpdate-fold-fields"><label for="clusterHandlerUpdate-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='clusterHandlerUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterHandlerUpdate-showhide-fields"><i><label for="clusterHandlerUpdate-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="clusterHandlerUpdate-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-46">err</a> <i><a href="../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandlerUpdate-fold-field-lbPolicy"><label for="clusterHandlerUpdate-fold-field-lbPolicy"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-42">lbPolicy</a> <i>*<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-ClusterLBPolicyRingHash">ClusterLBPolicyRingHash</a></i></label><span id='clusterHandlerUpdate-fold-field-lbPolicy-docs' class="fold-docs">
+				lbPolicy is the lb policy from the top (root) cluster.
+
+				Currently, we only support roundrobin or ringhash, and since roundrobin
+				does need configs, this is only set to the ringhash config, if the policy
+				is ringhash. In the future, if we support more policies, we can make this
+				an interface, and set it to config of the other policies.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandlerUpdate-fold-field-securityCfg"><label for="clusterHandlerUpdate-fold-field-securityCfg"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-35">securityCfg</a> <i>*<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-SecurityConfig">SecurityConfig</a></i></label><span id='clusterHandlerUpdate-fold-field-securityCfg-docs' class="fold-docs">
+				securityCfg is the Security Config from the top (root) cluster.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterHandlerUpdate-fold-field-updates"><label for="clusterHandlerUpdate-fold-field-updates"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-45">updates</a> <i>[]<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-ClusterUpdate">ClusterUpdate</a></i></label><span id='clusterHandlerUpdate-fold-field-updates-docs' class="fold-docs">
+				updates is a list of ClusterUpdates from all the leaf clusters.
+</span></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-clusterNode" data-popularity="225">	<input type='checkbox' class="fold" id="clusterNode-fold-content"><label for="clusterNode-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-134">clusterNode</a> <i>(struct)</i></label><span id='clusterNode-fold-content-docs' class="fold-docs">
+		This logically represents a cluster. This handles all the logic for starting
+		and stopping a cluster watch, handling any updates, and constructing a list
+		recursively for the ClusterHandler.
+
+		<input type='checkbox' class="fold" id="clusterNode-fold-fields"><label for="clusterNode-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='clusterNode-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterNode-showhide-fields"><i><label for="clusterNode-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="clusterNode-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-field-cancelFunc"><label for="clusterNode-fold-field-cancelFunc"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-136">cancelFunc</a> <i>func()</i></label><span id='clusterNode-fold-field-cancelFunc-docs' class="fold-docs">
+				A way to cancel the watch for the cluster.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-field-children"><label for="clusterNode-fold-field-children"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-139">children</a> <i>[]*<b>clusterNode</b></i></label><span id='clusterNode-fold-field-children-docs' class="fold-docs">
+				A list of children, as the Node can be an aggregate Cluster.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-151">clusterHandler</a> <i>*<a href="#name-clusterHandler">clusterHandler</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-field-clusterUpdate"><label for="clusterNode-fold-field-clusterUpdate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-143">clusterUpdate</a> <i><a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-ClusterUpdate">ClusterUpdate</a></i></label><span id='clusterNode-fold-field-clusterUpdate-docs' class="fold-docs">
+				A ClusterUpdate in order to build a list of cluster updates for CDS to
+				send down to child XdsClusterResolverLoadBalancingPolicy.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-field-receivedUpdate"><label for="clusterNode-fold-field-receivedUpdate"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-149">receivedUpdate</a> <i><a href="../../../../../builtin.html#name-bool">bool</a></i></label><span id='clusterNode-fold-field-receivedUpdate-docs' class="fold-docs">
+				This boolean determines whether this Node has received an update or not.
+				This isn't the best practice, but this will protect a list of Cluster
+				Updates from being constructed if a cluster in the tree has not received
+				an update yet.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterNode-fold-methods"><label for="clusterNode-fold-methods">Methods (<i>total 3, none are exported</i>)</label><span id='clusterNode-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterNode-showhide-methods"><i><label for="clusterNode-showhide-methods" class="show-inline">/* 3 unexporteds ... */</label><label for="clusterNode-showhide-methods" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-method-constructClusterUpdate"><label for="clusterNode-fold-method-constructClusterUpdate">(*clusterNode) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-180">constructClusterUpdate</a>() ([]<a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-ClusterUpdate">ClusterUpdate</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='clusterNode-fold-method-constructClusterUpdate-docs' class="fold-docs">
+				Construct cluster update (potentially a list of ClusterUpdates) for a node.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-method-delete"><label for="clusterNode-fold-method-delete">(*clusterNode) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-172">delete</a>()</label><span id='clusterNode-fold-method-delete-docs' class="fold-docs">
+				This function cancels the cluster watch on the cluster and all of it's
+				children.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="clusterNode-fold-method-handleResp"><label for="clusterNode-fold-method-handleResp">(*clusterNode) <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-210">handleResp</a>(clusterUpdate <a href="../xdsclient/xdsresource.html">xdsresource</a>.<a href="../xdsclient/xdsresource.html#name-ClusterUpdate">ClusterUpdate</a>, err <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='clusterNode-fold-method-handleResp-docs' class="fold-docs">
+				handleResp handles a xds response for a particular cluster. This function
+				also handles any logic with regards to any child state that may have changed.
+				At the end of the handleResp(), the clusterUpdate will be pinged in certain
+				situations to try and construct an update to send back to CDS.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="clusterNode-fold-results"><label for="clusterNode-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='clusterNode-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="clusterNode-showhide-inputofs"><i><label for="clusterNode-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="clusterNode-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-createClusterNode">createClusterNode</a>(clusterName <a href="../../../../../builtin.html#name-string">string</a>, xdsClient <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelHandler *<a href="#name-clusterHandler">clusterHandler</a>) *<b>clusterNode</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-exitIdle" data-popularity="0">	<span class="nodocs"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-145">exitIdle</a> <i>(struct)</i></span></div><div class="anchor type-res hidden" id="name-lbConfig" data-popularity="100">	<input type='checkbox' class="fold" id="lbConfig-fold-content"><label for="lbConfig-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-113">lbConfig</a> <i>(struct)</i></label><span id='lbConfig-fold-content-docs' class="fold-docs">
+		lbConfig represents the loadBalancingConfig section of the service config
+		for the cdsBalancer.
+
+		<input type='checkbox' class="fold" id="lbConfig-fold-fields"><label for="lbConfig-fold-fields">Fields (<i>total 2, both are exported</i>)</label><span id='lbConfig-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-115">ClusterName</a> <i><a href="../../../../../builtin.html#name-string">string</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-114">LoadBalancingConfig</a> <i><a href="../../../serviceconfig.html">serviceconfig</a>.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="lbConfig-fold-methods"><label for="lbConfig-fold-methods">Methods (<i>only one, which is unexported</i>)</label><span id='lbConfig-fold-methods-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="lbConfig-showhide-methods"><i><label for="lbConfig-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="lbConfig-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">( lbConfig) <a href="../../../../../../src/google.golang.org/grpc/serviceconfig/serviceconfig.go.html#line-36">isLoadBalancingConfig</a>()</span></i></span></span>
+		<input type='checkbox' class="fold" id="lbConfig-fold-impls"><label for="lbConfig-fold-impls">Implements (<i>at least one exported</i>)</label><span id='lbConfig-fold-impls-items' class="fold-items"><span>
+			 lbConfig : google.golang.org/grpc/serviceconfig.<a href="../../../serviceconfig.html#name-LoadBalancingConfig">LoadBalancingConfig</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-scUpdate" data-popularity="0">	<input type='checkbox' class="fold" id="scUpdate-fold-content"><label for="scUpdate-fold-content"> type <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-140">scUpdate</a> <i>(struct)</i></label><span id='scUpdate-fold-content-docs' class="fold-docs">
+		scUpdate wraps a subConn update received from gRPC. This is directly passed
+		on to the cluster_resolver balancer.
+
+		<input type='checkbox' class="fold" id="scUpdate-fold-fields"><label for="scUpdate-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='scUpdate-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="scUpdate-showhide-fields"><i><label for="scUpdate-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="scUpdate-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-142">state</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConnState">SubConnState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-141">subConn</a> <i><a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-SubConn">SubConn</a></i></span></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 5, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-buildProviderFunc"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-253">buildProviderFunc</a>(configs map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-BuildableConfig">BuildableConfig</a>, instanceName, certName <a href="../../../../../builtin.html#name-string">string</a>, wantIdentity, wantRoot <a href="../../../../../builtin.html#name-bool">bool</a>) (<a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-Provider">Provider</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-createClusterNode"><i>	<input type='checkbox' class="fold" id="createClusterNode-fold-content"><label for="createClusterNode-fold-content"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-156">createClusterNode</a>(clusterName <a href="../../../../../builtin.html#name-string">string</a>, xdsClient <a href="../xdsclient.html">xdsclient</a>.<a href="../xdsclient.html#name-XDSClient">XDSClient</a>, topLevelHandler *<a href="#name-clusterHandler">clusterHandler</a>) *<a href="#name-clusterNode">clusterNode</a></label><span id='createClusterNode-fold-content-docs' class="fold-docs">
+		CreateClusterNode creates a cluster node from a given clusterName. This will
+		also start the watch for that cluster.
+
+</span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-66">init</a>()</span></i></div><div class="anchor value-res hidden" id="name-newClusterHandler"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-67">newClusterHandler</a>(parent *<a href="#name-cdsBalancer">cdsBalancer</a>) *<a href="#name-clusterHandler">clusterHandler</a></span></i></div><div class="anchor value-res hidden" id="name-prefixLogger"><i>	<span class="nodocs"> func <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/logging.go.html#line-32">prefixLogger</a>(p *<a href="#name-cdsBalancer">cdsBalancer</a>) *<a href="../../../internal/grpclog.html">internalgrpclog</a>.<a href="../../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 5, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 5 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 5 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-buildProvider"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-63">buildProvider</a> func(configs map[<a href="../../../../../builtin.html#name-string">string</a>]*<a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-BuildableConfig">BuildableConfig</a>, instanceName <a href="../../../../../builtin.html#name-string">string</a>, certName <a href="../../../../../builtin.html#name-string">string</a>, wantIdentity <a href="../../../../../builtin.html#name-bool">bool</a>, wantRoot <a href="../../../../../builtin.html#name-bool">bool</a>) (<a href="../../../credentials/tls/certprovider.html">certprovider</a>.<a href="../../../credentials/tls/certprovider.html#name-Provider">Provider</a>, <a href="../../../../../builtin.html#name-error">error</a>)</span></i></div><div class="anchor value-res hidden" id="name-errBalancerClosed"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-49">errBalancerClosed</a> <a href="../../../../../builtin.html#name-error">error</a></span></i></div><div class="anchor value-res hidden" id="name-errNotReceivedUpdate"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cluster_handler.go.html#line-27">errNotReceivedUpdate</a> <a href="../../../../../builtin.html#name-error">error</a></span></i></div><div class="anchor value-res hidden" id="name-logger"><i>	<span class="nodocs">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/logging.go.html#line-30">logger</a> <a href="../../../grpclog.html">grpclog</a>.<a href="../../../grpclog.html#name-DepthLoggerV2">DepthLoggerV2</a></span></i></div><div class="anchor value-res hidden" id="name-newChildBalancer"><i>	<input type='checkbox' class="fold" id="newChildBalancer-fold-content"><label for="newChildBalancer-fold-content">  var <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-53">newChildBalancer</a> func(cc <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-ClientConn">ClientConn</a>, opts <a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-BuildOptions">BuildOptions</a>) (<a href="../../../balancer.html">balancer</a>.<a href="../../../balancer.html#name-Balancer">Balancer</a>, <a href="../../../../../builtin.html#name-error">error</a>)</label><span id='newChildBalancer-fold-content-docs' class="fold-docs">
+		newChildBalancer is a helper function to build a new cluster_resolver
+		balancer and will be overridden in unittests.
+
+</span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 2, neither is exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-cdsName"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/cdsbalancer.go.html#line-45">cdsName</a> = "cds_experimental"</span></i></div><div class="anchor value-res hidden" id="name-prefix"><i>	<span class="nodocs">const <a href="../../../../../../src/google.golang.org/grpc/xds/internal/balancer/cdsbalancer/logging.go.html#line-28">prefix</a> = "[cds-lb %p] "</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

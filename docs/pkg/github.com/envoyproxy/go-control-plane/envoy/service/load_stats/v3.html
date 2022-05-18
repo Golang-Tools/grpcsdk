@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3</title>
+<link href="../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>load_statsv3</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../../index.html#pkg-github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3">github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3</a><i> (on <a href="https://pkg.go.dev/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3.html">24 packages</a>, and imported by <a href="../../../../../../../dep/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">      <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html">lrs.pb.go</a></span>
+	<span class="nodocs">      <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html">lrs.pb.validate.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 14, in which 11 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-LoadReportingService_StreamLoadStatsClient" data-popularity="975">	<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-content"><label for="LoadReportingService_StreamLoadStatsClient-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-391">LoadReportingService_StreamLoadStatsClient</a> <b><i>(interface)</i></b></label><span id='LoadReportingService_StreamLoadStatsClient-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-methods"><label for="LoadReportingService_StreamLoadStatsClient-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='LoadReportingService_StreamLoadStatsClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-CloseSend"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-CloseSend">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-71">CloseSend</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-CloseSend-docs' class="fold-docs">
+				CloseSend closes the send direction of the stream. It closes the stream
+				when non-nil error is met. It is also not safe to call CloseSend
+				concurrently with SendMsg.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-Context"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-Context">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-76">Context</a>() <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a></label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-Context-docs' class="fold-docs">
+				Context returns the context for this stream.
+
+				It should not be called until after Header or RecvMsg has returned. Once
+				called, subsequent client-side retries are disabled.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-Header"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-Header">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-63">Header</a>() (<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-Header-docs' class="fold-docs">
+				Header returns the header metadata received from the server if there
+				is any. It blocks if the metadata is not ready to read.
+</span></span><span>
+			<span class="nodocs">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-393">Recv</a>() (*<a href="#name-LoadStatsResponse">LoadStatsResponse</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-RecvMsg"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-RecvMsg">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-104">RecvMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-RecvMsg-docs' class="fold-docs">
+				RecvMsg blocks until it receives a message into m or the stream is
+				done. It returns io.EOF when the stream completes successfully. On
+				any other error, the stream is aborted and the error contains the RPC
+				status.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not
+				safe to call RecvMsg on the same stream in different goroutines.
+</span></span><span>
+			<span class="nodocs">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-392">Send</a>(*<a href="#name-LoadStatsRequest">LoadStatsRequest</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-SendMsg"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-SendMsg">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-95">SendMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-SendMsg-docs' class="fold-docs">
+				SendMsg is generally called by generated code. On error, SendMsg aborts
+				the stream. If the error was generated by the client, the status is
+				returned directly; otherwise, io.EOF is returned and the status of
+				the stream may be discovered using RecvMsg.
+
+				SendMsg blocks until:
+				  - There is sufficient flow control to schedule m with the transport, or
+				  - The stream is done, or
+				  - The stream breaks.
+
+				SendMsg does not wait until the message is received by the server. An
+				untimely stream closure may result in lost messages. To ensure delivery,
+				users should ensure the RPC completed successfully using RecvMsg.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not safe
+				to call SendMsg on the same stream in different goroutines. It is also
+				not safe to call CloseSend concurrently with SendMsg.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-method-Trailer"><label for="LoadReportingService_StreamLoadStatsClient-fold-method-Trailer">( LoadReportingService_StreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-67">Trailer</a>() <a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a></label><span id='LoadReportingService_StreamLoadStatsClient-fold-method-Trailer-docs' class="fold-docs">
+				Trailer returns the trailer metadata from the server, if there is any.
+				It must only be called after stream.CloseAndRecv has returned, or
+				stream.Recv has returned a non-nil error (including io.EOF).
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-impledby"><label for="LoadReportingService_StreamLoadStatsClient-fold-impledby">Implemented By (<i>at least 2, neither is exported</i>)</label><span id='LoadReportingService_StreamLoadStatsClient-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadReportingService_StreamLoadStatsClient-showhide-impedBys"><i><label for="LoadReportingService_StreamLoadStatsClient-showhide-impedBys" class="show-inline">/* 2+ unexporteds ... */</label><label for="LoadReportingService_StreamLoadStatsClient-showhide-impedBys" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*<a href="#name-loadReportingServiceStreamLoadStatsClient">loadReportingServiceStreamLoadStatsClient</a></i></span><span class="hidden"><i>
+			 google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="../../../../../../google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.html#name-lrsStream">lrsStream</a> <i>(interface)</i></i></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-impls"><label for="LoadReportingService_StreamLoadStatsClient-fold-impls">Implements (<i>at least 4, in which 3 are exported</i>)</label><span id='LoadReportingService_StreamLoadStatsClient-fold-impls-items' class="fold-items"><span>
+			 LoadReportingService_StreamLoadStatsClient : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-ClientStream">ClientStream</a></span><span>
+			 LoadReportingService_StreamLoadStatsClient : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-Stream">Stream</a></span><span>
+			 LoadReportingService_StreamLoadStatsClient : google.golang.org/grpc/internal/resolver.<a href="../../../../../../google.golang.org/grpc/internal/resolver.html#name-ClientStream">ClientStream</a></span>
+			<input type='checkbox' class="showhide" id="LoadReportingService_StreamLoadStatsClient-showhide-impls"><i><label for="LoadReportingService_StreamLoadStatsClient-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="LoadReportingService_StreamLoadStatsClient-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			 LoadReportingService_StreamLoadStatsClient : google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="../../../../../../google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.html#name-lrsStream">lrsStream</a></i></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsClient-fold-results"><label for="LoadReportingService_StreamLoadStatsClient-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='LoadReportingService_StreamLoadStatsClient-fold-results-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingServiceClient">LoadReportingServiceClient</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-371">StreamLoadStats</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, opts ...<a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-CallOption">CallOption</a>) (<b>LoadReportingService_StreamLoadStatsClient</b>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadReportingService_StreamLoadStatsServer" data-popularity="720">	<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-content"><label for="LoadReportingService_StreamLoadStatsServer-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-462">LoadReportingService_StreamLoadStatsServer</a> <b><i>(interface)</i></b></label><span id='LoadReportingService_StreamLoadStatsServer-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-methods"><label for="LoadReportingService_StreamLoadStatsServer-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='LoadReportingService_StreamLoadStatsServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-Context"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-Context">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1402">Context</a>() <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a></label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-Context-docs' class="fold-docs">
+				Context returns the context for this stream.
+</span></span><span>
+			<span class="nodocs">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-464">Recv</a>() (*<a href="#name-LoadStatsRequest">LoadStatsRequest</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-RecvMsg"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-RecvMsg">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1426">RecvMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-RecvMsg-docs' class="fold-docs">
+				RecvMsg blocks until it receives a message into m or the stream is
+				done. It returns io.EOF when the client has performed a CloseSend. On
+				any non-EOF error, the stream is aborted and the error contains the
+				RPC status.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not
+				safe to call RecvMsg on the same stream in different goroutines.
+</span></span><span>
+			<span class="nodocs">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-463">Send</a>(*<a href="#name-LoadStatsResponse">LoadStatsResponse</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-SendHeader"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-SendHeader">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1397">SendHeader</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-SendHeader-docs' class="fold-docs">
+				SendHeader sends the header metadata.
+				The provided md and headers set by SetHeader() will be sent.
+				It fails if called multiple times.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-SendMsg"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-SendMsg">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1417">SendMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-SendMsg-docs' class="fold-docs">
+				SendMsg sends a message. On error, SendMsg aborts the stream and the
+				error is returned directly.
+
+				SendMsg blocks until:
+				  - There is sufficient flow control to schedule m with the transport, or
+				  - The stream is done, or
+				  - The stream breaks.
+
+				SendMsg does not wait until the message is received by the client. An
+				untimely stream closure may result in lost messages.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not safe
+				to call SendMsg on the same stream in different goroutines.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-SetHeader"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-SetHeader">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1393">SetHeader</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-SetHeader-docs' class="fold-docs">
+				SetHeader sets the header metadata. It may be called multiple times.
+				When call multiple times, all the provided metadata will be merged.
+				All the metadata will be sent out when one of the following happens:
+				 - ServerStream.SendHeader() is called;
+				 - The first response is sent out;
+				 - An RPC status is sent out (error or success).
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-method-SetTrailer"><label for="LoadReportingService_StreamLoadStatsServer-fold-method-SetTrailer">( LoadReportingService_StreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1400">SetTrailer</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>)</label><span id='LoadReportingService_StreamLoadStatsServer-fold-method-SetTrailer-docs' class="fold-docs">
+				SetTrailer sets the trailer metadata which will be sent with the RPC status.
+				When called more than once, all the provided metadata will be merged.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-impledby"><label for="LoadReportingService_StreamLoadStatsServer-fold-impledby">Implemented By (<i>at least one unexported</i>)</label><span id='LoadReportingService_StreamLoadStatsServer-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadReportingService_StreamLoadStatsServer-showhide-impedBys"><i><label for="LoadReportingService_StreamLoadStatsServer-showhide-impedBys" class="show-inline">/* at least one unexported ... */</label><label for="LoadReportingService_StreamLoadStatsServer-showhide-impedBys" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*<a href="#name-loadReportingServiceStreamLoadStatsServer">loadReportingServiceStreamLoadStatsServer</a></i></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-impls"><label for="LoadReportingService_StreamLoadStatsServer-fold-impls">Implements (<i>at least 2, both are exported</i>)</label><span id='LoadReportingService_StreamLoadStatsServer-fold-impls-items' class="fold-items"><span>
+			 LoadReportingService_StreamLoadStatsServer : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-ServerStream">ServerStream</a></span><span>
+			 LoadReportingService_StreamLoadStatsServer : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-Stream">Stream</a></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingService_StreamLoadStatsServer-fold-params"><label for="LoadReportingService_StreamLoadStatsServer-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='LoadReportingService_StreamLoadStatsServer-fold-params-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingServiceServer">LoadReportingServiceServer</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-443">StreamLoadStats</a>(<b>LoadReportingService_StreamLoadStatsServer</b>) <a href="../../../../../../builtin.html#name-error">error</a></span><span>
+			func (*<a href="#name-UnimplementedLoadReportingServiceServer">UnimplementedLoadReportingServiceServer</a>).<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-450">StreamLoadStats</a>(<b>LoadReportingService_StreamLoadStatsServer</b>) <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadReportingServiceClient" data-popularity="275">	<input type='checkbox' class="fold" id="LoadReportingServiceClient-fold-content"><label for="LoadReportingServiceClient-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-342">LoadReportingServiceClient</a> <b><i>(interface)</i></b></label><span id='LoadReportingServiceClient-fold-content-docs' class="fold-docs">
+		LoadReportingServiceClient is the client API for LoadReportingService service.
+
+		For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+
+		<input type='checkbox' class="fold" id="LoadReportingServiceClient-fold-methods"><label for="LoadReportingServiceClient-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='LoadReportingServiceClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadReportingServiceClient-fold-method-StreamLoadStats"><label for="LoadReportingServiceClient-fold-method-StreamLoadStats">( LoadReportingServiceClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-371">StreamLoadStats</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, opts ...<a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-CallOption">CallOption</a>) (<a href="#name-LoadReportingService_StreamLoadStatsClient">LoadReportingService_StreamLoadStatsClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='LoadReportingServiceClient-fold-method-StreamLoadStats-docs' class="fold-docs">
+				Advanced API to allow for multi-dimensional load balancing by remote
+				server. For receiving LB assignments, the steps are:
+				1, The management server is configured with per cluster/zone/load metric
+				   capacity configuration. The capacity configuration definition is
+				   outside of the scope of this document.
+				2. Envoy issues a standard {Stream,Fetch}Endpoints request for the clusters
+				   to balance.
+
+				Independently, Envoy will initiate a StreamLoadStats bidi stream with a
+				management server:
+				1. Once a connection establishes, the management server publishes a
+				   LoadStatsResponse for all clusters it is interested in learning load
+				   stats about.
+				2. For each cluster, Envoy load balances incoming traffic to upstream hosts
+				   based on per-zone weights and/or per-instance weights (if specified)
+				   based on intra-zone LbPolicy. This information comes from the above
+				   {Stream,Fetch}Endpoints.
+				3. When upstream hosts reply, they optionally add header &lt;define header
+				   name&gt; with ASCII representation of EndpointLoadMetricStats.
+				4. Envoy aggregates load reports over the period of time given to it in
+				   LoadStatsResponse.load_reporting_interval. This includes aggregation
+				   stats Envoy maintains by itself (total_requests, rpc_errors etc.) as
+				   well as load metrics from upstream hosts.
+				5. When the timer of load_reporting_interval expires, Envoy sends new
+				   LoadStatsRequest filled with load reports for each cluster.
+				6. The management server uses the load reports from all reported Envoys
+				   from around the world, computes global assignment and prepares traffic
+				   assignment destined for each zone Envoys are located in. Goto 2.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingServiceClient-fold-impledby"><label for="LoadReportingServiceClient-fold-impledby">Implemented By (<i>at least one unexported</i>)</label><span id='LoadReportingServiceClient-fold-impledby-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadReportingServiceClient-showhide-impedBys"><i><label for="LoadReportingServiceClient-showhide-impedBys" class="show-inline">/* at least one unexported ... */</label><label for="LoadReportingServiceClient-showhide-impedBys" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*<a href="#name-loadReportingServiceClient">loadReportingServiceClient</a></i></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingServiceClient-fold-results"><label for="LoadReportingServiceClient-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='LoadReportingServiceClient-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewLoadReportingServiceClient">NewLoadReportingServiceClient</a>(cc <a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ClientConnInterface">ClientConnInterface</a>) <b>LoadReportingServiceClient</b></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadReportingServiceServer" data-popularity="235">	<input type='checkbox' class="fold" id="LoadReportingServiceServer-fold-content"><label for="LoadReportingServiceServer-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-414">LoadReportingServiceServer</a> <b><i>(interface)</i></b></label><span id='LoadReportingServiceServer-fold-content-docs' class="fold-docs">
+		LoadReportingServiceServer is the server API for LoadReportingService service.
+
+		<input type='checkbox' class="fold" id="LoadReportingServiceServer-fold-methods"><label for="LoadReportingServiceServer-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='LoadReportingServiceServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadReportingServiceServer-fold-method-StreamLoadStats"><label for="LoadReportingServiceServer-fold-method-StreamLoadStats">( LoadReportingServiceServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-443">StreamLoadStats</a>(<a href="#name-LoadReportingService_StreamLoadStatsServer">LoadReportingService_StreamLoadStatsServer</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadReportingServiceServer-fold-method-StreamLoadStats-docs' class="fold-docs">
+				Advanced API to allow for multi-dimensional load balancing by remote
+				server. For receiving LB assignments, the steps are:
+				1, The management server is configured with per cluster/zone/load metric
+				   capacity configuration. The capacity configuration definition is
+				   outside of the scope of this document.
+				2. Envoy issues a standard {Stream,Fetch}Endpoints request for the clusters
+				   to balance.
+
+				Independently, Envoy will initiate a StreamLoadStats bidi stream with a
+				management server:
+				1. Once a connection establishes, the management server publishes a
+				   LoadStatsResponse for all clusters it is interested in learning load
+				   stats about.
+				2. For each cluster, Envoy load balances incoming traffic to upstream hosts
+				   based on per-zone weights and/or per-instance weights (if specified)
+				   based on intra-zone LbPolicy. This information comes from the above
+				   {Stream,Fetch}Endpoints.
+				3. When upstream hosts reply, they optionally add header &lt;define header
+				   name&gt; with ASCII representation of EndpointLoadMetricStats.
+				4. Envoy aggregates load reports over the period of time given to it in
+				   LoadStatsResponse.load_reporting_interval. This includes aggregation
+				   stats Envoy maintains by itself (total_requests, rpc_errors etc.) as
+				   well as load metrics from upstream hosts.
+				5. When the timer of load_reporting_interval expires, Envoy sends new
+				   LoadStatsRequest filled with load reports for each cluster.
+				6. The management server uses the load reports from all reported Envoys
+				   from around the world, computes global assignment and prepares traffic
+				   assignment destined for each zone Envoys are located in. Goto 2.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingServiceServer-fold-impledby"><label for="LoadReportingServiceServer-fold-impledby">Implemented By (<i>at least one exported</i>)</label><span id='LoadReportingServiceServer-fold-impledby-items' class="fold-items"><span>
+			*<a href="#name-UnimplementedLoadReportingServiceServer">UnimplementedLoadReportingServiceServer</a></span></span>
+		<input type='checkbox' class="fold" id="LoadReportingServiceServer-fold-params"><label for="LoadReportingServiceServer-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='LoadReportingServiceServer-fold-params-items' class="fold-items"><span>
+			func <a href="#name-RegisterLoadReportingServiceServer">RegisterLoadReportingServiceServer</a>(s *<a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-Server">Server</a>, srv <b>LoadReportingServiceServer</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsRequest" data-popularity="910">	<input type='checkbox' class="fold" id="LoadStatsRequest-fold-content"><label for="LoadStatsRequest-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-32">LoadStatsRequest</a> <i>(struct)</i></label><span id='LoadStatsRequest-fold-content-docs' class="fold-docs">
+		A load report Envoy sends to the management server.
+
+		<input type='checkbox' class="fold" id="LoadStatsRequest-fold-fields"><label for="LoadStatsRequest-fold-fields">Fields (<i>total 5, in which 2 are exported</i>)</label><span id='LoadStatsRequest-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequest-fold-field-ClusterStats"><label for="LoadStatsRequest-fold-field-ClusterStats"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-40">ClusterStats</a> <i>[]*<a href="../../config/endpoint/v3.html">v31</a>.<a href="../../config/endpoint/v3.html#name-ClusterStats">ClusterStats</a></i></label><span id='LoadStatsRequest-fold-field-ClusterStats-docs' class="fold-docs">
+				A list of load stats to report.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequest-fold-field-Node"><label for="LoadStatsRequest-fold-field-Node"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-38">Node</a> <i>*<a href="../../config/core/v3.html">v3</a>.<a href="../../config/core/v3.html#name-Node">Node</a></i></label><span id='LoadStatsRequest-fold-field-Node-docs' class="fold-docs">
+				Node identifier for Envoy instance.
+</span></span>
+			<input type='checkbox' class="showhide" id="LoadStatsRequest-showhide-fields"><i><label for="LoadStatsRequest-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="LoadStatsRequest-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-34">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-33">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-35">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequest-fold-methods"><label for="LoadStatsRequest-fold-methods">Methods (<i>total 10, in which 9 are exported</i>)</label><span id='LoadStatsRequest-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequest-fold-method-Descriptor"><label for="LoadStatsRequest-fold-method-Descriptor">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-71">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='LoadStatsRequest-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use LoadStatsRequest.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-82">GetClusterStats</a>() []*<a href="../../config/endpoint/v3.html">v31</a>.<a href="../../config/endpoint/v3.html#name-ClusterStats">ClusterStats</a></span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-75">GetNode</a>() *<a href="../../config/core/v3.html">v3</a>.<a href="../../config/core/v3.html#name-Node">Node</a></span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-56">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-58">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-43">Reset</a>()</span></span><span>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-52">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequest-fold-method-Validate"><label for="LoadStatsRequest-fold-method-Validate">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-41">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsRequest-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on LoadStatsRequest with the rules defined
+				in the proto definition for this message. If any rules are violated, the
+				first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequest-fold-method-ValidateAll"><label for="LoadStatsRequest-fold-method-ValidateAll">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-49">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsRequest-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on LoadStatsRequest with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				LoadStatsRequestMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="LoadStatsRequest-showhide-methods"><i><label for="LoadStatsRequest-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="LoadStatsRequest-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*LoadStatsRequest) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-53">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequest-fold-impls"><label for="LoadStatsRequest-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='LoadStatsRequest-fold-impls-items' class="fold-items"><span>
+			*LoadStatsRequest : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*LoadStatsRequest : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*LoadStatsRequest : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="LoadStatsRequest-showhide-impls"><i><label for="LoadStatsRequest-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="LoadStatsRequest-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*LoadStatsRequest : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*LoadStatsRequest : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*LoadStatsRequest : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequest-fold-results"><label for="LoadStatsRequest-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='LoadStatsRequest-fold-results-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingService_StreamLoadStatsServer">LoadReportingService_StreamLoadStatsServer</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-464">Recv</a>() (*<b>LoadStatsRequest</b>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequest-fold-params"><label for="LoadStatsRequest-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='LoadStatsRequest-fold-params-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingService_StreamLoadStatsClient">LoadReportingService_StreamLoadStatsClient</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-392">Send</a>(*<b>LoadStatsRequest</b>) <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsRequestMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="LoadStatsRequestMultiError-fold-content"><label for="LoadStatsRequestMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-133">LoadStatsRequestMultiError</a> <i>([])</i></label><span id='LoadStatsRequestMultiError-fold-content-docs' class="fold-docs">
+		LoadStatsRequestMultiError is an error wrapping multiple validation errors
+		returned by LoadStatsRequest.ValidateAll() if the designated constraints
+		aren't met.
+
+		<input type='checkbox' class="fold" id="LoadStatsRequestMultiError-fold-methods"><label for="LoadStatsRequestMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='LoadStatsRequestMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestMultiError-fold-method-AllErrors"><label for="LoadStatsRequestMultiError-fold-method-AllErrors">( LoadStatsRequestMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-145">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsRequestMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestMultiError-fold-method-Error"><label for="LoadStatsRequestMultiError-fold-method-Error">( LoadStatsRequestMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-136">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsRequestMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequestMultiError-fold-impls"><label for="LoadStatsRequestMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LoadStatsRequestMultiError-fold-impls-items' class="fold-items"><span>
+			 LoadStatsRequestMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsRequestValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-content"><label for="LoadStatsRequestValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-149">LoadStatsRequestValidationError</a> <i>(struct)</i></label><span id='LoadStatsRequestValidationError-fold-content-docs' class="fold-docs">
+		LoadStatsRequestValidationError is the validation error returned by
+		LoadStatsRequest.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-fields"><label for="LoadStatsRequestValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='LoadStatsRequestValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadStatsRequestValidationError-showhide-fields"><i><label for="LoadStatsRequestValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="LoadStatsRequestValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-152">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-150">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-153">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-151">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-methods"><label for="LoadStatsRequestValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='LoadStatsRequestValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-Cause"><label for="LoadStatsRequestValidationError-fold-method-Cause">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-163">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsRequestValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-Error"><label for="LoadStatsRequestValidationError-fold-method-Error">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-172">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsRequestValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-ErrorName"><label for="LoadStatsRequestValidationError-fold-method-ErrorName">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-169">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsRequestValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-Field"><label for="LoadStatsRequestValidationError-fold-method-Field">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-157">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsRequestValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-Key"><label for="LoadStatsRequestValidationError-fold-method-Key">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-166">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='LoadStatsRequestValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-method-Reason"><label for="LoadStatsRequestValidationError-fold-method-Reason">( LoadStatsRequestValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-160">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsRequestValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsRequestValidationError-fold-impls"><label for="LoadStatsRequestValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LoadStatsRequestValidationError-fold-impls-items' class="fold-items"><span>
+			 LoadStatsRequestValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsResponse" data-popularity="1010">	<input type='checkbox' class="fold" id="LoadStatsResponse-fold-content"><label for="LoadStatsResponse-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-91">LoadStatsResponse</a> <i>(struct)</i></label><span id='LoadStatsResponse-fold-content-docs' class="fold-docs">
+		The management server sends envoy a LoadStatsResponse with all clusters it
+		is interested in learning load stats about.
+
+		<input type='checkbox' class="fold" id="LoadStatsResponse-fold-fields"><label for="LoadStatsResponse-fold-fields">Fields (<i>total 7, in which 4 are exported</i>)</label><span id='LoadStatsResponse-fold-fields-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-field-Clusters"><label for="LoadStatsResponse-fold-field-Clusters"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-98">Clusters</a> <i>[]<a href="../../../../../../builtin.html#name-string">string</a></i></label><span id='LoadStatsResponse-fold-field-Clusters-docs' class="fold-docs">
+				Clusters to report stats for.
+				Not populated if *send_all_clusters* is true.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-field-LoadReportingInterval"><label for="LoadStatsResponse-fold-field-LoadReportingInterval"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-111">LoadReportingInterval</a> <i>*<a href="../../../../../golang/protobuf/ptypes/duration.html">duration</a>.<a href="../../../../../golang/protobuf/ptypes/duration.html#name-Duration">Duration</a></i></label><span id='LoadStatsResponse-fold-field-LoadReportingInterval-docs' class="fold-docs">
+				The minimum interval of time to collect stats over. This is only a minimum for two reasons:
+
+				1. There may be some delay from when the timer fires until stats sampling occurs.
+				2. For clusters that were already feature in the previous *LoadStatsResponse*, any traffic
+				   that is observed in between the corresponding previous *LoadStatsRequest* and this
+				   *LoadStatsResponse* will also be accumulated and billed to the cluster. This avoids a period
+				   of inobservability that might otherwise exists between the messages. New clusters are not
+				   subject to this consideration.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-field-ReportEndpointGranularity"><label for="LoadStatsResponse-fold-field-ReportEndpointGranularity"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-114">ReportEndpointGranularity</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></label><span id='LoadStatsResponse-fold-field-ReportEndpointGranularity-docs' class="fold-docs">
+				Set to *true* if the management server supports endpoint granularity
+				report.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-field-SendAllClusters"><label for="LoadStatsResponse-fold-field-SendAllClusters"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-102">SendAllClusters</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></label><span id='LoadStatsResponse-fold-field-SendAllClusters-docs' class="fold-docs">
+				If true, the client should send all clusters it knows about.
+				Only clients that advertise the "envoy.lrs.supports_send_all_clusters" capability in their
+				:ref:`client_features&lt;envoy_v3_api_field_config.core.v3.Node.client_features&gt;` field will honor this field.
+</span></span>
+			<input type='checkbox' class="showhide" id="LoadStatsResponse-showhide-fields"><i><label for="LoadStatsResponse-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="LoadStatsResponse-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-93">sizeCache</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-SizeCache">SizeCache</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-92">state</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-MessageState">MessageState</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-94">unknownFields</a> <i><a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html">protoimpl</a>.<a href="../../../../../../google.golang.org/protobuf/runtime/protoimpl.html#name-UnknownFields">UnknownFields</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponse-fold-methods"><label for="LoadStatsResponse-fold-methods">Methods (<i>total 12, in which 11 are exported</i>)</label><span id='LoadStatsResponse-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-method-Descriptor"><label for="LoadStatsResponse-fold-method-Descriptor">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-145">Descriptor</a>() ([]<a href="../../../../../../builtin.html#name-byte">byte</a>, []<a href="../../../../../../builtin.html#name-int">int</a>)</label><span id='LoadStatsResponse-fold-method-Descriptor-docs' class="fold-docs">
+				Deprecated: Use LoadStatsResponse.ProtoReflect.Descriptor instead.
+</span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-149">GetClusters</a>() []<a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-163">GetLoadReportingInterval</a>() *<a href="../../../../../golang/protobuf/ptypes/duration.html">duration</a>.<a href="../../../../../golang/protobuf/ptypes/duration.html#name-Duration">Duration</a></span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-170">GetReportEndpointGranularity</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-156">GetSendAllClusters</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-130">ProtoMessage</a>()</span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-132">ProtoReflect</a>() <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-Message">Message</a></span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-117">Reset</a>()</span></span><span>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-126">String</a>() <a href="../../../../../../builtin.html#name-string">string</a></span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-method-Validate"><label for="LoadStatsResponse-fold-method-Validate">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-204">Validate</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsResponse-fold-method-Validate-docs' class="fold-docs">
+				Validate checks the field values on LoadStatsResponse with the rules defined
+				in the proto definition for this message. If any rules are violated, the
+				first error encountered is returned, or nil if there are no violations.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponse-fold-method-ValidateAll"><label for="LoadStatsResponse-fold-method-ValidateAll">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-212">ValidateAll</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsResponse-fold-method-ValidateAll-docs' class="fold-docs">
+				ValidateAll checks the field values on LoadStatsResponse with the rules
+				defined in the proto definition for this message. If any rules are
+				violated, the result is a list of violation errors wrapped in
+				LoadStatsResponseMultiError, or nil if none found.
+</span></span>
+			<input type='checkbox' class="showhide" id="LoadStatsResponse-showhide-methods"><i><label for="LoadStatsResponse-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="LoadStatsResponse-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs">(*LoadStatsResponse) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-216">validate</a>(all <a href="../../../../../../builtin.html#name-bool">bool</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponse-fold-impls"><label for="LoadStatsResponse-fold-impls">Implements (<i>at least 6, in which 3 are exported</i>)</label><span id='LoadStatsResponse-fold-impls-items' class="fold-items"><span>
+			*LoadStatsResponse : fmt.<a href="../../../../../../fmt.html#name-Stringer">Stringer</a></span><span>
+			*LoadStatsResponse : google.golang.org/protobuf/reflect/protoreflect.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-ProtoMessage">ProtoMessage</a></span><span>
+			*LoadStatsResponse : google.golang.org/protobuf/runtime/protoiface.<a href="../../../../../../google.golang.org/protobuf/runtime/protoiface.html#name-MessageV1">MessageV1</a></span>
+			<input type='checkbox' class="showhide" id="LoadStatsResponse-showhide-impls"><i><label for="LoadStatsResponse-showhide-impls" class="show-inline">/* 3+ unexporteds ... */</label><label for="LoadStatsResponse-showhide-impls" class="hide-inline">/* 3+ unexporteds: */</label></i><span class="hidden"><i>
+			*LoadStatsResponse : context.<a href="../../../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*LoadStatsResponse : google.golang.org/protobuf/internal/impl.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-messageV1">messageV1</a></i></span><span class="hidden"><i>
+			*LoadStatsResponse : runtime.<a href="../../../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponse-fold-results"><label for="LoadStatsResponse-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='LoadStatsResponse-fold-results-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingService_StreamLoadStatsClient">LoadReportingService_StreamLoadStatsClient</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-393">Recv</a>() (*<b>LoadStatsResponse</b>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponse-fold-params"><label for="LoadStatsResponse-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='LoadStatsResponse-fold-params-items' class="fold-items"><span>
+			func <a href="#name-LoadReportingService_StreamLoadStatsServer">LoadReportingService_StreamLoadStatsServer</a>.<a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-463">Send</a>(*<b>LoadStatsResponse</b>) <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsResponseMultiError" data-popularity="150">	<input type='checkbox' class="fold" id="LoadStatsResponseMultiError-fold-content"><label for="LoadStatsResponseMultiError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-266">LoadStatsResponseMultiError</a> <i>([])</i></label><span id='LoadStatsResponseMultiError-fold-content-docs' class="fold-docs">
+		LoadStatsResponseMultiError is an error wrapping multiple validation errors
+		returned by LoadStatsResponse.ValidateAll() if the designated constraints
+		aren't met.
+
+		<input type='checkbox' class="fold" id="LoadStatsResponseMultiError-fold-methods"><label for="LoadStatsResponseMultiError-fold-methods">Methods (<i>total 2, both are exported</i>)</label><span id='LoadStatsResponseMultiError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseMultiError-fold-method-AllErrors"><label for="LoadStatsResponseMultiError-fold-method-AllErrors">( LoadStatsResponseMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-278">AllErrors</a>() []<a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsResponseMultiError-fold-method-AllErrors-docs' class="fold-docs">
+				AllErrors returns a list of validation violation errors.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseMultiError-fold-method-Error"><label for="LoadStatsResponseMultiError-fold-method-Error">( LoadStatsResponseMultiError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-269">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsResponseMultiError-fold-method-Error-docs' class="fold-docs">
+				Error returns a concatenation of all the error messages it wraps.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponseMultiError-fold-impls"><label for="LoadStatsResponseMultiError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LoadStatsResponseMultiError-fold-impls-items' class="fold-items"><span>
+			 LoadStatsResponseMultiError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-LoadStatsResponseValidationError" data-popularity="350">	<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-content"><label for="LoadStatsResponseValidationError-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-282">LoadStatsResponseValidationError</a> <i>(struct)</i></label><span id='LoadStatsResponseValidationError-fold-content-docs' class="fold-docs">
+		LoadStatsResponseValidationError is the validation error returned by
+		LoadStatsResponse.Validate if the designated constraints aren't met.
+
+		<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-fields"><label for="LoadStatsResponseValidationError-fold-fields">Fields (<i>total 4, none are exported</i>)</label><span id='LoadStatsResponseValidationError-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="LoadStatsResponseValidationError-showhide-fields"><i><label for="LoadStatsResponseValidationError-showhide-fields" class="show-inline">/* 4 unexporteds ... */</label><label for="LoadStatsResponseValidationError-showhide-fields" class="hide-inline">/* 4 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-152">cause</a> <i><a href="../../../../../../builtin.html#name-error">error</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-150">field</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-153">key</a> <i><a href="../../../../../../builtin.html#name-bool">bool</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-151">reason</a> <i><a href="../../../../../../builtin.html#name-string">string</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-methods"><label for="LoadStatsResponseValidationError-fold-methods">Methods (<i>total 6, all are exported</i>)</label><span id='LoadStatsResponseValidationError-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-Cause"><label for="LoadStatsResponseValidationError-fold-method-Cause">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-296">Cause</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='LoadStatsResponseValidationError-fold-method-Cause-docs' class="fold-docs">
+				Cause function returns cause value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-Error"><label for="LoadStatsResponseValidationError-fold-method-Error">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-307">Error</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsResponseValidationError-fold-method-Error-docs' class="fold-docs">
+				Error satisfies the builtin error interface
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-ErrorName"><label for="LoadStatsResponseValidationError-fold-method-ErrorName">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-302">ErrorName</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsResponseValidationError-fold-method-ErrorName-docs' class="fold-docs">
+				ErrorName returns error name.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-Field"><label for="LoadStatsResponseValidationError-fold-method-Field">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-290">Field</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsResponseValidationError-fold-method-Field-docs' class="fold-docs">
+				Field function returns field value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-Key"><label for="LoadStatsResponseValidationError-fold-method-Key">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-299">Key</a>() <a href="../../../../../../builtin.html#name-bool">bool</a></label><span id='LoadStatsResponseValidationError-fold-method-Key-docs' class="fold-docs">
+				Key function returns key value.
+</span></span><span>
+			<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-method-Reason"><label for="LoadStatsResponseValidationError-fold-method-Reason">( LoadStatsResponseValidationError) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.validate.go.html#line-293">Reason</a>() <a href="../../../../../../builtin.html#name-string">string</a></label><span id='LoadStatsResponseValidationError-fold-method-Reason-docs' class="fold-docs">
+				Reason function returns reason value.
+</span></span></span>
+		<input type='checkbox' class="fold" id="LoadStatsResponseValidationError-fold-impls"><label for="LoadStatsResponseValidationError-fold-impls">Implements (<i>at least one exported</i>)</label><span id='LoadStatsResponseValidationError-fold-impls-items' class="fold-items"><span>
+			 LoadStatsResponseValidationError : <a href="../../../../../../builtin.html#name-error">error</a></span></span>
+
+</span></div><div class="anchor type-res" id="name-UnimplementedLoadReportingServiceServer" data-popularity="100">	<input type='checkbox' class="fold" id="UnimplementedLoadReportingServiceServer-fold-content"><label for="UnimplementedLoadReportingServiceServer-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-447">UnimplementedLoadReportingServiceServer</a> <i>(struct)</i></label><span id='UnimplementedLoadReportingServiceServer-fold-content-docs' class="fold-docs">
+		UnimplementedLoadReportingServiceServer can be embedded to have forward compatible implementations.
+
+		<input type='checkbox' class="fold" id="UnimplementedLoadReportingServiceServer-fold-methods"><label for="UnimplementedLoadReportingServiceServer-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='UnimplementedLoadReportingServiceServer-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*UnimplementedLoadReportingServiceServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-450">StreamLoadStats</a>(<a href="#name-LoadReportingService_StreamLoadStatsServer">LoadReportingService_StreamLoadStatsServer</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></span></span>
+		<input type='checkbox' class="fold" id="UnimplementedLoadReportingServiceServer-fold-impls"><label for="UnimplementedLoadReportingServiceServer-fold-impls">Implements (<i>at least one exported</i>)</label><span id='UnimplementedLoadReportingServiceServer-fold-impls-items' class="fold-items"><span>
+			*UnimplementedLoadReportingServiceServer : <a href="#name-LoadReportingServiceServer">LoadReportingServiceServer</a></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-loadReportingServiceClient" data-popularity="100">	<input type='checkbox' class="fold" id="loadReportingServiceClient-fold-content"><label for="loadReportingServiceClient-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-374">loadReportingServiceClient</a> <i>(struct)</i></label><span id='loadReportingServiceClient-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="loadReportingServiceClient-fold-fields"><label for="loadReportingServiceClient-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='loadReportingServiceClient-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="loadReportingServiceClient-showhide-fields"><i><label for="loadReportingServiceClient-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="loadReportingServiceClient-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-375">cc</a> <i><a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ClientConnInterface">ClientConnInterface</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceClient-fold-methods"><label for="loadReportingServiceClient-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='loadReportingServiceClient-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*loadReportingServiceClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-382">StreamLoadStats</a>(ctx <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a>, opts ...<a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-CallOption">CallOption</a>) (<a href="#name-LoadReportingService_StreamLoadStatsClient">LoadReportingService_StreamLoadStatsClient</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceClient-fold-impls"><label for="loadReportingServiceClient-fold-impls">Implements (<i>at least one exported</i>)</label><span id='loadReportingServiceClient-fold-impls-items' class="fold-items"><span>
+			*loadReportingServiceClient : <a href="#name-LoadReportingServiceClient">LoadReportingServiceClient</a></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-loadReportingServiceStreamLoadStatsClient" data-popularity="650">	<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-content"><label for="loadReportingServiceStreamLoadStatsClient-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-397">loadReportingServiceStreamLoadStatsClient</a> <i>(struct)</i></label><span id='loadReportingServiceStreamLoadStatsClient-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-fields"><label for="loadReportingServiceStreamLoadStatsClient-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='loadReportingServiceStreamLoadStatsClient-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-398">ClientStream</a> <i><a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ClientStream">ClientStream</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-methods"><label for="loadReportingServiceStreamLoadStatsClient-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='loadReportingServiceStreamLoadStatsClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-CloseSend"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-CloseSend">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-71">CloseSend</a>() <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-CloseSend-docs' class="fold-docs">
+				CloseSend closes the send direction of the stream. It closes the stream
+				when non-nil error is met. It is also not safe to call CloseSend
+				concurrently with SendMsg.
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-Context"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-Context">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-76">Context</a>() <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a></label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-Context-docs' class="fold-docs">
+				Context returns the context for this stream.
+
+				It should not be called until after Header or RecvMsg has returned. Once
+				called, subsequent client-side retries are disabled.
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-Header"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-Header">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-63">Header</a>() (<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-Header-docs' class="fold-docs">
+				Header returns the header metadata received from the server if there
+				is any. It blocks if the metadata is not ready to read.
+</span></span><span>
+			<span class="nodocs">(*loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-405">Recv</a>() (*<a href="#name-LoadStatsResponse">LoadStatsResponse</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-RecvMsg"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-RecvMsg">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-104">RecvMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-RecvMsg-docs' class="fold-docs">
+				RecvMsg blocks until it receives a message into m or the stream is
+				done. It returns io.EOF when the stream completes successfully. On
+				any other error, the stream is aborted and the error contains the RPC
+				status.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not
+				safe to call RecvMsg on the same stream in different goroutines.
+</span></span><span>
+			<span class="nodocs">(*loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-401">Send</a>(m *<a href="#name-LoadStatsRequest">LoadStatsRequest</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-SendMsg"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-SendMsg">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-95">SendMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-SendMsg-docs' class="fold-docs">
+				SendMsg is generally called by generated code. On error, SendMsg aborts
+				the stream. If the error was generated by the client, the status is
+				returned directly; otherwise, io.EOF is returned and the status of
+				the stream may be discovered using RecvMsg.
+
+				SendMsg blocks until:
+				  - There is sufficient flow control to schedule m with the transport, or
+				  - The stream is done, or
+				  - The stream breaks.
+
+				SendMsg does not wait until the message is received by the server. An
+				untimely stream closure may result in lost messages. To ensure delivery,
+				users should ensure the RPC completed successfully using RecvMsg.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not safe
+				to call SendMsg on the same stream in different goroutines. It is also
+				not safe to call CloseSend concurrently with SendMsg.
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-method-Trailer"><label for="loadReportingServiceStreamLoadStatsClient-fold-method-Trailer">( loadReportingServiceStreamLoadStatsClient) <a href="../../../../../../../src/google.golang.org/grpc/internal/resolver/config_selector.go.html#line-67">Trailer</a>() <a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a></label><span id='loadReportingServiceStreamLoadStatsClient-fold-method-Trailer-docs' class="fold-docs">
+				Trailer returns the trailer metadata from the server, if there is any.
+				It must only be called after stream.CloseAndRecv has returned, or
+				stream.Recv has returned a non-nil error (including io.EOF).
+</span></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsClient-fold-impls"><label for="loadReportingServiceStreamLoadStatsClient-fold-impls">Implements (<i>at least 5, in which 4 are exported</i>)</label><span id='loadReportingServiceStreamLoadStatsClient-fold-impls-items' class="fold-items"><span>
+			*loadReportingServiceStreamLoadStatsClient : <a href="#name-LoadReportingService_StreamLoadStatsClient">LoadReportingService_StreamLoadStatsClient</a></span><span>
+			 loadReportingServiceStreamLoadStatsClient : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-ClientStream">ClientStream</a></span><span>
+			 loadReportingServiceStreamLoadStatsClient : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-Stream">Stream</a></span><span>
+			 loadReportingServiceStreamLoadStatsClient : google.golang.org/grpc/internal/resolver.<a href="../../../../../../google.golang.org/grpc/internal/resolver.html#name-ClientStream">ClientStream</a></span>
+			<input type='checkbox' checked class="showhide" id="loadReportingServiceStreamLoadStatsClient-showhide-impls"><i><label for="loadReportingServiceStreamLoadStatsClient-showhide-impls" class="show-inline">/* at least one unexported ... */</label><label for="loadReportingServiceStreamLoadStatsClient-showhide-impls" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			*loadReportingServiceStreamLoadStatsClient : google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.<a href="../../../../../../google.golang.org/grpc/xds/internal/xdsclient/controller/version/v3.html#name-lrsStream">lrsStream</a></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-loadReportingServiceStreamLoadStatsServer" data-popularity="550">	<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-content"><label for="loadReportingServiceStreamLoadStatsServer-fold-content"> type <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-468">loadReportingServiceStreamLoadStatsServer</a> <i>(struct)</i></label><span id='loadReportingServiceStreamLoadStatsServer-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-fields"><label for="loadReportingServiceStreamLoadStatsServer-fold-fields">Fields (<i>only one, which is exported</i>)</label><span id='loadReportingServiceStreamLoadStatsServer-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-469">ServerStream</a> <i><a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ServerStream">ServerStream</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-methods"><label for="loadReportingServiceStreamLoadStatsServer-fold-methods">Methods (<i>total 8, all are exported</i>)</label><span id='loadReportingServiceStreamLoadStatsServer-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-Context"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-Context">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1402">Context</a>() <a href="../../../../../../context.html">context</a>.<a href="../../../../../../context.html#name-Context">Context</a></label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-Context-docs' class="fold-docs">
+				Context returns the context for this stream.
+</span></span><span>
+			<span class="nodocs">(*loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-476">Recv</a>() (*<a href="#name-LoadStatsRequest">LoadStatsRequest</a>, <a href="../../../../../../builtin.html#name-error">error</a>)</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-RecvMsg"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-RecvMsg">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1426">RecvMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-RecvMsg-docs' class="fold-docs">
+				RecvMsg blocks until it receives a message into m or the stream is
+				done. It returns io.EOF when the client has performed a CloseSend. On
+				any non-EOF error, the stream is aborted and the error contains the
+				RPC status.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not
+				safe to call RecvMsg on the same stream in different goroutines.
+</span></span><span>
+			<span class="nodocs">(*loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-472">Send</a>(m *<a href="#name-LoadStatsResponse">LoadStatsResponse</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-SendHeader"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-SendHeader">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1397">SendHeader</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-SendHeader-docs' class="fold-docs">
+				SendHeader sends the header metadata.
+				The provided md and headers set by SetHeader() will be sent.
+				It fails if called multiple times.
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-SendMsg"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-SendMsg">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1417">SendMsg</a>(m interface{}) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-SendMsg-docs' class="fold-docs">
+				SendMsg sends a message. On error, SendMsg aborts the stream and the
+				error is returned directly.
+
+				SendMsg blocks until:
+				  - There is sufficient flow control to schedule m with the transport, or
+				  - The stream is done, or
+				  - The stream breaks.
+
+				SendMsg does not wait until the message is received by the client. An
+				untimely stream closure may result in lost messages.
+
+				It is safe to have a goroutine calling SendMsg and another goroutine
+				calling RecvMsg on the same stream at the same time, but it is not safe
+				to call SendMsg on the same stream in different goroutines.
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-SetHeader"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-SetHeader">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1393">SetHeader</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>) <a href="../../../../../../builtin.html#name-error">error</a></label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-SetHeader-docs' class="fold-docs">
+				SetHeader sets the header metadata. It may be called multiple times.
+				When call multiple times, all the provided metadata will be merged.
+				All the metadata will be sent out when one of the following happens:
+				 - ServerStream.SendHeader() is called;
+				 - The first response is sent out;
+				 - An RPC status is sent out (error or success).
+</span></span><span>
+			<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-method-SetTrailer"><label for="loadReportingServiceStreamLoadStatsServer-fold-method-SetTrailer">( loadReportingServiceStreamLoadStatsServer) <a href="../../../../../../../src/google.golang.org/grpc/stream.go.html#line-1400">SetTrailer</a>(<a href="../../../../../../google.golang.org/grpc/metadata.html">metadata</a>.<a href="../../../../../../google.golang.org/grpc/metadata.html#name-MD">MD</a>)</label><span id='loadReportingServiceStreamLoadStatsServer-fold-method-SetTrailer-docs' class="fold-docs">
+				SetTrailer sets the trailer metadata which will be sent with the RPC status.
+				When called more than once, all the provided metadata will be merged.
+</span></span></span>
+		<input type='checkbox' class="fold" id="loadReportingServiceStreamLoadStatsServer-fold-impls"><label for="loadReportingServiceStreamLoadStatsServer-fold-impls">Implements (<i>at least 3, all are exported</i>)</label><span id='loadReportingServiceStreamLoadStatsServer-fold-impls-items' class="fold-items"><span>
+			*loadReportingServiceStreamLoadStatsServer : <a href="#name-LoadReportingService_StreamLoadStatsServer">LoadReportingService_StreamLoadStatsServer</a></span><span>
+			 loadReportingServiceStreamLoadStatsServer : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-ServerStream">ServerStream</a></span><span>
+			 loadReportingServiceStreamLoadStatsServer : google.golang.org/grpc.<a href="../../../../../../google.golang.org/grpc.html#name-Stream">Stream</a></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 6, in which 2 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewLoadReportingServiceClient">	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-378">NewLoadReportingServiceClient</a>(cc <a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ClientConnInterface">ClientConnInterface</a>) <a href="#name-LoadReportingServiceClient">LoadReportingServiceClient</a></span></div><div class="anchor value-res" id="name-RegisterLoadReportingServiceServer">	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-454">RegisterLoadReportingServiceServer</a>(s *<a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-Server">Server</a>, srv <a href="#name-LoadReportingServiceServer">LoadReportingServiceServer</a>)</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-_LoadReportingService_StreamLoadStats_Handler"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-458">_LoadReportingService_StreamLoadStats_Handler</a>(srv interface{}, stream <a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ServerStream">ServerStream</a>) <a href="../../../../../../builtin.html#name-error">error</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_init"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-281">file_envoy_service_load_stats_v3_lrs_proto_init</a>()</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_rawDescGZIP"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-252">file_envoy_service_load_stats_v3_lrs_proto_rawDescGZIP</a>() []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-init"><i>	<span class="nodocs"> func <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-280">init</a>()</span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (total 8, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-File_envoy_service_load_stats_v3_lrs_proto">	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-177">File_envoy_service_load_stats_v3_lrs_proto</a> <a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html">protoreflect</a>.<a href="../../../../../../google.golang.org/protobuf/reflect/protoreflect.html#name-FileDescriptor">FileDescriptor</a></span></div>	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* 7 unexporteds ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* 7 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-_LoadReportingService_serviceDesc"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-484">_LoadReportingService_serviceDesc</a> <a href="../../../../../../google.golang.org/grpc.html">grpc</a>.<a href="../../../../../../google.golang.org/grpc.html#name-ServiceDesc">ServiceDesc</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_depIdxs"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-267">file_envoy_service_load_stats_v3_lrs_proto_depIdxs</a> []<a href="../../../../../../builtin.html#name-int32">int32</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_goTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-260">file_envoy_service_load_stats_v3_lrs_proto_goTypes</a> []interface{}</span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_msgTypes"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-259">file_envoy_service_load_stats_v3_lrs_proto_msgTypes</a> []<a href="../../../../../../google.golang.org/protobuf/internal/impl.html">impl</a>.<a href="../../../../../../google.golang.org/protobuf/internal/impl.html#name-MessageInfo">MessageInfo</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_rawDesc"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-179">file_envoy_service_load_stats_v3_lrs_proto_rawDesc</a> []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_rawDescData"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-249">file_envoy_service_load_stats_v3_lrs_proto_rawDescData</a> []<a href="../../../../../../builtin.html#name-byte">byte</a></span></i></div><div class="anchor value-res hidden" id="name-file_envoy_service_load_stats_v3_lrs_proto_rawDescOnce"><i>	<span class="nodocs">  var <a href="../../../../../../../src/github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3/lrs.pb.go.html#line-248">file_envoy_service_load_stats_v3_lrs_proto_rawDescOnce</a> <a href="../../../../../../sync.html">sync</a>.<a href="../../../../../../sync.html#name-Once">Once</a></span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

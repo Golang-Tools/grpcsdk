@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: google.golang.org/grpc/balancer/weightedtarget/weightedaggregator</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>weightedaggregator</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-google.golang.org/grpc/balancer/weightedtarget/weightedaggregator">google.golang.org/grpc/balancer/weightedtarget/weightedaggregator</a><i> (on <a href="https://pkg.go.dev/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator.html">7 packages</a>, and imported by <a href="../../../../../dep/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">   <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#doc">#d</a> <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html">aggregator.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+		Package weightedaggregator implements state aggregator for weighted_target
+		balancer.
+
+		This is a separate package so it can be shared by weighted_target and eds.
+		The eds balancer will be refactored to use weighted_target directly. After
+		that, all functions and structs in this package can be moved to package
+		weightedtarget and unexported.</span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 3, in which 1 are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Aggregator" data-popularity="575">	<input type='checkbox' class="fold" id="Aggregator-fold-content"><label for="Aggregator-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-55">Aggregator</a> <i>(struct)</i></label><span id='Aggregator-fold-content-docs' class="fold-docs">
+		Aggregator is the weighted balancer state aggregator.
+
+		<input type='checkbox' class="fold" id="Aggregator-fold-fields"><label for="Aggregator-fold-fields">Fields (<i>total 6, none are exported</i>)</label><span id='Aggregator-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="Aggregator-showhide-fields"><i><label for="Aggregator-showhide-fields" class="show-inline">/* 6 unexporteds ... */</label><label for="Aggregator-showhide-fields" class="hide-inline">/* 6 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-56">cc</a> <i><a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-ClientConn">ClientConn</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Aggregator-fold-field-idToPickerState"><label for="Aggregator-fold-field-idToPickerState"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-70">idToPickerState</a> <i>map[<a href="../../../../builtin.html#name-string">string</a>]*<a href="#name-weightedPickerState">weightedPickerState</a></i></label><span id='Aggregator-fold-field-idToPickerState-docs' class="fold-docs">
+				All balancer IDs exist as keys in this map, even if balancer group is not
+				started.
+
+				If an ID is not in map, it's either removed or never added.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-57">logger</a> <i>*<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-60">mu</a> <i><a href="../../../../sync.html">sync</a>.<a href="../../../../sync.html#name-Mutex">Mutex</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-58">newWRR</a> <i>func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Aggregator-fold-field-started"><label for="Aggregator-fold-field-started"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-65">started</a> <i><a href="../../../../builtin.html#name-bool">bool</a></i></label><span id='Aggregator-fold-field-started-docs' class="fold-docs">
+				If started is false, no updates should be sent to the parent cc. A closed
+				sub-balancer could still send pickers to this aggregator. This makes sure
+				that no updates will be forwarded to parent when the whole balancer group
+				and states aggregator is closed.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Aggregator-fold-methods"><label for="Aggregator-fold-methods">Methods (<i>total 9, in which 7 are exported</i>)</label><span id='Aggregator-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-Add"><label for="Aggregator-fold-method-Add">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-102">Add</a>(id <a href="../../../../builtin.html#name-string">string</a>, weight <a href="../../../../builtin.html#name-uint32">uint32</a>)</label><span id='Aggregator-fold-method-Add-docs' class="fold-docs">
+				Add adds a sub-balancer state with weight. It adds a place holder, and waits for
+				the real sub-balancer to update state.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-BuildAndUpdate"><label for="Aggregator-fold-method-BuildAndUpdate">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-188">BuildAndUpdate</a>()</label><span id='Aggregator-fold-method-BuildAndUpdate-docs' class="fold-docs">
+				BuildAndUpdate combines the sub-state from each sub-balancer into one state,
+				and update it to parent ClientConn.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-Remove"><label for="Aggregator-fold-method-Remove">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-120">Remove</a>(id <a href="../../../../builtin.html#name-string">string</a>)</label><span id='Aggregator-fold-method-Remove-docs' class="fold-docs">
+				Remove removes the sub-balancer state. Future updates from this sub-balancer,
+				if any, will be ignored.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-Start"><label for="Aggregator-fold-method-Start">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-85">Start</a>()</label><span id='Aggregator-fold-method-Start-docs' class="fold-docs">
+				Start starts the aggregator. It can be called after Close to restart the
+				aggretator.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-Stop"><label for="Aggregator-fold-method-Stop">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-93">Stop</a>()</label><span id='Aggregator-fold-method-Stop-docs' class="fold-docs">
+				Stop stops the aggregator. When the aggregator is closed, it won't call
+				parent ClientConn to update balancer state.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-UpdateState"><label for="Aggregator-fold-method-UpdateState">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-148">UpdateState</a>(id <a href="../../../../builtin.html#name-string">string</a>, newState <a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-State">State</a>)</label><span id='Aggregator-fold-method-UpdateState-docs' class="fold-docs">
+				UpdateState is called to report a balancer state change from sub-balancer.
+				It's usually called by the balancer group.
+
+				It calls parent ClientConn's UpdateState with the new aggregated state.
+</span></span><span>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-UpdateWeight"><label for="Aggregator-fold-method-UpdateWeight">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-134">UpdateWeight</a>(id <a href="../../../../builtin.html#name-string">string</a>, newWeight <a href="../../../../builtin.html#name-uint32">uint32</a>)</label><span id='Aggregator-fold-method-UpdateWeight-docs' class="fold-docs">
+				UpdateWeight updates the weight for the given id. Note that this doesn't
+				trigger an update to the parent ClientConn. The caller should decide when
+				it's necessary, and call BuildAndUpdate.
+</span></span>
+			<input type='checkbox' class="showhide" id="Aggregator-showhide-methods"><i><label for="Aggregator-showhide-methods" class="show-inline">/* 2 unexporteds ... */</label><label for="Aggregator-showhide-methods" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-build"><label for="Aggregator-fold-method-build">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-200">build</a>() <a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-State">State</a></label><span id='Aggregator-fold-method-build-docs' class="fold-docs">
+				build combines sub-states into one.
+
+				Caller must hold wbsa.mu.
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="Aggregator-fold-method-clearStates"><label for="Aggregator-fold-method-clearStates">(*Aggregator) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-176">clearStates</a>()</label><span id='Aggregator-fold-method-clearStates-docs' class="fold-docs">
+				clearState Reset everything to init state (Connecting) but keep the entry in
+				map (to keep the weight).
+
+				Caller must hold wbsa.mu.
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="Aggregator-fold-impls"><label for="Aggregator-fold-impls">Implements (<i>at least one exported</i>)</label><span id='Aggregator-fold-impls-items' class="fold-items"><span>
+			*Aggregator : google.golang.org/grpc/internal/balancergroup.<a href="../../internal/balancergroup.html#name-BalancerStateAggregator">BalancerStateAggregator</a></span></span>
+		<input type='checkbox' class="fold" id="Aggregator-fold-results"><label for="Aggregator-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='Aggregator-fold-results-items' class="fold-items"><span>
+			func <a href="#name-New">New</a>(cc <a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-ClientConn">ClientConn</a>, logger *<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, newWRR func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a>) *<b>Aggregator</b></span></span>
+
+</span></div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor type-res hidden" id="name-weightedPickerGroup" data-popularity="175">	<input type='checkbox' class="fold" id="weightedPickerGroup-fold-content"><label for="weightedPickerGroup-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-243">weightedPickerGroup</a> <i>(struct)</i></label><span id='weightedPickerGroup-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="weightedPickerGroup-fold-fields"><label for="weightedPickerGroup-fold-fields">Fields (<i>only one, which is unexported</i>)</label><span id='weightedPickerGroup-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="weightedPickerGroup-showhide-fields"><i><label for="weightedPickerGroup-showhide-fields" class="show-inline">/* one unexported ... */</label><label for="weightedPickerGroup-showhide-fields" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-244">w</a> <i><a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerGroup-fold-methods"><label for="weightedPickerGroup-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='weightedPickerGroup-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*weightedPickerGroup) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-263">Pick</a>(info <a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-PickInfo">PickInfo</a>) (<a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-PickResult">PickResult</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerGroup-fold-impls"><label for="weightedPickerGroup-fold-impls">Implements (<i>at least one exported</i>)</label><span id='weightedPickerGroup-fold-impls-items' class="fold-items"><span>
+			*weightedPickerGroup : google.golang.org/grpc/balancer.<a href="../../balancer.html#name-Picker">Picker</a></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerGroup-fold-results"><label for="weightedPickerGroup-fold-results">As Outputs Of (<i>at least one unexported</i>)</label><span id='weightedPickerGroup-fold-results-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="weightedPickerGroup-showhide-inputofs"><i><label for="weightedPickerGroup-showhide-inputofs" class="show-inline">/* at least one unexported ... */</label><label for="weightedPickerGroup-showhide-inputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newWeightedPickerGroup">newWeightedPickerGroup</a>(readyWeightedPickers []<a href="#name-weightedPickerState">weightedPickerState</a>, newWRR func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a>) *<b>weightedPickerGroup</b></i></span></span>
+
+</span></div><div class="anchor type-res hidden" id="name-weightedPickerState" data-popularity="235">	<input type='checkbox' class="fold" id="weightedPickerState-fold-content"><label for="weightedPickerState-fold-content"> type <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-39">weightedPickerState</a> <i>(struct)</i></label><span id='weightedPickerState-fold-content-docs' class="fold-docs">
+
+		<input type='checkbox' class="fold" id="weightedPickerState-fold-fields"><label for="weightedPickerState-fold-fields">Fields (<i>total 3, none are exported</i>)</label><span id='weightedPickerState-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="weightedPickerState-showhide-fields"><i><label for="weightedPickerState-showhide-fields" class="show-inline">/* 3 unexporteds ... */</label><label for="weightedPickerState-showhide-fields" class="hide-inline">/* 3 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-41">state</a> <i><a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-State">State</a></i></span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="weightedPickerState-fold-field-stateToAggregate"><label for="weightedPickerState-fold-field-stateToAggregate"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-47">stateToAggregate</a> <i><a href="../../connectivity.html">connectivity</a>.<a href="../../connectivity.html#name-State">State</a></i></label><span id='weightedPickerState-fold-field-stateToAggregate-docs' class="fold-docs">
+				stateToAggregate is the connectivity state used only for state
+				aggregation. It could be different from state.ConnectivityState. For
+				example when a sub-balancer transitions from TransientFailure to
+				connecting, state.ConnectivityState is Connecting, but stateToAggregate
+				is still TransientFailure.
+</span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-40">weight</a> <i><a href="../../../../builtin.html#name-uint32">uint32</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerState-fold-methods"><label for="weightedPickerState-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='weightedPickerState-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">(*weightedPickerState) <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-50">String</a>() <a href="../../../../builtin.html#name-string">string</a></span></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerState-fold-impls"><label for="weightedPickerState-fold-impls">Implements (<i>at least 3, in which 1 are exported</i>)</label><span id='weightedPickerState-fold-impls-items' class="fold-items"><span>
+			*weightedPickerState : fmt.<a href="../../../../fmt.html#name-Stringer">Stringer</a></span>
+			<input type='checkbox' checked class="showhide" id="weightedPickerState-showhide-impls"><i><label for="weightedPickerState-showhide-impls" class="show-inline">/* 2+ unexporteds ... */</label><label for="weightedPickerState-showhide-impls" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			*weightedPickerState : context.<a href="../../../../context.html#name-stringer">stringer</a></i></span><span class="hidden"><i>
+			*weightedPickerState : runtime.<a href="../../../../runtime.html#name-stringer">stringer</a></i></span></span>
+		<input type='checkbox' class="fold" id="weightedPickerState-fold-params"><label for="weightedPickerState-fold-params">As Inputs Of (<i>at least one unexported</i>)</label><span id='weightedPickerState-fold-params-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="weightedPickerState-showhide-outputofs"><i><label for="weightedPickerState-showhide-outputofs" class="show-inline">/* at least one unexported ... */</label><label for="weightedPickerState-showhide-outputofs" class="hide-inline">/* at least one unexported: */</label></i><span class="hidden"><i>
+			func <a href="#name-newWeightedPickerGroup">newWeightedPickerGroup</a>(readyWeightedPickers []<b>weightedPickerState</b>, newWRR func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a>) *<a href="#name-weightedPickerGroup">weightedPickerGroup</a></i></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 2, in which 1 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-New">	<input type='checkbox' class="fold" id="New-fold-content"><label for="New-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-74">New</a>(cc <a href="../../balancer.html">balancer</a>.<a href="../../balancer.html#name-ClientConn">ClientConn</a>, logger *<a href="../../internal/grpclog.html">grpclog</a>.<a href="../../internal/grpclog.html#name-PrefixLogger">PrefixLogger</a>, newWRR func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a>) *<a href="#name-Aggregator">Aggregator</a></label><span id='New-fold-content-docs' class="fold-docs">
+		New creates a new weighted balancer state aggregator.
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-newWeightedPickerGroup"><i>	<input type='checkbox' class="fold" id="newWeightedPickerGroup-fold-content"><label for="newWeightedPickerGroup-fold-content"> func <a href="../../../../../src/google.golang.org/grpc/balancer/weightedtarget/weightedaggregator/aggregator.go.html#line-252">newWeightedPickerGroup</a>(readyWeightedPickers []<a href="#name-weightedPickerState">weightedPickerState</a>, newWRR func() <a href="../../internal/wrr.html">wrr</a>.<a href="../../internal/wrr.html#name-WRR">WRR</a>) *<a href="#name-weightedPickerGroup">weightedPickerGroup</a></label><span id='newWeightedPickerGroup-fold-content-docs' class="fold-docs">
+		newWeightedPickerGroup takes pickers with weights, and groups them into one
+		picker.
+
+		Note it only takes ready pickers. The map shouldn't contain non-ready
+		pickers.
+
+</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

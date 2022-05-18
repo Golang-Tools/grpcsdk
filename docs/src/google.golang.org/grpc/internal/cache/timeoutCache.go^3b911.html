@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: timeoutCache.go in package google.golang.org/grpc/internal/cache</title>
+<link href="../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	timeoutCache.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/google.golang.org/grpc/internal/cache.html">google.golang.org/grpc/internal/cache</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> * Copyright 2019 gRPC authors.</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-17"><code><span class="comment">// Package cache implements caches to be used in gRPC.</span></code></span></div><span class="codeline" id="line-18"><code><span class="keyword">package</span> cache</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-21"><code>	<label for="i0"><span class="lit-string i0">"sync"</span></label></code></span>
+<span class="codeline" id="line-22"><code>	<label for="i1"><span class="lit-string i1">"time"</span></label></code></span>
+<span class="codeline" id="line-23"><code>)</code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code><span class="keyword">type</span> <a href="../../../../../pkg/google.golang.org/grpc/internal/cache.html#name-cacheEntry" class="ident">cacheEntry</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-26"><code>	item <span class="keyword">interface</span>{}</code></span>
+<span class="codeline" id="line-27"><code>	<span class="comment">// Note that to avoid deadlocks (potentially caused by lock ordering),</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">	// callback can only be called without holding cache's mutex.</span></code></span>
+<span class="codeline" id="line-29"><code>	callback <span class="keyword">func</span>()</code></span>
+<span class="codeline" id="line-30"><code>	timer    *<a href="../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../time/sleep.go.html#line-50" class="ident">Timer</a></code></span>
+<span class="codeline" id="line-31"><code>	<span class="comment">// deleted is set to true in Remove() when the call to timer.Stop() fails.</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">	// This can happen when the timer in the cache entry fires around the same</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">	// time that timer.stop() is called in Remove().</span></code></span>
+<span class="codeline" id="line-34"><code>	deleted <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-35"><code>}</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// TimeoutCache is a cache with items to be deleted after a timeout.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">type</span> <a href="../../../../../pkg/google.golang.org/grpc/internal/cache.html#name-TimeoutCache" class="ident">TimeoutCache</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-39"><code>	mu      <a href="../../../../../pkg/sync.html" class="ident i0">sync</a>.<a href="../../../../sync/mutex.go.html#line-25" class="ident">Mutex</a></code></span>
+<span class="codeline" id="line-40"><code>	timeout <a href="../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../time/time.go.html#line-589" class="ident">Duration</a></code></span>
+<span class="codeline" id="line-41"><code>	cache   <span class="keyword">map</span>[<span class="keyword">interface</span>{}]*<a href="#line-25" class="ident">cacheEntry</a></code></span>
+<span class="codeline" id="line-42"><code>}</code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">// NewTimeoutCache creates a TimeoutCache with the given timeout.</span></code></span>
+<span class="codeline" id="line-45"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../pkg/google.golang.org/grpc/internal/cache.html#name-NewTimeoutCache" class="ident">NewTimeoutCache</a></label>(<label for="r1" class="ident">timeout</label> <a href="../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../time/time.go.html#line-589" class="ident">Duration</a>) *<a href="#line-38" class="ident">TimeoutCache</a> {</code></span>
+<span class="codeline" id="line-46"><code>	<span class="keyword">return</span> &amp;<a href="#line-38" class="ident">TimeoutCache</a>{</code></span>
+<span class="codeline" id="line-47"><code>		<a href="#line-40" class="ident">timeout</a>: <label for="r1" class="ident">timeout</label>,</code></span>
+<span class="codeline" id="line-48"><code>		<a href="#line-41" class="ident">cache</a>:   <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<span class="keyword">interface</span>{}]*<a href="#line-25" class="ident">cacheEntry</a>),</code></span>
+<span class="codeline" id="line-49"><code>	}</code></span>
+<span class="codeline" id="line-50"><code>}</code></span>
+<span class="codeline" id="line-51"><code></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">// Add adds an item to the cache, with the specified callback to be called when</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">// the item is removed from the cache upon timeout. If the item is removed from</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// the cache using a call to Remove before the timeout expires, the callback</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">// will not be called.</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">// If the Add was successful, it returns (newly added item, true). If there is</span></code></span>
+<span class="codeline" id="line-58"><code><span class="comment">// an existing entry for the specified key, the cache entry is not be updated</span></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// with the specified item and it returns (existing item, false).</span></code></span>
+<span class="codeline" id="line-60"><code><span class="keyword">func</span> (<label for="r2" class="ident">c</label> *<a href="#line-38" class="ident">TimeoutCache</a>) <label for="r3" class="ident">Add</label>(<label for="r4" class="ident">key</label>, <label for="r5" class="ident">item</label> <span class="keyword">interface</span>{}, <label for="r6" class="ident">callback</label> <span class="keyword">func</span>()) (<span class="keyword">interface</span>{}, <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-61"><code>	<label for="r2" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-62"><code>	<span class="keyword">defer</span> <label for="r2" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-63"><code>	<span class="keyword">if</span> <label for="r7" class="ident">e</label>, <label for="r8" class="ident">ok</label> := <label for="r2" class="ident">c</label>.<a href="#line-41" class="ident">cache</a>[<label for="r4" class="ident">key</label>]; <label for="r8" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-64"><code>		<span class="keyword">return</span> <label for="r7" class="ident">e</label>.<a href="#line-26" class="ident">item</a>, <a href="../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-65"><code>	}</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code>	<label for="r9" class="ident">entry</label> := &amp;<a href="#line-25" class="ident">cacheEntry</a>{</code></span>
+<span class="codeline" id="line-68"><code>		<a href="#line-26" class="ident">item</a>:     <label for="r5" class="ident">item</label>,</code></span>
+<span class="codeline" id="line-69"><code>		<a href="#line-29" class="ident">callback</a>: <label for="r6" class="ident">callback</label>,</code></span>
+<span class="codeline" id="line-70"><code>	}</code></span>
+<span class="codeline" id="line-71"><code>	<label for="r9" class="ident">entry</label>.<a href="#line-30" class="ident">timer</a> = <a href="../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../time/sleep.go.html#line-163" class="ident">AfterFunc</a>(<label for="r2" class="ident">c</label>.<a href="#line-40" class="ident">timeout</a>, <span class="keyword">func</span>() {</code></span>
+<span class="codeline" id="line-72"><code>		<label for="r2" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-73"><code>		<span class="keyword">if</span> <label for="r9" class="ident">entry</label>.<a href="#line-34" class="ident">deleted</a> {</code></span>
+<span class="codeline" id="line-74"><code>			<label for="r2" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-75"><code>			<span class="comment">// Abort the delete since this has been taken care of in Remove().</span></code></span>
+<span class="codeline" id="line-76"><code>			<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-77"><code>		}</code></span>
+<span class="codeline" id="line-78"><code>		<a href="../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<label for="r2" class="ident">c</label>.<a href="#line-41" class="ident">cache</a>, <label for="r4" class="ident">key</label>)</code></span>
+<span class="codeline" id="line-79"><code>		<label for="r2" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-80"><code>		<label for="r9" class="ident">entry</label>.<a href="#line-29" class="ident">callback</a>()</code></span>
+<span class="codeline" id="line-81"><code>	})</code></span>
+<span class="codeline" id="line-82"><code>	<label for="r2" class="ident">c</label>.<a href="#line-41" class="ident">cache</a>[<label for="r4" class="ident">key</label>] = <label for="r9" class="ident">entry</label></code></span>
+<span class="codeline" id="line-83"><code>	<span class="keyword">return</span> <label for="r5" class="ident">item</label>, <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-84"><code>}</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// Remove the item with the key from the cache.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">// If the specified key exists in the cache, it returns (item associated with</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">// key, true) and the callback associated with the item is guaranteed to be not</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">// called. If the given key is not found in the cache, it returns (nil, false)</span></code></span>
+<span class="codeline" id="line-91"><code><span class="keyword">func</span> (<label for="r10" class="ident">c</label> *<a href="#line-38" class="ident">TimeoutCache</a>) <label for="r11" class="ident">Remove</label>(<label for="r12" class="ident">key</label> <span class="keyword">interface</span>{}) (<label for="r13" class="ident">item</label> <span class="keyword">interface</span>{}, <label for="r14" class="ident">ok</label> <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-92"><code>	<label for="r10" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">defer</span> <label for="r10" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-94"><code>	<label for="r15" class="ident">entry</label>, <label for="r14" class="ident">ok</label> := <label for="r10" class="ident">c</label>.<a href="#line-104" class="ident">removeInternal</a>(<label for="r12" class="ident">key</label>)</code></span>
+<span class="codeline" id="line-95"><code>	<span class="keyword">if</span> !<label for="r14" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-96"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-97"><code>	}</code></span>
+<span class="codeline" id="line-98"><code>	<span class="keyword">return</span> <label for="r15" class="ident">entry</label>.<a href="#line-26" class="ident">item</a>, <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-99"><code>}</code></span>
+<span class="codeline" id="line-100"><code></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">// removeInternal removes and returns the item with key.</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">// caller must hold c.mu.</span></code></span>
+<span class="codeline" id="line-104"><code><span class="keyword">func</span> (<label for="r16" class="ident">c</label> *<a href="#line-38" class="ident">TimeoutCache</a>) <label for="r17" class="ident">removeInternal</label>(<label for="r18" class="ident">key</label> <span class="keyword">interface</span>{}) (*<a href="#line-25" class="ident">cacheEntry</a>, <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-105"><code>	<label for="r19" class="ident">entry</label>, <label for="r20" class="ident">ok</label> := <label for="r16" class="ident">c</label>.<a href="#line-41" class="ident">cache</a>[<label for="r18" class="ident">key</label>]</code></span>
+<span class="codeline" id="line-106"><code>	<span class="keyword">if</span> !<label for="r20" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-107"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>, <a href="../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-108"><code>	}</code></span>
+<span class="codeline" id="line-109"><code>	<a href="../../../../../pkg/builtin.html#name-delete" class="ident">delete</a>(<label for="r16" class="ident">c</label>.<a href="#line-41" class="ident">cache</a>, <label for="r18" class="ident">key</label>)</code></span>
+<span class="codeline" id="line-110"><code>	<span class="keyword">if</span> !<label for="r19" class="ident">entry</label>.<a href="#line-30" class="ident">timer</a>.<a href="../../../../time/sleep.go.html#line-77" class="ident">Stop</a>() {</code></span>
+<span class="codeline" id="line-111"><code>		<span class="comment">// If stop was not successful, the timer has fired (this can only happen</span></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">		// in a race). But the deleting function is blocked on c.mu because the</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">		// mutex was held by the caller of this function.</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">		// Set deleted to true to abort the deleting function. When the lock is</span></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">		// released, the delete function will acquire the lock, check the value</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">		// of deleted and return.</span></code></span>
+<span class="codeline" id="line-118"><code>		<label for="r19" class="ident">entry</label>.<a href="#line-34" class="ident">deleted</a> = <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-119"><code>	}</code></span>
+<span class="codeline" id="line-120"><code>	<span class="keyword">return</span> <label for="r19" class="ident">entry</label>, <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-121"><code>}</code></span>
+<span class="codeline" id="line-122"><code></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">// Clear removes all entries, and runs the callbacks if runCallback is true.</span></code></span>
+<span class="codeline" id="line-124"><code><span class="keyword">func</span> (<label for="r21" class="ident">c</label> *<a href="#line-38" class="ident">TimeoutCache</a>) <label for="r22" class="ident">Clear</label>(<label for="r23" class="ident">runCallback</label> <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-125"><code>	<span class="keyword">var</span> <label for="r24" class="ident">entries</label> []*<a href="#line-25" class="ident">cacheEntry</a></code></span>
+<span class="codeline" id="line-126"><code>	<label for="r21" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-72" class="ident">Lock</a>()</code></span>
+<span class="codeline" id="line-127"><code>	<span class="keyword">for</span> <label for="r25" class="ident">key</label> := <span class="keyword">range</span> <label for="r21" class="ident">c</label>.<a href="#line-41" class="ident">cache</a> {</code></span>
+<span class="codeline" id="line-128"><code>		<span class="keyword">if</span> <label for="r26" class="ident">e</label>, <label for="r27" class="ident">ok</label> := <label for="r21" class="ident">c</label>.<a href="#line-104" class="ident">removeInternal</a>(<label for="r25" class="ident">key</label>); <label for="r27" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-129"><code>			<label for="r24" class="ident">entries</label> = <a href="../../../../../pkg/builtin.html#name-append" class="ident">append</a>(<label for="r24" class="ident">entries</label>, <label for="r26" class="ident">e</label>)</code></span>
+<span class="codeline" id="line-130"><code>		}</code></span>
+<span class="codeline" id="line-131"><code>	}</code></span>
+<span class="codeline" id="line-132"><code>	<label for="r21" class="ident">c</label>.<a href="#line-39" class="ident">mu</a>.<a href="../../../../sync/mutex.go.html#line-203" class="ident">Unlock</a>()</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code>	<span class="keyword">if</span> !<label for="r23" class="ident">runCallback</label> {</code></span>
+<span class="codeline" id="line-135"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-136"><code>	}</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code>	<span class="comment">// removeInternal removes entries from cache, and also stops the timer, so</span></code></span>
+<span class="codeline" id="line-139"><code><span class="comment">	// the callback is guaranteed to be not called. If runCallback is true,</span></code></span>
+<span class="codeline" id="line-140"><code><span class="comment">	// manual execute all callbacks.</span></code></span>
+<span class="codeline" id="line-141"><code>	<span class="keyword">for</span> <label for="r28" class="ident">_</label>, <label for="r29" class="ident">entry</label> := <span class="keyword">range</span> <label for="r24" class="ident">entries</label> {</code></span>
+<span class="codeline" id="line-142"><code>		<label for="r29" class="ident">entry</label>.<a href="#line-29" class="ident">callback</a>()</code></span>
+<span class="codeline" id="line-143"><code>	}</code></span>
+<span class="codeline" id="line-144"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

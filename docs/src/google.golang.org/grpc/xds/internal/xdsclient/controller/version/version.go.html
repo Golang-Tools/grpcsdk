@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: version.go in package google.golang.org/grpc/xds/internal/xdsclient/controller/version</title>
+<link href="../../../../../../../../css/light-v0.4.9.css" rel="stylesheet">
+<script src="../../../../../../../../jvs/golds-v0.4.9.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	version.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html">google.golang.org/grpc/xds/internal/xdsclient/controller/version</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3,
+input[id=i4]:checked ~pre .i4,
+input[id=i5]:checked ~pre .i5,
+input[id=i6]:checked ~pre .i6,
+input[id=i7]:checked ~pre .i7,
+input[id=i8]:checked ~pre .i8
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+<input id="i4" type="radio" name="i"/>
+<input id="i5" type="radio" name="i"/>
+<input id="i6" type="radio" name="i"/>
+<input id="i7" type="radio" name="i"/>
+<input id="i8" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment"> * Copyright 2021 gRPC authors.</span></code></span>
+<span class="codeline" id="line-4"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-5"><code><span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment"> * you may not use this file except in compliance with the License.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment"> * You may obtain a copy of the License at</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment"> *</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment"> * See the License for the specific language governing permissions and</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment"> * limitations under the License.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment"> */</span></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-18"><code><span class="comment">// Package version defines APIs to deal with different versions of xDS.</span></code></span></div><span class="codeline" id="line-19"><code><span class="keyword">package</span> version</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-22"><code>	<label for="i0"><span class="lit-string i0">"context"</span></label></code></span>
+<span class="codeline" id="line-23"><code>	<label for="i1"><span class="lit-string i1">"time"</span></label></code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>	<label for="i2"><span class="lit-string i2">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-26"><code>	<label for="i3"><span class="lit-string i3">"google.golang.org/grpc"</span></label></code></span>
+<span class="codeline" id="line-27"><code>	<label for="i4"><span class="lit-string i4">"google.golang.org/grpc/internal/grpclog"</span></label></code></span>
+<span class="codeline" id="line-28"><code>	<label for="i5"><span class="lit-string i5">"google.golang.org/grpc/xds/internal/xdsclient/load"</span></label></code></span>
+<span class="codeline" id="line-29"><code>	<label for="i6"><span class="lit-string i6">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"</span></label></code></span>
+<span class="codeline" id="line-30"><code>	<label for="i7"><span class="lit-string i7">"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"</span></label></code></span>
+<span class="codeline" id="line-31"><code>	<label for="i8"><span class="lit-string i8">"google.golang.org/protobuf/types/known/anypb"</span></label></code></span>
+<span class="codeline" id="line-32"><code>)</code></span>
+<span class="codeline" id="line-33"><code></code></span>
+<span class="codeline" id="line-34"><code><span class="keyword">var</span> (</code></span>
+<span class="codeline" id="line-35"><code>	<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-m" class="ident">m</a> = <a href="../../../../../../../../pkg/builtin.html#name-make" class="ident">make</a>(<span class="keyword">map</span>[<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i7">version</a>.<a href="../../xdsresource/version/version.go.html#line-26" class="ident">TransportAPI</a>]<span class="keyword">func</span>(opts <a href="#line-58" class="ident">BuildOptions</a>) (<a href="#line-90" class="ident">VersionedClient</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>))</code></span>
+<span class="codeline" id="line-36"><code>)</code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// RegisterAPIClientBuilder registers a client builder for xDS transport protocol</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// version specified by b.Version().</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// NOTE: this function must only be called during initialization time (i.e. in</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">// an init() function), and is not thread-safe. If multiple builders are</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">// registered for the same version, the one registered last will take effect.</span></code></span>
+<span class="codeline" id="line-44"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-RegisterAPIClientBuilder" class="ident">RegisterAPIClientBuilder</a></label>(<label for="r1" class="ident">v</label> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i7">version</a>.<a href="../../xdsresource/version/version.go.html#line-26" class="ident">TransportAPI</a>, <label for="r2" class="ident">f</label> <span class="keyword">func</span>(<label for="r3" class="ident">opts</label> <a href="#line-58" class="ident">BuildOptions</a>) (<a href="#line-90" class="ident">VersionedClient</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)) {</code></span>
+<span class="codeline" id="line-45"><code>	<a href="#line-35" class="ident">m</a>[<label for="r1" class="ident">v</label>] = <label for="r2" class="ident">f</label></code></span>
+<span class="codeline" id="line-46"><code>}</code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// GetAPIClientBuilder returns the client builder registered for the provided</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">// xDS transport API version.</span></code></span>
+<span class="codeline" id="line-50"><code><span class="keyword">func</span> <label for="r4" class="ident"><a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-GetAPIClientBuilder" class="ident">GetAPIClientBuilder</a></label>(<label for="r5" class="ident">version</label> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version.html" class="ident i7">version</a>.<a href="../../xdsresource/version/version.go.html#line-26" class="ident">TransportAPI</a>) <span class="keyword">func</span>(<label for="r6" class="ident">opts</label> <a href="#line-58" class="ident">BuildOptions</a>) (<a href="#line-90" class="ident">VersionedClient</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-51"><code>	<span class="keyword">if</span> <label for="r7" class="ident">f</label>, <label for="r8" class="ident">ok</label> := <a href="#line-35" class="ident">m</a>[<label for="r5" class="ident">version</label>]; <label for="r8" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-52"><code>		<span class="keyword">return</span> <label for="r7" class="ident">f</label></code></span>
+<span class="codeline" id="line-53"><code>	}</code></span>
+<span class="codeline" id="line-54"><code>	<span class="keyword">return</span> <a href="../../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-55"><code>}</code></span>
+<span class="codeline" id="line-56"><code></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">// BuildOptions contains options to be passed to client builders.</span></code></span>
+<span class="codeline" id="line-58"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-BuildOptions" class="ident">BuildOptions</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-59"><code>	<span class="comment">// NodeProto contains the Node proto to be used in xDS requests. The actual</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">	// type depends on the transport protocol version used.</span></code></span>
+<span class="codeline" id="line-61"><code>	NodeProto <a href="../../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i2">proto</a>.<a href="../../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a></code></span>
+<span class="codeline" id="line-62"><code>	<span class="comment">// // Backoff returns the amount of time to backoff before retrying broken</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	// // streams.</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	// Backoff func(int) time.Duration</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">	// Logger provides enhanced logging capabilities.</span></code></span>
+<span class="codeline" id="line-66"><code>	Logger *<a href="../../../../../../../../pkg/google.golang.org/grpc/internal/grpclog.html" class="ident i4">grpclog</a>.<a href="../../../../../internal/grpclog/prefixLogger.go^6d178.html#line-28" class="ident">PrefixLogger</a></code></span>
+<span class="codeline" id="line-67"><code>}</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// LoadReportingOptions contains configuration knobs for reporting load data.</span></code></span>
+<span class="codeline" id="line-70"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-LoadReportingOptions" class="ident">LoadReportingOptions</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-71"><code>	LoadStore *<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i5">load</a>.<a href="../../load/store.go.html#line-33" class="ident">Store</a></code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">// ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">// resource type. The wrapped ErrStr contains the details.</span></code></span>
+<span class="codeline" id="line-76"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-ErrResourceTypeUnsupported" class="ident">ErrResourceTypeUnsupported</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-77"><code>	ErrStr <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a></code></span>
+<span class="codeline" id="line-78"><code>}</code></span>
+<span class="codeline" id="line-79"><code></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">// Error helps implements the error interface.</span></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> (<label for="r9" class="ident">e</label> <a href="#line-76" class="ident">ErrResourceTypeUnsupported</a>) <label for="r10" class="ident"><a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.ErrResourceTypeUnsupported.html#name-.Error" class="ident">Error</a></label>() <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">return</span> <label for="r9" class="ident">e</label>.<a href="#line-77" class="ident">ErrStr</a></code></span>
+<span class="codeline" id="line-83"><code>}</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">// VersionedClient is the interface to version specific operations of the</span></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// client.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">// It mainly deals with the type assertion from proto.Message to the real v2/v3</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">// types, and grpc.Stream to the versioned stream types.</span></code></span>
+<span class="codeline" id="line-90"><code><span class="keyword">type</span> <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/controller/version.html#name-VersionedClient" class="ident">VersionedClient</a> <span class="keyword">interface</span> {</code></span>
+<span class="codeline" id="line-91"><code>	<span class="comment">// NewStream returns a new xDS client stream specific to the underlying</span></code></span>
+<span class="codeline" id="line-92"><code><span class="comment">	// transport protocol version.</span></code></span>
+<span class="codeline" id="line-93"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-NewStream" class="ident">NewStream</a>(ctx <a href="../../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../../context/context.go.html#line-62" class="ident">Context</a>, cc *<a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../clientconn.go.html#line-463" class="ident">ClientConn</a>) (<a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-94"><code>	<span class="comment">// SendRequest constructs and sends out a DiscoveryRequest message specific</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">	// to the underlying transport protocol version.</span></code></span>
+<span class="codeline" id="line-96"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-SendRequest" class="ident">SendRequest</a>(s <a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>, resourceNames []<a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, rType <a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i6">xdsresource</a>.<a href="../../xdsresource/type.go.html#line-140" class="ident">ResourceType</a>, version, nonce, errMsg <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>) <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-97"><code>	<span class="comment">// RecvResponse uses the provided stream to receive a response specific to</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">	// the underlying transport protocol version.</span></code></span>
+<span class="codeline" id="line-99"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-RecvResponse" class="ident">RecvResponse</a>(s <a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>) (<a href="../../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i2">proto</a>.<a href="../../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-100"><code>	<span class="comment">// ParseResponse type asserts message to the versioned response, and</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">	// retrieves the fields.</span></code></span>
+<span class="codeline" id="line-102"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-ParseResponse" class="ident">ParseResponse</a>(r <a href="../../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i2">proto</a>.<a href="../../../../../../../github.com/golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) (<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/xdsresource.html" class="ident i6">xdsresource</a>.<a href="../../xdsresource/type.go.html#line-140" class="ident">ResourceType</a>, []*<a href="../../../../../../../../pkg/google.golang.org/protobuf/types/known/anypb.html" class="ident i8">anypb</a>.<a href="../../../../../../protobuf/types/known/anypb/any.pb.go.html#line-214" class="ident">Any</a>, <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code>	<span class="comment">// The following are LRS methods.</span></code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code>	<span class="comment">// NewLoadStatsStream returns a new LRS client stream specific to the</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">	// underlying transport protocol version.</span></code></span>
+<span class="codeline" id="line-108"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-NewLoadStatsStream" class="ident">NewLoadStatsStream</a>(ctx <a href="../../../../../../../../pkg/context.html" class="ident i0">context</a>.<a href="../../../../../../../context/context.go.html#line-62" class="ident">Context</a>, cc *<a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../clientconn.go.html#line-463" class="ident">ClientConn</a>) (<a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>, <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-109"><code>	<span class="comment">// SendFirstLoadStatsRequest constructs and sends the first request on the</span></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">	// LRS stream.</span></code></span>
+<span class="codeline" id="line-111"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-SendFirstLoadStatsRequest" class="ident">SendFirstLoadStatsRequest</a>(s <a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>) <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-112"><code>	<span class="comment">// HandleLoadStatsResponse receives the first response from the server which</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">	// contains the load reporting interval and the clusters for which the</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">	// server asks the client to report load for.</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">	//</span></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">	// If the response sets SendAllClusters to true, the returned clusters is</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">	// nil.</span></code></span>
+<span class="codeline" id="line-118"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-HandleLoadStatsResponse" class="ident">HandleLoadStatsResponse</a>(s <a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>) (clusters []<a href="../../../../../../../../pkg/builtin.html#name-string" class="ident">string</a>, _ <a href="../../../../../../../../pkg/time.html" class="ident i1">time</a>.<a href="../../../../../../../time/time.go.html#line-589" class="ident">Duration</a>, _ <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>)</code></span>
+<span class="codeline" id="line-119"><code>	<span class="comment">// SendLoadStatsRequest will be invoked at regular intervals to send load</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">	// report with load data reported since the last time this method was</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">	// invoked.</span></code></span>
+<span class="codeline" id="line-122"><code>	<a href="../../../../../../../../imp/google.golang.org/grpc/xds/internal/xdsclient/controller/version.VersionedClient.html#name-SendLoadStatsRequest" class="ident">SendLoadStatsRequest</a>(s <a href="../../../../../../../../pkg/google.golang.org/grpc.html" class="ident i3">grpc</a>.<a href="../../../../../stream.go.html#line-90" class="ident">ClientStream</a>, loads []*<a href="../../../../../../../../pkg/google.golang.org/grpc/xds/internal/xdsclient/load.html" class="ident i5">load</a>.<a href="../../load/store.go.html#line-218" class="ident">Data</a>) <a href="../../../../../../../../pkg/builtin.html#name-error" class="ident">error</a></code></span>
+<span class="codeline" id="line-123"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.4.9</i>. (GOOS=darwin GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>
