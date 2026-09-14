@@ -1,4 +1,4 @@
-module github.com/Golang-Tools/grpcsdk
+module github.com/Golang-Tools/grpcsdk/v2
 
 require (
 	github.com/Golang-Tools/loggerhelper/v4 v4.0.0

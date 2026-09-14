@@ -2,7 +2,8 @@
 
 grpc的客户端sdk模板,使用它快速构造grpc的sdk
 
-本项目只适用于go 1.25+;日志使用标准库`log/slog`(由`github.com/Golang-Tools/loggerhelper/v4`提供),关键字参数使用`github.com/Golang-Tools/optparams` v1.0.0.
+本项目只适用于go 1.25+;模块路径为`github.com/Golang-Tools/grpcsdk/v2`(旧路径`github.com/Golang-Tools/grpcsdk`停留在v0.0.2不再更新);
+日志使用标准库`log/slog`(由`github.com/Golang-Tools/loggerhelper/v4`提供),关键字参数使用`github.com/Golang-Tools/optparams` v1.0.0.
 
 ## 使用步骤
 
@@ -39,7 +40,7 @@ import (
     "io"
     "os"
 
-    "github.com/Golang-Tools/grpcsdk"
+    "github.com/Golang-Tools/grpcsdk/v2"
     log "github.com/Golang-Tools/loggerhelper/v4"
     "xxx_pb"
     "google.golang.org/grpc"

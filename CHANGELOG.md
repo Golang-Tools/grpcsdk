@@ -1,9 +1,10 @@
-# v0.1.0
+# v2.0.0
 
 缺陷修复 + 现代化改造版本。
 
 ## 破坏性变更
 
++ 模块路径变更为 `github.com/Golang-Tools/grpcsdk/v2`,旧路径 `github.com/Golang-Tools/grpcsdk` 停留在 v0.0.2 不再更新
 + 最低 go 版本提升到 1.25(由 grpc v1.83.2 的版本要求决定)
 + 依赖升级:`google.golang.org/grpc` v1.83.2、`github.com/Golang-Tools/optparams` v1.0.0、`github.com/Golang-Tools/loggerhelper/v4` v4.0.0;不再依赖 `github.com/json-iterator/go`(改用标准库 `encoding/json`)
 + `optparams` v1.0.0 的 `GetOption` 改为拷贝语义(不再原地修改),内置的选项解析全部改用 `optparams.Apply`
