@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"google.golang.org/grpc/connectivity"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
@@ -78,6 +79,9 @@ func TestNilPool(t *testing.T) {
 	}
 	if got := pool.Available(); got != 0 {
 		t.Fatalf("nil的池可用客户端数应该为0, got: %v", got)
+	}
+	if got := pool.Limits(); got != 0 {
+		t.Fatalf("nil的池最大容量应该为0, got: %v", got)
 	}
 }
 
@@ -263,4 +267,131 @@ func TestPoolReleaseBeyondReservations(t *testing.T) {
 		t.Fatalf("Check error: %v", err)
 	}
 	pool.Release(c3)
+}
+
+// TestPoolFillConnsPartialFailure 验证注水中途失败时会清理已经创建好的连接
+func TestPoolFillConnsPartialFailure(t *testing.T) {
+	addr, cleanup := startDirtyHealthServer(t)
+	defer cleanup()
+
+	// 第一个连接可以正常建立,之后的连接会被服务器立即断开
+	pool, err := NewPool(
+		healthFactory(),
+		HasClientConfig(WithAddr(addr), WithBlockUntilReady(), WithBlockWaitTime(300*time.Millisecond)),
+		WithReservations(2),
+		WithLimits(2),
+	)
+	if err == nil {
+		pool.Close()
+		t.Fatal("注水中途失败时NewPool应该返回错误")
+	}
+}
+
+// TestPoolAcquireTransientFailure 验证连接故障时获取客户端会重试直到超时
+func TestPoolAcquireTransientFailure(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	pool, err := NewPool(healthFactory(), HasClientConfig(WithAddr(addr)), WithReservations(1), WithLimits(1), WithAcquireWaitTimeMS(200))
+	if err != nil {
+		t.Fatalf("NewPool error: %v", err)
+	}
+	defer pool.Close()
+
+	cli, err := pool.Acquire()
+	if err != nil {
+		t.Fatalf("Acquire error: %v", err)
+	}
+	// 关闭服务器,让连接进入故障状态
+	cleanup()
+	if _, err := cli.AsGrpcClient().Check(context.Background(), &healthpb.HealthCheckRequest{}); err == nil {
+		t.Fatal("服务器关闭后请求应该报错")
+	}
+	// 等待连接进入TransientFailure状态
+	deadline := time.Now().Add(2 * time.Second)
+	for cli.GetConn().GetState() != connectivity.TransientFailure {
+		if time.Now().After(deadline) {
+			t.Fatalf("连接没有进入TransientFailure状态, got: %v", cli.GetConn().GetState())
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
+	// 故障状态的连接会被按安全水位放回池中
+	pool.Release(cli)
+	// 连接持续故障时获取会重试直到超时
+	if _, err := pool.Acquire(); !errors.Is(err, ErrTimeout) {
+		t.Fatalf("连接故障时获取应该超时, got: %v", err)
+	}
+}
+
+// TestPoolReleaseShutdownConn 验证释放已经关闭的连接时不会放回池中
+func TestPoolReleaseShutdownConn(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+	pool, err := NewPool(healthFactory(), HasClientConfig(WithAddr(addr)), WithReservations(1), WithLimits(1), WithAcquireWaitTimeMS(50))
+	if err != nil {
+		t.Fatalf("NewPool error: %v", err)
+	}
+	defer pool.Close()
+
+	cli, err := pool.Acquire()
+	if err != nil {
+		t.Fatalf("Acquire error: %v", err)
+	}
+	// 手动关闭连接,模拟连接已经进入Shutdown状态
+	if err := cli.GetConn().Close(); err != nil {
+		t.Fatalf("Close conn error: %v", err)
+	}
+	deadline := time.Now().Add(2 * time.Second)
+	for cli.GetConn().GetState() != connectivity.Shutdown {
+		if time.Now().After(deadline) {
+			t.Fatalf("连接没有进入Shutdown状态, got: %v", cli.GetConn().GetState())
+		}
+		time.Sleep(5 * time.Millisecond)
+	}
+	pool.Release(cli)
+	// 已关闭的连接不会被放回池中
+	if got := pool.Available(); got != 0 {
+		t.Fatalf("已经关闭的连接不应该被放回池中, got: %v", got)
+	}
+}
+
+// TestPoolTryPutbackWhenChannelFull 验证池已满时放回连接会失败并关闭连接
+// 正常配置下池的容量不会小于安全水位,这里直接构造异常状态验证防御分支
+func TestPoolTryPutbackWhenChannelFull(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+	factory := healthFactory()
+
+	pool := &GrpcConnPool[healthpb.HealthClient]{
+		opts: NewClientPoolOptions{
+			NewClientOptions: &NewClientOptions{Addr: addr, DialOpts: DefaultNewClientOpts.Clone().DialOpts},
+			Reservations:     5,
+			Limits:           1,
+			AcquireWaitTime:  time.Millisecond,
+		},
+		clis:          make(chan GrpcClientInterface[healthpb.HealthClient], 1),
+		mu:            &sync.RWMutex{},
+		done:          make(chan struct{}),
+		clientfactory: factory,
+	}
+
+	c1, err := NewClient(factory, WithAddr(addr))
+	if err != nil {
+		t.Fatalf("NewClient error: %v", err)
+	}
+	if !pool.tryPutback(c1) {
+		t.Fatal("低于安全水位时应该可以放回池中")
+	}
+	c2, err := NewClient(factory, WithAddr(addr))
+	if err != nil {
+		t.Fatalf("NewClient error: %v", err)
+	}
+	if pool.tryPutback(c2) {
+		t.Fatal("池已经放满时不应该可以放回")
+	}
+	// 放回失败的连接会被关闭
+	if got := c2.GetConn().GetState(); got != connectivity.Shutdown {
+		t.Fatalf("放回失败的连接应该被关闭, got: %v", got)
+	}
+	if err := pool.Close(); err != nil {
+		t.Fatalf("Close error: %v", err)
+	}
 }

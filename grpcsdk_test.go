@@ -7,6 +7,7 @@ import (
 	"net"
 	"os"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -25,20 +26,78 @@ func TestMain(m *testing.M) {
 
 // startHealthServer 启动一个带健康检查服务的grpc测试服务器
 // @params t *testing.T 测试对象
+// @params serveropts ...grpc.ServerOption 服务器选项,如TLS凭证
 // @returns string 服务地址
 // @returns func() 关闭服务器的清理函数
-func startHealthServer(t *testing.T) (string, func()) {
+func startHealthServer(t *testing.T, serveropts ...grpc.ServerOption) (string, func()) {
+	return startHealthServerWithServices(t, nil, serveropts...)
+}
+
+// startHealthServerWithServices 启动一个带健康检查服务的grpc测试服务器,可以额外注册指定的健康检查服务名
+// @params t *testing.T 测试对象
+// @params services []string 额外注册的健康检查服务名
+// @params serveropts ...grpc.ServerOption 服务器选项,如TLS凭证
+// @returns string 服务地址
+// @returns func() 关闭服务器的清理函数
+func startHealthServerWithServices(t *testing.T, services []string, serveropts ...grpc.ServerOption) (string, func()) {
 	t.Helper()
 	lis, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		t.Fatalf("listen test server error: %v", err)
 	}
+	s := grpc.NewServer(serveropts...)
+	hs := health.NewServer()
+	hs.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)
+	for _, svc := range services {
+		hs.SetServingStatus(svc, healthpb.HealthCheckResponse_SERVING)
+	}
+	healthpb.RegisterHealthServer(s, hs)
+	go func() {
+		_ = s.Serve(lis)
+	}()
+	return lis.Addr().String(), func() {
+		s.Stop()
+		_ = lis.Close()
+	}
+}
+
+// dirtyListener 包装net.Listener,第一个连接正常透传,之后的连接在accept后立即断开
+// 用于模拟服务器只接受一次连接后建连失败的场景
+type dirtyListener struct {
+	net.Listener
+	accepted int32
+}
+
+// Accept 接受连接,第二个及以后的连接会被立即关闭
+func (l *dirtyListener) Accept() (net.Conn, error) {
+	c, err := l.Listener.Accept()
+	if err != nil {
+		return nil, err
+	}
+	if atomic.AddInt32(&l.accepted, 1) > 1 {
+		// 模拟建连失败:第二个及以后的连接立即断开
+		_ = c.Close()
+	}
+	return c, nil
+}
+
+// startDirtyHealthServer 启动一个只接受一次连接的grpc测试服务器
+// @params t *testing.T 测试对象
+// @returns string 服务地址
+// @returns func() 关闭服务器的清理函数
+func startDirtyHealthServer(t *testing.T) (string, func()) {
+	t.Helper()
+	lis, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("listen test server error: %v", err)
+	}
+	dlis := &dirtyListener{Listener: lis}
 	s := grpc.NewServer()
 	hs := health.NewServer()
 	hs.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)
 	healthpb.RegisterHealthServer(s, hs)
 	go func() {
-		_ = s.Serve(lis)
+		_ = s.Serve(dlis)
 	}()
 	return lis.Addr().String(), func() {
 		s.Stop()

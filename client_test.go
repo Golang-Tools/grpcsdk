@@ -6,7 +6,9 @@ import (
 	"testing"
 	"time"
 
+	grpc "google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/credentials/insecure"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
@@ -100,5 +102,44 @@ func TestNewClientOptionsIsolation(t *testing.T) {
 
 	if cli1.opts.Addr != addr1 || cli2.opts.Addr != addr2 {
 		t.Fatalf("客户端的配置互相污染: %v, %v", cli1.opts.Addr, cli2.opts.Addr)
+	}
+}
+
+// TestWaitConnReadyOnClosedConn 验证等待已经关闭的连接时会立即返回错误
+func TestWaitConnReadyOnClosedConn(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		t.Fatalf("NewClient error: %v", err)
+	}
+	_ = conn.Close()
+	if err := waitConnReady(conn, time.Second); !errors.Is(err, ErrAlreadyClosed) {
+		t.Fatalf("连接已关闭时应该返回ErrAlreadyClosed, got: %v", err)
+	}
+}
+
+// TestClientCloseWithoutConn 验证没有连接的客户端对象关闭时不会panic
+func TestClientCloseWithoutConn(t *testing.T) {
+	c := &Client[healthpb.HealthClient]{}
+	if err := c.Close(); err != nil {
+		t.Fatalf("没有连接时Close不应该报错, got: %v", err)
+	}
+}
+
+// TestOptionsNilHelpers 验证配置辅助方法对nil输入的处理
+func TestOptionsNilHelpers(t *testing.T) {
+	var o *NewClientOptions
+	if o.Clone() != nil {
+		t.Fatal("nil配置的Clone应该返回nil")
+	}
+	var po *NewClientPoolOptions
+	if got := po.Clone(); got.Reservations != 0 {
+		t.Fatalf("nil池配置的Clone应该返回零值配置, got: %+v", got)
+	}
+	base := NewClientOptions{Addr: "example.com:1234"}
+	WithClientConfig(nil).Apply(&base)
+	if base.Addr != "example.com:1234" {
+		t.Fatalf("WithClientConfig(nil)不应该修改配置, got: %+v", base)
 	}
 }

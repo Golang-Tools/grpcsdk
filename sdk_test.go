@@ -2,6 +2,7 @@ package grpcsdk
 
 import (
 	"context"
+	"strings"
 	"sync"
 	"testing"
 
@@ -288,4 +289,171 @@ func TestSDKGetClientConcurrent(t *testing.T) {
 		}()
 	}
 	wg.Wait()
+}
+
+// TestSDKInitWithMultiAddresses 验证多地址时使用本地负载均衡
+func TestSDKInitWithMultiAddresses(t *testing.T) {
+	// 多地址带请求方名称时会开启健康检查,试验服务器需要注册同名的健康检查服务
+	serviceName := "testapp-1_2_3"
+	addr1, cleanup1 := startHealthServerWithServices(t, []string{serviceName})
+	defer cleanup1()
+	addr2, cleanup2 := startHealthServerWithServices(t, []string{serviceName})
+	defer cleanup2()
+
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	if err := sdk.Init(
+		WithQueryAddresses(addr1, addr2),
+		WithRequesterAppName("testapp"),
+		WithRequesterAppVersion("1.2.3"),
+	); err != nil {
+		t.Fatalf("Init error: %v", err)
+	}
+	defer sdk.Close()
+	// 多地址会构造本地负载均衡的地址
+	if !strings.HasPrefix(sdk.addr, "localbalancer:///") {
+		t.Fatalf("多地址时应该使用本地负载均衡的地址, got: %s", sdk.addr)
+	}
+	cli, release := sdk.GetClient()
+	defer release()
+	// 轮询多个后端都应该可以正常请求
+	for i := 0; i < 4; i++ {
+		if _, err := cli.Check(context.Background(), &healthpb.HealthCheckRequest{}); err != nil {
+			t.Fatalf("Check error: %v", err)
+		}
+	}
+}
+
+// TestSDKInitWithDNSAddress 验证dns地址前缀时使用DNS解析与负载均衡
+func TestSDKInitWithDNSAddress(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	if err := sdk.Init(WithQueryAddresses("dns:///" + addr)); err != nil {
+		t.Fatalf("Init error: %v", err)
+	}
+	defer sdk.Close()
+	cli, release := sdk.GetClient()
+	defer release()
+	if _, err := cli.Check(context.Background(), &healthpb.HealthCheckRequest{}); err != nil {
+		t.Fatalf("Check error: %v", err)
+	}
+}
+
+// TestSDKInitWithXDSAddress 验证xds地址前缀时使用XDS凭证初始化
+func TestSDKInitWithXDSAddress(t *testing.T) {
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	if err := sdk.Init(WithQueryAddresses("xds:///test-service"), WithXDSCREDS()); err != nil {
+		t.Fatalf("Init error: %v", err)
+	}
+	defer sdk.Close()
+}
+
+// TestSDKInitAdvancedOptions 验证性能、压缩、keepalive与阻塞建连等配置项
+func TestSDKInitAdvancedOptions(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	if err := sdk.Init(
+		WithQueryAddresses(addr),
+		WithMaxRecvMsgSize(4*1024*1024),
+		WithMaxSendMsgSize(4*1024*1024),
+		WithCompression("gzip"),
+		WithKeepaliveTime(30),
+		WithKeepaliveTimeout(10),
+		WithKeepaliveEnforcementPermitWithoutStream(),
+		WithInitialWindowSize(64*1024),
+		WithInitialConnWindowSize(64*1024),
+		WithConnWithBlock(),
+		WithQueryTimeout(5000),
+	); err != nil {
+		t.Fatalf("Init error: %v", err)
+	}
+	defer sdk.Close()
+	cli, release := sdk.GetClient()
+	defer release()
+	if _, err := cli.Check(context.Background(), &healthpb.HealthCheckRequest{}); err != nil {
+		t.Fatalf("Check error: %v", err)
+	}
+}
+
+// TestSDKGetClientPanicWhenNotInit 验证未初始化时获取客户端会panic
+func TestSDKGetClientPanicWhenNotInit(t *testing.T) {
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	defer func() {
+		if r := recover(); r == nil {
+			t.Fatal("未初始化时GetClient应该panic")
+		}
+	}()
+	sdk.GetClient()
+}
+
+// TestSDKStreamInterceptor 验证流请求拦截器生效
+func TestSDKStreamInterceptor(t *testing.T) {
+	addr, cleanup := startHealthServer(t)
+	defer cleanup()
+
+	var mu sync.Mutex
+	var methods []string
+	streami := func(sctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, streamer grpc.Streamer, opts ...grpc.CallOption) (grpc.ClientStream, error) {
+		mu.Lock()
+		methods = append(methods, method)
+		mu.Unlock()
+		return streamer(sctx, desc, cc, method, opts...)
+	}
+
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	if err := sdk.Init(WithQueryAddresses(addr), WithStreamInterceptors(streami)); err != nil {
+		t.Fatalf("Init error: %v", err)
+	}
+	defer sdk.Close()
+
+	cli, release := sdk.GetClient()
+	defer release()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	watchcli, err := cli.Watch(ctx, &healthpb.HealthCheckRequest{})
+	if err != nil {
+		t.Fatalf("Watch error: %v", err)
+	}
+	resp, err := watchcli.Recv()
+	if err != nil {
+		t.Fatalf("Recv error: %v", err)
+	}
+	if resp.Status != healthpb.HealthCheckResponse_SERVING {
+		t.Fatalf("unexpected status: %v", resp.Status)
+	}
+	cancel()
+
+	mu.Lock()
+	defer mu.Unlock()
+	if len(methods) != 1 || !strings.Contains(methods[0], "Watch") {
+		t.Fatalf("流拦截器没有生效: %v", methods)
+	}
+}
+
+// TestWithMetaOptionWithoutRequestMeta 验证单独使用WithMeta时元数据可以被正确初始化
+func TestWithMetaOptionWithoutRequestMeta(t *testing.T) {
+	sdk := New(healthFactory(), &healthpb.Health_ServiceDesc)
+	ctx, cancel := sdk.NewCtx(WithMeta("key", "value"))
+	defer cancel()
+	md, ok := metadata.FromOutgoingContext(ctx)
+	if !ok {
+		t.Fatal("ctx中应该包含元数据")
+	}
+	if got := md.Get("key"); len(got) != 1 || got[0] != "value" {
+		t.Fatalf("key不正确: %v", got)
+	}
+}
+
+// TestWithRequestMetaWithoutConfig 验证SDKConfig为空时WithRequestMeta不会panic
+func TestWithRequestMetaWithoutConfig(t *testing.T) {
+	sdk := &SDK[healthpb.HealthClient]{}
+	o := CtxOptions{}
+	sdk.WithRequestMeta().Apply(&o)
+	if o.MetaData == nil {
+		t.Fatal("MetaData不应该为空")
+	}
 }
