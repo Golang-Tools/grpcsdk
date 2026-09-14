@@ -24,4 +24,6 @@ var (
 	ErrNilClientFactory = errors.New("grpcsdk: grpc client factory is nil")
 	//ErrCACertNotParsed 根证书文件中没有解析出有效的证书
 	ErrCACertNotParsed = errors.New("grpcsdk: no valid certificate parsed from ca file")
+	//ErrInvalidRetryPolicy 重试策略的参数不合法
+	ErrInvalidRetryPolicy = errors.New("grpcsdk: invalid retry policy")
 )

@@ -1,6 +1,10 @@
 package grpcsdk
 
 import (
+	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/Golang-Tools/optparams"
 	grpc "google.golang.org/grpc"
 )
@@ -40,8 +44,65 @@ type SDKConfig struct {
 	// 请求超时设置
 	Query_Timeout int `json:"query_timeout,omitempty" jsonschema:"description=请求服务的最大超时时间单位ms"`
 
+	// 连接设置
+	Connect_Params        *grpc.ConnectParams `json:"-" jsonschema:"nullable"`
+	Idle_Timeout_MS       int                 `json:"idle_timeout_ms,omitempty" jsonschema:"description=连接空闲回收时长,单位ms,0使用grpc默认的30分钟,负数表示禁用空闲回收"`
+	Load_Balancing_Policy string              `json:"load_balancing_policy,omitempty" jsonschema:"description=负载均衡策略,可选pick_first/round_robin/least_request/weighted_round_robin等,留空时按地址自动选择"`
+
+	// 重试设置
+	Retry_Policy *RetryPolicy `json:"retry_policy,omitempty" jsonschema:"description=grpc内建重试策略,只有幂等的方法才可以配置"`
+
 	UnaryInterceptors  []grpc.UnaryClientInterceptor  `json:"-" jsonschema:"nullable"`
 	StreamInterceptors []grpc.StreamClientInterceptor `json:"-" jsonschema:"nullable"`
+}
+
+// RetryPolicy grpc内建的重试策略,对应service config中的retryPolicy
+type RetryPolicy struct {
+	//MaxAttempts 最大尝试次数(包含首次请求),取值范围[2,5]
+	MaxAttempts int `json:"max_attempts" jsonschema:"description=最大尝试次数(包含首次请求),取值范围2到5"`
+	//InitialBackoff 首次重试前的等待时长
+	InitialBackoff time.Duration `json:"initial_backoff" jsonschema:"description=首次重试前的等待时长"`
+	//MaxBackoff 重试等待时长的上限
+	MaxBackoff time.Duration `json:"max_backoff" jsonschema:"description=重试等待时长的上限"`
+	//BackoffMultiplier 退避倍数
+	BackoffMultiplier float64 `json:"backoff_multiplier" jsonschema:"description=退避倍数"`
+	//RetryableStatusCodes 可以重试的状态码,如"UNAVAILABLE"、"RESOURCE_EXHAUSTED"
+	RetryableStatusCodes []string `json:"retryable_status_codes" jsonschema:"description=可以重试的状态码"`
+}
+
+// toMethodConfig 转换为service config中默认methodConfig的重试策略
+// retryPolicy只允许配置在methodConfig中,空name表示对所有方法生效
+// @returns map[string]interface{} service config中的默认methodConfig
+func (p *RetryPolicy) toMethodConfig() map[string]interface{} {
+	return map[string]interface{}{
+		"name": []interface{}{map[string]interface{}{}},
+		"retryPolicy": map[string]interface{}{
+			"maxAttempts":          p.MaxAttempts,
+			"initialBackoff":       durationToServiceConfig(p.InitialBackoff),
+			"maxBackoff":           durationToServiceConfig(p.MaxBackoff),
+			"backoffMultiplier":    p.BackoffMultiplier,
+			"retryableStatusCodes": p.RetryableStatusCodes,
+		},
+	}
+}
+
+// validate 校验重试策略参数是否合法
+// @returns error 错误信息
+func (p *RetryPolicy) validate() error {
+	if p.MaxAttempts < 2 || p.MaxAttempts > 5 {
+		return fmt.Errorf("%w: maxAttempts must be in [2,5], got %d", ErrInvalidRetryPolicy, p.MaxAttempts)
+	}
+	if len(p.RetryableStatusCodes) == 0 {
+		return fmt.Errorf("%w: retryableStatusCodes must not be empty", ErrInvalidRetryPolicy)
+	}
+	return nil
+}
+
+// durationToServiceConfig 把时长转换为service config中protobuf Duration的JSON格式(如"0.1s")
+// @params d time.Duration 要转换的时长
+// @returns string service config中的时长
+func durationToServiceConfig(d time.Duration) string {
+	return strconv.FormatFloat(d.Seconds(), 'f', -1, 64) + "s"
 }
 
 // WithConfig sdk.Init方法的参数,用于通过SDKConfig对象设置sdk的全部配置
@@ -240,6 +301,44 @@ func WithQueryTimeout(timeout int) optparams.Option[SDKConfig] {
 	return optparams.NewFuncOption(
 		func(o *SDKConfig) {
 			o.Query_Timeout = timeout
+		})
+}
+
+// WithConnectParams sdk.Init方法的参数,用于设置连接建立与维护的参数(重连退避与单次建连最短超时)
+// @params params grpc.ConnectParams 连接参数
+func WithConnectParams(params grpc.ConnectParams) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Connect_Params = &params
+		})
+}
+
+// WithIdleTimeoutMS sdk.Init方法的参数,用于设置连接空闲回收时长
+// @params timeout int 空闲回收时长,单位ms;0使用grpc默认的30分钟,负数表示禁用空闲回收
+func WithIdleTimeoutMS(timeout int) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Idle_Timeout_MS = timeout
+		})
+}
+
+// WithLoadBalancingPolicy sdk.Init方法的参数,用于设置负载均衡策略
+// 单地址留空时使用pick_first;多地址与dns地址留空时使用round_robin;xds地址的负载均衡由xds配置决定
+// @params policy string 策略名,可选pick_first/round_robin/least_request/weighted_round_robin等
+func WithLoadBalancingPolicy(policy string) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Load_Balancing_Policy = policy
+		})
+}
+
+// WithRetryPolicy sdk.Init方法的参数,用于设置grpc内建的重试策略
+// 注意重试会重复发送请求,只有幂等的方法才可以配置重试
+// @params policy *RetryPolicy 重试策略
+func WithRetryPolicy(policy *RetryPolicy) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Retry_Policy = policy
 		})
 }
 

@@ -1,3 +1,25 @@
+# v2.1.0
+
+## 新增功能
+
++ 新增grpc内建重试策略配置:`RetryPolicy` 与 `WithRetryPolicy`,通过service config的默认methodConfig下发(顶层不支持retryPolicy);`MaxAttempts` 限制为[2,5],状态码列表不能为空,只有幂等的方法才应该配置重试
++ 新增连接参数配置:`WithConnectParams`(重连退避与单次建连最短超时)与 `WithIdleTimeoutMS`(空闲连接回收,0使用grpc默认的30分钟,负数表示禁用)
++ 新增负载均衡策略配置:`WithLoadBalancingPolicy`(pick_first/round_robin/least_request/weighted_round_robin等);未设置时保持原有自动选择逻辑(单地址pick_first、多地址与dns地址round_robin、xds地址由xds决定)
++ 默认对所有调用附加 `grpc.StaticMethod()`,标记调用来自编译期确定的方法(供stats/opentelemetry等观测插件把方法名作为指标属性)
+
+## 文档
+
++ README新增`负载均衡与连接池`与`重试策略`说明:grpc推荐单个ClientConn配合负载均衡策略承载并发,连接池只在需要连接级隔离等特殊场景使用
+
+## 测试
+
++ 新增重试策略真实生效的端到端测试(基于自定义计数服务)、参数校验、methodConfig转换、负载均衡策略、连接参数与空闲回收等测试;语句覆盖率95.1%
+
+## 其他
+
++ 移除GitHub Actions CI工作流(本地校验:`gofmt -l . && go vet ./... && go test ./... -race`)
++ grpc-go当前尚未实现对冲策略(hedging,源码中仅有TODO),因此不提供相关配置
+
 # v2.0.1
 
 ## 测试

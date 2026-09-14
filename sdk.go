@@ -103,12 +103,55 @@ func (c *SDK[T]) initKeepalive() {
 // initPerformanceOpts 初始化连接的性能选项
 // @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
 func (c *SDK[T]) initPerformanceOpts() {
+	// StaticMethod标记调用来自编译期确定的方法,grpc的观测插件(如stats/opentelemetry)可以因此把方法名作为指标的属性
+	c.callopts = append(c.callopts, grpc.StaticMethod())
 	if c.Initial_Window_Size != 0 {
 		c.opts = append(c.opts, grpc.WithInitialWindowSize(int32(c.Initial_Window_Size)))
 	}
 	if c.Initial_Conn_Window_Size != 0 {
 		c.opts = append(c.opts, grpc.WithInitialConnWindowSize(int32(c.Initial_Conn_Window_Size)))
 	}
+}
+
+// initConnectParams 初始化连接参数与空闲连接回收设置
+// @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+func (c *SDK[T]) initConnectParams() {
+	if c.Connect_Params != nil {
+		c.opts = append(c.opts, grpc.WithConnectParams(*c.Connect_Params))
+	}
+	switch {
+	case c.Idle_Timeout_MS > 0:
+		c.opts = append(c.opts, grpc.WithIdleTimeout(time.Duration(c.Idle_Timeout_MS)*time.Millisecond))
+	case c.Idle_Timeout_MS < 0:
+		// grpc的WithIdleTimeout传入0表示禁用空闲连接回收
+		c.opts = append(c.opts, grpc.WithIdleTimeout(0))
+	}
+}
+
+// initRetryPolicy 初始化重试策略,策略会写入service config的默认methodConfig
+// retryPolicy只允许配置在methodConfig中,空name表示对所有方法生效
+// @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+// @returns error 错误信息
+func (c *SDK[T]) initRetryPolicy() error {
+	if c.Retry_Policy == nil {
+		return nil
+	}
+	if err := c.Retry_Policy.validate(); err != nil {
+		return err
+	}
+	c.serviceconfig["methodConfig"] = []interface{}{c.Retry_Policy.toMethodConfig()}
+	return nil
+}
+
+// loadBalancingPolicy 返回使用的负载均衡策略,未显式设置时使用传入的默认策略
+// @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+// @params defaultpolicy string 默认策略
+// @returns string 负载均衡策略
+func (c *SDK[T]) loadBalancingPolicy(defaultpolicy string) string {
+	if c.Load_Balancing_Policy != "" {
+		return c.Load_Balancing_Policy
+	}
+	return defaultpolicy
 }
 
 // initTLS 初始化TLS设置
@@ -147,13 +190,16 @@ func (c *SDK[T]) initTLS() error {
 // initWithoutLB 初始化没有负载均衡设置的服务
 // @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
 func (c *SDK[T]) initWithoutLB() error {
+	if c.Load_Balancing_Policy != "" {
+		c.serviceconfig["loadBalancingPolicy"] = c.Load_Balancing_Policy
+	}
 	return c.initTLS()
 }
 
 // initWithDNSLB 初始化使用外部dns做负载均衡的设置
 // @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
 func (c *SDK[T]) initWithDNSLB() error {
-	c.serviceconfig["loadBalancingPolicy"] = "round_robin"
+	c.serviceconfig["loadBalancingPolicy"] = c.loadBalancingPolicy("round_robin")
 	return c.initTLS()
 }
 
@@ -183,7 +229,7 @@ func (c *SDK[T]) initWithLocalBalance() error {
 			serverName = c.Requester_App_Name
 		}
 	}
-	c.serviceconfig["loadBalancingPolicy"] = "round_robin"
+	c.serviceconfig["loadBalancingPolicy"] = c.loadBalancingPolicy("round_robin")
 	c.serviceconfig["healthCheckConfig"] = map[string]string{"serviceName": serverName}
 
 	r := manual.NewBuilderWithScheme("localbalancer")
@@ -258,6 +304,10 @@ func (c *SDK[T]) Init(opts ...optparams.Option[SDKConfig]) error {
 	c.initCompression()
 	c.initKeepalive()
 	c.initPerformanceOpts()
+	c.initConnectParams()
+	if err := c.initRetryPolicy(); err != nil {
+		return err
+	}
 	c.RegistInterceptor()
 	if len(c.serviceconfig) != 0 {
 		serviceconfig, err := json.Marshal(c.serviceconfig)

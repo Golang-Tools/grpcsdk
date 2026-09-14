@@ -30,6 +30,40 @@ grpc的客户端sdk模板,使用它快速构造grpc的sdk
 + `Conn_With_Block`开启后建连会阻塞等待连接就绪(默认最长等待10s),对应`NewClientOptions`中的`BlockUntilReady`与`BlockWaitTime`
 + `Client_Pool`开启后使用客户端连接池,池的安全水位为`Client_Pool_Reservations`(池中保持的客户端数量),最大水位为`Client_Pool_Limits`;`GetClient`返回的回收函数会按安全水位把客户端放回池中,超出安全水位的连接会被关闭
 + 直接使用`NewClient`/`NewPool`而没有配置`DialOpts`时默认使用insecure连接,自己设置`DialOpts`时需要自行提供传输凭证
++ `WithRetryPolicy`可以开启grpc内建的重试(写入service config的默认methodConfig),只有幂等的方法才应该配置
++ `WithConnectParams`/`WithIdleTimeoutMS`可以调整重连退避、单次建连最短超时与空闲连接回收行为(空闲回收默认30分钟,传负数禁用)
++ `WithLoadBalancingPolicy`可以指定负载均衡策略,详见下面的`负载均衡与连接池`
+
+## 负载均衡与连接池
+
+grpc推荐用**单个ClientConn配合负载均衡策略**来承载并发:同一个ClientConn内部会维护到多个后端的子连接,请求按策略分布到不同后端,连接管理与空闲回收由grpc自身负责。因此:
+
++ 多地址场景直接使用`WithQueryAddresses(a1, a2, ...)`(内部自动组成本地负载均衡),或使用`dns:///`地址;
++ 用`WithLoadBalancingPolicy`指定策略,常用值:`pick_first`(单地址默认)、`round_robin`、`least_request`、`weighted_round_robin`;多地址与dns地址不设置时默认`round_robin`,xds地址由xds配置决定;
++ `Client_Pool`(多个ClientConn的连接池)只在需要连接级隔离等特殊场景使用:每个ClientConn都带有独立的resolver/负载均衡/子连接,池化会成倍放大资源占用,一般情况下不必开启。
+
+## 重试策略
+
+`WithRetryPolicy`可以开启grpc内建的重试(通过service config的默认methodConfig下发):
+
+```go
+sdk.Init(
+    grpcsdk.WithQueryAddresses("localhost:5000"),
+    grpcsdk.WithRetryPolicy(&grpcsdk.RetryPolicy{
+        MaxAttempts:          3,
+        InitialBackoff:       10 * time.Millisecond,
+        MaxBackoff:           100 * time.Millisecond,
+        BackoffMultiplier:    2,
+        RetryableStatusCodes: []string{"UNAVAILABLE"},
+    }),
+)
+```
+
+注意:
+
++ 重试只应该用于幂等的方法,否则可能造成重复处理;
++ `MaxAttempts`取值范围为[2,5],状态码列表不能为空,不满足时`Init`会报错;
++ grpc-go当前尚未实现对冲策略(hedging),因此本项目不提供对冲配置。
 
 ## 使用例子
 
