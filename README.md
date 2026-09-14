@@ -2,7 +2,7 @@
 
 grpc的客户端sdk模板,使用它快速构造grpc的sdk
 
-本项目只适用于go 1.18+
+本项目只适用于go 1.25+;日志使用标准库`log/slog`(由`github.com/Golang-Tools/loggerhelper/v4`提供),关键字参数使用`github.com/Golang-Tools/optparams` v1.0.0.
 
 ## 使用步骤
 
@@ -23,7 +23,12 @@ grpc的客户端sdk模板,使用它快速构造grpc的sdk
 
 补充:
 
-+ 在第四步完成后可以使用`sdk.Logger`打印log,这个log会带有字段`"module":"grpcsdk"`和`"target_service": desc.ServiceName`,log的其它配置会根据`github.com/Golang-Tools/loggerhelper/v2`的`Set`方法变化而变化
++ 在第四步完成后可以使用`sdk.Logger`打印log,这个log是带字段`"module":"grpcsdk"`和`"target_service": desc.ServiceName`的`*slog.Logger`,它的输出配置基于创建时的全局logger,日志等级会跟随后续`github.com/Golang-Tools/loggerhelper/v4`的`Set`方法变化
++ `Init`可以重复调用,重复调用会关闭旧的客户端获取器并按新配置重建,因此可以在运行期切换配置
++ 未配置证书时sdk使用insecure连接;配置了`Ca_Cert_Path`后使用TLS,同时配置`Client_Cert_Path`与`Client_Key_Path`时使用mTLS
++ `Conn_With_Block`开启后建连会阻塞等待连接就绪(默认最长等待10s),对应`NewClientOptions`中的`BlockUntilReady`与`BlockWaitTime`
++ `Client_Pool`开启后使用客户端连接池,池的安全水位为`Client_Pool_Reservations`(池中保持的客户端数量),最大水位为`Client_Pool_Limits`;`GetClient`返回的回收函数会按安全水位把客户端放回池中,超出安全水位的连接会被关闭
++ 直接使用`NewClient`/`NewPool`而没有配置`DialOpts`时默认使用insecure连接,自己设置`DialOpts`时需要自行提供传输凭证
 
 ## 使用例子
 
@@ -35,8 +40,8 @@ import (
     "os"
 
     "github.com/Golang-Tools/grpcsdk"
+    log "github.com/Golang-Tools/loggerhelper/v4"
     "xxx_pb"
-    log "github.com/Golang-Tools/loggerhelper/v2"
     "google.golang.org/grpc"
     "google.golang.org/grpc/metadata"
 )
@@ -46,7 +51,7 @@ func main() {
     sdk.Logger.Info("setup sdk ok")
     err := sdk.Init(grpcsdk.WithQueryAddresses("localhost:5000"))
     if err != nil {
-        sdk.Logger.Error("sdk.Init get error", log.Dict{"err": err.Error()})
+        sdk.Logger.Error("sdk.Init get error", "err", err.Error())
     }
     defer sdk.Close()
     sdk.Logger.Info("setup sdk init ok")
@@ -64,17 +69,17 @@ func main() {
         grpc.Trailer(&trailer), // will retrieve trailer
     )
     if err != nil {
-        sdk.Logger.Error("Square get error", log.Dict{"err": err.Error()})
+        sdk.Logger.Error("Square get error", "err", err.Error())
         os.Exit(1)
     }
-    log.Info("Square get result", log.Dict{"header": header, "req": req, "trailer": trailer})
+    log.Info("Square get result", "header", header, "req", req, "trailer", trailer)
 
     //req-stream
     streamctx, streamcancel := sdk.NewCtx(grpcsdk.UntilEnd())
     defer streamcancel()
     ResStream, err := Conn.RangeSquare(streamctx, &xxx_pb.Message{Message: 4.0})
     if err != nil {
-        sdk.Logger.Error("RangeSquare get error", log.Dict{"err": err.Error()})
+        sdk.Logger.Error("RangeSquare get error", "err", err.Error())
         os.Exit(1)
     }
     for {
@@ -83,11 +88,11 @@ func main() {
             if err == io.EOF {
                 break
             } else {
-                sdk.Logger.Error("RangeSquare(_) = _", log.Dict{"err": err.Error()})
+                sdk.Logger.Error("RangeSquare(_) = _", "err", err.Error())
                 os.Exit(1)
             }
         }
-        sdk.Logger.Info("RangeSquare get res", log.Dict{"res": feature})
+        sdk.Logger.Info("RangeSquare get res", "res", feature)
     }
 }
 ```
