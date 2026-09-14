@@ -65,6 +65,59 @@ sdk.Init(
 + `MaxAttempts`取值范围为[2,5],状态码列表不能为空,不满足时`Init`会报错;
 + grpc-go当前尚未实现对冲策略(hedging),因此本项目不提供对冲配置。
 
+## 进阶配置
+
+### 透传任意grpc选项
+
+`WithAdditionalDialOptions`可以把任意grpc的连接选项追加到SDK构造的选项之后(可以覆盖SDK的默认设置),常见用法:
+
++ 接入OpenTelemetry(grpc官方提供了一行式DialOption):
+
+```go
+import (
+    "google.golang.org/grpc/stats/opentelemetry"
+)
+
+sdk.Init(
+    grpcsdk.WithQueryAddresses("localhost:5000"),
+    grpcsdk.WithAdditionalDialOptions(opentelemetry.DialOption(opentelemetry.Options{
+        MetricsOptions: opentelemetry.MetricsOptions{MeterProvider: meterProvider},
+    })),
+)
+```
+
++ 本地连接使用`credentials/local`替代insecure:
+
+```go
+import "google.golang.org/grpc/credentials/local"
+
+sdk.Init(
+    grpcsdk.WithQueryAddresses("localhost:5000"),
+    grpcsdk.WithAdditionalDialOptions(grpc.WithTransportCredentials(local.NewCredentials())),
+)
+```
+
++ 调整底层参数:`grpc.WithWriteBufferSize`、`grpc.WithReadBufferSize` 等同样可以透传。
+
+### 请求级凭证
+
+`WithPerRPCCredentials`可以设置请求级凭证,grpc提供的`credentials/oauth`、`credentials/jwt`、`credentials/sts`等实现可以直接使用:
+
+```go
+sdk.Init(
+    grpcsdk.WithQueryAddresses("localhost:5000"),
+    grpcsdk.WithPerRPCCredentials(myCreds),
+)
+```
+
+注意`RequireTransportSecurity()`返回true的凭证要求使用非insecure的连接。
+
+### 其他开关
+
++ `WithAuthority` 覆盖请求的authority头(如证书校验域名与连接地址不一致);
++ `WithWaitForReady` 让请求等待连接就绪后再发送(默认快速失败);
++ `WithStatsHandlers` 设置grpc的stats.Handler(可多个),用于自定义观测。
+
 ## 使用例子
 
 ```go

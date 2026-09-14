@@ -7,6 +7,8 @@ import (
 
 	"github.com/Golang-Tools/optparams"
 	grpc "google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/stats"
 )
 
 // SDKConfig 的客户端类型
@@ -51,6 +53,13 @@ type SDKConfig struct {
 
 	// 重试设置
 	Retry_Policy *RetryPolicy `json:"retry_policy,omitempty" jsonschema:"description=grpc内建重试策略,只有幂等的方法才可以配置"`
+
+	// 进阶设置
+	Additional_Dial_Opts []grpc.DialOption               `json:"-" jsonschema:"nullable"`
+	Stats_Handlers       []stats.Handler                 `json:"-" jsonschema:"nullable"`
+	Per_RPC_Credentials  []credentials.PerRPCCredentials `json:"-" jsonschema:"nullable"`
+	Authority            string                          `json:"authority,omitempty" jsonschema:"description=覆盖请求的authority头,比如证书校验域名与连接地址不一致时"`
+	Wait_For_Ready       bool                            `json:"wait_for_ready,omitempty" jsonschema:"description=请求是否等待连接就绪,默认false表示快速失败"`
 
 	UnaryInterceptors  []grpc.UnaryClientInterceptor  `json:"-" jsonschema:"nullable"`
 	StreamInterceptors []grpc.StreamClientInterceptor `json:"-" jsonschema:"nullable"`
@@ -339,6 +348,56 @@ func WithRetryPolicy(policy *RetryPolicy) optparams.Option[SDKConfig] {
 	return optparams.NewFuncOption(
 		func(o *SDKConfig) {
 			o.Retry_Policy = policy
+		})
+}
+
+// WithAdditionalDialOptions sdk.Init方法的参数,用于追加任意grpc的连接选项
+// 追加的选项会作用在SDK构造的选项之后,可以覆盖SDK的默认设置;
+// 如stats/opentelemetry的DialOption、credentials/local、WithWriteBufferSize等都可以通过这里透传
+// @params opts ...grpc.DialOption grpc的连接选项
+func WithAdditionalDialOptions(opts ...grpc.DialOption) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Additional_Dial_Opts = append(o.Additional_Dial_Opts, opts...)
+		})
+}
+
+// WithStatsHandlers sdk.Init方法的参数,用于设置grpc的统计处理器(可以设置多个)
+// 接OpenTelemetry的指标/链路时传入其stats.Handler即可
+// @params handlers ...stats.Handler 统计处理器
+func WithStatsHandlers(handlers ...stats.Handler) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Stats_Handlers = append(o.Stats_Handlers, handlers...)
+		})
+}
+
+// WithPerRPCCredentials sdk.Init方法的参数,用于设置请求级别的凭证(可以设置多个)
+// 注意RequireTransportSecurity返回true的凭证要求使用非insecure的连接
+// @params creds ...credentials.PerRPCCredentials 请求级别的凭证
+func WithPerRPCCredentials(creds ...credentials.PerRPCCredentials) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Per_RPC_Credentials = append(o.Per_RPC_Credentials, creds...)
+		})
+}
+
+// WithAuthority sdk.Init方法的参数,用于覆盖请求的authority头
+// 比较常用的场景是证书校验的域名与连接地址不一致时
+// @params authority string authority值
+func WithAuthority(authority string) optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Authority = authority
+		})
+}
+
+// WithWaitForReady sdk.Init方法的参数,用于设置请求等待连接就绪后再发送
+// 默认false表示连接不可用时快速失败;开启后请求会等待连接恢复直到超时
+func WithWaitForReady() optparams.Option[SDKConfig] {
+	return optparams.NewFuncOption(
+		func(o *SDKConfig) {
+			o.Wait_For_Ready = true
 		})
 }
 

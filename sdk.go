@@ -105,6 +105,9 @@ func (c *SDK[T]) initKeepalive() {
 func (c *SDK[T]) initPerformanceOpts() {
 	// StaticMethod标记调用来自编译期确定的方法,grpc的观测插件(如stats/opentelemetry)可以因此把方法名作为指标的属性
 	c.callopts = append(c.callopts, grpc.StaticMethod())
+	if c.Wait_For_Ready {
+		c.callopts = append(c.callopts, grpc.WaitForReady(true))
+	}
 	if c.Initial_Window_Size != 0 {
 		c.opts = append(c.opts, grpc.WithInitialWindowSize(int32(c.Initial_Window_Size)))
 	}
@@ -141,6 +144,24 @@ func (c *SDK[T]) initRetryPolicy() error {
 	}
 	c.serviceconfig["methodConfig"] = []interface{}{c.Retry_Policy.toMethodConfig()}
 	return nil
+}
+
+// initAdvancedDialOpts 初始化进阶的连接选项
+// 用户自定义的额外连接选项会追加在SDK构造的选项之后,可以覆盖SDK的默认设置
+// @generics T any 由pb生成的客户端接口,以`XXXXClient`命名的interface
+func (c *SDK[T]) initAdvancedDialOpts() {
+	for _, h := range c.Stats_Handlers {
+		c.opts = append(c.opts, grpc.WithStatsHandler(h))
+	}
+	if len(c.Per_RPC_Credentials) > 0 {
+		for _, cred := range c.Per_RPC_Credentials {
+			c.opts = append(c.opts, grpc.WithPerRPCCredentials(cred))
+		}
+	}
+	if c.Authority != "" {
+		c.opts = append(c.opts, grpc.WithAuthority(c.Authority))
+	}
+	c.opts = append(c.opts, c.Additional_Dial_Opts...)
 }
 
 // loadBalancingPolicy 返回使用的负载均衡策略,未显式设置时使用传入的默认策略
@@ -319,6 +340,8 @@ func (c *SDK[T]) Init(opts ...optparams.Option[SDKConfig]) error {
 	if len(c.callopts) != 0 {
 		c.opts = append(c.opts, grpc.WithDefaultCallOptions(c.callopts...))
 	}
+	// 追加用户自定义的连接选项,它们会作用在SDK构造的选项之后
+	c.initAdvancedDialOpts()
 
 	// 已经建立过客户端获取器时先关闭,避免旧连接泄漏
 	c.getClientGetterLock.Lock()

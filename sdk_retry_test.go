@@ -12,14 +12,16 @@ import (
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/codes"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
 // countingService 统计调用次数的测试服务,可以模拟调用延迟与固定错误
 type countingService struct {
-	calls int32
-	delay time.Duration
-	err   error
+	calls    int32
+	delay    time.Duration
+	err      error
+	lastAuth atomic.Value
 }
 
 // count 返回被调用的次数
@@ -28,9 +30,21 @@ func (s *countingService) count() int32 {
 	return atomic.LoadInt32(&s.calls)
 }
 
+// auth 返回最后一次请求携带的authorization
+// @returns string authorization值
+func (s *countingService) auth() string {
+	v, _ := s.lastAuth.Load().(string)
+	return v
+}
+
 // Do 记录调用次数后按配置返回结果
 func (s *countingService) Do(ctx context.Context, in *healthpb.HealthCheckRequest) (*healthpb.HealthCheckResponse, error) {
 	atomic.AddInt32(&s.calls, 1)
+	if md, ok := metadata.FromIncomingContext(ctx); ok {
+		if v := md.Get("authorization"); len(v) > 0 {
+			s.lastAuth.Store(v[0])
+		}
+	}
 	if s.delay > 0 {
 		select {
 		case <-time.After(s.delay):

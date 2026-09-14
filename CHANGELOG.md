@@ -1,3 +1,21 @@
+# v2.2.0
+
+## 新增功能
+
++ 新增任意grpc连接选项的透传口 `WithAdditionalDialOptions`:追加在SDK构造的选项之后,可以覆盖SDK的默认设置;`stats/opentelemetry.DialOption`、`credentials/local`、`WithWriteBufferSize` 等都可以从这里接入
++ 新增 `WithStatsHandlers`:接入grpc的 `stats.Handler`(可设置多个),用于观测
++ 新增 `WithPerRPCCredentials`:设置请求级凭证,grpc的 `credentials/oauth`、`credentials/jwt`、`credentials/sts` 实现可直接使用
++ 新增 `WithAuthority`:覆盖请求的authority头(如证书校验域名与连接地址不一致时)
++ 新增 `WithWaitForReady`:请求等待连接就绪后再发送,默认false保持快速失败
+
+## 文档
+
++ README新增`进阶配置`章节:透传任意grpc选项(OpenTelemetry一行接入、credentials/local、缓冲区参数)、请求级凭证与其他开关
+
+## 测试
+
++ 新增透传选项(自定义拦截器生效)、stats.Handler接入、请求级凭证端到端(服务端验证authorization)、authority、等待就绪与快速失败对照等测试
+
 # v2.1.0
 
 ## 新增功能
